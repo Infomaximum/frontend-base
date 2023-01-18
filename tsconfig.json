@@ -3,11 +3,10 @@
   "compilerOptions": {
     "paths": {
       "@im/base/*": ["base/*"],
-      "@im/platform/*": ["platform/*"],
       "@im/core": ["core/*"],
       "@im/utils": ["utils/*"]
     },
     "noUncheckedIndexedAccess": true
   },
-  "include": ["../core", "../platform", "../utils", "src"]
+  "include": ["../core", "../utils", "src"]
 }
