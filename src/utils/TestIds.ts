@@ -34,3 +34,6 @@ export const inputSearchTestId = "input-search-testId";
 
 // AddButton
 export const addButtonTestId = "add-button";
+
+// ApplicationCard
+export const applicationCardTestId = "application-card";
