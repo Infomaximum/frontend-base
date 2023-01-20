@@ -22,3 +22,9 @@ export const submitFormButtonTestId = "submit-button";
 
 // Spinner
 export const wrapperSpinnerTestId = "wrapper-spinner";
+
+// ContextMenu
+export const contextMenuTestId = "context-menu";
+export const contextMenuItemTestId = `${contextMenuTestId}-item`;
+export const contextMenuDropDownTestId = `${contextMenuTestId}-dropdown`;
+export const contextMenuDropDownBtnTestId = `${contextMenuDropDownTestId}_btn`;
