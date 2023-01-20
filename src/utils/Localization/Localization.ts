@@ -67,3 +67,23 @@ export const ADD = {
   ru: "Добавить",
   en: "Add",
 };
+
+export const NOTHING_FOUND = {
+  ru: "Ничего не найдено",
+  en: "Nothing found",
+};
+
+export const NO_ACCESS = {
+  ru: "Нет доступа",
+  en: "No access",
+};
+
+export const NO_OBJECTS_MATCHING_FILTER_CRITERIA = {
+  ru: "Нет объектов, подходящих условиям фильтра",
+  en: "No objects matching filter criteria",
+};
+
+export const EMPTY_HERE = {
+  ru: "Здесь пусто",
+  en: "It's empty",
+};
