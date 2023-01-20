@@ -37,3 +37,9 @@ export const addButtonTestId = "add-button";
 
 // ApplicationCard
 export const applicationCardTestId = "application-card";
+
+// Banner
+export const closeBannerButtonTestId = "close-banner-button";
+export const bannerDontShowAgainTestId = "dont-show-again";
+export const crossCloseBannerTestId = "cross-close-banner";
+export const showMoreBannerTestId = "show-more-banner";

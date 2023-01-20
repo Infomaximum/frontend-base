@@ -1,0 +1,81 @@
+import { useContainerWidth } from "@im/base/src/decorators/hooks/useContainerWidth";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import MarkdownView from "react-showdown";
+import Button from "@im/base/src/components/Button/Button";
+import type { IBannerContentProps } from "./BannerContent.types";
+import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
+import { SHOW_MORE } from "@im/base/src/utils/Localization/Localization";
+import BannerContentModal from "../BannerContentModal/BannerContentModal";
+import {
+  bannerContentParagraphStyle,
+  bannerContentShowMoreButtonStyle,
+  bannerContentShowMoreStyle,
+  bannerContentStyle,
+} from "./BannerContent.styles";
+import { showMoreBannerTestId } from "@im/base/src/utils/TestIds";
+
+const BannerContent: React.FC<IBannerContentProps> = ({ md, className, backgroundColor }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [showShowMoreButton, setShowShowMoreButton] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [containerWidth, setContainerRef] = useContainerWidth();
+  const localization = useLocalization();
+
+  useEffect(() => {
+    setContainerRef(contentRef.current);
+  }, [setContainerRef]);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      // Делаем запас в 1px для корректной работы при разных масштабах окна браузера
+      const scrollHeight = contentRef.current.scrollHeight - 1;
+
+      if (!showShowMoreButton && contentRef.current.offsetHeight < scrollHeight) {
+        setShowShowMoreButton(true);
+      } else if (showShowMoreButton && contentRef.current.offsetHeight >= scrollHeight) {
+        setShowShowMoreButton(false);
+      }
+    }
+  }, [containerWidth, showShowMoreButton, md]);
+
+  const handleShowMoreButtonClick = useCallback(() => {
+    setShowModal(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setShowModal(false);
+  }, []);
+
+  const mdViewComponents = useMemo(
+    () => ({
+      p: (props: TDictionary) => {
+        return <p css={bannerContentParagraphStyle} {...props} />;
+      },
+    }),
+    []
+  );
+
+  const mdViewOptions = useMemo(() => ({ strikethrough: true }), []);
+
+  return (
+    <div ref={contentRef} className={className} css={bannerContentStyle}>
+      <MarkdownView markdown={md} components={mdViewComponents} options={mdViewOptions} />
+      {showShowMoreButton ? (
+        <div css={bannerContentShowMoreStyle(backgroundColor)}>
+          {`... `}
+          <Button
+            type="link"
+            css={bannerContentShowMoreButtonStyle}
+            onClick={handleShowMoreButtonClick}
+            test-id={showMoreBannerTestId}
+          >
+            {localization.getLocalized(SHOW_MORE)}
+          </Button>
+        </div>
+      ) : null}
+      <BannerContentModal md={md} visible={showModal} onCancel={handleCloseModal} />
+    </div>
+  );
+};
+
+export default memo(BannerContent);

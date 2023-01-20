@@ -87,3 +87,18 @@ export const EMPTY_HERE = {
   ru: "Здесь пусто",
   en: "It's empty",
 };
+
+export const DONT_SHOW_AGAIN = {
+  ru: "Больше не показывать",
+  en: "Don't show again",
+};
+
+export const SHOW_MORE = {
+  ru: "Показать ещё",
+  en: "Show more",
+};
+
+export const NOTIFICATION = {
+  ru: "Оповещение",
+  en: "Notification",
+};
