@@ -98,3 +98,19 @@ export const Z_INDEX_FORM_CONFIRMATION_MODAL = 5000;
 /** Задержка для отображения лоадера, ms */
 export const loaderDelay = 750;
 export const suffixLoaderDelay = 1500;
+
+export enum ESortDirection {
+  descend = "DESC",
+  ascend = "ASC",
+  ASC = "ascend",
+  DESC = "descend",
+}
+
+export const contextMenuColumnKey = "context_menu";
+
+/** Для измерения высоты шапки */
+export const TABLE_HEADER_ID = "table-header-id";
+/** Для работы со скоролом в теле виртуализированной таблицы*/
+export const VIRTUALIZED_TABLE_BODY_ID = "virtualized-table-body-id";
+/** Для работы со скоролом в контейнере с контентом*/
+export const MAIN_LAYOUT_CONTENT_ID = "main-layout-content-id";

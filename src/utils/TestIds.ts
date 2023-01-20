@@ -46,3 +46,19 @@ export const showMoreBannerTestId = "show-more-banner";
 
 // Drawer
 export const drawerCloseButtonTestId = "drawer-close-button";
+
+// VirtualizedTable
+export const virtualizedTableTestId = "virtualized-table";
+export const virtualizedTableRowTestId = `${virtualizedTableTestId}_row`;
+export const virtualizedTableHeaderTestId = `${virtualizedTableTestId}_header`;
+export const virtualizedTableCheckboxTestId = `${virtualizedTableTestId}_checkbox`;
+export const virtualizedTableDivTestId = `${virtualizedTableTestId}_div`;
+
+// TableRow
+export const tableRowCheckboxTestId = "tableRow-test_checkbox";
+export const tableRowLoadingTestId = "tableRow-test_loading";
+
+// TableArrowIcons
+export const tableArrowUpTestId = "tableArrow-test_up";
+export const tableArrowRightTestId = "tableArrow-test_right";
+export const tableExpanderTestId = `table-expander`;
