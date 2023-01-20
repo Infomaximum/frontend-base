@@ -28,3 +28,6 @@ export const contextMenuTestId = "context-menu";
 export const contextMenuItemTestId = `${contextMenuTestId}-item`;
 export const contextMenuDropDownTestId = `${contextMenuTestId}-dropdown`;
 export const contextMenuDropDownBtnTestId = `${contextMenuDropDownTestId}_btn`;
+
+// Search.test
+export const inputSearchTestId = "input-search-testId";
