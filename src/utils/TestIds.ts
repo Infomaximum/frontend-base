@@ -43,3 +43,6 @@ export const closeBannerButtonTestId = "close-banner-button";
 export const bannerDontShowAgainTestId = "dont-show-again";
 export const crossCloseBannerTestId = "cross-close-banner";
 export const showMoreBannerTestId = "show-more-banner";
+
+// Drawer
+export const drawerCloseButtonTestId = "drawer-close-button";
