@@ -11,7 +11,6 @@ import {
 } from "./RemoveConfirmationModal.styles";
 import { CANCEL, DELETE, DELETION } from "@im/base/src/utils/Localization/Localization";
 import { withLoc } from "@im/utils";
-import { boundMethod } from "autobind-decorator";
 import { ModalAnimationInterval } from "@im/base/src/utils/const";
 import { isFunction } from "lodash";
 import {
@@ -36,8 +35,7 @@ class RemoveConfirmationModal extends PureComponent<
     buttonRemoveText: DELETE,
   } as const;
 
-  @boundMethod
-  private getContentBodyModal() {
+  private getContentBodyModal = () => {
     const { localization, title } = this.props;
 
     return (
@@ -51,7 +49,7 @@ class RemoveConfirmationModal extends PureComponent<
         </div>
       </div>
     );
-  }
+  };
 
   private onCloseModal() {
     this.setState({ isVisible: false });
@@ -63,13 +61,11 @@ class RemoveConfirmationModal extends PureComponent<
     }
   }
 
-  @boundMethod
-  private handleCancel() {
+  private handleCancel = () => {
     this.onCloseModal();
     this.afterCloseModal(this.props.onAfterCancel);
-  }
+  };
 
-  @boundMethod
   private handleConfirm() {
     const { onConfirm, onAfterConfirm, onAfterCancel } = this.props;
 
@@ -92,8 +88,7 @@ class RemoveConfirmationModal extends PureComponent<
     );
   }
 
-  @boundMethod
-  private getFooterModal() {
+  private getFooterModal = () => {
     const { localization, buttonRemoveText } = this.props;
     const { isLoading } = this.state;
 
@@ -119,7 +114,7 @@ class RemoveConfirmationModal extends PureComponent<
         </Button>
       </div>
     );
-  }
+  };
 
   public override render() {
     return (

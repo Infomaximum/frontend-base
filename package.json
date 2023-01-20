@@ -12,7 +12,6 @@
     "@im/utils": "5.1.0",
     "@emotion/react": "11.8.2",
     "antd": "4.22.1",
-    "autobind-decorator": "2.4.0",
     "lodash": "4.17.21",
     "graphql-tag": "2.12.6",
     "react": "18.2.0",
