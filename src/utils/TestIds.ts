@@ -31,3 +31,6 @@ export const contextMenuDropDownBtnTestId = `${contextMenuDropDownTestId}_btn`;
 
 // Search.test
 export const inputSearchTestId = "input-search-testId";
+
+// AddButton
+export const addButtonTestId = "add-button";

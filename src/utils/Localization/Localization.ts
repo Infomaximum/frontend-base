@@ -62,3 +62,8 @@ export const UNABLE_TO_SAVE_CHANGE = {
   ru: "У вас есть изменения, которые нельзя сохранить из-за ошибок на форме",
   en: "You have changes that cannot be saved due to errors on the form",
 };
+
+export const ADD = {
+  ru: "Добавить",
+  en: "Add",
+};
