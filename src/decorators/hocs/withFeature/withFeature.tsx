@@ -5,7 +5,7 @@ import { useFeature } from "@im/base/src/decorators/hooks/useFeature";
 
 const withFeature: TPropInjector<IWithFeatureProps> = (Component: any) => {
   const WithFeature = (props: any) => {
-    const isFeatureEnabled = useFeature();
+    const { isFeatureEnabled } = useFeature();
 
     return <Component {...props} isFeatureEnabled={isFeatureEnabled} />;
   };
