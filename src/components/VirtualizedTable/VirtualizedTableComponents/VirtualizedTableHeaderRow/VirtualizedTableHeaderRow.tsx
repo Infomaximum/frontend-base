@@ -6,7 +6,6 @@ import {
   virtualizedTableHeaderTestId,
   virtualizedTableCheckboxTestId,
 } from "@im/base/src/utils/TestIds";
-import { boundMethod } from "autobind-decorator";
 import type { TRow } from "@im/base/src/components/VirtualizedTable/VirtualizedTable.types";
 import Checkbox from "@im/base/src/components/Checkbox/Checkbox";
 import type { IVirtualizedTableHeaderRowProps } from "./VirtualizedTableHeaderRow.types";
@@ -86,10 +85,9 @@ export class VirtualizedTableHeaderRow<T = TRow> extends PureComponent<
     });
   }
 
-  @boundMethod
-  private handleHeaderCheckboxChange(e: CheckboxChangeEvent) {
+  private handleHeaderCheckboxChange = (e: CheckboxChangeEvent) => {
     this.props.onSelectChange(null, e.target.checked);
-  }
+  };
 
   public override render() {
     const { scrollOffset, isShowDivider } = this.props;

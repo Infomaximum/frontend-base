@@ -1,6 +1,5 @@
 import { createRef, PureComponent } from "react";
 import type { ListRowProps, List as VList } from "react-virtualized";
-import { boundMethod } from "autobind-decorator";
 import { getEmptyContentStyle, loaderWrapperStyle } from "./VirtualizedTable.styles";
 import { Spin, Row, Col } from "antd";
 import type {
@@ -128,12 +127,11 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
     }
   }
 
-  @boundMethod
-  public addScrollOffset(offset: number) {
+  public addScrollOffset = (offset: number) => {
     if (this.state.scrollOffset !== offset) {
       this.setState({ scrollOffset: offset });
     }
-  }
+  };
 
   private updateColumnsSortOrders(columns: IVirtualizedTableProps<T | null>["columns"]) {
     let previousKey: string | number;
@@ -236,8 +234,7 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
     this.setState({ surfaceNodes });
   }
 
-  @boundMethod
-  private handleSorterChange(column: SorterResult<T | null>["column"]) {
+  private handleSorterChange = (column: SorterResult<T | null>["column"]) => {
     const { surfaceNodes } = this.state;
     const key = column?.key;
 
@@ -258,10 +255,9 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
 
     this.setState({ sorter: { field, order } });
     this.vListRef.current?.forceUpdateGrid();
-  }
+  };
 
-  @boundMethod
-  private handleSelectChange(record: T | null, isChecking: boolean) {
+  private handleSelectChange = (record: T | null, isChecking: boolean) => {
     const { rowSelection, dataSource } = this.props;
 
     const onSelect = rowSelection?.onSelect;
@@ -283,10 +279,9 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
         onSelectAll(isChecking, undefined!, undefined!);
       }
     }
-  }
+  };
 
-  @boundMethod
-  private handleRowExpanderChange(key: string, isOpening: boolean) {
+  private handleRowExpanderChange = (key: string, isOpening: boolean) => {
     const { expandedRowKeys, onExpandedRowsChange } = this.props;
 
     const newExpandedRowKeys = isOpening
@@ -294,7 +289,7 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
       : without(expandedRowKeys as string[], key);
 
     onExpandedRowsChange?.(newExpandedRowKeys);
-  }
+  };
 
   private stretchColumn(column: IVirtualizedColumnConfig<T>): IVirtualizedColumnConfig<T> {
     return { ...column, width: "100%" };
@@ -303,8 +298,7 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
   /**
    * Отрисовывает каждую строку, попадающую во Viewport
    */
-  @boundMethod
-  private rowRenderer({ index, key, style }: ListRowProps) {
+  private rowRenderer = ({ index, key, style }: ListRowProps) => {
     const { rowSelection, loading, indentSize, enableRowClick, isShowDividers } = this.props;
     const { surfaceNodes, columnConfig, selectedRowKeysSet } = this.state;
 
@@ -347,7 +341,7 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
         />
       </div>
     );
-  }
+  };
 
   public get loader() {
     return this.props.loading ? (

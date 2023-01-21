@@ -15,7 +15,6 @@ import {
   isFunction,
 } from "lodash";
 import { emptyTableStyle, borderTopStyle, transparentBordersStyle } from "./Table.styles";
-import { boundMethod } from "autobind-decorator";
 import { type Interpolation, withTheme } from "@emotion/react";
 import Empty from "@im/base/src/components/Empty/Empty";
 import { observer } from "mobx-react";
@@ -140,13 +139,11 @@ class Table<T extends TDictionary> extends Component<ITableProps<T>, ITableState
     return this.headerHtml ? this.headerHtml.offsetHeight : theme.commonTableRowHeight;
   }
 
-  @boundMethod
-  public updateOnResize() {
+  public updateOnResize = () => {
     this.forceUpdate();
-  }
+  };
 
-  @boundMethod
-  private getEmpty() {
+  private getEmpty = () => {
     const {
       isFiltersEmpty,
       isSearchEmpty,
@@ -176,10 +173,9 @@ class Table<T extends TDictionary> extends Component<ITableProps<T>, ITableState
         customEmptyTableStyle={customEmptyTableStyle}
       />
     );
-  }
+  };
 
-  @boundMethod
-  private handleRow(record: T, index: number) {
+  private handleRow = (record: T, index: number) => {
     const { onRow, rowSelection, enableRowClick, dataSource } = this.props;
 
     const rowProps = isFunction(onRow) ? onRow?.(record, index) : null;
@@ -209,10 +205,9 @@ class Table<T extends TDictionary> extends Component<ITableProps<T>, ITableState
     }
 
     return newRowProps;
-  }
+  };
 
-  @boundMethod
-  private getStyleTable(): Interpolation<TTheme> {
+  private getStyleTable = (): Interpolation<TTheme> => {
     const { dataSource, customStyle, isShowDividers } = this.props;
 
     const styles: Interpolation<TTheme>[] = [];
@@ -228,7 +223,7 @@ class Table<T extends TDictionary> extends Component<ITableProps<T>, ITableState
     }
 
     return styles;
-  }
+  };
 
   private get wrapperStyle() {
     return this.props.isStretchToBottom
