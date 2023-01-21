@@ -127,3 +127,10 @@ export const NOTHING_FOUND_CHANGE_QUERY = {
   ru: "Ничего не найдено. Измените запрос.",
   en: "Nothing found. Change the query.",
 };
+
+export const SHOWING_OF = {
+  ru: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
+    `Показано ${currentCount} из ${totalCount}`,
+  en: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
+    `Showing ${currentCount} of the ${totalCount}`,
+};
