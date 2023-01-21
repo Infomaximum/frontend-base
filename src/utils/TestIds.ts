@@ -62,3 +62,6 @@ export const tableRowLoadingTestId = "tableRow-test_loading";
 export const tableArrowUpTestId = "tableArrow-test_up";
 export const tableArrowRightTestId = "tableArrow-test_right";
 export const tableExpanderTestId = `table-expander`;
+
+// Notification
+export const notificationErrorTestId = "notification-error";
