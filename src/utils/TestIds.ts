@@ -70,3 +70,6 @@ export const notificationErrorTestId = "notification-error";
 const confirmPopoverTestId = "confirm-popover";
 export const confirmPopoverOkButtonTestId = `${confirmPopoverTestId}_ok-button`;
 export const confirmPopoverCancelButtonTestId = `${confirmPopoverTestId}_cancel-button`;
+
+// ShowMore
+export const tableShowMoreButtonTestId = "table_show-more-button";
