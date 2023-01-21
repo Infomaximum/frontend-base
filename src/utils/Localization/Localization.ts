@@ -134,3 +134,8 @@ export const SHOWING_OF = {
   en: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
     `Showing ${currentCount} of the ${totalCount}`,
 };
+
+export const SERVICE_MODE = {
+  ru: "Система находится в сервисном режиме: ведутся регламентно-технические работы.",
+  en: "System is in a service mode: regulatory and technical work is going.",
+};

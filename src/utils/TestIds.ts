@@ -76,3 +76,6 @@ export const tableShowMoreButtonTestId = "table_show-more-button";
 
 // PageHeader
 export const pageHeaderBackButtonTestId = "page-header_back-btn";
+
+// Authorization
+export const authorizationServiceModePanelTestId = "authorization-service-mode-panel";
