@@ -65,3 +65,8 @@ export const tableExpanderTestId = `table-expander`;
 
 // Notification
 export const notificationErrorTestId = "notification-error";
+
+// ConfirmPopover
+const confirmPopoverTestId = "confirm-popover";
+export const confirmPopoverOkButtonTestId = `${confirmPopoverTestId}_ok-button`;
+export const confirmPopoverCancelButtonTestId = `${confirmPopoverTestId}_cancel-button`;

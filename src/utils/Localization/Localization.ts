@@ -38,6 +38,11 @@ export const CANCEL = {
   en: "Cancel",
 };
 
+export const CONFIRM = {
+  ru: "Подтвердить",
+  en: "Confirm",
+};
+
 export const DO_NOT_SAVE = {
   ru: "Не сохранять",
   en: "Don't save",
