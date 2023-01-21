@@ -102,3 +102,23 @@ export const NOTIFICATION = {
   ru: "Оповещение",
   en: "Notification",
 };
+
+export const ENTER_OR_SELECT_FROM_THE_LIST = {
+  ru: "Введите или выберите из списка",
+  en: "Enter or select from the list",
+};
+
+export const NOT_SELECTED = {
+  ru: "Не выбрано",
+  en: "Not selected",
+};
+
+export const SELECT_FROM_LIST = {
+  ru: "Выберите из списка",
+  en: "Select from list",
+};
+
+export const NOTHING_FOUND_CHANGE_QUERY = {
+  ru: "Ничего не найдено. Измените запрос.",
+  en: "Nothing found. Change the query.",
+};
