@@ -1,10 +1,15 @@
-import PersonModel from "@im/base/src/models/PersonModel";
 import typenameToModel from "@im/base/src/models/typenameToModel";
-import { graphqlTag } from "@im/utils";
+import { graphqlTag, Model } from "@im/utils";
 import { forEach, set } from "lodash";
 import { Store } from "./Store";
 
-typenameToModel.registrationModels([PersonModel]);
+class TestModel extends Model {
+  static override get typename() {
+    return "test_typename";
+  }
+}
+
+typenameToModel.registrationModels([TestModel]);
 
 const fakeId = 1;
 const fakeDisplayName = "Alexandr Ivanov";
@@ -12,7 +17,7 @@ const fakeDisplayName = "Alexandr Ivanov";
 const fakeServerResponseRequestData = set({}, "employee.employee", {
   id: fakeId,
   display_name: fakeDisplayName,
-  __typename: PersonModel.typename,
+  __typename: TestModel.typename,
 });
 
 const fakeServerResponseSubmitData = set({}, "employee.update", {
@@ -37,7 +42,7 @@ const requestInstanceMocks = {
 };
 
 const getStore = () =>
-  new Store<PersonModel>({
+  new Store<TestModel>({
     name: "Test",
     dataPath: "employee.employee",
     requestInstance: requestInstanceMocks,

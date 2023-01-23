@@ -1,5 +1,6 @@
 import type { IModel, IModelParams } from "@im/utils";
 import { assertSimple, Model } from "@im/utils";
+import typenameToModel from "./typenameToModel";
 
 interface IRestParams extends IModelParams {
   parent: IModel;
@@ -39,5 +40,7 @@ class RestModel extends Model {
     return `${this.getTypename()}_${this.getId()}_${this.getNextCount()}`;
   }
 }
+
+typenameToModel.registrationModels([RestModel]);
 
 export default RestModel;
