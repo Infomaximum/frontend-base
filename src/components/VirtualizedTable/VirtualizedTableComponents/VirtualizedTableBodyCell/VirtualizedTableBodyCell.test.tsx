@@ -7,7 +7,7 @@ import {
   tableArrowRightTestId,
   tableArrowUpTestId,
   tableExpanderTestId,
-} from "@im/base/src/utils/TestIds";
+} from "src/utils/TestIds";
 
 describe("Тест компонента VirtualizedTableBodyCell", () => {
   it("Простое отображение значения", async () => {
@@ -62,7 +62,9 @@ describe("Тест компонента VirtualizedTableBodyCell", () => {
       />
     );
 
-    expect(screen.queryByText("Подготовленное значение - Test caption")).toBeInTheDocument();
+    expect(
+      screen.queryByText("Подготовленное значение - Test caption")
+    ).toBeInTheDocument();
   });
 
   it("Отображение кнопки расскрытия", async () => {

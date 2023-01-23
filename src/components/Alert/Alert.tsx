@@ -16,7 +16,7 @@ import Icon, {
   CloseCircleFilled,
   CheckCircleFilled,
   ExclamationCircleFilled,
-} from "@im/base/src/components/Icons/Icons";
+} from "src/components/Icons/Icons";
 
 const Alert: React.FC<IAlertProps> = (props) => {
   const icon = useMemo(() => {
@@ -66,12 +66,17 @@ const Alert: React.FC<IAlertProps> = (props) => {
 
   const memoizedMessage = useMemo(
     () =>
-      props.message ? <span css={hasDescription && boldTitleStyle}>{props.message}</span> : null,
+      props.message ? (
+        <span css={hasDescription && boldTitleStyle}>{props.message}</span>
+      ) : null,
     [hasDescription, props.message]
   );
 
   const memoizedDescription = useMemo(
-    () => (props.description ? <span css={alertDescriptionStyle}>{props.description}</span> : null),
+    () =>
+      props.description ? (
+        <span css={alertDescriptionStyle}>{props.description}</span>
+      ) : null,
     [props.description]
   );
 

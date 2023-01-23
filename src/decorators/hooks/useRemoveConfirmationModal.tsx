@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Deferred } from "@im/utils";
 import type { TLocalizationDescription } from "@im/utils";
 import { useLocalization } from "./useLocalization";
-import RemoveConfirmationModal from "@im/base/src/components/modals/RemoveConfirmationModal/RemoveConfirmationModal";
+import RemoveConfirmationModal from "src/components/modals/RemoveConfirmationModal/RemoveConfirmationModal";
 
 type TRemoveConfirmationParams<T> = {
   /** Колбек который будет вызван после подтверждения удаления данных */
@@ -13,7 +13,9 @@ type TRemoveConfirmationParams<T> = {
 };
 
 /** Отображает модальное окно подтверждения удаления данных  */
-export const useRemoveConfirmationModal = <T,>(params: TRemoveConfirmationParams<T>) => {
+export const useRemoveConfirmationModal = <T,>(
+  params: TRemoveConfirmationParams<T>
+) => {
   const localization = useLocalization();
 
   const arg = useRef(params);
@@ -61,7 +63,9 @@ export const useRemoveConfirmationModal = <T,>(params: TRemoveConfirmationParams
           onAfterCancel={handleAfterCancel}
           onConfirm={handleConfirm}
           title={
-            typeof titleLoc === "function" ? titleLoc(data) : localization.getLocalized(titleLoc)
+            typeof titleLoc === "function"
+              ? titleLoc(data)
+              : localization.getLocalized(titleLoc)
           }
         >
           {typeof bodyLoc === "function"
@@ -72,7 +76,14 @@ export const useRemoveConfirmationModal = <T,>(params: TRemoveConfirmationParams
         </RemoveConfirmationModal>
       );
     }
-  }, [params, data, handleAfterCancel, handleConfirm, isShowRemoveModal, localization]);
+  }, [
+    params,
+    data,
+    handleAfterCancel,
+    handleConfirm,
+    isShowRemoveModal,
+    localization,
+  ]);
 
   return { renderRemoveModal, handleRemoveEntity };
 };

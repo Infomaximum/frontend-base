@@ -1,13 +1,19 @@
 import React, { useMemo } from "react";
 import type { ITreeProps } from "./Tree.types";
 import { Tree as AntTree } from "antd";
-import { treeStyle, treeSwitcherIconContainerStyle, treeSwitcherIconStyle } from "./Tree.styles";
-import { DownOutlined } from "@im/base/src/components/Icons/Icons";
+import {
+  treeStyle,
+  treeSwitcherIconContainerStyle,
+  treeSwitcherIconStyle,
+} from "./Tree.styles";
+import { DownOutlined } from "src/components/Icons/Icons";
 import type { DataNode } from "antd/lib/tree";
 import { map } from "lodash";
 
 /** Метод возвращает новые данные дерева с добавлением classNames для различных состояний */
-const mapTreeData = (treeData: DataNode[] | undefined): DataNode[] | undefined => {
+const mapTreeData = (
+  treeData: DataNode[] | undefined
+): DataNode[] | undefined => {
   if (!treeData) {
     return;
   }
@@ -39,7 +45,12 @@ const Tree: React.FC<ITreeProps> & {
   const treeData = useMemo(() => mapTreeData(props.treeData), [props.treeData]);
 
   return (
-    <AntTree switcherIcon={Tree.SwitcherIcon} {...props} treeData={treeData} css={treeStyle} />
+    <AntTree
+      switcherIcon={Tree.SwitcherIcon}
+      {...props}
+      treeData={treeData}
+      css={treeStyle}
+    />
   );
 };
 

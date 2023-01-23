@@ -1,7 +1,7 @@
 import { mount } from "enzyme";
 import BaseCard from "./BaseCard";
 import { keyframes } from "@emotion/react";
-import { getRouterWrapper } from "@im/base/src/utils/tests/wrappers";
+import { getRouterWrapper } from "src/utils/tests/wrappers";
 
 describe("Тест компонента BaseCard", () => {
   // Тест на "Вызов функции 'onAnimationEnd' не работает
@@ -35,13 +35,17 @@ describe("Тест компонента BaseCard", () => {
   });
 
   it("Наличие 'card-header' если есть 'title'", () => {
-    const component = mount(getRouterWrapper(<BaseCard title="Заголовок">TEST</BaseCard>));
+    const component = mount(
+      getRouterWrapper(<BaseCard title="Заголовок">TEST</BaseCard>)
+    );
 
     expect(component.find("div > div").exists()).toEqual(true);
   });
 
   it("Наличие 'wrapper-menu' и 'card-header' если есть 'menu'", () => {
-    const component = mount(getRouterWrapper(<BaseCard menu="Меню">TEST</BaseCard>));
+    const component = mount(
+      getRouterWrapper(<BaseCard menu="Меню">TEST</BaseCard>)
+    );
 
     expect(component.find("div > div").exists()).toEqual(true);
     expect(component.find("div > div > div").exists()).toEqual(true);

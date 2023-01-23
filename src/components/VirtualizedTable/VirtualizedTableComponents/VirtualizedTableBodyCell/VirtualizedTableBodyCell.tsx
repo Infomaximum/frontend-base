@@ -1,6 +1,6 @@
 import type { Interpolation } from "@emotion/react";
 import { get, isString } from "lodash";
-import EllipsisTooltip from "@im/base/src/components/EllipsisTooltip/EllipsisTooltip";
+import EllipsisTooltip from "src/components/EllipsisTooltip/EllipsisTooltip";
 import { useCallback } from "react";
 import {
   virtualizedTableCellExpandedTextStyle,
@@ -9,9 +9,9 @@ import {
   getVirtualizedTableCellIndentBlockStyle,
 } from "./VirtualizedTableBodyCell.styles";
 import type { IVirtualizedTableBodyCellProps } from "./VirtualizedTableBodyCell.types";
-import type { TRow } from "@im/base/src/components/VirtualizedTable/VirtualizedTable.types";
-import TableExpandIcon from "@im/base/src/components/Table/TableComponents/TableExpandIcon/TableExpandIcon";
-import { contextMenuColumnKey } from "@im/base/src/utils/const";
+import type { TRow } from "src/components/VirtualizedTable/VirtualizedTable.types";
+import TableExpandIcon from "src/components/Table/TableComponents/TableExpandIcon/TableExpandIcon";
+import { contextMenuColumnKey } from "src/utils/const";
 
 const VirtualizedTableBodyCell = <T extends TRow>(
   props: IVirtualizedTableBodyCellProps<T | null>
@@ -31,7 +31,9 @@ const VirtualizedTableBodyCell = <T extends TRow>(
   const isFirstColumn = index === 0;
 
   const content = get(record, dataIndex as string);
-  const node = column.render ? column.render(dataIndex ? content : record, record, index) : content;
+  const node = column.render
+    ? column.render(dataIndex ? content : record, record, index)
+    : content;
 
   const handleRowContentClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -73,14 +75,19 @@ const VirtualizedTableBodyCell = <T extends TRow>(
   const cellContent =
     (hasExpander && enableRowClick && key !== contextMenuColumnKey) ||
     (hasExpander && enableCellClick) ? (
-      <span css={virtualizedTableCellExpandedTextStyle} onClick={handleRowContentClick}>
+      <span
+        css={virtualizedTableCellExpandedTextStyle}
+        onClick={handleRowContentClick}
+      >
         {wrapInEllipsis(node)}
       </span>
     ) : (
       wrapInEllipsis(node)
     );
 
-  const cellCustomStyle = column?.onCell?.(record)?.style as Interpolation<TTheme> | undefined;
+  const cellCustomStyle = column?.onCell?.(record)?.style as
+    | Interpolation<TTheme>
+    | undefined;
 
   /* Учет isTree нужен для того, чтобы не оставлять промежутков в плоских списках*/
   return (

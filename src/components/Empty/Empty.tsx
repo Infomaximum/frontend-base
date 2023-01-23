@@ -1,16 +1,16 @@
 import React from "react";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
 import {
   NOTHING_FOUND,
   NO_ACCESS,
   NO_OBJECTS_MATCHING_FILTER_CRITERIA,
   EMPTY_HERE,
-} from "@im/base/src/utils/Localization/Localization";
+} from "src/utils/Localization/Localization";
 import { Empty as AntEmpty } from "antd";
-import EmptyHereForNowSVG from "@im/base/src/resources/icons/EmptyHereForNow.svg";
-import NoObjectsMatchingFilterCriteriaSVG from "@im/base/src/resources/icons/NoObjectsMatchingFilterCriteria.svg";
-import NothingFoundSVG from "@im/base/src/resources/icons/NothingFound.svg";
-import NoAccessImage from "@im/base/src/resources/icons/NoAccessImage.svg";
+import EmptyHereForNowSVG from "src/resources/icons/EmptyHereForNow.svg";
+import NoObjectsMatchingFilterCriteriaSVG from "src/resources/icons/NoObjectsMatchingFilterCriteria.svg";
+import NothingFoundSVG from "src/resources/icons/NothingFound.svg";
+import NoAccessImage from "src/resources/icons/NoAccessImage.svg";
 import {
   emptyDescriptionStyle,
   emptyHintStyle,
@@ -43,7 +43,9 @@ const Empty: React.FC<IEmptyProps> = ({
       emptyCaption = localization.getLocalized(NOTHING_FOUND);
     } else if (isBoolean(isFiltersEmpty) && !isFiltersEmpty) {
       emptyImage = <NoObjectsMatchingFilterCriteriaSVG />;
-      emptyCaption = localization.getLocalized(NO_OBJECTS_MATCHING_FILTER_CRITERIA);
+      emptyCaption = localization.getLocalized(
+        NO_OBJECTS_MATCHING_FILTER_CRITERIA
+      );
     } else if (isBoolean(isHasAccess) && !isHasAccess) {
       emptyImage = <NoAccessImage />;
       emptyCaption = localization.getLocalized(NO_ACCESS);
@@ -52,7 +54,9 @@ const Empty: React.FC<IEmptyProps> = ({
     emptyCaption = description;
   }
 
-  const emptyDescription = <span css={emptyDescriptionStyle}>{emptyCaption}</span>;
+  const emptyDescription = (
+    <span css={emptyDescriptionStyle}>{emptyCaption}</span>
+  );
   const emptyHint = hint && <span css={emptyHintStyle}>{hint}</span>;
 
   const defaultEmptyContent = (
@@ -69,7 +73,11 @@ const Empty: React.FC<IEmptyProps> = ({
 
   return (
     <div
-      css={!!isTableComponent ? [wrapperEmptyTableStyle, customEmptyTableStyle] : wrapperEmptyStyle}
+      css={
+        !!isTableComponent
+          ? [wrapperEmptyTableStyle, customEmptyTableStyle]
+          : wrapperEmptyStyle
+      }
     >
       {isUndefined(emptyContent) ? defaultEmptyContent : emptyContent}
     </div>

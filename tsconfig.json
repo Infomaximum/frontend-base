@@ -1,12 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@im/configs/tsconfig.common.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@im/base/*": ["base/*"],
-      "@im/core": ["core/*"],
-      "@im/utils": ["utils/*"]
-    },
-    "noUncheckedIndexedAccess": true
+      "src/*": ["src/*"]
+    }
   },
-  "include": ["../core", "../utils", "src"]
+  "exclude": ["/node_modules/", "**/node_modules", "**/.*/"],
+  "include": ["src"]
 }

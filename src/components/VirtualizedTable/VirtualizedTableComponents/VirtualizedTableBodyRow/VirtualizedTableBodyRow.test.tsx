@@ -2,9 +2,9 @@ import enzyme from "enzyme";
 import { Localization } from "@im/utils";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableBodyRow";
 import type { ColumnType } from "antd/lib/table";
-import { ERROR_MESSAGE } from "@im/base/src/utils/Localization/Localization";
-import { tableExpanderTestId } from "@im/base/src/utils/TestIds";
-import type { TBaseRow, TExtendColumns } from "@im/base/src/managers/Tree";
+import { ERROR_MESSAGE } from "src/utils/Localization/Localization";
+import { tableExpanderTestId } from "src/utils/TestIds";
+import type { TBaseRow, TExtendColumns } from "src/managers/Tree";
 
 const localization = new Localization({ language: Localization.Language.ru });
 
@@ -53,11 +53,15 @@ const renderComponent = (loading: boolean) => {
 
 describe("Тест компонента VirtualizedTableBodyRow", () => {
   it("Проверка отрисовки компонента VirtualizedTableBodyRow", () => {
-    expect(renderComponent(false).find("VirtualizedTableBodyRow").length).toEqual(1);
+    expect(
+      renderComponent(false).find("VirtualizedTableBodyRow").length
+    ).toEqual(1);
   });
 
   it("Проверка состояния loading", () => {
-    expect(renderComponent(true).find("div[test-id='tableRow-test_loading']").length).toEqual(1);
+    expect(
+      renderComponent(true).find("div[test-id='tableRow-test_loading']").length
+    ).toEqual(1);
   });
 
   it("Проверка onSelectChange ", () => {
@@ -65,12 +69,16 @@ describe("Тест компонента VirtualizedTableBodyRow", () => {
       .find("Checkbox[test-id='tableRow-test_checkbox']")
       .first()
       .find("input")
-      .simulate("change", { target: { value: "test VirtualizedTableBodyRow" } });
+      .simulate("change", {
+        target: { value: "test VirtualizedTableBodyRow" },
+      });
     expect(onSelectChange).toHaveBeenCalled();
   });
 
   it("Проверка onRowExpanderChange", () => {
-    renderComponent(false).find(`button[test-id='${tableExpanderTestId}']`).simulate("click");
+    renderComponent(false)
+      .find(`button[test-id='${tableExpanderTestId}']`)
+      .simulate("click");
     expect(onRowExpanderChange).toHaveBeenCalled();
   });
 

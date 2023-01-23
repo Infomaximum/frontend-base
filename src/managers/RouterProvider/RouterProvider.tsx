@@ -4,13 +4,13 @@ import {
   resolveConstraintsInRoutes,
   routesMap,
   sortPriority,
-} from "@im/base/src/utils/Routes/routes";
+} from "src/utils/Routes/routes";
 import type { NCore } from "@im/core";
 import type { IRouterProviderProps } from "./RouterProvider.types";
 import { observer } from "mobx-react";
 import { useRoutes } from "react-router";
-import { RoutesContext } from "@im/base/src/decorators/contexts/RoutesContext";
-import { useFeature } from "@im/base/src/decorators/hooks/useFeature";
+import { RoutesContext } from "src/decorators/contexts/RoutesContext";
+import { useFeature } from "src/decorators/hooks/useFeature";
 
 const RouterProvider: FC<IRouterProviderProps> = ({
   layout: LayoutProps,
@@ -24,7 +24,11 @@ const RouterProvider: FC<IRouterProviderProps> = ({
 
   const resolvedRoutes = useMemo(() => {
     return isFeatureEnabled
-      ? getRoutes(sortPriority(resolveConstraintsInRoutes(routesConfig, isFeatureEnabled)))
+      ? getRoutes(
+          sortPriority(
+            resolveConstraintsInRoutes(routesConfig, isFeatureEnabled)
+          )
+        )
       : null;
   }, [routesConfig, isFeatureEnabled]);
 

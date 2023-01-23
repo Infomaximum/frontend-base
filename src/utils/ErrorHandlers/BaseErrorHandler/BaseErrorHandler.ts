@@ -1,7 +1,11 @@
 import { assertSimple, EHttpCodes } from "@im/utils";
 import { Expander, NCore, showGlobalErrorModal } from "@im/core";
 import { filter, find, get, isArray, isMatch, isPlainObject } from "lodash";
-import { EErrorCode, PARAMETERS_FIELD_NAME, rootDomNodeName } from "@im/base/src/utils/const";
+import {
+  EErrorCode,
+  PARAMETERS_FIELD_NAME,
+  rootDomNodeName,
+} from "src/utils/const";
 import type { NErrorHandlers } from "../ErrorHandlers.types";
 
 export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
@@ -15,7 +19,10 @@ export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
 
       let isShowError = true;
 
-      if (err && this.createNormalizedError(err)?.code === EErrorCode.INVALID_CREDENTIALS) {
+      if (
+        err &&
+        this.createNormalizedError(err)?.code === EErrorCode.INVALID_CREDENTIALS
+      ) {
         isShowError = false;
       }
 
@@ -25,7 +32,10 @@ export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
     }
   }
 
-  public async prepareError(graphqlError: NCore.TGraphqlError, params?: NCore.TErrorHandlerParams) {
+  public async prepareError(
+    graphqlError: NCore.TGraphqlError,
+    params?: NCore.TErrorHandlerParams
+  ) {
     this.prepareInitialServerError(graphqlError);
     const errorStatusCode = get(graphqlError, "networkError.statusCode");
 
@@ -62,7 +72,9 @@ export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
   protected async handleError(normalizedError: NCore.TError) {
     const error = find(
       Expander.getInstance().getErrorsHandlers(),
-      (e) => e.code === normalizedError.code && isMatch(normalizedError.params, e.params!)
+      (e) =>
+        e.code === normalizedError.code &&
+        isMatch(normalizedError.params, e.params!)
     );
 
     // Формируем список из ошибок с кодом ошибки кроме той у которой вызываем handle

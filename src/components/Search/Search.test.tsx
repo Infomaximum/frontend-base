@@ -1,6 +1,6 @@
 import * as enzyme from "enzyme";
 import Search from "./Search";
-import { inputSearchTestId } from "@im/base/src/utils/TestIds";
+import { inputSearchTestId } from "src/utils/TestIds";
 
 const getFakeFunc = () => jest.fn();
 

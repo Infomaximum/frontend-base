@@ -1,11 +1,11 @@
-import type { Store } from "@im/base/src/utils/Store/Store/Store";
+import type { Store } from "src/utils/Store/Store/Store";
 import type { IDocumentNode, Model, TInferredVariables } from "@im/utils";
-import type { NStore } from "@im/base/src/utils/Store/Store/Store.types";
+import type { NStore } from "src/utils/Store/Store/Store.types";
 import { useCallback, useEffect } from "react";
 import { useMountEffect } from "./useMountEffect";
 import { useUnmountEffect } from "./useUnmountEffect";
 import { useModalError } from "./useModalError";
-import { EErrorCode } from "@im/base/src/utils/const";
+import { EErrorCode } from "src/utils/const";
 
 export type TStoreParams = {
   /** Выполнять ли запрос при маунте компонента `(false)` */
@@ -28,7 +28,10 @@ export interface IMutation<V extends TDictionary = never>
   variables?: V;
 }
 
-export const useStore = <S extends Store<Model>>(store: S, params?: TStoreParams) => {
+export const useStore = <S extends Store<Model>>(
+  store: S,
+  params?: TStoreParams
+) => {
   const requestOnMount = params?.requestOnMount ?? false;
   const clearOnUnmount = params?.clearOnUnmount ?? true;
   const cancelRequestOnUnmount = params?.cancelRequestOnUnmount ?? true;
@@ -43,7 +46,10 @@ export const useStore = <S extends Store<Model>>(store: S, params?: TStoreParams
   const unsubscribe = store.unsubscribe;
 
   const mutate = useCallback(
-    <T extends NStore.IActionSubmitDataParams, Variables = TInferredVariables<T, "mutation">>(
+    <
+      T extends NStore.IActionSubmitDataParams,
+      Variables = TInferredVariables<T, "mutation">
+    >(
       params: IMutation<Variables>
     ) => store.submitData(params),
     [store]

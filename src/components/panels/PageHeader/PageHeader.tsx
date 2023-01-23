@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ArrowLeftOutlined } from "@im/base/src/components/Icons/Icons";
+import { ArrowLeftOutlined } from "src/components/Icons/Icons";
 import { PageHeader as AntPageHeader } from "antd";
 import {
   iconBackStyle,
@@ -7,11 +7,18 @@ import {
   pageHeaderTitleStyle,
   headerTitleWrapperStyle,
 } from "./PageHeader.styles";
-import { pageHeaderBackButtonTestId } from "@im/base/src/utils/TestIds";
+import { pageHeaderBackButtonTestId } from "src/utils/TestIds";
 import type { IPageHeaderProps } from "./PageHeader.types";
 
 const PageHeader: React.FC<IPageHeaderProps> = (props) => {
-  const { title, onBack, titleStyle, leftOutlinedIcon, titleWrapperStyle, ...rest } = props;
+  const {
+    title,
+    onBack,
+    titleStyle,
+    leftOutlinedIcon,
+    titleWrapperStyle,
+    ...rest
+  } = props;
 
   const memoizedTitle = useMemo(() => {
     const testId = props["test-id"]
@@ -20,7 +27,9 @@ const PageHeader: React.FC<IPageHeaderProps> = (props) => {
 
     return (
       <div onClick={onBack} css={titleWrapperStyle ?? headerTitleWrapperStyle}>
-        {leftOutlinedIcon ?? <ArrowLeftOutlined test-id={testId} css={iconBackStyle} />}
+        {leftOutlinedIcon ?? (
+          <ArrowLeftOutlined test-id={testId} css={iconBackStyle} />
+        )}
         <span css={titleStyle ?? pageHeaderTitleStyle}>{title}</span>
       </div>
     );

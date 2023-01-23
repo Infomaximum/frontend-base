@@ -2,10 +2,18 @@ import { cloneElement, FC, isValidElement, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ellipsisStyle, tableLinkStyle } from "./TableLink.styles";
 import type { ITableLinkProps } from "./TableLink.types";
-import Tooltip from "@im/base/src/components/Tooltip/Tooltip";
+import Tooltip from "src/components/Tooltip/Tooltip";
 
-const TableLink: FC<ITableLinkProps> = ({ ellipsis = true, title, children, ...restProps }) => {
-  const styles = useMemo(() => [tableLinkStyle, ellipsis ? ellipsisStyle : null], [ellipsis]);
+const TableLink: FC<ITableLinkProps> = ({
+  ellipsis = true,
+  title,
+  children,
+  ...restProps
+}) => {
+  const styles = useMemo(
+    () => [tableLinkStyle, ellipsis ? ellipsisStyle : null],
+    [ellipsis]
+  );
 
   const clearTitle = useMemo(() => {
     /** Если это элемент, то нужно убрать некоторые стили которые были добавлены */

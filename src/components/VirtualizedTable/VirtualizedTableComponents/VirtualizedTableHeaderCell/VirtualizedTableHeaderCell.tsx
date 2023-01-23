@@ -1,10 +1,10 @@
 import { get, includes } from "lodash";
-import { ESortDirection } from "@im/base/src/utils/const";
+import { ESortDirection } from "src/utils/const";
 import React, { memo, useMemo } from "react";
 import type { IVirtualizedTableHeaderCellProps } from "./VirtualizedTableHeaderCell.types";
 import { Row, Col } from "antd";
-import { CaretDownOutlined, CaretUpOutlined } from "@im/base/src/components/Icons/Icons";
-import { virtualizedTableDivTestId } from "@im/base/src/utils/TestIds";
+import { CaretDownOutlined, CaretUpOutlined } from "src/components/Icons/Icons";
+import { virtualizedTableDivTestId } from "src/utils/TestIds";
 import { getVirtualizedTableCellFlexStyle } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell.styles";
 import {
   sorterArrowDownActiveStyle,
@@ -64,7 +64,9 @@ const VirtualizedTableHeaderCell = <T extends TDictionary>(
           )}
           {includes(columnOrders, ESortDirection.DESC) && (
             <Row key="desc">
-              <CaretDownOutlined css={getSorterArrowStyle(false, isDownActive)} />
+              <CaretDownOutlined
+                css={getSorterArrowStyle(false, isDownActive)}
+              />
             </Row>
           )}
         </Col>
@@ -89,6 +91,6 @@ const VirtualizedTableHeaderCell = <T extends TDictionary>(
 
 const MemoVirtualizedTableHeaderCell = memo(VirtualizedTableHeaderCell);
 
-export default <T extends TDictionary>(props: IVirtualizedTableHeaderCellProps<T>) => (
-  <MemoVirtualizedTableHeaderCell {...props} />
-);
+export default <T extends TDictionary>(
+  props: IVirtualizedTableHeaderCellProps<T>
+) => <MemoVirtualizedTableHeaderCell {...props} />;

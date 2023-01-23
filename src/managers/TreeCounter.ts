@@ -1,7 +1,7 @@
 import { forEach, isNumber } from "lodash";
 import type { IModel } from "@im/utils";
 import { Group } from "@im/utils";
-import RestModel from "@im/base/src/models/RestModel";
+import RestModel from "src/models/RestModel";
 
 /**
  * Класс, рассчитывающий количество элементов в дереве по разным критериям
@@ -43,7 +43,8 @@ class TreeCounter {
       this.countCheckedShallowEntities(shellModels);
 
       this.totalCheckedCount = this.itemsCheckedCount + this.groupsCheckedCount;
-      this.targetAll = totalCount !== 0 && totalCount === this.totalCheckedCount;
+      this.targetAll =
+        totalCount !== 0 && totalCount === this.totalCheckedCount;
     }
   }
 

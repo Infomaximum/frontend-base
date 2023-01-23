@@ -5,8 +5,8 @@ import type { DataIndex } from "rc-table/lib/interface";
 import type { IWithSpinPropsReplacer } from "./VirtualizedTable.utils";
 import type React from "react";
 import type { ScrollParams } from "react-virtualized";
-import type { TBaseRow, TExtendColumns } from "@im/base/src/managers/Tree";
-import type { IBaseColumnConfig } from "@im/base/src/components/Table/Table.types";
+import type { TBaseRow, TExtendColumns } from "src/managers/Tree";
+import type { IBaseColumnConfig } from "src/components/Table/Table.types";
 
 export interface IColumnProps<T = any> extends IBaseColumnConfig<T> {
   /** Позволяет раскрыть строку виртуализированной таблицы при клике на конкретную ячейку */

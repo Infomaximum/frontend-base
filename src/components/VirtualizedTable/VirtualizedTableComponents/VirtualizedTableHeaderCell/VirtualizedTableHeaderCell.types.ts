@@ -1,5 +1,5 @@
 import type { SorterResult, SortOrder } from "antd/lib/table/interface";
-import type { IVirtualizedColumnConfig } from "@im/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import type { IVirtualizedColumnConfig } from "src/components/VirtualizedTable/VirtualizedTable.types";
 
 export interface IVirtualizedTableHeaderCellProps<T> {
   column: IVirtualizedColumnConfig<T>;

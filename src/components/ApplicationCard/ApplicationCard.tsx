@@ -1,4 +1,11 @@
-import { memo, useMemo, useCallback, forwardRef, type ForwardedRef, useState } from "react";
+import {
+  memo,
+  useMemo,
+  useCallback,
+  forwardRef,
+  type ForwardedRef,
+  useState,
+} from "react";
 import type { IApplicationCardProps } from "./ApplicationCard.types";
 import {
   titleStyle,
@@ -11,16 +18,19 @@ import {
   pointerCardStyle,
   focusStyle,
 } from "./ApplicationCard.styles";
-import ContextMenu from "@im/base/src/components/ContextMenu/ContextMenu";
+import ContextMenu from "src/components/ContextMenu/ContextMenu";
 import InlineTags from "./InlineTags/InlineTags";
 import { isEmpty, isFunction } from "lodash";
-import { applicationCardTestId } from "@im/base/src/utils/TestIds";
-import { DELETE } from "@im/base/src/utils/Localization/Localization";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
+import { applicationCardTestId } from "src/utils/TestIds";
+import { DELETE } from "src/utils/Localization/Localization";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
 import { Link } from "react-router-dom";
 import type { Interpolation } from "@emotion/react";
 
-const ApplicationCard = forwardRef<HTMLAnchorElement | HTMLDivElement, IApplicationCardProps>(
+const ApplicationCard = forwardRef<
+  HTMLAnchorElement | HTMLDivElement,
+  IApplicationCardProps
+>(
   (
     {
       entity,
@@ -56,7 +66,14 @@ const ApplicationCard = forwardRef<HTMLAnchorElement | HTMLDivElement, IApplicat
       }
 
       return menuItems;
-    }, [contextMenuGetter, entity, isReadOnly, hasDeleteAccess, localization, onRemove]);
+    }, [
+      contextMenuGetter,
+      entity,
+      isReadOnly,
+      hasDeleteAccess,
+      localization,
+      onRemove,
+    ]);
 
     const hasContextMenu = !isEmpty(contextMenuItems);
 
@@ -113,7 +130,9 @@ const ApplicationCard = forwardRef<HTMLAnchorElement | HTMLDivElement, IApplicat
           css={cardStyles}
           onClick={onClick && handleClick}
           ref={ref as ForwardedRef<HTMLAnchorElement>}
-          test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
+          test-id={`${applicationCardTestId}-${
+            entity.contentTypename
+          }-${entity.getId()}`}
         >
           {content}
           {contextMenu}
@@ -126,7 +145,9 @@ const ApplicationCard = forwardRef<HTMLAnchorElement | HTMLDivElement, IApplicat
         css={cardStyles}
         onClick={onClick && handleClick}
         ref={ref as ForwardedRef<HTMLDivElement>}
-        test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
+        test-id={`${applicationCardTestId}-${
+          entity.contentTypename
+        }-${entity.getId()}`}
       >
         {content}
         {contextMenu}

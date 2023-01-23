@@ -1,15 +1,19 @@
 import React from "react";
 import { Empty } from "antd";
 import type { IDropdownPlaceholderProps } from "./DropdownPlaceholder.types";
-import { emptyStyle, emptyImageStyle, hintStyle } from "./DropdownPlaceholder.styles";
-import NothingFoundBox from "@im/base/src/resources/icons/NothingFoundBox.svg";
-import NoAccess from "@im/base/src/resources/icons/NoAccess.svg";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
+import {
+  emptyStyle,
+  emptyImageStyle,
+  hintStyle,
+} from "./DropdownPlaceholder.styles";
+import NothingFoundBox from "src/resources/icons/NothingFoundBox.svg";
+import NoAccess from "src/resources/icons/NoAccess.svg";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
 import {
   EMPTY_HERE,
   NO_ACCESS,
   NOTHING_FOUND_CHANGE_QUERY,
-} from "@im/base/src/utils/Localization/Localization";
+} from "src/utils/Localization/Localization";
 
 /**
  * Placeholder выпадающего списка (данные запрашиваются 1 раз).
@@ -25,7 +29,11 @@ const DropdownPlaceholder: React.FC<IDropdownPlaceholderProps> = ({
   const localization = useLocalization();
 
   if (!!searchText) {
-    return <span css={hintStyle}>{localization.getLocalized(NOTHING_FOUND_CHANGE_QUERY)}</span>;
+    return (
+      <span css={hintStyle}>
+        {localization.getLocalized(NOTHING_FOUND_CHANGE_QUERY)}
+      </span>
+    );
   }
 
   if (!hasAccess) {

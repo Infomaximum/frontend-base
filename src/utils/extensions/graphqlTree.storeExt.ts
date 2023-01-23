@@ -1,8 +1,8 @@
 import type { Model, TModelStruct } from "@im/utils";
 import { InvalidIndex, assertSimple } from "@im/utils";
 import { forEach, get, isNull, isEmpty, map } from "lodash";
-import type { NStore } from "@im/base/src/utils/Store/Store/Store.types";
-import type { Store } from "@im/base/src/utils/Store/Store/Store";
+import type { NStore } from "src/utils/Store/Store/Store.types";
+import type { Store } from "src/utils/Store/Store/Store";
 
 type TTreeBuilderParams = {
   // typename группы
@@ -28,7 +28,10 @@ const defaultItemWrapperField = "element";
  * Функция работает только если родительские элементы приходят в списке раньше своих дочерних.
  * Иначе потребуются более затратные вычисления.
  */
-export function buildTreeFromList(sourceList: TModelStruct[], params: TTreeBuilderParams) {
+export function buildTreeFromList(
+  sourceList: TModelStruct[],
+  params: TTreeBuilderParams
+) {
   const {
     parentsIdsField,
     groupTypename,
@@ -103,7 +106,10 @@ export function buildTreeFromList(sourceList: TModelStruct[], params: TTreeBuild
 }
 
 function getRestItemStruct(nextCount: number) {
-  assertSimple(nextCount !== 0, `Попытка принять элемент с ${nextCountKey} = 0 за "Показать еще"`);
+  assertSimple(
+    nextCount !== 0,
+    `Попытка принять элемент с ${nextCountKey} = 0 за "Показать еще"`
+  );
 
   return {
     next_count: nextCount,

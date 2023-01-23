@@ -2,12 +2,12 @@ import type { ReactWrapper } from "enzyme";
 import { mount } from "enzyme";
 import ConfirmationModal from "./ConfirmationModal";
 import { Localization } from "@im/utils";
-import { ModalAnimationInterval } from "@im/base/src/utils/const";
+import { ModalAnimationInterval } from "src/utils/const";
 import {
   confirmationModalAdditionalButtonTestId,
   confirmationModalCancelButtonTestId,
   confirmationModalConfirmButtonTestId,
-} from "@im/base/src/utils/TestIds";
+} from "src/utils/TestIds";
 
 describe("Тест компонента ConfirmationModal", () => {
   const props = {
@@ -35,7 +35,9 @@ describe("Тест компонента ConfirmationModal", () => {
 
     expect(getModal(component).prop("visible")).toEqual(true);
 
-    getButton(component, confirmationModalConfirmButtonTestId).simulate("click");
+    getButton(component, confirmationModalConfirmButtonTestId).simulate(
+      "click"
+    );
 
     expect(component.props().onConfirm).toHaveBeenCalled();
     expect(getModal(component).prop("visible")).toEqual(false);
@@ -62,9 +64,14 @@ describe("Тест компонента ConfirmationModal", () => {
 
   xit("Тест дополнительной кнопки", () => {
     const component = getTestComponent();
-    component.setProps({ withAdditionalButton: true, onAdditionalButtonClick: jest.fn() });
+    component.setProps({
+      withAdditionalButton: true,
+      onAdditionalButtonClick: jest.fn(),
+    });
 
-    getButton(component, confirmationModalAdditionalButtonTestId).simulate("click");
+    getButton(component, confirmationModalAdditionalButtonTestId).simulate(
+      "click"
+    );
     expect(component.props().onAdditionalButtonClick).toHaveBeenCalled();
     expect(getModal(component).prop("visible")).toEqual(true);
   });

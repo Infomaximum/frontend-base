@@ -1,4 +1,4 @@
-import type { IContextMenuParam } from "@im/base/src/components/ContextMenu/ContextMenu.types";
+import type { IContextMenuParam } from "src/components/ContextMenu/ContextMenu.types";
 import type { ITagProps } from "./InlineTags/InlineTags.types";
 
 export interface ICardEntity {

@@ -1,4 +1,4 @@
-import type { IVirtualizedColumnConfig } from "@im/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import type { IVirtualizedColumnConfig } from "src/components/VirtualizedTable/VirtualizedTable.types";
 
 export interface IVirtualizedTableBodyCellProps<T> {
   index: number;

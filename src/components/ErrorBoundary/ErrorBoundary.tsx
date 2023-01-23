@@ -1,4 +1,4 @@
-import withModalError from "@im/base/src/decorators/hocs/withModalError/withModalError";
+import withModalError from "src/decorators/hocs/withModalError/withModalError";
 import type { ComponentType, ErrorInfo } from "react";
 import { Component } from "react";
 import { ErrorHandling } from "@im/utils";
@@ -10,7 +10,10 @@ import type {
 
 const AppErrorHandlingService = new ErrorHandling();
 
-class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
+class ErrorBoundary extends Component<
+  IErrorBoundaryProps,
+  IErrorBoundaryState
+> {
   public static getDerivedStateFromError() {
     return { hasError: true };
   }
@@ -49,7 +52,9 @@ class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> 
     } else {
       // eslint-disable-next-line no-console
       console.error(
-        `ошибка произошла по пути ${this.getPathName()} ошибка ${error} код: ${this.props.code}`
+        `ошибка произошла по пути ${this.getPathName()} ошибка ${error} код: ${
+          this.props.code
+        }`
       );
     }
   }
@@ -68,8 +73,8 @@ class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> 
   }
 }
 
-export const AppErrorBoundary = withModalError(ErrorBoundary) as unknown as ComponentType<
-  Omit<IAppErrorBoundaryProps, "showModalError">
->;
+export const AppErrorBoundary = withModalError(
+  ErrorBoundary
+) as unknown as ComponentType<Omit<IAppErrorBoundaryProps, "showModalError">>;
 
 export default withModalError(ErrorBoundary);

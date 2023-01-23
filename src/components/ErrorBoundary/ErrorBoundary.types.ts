@@ -1,5 +1,5 @@
 import type { NCore } from "@im/core";
-import type { IWithModalErrorProps } from "@im/base/src/decorators/hocs/withModalError/withModalError.types";
+import type { IWithModalErrorProps } from "src/decorators/hocs/withModalError/withModalError.types";
 
 export interface IAppErrorBoundaryProps extends IWithModalErrorProps {
   /**

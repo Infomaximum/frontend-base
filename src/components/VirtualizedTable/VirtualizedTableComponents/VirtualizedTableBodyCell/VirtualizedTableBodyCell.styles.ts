@@ -1,10 +1,13 @@
-import { tableBodyCellStyle } from "@im/base/src/components/Table/TableComponents/TableBodyCell/TableBodyCell.styles";
+import { tableBodyCellStyle } from "src/components/Table/TableComponents/TableBodyCell/TableBodyCell.styles";
 import type { ReactText } from "react";
 import { EUserAgents, userAgent } from "@im/utils";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 
-export const getVirtualizedTableCellFlexStyle = (width?: ReactText, minWidth?: ReactText) => {
+export const getVirtualizedTableCellFlexStyle = (
+  width?: ReactText,
+  minWidth?: ReactText
+) => {
   return { flexBasis: width ?? 0, flexGrow: width ? 0 : 1, minWidth };
 };
 

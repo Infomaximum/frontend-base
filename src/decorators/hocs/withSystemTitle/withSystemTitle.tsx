@@ -1,6 +1,6 @@
 import { PureComponent } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import { getBreadcrumbs } from "@im/base/src/utils/Routes/routes";
+import { getBreadcrumbs } from "src/utils/Routes/routes";
 import { withLoc } from "@im/utils";
 import { isArray } from "lodash";
 import type { TPropInjector } from "@im/utils";
@@ -13,7 +13,11 @@ import { observer } from "mobx-react";
 import withLocation from "../withLocation/withLocation";
 
 const withSystemTitle = (
-  params: TParams = { displayModelNameInTitle: false, titleLocList: undefined, store: undefined }
+  params: TParams = {
+    displayModelNameInTitle: false,
+    titleLocList: undefined,
+    store: undefined,
+  }
 ): TPropInjector<IWithSystemTitleProps> => {
   const { displayModelNameInTitle, titleLocList, store } = params;
 
@@ -26,11 +30,18 @@ const withSystemTitle = (
         this.buildSystemTitle = this.buildSystemTitle.bind(this);
       }
 
-      public static getDerivedStateFromProps(props: any, state: IWithSystemTitleState) {
+      public static getDerivedStateFromProps(
+        props: any,
+        state: IWithSystemTitleState
+      ) {
         if (!state.isCustomTitle) {
-          const crumbs = getBreadcrumbs(props.location.pathname, "systemTitleLoc");
+          const crumbs = getBreadcrumbs(
+            props.location.pathname,
+            "systemTitleLoc"
+          );
 
-          const modelDisplayName = (store ?? props)?.model?.getDisplayName() ?? "";
+          const modelDisplayName =
+            (store ?? props)?.model?.getDisplayName() ?? "";
 
           let systemTitle = "";
 
@@ -38,12 +49,16 @@ const withSystemTitle = (
             const crumb = crumbs[i];
 
             if (i === crumbs.length - 1 && crumb) {
-              systemTitle += props.localization.getLocalized(crumb.systemTitleLoc);
+              systemTitle += props.localization.getLocalized(
+                crumb.systemTitleLoc
+              );
               continue;
             }
 
             if (crumb) {
-              systemTitle += ` - ${props.localization.getLocalized(crumb.systemTitleLoc)}`;
+              systemTitle += ` - ${props.localization.getLocalized(
+                crumb.systemTitleLoc
+              )}`;
             }
           }
 
@@ -56,7 +71,9 @@ const withSystemTitle = (
                 continue;
               }
 
-              systemTitle += ` - ${props.localization.getLocalized(titleLocList[i])}`;
+              systemTitle += ` - ${props.localization.getLocalized(
+                titleLocList[i]
+              )}`;
             }
           }
 

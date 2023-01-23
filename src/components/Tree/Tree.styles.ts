@@ -1,4 +1,4 @@
-import { HoverAnimationInterval } from "@im/base/src/utils/const";
+import { HoverAnimationInterval } from "src/utils/const";
 import Tree from "./Tree";
 
 export const treeSwitcherIconContainerStyle = (theme: TTheme) =>

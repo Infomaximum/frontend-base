@@ -1,11 +1,14 @@
-import Tooltip from "@im/base/src/components/Tooltip/Tooltip";
+import Tooltip from "src/components/Tooltip/Tooltip";
 import { isArray, isString, last } from "lodash";
 import React, { forwardRef } from "react";
 import { tableBodyCellStyle } from "./TableBodyCell.styles";
 import type { ITableBodyCellProps } from "./TableBodyCell.types";
 
 const TableBodyCell: React.FC<ITableBodyCellProps> = forwardRef(
-  ({ children, showTooltip, ...restProps }, ref: React.Ref<HTMLTableCellElement>) => {
+  (
+    { children, showTooltip, ...restProps },
+    ref: React.Ref<HTMLTableCellElement>
+  ) => {
     const getTitle = () => {
       let title: string | null = null;
 
@@ -29,7 +32,11 @@ const TableBodyCell: React.FC<ITableBodyCellProps> = forwardRef(
 
     return (
       <td {...restProps} css={tableBodyCellStyle} ref={ref} title={undefined}>
-        {showTooltip ? <Tooltip title={getTitle()}>{children}</Tooltip> : children}
+        {showTooltip ? (
+          <Tooltip title={getTitle()}>{children}</Tooltip>
+        ) : (
+          children
+        )}
       </td>
     );
   }

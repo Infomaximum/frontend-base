@@ -5,7 +5,7 @@ import Select from "./Select";
 import "@testing-library/jest-dom";
 import type { ISelectProps } from "./Select.types";
 import { mapChildrenToOptions } from "./Select.utils";
-import Tooltip from "@im/base/src/components/Tooltip/Tooltip";
+import Tooltip from "src/components/Tooltip/Tooltip";
 import { textWrapperStyle } from "./Select.styles";
 
 enum EElement {

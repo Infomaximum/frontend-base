@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Deferred } from "@im/utils";
 import type { TLocalizationDescription } from "@im/utils";
 import { useLocalization } from "./useLocalization";
-import ConfirmationModal from "@im/base/src/components/modals/ConfirmationModal/ConfirmationModal";
-import { SAVE } from "@im/base/src/utils/Localization/Localization";
+import ConfirmationModal from "src/components/modals/ConfirmationModal/ConfirmationModal";
+import { SAVE } from "src/utils/Localization/Localization";
 
 type TConfirmationParams<T> = {
   /** Колбек который будет вызван после подтверждения выполняемого действия */
@@ -64,7 +64,9 @@ export const useConfirmationModal = <T,>(params: TConfirmationParams<T>) => {
       const { loc, titleLoc } = params;
 
       const title =
-        typeof titleLoc === "function" ? titleLoc(data) : localization.getLocalized(titleLoc);
+        typeof titleLoc === "function"
+          ? titleLoc(data)
+          : localization.getLocalized(titleLoc);
 
       return (
         <ConfirmationModal
@@ -73,11 +75,20 @@ export const useConfirmationModal = <T,>(params: TConfirmationParams<T>) => {
           onConfirm={handleConfirm}
           buttonOkText={SAVE}
         >
-          {typeof loc === "function" ? loc(data) : localization.getLocalized(loc)}
+          {typeof loc === "function"
+            ? loc(data)
+            : localization.getLocalized(loc)}
         </ConfirmationModal>
       );
     }
-  }, [params, data, handleAfterCancel, handleConfirm, isShowModal, localization]);
+  }, [
+    params,
+    data,
+    handleAfterCancel,
+    handleConfirm,
+    isShowModal,
+    localization,
+  ]);
 
   return { renderConfirmationModal, handleAction };
 };

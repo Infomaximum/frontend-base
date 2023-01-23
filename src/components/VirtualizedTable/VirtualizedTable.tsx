@@ -1,6 +1,9 @@
 import { createRef, PureComponent } from "react";
 import type { ListRowProps, List as VList } from "react-virtualized";
-import { getEmptyContentStyle, loaderWrapperStyle } from "./VirtualizedTable.styles";
+import {
+  getEmptyContentStyle,
+  loaderWrapperStyle,
+} from "./VirtualizedTable.styles";
 import { Spin, Row, Col } from "antd";
 import type {
   IVirtualizedColumnConfig,
@@ -22,8 +25,11 @@ import {
   filter,
   take,
 } from "lodash";
-import { virtualizedTableRowTestId, virtualizedTableTestId } from "@im/base/src/utils/TestIds";
-import { ESortDirection } from "@im/base/src/utils/const";
+import {
+  virtualizedTableRowTestId,
+  virtualizedTableTestId,
+} from "src/utils/TestIds";
+import { ESortDirection } from "src/utils/const";
 import VirtualizedTableHeaderRow from "./VirtualizedTableComponents/VirtualizedTableHeaderRow/VirtualizedTableHeaderRow";
 import VirtualizedTableBodyRow from "./VirtualizedTableComponents/VirtualizedTableBodyRow/VirtualizedTableBodyRow";
 import VirtualizedTableBody from "./VirtualizedTableComponents/VirtualizedTableBody/VirtualizedTableBody";
@@ -31,10 +37,13 @@ import { assertSimple } from "@im/utils";
 import type { SorterResult, SortOrder } from "antd/lib/table/interface";
 import { borderTopStyle } from "../Table/Table.styles";
 import { observer } from "mobx-react";
-import RestModel from "@im/base/src/models/RestModel";
+import RestModel from "src/models/RestModel";
 import { withSpinPropsReplacer } from "./VirtualizedTable.utils";
 
-const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [SortOrder, SortOrder];
+const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [
+  SortOrder,
+  SortOrder
+];
 
 /**
  * Таблица для виртуализированной отрисовки больших данных, стилизованная под AntTable и
@@ -86,17 +95,24 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
     }
 
     this.setState({
-      selectedRowKeysSet: new Set(rowSelection?.selectedRowKeys as Iterable<string>),
+      selectedRowKeysSet: new Set(
+        rowSelection?.selectedRowKeys as Iterable<string>
+      ),
     });
   }
 
-  public override componentDidUpdate(prevProps: IVirtualizedTableProps<T | null>) {
-    const { rowSelection, dataSource, expandedRowKeys, loading, columns } = this.props;
+  public override componentDidUpdate(
+    prevProps: IVirtualizedTableProps<T | null>
+  ) {
+    const { rowSelection, dataSource, expandedRowKeys, loading, columns } =
+      this.props;
 
     if (prevProps.rowSelection !== rowSelection) {
       this.setState(
         {
-          selectedRowKeysSet: new Set(rowSelection?.selectedRowKeys as Iterable<string>),
+          selectedRowKeysSet: new Set(
+            rowSelection?.selectedRowKeys as Iterable<string>
+          ),
         },
         () => {
           this.vListRef.current?.forceUpdateGrid();
@@ -108,7 +124,10 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
       this.vListRef.current?.forceUpdateGrid();
     }
 
-    if (prevProps.dataSource !== dataSource || prevProps.expandedRowKeys !== expandedRowKeys) {
+    if (
+      prevProps.dataSource !== dataSource ||
+      prevProps.expandedRowKeys !== expandedRowKeys
+    ) {
       this.updateSurfaceNodes();
       this.vListRef.current?.forceUpdateGrid();
     }
@@ -133,7 +152,9 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
     }
   };
 
-  private updateColumnsSortOrders(columns: IVirtualizedTableProps<T | null>["columns"]) {
+  private updateColumnsSortOrders(
+    columns: IVirtualizedTableProps<T | null>["columns"]
+  ) {
     let previousKey: string | number;
 
     const columnsOrders: IVirtualizedTableState<T | null>["columnsOrders"] = {};
@@ -145,7 +166,9 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
         set(
           columnsOrders,
           key,
-          sortDirections ? intersection(defaultOrders, sortDirections) : defaultOrders
+          sortDirections
+            ? intersection(defaultOrders, sortDirections)
+            : defaultOrders
         );
       }
 
@@ -185,12 +208,15 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
         "Попытка установить некорректное направление сортировки"
       );
 
-      newSortIndex = currentSortIndex === columnOrders.length ? 0 : currentSortIndex + 1;
+      newSortIndex =
+        currentSortIndex === columnOrders.length ? 0 : currentSortIndex + 1;
     } else {
       newSortIndex = 0;
     }
 
-    return newSortIndex === columnOrders.length ? false : columnOrders[newSortIndex];
+    return newSortIndex === columnOrders.length
+      ? false
+      : columnOrders[newSortIndex];
   }
 
   private updateSurfaceNodes() {
@@ -202,7 +228,10 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
 
     const surfaceNodes: T[] = [];
 
-    const traverseTree = (treeNodes: readonly (T | null)[] | undefined, depth = 0) => {
+    const traverseTree = (
+      treeNodes: readonly (T | null)[] | undefined,
+      depth = 0
+    ) => {
       forEach(treeNodes, (treeNode) => {
         if (!treeNode) {
           return;
@@ -250,7 +279,12 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
 
     if (surfaceNodes.length) {
       /* Фильтры, пагинация и extra еще не реализованы */
-      this.props.onChange?.(null!, null!, sorter as SorterResult<T | null>, null!);
+      this.props.onChange?.(
+        null!,
+        null!,
+        sorter as SorterResult<T | null>,
+        null!
+      );
     }
 
     this.setState({ sorter: { field, order } });
@@ -291,7 +325,9 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
     onExpandedRowsChange?.(newExpandedRowKeys);
   };
 
-  private stretchColumn(column: IVirtualizedColumnConfig<T>): IVirtualizedColumnConfig<T> {
+  private stretchColumn(
+    column: IVirtualizedColumnConfig<T>
+  ): IVirtualizedColumnConfig<T> {
     return { ...column, width: "100%" };
   }
 
@@ -299,7 +335,13 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
    * Отрисовывает каждую строку, попадающую во Viewport
    */
   private rowRenderer = ({ index, key, style }: ListRowProps) => {
-    const { rowSelection, loading, indentSize, enableRowClick, isShowDividers } = this.props;
+    const {
+      rowSelection,
+      loading,
+      indentSize,
+      enableRowClick,
+      isShowDividers,
+    } = this.props;
     const { surfaceNodes, columnConfig, selectedRowKeysSet } = this.state;
 
     const record = surfaceNodes[index] ?? null;
@@ -308,7 +350,8 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
 
     const hasExpander = this.isTree && !isEmpty(record?.children);
 
-    const isExpanded = !!record?.key && hasExpander && this.expandedRowKeysSet.has(record.key);
+    const isExpanded =
+      !!record?.key && hasExpander && this.expandedRowKeysSet.has(record.key);
 
     const isEnableRowClick =
       !!record?.model && enableRowClick && !(record.model instanceof RestModel);
@@ -330,7 +373,9 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
           selectionType={rowSelection?.type}
           checkboxProps={checkboxProps}
           indentLeft={
-            !!record?.key && indentSize ? indentSize * (this.indents.get(record.key) ?? 0) : 0
+            !!record?.key && indentSize
+              ? indentSize * (this.indents.get(record.key) ?? 0)
+              : 0
           }
           hasExpander={hasExpander}
           isExpanded={isExpanded}
@@ -345,7 +390,12 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
 
   public get loader() {
     return this.props.loading ? (
-      <Row key="loader" justify="center" align="middle" css={loaderWrapperStyle}>
+      <Row
+        key="loader"
+        justify="center"
+        align="middle"
+        css={loaderWrapperStyle}
+      >
         <Col>
           <Spin />
         </Col>

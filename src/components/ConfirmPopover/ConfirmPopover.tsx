@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
-import { ExclamationCircleFilled } from "@im/base/src/components/Icons/Icons";
+import { ExclamationCircleFilled } from "src/components/Icons/Icons";
 import { Row, Col, Popover } from "antd";
-import Button from "@im/base/src/components/Button/Button";
+import Button from "src/components/Button/Button";
 import { withLoc } from "@im/utils";
 import type { IConfirmPopoverProps } from "./ConfirmPopover.types";
-import { CANCEL, CONFIRM } from "@im/base/src/utils/Localization/Localization";
+import { CANCEL, CONFIRM } from "src/utils/Localization/Localization";
 import {
   popoverPrimaryButtonStyle,
   popoverTitleIconStyle,
@@ -13,7 +13,7 @@ import {
 import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,
-} from "@im/base/src/utils/TestIds";
+} from "src/utils/TestIds";
 
 const buttonsSize = "small";
 
@@ -28,7 +28,10 @@ const ConfirmPopover: React.FC<IConfirmPopoverProps> = ({
   trigger = "click",
   ...rest
 }) => {
-  const onCancel = useCallback(() => onVisibleChange?.(false), [onVisibleChange]);
+  const onCancel = useCallback(
+    () => onVisibleChange?.(false),
+    [onVisibleChange]
+  );
 
   const content = (
     <>
@@ -65,7 +68,12 @@ const ConfirmPopover: React.FC<IConfirmPopoverProps> = ({
   );
 
   return (
-    <Popover trigger={trigger} content={content} onVisibleChange={onVisibleChange} {...rest} />
+    <Popover
+      trigger={trigger}
+      content={content}
+      onVisibleChange={onVisibleChange}
+      {...rest}
+    />
   );
 };
 

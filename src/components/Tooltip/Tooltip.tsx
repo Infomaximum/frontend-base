@@ -2,8 +2,11 @@ import React, { useMemo, FC } from "react";
 // eslint-disable-next-line im/ban-import-entity
 import { Tooltip as AntTooltip } from "antd";
 import type { ITooltipProps } from "./Tooltip.types";
-import { useTheme } from "@im/base/src/decorators/hooks/useTheme";
-import { tooltipOverlayStyle, tooltipOverlayInnerStyle } from "./Tooltip.styles";
+import { useTheme } from "src/decorators/hooks/useTheme";
+import {
+  tooltipOverlayStyle,
+  tooltipOverlayInnerStyle,
+} from "./Tooltip.styles";
 
 const tooltipOffset = [0, 2];
 const align = { offset: tooltipOffset };

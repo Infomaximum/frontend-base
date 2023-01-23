@@ -1,9 +1,9 @@
-import Alert from "@im/base/src/components/Alert/Alert";
-import { notificationErrorTestId } from "@im/base/src/utils/TestIds";
+import Alert from "src/components/Alert/Alert";
+import { notificationErrorTestId } from "src/utils/TestIds";
 import type { INotificationProps } from "./Notification.types";
 import { observer } from "mobx-react";
 import { useContext } from "react";
-import { DebugModeContext } from "@im/base/src/decorators/contexts/DebugModeContext";
+import { DebugModeContext } from "src/decorators/contexts/DebugModeContext";
 
 const Notification = ({ error }: INotificationProps) => {
   const isDebugMode = useContext(DebugModeContext);
@@ -26,7 +26,9 @@ const Notification = ({ error }: INotificationProps) => {
         type="error"
         showIcon={true}
         message={error.message ? error.title : undefined}
-        description={isDebugMode && traceId ? `${message} [${traceId}]` : message}
+        description={
+          isDebugMode && traceId ? `${message} [${traceId}]` : message
+        }
       />
     </div>
   );

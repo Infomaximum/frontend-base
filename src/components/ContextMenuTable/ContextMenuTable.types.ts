@@ -1,4 +1,4 @@
-import type { TAccessRules } from "@im/base/src/utils/access";
+import type { TAccessRules } from "src/utils/access";
 import type { ReactNode } from "react";
 
 export type TContextMenuItem = {

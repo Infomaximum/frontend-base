@@ -1,7 +1,7 @@
 import * as enzyme from "enzyme";
 import ContextMenu from "./ContextMenu";
 import { Menu } from "antd";
-import Button from "@im/base/src/components/Button/Button";
+import Button from "src/components/Button/Button";
 import type { IContextMenuProps } from "./ContextMenu.types";
 import MenuItem from "antd/lib/menu/MenuItem";
 

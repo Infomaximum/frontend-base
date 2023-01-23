@@ -1,10 +1,10 @@
 import React from "react";
-import { ArrowDownOutlined } from "@im/base/src/components/Icons/Icons";
-import Button from "@im/base/src/components/Button/Button";
+import { ArrowDownOutlined } from "src/components/Icons/Icons";
+import Button from "src/components/Button/Button";
 import { withLoc } from "@im/utils";
-import { SHOW_MORE } from "@im/base/src/utils/Localization/Localization";
+import { SHOW_MORE } from "src/utils/Localization/Localization";
 import type { IShowMoreProps } from "./ShowMore.types";
-import { tableShowMoreButtonTestId } from "@im/base/src/utils/TestIds";
+import { tableShowMoreButtonTestId } from "src/utils/TestIds";
 import { buttonStyle, ghostButtonStyle } from "./ShowMore.styles";
 import { observer } from "mobx-react";
 

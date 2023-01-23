@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-no-bind */
 import { ThemeContext } from "@emotion/react";
 // eslint-disable-next-line im/ban-import-entity
-import { theme } from "@im/base/src/styles/theme";
+import { theme } from "src/styles/theme";
 import { Localization, LocalizationContext } from "@im/utils";
 import { reduce } from "lodash";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-export const testLocalization = new Localization({ language: Localization.Language.ru });
+export const testLocalization = new Localization({
+  language: Localization.Language.ru,
+});
 
 type TWrapperKey = "theme" | "localization" | "router";
 
@@ -17,7 +19,9 @@ export const getThemeWrapper = (element: JSX.Element) => {
 
 export const getLocalizationWrapper = (element: JSX.Element) => {
   return (
-    <LocalizationContext.Provider value={testLocalization}>{element}</LocalizationContext.Provider>
+    <LocalizationContext.Provider value={testLocalization}>
+      {element}
+    </LocalizationContext.Provider>
   );
 };
 
@@ -38,9 +42,13 @@ const wrappers: Record<TWrapperKey, (element: JSX.Element) => JSX.Element> = {
   localization: getLocalizationWrapper,
 };
 
-export const getDefaultWrappers = (wrapperKey: TWrapperKey[], element: JSX.Element) =>
+export const getDefaultWrappers = (
+  wrapperKey: TWrapperKey[],
+  element: JSX.Element
+) =>
   reduce(
     wrappers,
-    (acc, func, key) => (wrapperKey.includes(key as TWrapperKey) ? func(acc) : acc),
+    (acc, func, key) =>
+      wrapperKey.includes(key as TWrapperKey) ? func(acc) : acc,
     element
   );

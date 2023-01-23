@@ -8,11 +8,12 @@ import {
 import type { Interpolation } from "@emotion/react";
 import { isFunction } from "lodash";
 import type { IBaseCardProps } from "./BaseCard.types";
-import { useTheme } from "@im/base/src/decorators/hooks/useTheme";
+import { useTheme } from "src/decorators/hooks/useTheme";
 
 const BaseCard: React.FC<IBaseCardProps> = (props) => {
   const theme = useTheme();
-  const { title, styleWrapper, headStyle, bodyStyle, onAnimationEnd, menu } = props;
+  const { title, styleWrapper, headStyle, bodyStyle, onAnimationEnd, menu } =
+    props;
 
   const containerDefaultStyle = React.useMemo(
     () => [
@@ -32,7 +33,10 @@ const BaseCard: React.FC<IBaseCardProps> = (props) => {
   );
 
   const bodyDefaultStyle = React.useMemo(
-    () => [cardBodyDefault, isFunction(bodyStyle) ? bodyStyle(theme) : bodyStyle],
+    () => [
+      cardBodyDefault,
+      isFunction(bodyStyle) ? bodyStyle(theme) : bodyStyle,
+    ],
     [bodyStyle, theme]
   );
 

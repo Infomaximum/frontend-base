@@ -1,22 +1,25 @@
 import type { NCore } from "@im/core";
 import ErrorModalContext, {
   IErrorModalContextContextData,
-} from "@im/base/src/decorators/contexts/ErrorModalContext";
+} from "src/decorators/contexts/ErrorModalContext";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
 import { handleErrorInternal } from "../Errors/Errors";
-import { ModalAnimationInterval } from "@im/base/src/utils/const";
-import { ErrorModal } from "@im/base/src/components/modals/ErrorModal/ErrorModal";
+import { ModalAnimationInterval } from "src/utils/const";
+import { ErrorModal } from "src/components/modals/ErrorModal/ErrorModal";
 import type {
   IErrorModalProviderConfigState,
   IErrorModalProviderProps,
 } from "./ErrorModalProvider.types";
 
-const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isDebugMode }) => {
+const ErrorModalProvider: FC<IErrorModalProviderProps> = ({
+  children,
+  isDebugMode,
+}) => {
   const [showModal, setShowModal] = useState(false);
-  const [errorConfig, setErrorConfig] = useState<IErrorModalProviderConfigState | undefined>(
-    undefined
-  );
+  const [errorConfig, setErrorConfig] = useState<
+    IErrorModalProviderConfigState | undefined
+  >(undefined);
   const localization = useLocalization();
 
   useEffect(() => {

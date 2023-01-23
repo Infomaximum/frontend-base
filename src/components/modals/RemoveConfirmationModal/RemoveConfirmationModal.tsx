@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
-import { CloseCircleOutlined } from "@im/base/src/components/Icons/Icons";
-import Button from "@im/base/src/components/Button/Button";
-import Modal from "@im/base/src/components/modals/Modal/Modal";
+import { CloseCircleOutlined } from "src/components/Icons/Icons";
+import Button from "src/components/Button/Button";
+import Modal from "src/components/modals/Modal/Modal";
 import {
   bodyStyle,
   titleModalStyle,
@@ -9,14 +9,14 @@ import {
   bodyModalStyle,
   modalContentStyle,
 } from "./RemoveConfirmationModal.styles";
-import { CANCEL, DELETE, DELETION } from "@im/base/src/utils/Localization/Localization";
+import { CANCEL, DELETE, DELETION } from "src/utils/Localization/Localization";
 import { withLoc } from "@im/utils";
-import { ModalAnimationInterval } from "@im/base/src/utils/const";
+import { ModalAnimationInterval } from "src/utils/const";
 import { isFunction } from "lodash";
 import {
   removeConfirmationModalCancelButtonTestId,
   removeConfirmationModalRemoveButtonTestId,
-} from "@im/base/src/utils/TestIds";
+} from "src/utils/TestIds";
 import type {
   IRemoveConfirmationModalProps,
   IRemoveConfirmationModalState,
@@ -44,7 +44,9 @@ class RemoveConfirmationModal extends PureComponent<
           <CloseCircleOutlined css={iconStyle} />
         </div>
         <div>
-          <span css={titleModalStyle}>{title ? title : localization.getLocalized(DELETION)}</span>
+          <span css={titleModalStyle}>
+            {title ? title : localization.getLocalized(DELETION)}
+          </span>
           <span css={bodyModalStyle}>{this.props.children}</span>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import type { IDocumentNode, Model, TInferredVariables } from "@im/utils";
-import type { Store } from "@im/base/src/utils/Store/Store/Store";
-import type { NRequests } from "@im/base/src/utils/Requests/Requests.types";
+import type { Store } from "src/utils/Store/Store/Store";
+import type { NRequests } from "src/utils/Requests/Requests.types";
 
 export type TQueryParams = {
   /** Запрос */
@@ -38,7 +38,10 @@ export interface IWithStoreProps<S extends Store<Model>> {
   /** Отправляет запрос на сервер */
   query<T = TDictionary>(params?: TQueryParams): Promise<T | null>;
   /** Отправляет мутацию на сервер */
-  mutate<T extends IMutateParams<TDictionary>, Variable = TInferredVariables<T, "mutation">>(
+  mutate<
+    T extends IMutateParams<TDictionary>,
+    Variable = TInferredVariables<T, "mutation">
+  >(
     params: IMutateParams<Variable>
   ): Promise<TDictionary | null>;
   /** Отправляет мутацию от формы на сервер */

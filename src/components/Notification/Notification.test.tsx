@@ -2,7 +2,7 @@ import { Localization } from "@im/utils";
 import enzyme from "enzyme";
 import Notification from "./Notification";
 import type { NCore } from "@im/core";
-import { ERROR, ERROR_MESSAGE } from "@im/base/src/utils/Localization/Localization";
+import { ERROR, ERROR_MESSAGE } from "src/utils/Localization/Localization";
 
 const localization = new Localization({ language: Localization.Language.ru });
 
@@ -22,14 +22,18 @@ describe("Тест компонента Notification", () => {
   });
 
   it("Тест отрисовки передаваемого title", () => {
-    expect(renderComponent(testError).find("div[className='ant-alert-message']").text()).toEqual(
-      localization.getLocalized(ERROR)
-    );
+    expect(
+      renderComponent(testError)
+        .find("div[className='ant-alert-message']")
+        .text()
+    ).toEqual(localization.getLocalized(ERROR));
   });
 
   it("Тест отрисовки передаваемого description", () => {
     expect(
-      renderComponent(testError).find("div[className='ant-alert-description']").text()
+      renderComponent(testError)
+        .find("div[className='ant-alert-description']")
+        .text()
     ).toEqual(localization.getLocalized(ERROR_MESSAGE));
   });
 
@@ -39,7 +43,9 @@ describe("Тест компонента Notification", () => {
       message: localization.getLocalized(ERROR_MESSAGE),
     };
     expect(
-      renderComponent(localeError).find("div[test-id='notification-error_validation-error']").length
+      renderComponent(localeError).find(
+        "div[test-id='notification-error_validation-error']"
+      ).length
     ).toEqual(0);
   });
 });

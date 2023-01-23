@@ -1,5 +1,8 @@
-import { MAIN_LAYOUT_CONTENT_ID } from "@im/base/src/utils/const";
-import type { IScrollBehavior, TScrollBehaviorOptions } from "./ScrollBehavior.types";
+import { MAIN_LAYOUT_CONTENT_ID } from "src/utils/const";
+import type {
+  IScrollBehavior,
+  TScrollBehaviorOptions,
+} from "./ScrollBehavior.types";
 
 export class ScrollBehavior implements IScrollBehavior {
   private _scrollWidth!: number;
@@ -7,7 +10,10 @@ export class ScrollBehavior implements IScrollBehavior {
   private scrollContainer!: HTMLElement | null;
   private isRelativelyWindow: boolean;
 
-  constructor(private scrollContainerId: string, options: TScrollBehaviorOptions) {
+  constructor(
+    private scrollContainerId: string,
+    options: TScrollBehaviorOptions
+  ) {
     this.isRelativelyWindow = options.isRelativelyWindow;
   }
 
@@ -22,7 +28,11 @@ export class ScrollBehavior implements IScrollBehavior {
     return this.scrollContainer;
   }
 
-  private setStyles(scrollOverflowY: string, paddingRight: number, overflowBody: string) {
+  private setStyles(
+    scrollOverflowY: string,
+    paddingRight: number,
+    overflowBody: string
+  ) {
     const scrollContainer = this.getScrollContainer();
 
     if (!scrollContainer) {
@@ -44,7 +54,8 @@ export class ScrollBehavior implements IScrollBehavior {
     if (this.isRelativelyWindow) {
       this._scrollWidth = window.innerWidth - scrollContainer.clientWidth;
     } else {
-      this._scrollWidth = scrollContainer.offsetWidth - scrollContainer.clientWidth;
+      this._scrollWidth =
+        scrollContainer.offsetWidth - scrollContainer.clientWidth;
     }
   }
 

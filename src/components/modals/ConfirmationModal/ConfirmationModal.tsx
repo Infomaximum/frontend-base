@@ -1,7 +1,11 @@
 import { useState, FC, useMemo, useCallback, useRef, useEffect } from "react";
-import Button from "@im/base/src/components/Button/Button";
-import Modal from "@im/base/src/components/modals/Modal/Modal";
-import { APPLY, CANCEL, DO_NOT_SAVE } from "@im/base/src/utils/Localization/Localization";
+import Button from "src/components/Button/Button";
+import Modal from "src/components/modals/Modal/Modal";
+import {
+  APPLY,
+  CANCEL,
+  DO_NOT_SAVE,
+} from "src/utils/Localization/Localization";
 import type { TLocalizationDescription } from "@im/utils";
 import {
   bodyModalStyle,
@@ -13,16 +17,16 @@ import {
 } from "./ConfirmationModal.styles";
 import type { Interpolation } from "@emotion/react";
 import { isFunction } from "lodash";
-import { ModalAnimationInterval } from "@im/base/src/utils/const";
+import { ModalAnimationInterval } from "src/utils/const";
 import {
   confirmationModalAdditionalButtonTestId,
   confirmationModalCancelButtonTestId,
   confirmationModalConfirmButtonTestId,
-} from "@im/base/src/utils/TestIds";
-import { WarningOutlined } from "@im/base/src/components/Icons/Icons";
+} from "src/utils/TestIds";
+import { WarningOutlined } from "src/components/Icons/Icons";
 import type { IConfirmationModalProps } from "./ConfirmationModal.types";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
-import { useTheme } from "@im/base/src/decorators/hooks/useTheme";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { useTheme } from "src/decorators/hooks/useTheme";
 
 const ConfirmationModal: FC<IConfirmationModalProps> = (props) => {
   const {
@@ -115,7 +119,11 @@ const ConfirmationModal: FC<IConfirmationModalProps> = (props) => {
             {localization.getLocalized(additionalButtonCaption)}
           </Button>
         ) : null}
-        <Button type="ghost" onClick={handleCancel} test-id={confirmationModalCancelButtonTestId}>
+        <Button
+          type="ghost"
+          onClick={handleCancel}
+          test-id={confirmationModalCancelButtonTestId}
+        >
           {localization.getLocalized(CANCEL)}
         </Button>
         <Button

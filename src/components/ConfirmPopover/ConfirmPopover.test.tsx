@@ -5,14 +5,16 @@ import { Localization } from "@im/utils";
 import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,
-} from "@im/base/src/utils/TestIds";
-import Button from "@im/base/src/components/Button/Button";
+} from "src/utils/TestIds";
+import Button from "src/components/Button/Button";
 
 describe("Тест компонента ConfirmPopover", () => {
   const showPopoverButtonTestId = "show-popover";
   const bodyText = "body text";
 
-  const getMountedComponent = (extraProps: Partial<IConfirmPopoverProps> = {}) => {
+  const getMountedComponent = (
+    extraProps: Partial<IConfirmPopoverProps> = {}
+  ) => {
     const props = {
       text: bodyText,
       loading: false,
@@ -46,11 +48,17 @@ describe("Тест компонента ConfirmPopover", () => {
     const okText = "ok";
     const cancelText = "cancel";
 
-    const component = getMountedComponent({ okText, cancelText, visible: true });
+    const component = getMountedComponent({
+      okText,
+      cancelText,
+      visible: true,
+    });
 
     expect(getOkButton(component).text()).toBe(okText);
     expect(getCancelButton(component).text()).toBe(cancelText);
-    expect(component.find("Popover").find("Row").find("Col").at(1).text()).toBe(bodyText);
+    expect(component.find("Popover").find("Row").find("Col").at(1).text()).toBe(
+      bodyText
+    );
   });
 
   it("Видимость компонента управляется пропом visible", () => {
@@ -64,7 +72,10 @@ describe("Тест компонента ConfirmPopover", () => {
   });
 
   it("При нажатии на кнопку подтверждения срабатывает переданный callback onSubmit", () => {
-    const component = getMountedComponent({ visible: true, onSubmit: jest.fn() });
+    const component = getMountedComponent({
+      visible: true,
+      onSubmit: jest.fn(),
+    });
 
     getOkButton(component).simulate("click");
 
@@ -75,7 +86,10 @@ describe("Тест компонента ConfirmPopover", () => {
     "При нажатии на кнопку отмены срабатывает переданный callback onVisibleChange" +
       " с аргументом false",
     () => {
-      const component = getMountedComponent({ visible: true, onVisibleChange: jest.fn() });
+      const component = getMountedComponent({
+        visible: true,
+        onVisibleChange: jest.fn(),
+      });
 
       getCancelButton(component).simulate("click");
 
@@ -87,7 +101,10 @@ describe("Тест компонента ConfirmPopover", () => {
     "При нажатии за пределами поповера срабатывает переданный callback onVisibleChange" +
       " с аргументом false",
     () => {
-      const component = getMountedComponent({ visible: true, onVisibleChange: jest.fn() });
+      const component = getMountedComponent({
+        visible: true,
+        onVisibleChange: jest.fn(),
+      });
 
       getShowPopoverButton(component).simulate("click");
 
@@ -99,7 +116,10 @@ describe("Тест компонента ConfirmPopover", () => {
     "При нажатии по ребенку поповера, если поповер скрыт, срабатывает переданный" +
       " callback onVisibleChange с аргументом true",
     () => {
-      const component = getMountedComponent({ visible: false, onVisibleChange: jest.fn() });
+      const component = getMountedComponent({
+        visible: false,
+        onVisibleChange: jest.fn(),
+      });
 
       getShowPopoverButton(component).simulate("click");
 

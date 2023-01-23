@@ -9,7 +9,7 @@ import {
   TypenameToModel,
 } from "@im/utils";
 import { buildTreeFromList } from "../utils/extensions/graphqlTree.storeExt";
-import RestModel from "@im/base/src/models/RestModel";
+import RestModel from "src/models/RestModel";
 import { cloneDeep, set, unset, xor } from "lodash";
 
 type TItems = TreeItemModel | TreeGroupModel | RestModel;
@@ -64,7 +64,10 @@ class TreeItemModel extends Model {
 
 typenameToModel.registrationModels([TreeGroupModel, TreeItemModel, RestModel]);
 
-const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] => {
+const generateRawData = (
+  data: TNestedData,
+  parents: number[]
+): TModelStruct[] => {
   const checkIsGroup = (data: TNestedData): data is TNestedGroup => {
     return (data as TNestedGroup).items !== undefined;
   };
@@ -86,7 +89,9 @@ const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] =
   if (checkIsGroup(data)) {
     const nextParents = ~data.id ? [...parents, data.id] : parents;
 
-    const children = data.items.flatMap((item: TNestedData) => generateRawData(item, nextParents));
+    const children = data.items.flatMap((item: TNestedData) =>
+      generateRawData(item, nextParents)
+    );
 
     return [
       {
@@ -134,7 +139,10 @@ const nestedData: TNestedGroup = {
     {
       id: 5,
       items: [
-        { id: 6, items: [{ id: 16 }, { id: 21 }, { id: 22 }, { next_count: 2 }] },
+        {
+          id: 6,
+          items: [{ id: 16 }, { id: 21 }, { id: 22 }, { next_count: 2 }],
+        },
         { id: 7 },
         { id: 8 },
         { id: 17 },
@@ -266,7 +274,10 @@ describe("Тесты методов класса 'Tree'", () => {
       indeterminateKeys: [],
     });
 
-    const expectedAfterSecondClick = ["tree_component_model_10", "tree_component_model_11"];
+    const expectedAfterSecondClick = [
+      "tree_component_model_10",
+      "tree_component_model_11",
+    ];
 
     tree.handleSelect(tree.getNodeByKey("tree_component_group_9"), false);
     testState(tree, {
@@ -454,8 +465,12 @@ describe("Тесты методов класса 'Tree'", () => {
     tree.updateSelection();
 
     const checkedState = tree.getCheckedStateDispatchData();
-    expect(checkedState.accumulatedKeys).not.toContain("tree_component_model_18");
-    expect(checkedState.accumulatedKeys).not.toContain("tree_component_model_19");
+    expect(checkedState.accumulatedKeys).not.toContain(
+      "tree_component_model_18"
+    );
+    expect(checkedState.accumulatedKeys).not.toContain(
+      "tree_component_model_19"
+    );
   });
 
   it("'Показать ещё' в отфильтрованном дереве никогда не выделяется", () => {
@@ -529,7 +544,9 @@ describe("Тесты методов класса 'Tree'", () => {
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
-      defaultCheckedModels: [new TreeGroupModel({ struct: { id: 5, __typename: typenameGroup } })],
+      defaultCheckedModels: [
+        new TreeGroupModel({ struct: { id: 5, __typename: typenameGroup } }),
+      ],
     });
     tree.onModelChange(rootModel, {});
     tree.updateSelection();
@@ -595,6 +612,8 @@ describe("Тесты методов класса 'Tree'", () => {
     tree.onModelChange(rootModel, { isFilteredTree: false });
     tree.updateSelection();
 
-    expect(tree.getCheckedStateDispatchData().keys).not.toContain("tree_component_model_12");
+    expect(tree.getCheckedStateDispatchData().keys).not.toContain(
+      "tree_component_model_12"
+    );
   });
 });

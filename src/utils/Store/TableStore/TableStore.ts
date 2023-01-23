@@ -1,6 +1,6 @@
 import { action, makeObservable, observable, override, computed } from "mobx";
 import type { IModel, Model } from "@im/utils";
-import { Store } from "@im/base/src/utils/Store/Store/Store";
+import { Store } from "src/utils/Store/Store/Store";
 import type { NTableStore } from "./TableStore.types";
 import { isNumber, setWith } from "lodash";
 
@@ -139,7 +139,10 @@ class TableStore<M extends Model = never> extends Store<M> {
   }
 
   // Override
-  public override searchValueChange(value: string | undefined, variables?: TDictionary) {
+  public override searchValueChange(
+    value: string | undefined,
+    variables?: TDictionary
+  ) {
     super.searchValueChange(value);
     this.requestData({ variables });
   }

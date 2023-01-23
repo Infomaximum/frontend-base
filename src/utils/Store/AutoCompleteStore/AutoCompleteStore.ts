@@ -1,4 +1,4 @@
-import AutoCompleteListModel from "@im/base/src/models/AutoCompleteListModel";
+import AutoCompleteListModel from "src/models/AutoCompleteListModel";
 import { forEach } from "lodash";
 import { computed, makeObservable, override } from "mobx";
 import type { IModel } from "@im/utils";
@@ -22,12 +22,18 @@ type TPrivateAutoCompleteStoreField = "receiveData";
  * })
  *
  */
-class AutoCompleteStore<M extends AutoCompleteListModel = AutoCompleteListModel> extends Store<M> {
+class AutoCompleteStore<
+  M extends AutoCompleteListModel = AutoCompleteListModel
+> extends Store<M> {
   constructor(params: NStore.TStoreParams<AutoCompleteStore<M>>) {
     super({
       ...params,
-      getQueryParams(getterQueryParams: NStore.TParamsGetterArg<AutoCompleteStore<M>>) {
-        const queryParams = (params as NStore.TStoreParams<any>).getQueryParams(getterQueryParams);
+      getQueryParams(
+        getterQueryParams: NStore.TParamsGetterArg<AutoCompleteStore<M>>
+      ) {
+        const queryParams = (params as NStore.TStoreParams<any>).getQueryParams(
+          getterQueryParams
+        );
 
         return {
           ...queryParams,
@@ -78,7 +84,10 @@ class AutoCompleteStore<M extends AutoCompleteListModel = AutoCompleteListModel>
       : null;
   }
 
-  public override searchValueChange(value: string | undefined, variables?: TDictionary) {
+  public override searchValueChange(
+    value: string | undefined,
+    variables?: TDictionary
+  ) {
     super.searchValueChange(value);
 
     this.requestData({ variables });

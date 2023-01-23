@@ -1,13 +1,27 @@
 import React from "react";
 import { first, map } from "lodash";
-import type { IContextMenuTableProps, TContextMenuItem } from "./ContextMenuTable.types";
+import type {
+  IContextMenuTableProps,
+  TContextMenuItem,
+} from "./ContextMenuTable.types";
 import { threeDotsStyle } from "./ContextMenuTable.styles";
-import ContextMenu from "@im/base/src/components/ContextMenu/ContextMenu";
+import ContextMenu from "src/components/ContextMenu/ContextMenu";
 
-const ContextMenuTable: React.FC<IContextMenuTableProps> = ({ onSelect, data, items }) => {
+const ContextMenuTable: React.FC<IContextMenuTableProps> = ({
+  onSelect,
+  data,
+  items,
+}) => {
   const content = map(
     items,
-    ({ label, action, disabled, priority, ["test-id"]: testId, icon }: TContextMenuItem) => ({
+    ({
+      label,
+      action,
+      disabled,
+      priority,
+      ["test-id"]: testId,
+      icon,
+    }: TContextMenuItem) => ({
       action,
       disabled,
       priority,
@@ -36,7 +50,13 @@ const ContextMenuTable: React.FC<IContextMenuTableProps> = ({ onSelect, data, it
     }
   }
 
-  return <ContextMenu content={content} placement="bottomRight" css={threeDotsStyle} />;
+  return (
+    <ContextMenu
+      content={content}
+      placement="bottomRight"
+      css={threeDotsStyle}
+    />
+  );
 };
 
 export default React.memo(ContextMenuTable);

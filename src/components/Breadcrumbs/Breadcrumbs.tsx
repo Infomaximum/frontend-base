@@ -1,7 +1,7 @@
 import { compact, dropRight, last, size, takeRight } from "lodash";
 import type React from "react";
-import { useContainerWidth } from "@im/base/src/decorators/hooks/useContainerWidth";
-import { HomeOutlined } from "@im/base/src/components/Icons/Icons";
+import { useContainerWidth } from "src/decorators/hooks/useContainerWidth";
+import { HomeOutlined } from "src/components/Icons/Icons";
 import {
   containerStyle,
   crumbStyle,
@@ -13,14 +13,18 @@ import {
   threeDotsIconStyle,
 } from "./Breadcrumbs.styles";
 import type { IBreadcrumbsProps } from "./Breadcrumbs.types";
-import { calcShrinkMask, getTextWidth, interleaveWith } from "./Breadcrumbs.utils";
+import {
+  calcShrinkMask,
+  getTextWidth,
+  interleaveWith,
+} from "./Breadcrumbs.utils";
 import { Menu } from "antd";
-import Dropdown from "@im/base/src/components/Dropdown/Dropdown";
-import ThreeDotsSVG from "@im/base/src/resources/icons/ThreeDots.svg";
-import EllipsisTooltip from "@im/base/src/components/EllipsisTooltip/EllipsisTooltip";
-import Tooltip from "@im/base/src/components/Tooltip/Tooltip";
+import Dropdown from "src/components/Dropdown/Dropdown";
+import ThreeDotsSVG from "src/resources/icons/ThreeDots.svg";
+import EllipsisTooltip from "src/components/EllipsisTooltip/EllipsisTooltip";
+import Tooltip from "src/components/Tooltip/Tooltip";
 import { useNavigate } from "react-router";
-import { ellipsisStyle } from "@im/base/src/styles/common.styles";
+import { ellipsisStyle } from "src/styles/common.styles";
 
 // "Хлебные крошки" для нового списка сотрудников, который еще не реализован
 const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
@@ -46,7 +50,11 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
 
   function renderHome() {
     return (
-      <div key="home" css={crumbStyle(crumbXPadding)} onClick={createCrumbHandler(homePath)}>
+      <div
+        key="home"
+        css={crumbStyle(crumbXPadding)}
+        onClick={createCrumbHandler(homePath)}
+      >
         <Tooltip title={homeTitle} placement="bottomLeft">
           <HomeOutlined css={homeIconStyle} key="home" />
         </Tooltip>
@@ -90,7 +98,9 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
 
   function getTextShrinks() {
     const minWidth = 85;
-    const widths = visibleItems.map(({ name }) => getTextWidth(name, crumbFontSize));
+    const widths = visibleItems.map(({ name }) =>
+      getTextWidth(name, crumbFontSize)
+    );
     /** Доступная ширина под текст крошек */
     const excessTextWidth =
       labeledCrumbsWidth - size(widths) * (crumbXPadding * 2 + separatorWidth);
@@ -109,7 +119,10 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
 
       return (
         <div key={item.key} css={style} onClick={createCrumbHandler(item.path)}>
-          <EllipsisTooltip css={{ fontSize: crumbFontSize }} placement="bottomLeft">
+          <EllipsisTooltip
+            css={{ fontSize: crumbFontSize }}
+            placement="bottomLeft"
+          >
             {item.name}
           </EllipsisTooltip>
         </div>
@@ -117,7 +130,11 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
     });
 
     return (
-      <div key="text-crumbs" css={labeledCrumbsContainerStyle} ref={setLabeledCrumbsElement}>
+      <div
+        key="text-crumbs"
+        css={labeledCrumbsContainerStyle}
+        ref={setLabeledCrumbsElement}
+      >
         {interleaveWith(renderSeparator, crumbs)}
       </div>
     );

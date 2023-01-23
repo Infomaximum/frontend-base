@@ -1,8 +1,8 @@
 import type { IModel } from "@im/utils";
-import type TreeCounter from "@im/base/src/managers/TreeCounter";
-import type { ELimitsStateNames } from "@im/base/src/utils/const";
+import type TreeCounter from "src/managers/TreeCounter";
+import type { ELimitsStateNames } from "src/utils/const";
 import type { NStore } from "../Store/Store.types";
-import type RestModel from "@im/base/src/models/RestModel";
+import type RestModel from "src/models/RestModel";
 import type TableStore from "./TableStore";
 
 export declare namespace NTableStore {
@@ -61,5 +61,9 @@ export declare namespace NTableStore {
     accumulatedKeys: string[];
   }>;
 
-  type TExcludeClearDataKeys = ("checkedState" | "expandedState" | "searchValue")[];
+  type TExcludeClearDataKeys = (
+    | "checkedState"
+    | "expandedState"
+    | "searchValue"
+  )[];
 }

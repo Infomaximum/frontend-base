@@ -1,13 +1,16 @@
 import type { DocumentNode } from "graphql";
 import type { IDocumentNode, Model, TModelStruct } from "@im/utils";
 import type { NBaseStore } from "../BaseStore/BaseStore.types";
-import type { NRequests } from "@im/base/src/utils/Requests/Requests.types";
 import type { NCore } from "@im/core";
 import type { Store } from "./Store";
+import type { NRequests } from "src/utils/Requests/Requests.types";
 
 /** Пространство для типов базового стора */
 export declare namespace NStore {
-  type TPrepareDataFuncParams<S extends Store<M> = Store<any>, M extends Model = Model> = {
+  type TPrepareDataFuncParams<
+    S extends Store<M> = Store<any>,
+    M extends Model = Model
+  > = {
     data: TModelStruct | null;
     store: S;
     variables: TDictionary | undefined;
@@ -27,7 +30,11 @@ export declare namespace NStore {
     store: S;
   };
 
-  type TQueryParamsGetter<S extends Store<M>, M extends Model = Model, T = unknown> = (
+  type TQueryParamsGetter<
+    S extends Store<M>,
+    M extends Model = Model,
+    T = unknown
+  > = (
     this: S,
     params: TParamsGetterArg<S, M>
   ) => {
@@ -82,7 +89,11 @@ export declare namespace NStore {
   }
 
   interface IActionSubscribeParams {
-    onMessage: (params: { first: boolean; response: TDictionary; store: unknown }) => void;
+    onMessage: (params: {
+      first: boolean;
+      response: TDictionary;
+      store: unknown;
+    }) => void;
   }
 
   export type TStoreSubscriptionConfig = {
@@ -92,7 +103,11 @@ export declare namespace NStore {
       /** Переменные запроса */
       variables?: TDictionary;
     };
-    onMessage?: (params: { first: boolean; response: TDictionary; store: unknown }) => void;
+    onMessage?: (params: {
+      first: boolean;
+      response: TDictionary;
+      store: unknown;
+    }) => void;
     onError?: (params: { error: NCore.TError; store: unknown }) => void;
   };
 

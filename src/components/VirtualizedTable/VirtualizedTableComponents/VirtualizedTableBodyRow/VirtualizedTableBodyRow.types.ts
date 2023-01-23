@@ -1,5 +1,5 @@
 import type { TableRowSelection } from "antd/lib/table/interface";
-import type { IVirtualizedTableProps } from "@im/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import type { IVirtualizedTableProps } from "src/components/VirtualizedTable/VirtualizedTable.types";
 import type { IVirtualizedTableBodyCellProps } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell.types";
 
 export interface IVirtualizedTableBodyRowProps<T>
@@ -11,7 +11,9 @@ export interface IVirtualizedTableBodyRowProps<T>
   isCheckable: boolean;
   onSelectChange(record: T | null, isChecking: boolean): void;
   selectionType?: TableRowSelection<T>["type"];
-  checkboxProps?: ReturnType<NonNullable<TableRowSelection<T>["getCheckboxProps"]>>;
+  checkboxProps?: ReturnType<
+    NonNullable<TableRowSelection<T>["getCheckboxProps"]>
+  >;
   isTree: boolean;
   hasExpander: boolean;
   isExpanded: boolean;

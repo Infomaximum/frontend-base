@@ -1,5 +1,8 @@
 import { observer } from "mobx-react";
-import { tableRowCheckboxTestId, tableRowLoadingTestId } from "@im/base/src/utils/TestIds";
+import {
+  tableRowCheckboxTestId,
+  tableRowLoadingTestId,
+} from "src/utils/TestIds";
 import {
   virtualizedTableBodyRowLoadingCoverStyle,
   usualVirtualizedTableBodyRowStyle,
@@ -9,14 +12,14 @@ import {
 } from "./VirtualizedTableBodyRow.styles";
 import type { IVirtualizedTableBodyRowProps } from "./VirtualizedTableBodyRow.types";
 import { MouseEvent, useCallback } from "react";
-import Radio from "@im/base/src/components/Radio/Radio";
-import Checkbox from "@im/base/src/components/Checkbox/Checkbox";
+import Radio from "src/components/Radio/Radio";
+import Checkbox from "src/components/Checkbox/Checkbox";
 import { map } from "lodash";
 import VirtualizedTableBodyCell from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell";
-import type { TRow } from "@im/base/src/components/VirtualizedTable/VirtualizedTable.types";
-import TableCheckboxCell from "@im/base/src/components/Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
+import type { TRow } from "src/components/VirtualizedTable/VirtualizedTable.types";
+import TableCheckboxCell from "src/components/Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
-import { withoutDividerStyle } from "@im/base/src/components/VirtualizedTable/VirtualizedTable.styles";
+import { withoutDividerStyle } from "src/components/VirtualizedTable/VirtualizedTable.styles";
 
 export const VirtualizedTableBodyRow = <T extends TRow>(
   props: IVirtualizedTableBodyRowProps<T | null>
@@ -71,8 +74,12 @@ export const VirtualizedTableBodyRow = <T extends TRow>(
     <>
       <div
         css={[
-          isChecked ? checkedVirtualizedTableBodyRowStyle : usualVirtualizedTableBodyRowStyle,
-          enableRowClick && !isRowDisable && clickableVirtualizedTableBodyRowStyle,
+          isChecked
+            ? checkedVirtualizedTableBodyRowStyle
+            : usualVirtualizedTableBodyRowStyle,
+          enableRowClick &&
+            !isRowDisable &&
+            clickableVirtualizedTableBodyRowStyle,
           isShowDivider ? null : withoutDividerStyle,
         ]}
         onClick={!isRowDisable && enableRowClick ? selectChange : undefined}
@@ -96,7 +103,10 @@ export const VirtualizedTableBodyRow = <T extends TRow>(
         })}
       </div>
       {loading && (
-        <div css={virtualizedTableBodyRowLoadingCoverStyle} test-id={tableRowLoadingTestId} />
+        <div
+          css={virtualizedTableBodyRowLoadingCoverStyle}
+          test-id={tableRowLoadingTestId}
+        />
       )}
     </>
   );

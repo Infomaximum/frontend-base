@@ -1,8 +1,13 @@
 import type { NCore } from "@im/core";
-import RouteElement from "@im/base/src/components/routes/RouteElement/RouteElement";
+import RouteElement from "src/components/routes/RouteElement/RouteElement";
 import type { ReactElement } from "react";
 import { moduleGroupPath } from "./paths";
-import { getRelativeRoutePath, routesMap, breadcrumbsPacker, removeModulesLayer } from "./routes";
+import {
+  getRelativeRoutePath,
+  routesMap,
+  breadcrumbsPacker,
+  removeModulesLayer,
+} from "./routes";
 
 describe("Тесты методов работы с роутингом - routes", () => {
   describe("Удаления из роутов слоя для группировки модулей", () => {
@@ -13,18 +18,39 @@ describe("Тесты методов работы с роутингом - routes"
         routes: [
           {
             path: moduleGroupPath,
-            routes: [{ path: "/b/a" }, { path: "/b/b", routes: [{ path: "b/b/a" }] }],
+            routes: [
+              { path: "/b/a" },
+              { path: "/b/b", routes: [{ path: "b/b/a" }] },
+            ],
           },
         ],
       },
-      { path: "/c", routes: [{ path: "/c/a" }, { path: "/c/b", routes: [{ path: "c/b/a" }] }] },
+      {
+        path: "/c",
+        routes: [
+          { path: "/c/a" },
+          { path: "/c/b", routes: [{ path: "c/b/a" }] },
+        ],
+      },
     ];
 
     it("Структура роутов очищается", () => {
       expect(removeModulesLayer(routes)).toEqual([
         { path: "/a" },
-        { path: "/b", routes: [{ path: "/b/a" }, { path: "/b/b", routes: [{ path: "b/b/a" }] }] },
-        { path: "/c", routes: [{ path: "/c/a" }, { path: "/c/b", routes: [{ path: "c/b/a" }] }] },
+        {
+          path: "/b",
+          routes: [
+            { path: "/b/a" },
+            { path: "/b/b", routes: [{ path: "b/b/a" }] },
+          ],
+        },
+        {
+          path: "/c",
+          routes: [
+            { path: "/c/a" },
+            { path: "/c/b", routes: [{ path: "c/b/a" }] },
+          ],
+        },
       ]);
     });
   });
@@ -36,7 +62,10 @@ describe("Тесты методов работы с роутингом - routes"
         path: "/a",
         routes: [
           { path: "/a/aa", routes: [{ loc: "aaa", path: "/a/aa/aaa" }] },
-          { path: "/a/aa/:id/tab", routes: [{ loc: "tab", path: "/a/aa/:id/tab" }] },
+          {
+            path: "/a/aa/:id/tab",
+            routes: [{ loc: "tab", path: "/a/aa/:id/tab" }],
+          },
         ],
       },
       {
@@ -73,7 +102,11 @@ describe("Тесты методов работы с роутингом - routes"
     });
 
     it("Для всех роутов есть локализации", () => {
-      expect(generateCrumbsLocs(routes1, "/b/ba/baa")).toEqual(["b", "ba", "baa"]);
+      expect(generateCrumbsLocs(routes1, "/b/ba/baa")).toEqual([
+        "b",
+        "ba",
+        "baa",
+      ]);
     });
 
     const routes2 = [
@@ -86,8 +119,15 @@ describe("Тесты методов работы с роутингом - routes"
             path: "/a/aa",
             isLayoutRoute: true,
             routes: [
-              { loc: "aaa", path: "/a/aa/aaa", routes: [{ loc: "aaaa", path: "/a/aa/aaa/aaaa" }] },
-              { path: "/a/aa/aab", routes: [{ loc: "aaba", path: "/a/aa/aab/aaba" }] },
+              {
+                loc: "aaa",
+                path: "/a/aa/aaa",
+                routes: [{ loc: "aaaa", path: "/a/aa/aaa/aaaa" }],
+              },
+              {
+                path: "/a/aa/aab",
+                routes: [{ loc: "aaba", path: "/a/aa/aab/aaba" }],
+              },
             ],
           },
           {
@@ -95,8 +135,16 @@ describe("Тесты методов работы с роутингом - routes"
             path: "/a/ab",
             isLayoutRoute: true,
             routes: [
-              { loc: "aba", path: "/a/ab/aba", routes: [{ loc: "abaa", path: "/a/ab/aba/abaa" }] },
-              { loc: "abb", path: "/a/ab/abb", routes: [{ loc: "abba", path: "/a/ab/aba/abba" }] },
+              {
+                loc: "aba",
+                path: "/a/ab/aba",
+                routes: [{ loc: "abaa", path: "/a/ab/aba/abaa" }],
+              },
+              {
+                loc: "abb",
+                path: "/a/ab/abb",
+                routes: [{ loc: "abba", path: "/a/ab/aba/abba" }],
+              },
             ],
           },
         ],
@@ -104,11 +152,20 @@ describe("Тесты методов работы с роутингом - routes"
     ];
 
     it(`Единственная локализованная вкладка профиля не попадает в "крошки"`, () => {
-      expect(generateCrumbsLocs(routes2, "/a/aa/aaa/aaaa")).toEqual(["a", "aa", "aaaa"]);
+      expect(generateCrumbsLocs(routes2, "/a/aa/aaa/aaaa")).toEqual([
+        "a",
+        "aa",
+        "aaaa",
+      ]);
     });
 
     it(`При наличии нескольких локализованных вкладок, вкладка профиля попадает в "крошки"`, () => {
-      expect(generateCrumbsLocs(routes2, "/a/ab/aba/abaa")).toEqual(["a", "ab", "aba", "abaa"]);
+      expect(generateCrumbsLocs(routes2, "/a/ab/aba/abaa")).toEqual([
+        "a",
+        "ab",
+        "aba",
+        "abaa",
+      ]);
     });
   });
 
@@ -134,7 +191,13 @@ describe("Тесты методов работы с роутингом - routes"
     it("Плоский список", () => {
       const TestComponent = () => <>test</>;
       const routeConfig: NCore.IRoutes[] = [
-        { key: "a", path: "a", originalPath: "a", element: <TestComponent />, exact: true },
+        {
+          key: "a",
+          path: "a",
+          originalPath: "a",
+          element: <TestComponent />,
+          exact: true,
+        },
       ];
 
       expect(routesMap(routeConfig)).toEqual(routeConfig);
@@ -142,14 +205,21 @@ describe("Тесты методов работы с роутингом - routes"
 
     it("Преобразование параметра 'component' в 'element'", () => {
       const TestComponent = () => <>test</>;
-      const route = { key: "a", path: "a", component: TestComponent, exact: true };
+      const route = {
+        key: "a",
+        path: "a",
+        component: TestComponent,
+        exact: true,
+      };
       const routeConfig: NCore.IRoutes[] = [route];
 
-      expect(((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement).type).toBe(
-        RouteElement
-      );
       expect(
-        ((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement).props.route.key
+        ((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement)
+          .type
+      ).toBe(RouteElement);
+      expect(
+        ((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement)
+          .props.route.key
       ).toEqual(route.key);
     });
 
@@ -172,7 +242,9 @@ describe("Тесты методов работы с роутингом - routes"
 
       const routeConfig: NCore.IRoutes[] = [routeA];
 
-      expect(routesMap(routeConfig).find((route) => route.key === routeB.key)).not.toBeUndefined();
+      expect(
+        routesMap(routeConfig).find((route) => route.key === routeB.key)
+      ).not.toBeUndefined();
     });
 
     it("Роуты с типом layout на первом уровне вложенности, когда layout вложен в layout", () => {
@@ -195,8 +267,12 @@ describe("Тесты методов работы с роутингом - routes"
 
       const routeConfig: NCore.IRoutes[] = [routeA];
 
-      expect(routesMap(routeConfig).find((route) => route.key === routeB.key)).not.toBeUndefined();
-      expect(routesMap(routeConfig).find((route) => route.key === routeC.key)).not.toBeUndefined();
+      expect(
+        routesMap(routeConfig).find((route) => route.key === routeB.key)
+      ).not.toBeUndefined();
+      expect(
+        routesMap(routeConfig).find((route) => route.key === routeC.key)
+      ).not.toBeUndefined();
     });
 
     it("Дочерние роуты не преобразуются в плоский список внутри layout, если layout на первом уровне вложенности", () => {
@@ -220,7 +296,9 @@ describe("Тесты методов работы с роутингом - routes"
 
       expect(routesMap(routeConfig)[0]?.key).toEqual(routeA.key);
       expect(routesMap(routeConfig)[0]?.routes?.[0]?.key).toEqual(routeB.key);
-      expect(routesMap(routeConfig)[0]?.routes?.[0]?.routes?.[0]?.key).toEqual(routeC.key);
+      expect(routesMap(routeConfig)[0]?.routes?.[0]?.routes?.[0]?.key).toEqual(
+        routeC.key
+      );
     });
 
     it("Дочерние роуты не преобразуются в плоский список внутри layout, если layout на втором уровне вложенности", () => {
@@ -272,7 +350,9 @@ describe("Тесты методов работы с роутингом - routes"
           }),
         ])
       );
-      expect(routesMap(routeConfig).find((route) => route.key === routeB.key)?.routes).toEqual(
+      expect(
+        routesMap(routeConfig).find((route) => route.key === routeB.key)?.routes
+      ).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             key: routeC.key,

@@ -1,8 +1,18 @@
-import { forEach, map, includes, filter, reduce, every, isEmpty, get, isUndefined } from "lodash";
+import {
+  forEach,
+  map,
+  includes,
+  filter,
+  reduce,
+  every,
+  isEmpty,
+  get,
+  isUndefined,
+} from "lodash";
 import { Group, assertSimple, IModel, Model, runDfs } from "@im/utils";
 import TreeCounter from "./TreeCounter";
 import type { NTableStore } from "../utils/Store/TableStore/TableStore.types";
-import RestModel from "@im/base/src/models/RestModel";
+import RestModel from "src/models/RestModel";
 
 export type TBaseRow = {
   key: string;
@@ -156,7 +166,9 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
 
     // когда приходит хотя бы 1 элемент, смотрим, имеет ли он флаг hidden и запоминаем
     if (!isEmpty(treeModelItems) && !this.hasAlwaysComingData) {
-      this.hasAlwaysComingData = !isUndefined(get(treeModelItems[0], "struct.hidden"));
+      this.hasAlwaysComingData = !isUndefined(
+        get(treeModelItems[0], "struct.hidden")
+      );
     }
 
     const addedRows = addedRow ? [addedRow] : [];
@@ -173,7 +185,9 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
 
     if (this.isCheckable) {
       const plainTreeNodes = this.getPlainTreeNodes(this.preparedTreeData);
-      this.treeNodesMap = new Map(map(plainTreeNodes, (node) => [node.key, node]));
+      this.treeNodesMap = new Map(
+        map(plainTreeNodes, (node) => [node.key, node])
+      );
       this.currentDataKeysSet = new Set();
       this.filteredTreeItemsKeys = [];
       this.nonSelectableGroupAndRestKeysSet = new Set();
@@ -191,7 +205,10 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
         this.currentDataKeysSet.add(key);
 
         if (isFilteredTree) {
-          if (model instanceof RestModel || (model instanceof Group && !model.isSelected)) {
+          if (
+            model instanceof RestModel ||
+            (model instanceof Group && !model.isSelected)
+          ) {
             this.nonSelectableGroupAndRestKeysSet.add(key);
           } else {
             if (!(model instanceof Group)) {
@@ -225,7 +242,10 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
    * - выделяет дочерние элементы внутри выделенных родителей
    */
   public updateSelection(isInitiation: boolean = false) {
-    assertSimple(this.isCheckable, "Нельзя обновить выделение у компонента без чекбоксов");
+    assertSimple(
+      this.isCheckable,
+      "Нельзя обновить выделение у компонента без чекбоксов"
+    );
 
     const removableKeys: string[] = [];
     const removableRestKeys: string[] = [];
@@ -248,7 +268,10 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
       if (this.hasAlwaysComingData) {
         // если какого-либо выделенного ключа нет в текущих данных, удаляем его, но rest не трогаем
         forEach(this.accumulatedCheckedKeys, (checkedKey) => {
-          if (!this.currentDataKeysSet.has(checkedKey) && !this.restKeysSet.has(checkedKey)) {
+          if (
+            !this.currentDataKeysSet.has(checkedKey) &&
+            !this.restKeysSet.has(checkedKey)
+          ) {
             removableKeys.push(checkedKey);
             // обязательно нужно проверить, был ли ключ уже удален на предыдущем шаге,
             // т.к. предыдущий шаг не должен влиять на hasLostChecks
@@ -259,7 +282,10 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
         });
       }
 
-      removableKeys.push(...removableRestKeys, ...this.nonSelectableGroupAndRestKeysSet);
+      removableKeys.push(
+        ...removableRestKeys,
+        ...this.nonSelectableGroupAndRestKeysSet
+      );
     }
 
     const addedKeys: string[] = [];
@@ -276,8 +302,11 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
           return;
         }
 
-        const [childrenNodes, filteredChildrenNodes] = this.getChildrenNodes(node);
-        const actualChildrenNodes = this.isFilteredTree ? filteredChildrenNodes : childrenNodes;
+        const [childrenNodes, filteredChildrenNodes] =
+          this.getChildrenNodes(node);
+        const actualChildrenNodes = this.isFilteredTree
+          ? filteredChildrenNodes
+          : childrenNodes;
         const childrenKeys = map(actualChildrenNodes, (node) => node.key);
 
         addedKeys.push(...childrenKeys);
@@ -285,7 +314,11 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
     }
 
     const checkedKeysSet = new Set(this.accumulatedCheckedKeys);
-    const resultKeysSet = this.mergeKeysWithSet(checkedKeysSet, addedKeys, removableKeys);
+    const resultKeysSet = this.mergeKeysWithSet(
+      checkedKeysSet,
+      addedKeys,
+      removableKeys
+    );
 
     this.updateCheckedState(resultKeysSet);
   }
@@ -326,9 +359,14 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
       0
     );
 
-    const totalCount = this.sourceTreeNodesLength - sourceTreeRestModels.length + restCount;
+    const totalCount =
+      this.sourceTreeNodesLength - sourceTreeRestModels.length + restCount;
 
-    this.treeCounter = new TreeCounter(this.checkedModels, this.checkedShellModels, totalCount);
+    this.treeCounter = new TreeCounter(
+      this.checkedModels,
+      this.checkedShellModels,
+      totalCount
+    );
   }
 
   /**
@@ -364,7 +402,10 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
     selectionType?: string,
     blockedRowKeys?: string[]
   ) {
-    assertSimple(this.isCheckable, "Нельзя обновить выделение у компонента без чекбоксов");
+    assertSimple(
+      this.isCheckable,
+      "Нельзя обновить выделение у компонента без чекбоксов"
+    );
 
     if (selectionType === "radio") {
       targetTreeNode && this.updateCheckedState(new Set([targetTreeNode.key]));
@@ -385,8 +426,12 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
         let interpretedSelectAction = userSelectAction;
 
         if (targetTreeNode.model instanceof Group) {
-          const [childrenNodes, filteredChildrenNodes] = this.getChildrenNodes(targetTreeNode);
-          const filteredChildrenNodesKeys = map(filteredChildrenNodes, (node) => node.key);
+          const [childrenNodes, filteredChildrenNodes] =
+            this.getChildrenNodes(targetTreeNode);
+          const filteredChildrenNodesKeys = map(
+            filteredChildrenNodes,
+            (node) => node.key
+          );
 
           const isAllChildrenChecked =
             this.isAllChecked(filteredChildrenNodesKeys, checkedKeysSet) &&
@@ -394,7 +439,9 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
 
           // инвертирование выделения, если щелкаем по группе со всеми выделенными детьми
           interpretedSelectAction =
-            isAllChildrenChecked && userSelectAction ? !userSelectAction : userSelectAction;
+            isAllChildrenChecked && userSelectAction
+              ? !userSelectAction
+              : userSelectAction;
 
           if (this.isFilteredTree) {
             if (interpretedSelectAction) {
@@ -426,7 +473,11 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
 
         if (interpretedSelectAction) {
           // нельзя выделить группу в отфильтрованном дереве
-          if (!(this.isFilteredTree && this.isGroupWithChild(targetTreeNode.model))) {
+          if (
+            !(
+              this.isFilteredTree && this.isGroupWithChild(targetTreeNode.model)
+            )
+          ) {
             addedKeys.push(targetTreeNode.key);
           }
         } else {
@@ -447,9 +498,13 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
       if (this.isFilteredTree) {
         if (
           !userSelectAction ||
-          (userSelectAction && this.isAllChecked(this.filteredTreeItemsKeys, checkedKeysSet))
+          (userSelectAction &&
+            this.isAllChecked(this.filteredTreeItemsKeys, checkedKeysSet))
         ) {
-          removableKeys = [...this.treeNodesMap.keys(), ...this.restKeysSet.keys()];
+          removableKeys = [
+            ...this.treeNodesMap.keys(),
+            ...this.restKeysSet.keys(),
+          ];
         } else {
           addedKeys = this.filteredTreeItemsKeys;
         }
@@ -517,16 +572,25 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
 
   public defineExpandedKeysForFound() {
     const getModelItems = (model: Group) => model.getItems();
-    const isModelExpanded = (model: Model) => !model.isSelected() && model instanceof Group;
+    const isModelExpanded = (model: Model) =>
+      !model.isSelected() && model instanceof Group;
     const getInnerName = (model: Model) => model.getInnerName();
 
-    return runDfs(this.treeModel, getModelItems, isModelExpanded, getInnerName) as string[];
+    return runDfs(
+      this.treeModel,
+      getModelItems,
+      isModelExpanded,
+      getInnerName
+    ) as string[];
   }
 
   private get sourceTreeRootRestKey(): string | undefined {
     const rootDepartmentKey = this.treeModel?.getInnerName();
 
-    return rootDepartmentKey && this.restByGroupMap.get(rootDepartmentKey)?.getInnerName();
+    return (
+      rootDepartmentKey &&
+      this.restByGroupMap.get(rootDepartmentKey)?.getInnerName()
+    );
   }
 
   /**
@@ -569,7 +633,9 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
   private getParentsRemovedKeys(targetTreeNode: TExtendColumns<T>): string[] {
     const removedKeys = [];
     const parentsKeys = map(
-      (targetTreeNode.model as unknown as { getParents(): any[] })?.getParents(),
+      (
+        targetTreeNode.model as unknown as { getParents(): any[] }
+      )?.getParents(),
       (model) => model.getInnerName()
     );
     removedKeys.push(...parentsKeys, this.sourceTreeRootRestKey);
@@ -649,7 +715,10 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
   private updateIndeterminateGroupsKeys(checkedKeysSet: Set<string>) {
     const indeterminateGroupsKeys: string[] = [];
 
-    const pushIndeterminateGroups = (models: IModel[], parentsKeys: string[] = []) => {
+    const pushIndeterminateGroups = (
+      models: IModel[],
+      parentsKeys: string[] = []
+    ) => {
       let isParentIndeterminate = false;
 
       for (let i = 0; i < models.length; i += 1) {
@@ -705,7 +774,9 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
    */
   private removeContradictions(models: IModel[]): IModel[] {
     // создаем коллекцию моделей по их ключам
-    const modelsMap = new Map(map(models, (model) => [model.getInnerName(), model]));
+    const modelsMap = new Map(
+      map(models, (model) => [model.getInnerName(), model])
+    );
 
     // Если дочерние элементы модели уже есть в списке, удаляем их
 
@@ -735,7 +806,10 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
 
     forEach(models, (model) => {
       if (model instanceof RestModel) {
-        (rows as TExtendColumns<any>[]).push({ model, key: model.getInnerName() });
+        (rows as TExtendColumns<any>[]).push({
+          model,
+          key: model.getInnerName(),
+        });
       } else {
         let isHidden: boolean = false;
 
@@ -752,7 +826,8 @@ export default class Tree<T extends TBaseRow = TBaseRow> {
           }
         }
 
-        const isErased = this.erasedKeys && includes(this.erasedKeys, model.getInnerName());
+        const isErased =
+          this.erasedKeys && includes(this.erasedKeys, model.getInnerName());
 
         if (!(isErased || isHidden)) {
           const row = { ...this.rowBuilder(model) } as TExtendColumns<T>;

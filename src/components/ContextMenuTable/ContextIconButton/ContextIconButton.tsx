@@ -5,8 +5,8 @@ import {
   redButtonStyle,
   disabledButtonStyle,
 } from "./ContextIconButton.styles";
-import { useTheme } from "@im/base/src/decorators/hooks/useTheme";
-import Tooltip from "@im/base/src/components/Tooltip/Tooltip";
+import { useTheme } from "src/decorators/hooks/useTheme";
+import Tooltip from "src/components/Tooltip/Tooltip";
 
 export enum EContextIconButtonColors {
   DEFAULT = "DEFAULT",
@@ -61,7 +61,11 @@ const ContextIconButton: React.FC<IEditableRowButtonProps> & {
 
   return (
     <Tooltip title={!disabled ? title : undefined}>
-      <div css={buttonStyle} onClick={!disabled ? handleClick : undefined} {...rest}>
+      <div
+        css={buttonStyle}
+        onClick={!disabled ? handleClick : undefined}
+        {...rest}
+      >
         {icon}
       </div>
     </Tooltip>

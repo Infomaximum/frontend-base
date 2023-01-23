@@ -1,10 +1,14 @@
 import React from "react";
 import type { ISearchProps, ISearchState } from "./Search.types";
-import Input from "@im/base/src/components/Input/Input";
+import Input from "src/components/Input/Input";
 import { isString, isFunction } from "lodash";
-import { KeyupRequestInterval } from "@im/base/src/utils/const";
-import { SearchOutlined } from "@im/base/src/components/Icons/Icons";
-import { iconStyle, searchMiddleInputStyle, searchSmallInputStyle } from "./Search.style";
+import { KeyupRequestInterval } from "src/utils/const";
+import { SearchOutlined } from "src/components/Icons/Icons";
+import {
+  iconStyle,
+  searchMiddleInputStyle,
+  searchSmallInputStyle,
+} from "./Search.style";
 import type { Interpolation } from "@emotion/react";
 
 class Search extends React.PureComponent<ISearchProps, ISearchState> {
@@ -13,7 +17,9 @@ class Search extends React.PureComponent<ISearchProps, ISearchState> {
     size: "middle",
   };
 
-  private static prefixIcon = (<SearchOutlined key="search-icon" css={iconStyle} />);
+  private static prefixIcon = (
+    <SearchOutlined key="search-icon" css={iconStyle} />
+  );
 
   private timer: NodeJS.Timer | undefined;
 
@@ -27,7 +33,10 @@ class Search extends React.PureComponent<ISearchProps, ISearchState> {
     };
   }
 
-  public override componentDidUpdate(prevProps: ISearchProps, prevState: ISearchState) {
+  public override componentDidUpdate(
+    prevProps: ISearchProps,
+    prevState: ISearchState
+  ) {
     const { searchText } = this.state;
     const { value } = this.props;
 
@@ -40,7 +49,9 @@ class Search extends React.PureComponent<ISearchProps, ISearchState> {
     }
   }
 
-  private handleChangeState = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  private handleChangeState = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     this.setState({
       searchText: e.target.value,
     });

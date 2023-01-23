@@ -2,14 +2,19 @@
 import type { NCore } from "@im/core";
 import { get, isArray, isNil, reduce } from "lodash";
 import { action, computed, makeObservable, observable } from "mobx";
-import typenameToModel from "@im/base/src/models/typenameToModel";
-import { assertSimple, Model, TInferredVariables, TModelStruct } from "@im/utils";
-import { BaseRequest } from "@im/base/src/utils/Requests/BaseRequest/BaseRequest";
-import { BaseErrorHandler } from "@im/base/src/utils/ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
+import typenameToModel from "src/models/typenameToModel";
+import {
+  assertSimple,
+  Model,
+  TInferredVariables,
+  TModelStruct,
+} from "@im/utils";
+import { BaseRequest } from "src/utils/Requests/BaseRequest/BaseRequest";
+import { BaseErrorHandler } from "src/utils/ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
 import type { NStore } from "./Store.types";
 import type { DocumentNode } from "graphql";
 import { BaseStore } from "../BaseStore/BaseStore";
-import type { NRequests } from "@im/base/src/utils/Requests/Requests.types";
+import type { NRequests } from "src/utils/Requests/Requests.types";
 
 type TPrivateStoreField =
   | "_data"
@@ -101,7 +106,8 @@ export class Store<M extends Model = never> extends BaseStore {
     this.dataPath = params.dataPath;
     this.prepareData = params.prepareData;
     this.requestInstance =
-      params.requestInstance ?? new BaseRequest({ errorHandlerInstance: new BaseErrorHandler() });
+      params.requestInstance ??
+      new BaseRequest({ errorHandlerInstance: new BaseErrorHandler() });
     this.subscriptionConfig = params.subscriptionConfig;
     this.isHasSubscription = Boolean(params.subscriptionConfig);
   }
@@ -213,7 +219,10 @@ export class Store<M extends Model = never> extends BaseStore {
 
     const { query, variables, ...rest } = params?.query
       ? params
-      : this.getQueryParams({ variables: params?.variables ?? {}, store: this });
+      : this.getQueryParams({
+          variables: params?.variables ?? {},
+          store: this,
+        });
 
     let data: Data | null;
 
@@ -309,7 +318,8 @@ export class Store<M extends Model = never> extends BaseStore {
 
     this.requestInstance.subscribe({
       onMessage: ({ first, response }) => {
-        const onMessage = params?.onMessage || self.subscriptionConfig?.onMessage;
+        const onMessage =
+          params?.onMessage || self.subscriptionConfig?.onMessage;
 
         onMessage?.({
           first,
@@ -341,14 +351,21 @@ export class Store<M extends Model = never> extends BaseStore {
   }
 
   /** Подготавливает данные для сохранения */
-  protected getPreparedData(data: TDictionary | null, dataPath: string, variables?: TDictionary) {
+  protected getPreparedData(
+    data: TDictionary | null,
+    dataPath: string,
+    variables?: TDictionary
+  ) {
     const prepareDataGetters =
-      this.prepareData && (isArray(this.prepareData) ? this.prepareData : [this.prepareData]);
+      this.prepareData &&
+      (isArray(this.prepareData) ? this.prepareData : [this.prepareData]);
 
     return reduce(
       prepareDataGetters,
       (acc, func) =>
-        typeof func === "function" ? func({ data: acc, store: this, variables }) : acc,
+        typeof func === "function"
+          ? func({ data: acc, store: this, variables })
+          : acc,
 
       get(data, dataPath) as TModelStruct | null
     );

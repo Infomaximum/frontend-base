@@ -14,7 +14,7 @@ import {
   primaryNotificationButtonStyle,
 } from "./Button.styles";
 import type { Interpolation } from "@emotion/react";
-import Tooltip from "@im/base/src/components/Tooltip/Tooltip";
+import Tooltip from "src/components/Tooltip/Tooltip";
 
 const Button: React.FC<IButtonProps> = React.forwardRef(
   (props, ref: React.Ref<HTMLButtonElement>) => {
@@ -70,7 +70,13 @@ const Button: React.FC<IButtonProps> = React.forwardRef(
 
     return (
       <Tooltip title={props.title}>
-        <AntButton {...rest} css={buttonStyles} ref={ref} title={undefined} type={getType()} />
+        <AntButton
+          {...rest}
+          css={buttonStyles}
+          ref={ref}
+          title={undefined}
+          type={getType()}
+        />
       </Tooltip>
     );
   }

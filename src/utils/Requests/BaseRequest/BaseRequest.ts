@@ -2,11 +2,11 @@
 import axios from "axios";
 import { CancelRequest, XTraceIdHeaderKey } from "@im/utils";
 import { isFunction } from "lodash";
-import { apolloInstance } from "@im/base/src/utils/Store/Apollo";
+import { apolloInstance } from "src/utils/Store/Apollo";
 import type { NBaseRequest } from "./BaseRequest.types";
 import type { NRequests } from "../Requests.types";
-import { BaseErrorHandler } from "@im/base/src/utils/ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
-import type { NErrorHandlers } from "@im/base/src/utils/ErrorHandlers/ErrorHandlers.types";
+import { BaseErrorHandler } from "src/utils/ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
+import type { NErrorHandlers } from "src/utils/ErrorHandlers/ErrorHandlers.types";
 import type { Subscription } from "zen-observable-ts";
 import type { NCore } from "@im/core";
 import { v4 as uuid4 } from "uuid";
@@ -31,7 +31,8 @@ export class BaseRequest implements NRequests.IRequest {
   };
 
   constructor(params: TRequestParams) {
-    this.errorHandlerInstance = params.errorHandlerInstance ?? new BaseErrorHandler();
+    this.errorHandlerInstance =
+      params.errorHandlerInstance ?? new BaseErrorHandler();
   }
 
   /** Отмена запросов и мутаций */
@@ -87,7 +88,11 @@ export class BaseRequest implements NRequests.IRequest {
   }
 
   /** Выполняет запросы на сервер */
-  public async requestData({ query, variables, cancelable }: NRequests.TRequestDataParams) {
+  public async requestData({
+    query,
+    variables,
+    cancelable,
+  }: NRequests.TRequestDataParams) {
     const apolloClient = apolloInstance.apolloClient;
 
     const { cancelToken, cancelCallback } = this.getCancelToken();
@@ -126,9 +131,10 @@ export class BaseRequest implements NRequests.IRequest {
         data = response?.data;
       }
     } catch (err) {
-      const error: NCore.TError | undefined = await this.errorHandlerInstance.prepareError(err, {
-        traceId,
-      });
+      const error: NCore.TError | undefined =
+        await this.errorHandlerInstance.prepareError(err, {
+          traceId,
+        });
 
       throw error || err;
     } finally {
@@ -139,7 +145,12 @@ export class BaseRequest implements NRequests.IRequest {
   }
 
   /** Отправляет мутации на сервер */
-  public async submitData({ mutation, variables, cancelable, files }: NRequests.TSubmitDataParams) {
+  public async submitData({
+    mutation,
+    variables,
+    cancelable,
+    files,
+  }: NRequests.TSubmitDataParams) {
     const apolloClient = apolloInstance.apolloClient;
 
     const { cancelToken, cancelCallback } = this.getCancelToken();
@@ -179,9 +190,10 @@ export class BaseRequest implements NRequests.IRequest {
         data = response?.data;
       }
     } catch (err) {
-      const error: NCore.TError | undefined = await this.errorHandlerInstance.prepareError(err, {
-        traceId,
-      });
+      const error: NCore.TError | undefined =
+        await this.errorHandlerInstance.prepareError(err, {
+          traceId,
+        });
 
       throw error || err;
     } finally {
@@ -211,11 +223,15 @@ export class BaseRequest implements NRequests.IRequest {
         }
       },
       (err) => {
-        this.errorHandlerInstance.prepareError(err.originalError, {}).then((error) => {
-          if (isFunction(params.onError)) {
-            (params.onError as typeof params["onError"])({ error: error || err });
-          }
-        });
+        this.errorHandlerInstance
+          .prepareError(err.originalError, {})
+          .then((error) => {
+            if (isFunction(params.onError)) {
+              (params.onError as typeof params["onError"])({
+                error: error || err,
+              });
+            }
+          });
       }
     );
   }

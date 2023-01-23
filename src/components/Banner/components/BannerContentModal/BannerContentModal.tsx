@@ -1,19 +1,23 @@
-import Button from "@im/base/src/components/Button/Button";
-import Modal from "@im/base/src/components/modals/Modal/Modal";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
-import { useTheme } from "@im/base/src/decorators/hooks/useTheme";
-import { NOTIFICATION, CLOSE } from "@im/base/src/utils/Localization/Localization";
+import Button from "src/components/Button/Button";
+import Modal from "src/components/modals/Modal/Modal";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { useTheme } from "src/decorators/hooks/useTheme";
+import { NOTIFICATION, CLOSE } from "src/utils/Localization/Localization";
 import { memo, useMemo } from "react";
 import MarkdownView from "react-showdown";
-import { CloseOutlined } from "@im/base/src/components/Icons/Icons";
+import { CloseOutlined } from "src/components/Icons/Icons";
 import {
   bannerContentModalBodyStyle,
   bannerContentModalParagraphStyle,
 } from "./BannerContentModal.styles";
 import type { IBannerContentModalProps } from "./BannerContentModal.types";
-import { closeModalIconStyle } from "@im/base/src/styles/common.styles";
+import { closeModalIconStyle } from "src/styles/common.styles";
 
-const BannerContentModal: React.FC<IBannerContentModalProps> = ({ visible, onCancel, md }) => {
+const BannerContentModal: React.FC<IBannerContentModalProps> = ({
+  visible,
+  onCancel,
+  md,
+}) => {
   const localization = useLocalization();
   const theme = useTheme();
 
@@ -50,7 +54,11 @@ const BannerContentModal: React.FC<IBannerContentModalProps> = ({ visible, onCan
       centered={true}
       closeIcon={closeIcon}
     >
-      <MarkdownView markdown={md} components={mdViewComponents} options={mdViewOptions} />
+      <MarkdownView
+        markdown={md}
+        components={mdViewComponents}
+        options={mdViewOptions}
+      />
     </Modal>
   );
 };

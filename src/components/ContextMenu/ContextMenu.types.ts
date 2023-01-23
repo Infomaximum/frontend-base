@@ -1,4 +1,4 @@
-import type { IDropdownProps } from "@im/base/src/components/Dropdown/Dropdown.types";
+import type { IDropdownProps } from "src/components/Dropdown/Dropdown.types";
 import type { EOperationType } from "@im/utils";
 import type { Interpolation } from "@emotion/react";
 import type { SubMenuProps } from "antd/lib/menu/SubMenu";
@@ -8,7 +8,10 @@ export enum ESortingMethodsNames {
   title = "title",
 }
 
-export type TContextMenuParamItem = IContextMenuParam | IContextMenuDivider | IContextSubMenuParam;
+export type TContextMenuParamItem =
+  | IContextMenuParam
+  | IContextMenuDivider
+  | IContextSubMenuParam;
 
 export interface IContextMenuParam {
   key?: string;
@@ -42,7 +45,8 @@ export interface IContextSubMenuParam
   children: TContextMenuParamItem[];
 }
 
-export interface IContextMenuProps extends Omit<IDropdownProps, "overlay" | "overlayStyle"> {
+export interface IContextMenuProps
+  extends Omit<IDropdownProps, "overlay" | "overlayStyle"> {
   content: TContextMenuParamItem[];
   "test-id"?: string;
   buttonStyle?: Interpolation<TTheme>;

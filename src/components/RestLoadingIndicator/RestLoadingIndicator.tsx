@@ -1,7 +1,11 @@
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
-import { SHOWING_OF } from "@im/base/src/utils/Localization/Localization";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { SHOWING_OF } from "src/utils/Localization/Localization";
 import { Space, Spin } from "antd";
-import { containerStyle, labelStyle, spinStyle } from "./RestLoadingIndicator.styles";
+import {
+  containerStyle,
+  labelStyle,
+  spinStyle,
+} from "./RestLoadingIndicator.styles";
 import type { IRestLoadingIndicatorProps } from "./RestLoadingIndicator.types";
 
 const RestLoadingIndicator: React.FC<IRestLoadingIndicatorProps> = ({

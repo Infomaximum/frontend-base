@@ -26,8 +26,12 @@ import {
 } from "./paths";
 import type { NCore } from "@im/core";
 import { Expander } from "@im/core";
-import { assertSimple, getPathToLocalStorage, TFeatureEnabledChecker } from "@im/utils";
-import RouteElement from "@im/base/src/components/routes/RouteElement/RouteElement";
+import {
+  assertSimple,
+  getPathToLocalStorage,
+  TFeatureEnabledChecker,
+} from "@im/utils";
+import RouteElement from "src/components/routes/RouteElement/RouteElement";
 
 /**
  * @param items {IRoutes[]} - конфиг роутов
@@ -67,7 +71,9 @@ export const routesMap = (
             path:
               childRoute.path &&
               item.path &&
-              getRelativeRoutePath(childRoute.path, item.path, { exact: childRoute.exact }),
+              getRelativeRoutePath(childRoute.path, item.path, {
+                exact: childRoute.exact,
+              }),
           });
         }
       });
@@ -98,7 +104,9 @@ export const getRelativeRoutePath = (
   return childPath?.replace(`${parentPath}/`, "");
 };
 
-export const getRoutes = (items: NCore.IRoutes[] | undefined): NCore.IRoutes[] => {
+export const getRoutes = (
+  items: NCore.IRoutes[] | undefined
+): NCore.IRoutes[] => {
   const routes = uniq(compact(routesMap(items)));
 
   // Важно: т.к. у вкладок могут быть компоненты-обертки над контентом, а дети отрисовываются
@@ -110,7 +118,9 @@ export const getRoutes = (items: NCore.IRoutes[] | undefined): NCore.IRoutes[] =
   ];
 };
 
-export function sortByPriority<T extends { priority?: number }[]>(objects: T): T {
+export function sortByPriority<T extends { priority?: number }[]>(
+  objects: T
+): T {
   if (!isArray(objects) || !some(objects, (obj) => Boolean(obj?.priority))) {
     return objects;
   }
@@ -171,12 +181,18 @@ export const resolveConstraintsInRoutes = (
       (!privileges ||
         (privileges &&
           every(privileges, (privilege) =>
-            isFeatureEnabled.apply(null, isArray(privilege) ? privilege : [privilege])
+            isFeatureEnabled.apply(
+              null,
+              isArray(privilege) ? privilege : [privilege]
+            )
           ))) &&
       (!somePrivileges ||
         (somePrivileges &&
           some(somePrivileges, (privilege) =>
-            isFeatureEnabled.apply(null, isArray(privilege) ? privilege : [privilege])
+            isFeatureEnabled.apply(
+              null,
+              isArray(privilege) ? privilege : [privilege]
+            )
           )))
     ) {
       if (!sourceRoute.routes) {
@@ -189,7 +205,10 @@ export const resolveConstraintsInRoutes = (
         isFeatureEnabled
       );
 
-      if (outputChildrenRoutes.length > 0 && !hasOnlyRedirects(outputChildrenRoutes)) {
+      if (
+        outputChildrenRoutes.length > 0 &&
+        !hasOnlyRedirects(outputChildrenRoutes)
+      ) {
         outputRoutes.push({ ...sourceRoute, routes: outputChildrenRoutes });
       }
     }
@@ -205,7 +224,11 @@ export function removeModulesLayer(routes: NCore.IRoutes[]): NCore.IRoutes[] {
       return route.routes ? removeModulesLayer(route.routes) : [];
     }
 
-    return [route.routes ? { ...route, routes: removeModulesLayer(route.routes) } : route];
+    return [
+      route.routes
+        ? { ...route, routes: removeModulesLayer(route.routes) }
+        : route,
+    ];
   });
 }
 
@@ -229,7 +252,8 @@ export function breadcrumbsPacker(
 
   const matchingRoute = maxBy(
     routes,
-    ({ path = "" }) => matchPath({ path, end: false }, fullPath)?.pathnameBase.length
+    ({ path = "" }) =>
+      matchPath({ path, end: false }, fullPath)?.pathnameBase.length
   );
 
   if (!matchingRoute) {
@@ -238,11 +262,19 @@ export function breadcrumbsPacker(
 
   const { routes: childRoutes = [], isLayoutRoute } = matchingRoute;
   // Единственную локализованную вкладку не показываем в "крошках"
-  const isHideNextLevel = isLayoutRoute && filter(childRoutes, locKey).length <= 1;
+  const isHideNextLevel =
+    isLayoutRoute && filter(childRoutes, locKey).length <= 1;
 
-  const tail = breadcrumbsPacker(childRoutes, fullPath, locKey, isHideNextLevel);
+  const tail = breadcrumbsPacker(
+    childRoutes,
+    fullPath,
+    locKey,
+    isHideNextLevel
+  );
 
-  return matchingRoute[locKey] && !isHideLevel ? [matchingRoute, ...tail] : tail;
+  return matchingRoute[locKey] && !isHideLevel
+    ? [matchingRoute, ...tail]
+    : tail;
 }
 
 export const getBreadcrumbs = (
@@ -273,7 +305,10 @@ export const getActiveRouteKeys = (
   const allRoutes = routesMap(routes);
 
   forEach(allRoutes, (item) => {
-    if (item.path && matchPath({ path: item.path, end: exact }, currentLocationPath)) {
+    if (
+      item.path &&
+      matchPath({ path: item.path, end: exact }, currentLocationPath)
+    ) {
       selectedItems.push(String(item.key));
     }
   });

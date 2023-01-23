@@ -1,5 +1,5 @@
 import type { GraphQlQuery } from "@im/utils";
-import type { NStore } from "@im/base/src/utils/Store/Store/Store.types";
+import type { NStore } from "src/utils/Store/Store/Store.types";
 
 export type TFormElementsGetter<P = unknown> = (props: P) => React.ReactNode[];
 
@@ -10,7 +10,8 @@ export type TInitialValuesModifier<P = unknown> = (
   containerProps?: P
 ) => void;
 
-export type TInitialValuesModifierList<P = unknown> = TInitialValuesModifier<P>[];
+export type TInitialValuesModifierList<P = unknown> =
+  TInitialValuesModifier<P>[];
 
 export type TQueryBuilderModifier = (
   queryBuilder: GraphQlQuery,

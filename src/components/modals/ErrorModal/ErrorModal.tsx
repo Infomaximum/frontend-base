@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import type { IErrorModalProps } from "./ErrorModal.types";
-import Modal from "@im/base/src/components/modals/Modal/Modal";
-import Button from "@im/base/src/components/Button/Button";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
+import Modal from "src/components/modals/Modal/Modal";
+import Button from "src/components/Button/Button";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
 import {
   modalFooterStyle,
   bodyModalStyle,
@@ -18,10 +18,17 @@ import {
   modalErrorCloseButtonTestId,
   modalErrorTitleErrorTestId,
   modalErrorContentErrorTestId,
-} from "@im/base/src/utils/TestIds";
-import { CLOSE, CONTINUE, ERROR_MESSAGE } from "@im/base/src/utils/Localization/Localization";
+} from "src/utils/TestIds";
+import {
+  CLOSE,
+  CONTINUE,
+  ERROR_MESSAGE,
+} from "src/utils/Localization/Localization";
 import { kebabCase } from "lodash";
-import { CloseCircleOutlined, InfoCircleOutlined } from "@im/base/src/components/Icons/Icons";
+import {
+  CloseCircleOutlined,
+  InfoCircleOutlined,
+} from "src/components/Icons/Icons";
 import { observer } from "mobx-react";
 import { useFooterAndTitleHeight } from "./ErrorModal.utils";
 
@@ -29,7 +36,8 @@ export const ErrorModal: React.FC<IErrorModalProps> = observer(
   ({ error, showModal, onCloseModal, isDebugMode }) => {
     const localization = useLocalization();
 
-    const { footerHeight, footerCBRef, titleHeight, titleCBRef } = useFooterAndTitleHeight();
+    const { footerHeight, footerCBRef, titleHeight, titleCBRef } =
+      useFooterAndTitleHeight();
 
     const isInfo = error?.typeDisplayedComponent === "info";
 
@@ -53,8 +61,12 @@ export const ErrorModal: React.FC<IErrorModalProps> = observer(
       return null;
     }
 
-    const titleModalTestId = `${modalErrorTitleErrorTestId}_${kebabCase(error.code)}`;
-    const contentModalTestId = `${modalErrorContentErrorTestId}_${kebabCase(error.code)}`;
+    const titleModalTestId = `${modalErrorTitleErrorTestId}_${kebabCase(
+      error.code
+    )}`;
+    const contentModalTestId = `${modalErrorContentErrorTestId}_${kebabCase(
+      error.code
+    )}`;
 
     const modalWidth = !!error.message ? 458 : 416;
 
@@ -92,7 +104,8 @@ export const ErrorModal: React.FC<IErrorModalProps> = observer(
               test-id={contentModalTestId}
               css={textStyle(titleHeight, footerHeight)}
             >
-              {error.message} {isDebugMode && error.traceId && `[${error.traceId}]`}
+              {error.message}{" "}
+              {isDebugMode && error.traceId && `[${error.traceId}]`}
             </p>
           ) : null}
         </div>

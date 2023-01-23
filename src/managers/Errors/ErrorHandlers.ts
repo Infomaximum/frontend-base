@@ -1,5 +1,5 @@
 import type { NCore } from "@im/core";
-import { EErrorCode, ERROR_FIELD_NAME } from "@im/base/src/utils/const";
+import { EErrorCode, ERROR_FIELD_NAME } from "src/utils/const";
 import {
   ACCESS_DENIED,
   ACCOUNT_IS_LOCKED,
@@ -39,7 +39,7 @@ import {
   UNABLE_TO_CONNECT_TO_THE_SERVER,
   YOU_CANNOT_DELETE_ADMIN_AND_DEPARTMENTS_THAT_HAS_EMPLOYEES,
   YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES,
-} from "@im/base/src/utils/Localization/ErrorLocalization";
+} from "src/utils/Localization/ErrorLocalization";
 
 export const baseErrorHandlers: NCore.TErrorPreparer[] = [
   {
@@ -153,7 +153,8 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
   {
     code: EErrorCode.EMPLOYEE_SELF_REMOVE_ADMIN_NOT_EMPTY_DEPARTMENT,
     title: CANNOT_DELETE_YOUR_PROFILE_ADMINISTRATORS_AND_NON_EMPTY_DEPARTMENTS,
-    description: DELETE_EMPLOYEES_FROM_DEPARTMENTS_CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN,
+    description:
+      DELETE_EMPLOYEES_FROM_DEPARTMENTS_CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN,
   },
   /*** ============================ errorHandlers для страницы employee [END]  ============================ ***/
   {
@@ -174,7 +175,11 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
     description: SERVER_OVERLOADED_DESCRIPTION,
     typeDisplayedComponent: "info",
   },
-  { code: "server_timeout", title: SERVER_TIMEOUT, typeDisplayedComponent: "info" },
+  {
+    code: "server_timeout",
+    title: SERVER_TIMEOUT,
+    typeDisplayedComponent: "info",
+  },
   {
     code: "password_recovery_link_expired",
     description: PASSWORD_RECOVERY_LINK_EXPIRED,

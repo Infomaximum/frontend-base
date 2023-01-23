@@ -11,9 +11,9 @@ import {
   titleStyle,
   closeIconWrapperStyle,
 } from "./Drawer.styles";
-import { drawerCloseButtonTestId } from "@im/base/src/utils/TestIds";
-import { CloseOutlined } from "@im/base/src/components/Icons/Icons";
-import { useTheme } from "@im/base/src/decorators/hooks/useTheme";
+import { drawerCloseButtonTestId } from "src/utils/TestIds";
+import { CloseOutlined } from "src/components/Icons/Icons";
+import { useTheme } from "src/decorators/hooks/useTheme";
 
 export const getBoldTitle = createSelector(
   (title: React.ReactNode) => title,
@@ -31,7 +31,10 @@ const Drawer: React.FC<IDrawerProps> = (props) => {
     firstRenderCheck(false);
   }, []);
 
-  const boldTitle = useMemo(() => <span css={titleStyle}>{title}</span>, [title]);
+  const boldTitle = useMemo(
+    () => <span css={titleStyle}>{title}</span>,
+    [title]
+  );
 
   const closeIcon = useMemo(() => {
     return (

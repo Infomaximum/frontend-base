@@ -3,10 +3,10 @@ import hoistNonReactStatics from "hoist-non-react-statics";
 import { isFunction, noop } from "lodash";
 import { FC, useCallback, useMemo, useRef } from "react";
 import type { IAutoCompleteProps } from "./AutoComplete.types";
-import { useSelectDropdownPosition } from "@im/base/src/components/Select/Select.utils";
+import { useSelectDropdownPosition } from "src/components/Select/Select.utils";
 import { suffixIconSpinnerStyle } from "./AutoComplete.styles";
-import { suffixLoaderDelay } from "@im/base/src/utils/const";
-import { useDelayedTrue } from "@im/base/src/decorators/hooks/useDelayedTrue";
+import { suffixLoaderDelay } from "src/utils/const";
+import { useDelayedTrue } from "src/decorators/hooks/useDelayedTrue";
 
 const AutoComplete: FC<IAutoCompleteProps> = (props) => {
   const {
@@ -22,9 +22,15 @@ const AutoComplete: FC<IAutoCompleteProps> = (props) => {
   const fieldWrapperRef = useRef<HTMLDivElement>(null);
 
   const dropdownConfig = { itemHeight: listItemHeight } as const;
-  const dropdownPosition = useSelectDropdownPosition(fieldWrapperRef, dropdownConfig, "left");
+  const dropdownPosition = useSelectDropdownPosition(
+    fieldWrapperRef,
+    dropdownConfig,
+    "left"
+  );
 
-  const computeDropdownPosition = isFunction(dropdownRender) ? noop : dropdownPosition.compute;
+  const computeDropdownPosition = isFunction(dropdownRender)
+    ? noop
+    : dropdownPosition.compute;
 
   const handleDropdownVisibleChange = useCallback(
     (shouldOpen: boolean) => {

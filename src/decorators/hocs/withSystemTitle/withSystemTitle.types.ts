@@ -1,5 +1,5 @@
 import type { Model, TLocalizationDescription } from "@im/utils";
-import type { Store } from "@im/base/src/utils/Store/Store/Store";
+import type { Store } from "src/utils/Store/Store/Store";
 
 export type TParams = {
   displayModelNameInTitle?: boolean;

@@ -2,9 +2,9 @@ import { FC, memo, useCallback } from "react";
 import { CopyOutlined } from "../Icons";
 import type { IClipboardIconProps } from "./ClipboardIcon.types";
 import { iconStyle, tooltipStyle } from "./ClipboardIcon.styles";
-import Tooltip from "@im/base/src/components/Tooltip/Tooltip";
-import { useLocalization } from "@im/base/src/decorators/hooks/useLocalization";
-import { COPY_TO_CLIPBOARD } from "@im/base/src/utils/Localization/Localization";
+import Tooltip from "src/components/Tooltip/Tooltip";
+import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { COPY_TO_CLIPBOARD } from "src/utils/Localization/Localization";
 import copyToClipboard from "copy-to-clipboard";
 
 export const ClipboardIcon: FC<IClipboardIconProps> = memo(
@@ -16,7 +16,10 @@ export const ClipboardIcon: FC<IClipboardIconProps> = memo(
     }, [onClick, text]);
 
     return (
-      <Tooltip css={tooltipStyle} title={localization.getLocalized(COPY_TO_CLIPBOARD)}>
+      <Tooltip
+        css={tooltipStyle}
+        title={localization.getLocalized(COPY_TO_CLIPBOARD)}
+      >
         <CopyOutlined {...rest} css={iconStyle} onClick={handleClick} />
       </Tooltip>
     );
