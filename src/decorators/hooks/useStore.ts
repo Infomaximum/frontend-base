@@ -1,5 +1,6 @@
 import type { Store } from "src/utils/Store/Store/Store";
-import type { IDocumentNode, Model, TInferredVariables } from "@im/utils";
+import type { IDocumentNode, TInferredVariables } from "@im/utils";
+import type { Model } from "@im/models";
 import type { NStore } from "src/utils/Store/Store/Store.types";
 import { useCallback, useEffect } from "react";
 import { useMountEffect } from "./useMountEffect";

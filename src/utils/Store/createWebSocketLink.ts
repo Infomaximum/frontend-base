@@ -1,7 +1,7 @@
-import { getCurrentHostWithoutProtocol } from "@im/utils";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { WebSocketPingPongInterval } from "../const";
+import { getCurrentHostWithoutProtocol } from "../URI/URI";
 
 function createWebSocketLink() {
   let wsProtocol = "ws:";

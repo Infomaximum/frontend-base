@@ -1,4 +1,4 @@
-import type { IModel } from "@im/utils";
+import type { IModel } from "@im/models";
 import type TreeCounter from "src/managers/TreeCounter";
 import type { ELimitsStateNames } from "src/utils/const";
 import type { NStore } from "../Store/Store.types";

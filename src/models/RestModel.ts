@@ -1,5 +1,6 @@
-import type { IModel, IModelParams } from "@im/utils";
-import { assertSimple, Model } from "@im/utils";
+import { assertSimple } from "@im/asserts";
+import { IModel, IModelParams, Model } from "@im/models";
+
 import typenameToModel from "./typenameToModel";
 
 interface IRestParams extends IModelParams {
@@ -12,7 +13,10 @@ class RestModel extends Model {
   }
 
   constructor(params: IRestParams) {
-    assertSimple(!!params.parent, "Не задана родительская модель для RestModel модели!");
+    assertSimple(
+      !!params.parent,
+      "Не задана родительская модель для RestModel модели!"
+    );
     super(params);
   }
 

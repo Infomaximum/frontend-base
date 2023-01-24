@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { ExclamationCircleFilled } from "src/components/Icons/Icons";
 import { Row, Col, Popover } from "antd";
 import Button from "src/components/Button/Button";
-import { withLoc } from "@im/utils";
+import withLoc from "src/decorators/hocs/withLoc/withLoc";
 import type { IConfirmPopoverProps } from "./ConfirmPopover.types";
 import { CANCEL, CONFIRM } from "src/utils/Localization/Localization";
 import {

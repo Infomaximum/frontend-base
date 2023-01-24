@@ -1,7 +1,8 @@
 import { get, set, map } from "lodash";
-import { assertSimple, Model } from "@im/utils";
 import type { NStore } from "src/utils/Store/Store/Store.types";
 import type { Store } from "src/utils/Store/Store/Store";
+import { assertSimple } from "@im/asserts";
+import type { Model } from "@im/models";
 
 export default (
     itemWrapperField: string,

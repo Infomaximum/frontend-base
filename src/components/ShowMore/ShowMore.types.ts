@@ -1,7 +1,8 @@
-import type { IWithLocProps, Model } from "@im/utils";
+import type { Model } from "@im/models";
 import type { ELimitsStateNames } from "src/utils/const";
 import type RestModel from "src/models/RestModel";
 import type TableStore from "src/utils/Store/TableStore/TableStore";
+import type { IWithLocProps } from "src/decorators/hocs/withLoc/withLoc";
 
 export interface IShowMoreOwnProps {
   tableStore: TableStore<Model>;

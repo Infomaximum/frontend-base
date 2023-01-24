@@ -1,6 +1,5 @@
 import { forEach, isNumber } from "lodash";
-import type { IModel } from "@im/utils";
-import { Group } from "@im/utils";
+import { Group, type IModel } from "@im/models";
 import RestModel from "src/models/RestModel";
 
 /**

@@ -1,4 +1,4 @@
-import { TypenameToModel } from "@im/utils";
+import { TypenameToModel } from "@im/models";
 
 /**
  * Экземпляр класса TypenameToModel

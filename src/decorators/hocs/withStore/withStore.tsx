@@ -1,7 +1,7 @@
 import type { Store } from "src/utils/Store/Store/Store";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { FC, useCallback } from "react";
-import type { Model, TPropInjector } from "@im/utils";
+import type { TPropInjector } from "@im/utils";
 import { observer } from "mobx-react";
 import { useMountEffect } from "src/decorators/hooks/useMountEffect";
 import { useUnmountEffect } from "src/decorators/hooks/useUnmountEffect";
@@ -12,6 +12,7 @@ import type {
   TQueryParams,
   TWithStoreParams,
 } from "./withStore.types";
+import type { Model } from "@im/models";
 
 export const withStore =
   (

@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowDownOutlined } from "src/components/Icons/Icons";
 import Button from "src/components/Button/Button";
-import { withLoc } from "@im/utils";
+import withLoc from "src/decorators/hocs/withLoc/withLoc";
 import { SHOW_MORE } from "src/utils/Localization/Localization";
 import type { IShowMoreProps } from "./ShowMore.types";
 import { tableShowMoreButtonTestId } from "src/utils/TestIds";

@@ -1,4 +1,4 @@
-import { LocalizationContext } from "@im/utils";
+import LocalizationContext from "../contexts/LocalizationContext";
 import { useContext } from "react";
 
 export const useLocalization = () => {

@@ -1,6 +1,6 @@
 import { isArray, isNumber } from "lodash";
 import type { NStore } from "src/utils/Store/Store/Store.types";
-import type { Model, TModelStruct } from "@im/utils";
+import type { Model, TModelStruct } from "@im/models";
 import type { Store } from "src/utils/Store/Store/Store";
 
 export const REST_GRAPHQL_FAKE_TYPE = "rest";

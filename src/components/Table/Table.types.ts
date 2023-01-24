@@ -1,6 +1,7 @@
 import type { ColumnProps, TableProps } from "antd/lib/table";
-import type { IWithThemeProps, Localization } from "@im/utils";
+import type { Localization } from "@im/utils";
 import type { Interpolation } from "@emotion/react";
+import type { IWithThemeProps } from "src/decorators/hocs/withTheme/withTheme";
 
 export interface IBaseColumnConfig<T> extends Omit<ColumnProps<T>, "children"> {
   children?: IBaseColumnConfig<T>[] | null;
@@ -34,7 +35,9 @@ export interface ITableOwnProps<T> extends TTableProps<T> {
   isStretchToBottom?: boolean;
 }
 
-export interface ITableProps<T> extends IWithThemeProps<TTheme>, ITableOwnProps<T> {}
+export interface ITableProps<T>
+  extends IWithThemeProps<TTheme>,
+    ITableOwnProps<T> {}
 
 export interface ITableState {
   isExpandableTable: boolean | undefined;

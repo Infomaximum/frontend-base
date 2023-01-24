@@ -1,4 +1,4 @@
-import { assertSimple } from "@im/utils";
+import { assertSimple } from "@im/asserts";
 import { memo } from "react";
 import { useLocation, useMatch, useNavigate } from "react-router";
 import type { IRouteElementProps } from "./RouteElement.types";
@@ -8,7 +8,10 @@ const RouteElement: React.FC<IRouteElementProps> = ({ route }) => {
   const navigate = useNavigate();
   const match = useMatch({ path: route.path || "", end: !!route.exact });
 
-  assertSimple(!!route.component, `Для роута "${route.key}" не задан component`);
+  assertSimple(
+    !!route.component,
+    `Для роута "${route.key}" не задан component`
+  );
 
   const RouteComponent = route.component;
 
@@ -16,7 +19,14 @@ const RouteElement: React.FC<IRouteElementProps> = ({ route }) => {
     return null;
   }
 
-  return <RouteComponent route={route} location={location} navigate={navigate} match={match} />;
+  return (
+    <RouteComponent
+      route={route}
+      location={location}
+      navigate={navigate}
+      match={match}
+    />
+  );
 };
 
 export default memo(RouteElement);

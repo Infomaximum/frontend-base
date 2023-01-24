@@ -26,12 +26,10 @@ import {
 } from "./paths";
 import type { NCore } from "@im/core";
 import { Expander } from "@im/core";
-import {
-  assertSimple,
-  getPathToLocalStorage,
-  TFeatureEnabledChecker,
-} from "@im/utils";
+import type { TFeatureEnabledChecker } from "@im/utils";
 import RouteElement from "src/components/routes/RouteElement/RouteElement";
+import { assertSimple } from "@im/asserts";
+import { getPathToLocalStorage } from "../URI/URI";
 
 /**
  * @param items {IRoutes[]} - конфиг роутов

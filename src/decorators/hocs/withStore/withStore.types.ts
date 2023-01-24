@@ -1,6 +1,7 @@
-import type { IDocumentNode, Model, TInferredVariables } from "@im/utils";
+import type { IDocumentNode, TInferredVariables } from "@im/utils";
 import type { Store } from "src/utils/Store/Store/Store";
 import type { NRequests } from "src/utils/Requests/Requests.types";
+import type { Model } from "@im/models";
 
 export type TQueryParams = {
   /** Запрос */

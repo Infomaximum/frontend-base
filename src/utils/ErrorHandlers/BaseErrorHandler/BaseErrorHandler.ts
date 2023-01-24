@@ -1,4 +1,4 @@
-import { assertSimple, EHttpCodes } from "@im/utils";
+import { EHttpCodes } from "@im/utils";
 import { Expander, NCore, showGlobalErrorModal } from "@im/core";
 import { filter, find, get, isArray, isMatch, isPlainObject } from "lodash";
 import {
@@ -7,6 +7,7 @@ import {
   rootDomNodeName,
 } from "src/utils/const";
 import type { NErrorHandlers } from "../ErrorHandlers.types";
+import { assertSimple } from "@im/asserts";
 
 export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
   private prepareInitialServerError(error: any) {

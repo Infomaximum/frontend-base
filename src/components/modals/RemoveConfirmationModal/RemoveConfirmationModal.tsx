@@ -10,7 +10,7 @@ import {
   modalContentStyle,
 } from "./RemoveConfirmationModal.styles";
 import { CANCEL, DELETE, DELETION } from "src/utils/Localization/Localization";
-import { withLoc } from "@im/utils";
+import withLoc from "src/decorators/hocs/withLoc/withLoc";
 import { ModalAnimationInterval } from "src/utils/const";
 import { isFunction } from "lodash";
 import {

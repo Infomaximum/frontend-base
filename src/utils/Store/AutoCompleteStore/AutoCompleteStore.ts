@@ -1,9 +1,9 @@
 import AutoCompleteListModel from "src/models/AutoCompleteListModel";
 import { forEach } from "lodash";
 import { computed, makeObservable, override } from "mobx";
-import type { IModel } from "@im/utils";
 import { Store } from "../Store/Store";
 import type { NStore } from "../Store/Store.types";
+import type { IModel } from "@im/models";
 
 type TPrivateAutoCompleteStoreField = "receiveData";
 

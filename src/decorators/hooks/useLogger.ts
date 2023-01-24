@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useEffect, useMemo } from "react";
-import { assertSilent } from "@im/utils";
+import { assertSilent } from "@im/asserts";
 import { useFirstMountState } from "./useFirstMountState";
 import { useMountEffect } from "./useMountEffect";
 
@@ -16,7 +16,11 @@ type TLoggerParams = {
 /**
  * хук для логирования жизненного цикла компонента
  */
-export const useLogger = ({ componentName, logLevel = "warn", ...rest }: TLoggerParams) => {
+export const useLogger = ({
+  componentName,
+  logLevel = "warn",
+  ...rest
+}: TLoggerParams) => {
   const isFirstMount = useFirstMountState();
 
   const logger = useMemo(() => {

@@ -1,5 +1,5 @@
 import { action, makeObservable, observable, override, computed } from "mobx";
-import type { IModel, Model } from "@im/utils";
+import type { IModel, Model } from "@im/models";
 import { Store } from "src/utils/Store/Store/Store";
 import type { NTableStore } from "./TableStore.types";
 import { isNumber, setWith } from "lodash";

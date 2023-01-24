@@ -1,7 +1,8 @@
 import typenameToModel from "src/models/typenameToModel";
-import { graphqlTag, Model } from "@im/utils";
+import { graphqlTag } from "@im/utils";
 import { forEach, set } from "lodash";
 import { Store } from "./Store";
+import { Model } from "@im/models";
 
 class TestModel extends Model {
   static override get typename() {

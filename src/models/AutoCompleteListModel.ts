@@ -1,5 +1,4 @@
-import type { Model } from "@im/utils";
-import { Group } from "@im/utils";
+import { Group, type Model } from "@im/models";
 import typenameToModel from "src/models/typenameToModel";
 
 /**

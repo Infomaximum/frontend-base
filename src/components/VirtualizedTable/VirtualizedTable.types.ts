@@ -1,5 +1,5 @@
 import type { TableProps } from "antd/lib/table";
-import type { IWithLocProps } from "@im/utils";
+import type { IWithLocProps } from "src/decorators/hocs/withLoc/withLoc";
 import type { SortOrder } from "antd/lib/table/interface";
 import type { DataIndex } from "rc-table/lib/interface";
 import type { IWithSpinPropsReplacer } from "./VirtualizedTable.utils";

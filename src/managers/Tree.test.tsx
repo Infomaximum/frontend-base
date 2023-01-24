@@ -1,16 +1,16 @@
 import Tree from "./Tree";
-import {
-  assertSimple,
-  Group,
-  IModel,
-  InvalidIndex,
-  Model,
-  TModelStruct,
-  TypenameToModel,
-} from "@im/utils";
+import { InvalidIndex } from "@im/utils";
 import { buildTreeFromList } from "../utils/extensions/graphqlTree.storeExt";
 import RestModel from "src/models/RestModel";
 import { cloneDeep, set, unset, xor } from "lodash";
+import {
+  Group,
+  IModel,
+  Model,
+  TModelStruct,
+  TypenameToModel,
+} from "@im/models";
+import { assertSimple } from "@im/asserts";
 
 type TItems = TreeItemModel | TreeGroupModel | RestModel;
 

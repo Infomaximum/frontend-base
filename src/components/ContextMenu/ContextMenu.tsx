@@ -27,12 +27,12 @@ import {
 import ThreeDotsSVG from "src/resources/icons/ThreeDots.svg";
 import Button from "src/components/Button/Button";
 import type { ItemType } from "antd/lib/menu/hooks/useItems";
-import { withTheme } from "@im/utils";
 import { useFeature } from "src/decorators/hooks/useFeature";
 import { useTheme } from "src/decorators/hooks/useTheme";
 import { sortByPriority } from "src/utils/Routes/routes";
 import { isShowElement } from "src/utils/access";
 import { sortByTitle } from "src/utils/sortings";
+import withTheme from "src/decorators/hocs/withTheme/withTheme";
 
 const dropdownTrigger: ["click"] = ["click"];
 

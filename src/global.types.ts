@@ -1,18 +1,54 @@
 /// <reference types="@emotion/react/types/css-prop" />
-
+import type {
+  TDictionary as TDictionaryUtils,
+  TNullable as TNullableUtils,
+  valueof as valueofUtils,
+} from "@im/utils/utils/types/utility.types";
 import type { theme } from "./styles/theme";
 
+type TFrontendConfigImage = {
+  // id родительского элемента в который будет добавлена картинка
+  id: string;
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+};
+
+type TFrontendConfigFont = {
+  fontFamily: string;
+  src: string;
+  fontWeight: string | number;
+  fontStyle: string;
+};
+
 declare global {
-  type TDictionary<T = any> = Record<string, T>;
+  type TDictionary<T = any> = TDictionaryUtils<T>;
 
-  type valueof<T> = T[keyof T];
+  type TNullable<T> = TNullableUtils<T>;
 
-  type TNullable<T> = T | null | undefined;
+  type valueof<T> = valueofUtils<T>;
 
   // eslint-disable-next-line im/naming-interfaces-and-types
   interface Window {
     activeRequests: number;
     isRejectionRequired: boolean;
+
+    imFrontEndSystem: {
+      /** Версии внутренних модулей */
+      versions: TDictionary<string>;
+      /** Префикс пути для загрузки ресурсов */
+      apiPrefix: string;
+      /** Префикс для разделения пути для загрузки данных */
+      basePrefix: string;
+      /** Подключаемые ресурсы */
+      sources: {
+        stylesheets: string[];
+        scripts: string[];
+        fonts: TFrontendConfigFont[];
+        images: TFrontendConfigImage[];
+      };
+    };
   }
 
   type TTheme = typeof theme;

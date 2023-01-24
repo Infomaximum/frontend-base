@@ -1,5 +1,5 @@
 import type { ButtonProps } from "antd/lib/button";
-import type { IWithLocProps } from "@im/utils";
+import type { IWithLocProps } from "src/decorators/hocs/withLoc/withLoc";
 import type { PopoverProps } from "antd/lib/popover";
 
 export interface IConfirmPopoverProps

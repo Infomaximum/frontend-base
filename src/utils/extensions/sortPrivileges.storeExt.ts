@@ -2,7 +2,7 @@ import { sortBy, find, reverse } from "lodash";
 import { Expander } from "@im/core";
 import type { NStore } from "src/utils/Store/Store/Store.types";
 import type { Store } from "src/utils/Store/Store/Store";
-import type { Model } from "@im/utils";
+import type { Model } from "@im/models";
 
 export const sortPrivilegesExt: NStore.TPrepareDataFunc<Store<Model>> = ({
   data,
