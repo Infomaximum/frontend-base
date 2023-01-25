@@ -3,10 +3,10 @@ import hoistNonReactStatics from "hoist-non-react-statics";
 import { isFunction, noop } from "lodash";
 import { FC, useCallback, useMemo, useRef } from "react";
 import type { IAutoCompleteProps } from "./AutoComplete.types";
-import { useSelectDropdownPosition } from "src/components/Select/Select.utils";
+import { useSelectDropdownPosition } from "../../components/Select/Select.utils";
 import { suffixIconSpinnerStyle } from "./AutoComplete.styles";
-import { suffixLoaderDelay } from "src/utils/const";
-import { useDelayedTrue } from "src/decorators/hooks/useDelayedTrue";
+import { suffixLoaderDelay } from "../../utils/const";
+import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
 
 const AutoComplete: FC<IAutoCompleteProps> = (props) => {
   const {

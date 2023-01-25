@@ -28,8 +28,8 @@ import {
 import {
   virtualizedTableRowTestId,
   virtualizedTableTestId,
-} from "src/utils/TestIds";
-import { ESortDirection } from "src/utils/const";
+} from "../../utils/TestIds";
+import { ESortDirection } from "../../utils/const";
 import VirtualizedTableHeaderRow from "./VirtualizedTableComponents/VirtualizedTableHeaderRow/VirtualizedTableHeaderRow";
 import VirtualizedTableBodyRow from "./VirtualizedTableComponents/VirtualizedTableBodyRow/VirtualizedTableBodyRow";
 import VirtualizedTableBody from "./VirtualizedTableComponents/VirtualizedTableBody/VirtualizedTableBody";
@@ -37,7 +37,7 @@ import { assertSimple } from "@im/asserts";
 import type { SorterResult, SortOrder } from "antd/lib/table/interface";
 import { borderTopStyle } from "../Table/Table.styles";
 import { observer } from "mobx-react";
-import RestModel from "src/models/RestModel";
+import RestModel from "../../models/RestModel";
 import { withSpinPropsReplacer } from "./VirtualizedTable.utils";
 
 const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [

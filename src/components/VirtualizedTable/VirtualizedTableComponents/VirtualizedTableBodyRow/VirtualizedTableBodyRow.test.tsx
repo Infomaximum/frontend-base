@@ -2,9 +2,9 @@ import enzyme from "enzyme";
 import { Localization } from "@im/utils";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableBodyRow";
 import type { ColumnType } from "antd/lib/table";
-import { ERROR_MESSAGE } from "src/utils/Localization/Localization";
-import { tableExpanderTestId } from "src/utils/TestIds";
-import type { TBaseRow, TExtendColumns } from "src/managers/Tree";
+import { ERROR_MESSAGE } from "../../../../utils/Localization/Localization";
+import { tableExpanderTestId } from "../../../../utils/TestIds";
+import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";
 
 const localization = new Localization({ language: Localization.Language.ru });
 

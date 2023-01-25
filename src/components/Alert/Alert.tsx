@@ -16,7 +16,7 @@ import Icon, {
   CloseCircleFilled,
   CheckCircleFilled,
   ExclamationCircleFilled,
-} from "src/components/Icons/Icons";
+} from "../../components/Icons/Icons";
 
 const Alert: React.FC<IAlertProps> = (props) => {
   const icon = useMemo(() => {

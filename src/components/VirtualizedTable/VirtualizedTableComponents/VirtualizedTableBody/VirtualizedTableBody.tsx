@@ -1,9 +1,9 @@
-import { VIRTUALIZED_TABLE_BODY_ID } from "src/utils/const";
+import { VIRTUALIZED_TABLE_BODY_ID } from "../../../../utils/const";
 import React, { FC, useEffect } from "react";
 import { AutoSizer, List as VList } from "react-virtualized";
-import { ScrollBehavior } from "src/utils/ScrollBehavior/ScrollBehavior";
+import { ScrollBehavior } from "../../../../utils/ScrollBehavior/ScrollBehavior";
 import { observer } from "mobx-react";
-import { useTheme } from "src/decorators/hooks/useTheme";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
 import { virtualizedTableBodyListStyle } from "./VirtualizedTableBody.styles";
 import type { IVirtualizedTableBodyProps } from "./VirtualizedTableBody.types";
 

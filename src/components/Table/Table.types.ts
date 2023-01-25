@@ -1,7 +1,7 @@
 import type { ColumnProps, TableProps } from "antd/lib/table";
 import type { Localization } from "@im/utils";
 import type { Interpolation } from "@emotion/react";
-import type { IWithThemeProps } from "src/decorators/hocs/withTheme/withTheme";
+import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 
 export interface IBaseColumnConfig<T> extends Omit<ColumnProps<T>, "children"> {
   children?: IBaseColumnConfig<T>[] | null;

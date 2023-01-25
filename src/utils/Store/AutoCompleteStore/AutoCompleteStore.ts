@@ -1,4 +1,4 @@
-import AutoCompleteListModel from "src/models/AutoCompleteListModel";
+import AutoCompleteListModel from "../../../models/AutoCompleteListModel";
 import { forEach } from "lodash";
 import { computed, makeObservable, override } from "mobx";
 import { Store } from "../Store/Store";

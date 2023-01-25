@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-no-bind */
 import { ThemeContext } from "@emotion/react";
 // eslint-disable-next-line im/ban-import-entity
-import { theme } from "src/styles/theme";
+import { theme } from "../../styles/theme";
 import { Localization } from "@im/utils";
 import { reduce } from "lodash";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LocalizationContext from "src/decorators/contexts/LocalizationContext";
+import LocalizationContext from "../../decorators/contexts/LocalizationContext";
 
 export const testLocalization = new Localization({
   language: Localization.Language.ru,

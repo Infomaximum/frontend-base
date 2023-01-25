@@ -1,12 +1,12 @@
 import type { NCore } from "@im/core";
 import ErrorModalContext, {
   IErrorModalContextContextData,
-} from "src/decorators/contexts/ErrorModalContext";
+} from "../../decorators/contexts/ErrorModalContext";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { handleErrorInternal } from "../Errors/Errors";
-import { ModalAnimationInterval } from "src/utils/const";
-import { ErrorModal } from "src/components/modals/ErrorModal/ErrorModal";
+import { ModalAnimationInterval } from "../../utils/const";
+import { ErrorModal } from "../../components/modals/ErrorModal/ErrorModal";
 import type {
   IErrorModalProviderConfigState,
   IErrorModalProviderProps,

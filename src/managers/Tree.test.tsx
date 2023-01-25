@@ -1,7 +1,7 @@
 import Tree from "./Tree";
 import { InvalidIndex } from "@im/utils";
 import { buildTreeFromList } from "../utils/extensions/graphqlTree.storeExt";
-import RestModel from "src/models/RestModel";
+import RestModel from "../models/RestModel";
 import { cloneDeep, set, unset, xor } from "lodash";
 import {
   Group,

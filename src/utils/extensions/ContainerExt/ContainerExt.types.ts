@@ -1,5 +1,5 @@
 import type { GraphQlQuery } from "@im/utils";
-import type { NStore } from "src/utils/Store/Store/Store.types";
+import type { NStore } from "../../Store/Store/Store.types";
 
 export type TFormElementsGetter<P = unknown> = (props: P) => React.ReactNode[];
 

@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState, FC } from "react";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
-import Checkbox from "src/components/Checkbox/Checkbox";
+import { useLocalization } from "../../decorators/hooks/useLocalization";
+import Checkbox from "../../components/Checkbox/Checkbox";
 import type { IBannerProps } from "./Banner.types";
 import BannerContent from "./components/BannerContent/BannerContent";
-import Button from "src/components/Button/Button";
-import { DONT_SHOW_AGAIN, CLOSE } from "src/utils/Localization/Localization";
+import Button from "../../components/Button/Button";
+import { DONT_SHOW_AGAIN, CLOSE } from "../../utils/Localization/Localization";
 import {
   bannerStyle,
   dontShowAgainWrapperBannerStyle,
@@ -18,7 +18,7 @@ import { MillisecondsPerSecond } from "@im/utils";
 import {
   bannerDontShowAgainTestId,
   closeBannerButtonTestId,
-} from "src/utils/TestIds";
+} from "../../utils/TestIds";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 
 const Banner: FC<IBannerProps> = ({

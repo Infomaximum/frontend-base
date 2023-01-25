@@ -1,4 +1,4 @@
-import type { IDropdownProps } from "src/components/Dropdown/Dropdown.types";
+import type { IDropdownProps } from "../../components/Dropdown/Dropdown.types";
 import type { EOperationType } from "@im/utils";
 import type { Interpolation } from "@emotion/react";
 import type { SubMenuProps } from "antd/lib/menu/SubMenu";

@@ -1,4 +1,4 @@
-import withModalError from "src/decorators/hocs/withModalError/withModalError";
+import withModalError from "../../decorators/hocs/withModalError/withModalError";
 import type { ComponentType, ErrorInfo } from "react";
 import { Component } from "react";
 import { ErrorHandling } from "@im/utils";

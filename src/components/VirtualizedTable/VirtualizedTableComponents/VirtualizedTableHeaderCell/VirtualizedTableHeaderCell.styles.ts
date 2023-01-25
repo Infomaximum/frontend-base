@@ -1,4 +1,4 @@
-import { commonTableHeaderCellStyle } from "src/components/Table/TableComponents/TableHeaderCell/TableHeaderCell.styles";
+import { commonTableHeaderCellStyle } from "../../../Table/TableComponents/TableHeaderCell/TableHeaderCell.styles";
 import { virtualizedTableCellStyle } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell.styles";
 
 export const virtualizedTableHeaderCellStyle = (theme: TTheme) => ({

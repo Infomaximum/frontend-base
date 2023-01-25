@@ -2,14 +2,14 @@
 import type { NCore } from "@im/core";
 import { get, isArray, isNil, reduce } from "lodash";
 import { action, computed, makeObservable, observable } from "mobx";
-import typenameToModel from "src/models/typenameToModel";
+import typenameToModel from "../../../models/typenameToModel";
 import type { TInferredVariables } from "@im/utils";
-import { BaseRequest } from "src/utils/Requests/BaseRequest/BaseRequest";
-import { BaseErrorHandler } from "src/utils/ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
+import { BaseRequest } from "../../Requests/BaseRequest/BaseRequest";
+import { BaseErrorHandler } from "../../ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
 import type { NStore } from "./Store.types";
 import type { DocumentNode } from "graphql";
 import { BaseStore } from "../BaseStore/BaseStore";
-import type { NRequests } from "src/utils/Requests/Requests.types";
+import type { NRequests } from "../../Requests/Requests.types";
 import type { Model, TModelStruct } from "@im/models";
 import { assertSimple } from "@im/asserts";
 

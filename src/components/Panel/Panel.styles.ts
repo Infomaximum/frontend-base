@@ -1,4 +1,4 @@
-import { CollapsibleContentAnimationInterval } from "src/utils/const";
+import { CollapsibleContentAnimationInterval } from "../../utils/const";
 
 const headerPanelCollapseStyle = {
   padding: "10px 12px !important",

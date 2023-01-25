@@ -5,7 +5,7 @@ import type {
   TContextMenuItem,
 } from "./ContextMenuTable.types";
 import { threeDotsStyle } from "./ContextMenuTable.styles";
-import ContextMenu from "src/components/ContextMenu/ContextMenu";
+import ContextMenu from "../ContextMenu/ContextMenu";
 
 const ContextMenuTable: React.FC<IContextMenuTableProps> = ({
   onSelect,

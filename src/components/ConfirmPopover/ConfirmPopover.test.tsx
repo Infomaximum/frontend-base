@@ -5,8 +5,8 @@ import { Localization } from "@im/utils";
 import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,
-} from "src/utils/TestIds";
-import Button from "src/components/Button/Button";
+} from "../../utils/TestIds";
+import Button from "../Button/Button";
 
 describe("Тест компонента ConfirmPopover", () => {
   const showPopoverButtonTestId = "show-popover";

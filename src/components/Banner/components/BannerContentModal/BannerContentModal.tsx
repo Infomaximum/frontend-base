@@ -1,17 +1,20 @@
-import Button from "src/components/Button/Button";
-import Modal from "src/components/modals/Modal/Modal";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
-import { useTheme } from "src/decorators/hooks/useTheme";
-import { NOTIFICATION, CLOSE } from "src/utils/Localization/Localization";
+import Button from "../../../../components/Button/Button";
+import Modal from "../../../../components/modals/Modal/Modal";
+import { useLocalization } from "../../../../decorators/hooks/useLocalization";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
+import {
+  NOTIFICATION,
+  CLOSE,
+} from "../../../../utils/Localization/Localization";
 import { memo, useMemo } from "react";
 import MarkdownView from "react-showdown";
-import { CloseOutlined } from "src/components/Icons/Icons";
+import { CloseOutlined } from "../../../../components/Icons/Icons";
 import {
   bannerContentModalBodyStyle,
   bannerContentModalParagraphStyle,
 } from "./BannerContentModal.styles";
 import type { IBannerContentModalProps } from "./BannerContentModal.types";
-import { closeModalIconStyle } from "src/styles/common.styles";
+import { closeModalIconStyle } from "../../../../styles/common.styles";
 
 const BannerContentModal: React.FC<IBannerContentModalProps> = ({
   visible,

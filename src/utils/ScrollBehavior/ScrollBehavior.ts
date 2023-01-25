@@ -1,4 +1,4 @@
-import { MAIN_LAYOUT_CONTENT_ID } from "src/utils/const";
+import { MAIN_LAYOUT_CONTENT_ID } from "../const";
 import type {
   IScrollBehavior,
   TScrollBehaviorOptions,

@@ -8,7 +8,7 @@ import {
 import type { Interpolation } from "@emotion/react";
 import { isFunction } from "lodash";
 import type { IBaseCardProps } from "./BaseCard.types";
-import { useTheme } from "src/decorators/hooks/useTheme";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 const BaseCard: React.FC<IBaseCardProps> = (props) => {
   const theme = useTheme();

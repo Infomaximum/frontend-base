@@ -1,4 +1,4 @@
-import Tooltip from "src/components/Tooltip/Tooltip";
+import Tooltip from "../../../Tooltip/Tooltip";
 import { isArray, isString, last } from "lodash";
 import React, { forwardRef } from "react";
 import { tableBodyCellStyle } from "./TableBodyCell.styles";

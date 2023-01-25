@@ -1,12 +1,12 @@
 import type { TableProps } from "antd/lib/table";
-import type { IWithLocProps } from "src/decorators/hocs/withLoc/withLoc";
+import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
 import type { SortOrder } from "antd/lib/table/interface";
 import type { DataIndex } from "rc-table/lib/interface";
 import type { IWithSpinPropsReplacer } from "./VirtualizedTable.utils";
 import type React from "react";
 import type { ScrollParams } from "react-virtualized";
-import type { TBaseRow, TExtendColumns } from "src/managers/Tree";
-import type { IBaseColumnConfig } from "src/components/Table/Table.types";
+import type { TBaseRow, TExtendColumns } from "../../managers/Tree";
+import type { IBaseColumnConfig } from "../Table/Table.types";
 
 export interface IColumnProps<T = any> extends IBaseColumnConfig<T> {
   /** Позволяет раскрыть строку виртуализированной таблицы при клике на конкретную ячейку */

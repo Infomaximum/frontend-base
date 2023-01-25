@@ -5,7 +5,7 @@ import Select from "./Select";
 import "@testing-library/jest-dom";
 import type { ISelectProps } from "./Select.types";
 import { mapChildrenToOptions } from "./Select.utils";
-import Tooltip from "src/components/Tooltip/Tooltip";
+import Tooltip from "../Tooltip/Tooltip";
 import { textWrapperStyle } from "./Select.styles";
 
 enum EElement {
@@ -23,9 +23,15 @@ const elementDisplayValue = {
 const renderSelect = (props: ISelectProps) => {
   return (
     <Select {...props}>
-      <Select.Option value={EElement.FIRST}>{elementDisplayValue[EElement.FIRST]}</Select.Option>
-      <Select.Option value={EElement.SECOND}>{elementDisplayValue[EElement.SECOND]}</Select.Option>
-      <Select.Option value={EElement.THIRD}>{elementDisplayValue[EElement.THIRD]}</Select.Option>
+      <Select.Option value={EElement.FIRST}>
+        {elementDisplayValue[EElement.FIRST]}
+      </Select.Option>
+      <Select.Option value={EElement.SECOND}>
+        {elementDisplayValue[EElement.SECOND]}
+      </Select.Option>
+      <Select.Option value={EElement.THIRD}>
+        {elementDisplayValue[EElement.THIRD]}
+      </Select.Option>
     </Select>
   );
 };
@@ -64,9 +70,15 @@ describe("Тест компонента Select", () => {
     expect(clickFn).toHaveBeenCalled();
     getByRole("listbox");
 
-    expect(screen.getByText(elementDisplayValue[EElement.FIRST])).toBeInTheDocument();
-    expect(screen.getByText(elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
-    expect(screen.getByText(elementDisplayValue[EElement.THIRD])).toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.FIRST])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.SECOND])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.THIRD])
+    ).toBeInTheDocument();
   });
 
   it("Рендер пустого", async () => {
@@ -90,7 +102,9 @@ describe("Тест компонента Select", () => {
     const user = userEvent.setup();
     const handleClickFn = jest.fn();
 
-    const { getByRole, baseElement } = render(renderSelect({ onClick: handleClickFn }));
+    const { getByRole, baseElement } = render(
+      renderSelect({ onClick: handleClickFn })
+    );
     const target = getByRole("combobox");
     expect(target).not.toBeNull();
 
@@ -100,9 +114,12 @@ describe("Тест компонента Select", () => {
     const options = baseElement.querySelectorAll(".ant-select-item");
     expect(options.length).toBe(3);
 
-    await userEvent.click(screen.getByText(elementDisplayValue[EElement.SECOND]), {
-      pointerEventsCheck: 0,
-    });
+    await userEvent.click(
+      screen.getByText(elementDisplayValue[EElement.SECOND]),
+      {
+        pointerEventsCheck: 0,
+      }
+    );
 
     const selected = baseElement.querySelectorAll<HTMLSpanElement>(
       ".ant-select-selection-item"
@@ -112,7 +129,9 @@ describe("Тест компонента Select", () => {
     expect(selected).not.toBeNull();
 
     if (selected) {
-      expect(getByText(selected, elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
+      expect(
+        getByText(selected, elementDisplayValue[EElement.SECOND])
+      ).toBeInTheDocument();
     }
   });
 
@@ -120,23 +139,37 @@ describe("Тест компонента Select", () => {
     const user = userEvent.setup();
     const clickFn = jest.fn();
     simulateBoundingClientRect(44);
-    const { rerender } = render(renderSelect({ onClick: clickFn, listItemHeight: 48 }));
+    const { rerender } = render(
+      renderSelect({ onClick: clickFn, listItemHeight: 48 })
+    );
     const target = screen.getByRole("combobox");
     expect(target).not.toBeNull();
 
     await user.click(target);
     expect(clickFn).toHaveBeenCalled();
 
-    expect(screen.getByText(elementDisplayValue[EElement.FIRST])).toBeInTheDocument();
-    expect(screen.getByText(elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
-    expect(screen.queryByText(elementDisplayValue[EElement.THIRD])).not.toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.FIRST])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.SECOND])
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(elementDisplayValue[EElement.THIRD])
+    ).not.toBeInTheDocument();
 
     simulateBoundingClientRect(400);
     rerender(renderSelect({ onClick: clickFn }));
 
-    expect(screen.getByText(elementDisplayValue[EElement.FIRST])).toBeInTheDocument();
-    expect(screen.getByText(elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
-    expect(screen.getByText(elementDisplayValue[EElement.THIRD])).toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.FIRST])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.SECOND])
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(elementDisplayValue[EElement.THIRD])
+    ).toBeInTheDocument();
   });
 });
 

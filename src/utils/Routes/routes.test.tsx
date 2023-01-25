@@ -1,5 +1,5 @@
 import type { NCore } from "@im/core";
-import RouteElement from "src/components/routes/RouteElement/RouteElement";
+import RouteElement from "../../components/routes/RouteElement/RouteElement";
 import type { ReactElement } from "react";
 import { moduleGroupPath } from "./paths";
 import {

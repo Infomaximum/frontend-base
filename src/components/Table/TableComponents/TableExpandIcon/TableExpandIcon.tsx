@@ -4,7 +4,7 @@ import {
   tableArrowUpTestId,
   tableArrowRightTestId,
   tableExpanderTestId,
-} from "src/utils/TestIds";
+} from "../../../../utils/TestIds";
 import type React from "react";
 import { memo, useCallback } from "react";
 import {

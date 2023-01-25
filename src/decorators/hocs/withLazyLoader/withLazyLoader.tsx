@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 import { lazy, Suspense } from "react";
-import Spinner from "src/components/Spinner/Spinner";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const spinner = <Spinner />;
 

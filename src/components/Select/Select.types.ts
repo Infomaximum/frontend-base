@@ -3,7 +3,7 @@ import type {
   SelectProps,
   SelectValue,
 } from "antd/lib/select";
-import type { TXPlacement } from "src/components/Dropdown/Dropdown.types";
+import type { TXPlacement } from "../Dropdown/Dropdown.types";
 
 export interface ISelectProps<T extends SelectValue = SelectValue>
   extends Omit<SelectProps<T>, "listHeight" | "dropdownAlign" | "showAction"> {

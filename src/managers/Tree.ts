@@ -12,7 +12,7 @@ import {
 import { runDfs } from "@im/utils";
 import TreeCounter from "./TreeCounter";
 import type { NTableStore } from "../utils/Store/TableStore/TableStore.types";
-import RestModel from "src/models/RestModel";
+import RestModel from "../models/RestModel";
 import { Group, IModel, Model } from "@im/models";
 import { assertSimple } from "@im/asserts";
 

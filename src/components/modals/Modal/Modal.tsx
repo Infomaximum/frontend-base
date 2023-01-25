@@ -3,7 +3,7 @@ import type { IModalProps } from "./Modal.types";
 import { Modal as AntModal } from "antd";
 import { createSelector } from "reselect";
 import { boldTitleStyle, titleStyle } from "./Modal.styles";
-import { modalTitleTestId } from "src/utils/TestIds";
+import { modalTitleTestId } from "../../../utils/TestIds";
 
 export const getBoldTitle = createSelector(
   (title: React.ReactNode) => title,

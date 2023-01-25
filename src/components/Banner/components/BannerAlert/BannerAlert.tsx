@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { CloseOutlined } from "src/components/Icons/Icons";
+import { CloseOutlined } from "../../../../components/Icons/Icons";
 import {
   closeIconBannerAlertStyle,
   iconBannerAlertStyle,
@@ -8,7 +8,7 @@ import {
 } from "./BannerAlert.styles";
 import type { IBannerAlertProps } from "./BannerAlert.types";
 import { isFunction } from "lodash";
-import { crossCloseBannerTestId } from "src/utils/TestIds";
+import { crossCloseBannerTestId } from "../../../../utils/TestIds";
 
 const BannerAlert = forwardRef<HTMLDivElement, IBannerAlertProps>(
   (props, ref) => {

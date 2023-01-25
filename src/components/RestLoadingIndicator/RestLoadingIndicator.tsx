@@ -1,5 +1,5 @@
-import { useLocalization } from "src/decorators/hooks/useLocalization";
-import { SHOWING_OF } from "src/utils/Localization/Localization";
+import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { SHOWING_OF } from "../../utils/Localization/Localization";
 import { Space, Spin } from "antd";
 import {
   containerStyle,

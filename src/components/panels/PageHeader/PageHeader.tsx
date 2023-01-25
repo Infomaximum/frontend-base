@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ArrowLeftOutlined } from "src/components/Icons/Icons";
+import { ArrowLeftOutlined } from "../../Icons/Icons";
 import { PageHeader as AntPageHeader } from "antd";
 import {
   iconBackStyle,
@@ -7,7 +7,7 @@ import {
   pageHeaderTitleStyle,
   headerTitleWrapperStyle,
 } from "./PageHeader.styles";
-import { pageHeaderBackButtonTestId } from "src/utils/TestIds";
+import { pageHeaderBackButtonTestId } from "../../../utils/TestIds";
 import type { IPageHeaderProps } from "./PageHeader.types";
 
 const PageHeader: React.FC<IPageHeaderProps> = (props) => {

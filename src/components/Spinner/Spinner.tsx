@@ -1,9 +1,9 @@
 import { Spin } from "antd";
 import { wrapperSpinnerStyle } from "./Spinner.styles";
-import { wrapperSpinnerTestId } from "src/utils/TestIds";
+import { wrapperSpinnerTestId } from "../../utils/TestIds";
 import type { ISpinnerProps } from "./Spinner.types";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
-import { loaderDelay } from "src/utils/const";
+import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { loaderDelay } from "../../utils/const";
 
 const Spinner: React.FC<ISpinnerProps> = ({
   labelLoc,

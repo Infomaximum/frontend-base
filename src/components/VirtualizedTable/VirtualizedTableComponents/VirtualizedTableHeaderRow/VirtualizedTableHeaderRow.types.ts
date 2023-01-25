@@ -1,7 +1,7 @@
 import type {
   IVirtualizedTableProps,
   IVirtualizedTableState,
-} from "src/components/VirtualizedTable/VirtualizedTable.types";
+} from "../../../VirtualizedTable/VirtualizedTable.types";
 import type { IVirtualizedTableHeaderCellProps } from "../VirtualizedTableHeaderCell/VirtualizedTableHeaderCell.types";
 
 export interface IVirtualizedTableHeaderRowProps<T>

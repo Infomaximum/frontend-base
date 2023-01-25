@@ -1,11 +1,11 @@
 import { useState, FC, useMemo, useCallback, useRef, useEffect } from "react";
-import Button from "src/components/Button/Button";
-import Modal from "src/components/modals/Modal/Modal";
+import Button from "../../Button/Button";
+import Modal from "../../modals/Modal/Modal";
 import {
   APPLY,
   CANCEL,
   DO_NOT_SAVE,
-} from "src/utils/Localization/Localization";
+} from "../../../utils/Localization/Localization";
 import type { TLocalizationDescription } from "@im/utils";
 import {
   bodyModalStyle,
@@ -17,16 +17,16 @@ import {
 } from "./ConfirmationModal.styles";
 import type { Interpolation } from "@emotion/react";
 import { isFunction } from "lodash";
-import { ModalAnimationInterval } from "src/utils/const";
+import { ModalAnimationInterval } from "../../../utils/const";
 import {
   confirmationModalAdditionalButtonTestId,
   confirmationModalCancelButtonTestId,
   confirmationModalConfirmButtonTestId,
-} from "src/utils/TestIds";
-import { WarningOutlined } from "src/components/Icons/Icons";
+} from "../../../utils/TestIds";
+import { WarningOutlined } from "../../Icons/Icons";
 import type { IConfirmationModalProps } from "./ConfirmationModal.types";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
-import { useTheme } from "src/decorators/hooks/useTheme";
+import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import { useTheme } from "../../../decorators/hooks/useTheme";
 
 const ConfirmationModal: FC<IConfirmationModalProps> = (props) => {
   const {

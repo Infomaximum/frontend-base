@@ -11,7 +11,7 @@ import type {
 } from "./ContainerExt.types";
 import { forEach } from "lodash";
 import type { GraphQlQuery } from "@im/utils";
-import type { NStore } from "src/utils/Store/Store/Store.types";
+import type { NStore } from "../../Store/Store/Store.types";
 
 export class ContainerExt<P = unknown> {
   private formElementsGetterList: TFormElementsGetterList<P> = [];

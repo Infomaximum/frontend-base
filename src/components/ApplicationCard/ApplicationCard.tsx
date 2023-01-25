@@ -18,12 +18,12 @@ import {
   pointerCardStyle,
   focusStyle,
 } from "./ApplicationCard.styles";
-import ContextMenu from "src/components/ContextMenu/ContextMenu";
+import ContextMenu from "../../components/ContextMenu/ContextMenu";
 import InlineTags from "./InlineTags/InlineTags";
 import { isEmpty, isFunction } from "lodash";
-import { applicationCardTestId } from "src/utils/TestIds";
-import { DELETE } from "src/utils/Localization/Localization";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { applicationCardTestId } from "../../utils/TestIds";
+import { DELETE } from "../../utils/Localization/Localization";
+import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { Link } from "react-router-dom";
 import type { Interpolation } from "@emotion/react";
 

@@ -1,9 +1,9 @@
-import Alert from "src/components/Alert/Alert";
-import { notificationErrorTestId } from "src/utils/TestIds";
+import Alert from "../Alert/Alert";
+import { notificationErrorTestId } from "../../utils/TestIds";
 import type { INotificationProps } from "./Notification.types";
 import { observer } from "mobx-react";
 import { useContext } from "react";
-import { DebugModeContext } from "src/decorators/contexts/DebugModeContext";
+import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
 
 const Notification = ({ error }: INotificationProps) => {
   const isDebugMode = useContext(DebugModeContext);

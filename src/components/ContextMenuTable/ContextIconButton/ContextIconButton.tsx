@@ -5,8 +5,8 @@ import {
   redButtonStyle,
   disabledButtonStyle,
 } from "./ContextIconButton.styles";
-import { useTheme } from "src/decorators/hooks/useTheme";
-import Tooltip from "src/components/Tooltip/Tooltip";
+import { useTheme } from "../../../decorators/hooks/useTheme";
+import Tooltip from "../../Tooltip/Tooltip";
 
 export enum EContextIconButtonColors {
   DEFAULT = "DEFAULT",

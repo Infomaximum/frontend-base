@@ -1,7 +1,7 @@
 import { compact, dropRight, last, size, takeRight } from "lodash";
 import type React from "react";
-import { useContainerWidth } from "src/decorators/hooks/useContainerWidth";
-import { HomeOutlined } from "src/components/Icons/Icons";
+import { useContainerWidth } from "../../decorators/hooks/useContainerWidth";
+import { HomeOutlined } from "../Icons/Icons";
 import {
   containerStyle,
   crumbStyle,
@@ -19,12 +19,12 @@ import {
   interleaveWith,
 } from "./Breadcrumbs.utils";
 import { Menu } from "antd";
-import Dropdown from "src/components/Dropdown/Dropdown";
+import Dropdown from "../Dropdown/Dropdown";
 import ThreeDotsSVG from "src/resources/icons/ThreeDots.svg";
-import EllipsisTooltip from "src/components/EllipsisTooltip/EllipsisTooltip";
-import Tooltip from "src/components/Tooltip/Tooltip";
+import EllipsisTooltip from "../EllipsisTooltip/EllipsisTooltip";
+import Tooltip from "../Tooltip/Tooltip";
 import { useNavigate } from "react-router";
-import { ellipsisStyle } from "src/styles/common.styles";
+import { ellipsisStyle } from "../../styles/common.styles";
 
 // "Хлебные крошки" для нового списка сотрудников, который еще не реализован
 const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({

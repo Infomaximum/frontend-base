@@ -1,4 +1,4 @@
-import typenameToModel from "src/models/typenameToModel";
+import typenameToModel from "../../../models/typenameToModel";
 import { graphqlTag } from "@im/utils";
 import { forEach, set } from "lodash";
 import { Store } from "./Store";

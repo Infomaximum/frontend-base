@@ -3,7 +3,7 @@ import { isBoolean } from "lodash";
 import type React from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { TPropInjector } from "@im/utils";
-import { useDelayedTrue } from "src/decorators/hooks/useDelayedTrue";
+import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
 
 export interface IWithSpinPropsReplacer
   extends Pick<TableProps<unknown>, "loading"> {}

@@ -3,7 +3,7 @@ import type { IDocumentNode } from "@im/utils";
 import type { NBaseStore } from "../BaseStore/BaseStore.types";
 import type { NCore } from "@im/core";
 import type { Store } from "./Store";
-import type { NRequests } from "src/utils/Requests/Requests.types";
+import type { NRequests } from "../../Requests/Requests.types";
 import type { Model, TModelStruct } from "@im/models";
 
 /** Пространство для типов базового стора */

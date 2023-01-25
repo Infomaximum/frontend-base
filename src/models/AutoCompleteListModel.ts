@@ -1,5 +1,5 @@
 import { Group, type Model } from "@im/models";
-import typenameToModel from "src/models/typenameToModel";
+import typenameToModel from "./typenameToModel";
 
 /**
  * Модель автокомплита

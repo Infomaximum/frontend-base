@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
-import { CloseCircleOutlined } from "src/components/Icons/Icons";
-import Button from "src/components/Button/Button";
-import Modal from "src/components/modals/Modal/Modal";
+import { CloseCircleOutlined } from "../../Icons/Icons";
+import Button from "../../Button/Button";
+import Modal from "../../modals/Modal/Modal";
 import {
   bodyStyle,
   titleModalStyle,
@@ -9,14 +9,18 @@ import {
   bodyModalStyle,
   modalContentStyle,
 } from "./RemoveConfirmationModal.styles";
-import { CANCEL, DELETE, DELETION } from "src/utils/Localization/Localization";
-import withLoc from "src/decorators/hocs/withLoc/withLoc";
-import { ModalAnimationInterval } from "src/utils/const";
+import {
+  CANCEL,
+  DELETE,
+  DELETION,
+} from "../../../utils/Localization/Localization";
+import withLoc from "../../../decorators/hocs/withLoc/withLoc";
+import { ModalAnimationInterval } from "../../../utils/const";
 import { isFunction } from "lodash";
 import {
   removeConfirmationModalCancelButtonTestId,
   removeConfirmationModalRemoveButtonTestId,
-} from "src/utils/TestIds";
+} from "../../../utils/TestIds";
 import type {
   IRemoveConfirmationModalProps,
   IRemoveConfirmationModalState,

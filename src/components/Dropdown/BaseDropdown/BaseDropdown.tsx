@@ -5,7 +5,7 @@ import type {
   IBaseDropdownState,
 } from "./BaseDropdown.types";
 import { menuStyle, mainBaseDropdownOverlayStyle } from "./BaseDropdown.styles";
-import { DropdownAnimationInterval } from "src/utils/const";
+import { DropdownAnimationInterval } from "../../../utils/const";
 
 export enum EBaseDropdownPlacement {
   bottomLeft = "bottomLeft",

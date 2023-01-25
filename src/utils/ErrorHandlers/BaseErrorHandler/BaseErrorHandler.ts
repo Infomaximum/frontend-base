@@ -5,7 +5,7 @@ import {
   EErrorCode,
   PARAMETERS_FIELD_NAME,
   rootDomNodeName,
-} from "src/utils/const";
+} from "../../const";
 import type { NErrorHandlers } from "../ErrorHandlers.types";
 import { assertSimple } from "@im/asserts";
 

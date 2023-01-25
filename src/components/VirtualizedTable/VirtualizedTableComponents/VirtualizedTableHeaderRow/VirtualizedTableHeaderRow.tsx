@@ -5,9 +5,9 @@ import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 import {
   virtualizedTableHeaderTestId,
   virtualizedTableCheckboxTestId,
-} from "src/utils/TestIds";
-import type { TRow } from "src/components/VirtualizedTable/VirtualizedTable.types";
-import Checkbox from "src/components/Checkbox/Checkbox";
+} from "../../../../utils/TestIds";
+import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
+import Checkbox from "../../../Checkbox/Checkbox";
 import type { IVirtualizedTableHeaderRowProps } from "./VirtualizedTableHeaderRow.types";
 import VirtualizedTableHeaderCell from "../VirtualizedTableHeaderCell/VirtualizedTableHeaderCell";
 import {
@@ -19,9 +19,9 @@ import {
   virtualizedTableBodyRowLoadingCoverStyle,
   virtualizedTableCheckboxCellStyle,
 } from "../VirtualizedTableBodyRow/VirtualizedTableBodyRow.styles";
-import TableCheckboxCell from "src/components/Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
-import { withoutDividerStyle } from "src/components/VirtualizedTable/VirtualizedTable.styles";
-import { TABLE_HEADER_ID } from "src/utils/const";
+import TableCheckboxCell from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
+import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
+import { TABLE_HEADER_ID } from "../../../../utils/const";
 
 export class VirtualizedTableHeaderRow<T = TRow> extends PureComponent<
   IVirtualizedTableHeaderRowProps<T>

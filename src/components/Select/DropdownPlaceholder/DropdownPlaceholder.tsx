@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { Empty } from "antd";
 import type { IDropdownPlaceholderProps } from "./DropdownPlaceholder.types";
 import {
@@ -8,12 +8,12 @@ import {
 } from "./DropdownPlaceholder.styles";
 import NothingFoundBox from "src/resources/icons/NothingFoundBox.svg";
 import NoAccess from "src/resources/icons/NoAccess.svg";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import {
   EMPTY_HERE,
   NO_ACCESS,
   NOTHING_FOUND_CHANGE_QUERY,
-} from "src/utils/Localization/Localization";
+} from "../../../utils/Localization/Localization";
 
 /**
  * Placeholder выпадающего списка (данные запрашиваются 1 раз).

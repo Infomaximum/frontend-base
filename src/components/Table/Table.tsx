@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import type { ITableOwnProps, ITableProps, ITableState } from "./Table.types";
 import type { RenderExpandIconProps } from "rc-table/lib/interface";
 import { Table as AntTable, ConfigProvider } from "antd";
-import VirtualizedTable from "src/components/VirtualizedTable/VirtualizedTable";
+import VirtualizedTable from "../VirtualizedTable/VirtualizedTable";
 import {
   isEmpty,
   some,
@@ -20,7 +20,7 @@ import {
   transparentBordersStyle,
 } from "./Table.styles";
 import { type Interpolation, withTheme } from "@emotion/react";
-import Empty from "src/components/Empty/Empty";
+import Empty from "../Empty/Empty";
 import { observer } from "mobx-react";
 import TableContainer from "./TableComponents/TableContainer/TableContainer";
 import TableBodyRow from "./TableComponents/TableBodyRow/TableBodyRow";
@@ -32,7 +32,7 @@ import TableHeaderWrapper from "./TableComponents/TableHeaderWrapper/TableHeader
 import TableExpandIcon from "./TableComponents/TableExpandIcon/TableExpandIcon";
 import TableCheckboxCell from "./TableComponents/TableCheckboxCell/TableCheckboxCell";
 import { createSelector } from "reselect";
-import { TABLE_HEADER_ID, loaderDelay } from "src/utils/const";
+import { TABLE_HEADER_ID, loaderDelay } from "../../utils/const";
 import { AutoSizer } from "react-virtualized";
 
 class Table<T extends TDictionary> extends Component<

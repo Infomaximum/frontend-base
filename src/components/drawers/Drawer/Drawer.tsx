@@ -11,9 +11,9 @@ import {
   titleStyle,
   closeIconWrapperStyle,
 } from "./Drawer.styles";
-import { drawerCloseButtonTestId } from "src/utils/TestIds";
-import { CloseOutlined } from "src/components/Icons/Icons";
-import { useTheme } from "src/decorators/hooks/useTheme";
+import { drawerCloseButtonTestId } from "../../../utils/TestIds";
+import { CloseOutlined } from "../../Icons/Icons";
+import { useTheme } from "../../../decorators/hooks/useTheme";
 
 export const getBoldTitle = createSelector(
   (title: React.ReactNode) => title,

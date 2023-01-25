@@ -4,13 +4,13 @@ import {
   resolveConstraintsInRoutes,
   routesMap,
   sortPriority,
-} from "src/utils/Routes/routes";
+} from "../../utils/Routes/routes";
 import type { NCore } from "@im/core";
 import type { IRouterProviderProps } from "./RouterProvider.types";
 import { observer } from "mobx-react";
 import { useRoutes } from "react-router";
-import { RoutesContext } from "src/decorators/contexts/RoutesContext";
-import { useFeature } from "src/decorators/hooks/useFeature";
+import { RoutesContext } from "../../decorators/contexts/RoutesContext";
+import { useFeature } from "../../decorators/hooks/useFeature";
 
 const RouterProvider: FC<IRouterProviderProps> = ({
   layout: LayoutProps,

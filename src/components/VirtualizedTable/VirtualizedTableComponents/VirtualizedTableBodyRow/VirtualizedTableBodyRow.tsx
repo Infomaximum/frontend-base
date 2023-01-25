@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import {
   tableRowCheckboxTestId,
   tableRowLoadingTestId,
-} from "src/utils/TestIds";
+} from "../../../../utils/TestIds";
 import {
   virtualizedTableBodyRowLoadingCoverStyle,
   usualVirtualizedTableBodyRowStyle,
@@ -12,14 +12,14 @@ import {
 } from "./VirtualizedTableBodyRow.styles";
 import type { IVirtualizedTableBodyRowProps } from "./VirtualizedTableBodyRow.types";
 import { MouseEvent, useCallback } from "react";
-import Radio from "src/components/Radio/Radio";
-import Checkbox from "src/components/Checkbox/Checkbox";
+import Radio from "../../../Radio/Radio";
+import Checkbox from "../../../Checkbox/Checkbox";
 import { map } from "lodash";
 import VirtualizedTableBodyCell from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell";
-import type { TRow } from "src/components/VirtualizedTable/VirtualizedTable.types";
-import TableCheckboxCell from "src/components/Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
+import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
+import TableCheckboxCell from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
-import { withoutDividerStyle } from "src/components/VirtualizedTable/VirtualizedTable.styles";
+import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
 
 export const VirtualizedTableBodyRow = <T extends TRow>(
   props: IVirtualizedTableBodyRowProps<T | null>

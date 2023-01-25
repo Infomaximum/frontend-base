@@ -5,7 +5,7 @@ import {
   CheckOutlined,
   CloseCircleOutlined,
   CloseOutlined,
-} from "src/components/Icons/Icons";
+} from "../Icons/Icons";
 import React, {
   MouseEvent,
   useState,
@@ -25,7 +25,7 @@ import {
   tagStyle,
 } from "./Select.styles";
 import type { ISelectProps } from "./Select.types";
-import Tag from "src/components/Tag/Tag";
+import Tag from "../Tag/Tag";
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import type { ArrayInterpolation } from "@emotion/react";
 import ArrowDownSVG from "src/resources/icons/ArrowDown.svg";
@@ -50,14 +50,17 @@ import {
   isUndefined,
   noop,
 } from "lodash";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
+import { useLocalization } from "../../decorators/hooks/useLocalization";
 import {
   ENTER_OR_SELECT_FROM_THE_LIST,
   NOT_SELECTED,
   SELECT_FROM_LIST,
-} from "src/utils/Localization/Localization";
-import { useDelayedTrue } from "src/decorators/hooks/useDelayedTrue";
-import { suffixLoaderDelay, DropdownAnimationInterval } from "src/utils/const";
+} from "../../utils/Localization/Localization";
+import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
+import {
+  suffixLoaderDelay,
+  DropdownAnimationInterval,
+} from "../../utils/const";
 import type { BaseSelectRef } from "rc-select";
 
 const { OptGroup, Option } = AntSelect;

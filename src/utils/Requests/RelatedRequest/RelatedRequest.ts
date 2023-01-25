@@ -1,7 +1,7 @@
 import { BaseRequest } from "../BaseRequest/BaseRequest";
 import type { NRequests } from "../Requests.types";
 import type { TRelatedRequestData } from "./RelatedRequest.types";
-import { apolloInstance } from "src/utils/Store/Apollo";
+import { apolloInstance } from "../../Store/Apollo";
 import { XTraceIdHeaderKey } from "@im/utils";
 import type { NCore } from "@im/core";
 import { v4 as uuid4 } from "uuid";

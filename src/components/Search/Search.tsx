@@ -1,9 +1,9 @@
 import React from "react";
 import type { ISearchProps, ISearchState } from "./Search.types";
-import Input from "src/components/Input/Input";
+import Input from "../Input/Input";
 import { isString, isFunction } from "lodash";
-import { KeyupRequestInterval } from "src/utils/const";
-import { SearchOutlined } from "src/components/Icons/Icons";
+import { KeyupRequestInterval } from "../../utils/const";
+import { SearchOutlined } from "../Icons/Icons";
 import {
   iconStyle,
   searchMiddleInputStyle,

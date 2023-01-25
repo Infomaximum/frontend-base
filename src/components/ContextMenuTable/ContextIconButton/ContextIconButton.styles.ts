@@ -1,5 +1,5 @@
 import { assignInWith, isNil } from "lodash";
-import { HoverAnimationInterval } from "src/utils/const";
+import { HoverAnimationInterval } from "../../../utils/const";
 import type { TCustomContextIconButtonFuncStyle } from "./ContextIconButton.types";
 
 export const defaultButtonStyle = (size: number) => (theme: TTheme) =>

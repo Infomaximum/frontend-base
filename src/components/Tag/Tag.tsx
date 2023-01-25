@@ -7,9 +7,9 @@ import {
   notClosableTagStyle,
   tagContentStyle,
 } from "./Tag.styles";
-import { useTheme } from "src/decorators/hooks/useTheme";
+import { useTheme } from "../../decorators/hooks/useTheme";
 import { get } from "lodash";
-import Tooltip from "src/components/Tooltip/Tooltip";
+import Tooltip from "../Tooltip/Tooltip";
 
 const Tag: FC<ITagProps> = (props) => {
   const theme = useTheme();

@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 import type { IServiceModePanelProps } from "./ServiceModePanel.types";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
-import { SERVICE_MODE } from "src/utils/Localization/Localization";
-import { authorizationServiceModePanelTestId } from "src/utils/TestIds";
-import Banner from "src/components/Banner/Banner";
-import { useTheme } from "src/decorators/hooks/useTheme";
-import { WarningOutlined } from "src/components/Icons/Icons";
+import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import { SERVICE_MODE } from "../../../utils/Localization/Localization";
+import { authorizationServiceModePanelTestId } from "../../../utils/TestIds";
+import Banner from "../../Banner/Banner";
+import { useTheme } from "../../../decorators/hooks/useTheme";
+import { WarningOutlined } from "../../Icons/Icons";
 import {
   serviceModeBannerStyle,
   wrapperContentStyle,

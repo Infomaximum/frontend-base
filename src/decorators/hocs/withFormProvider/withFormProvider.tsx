@@ -1,6 +1,6 @@
 import type { TPropInjector } from "@im/utils";
-import type { IFormProvider } from "src/decorators/contexts/FormContext";
-import FormContext from "src/decorators/contexts/FormContext";
+import type { IFormProvider } from "../../contexts/FormContext";
+import FormContext from "../../contexts/FormContext";
 import hoistNonReactStatics from "hoist-non-react-statics";
 
 export interface IWithFormProviderProps {

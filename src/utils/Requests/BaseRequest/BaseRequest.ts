@@ -2,11 +2,11 @@
 import axios from "axios";
 import { CancelRequest, XTraceIdHeaderKey } from "@im/utils";
 import { isFunction } from "lodash";
-import { apolloInstance } from "src/utils/Store/Apollo";
+import { apolloInstance } from "../../Store/Apollo";
 import type { NBaseRequest } from "./BaseRequest.types";
 import type { NRequests } from "../Requests.types";
-import { BaseErrorHandler } from "src/utils/ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
-import type { NErrorHandlers } from "src/utils/ErrorHandlers/ErrorHandlers.types";
+import { BaseErrorHandler } from "../../ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
+import type { NErrorHandlers } from "../../ErrorHandlers/ErrorHandlers.types";
 import type { Subscription } from "zen-observable-ts";
 import type { NCore } from "@im/core";
 import { v4 as uuid4 } from "uuid";
@@ -227,7 +227,7 @@ export class BaseRequest implements NRequests.IRequest {
           .prepareError(err.originalError, {})
           .then((error) => {
             if (isFunction(params.onError)) {
-              (params.onError as typeof params["onError"])({
+              (params.onError as (typeof params)["onError"])({
                 error: error || err,
               });
             }

@@ -4,7 +4,7 @@ import {
   ellipsisStyleForSafari,
 } from "./EllipsisTooltip.styles";
 import type { IEllipsisTooltipProps } from "./EllipsisTooltip.types";
-import Tooltip from "src/components/Tooltip/Tooltip";
+import Tooltip from "../Tooltip/Tooltip";
 import { EUserAgents, userAgent } from "@im/utils";
 
 const isSafari = userAgent() === EUserAgents.Safari;

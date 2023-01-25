@@ -1,4 +1,4 @@
-import { TABLE_HEADER_ID } from "src/utils/const";
+import { TABLE_HEADER_ID } from "../../../../utils/const";
 import { forwardRef } from "react";
 import type { ITableHeaderWrapperProps } from "./TableHeaderWrapper.types";
 

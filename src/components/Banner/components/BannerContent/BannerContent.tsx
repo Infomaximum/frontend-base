@@ -1,10 +1,10 @@
-import { useContainerWidth } from "src/decorators/hooks/useContainerWidth";
+import { useContainerWidth } from "../../../../decorators/hooks/useContainerWidth";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import MarkdownView from "react-showdown";
-import Button from "src/components/Button/Button";
+import Button from "../../../Button/Button";
 import type { IBannerContentProps } from "./BannerContent.types";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
-import { SHOW_MORE } from "src/utils/Localization/Localization";
+import { useLocalization } from "../../../../decorators/hooks/useLocalization";
+import { SHOW_MORE } from "../../../../utils/Localization/Localization";
 import BannerContentModal from "../BannerContentModal/BannerContentModal";
 import {
   bannerContentParagraphStyle,
@@ -12,7 +12,7 @@ import {
   bannerContentShowMoreStyle,
   bannerContentStyle,
 } from "./BannerContent.styles";
-import { showMoreBannerTestId } from "src/utils/TestIds";
+import { showMoreBannerTestId } from "../../../../utils/TestIds";
 
 const BannerContent: React.FC<IBannerContentProps> = ({
   md,

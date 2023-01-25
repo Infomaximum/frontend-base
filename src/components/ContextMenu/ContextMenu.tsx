@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from "react";
 import { Menu } from "antd";
-import Dropdown from "src/components/Dropdown/Dropdown";
+import Dropdown from "../../components/Dropdown/Dropdown";
 import type { MenuProps, SubMenuProps } from "antd/lib/menu";
-import withFeature from "src/decorators/hocs/withFeature/withFeature";
+import withFeature from "../../decorators/hocs/withFeature/withFeature";
 import {
   wrapperContextMenuStyle,
   threeDotsButtonStyle,
@@ -23,16 +23,16 @@ import {
   contextMenuItemTestId,
   contextMenuDropDownTestId,
   contextMenuDropDownBtnTestId,
-} from "src/utils/TestIds";
-import ThreeDotsSVG from "src/resources/icons/ThreeDots.svg";
-import Button from "src/components/Button/Button";
+} from "../../utils/TestIds";
+import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
+import Button from "../../components/Button/Button";
 import type { ItemType } from "antd/lib/menu/hooks/useItems";
-import { useFeature } from "src/decorators/hooks/useFeature";
-import { useTheme } from "src/decorators/hooks/useTheme";
-import { sortByPriority } from "src/utils/Routes/routes";
-import { isShowElement } from "src/utils/access";
-import { sortByTitle } from "src/utils/sortings";
-import withTheme from "src/decorators/hocs/withTheme/withTheme";
+import { useFeature } from "../../decorators/hooks/useFeature";
+import { useTheme } from "../../decorators/hooks/useTheme";
+import { sortByPriority } from "../../utils/Routes/routes";
+import { isShowElement } from "../../utils/access";
+import { sortByTitle } from "../../utils/sortings";
+import withTheme from "../../decorators/hocs/withTheme/withTheme";
 
 const dropdownTrigger: ["click"] = ["click"];
 

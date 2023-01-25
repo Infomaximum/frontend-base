@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import type { IErrorModalProps } from "./ErrorModal.types";
-import Modal from "src/components/modals/Modal/Modal";
-import Button from "src/components/Button/Button";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
+import Modal from "../../modals/Modal/Modal";
+import Button from "../../Button/Button";
+import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import {
   modalFooterStyle,
   bodyModalStyle,
@@ -18,17 +18,14 @@ import {
   modalErrorCloseButtonTestId,
   modalErrorTitleErrorTestId,
   modalErrorContentErrorTestId,
-} from "src/utils/TestIds";
+} from "../../../utils/TestIds";
 import {
   CLOSE,
   CONTINUE,
   ERROR_MESSAGE,
-} from "src/utils/Localization/Localization";
+} from "../../../utils/Localization/Localization";
 import { kebabCase } from "lodash";
-import {
-  CloseCircleOutlined,
-  InfoCircleOutlined,
-} from "src/components/Icons/Icons";
+import { CloseCircleOutlined, InfoCircleOutlined } from "../../Icons/Icons";
 import { observer } from "mobx-react";
 import { useFooterAndTitleHeight } from "./ErrorModal.utils";
 

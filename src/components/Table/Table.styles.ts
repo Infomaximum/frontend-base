@@ -1,4 +1,4 @@
-import { ellipsisStyle } from "src/styles/common.styles";
+import { ellipsisStyle } from "../../styles/common.styles";
 
 export const borderTopStyle = (theme: TTheme) =>
   ({

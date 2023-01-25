@@ -1,5 +1,5 @@
 import type { NCore } from "@im/core";
-import { EErrorCode, ERROR_FIELD_NAME } from "src/utils/const";
+import { EErrorCode, ERROR_FIELD_NAME } from "../../utils/const";
 import {
   ACCESS_DENIED,
   ACCOUNT_IS_LOCKED,
@@ -39,7 +39,7 @@ import {
   UNABLE_TO_CONNECT_TO_THE_SERVER,
   YOU_CANNOT_DELETE_ADMIN_AND_DEPARTMENTS_THAT_HAS_EMPLOYEES,
   YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES,
-} from "src/utils/Localization/ErrorLocalization";
+} from "../../utils/Localization/ErrorLocalization";
 
 export const baseErrorHandlers: NCore.TErrorPreparer[] = [
   {

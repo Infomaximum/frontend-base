@@ -1,11 +1,11 @@
-import React from "react";
-import { useLocalization } from "src/decorators/hooks/useLocalization";
+import type React from "react";
+import { useLocalization } from "../../decorators/hooks/useLocalization";
 import {
   NOTHING_FOUND,
   NO_ACCESS,
   NO_OBJECTS_MATCHING_FILTER_CRITERIA,
   EMPTY_HERE,
-} from "src/utils/Localization/Localization";
+} from "../../utils/Localization/Localization";
 import { Empty as AntEmpty } from "antd";
 import EmptyHereForNowSVG from "src/resources/icons/EmptyHereForNow.svg";
 import NoObjectsMatchingFilterCriteriaSVG from "src/resources/icons/NoObjectsMatchingFilterCriteria.svg";

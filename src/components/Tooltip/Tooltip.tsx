@@ -2,7 +2,7 @@ import React, { useMemo, FC } from "react";
 // eslint-disable-next-line im/ban-import-entity
 import { Tooltip as AntTooltip } from "antd";
 import type { ITooltipProps } from "./Tooltip.types";
-import { useTheme } from "src/decorators/hooks/useTheme";
+import { useTheme } from "../../decorators/hooks/useTheme";
 import {
   tooltipOverlayStyle,
   tooltipOverlayInnerStyle,

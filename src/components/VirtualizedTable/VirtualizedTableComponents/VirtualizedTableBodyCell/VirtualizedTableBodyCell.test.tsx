@@ -7,7 +7,7 @@ import {
   tableArrowRightTestId,
   tableArrowUpTestId,
   tableExpanderTestId,
-} from "src/utils/TestIds";
+} from "../../../../utils/TestIds";
 
 describe("Тест компонента VirtualizedTableBodyCell", () => {
   it("Простое отображение значения", async () => {

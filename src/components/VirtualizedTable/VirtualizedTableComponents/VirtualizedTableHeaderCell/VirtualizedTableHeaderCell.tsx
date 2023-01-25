@@ -1,10 +1,10 @@
 import { get, includes } from "lodash";
-import { ESortDirection } from "src/utils/const";
+import { ESortDirection } from "../../../../utils/const";
 import React, { memo, useMemo } from "react";
 import type { IVirtualizedTableHeaderCellProps } from "./VirtualizedTableHeaderCell.types";
 import { Row, Col } from "antd";
-import { CaretDownOutlined, CaretUpOutlined } from "src/components/Icons/Icons";
-import { virtualizedTableDivTestId } from "src/utils/TestIds";
+import { CaretDownOutlined, CaretUpOutlined } from "../../../Icons/Icons";
+import { virtualizedTableDivTestId } from "../../../../utils/TestIds";
 import { getVirtualizedTableCellFlexStyle } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell.styles";
 import {
   sorterArrowDownActiveStyle,

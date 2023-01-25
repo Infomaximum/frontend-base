@@ -1,8 +1,8 @@
 import type { Model, TModelStruct } from "@im/models";
 import { InvalidIndex } from "@im/utils";
 import { forEach, get, isNull, isEmpty, map } from "lodash";
-import type { NStore } from "src/utils/Store/Store/Store.types";
-import type { Store } from "src/utils/Store/Store/Store";
+import type { NStore } from "../Store/Store/Store.types";
+import type { Store } from "../Store/Store/Store";
 import { assertSimple } from "@im/asserts";
 
 type TTreeBuilderParams = {

@@ -1,10 +1,10 @@
-import type { Store } from "src/utils/Store/Store/Store";
+import type { Store } from "../../../utils/Store/Store/Store";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { FC, useCallback } from "react";
 import type { TPropInjector } from "@im/utils";
 import { observer } from "mobx-react";
-import { useMountEffect } from "src/decorators/hooks/useMountEffect";
-import { useUnmountEffect } from "src/decorators/hooks/useUnmountEffect";
+import { useMountEffect } from "../../hooks/useMountEffect";
+import { useUnmountEffect } from "../../hooks/useUnmountEffect";
 import type {
   IWithStoreProps,
   IFormMutateParams,

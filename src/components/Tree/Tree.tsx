@@ -6,7 +6,7 @@ import {
   treeSwitcherIconContainerStyle,
   treeSwitcherIconStyle,
 } from "./Tree.styles";
-import { DownOutlined } from "src/components/Icons/Icons";
+import { DownOutlined } from "../Icons/Icons";
 import type { DataNode } from "antd/lib/tree";
 import { map } from "lodash";
 

@@ -1,12 +1,12 @@
-import type { Store } from "src/utils/Store/Store/Store";
+import type { Store } from "../../utils/Store/Store/Store";
 import type { IDocumentNode, TInferredVariables } from "@im/utils";
 import type { Model } from "@im/models";
-import type { NStore } from "src/utils/Store/Store/Store.types";
+import type { NStore } from "../../utils/Store/Store/Store.types";
 import { useCallback, useEffect } from "react";
 import { useMountEffect } from "./useMountEffect";
 import { useUnmountEffect } from "./useUnmountEffect";
 import { useModalError } from "./useModalError";
-import { EErrorCode } from "src/utils/const";
+import { EErrorCode } from "../../utils/const";
 
 export type TStoreParams = {
   /** Выполнять ли запрос при маунте компонента `(false)` */

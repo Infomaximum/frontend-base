@@ -1,4 +1,4 @@
-import { scrollDefaultStyle } from "src/styles/global.styles";
+import { scrollDefaultStyle } from "../../../styles/global.styles";
 import { EUserAgents, userAgent } from "@im/utils";
 
 const bodyModalPadding = 32;

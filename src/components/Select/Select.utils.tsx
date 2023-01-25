@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, RefObject, useEffect } from "react";
 import Select from "./Select";
-import Tooltip from "src/components/Tooltip/Tooltip";
+import Tooltip from "../Tooltip/Tooltip";
 import {
   find,
   has,
@@ -12,17 +12,14 @@ import {
   map,
 } from "lodash";
 import { textWrapperStyle } from "./Select.styles";
-import { useDropdownPosition } from "src/components/Dropdown/Dropdown.utils";
+import { useDropdownPosition } from "../Dropdown/Dropdown.utils";
 import type {
   DefaultOptionType,
   LabeledValue,
   SelectValue,
 } from "antd/lib/select";
-import type {
-  IDropdownParams,
-  TXPlacement,
-} from "src/components/Dropdown/Dropdown.types";
-import { globalScrollBehavior } from "src/utils/ScrollBehavior/ScrollBehavior";
+import type { IDropdownParams, TXPlacement } from "../Dropdown/Dropdown.types";
+import { globalScrollBehavior } from "../../utils/ScrollBehavior/ScrollBehavior";
 import type { BaseSelectRef } from "rc-select";
 
 export const replaceBrowserTooltip = (children: React.ReactNode) =>

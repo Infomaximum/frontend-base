@@ -1,4 +1,4 @@
-import { FeatureContext } from "src/decorators/contexts/FeatureContext";
+import { FeatureContext } from "../contexts/FeatureContext";
 import { useContext } from "react";
 
 export const useFeature = () => {

@@ -1,6 +1,6 @@
 import { forEach, isNumber } from "lodash";
 import { Group, type IModel } from "@im/models";
-import RestModel from "src/models/RestModel";
+import RestModel from "../models/RestModel";
 
 /**
  * Класс, рассчитывающий количество элементов в дереве по разным критериям

@@ -1,5 +1,5 @@
 import type { TableRowSelection } from "antd/lib/table/interface";
-import type { IVirtualizedTableProps } from "src/components/VirtualizedTable/VirtualizedTable.types";
+import type { IVirtualizedTableProps } from "../../../VirtualizedTable/VirtualizedTable.types";
 import type { IVirtualizedTableBodyCellProps } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell.types";
 
 export interface IVirtualizedTableBodyRowProps<T>

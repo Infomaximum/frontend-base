@@ -27,7 +27,7 @@ import {
 import type { NCore } from "@im/core";
 import { Expander } from "@im/core";
 import type { TFeatureEnabledChecker } from "@im/utils";
-import RouteElement from "src/components/routes/RouteElement/RouteElement";
+import RouteElement from "../../components/routes/RouteElement/RouteElement";
 import { assertSimple } from "@im/asserts";
 import { getPathToLocalStorage } from "../URI/URI";
 

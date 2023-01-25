@@ -1,7 +1,7 @@
 import { isArray, isNumber } from "lodash";
-import type { NStore } from "src/utils/Store/Store/Store.types";
+import type { NStore } from "../Store/Store/Store.types";
 import type { Model, TModelStruct } from "@im/models";
-import type { Store } from "src/utils/Store/Store/Store";
+import type { Store } from "../Store/Store/Store";
 
 export const REST_GRAPHQL_FAKE_TYPE = "rest";
 

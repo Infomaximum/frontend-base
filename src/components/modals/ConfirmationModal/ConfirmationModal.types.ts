@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import type { Interpolation } from "@emotion/react";
 import type { TLocalizationDescription } from "@im/utils";
-import type { AntdIconProps } from "src/components/Icons/Icons";
-import type { TButtonType } from "src/components/Button/Button.types";
+import type { AntdIconProps } from "../../Icons/Icons";
+import type { TButtonType } from "../../Button/Button.types";
 
 export interface IConfirmationModalProps {
   /**
