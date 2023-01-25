@@ -28,7 +28,7 @@ import type { ISelectProps } from "./Select.types";
 import Tag from "../Tag/Tag";
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import type { ArrayInterpolation } from "@emotion/react";
-import ArrowDownSVG from "src/resources/icons/ArrowDown.svg";
+import ArrowDownSVG from "../../resources/icons/ArrowDown.svg";
 import {
   findActiveOption,
   isLabeled,
