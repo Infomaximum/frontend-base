@@ -1,5 +1,9 @@
-import * as components from "./components";
+import "./global.types";
+import "./svg.types";
 
-export default {
-  ...components,
-};
+export * from "./components";
+export * from "./decorators";
+export * from "./managers";
+export * from "./models";
+export * from "./styles";
+export * from "./utils";

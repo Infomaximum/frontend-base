@@ -1,5 +1,5 @@
-import { ThemeContext } from "@emotion/react";
-import { useContext } from "react";
+import { Context, useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { TPropInjector } from "@im/utils";
 
@@ -11,7 +11,10 @@ export interface IWithThemeProps<T extends TThemeValue> {
 
 const withTheme: TPropInjector<IWithThemeProps<any>> = (Component: any) => {
   const WithTheme = (props: any) => (
-    <Component {...props} theme={useContext(ThemeContext)} />
+    <Component
+      {...props}
+      theme={useContext(ThemeContext as unknown as Context<TTheme>)}
+    />
   );
 
   return hoistNonReactStatics(WithTheme, Component);

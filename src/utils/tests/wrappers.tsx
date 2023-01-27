@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
-import { ThemeContext } from "@emotion/react";
+import { ThemeContext } from "../../decorators/contexts/ThemeContext";
 // eslint-disable-next-line im/ban-import-entity
 import { theme } from "../../styles/theme";
 import { Localization } from "@im/utils";

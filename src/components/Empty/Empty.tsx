@@ -7,10 +7,10 @@ import {
   EMPTY_HERE,
 } from "../../utils/Localization/Localization";
 import { Empty as AntEmpty } from "antd";
-import EmptyHereForNowSVG from "src/resources/icons/EmptyHereForNow.svg";
-import NoObjectsMatchingFilterCriteriaSVG from "src/resources/icons/NoObjectsMatchingFilterCriteria.svg";
-import NothingFoundSVG from "src/resources/icons/NothingFound.svg";
-import NoAccessImage from "src/resources/icons/NoAccessImage.svg";
+import EmptyHereForNowSVG from "../../resources/icons/EmptyHereForNow.svg";
+import NoObjectsMatchingFilterCriteriaSVG from "../../resources/icons/NoObjectsMatchingFilterCriteria.svg";
+import NothingFoundSVG from "../../resources/icons/NothingFound.svg";
+import NoAccessImage from "../../resources/icons/NoAccessImage.svg";
 import {
   emptyDescriptionStyle,
   emptyHintStyle,

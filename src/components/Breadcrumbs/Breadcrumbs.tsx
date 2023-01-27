@@ -20,7 +20,7 @@ import {
 } from "./Breadcrumbs.utils";
 import { Menu } from "antd";
 import Dropdown from "../Dropdown/Dropdown";
-import ThreeDotsSVG from "src/resources/icons/ThreeDots.svg";
+import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
 import EllipsisTooltip from "../EllipsisTooltip/EllipsisTooltip";
 import Tooltip from "../Tooltip/Tooltip";
 import { useNavigate } from "react-router";

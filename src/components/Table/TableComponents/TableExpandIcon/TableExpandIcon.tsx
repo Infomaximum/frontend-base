@@ -1,5 +1,5 @@
-import ArrowRightSVG from "src/resources/icons/ArrowRight.svg";
-import ArrowUpSVG from "src/resources/icons/ArrowUp.svg";
+import ArrowRightSVG from "../../../../resources/icons/ArrowRight.svg";
+import ArrowUpSVG from "../../../../resources/icons/ArrowUp.svg";
 import {
   tableArrowUpTestId,
   tableArrowRightTestId,

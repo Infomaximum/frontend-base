@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 import { boldTitleStyle, titleStyle } from "./Modal.styles";
 import { modalTitleTestId } from "../../../utils/TestIds";
 
-export const getBoldTitle = createSelector(
+export const getBoldTitleModal = createSelector(
   (title: React.ReactNode) => title,
   (title: React.ReactNode) => (
     <span test-id={modalTitleTestId} style={boldTitleStyle}>

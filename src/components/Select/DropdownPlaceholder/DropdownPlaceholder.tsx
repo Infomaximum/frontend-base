@@ -6,8 +6,8 @@ import {
   emptyImageStyle,
   hintStyle,
 } from "./DropdownPlaceholder.styles";
-import NothingFoundBox from "src/resources/icons/NothingFoundBox.svg";
-import NoAccess from "src/resources/icons/NoAccess.svg";
+import NothingFoundBox from "../../../resources/icons/NothingFoundBox.svg";
+import NoAccess from "../../../resources/icons/NoAccess.svg";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import {
   EMPTY_HERE,
