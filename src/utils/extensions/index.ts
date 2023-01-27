@@ -1,6 +1,10 @@
 export * from "./ContainerExt";
-export { default as expandModels } from "./expandModels.storeExt";
-export { default as graphqlTree } from "./graphqlTree.storeExt";
-export * from "./showMoreAdd.storeExt";
-export * from "./sortPrivileges.storeExt";
-export * from "./wrapInFakeList.storeExt";
+export { expandModelsStoreExt } from "./expandModels.storeExt";
+export { graphqlTreeStoreExt } from "./graphqlTree.storeExt";
+export {
+  showMoreAddStoreExt,
+  REST_GRAPHQL_FAKE_TYPE,
+  getRestItemStruct,
+} from "./showMoreAdd.storeExt";
+export { sortPrivilegesExt } from "./sortPrivileges.storeExt";
+export { wrapInFakeListPrepareData } from "./wrapInFakeList.storeExt";

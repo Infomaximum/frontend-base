@@ -1,1 +1,1 @@
-export { default as withTheme } from './withTheme';
+export { withTheme } from "./withTheme";

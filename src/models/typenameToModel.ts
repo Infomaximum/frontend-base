@@ -19,6 +19,4 @@ import { TypenameToModel } from "@im/models";
  * export default Position
  *
  */
-const typenameToModel = new TypenameToModel();
-
-export default typenameToModel;
+export const typenameToModel = new TypenameToModel();

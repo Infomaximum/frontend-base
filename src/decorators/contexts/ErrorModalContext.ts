@@ -9,7 +9,7 @@ export interface IErrorModalContextContextData {
   ) => void;
 }
 
-export default createContext<IErrorModalContextContextData>({
+export const ErrorModalContext = createContext<IErrorModalContextContextData>({
   showModalError() {
     assertSimple(
       process.env.NODE_ENV === "test",

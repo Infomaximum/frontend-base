@@ -1,8 +1,13 @@
 import { Checkbox as AntCheckbox } from "antd";
 import type { FC } from "react";
-import type { ICheckboxProps, ICheckboxStaticComponent } from "./Checkbox.types";
+import type {
+  ICheckboxProps,
+  ICheckboxStaticComponent,
+} from "./Checkbox.types";
 
-const Checkbox: FC<ICheckboxProps> & ICheckboxStaticComponent = (props) => {
+const CheckboxComponent: FC<ICheckboxProps> & ICheckboxStaticComponent = (
+  props
+) => {
   const { "test-id": testId } = props;
 
   return (
@@ -12,6 +17,6 @@ const Checkbox: FC<ICheckboxProps> & ICheckboxStaticComponent = (props) => {
   );
 };
 
-Checkbox.Group = AntCheckbox.Group;
+CheckboxComponent.Group = AntCheckbox.Group;
 
-export default Checkbox;
+export const Checkbox = CheckboxComponent;

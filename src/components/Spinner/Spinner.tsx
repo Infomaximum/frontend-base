@@ -5,7 +5,7 @@ import type { ISpinnerProps } from "./Spinner.types";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { loaderDelay } from "../../utils/const";
 
-const Spinner: React.FC<ISpinnerProps> = ({
+const SpinnerComponent: React.FC<ISpinnerProps> = ({
   labelLoc,
   size,
   wrapperStyle,
@@ -28,10 +28,10 @@ const Spinner: React.FC<ISpinnerProps> = ({
   );
 };
 
-Spinner.defaultProps = {
+SpinnerComponent.defaultProps = {
   wrapperStyle: wrapperSpinnerStyle,
   size: "default",
   delay: loaderDelay,
 };
 
-export default Spinner;
+export const Spinner = SpinnerComponent;

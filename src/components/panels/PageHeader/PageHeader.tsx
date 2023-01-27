@@ -10,7 +10,7 @@ import {
 import { pageHeaderBackButtonTestId } from "../../../utils/TestIds";
 import type { IPageHeaderProps } from "./PageHeader.types";
 
-const PageHeader: React.FC<IPageHeaderProps> = (props) => {
+const PageHeaderComponent: React.FC<IPageHeaderProps> = (props) => {
   const {
     title,
     onBack,
@@ -46,4 +46,4 @@ const PageHeader: React.FC<IPageHeaderProps> = (props) => {
   );
 };
 
-export default React.memo(PageHeader);
+export const PageHeader = React.memo(PageHeaderComponent);

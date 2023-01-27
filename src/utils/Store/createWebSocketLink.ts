@@ -3,7 +3,7 @@ import { createClient } from "graphql-ws";
 import { WebSocketPingPongInterval } from "../const";
 import { getCurrentHostWithoutProtocol } from "../URI/URI";
 
-function createWebSocketLink() {
+export function createWebSocketLink() {
   let wsProtocol = "ws:";
   if (window.location.protocol === "https:") {
     wsProtocol = "wss:";
@@ -22,5 +22,3 @@ function createWebSocketLink() {
     subscriptionClient,
   };
 }
-
-export default createWebSocketLink;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import type { ITableOwnProps, ITableProps, ITableState } from "./Table.types";
 import type { RenderExpandIconProps } from "rc-table/lib/interface";
 import { Table as AntTable, ConfigProvider } from "antd";
-import VirtualizedTable from "../VirtualizedTable/VirtualizedTable";
+import { VirtualizedTable } from "../VirtualizedTable/VirtualizedTable";
 import {
   isEmpty,
   some,
@@ -20,22 +20,22 @@ import {
   transparentBordersStyle,
 } from "./Table.styles";
 import { type Interpolation, withTheme } from "@emotion/react";
-import Empty from "../Empty/Empty";
+import { Empty } from "../Empty/Empty";
 import { observer } from "mobx-react";
-import TableContainer from "./TableComponents/TableContainer/TableContainer";
-import TableBodyRow from "./TableComponents/TableBodyRow/TableBodyRow";
-import TableBodyWrapper from "./TableComponents/TableBodyWrapper/TableBodyWrapper";
-import TableBodyCell from "./TableComponents/TableBodyCell/TableBodyCell";
-import TableHeaderRow from "./TableComponents/TableHeaderRow/TableHeaderRow";
-import TableHeaderCell from "./TableComponents/TableHeaderCell/TableHeaderCell";
-import TableHeaderWrapper from "./TableComponents/TableHeaderWrapper/TableHeaderWrapper";
-import TableExpandIcon from "./TableComponents/TableExpandIcon/TableExpandIcon";
-import TableCheckboxCell from "./TableComponents/TableCheckboxCell/TableCheckboxCell";
+import { TableContainer } from "./TableComponents/TableContainer/TableContainer";
+import { TableBodyRow } from "./TableComponents/TableBodyRow/TableBodyRow";
+import { TableBodyWrapper } from "./TableComponents/TableBodyWrapper/TableBodyWrapper";
+import { TableBodyCell } from "./TableComponents/TableBodyCell/TableBodyCell";
+import { TableHeaderRow } from "./TableComponents/TableHeaderRow/TableHeaderRow";
+import { TableHeaderCell } from "./TableComponents/TableHeaderCell/TableHeaderCell";
+import { TableHeaderWrapper } from "./TableComponents/TableHeaderWrapper/TableHeaderWrapper";
+import { TableExpandIcon } from "./TableComponents/TableExpandIcon/TableExpandIcon";
+import { TableCheckboxCell } from "./TableComponents/TableCheckboxCell/TableCheckboxCell";
 import { createSelector } from "reselect";
 import { TABLE_HEADER_ID, loaderDelay } from "../../utils/const";
 import { AutoSizer } from "react-virtualized";
 
-class Table<T extends TDictionary> extends Component<
+class TableComponent<T extends TDictionary> extends Component<
   ITableProps<T>,
   ITableState
 > {
@@ -346,8 +346,8 @@ class Table<T extends TDictionary> extends Component<
   }
 }
 
-const TableWithTheme = withTheme(observer(Table));
+const TableWithTheme = withTheme(observer(TableComponent));
 
-export default <T extends TDictionary>(props: ITableOwnProps<T>) => (
+export const Table = <T extends TDictionary>(props: ITableOwnProps<T>) => (
   <TableWithTheme {...props} />
 );

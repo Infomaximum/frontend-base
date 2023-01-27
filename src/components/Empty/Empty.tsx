@@ -22,7 +22,7 @@ import {
 import type { IEmptyProps } from "./Empty.types";
 import { isBoolean, isUndefined } from "lodash";
 
-const Empty: React.FC<IEmptyProps> = ({
+const EmptyComponent: React.FC<IEmptyProps> = ({
   isFiltersEmpty,
   isSearchEmpty,
   isTableComponent,
@@ -84,4 +84,4 @@ const Empty: React.FC<IEmptyProps> = ({
   );
 };
 
-export default Empty;
+export const Empty = EmptyComponent;

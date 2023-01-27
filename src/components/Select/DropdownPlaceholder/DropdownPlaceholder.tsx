@@ -22,7 +22,7 @@ import {
  * - Если нет контента по поисковой строке
  * - Если нет доступа
  */
-const DropdownPlaceholder: React.FC<IDropdownPlaceholderProps> = ({
+const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
   searchText,
   hasAccess = true,
 }) => {
@@ -59,4 +59,4 @@ const DropdownPlaceholder: React.FC<IDropdownPlaceholderProps> = ({
   );
 };
 
-export default DropdownPlaceholder;
+export const DropdownPlaceholder = DropdownPlaceholderComponent;

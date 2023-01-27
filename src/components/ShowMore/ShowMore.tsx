@@ -1,14 +1,14 @@
 import React from "react";
 import { ArrowDownOutlined } from "../Icons/Icons";
-import Button from "../Button/Button";
-import withLoc from "../../decorators/hocs/withLoc/withLoc";
+import { Button } from "../Button/Button";
+import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
 import { SHOW_MORE } from "../../utils/Localization/Localization";
 import type { IShowMoreProps } from "./ShowMore.types";
 import { tableShowMoreButtonTestId } from "../../utils/TestIds";
 import { buttonStyle, ghostButtonStyle } from "./ShowMore.styles";
 import { observer } from "mobx-react";
 
-class ShowMore extends React.PureComponent<IShowMoreProps> {
+class ShowMoreComponent extends React.PureComponent<IShowMoreProps> {
   public static defaultProps = {
     mode: "link",
   } as const;
@@ -46,4 +46,4 @@ class ShowMore extends React.PureComponent<IShowMoreProps> {
   }
 }
 
-export default withLoc(observer(ShowMore));
+export const ShowMore = withLoc(observer(ShowMoreComponent));

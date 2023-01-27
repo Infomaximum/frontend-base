@@ -1,2 +1,1 @@
-export { default as withFeature } from './withFeature';
-export * from './withFeature';
+export { withFeature } from "./withFeature";

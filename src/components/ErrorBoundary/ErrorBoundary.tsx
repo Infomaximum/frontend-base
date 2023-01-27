@@ -1,4 +1,4 @@
-import withModalError from "../../decorators/hocs/withModalError/withModalError";
+import { withModalError } from "../../decorators/hocs/withModalError/withModalError";
 import type { ComponentType, ErrorInfo } from "react";
 import { Component } from "react";
 import { ErrorHandling } from "@im/utils";
@@ -10,7 +10,7 @@ import type {
 
 const AppErrorHandlingService = new ErrorHandling();
 
-class ErrorBoundary extends Component<
+class ErrorBoundaryComponent extends Component<
   IErrorBoundaryProps,
   IErrorBoundaryState
 > {
@@ -74,7 +74,7 @@ class ErrorBoundary extends Component<
 }
 
 export const AppErrorBoundary = withModalError(
-  ErrorBoundary
+  ErrorBoundaryComponent
 ) as unknown as ComponentType<Omit<IAppErrorBoundaryProps, "showModalError">>;
 
-export default withModalError(ErrorBoundary);
+export const ErrorBoundary = withModalError(ErrorBoundaryComponent);

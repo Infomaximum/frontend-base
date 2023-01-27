@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState, FC } from "react";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
-import Checkbox from "../../components/Checkbox/Checkbox";
+import { Checkbox } from "../Checkbox/Checkbox";
 import type { IBannerProps } from "./Banner.types";
-import BannerContent from "./components/BannerContent/BannerContent";
-import Button from "../../components/Button/Button";
+import { BannerContent } from "./components/BannerContent/BannerContent";
+import { Button } from "../../components/Button/Button";
 import { DONT_SHOW_AGAIN, CLOSE } from "../../utils/Localization/Localization";
 import {
   bannerStyle,
@@ -12,7 +12,7 @@ import {
   animationBannerStyle,
   closeBannerAnimationDuration,
 } from "./Banner.styles";
-import BannerAlert from "./components/BannerAlert/BannerAlert";
+import { BannerAlert } from "./components/BannerAlert/BannerAlert";
 import { isFunction } from "lodash";
 import { MillisecondsPerSecond } from "@im/utils";
 import {
@@ -21,7 +21,7 @@ import {
 } from "../../utils/TestIds";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 
-const Banner: FC<IBannerProps> = ({
+const BannerComponent: FC<IBannerProps> = ({
   showDontShowAgain,
   content,
   onClose,
@@ -115,4 +115,4 @@ const Banner: FC<IBannerProps> = ({
   ) : null;
 };
 
-export default Banner;
+export const Banner = BannerComponent;

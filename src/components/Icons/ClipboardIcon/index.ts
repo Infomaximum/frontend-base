@@ -1,3 +1,1 @@
-export * from './ClipboardIcon';
-export * from './ClipboardIcon';
-export * from './ClipboardIcon';
+export { ClipboardIcon } from "./ClipboardIcon";

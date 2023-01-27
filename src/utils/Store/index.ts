@@ -1,7 +1,7 @@
-export * from "./Apollo";
-export * from "./AutoCompleteStore";
 export * from "./BaseStore";
 export * from "./Store";
 export * from "./TableStore";
-export { default as createUploadLink } from "./createUploadLink";
-export { default as createWebSocketLink } from "./createWebSocketLink";
+export * from "./AutoCompleteStore";
+export { apolloInstance } from "./Apollo";
+export { createUploadLink } from "./createUploadLink";
+export { createWebSocketLink } from "./createWebSocketLink";

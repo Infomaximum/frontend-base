@@ -4,7 +4,8 @@ import type { Store } from "../Store/Store/Store";
 import { assertSimple } from "@im/asserts";
 import type { Model } from "@im/models";
 
-export default (
+export const expandModelsStoreExt =
+  (
     itemWrapperField: string,
     itemsPath: string = "items"
   ): NStore.TPrepareDataFunc<Store<Model>> =>

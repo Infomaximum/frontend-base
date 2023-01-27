@@ -1,11 +1,11 @@
-import Alert from "../Alert/Alert";
+import { Alert } from "../Alert/Alert";
 import { notificationErrorTestId } from "../../utils/TestIds";
 import type { INotificationProps } from "./Notification.types";
 import { observer } from "mobx-react";
-import { useContext } from "react";
+import { FC, useContext } from "react";
 import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
 
-const Notification = ({ error }: INotificationProps) => {
+const NotificationComponent: FC<INotificationProps> = ({ error }) => {
   const isDebugMode = useContext(DebugModeContext);
 
   if (!error || (!error.code && !error.message && !error.title)) {
@@ -34,4 +34,4 @@ const Notification = ({ error }: INotificationProps) => {
   );
 };
 
-export default observer(Notification);
+export const Notification = observer(NotificationComponent);

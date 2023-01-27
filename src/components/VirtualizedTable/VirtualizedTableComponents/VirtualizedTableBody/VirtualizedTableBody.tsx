@@ -7,7 +7,7 @@ import { useTheme } from "../../../../decorators/hooks/useTheme";
 import { virtualizedTableBodyListStyle } from "./VirtualizedTableBody.styles";
 import type { IVirtualizedTableBodyProps } from "./VirtualizedTableBody.types";
 
-const VirtualizedTableBody: FC<IVirtualizedTableBodyProps> = ({
+const VirtualizedTableBodyComponent: FC<IVirtualizedTableBodyProps> = ({
   vListRef,
   rowRenderer,
   itemsCount,
@@ -51,4 +51,4 @@ const VirtualizedTableBody: FC<IVirtualizedTableBodyProps> = ({
   );
 };
 
-export default observer(VirtualizedTableBody);
+export const VirtualizedTableBody = observer(VirtualizedTableBodyComponent);

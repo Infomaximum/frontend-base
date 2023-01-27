@@ -9,7 +9,9 @@ export interface IWithThemeProps<T extends TThemeValue> {
   theme: T;
 }
 
-const withTheme: TPropInjector<IWithThemeProps<any>> = (Component: any) => {
+export const withTheme: TPropInjector<IWithThemeProps<any>> = (
+  Component: any
+) => {
   const WithTheme = (props: any) => (
     <Component
       {...props}
@@ -19,5 +21,3 @@ const withTheme: TPropInjector<IWithThemeProps<any>> = (Component: any) => {
 
   return hoistNonReactStatics(WithTheme, Component);
 };
-
-export default withTheme;

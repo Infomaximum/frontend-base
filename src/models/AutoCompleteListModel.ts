@@ -1,10 +1,10 @@
 import { Group, type Model } from "@im/models";
-import typenameToModel from "./typenameToModel";
+import { typenameToModel } from "./typenameToModel";
 
 /**
  * Модель автокомплита
  */
-class AutoCompleteListModel<M extends Model = Model> extends Group {
+export class AutoCompleteListModel<M extends Model = Model> extends Group {
   public static override get typename(): null {
     return null;
   }
@@ -20,5 +20,3 @@ class AutoCompleteListModel<M extends Model = Model> extends Group {
     return this.getNumberField("next_count") || 0;
   }
 }
-
-export default AutoCompleteListModel;

@@ -10,9 +10,9 @@ import {
   isUndefined,
 } from "lodash";
 import { runDfs } from "@im/utils";
-import TreeCounter from "./TreeCounter";
+import { TreeCounter } from "./TreeCounter";
 import type { NTableStore } from "../utils/Store/TableStore/TableStore.types";
-import RestModel from "../models/RestModel";
+import { RestModel } from "../models/RestModel";
 import { Group, IModel, Model } from "@im/models";
 import { assertSimple } from "@im/asserts";
 
@@ -55,7 +55,7 @@ type TModelUpdateParams<T extends TBaseRow = TBaseRow> = {
  * приведет к усложнению логики.
  */
 
-export default class Tree<T extends TBaseRow = TBaseRow> {
+export class TreeManager<T extends TBaseRow = TBaseRow> {
   // дерево, подготовленное для таблицы Ant
   public preparedTreeData: TExtendColumns<T>[] = [];
 

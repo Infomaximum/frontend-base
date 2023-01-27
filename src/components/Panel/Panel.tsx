@@ -3,7 +3,7 @@ import { Collapse } from "antd";
 import { panelCollapseStyle } from "./Panel.styles";
 import { useMemo } from "react";
 
-const Panel: React.FC<IPanelProps> = (props) => {
+const PanelComponent: React.FC<IPanelProps> = (props) => {
   const { panelStyle, testId, children, header, ...rest } = props;
 
   const wrappedHeader = useMemo(() => {
@@ -11,10 +11,14 @@ const Panel: React.FC<IPanelProps> = (props) => {
   }, [header, testId]);
 
   return (
-    <Collapse.Panel {...rest} header={wrappedHeader} css={[panelCollapseStyle, panelStyle]}>
+    <Collapse.Panel
+      {...rest}
+      header={wrappedHeader}
+      css={[panelCollapseStyle, panelStyle]}
+    >
       {children}
     </Collapse.Panel>
   );
 };
 
-export default Panel;
+export const Panel = PanelComponent;

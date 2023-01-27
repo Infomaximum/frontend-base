@@ -8,7 +8,7 @@ import { suffixIconSpinnerStyle } from "./AutoComplete.styles";
 import { suffixLoaderDelay } from "../../utils/const";
 import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
 
-const AutoComplete: FC<IAutoCompleteProps> = (props) => {
+const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
   const {
     dropdownRender,
     listItemHeight,
@@ -70,4 +70,7 @@ const AutoComplete: FC<IAutoCompleteProps> = (props) => {
   );
 };
 
-export default hoistNonReactStatics(AutoComplete, AntAutoComplete);
+export const AutoComplete = hoistNonReactStatics(
+  AutoCompleteComponent,
+  AntAutoComplete
+);

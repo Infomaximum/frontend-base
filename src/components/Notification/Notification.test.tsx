@@ -1,6 +1,6 @@
 import { Localization } from "@im/utils";
 import enzyme from "enzyme";
-import Notification from "./Notification";
+import { Notification } from "./Notification";
 import type { NCore } from "@im/core";
 import { ERROR, ERROR_MESSAGE } from "../../utils/Localization/Localization";
 

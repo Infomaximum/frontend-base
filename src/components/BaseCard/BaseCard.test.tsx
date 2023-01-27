@@ -1,5 +1,5 @@
 import { mount } from "enzyme";
-import BaseCard from "./BaseCard";
+import { BaseCard } from "./BaseCard";
 import { keyframes } from "@emotion/react";
 import { getRouterWrapper } from "../../utils/tests/wrappers";
 

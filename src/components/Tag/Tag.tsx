@@ -9,9 +9,9 @@ import {
 } from "./Tag.styles";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { get } from "lodash";
-import Tooltip from "../Tooltip/Tooltip";
+import { Tooltip } from "../Tooltip/Tooltip";
 
-const Tag: FC<ITagProps> = (props) => {
+const TagComponent: FC<ITagProps> = (props) => {
   const theme = useTheme();
 
   const { tagsStyles } = theme;
@@ -59,4 +59,4 @@ const Tag: FC<ITagProps> = (props) => {
   );
 };
 
-export default Tag;
+export const Tag = TagComponent;

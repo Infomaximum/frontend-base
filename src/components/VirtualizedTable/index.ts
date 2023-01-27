@@ -1,9 +1,3 @@
-export * from "./VirtualizedTable";
-export * from "./VirtualizedTable";
-export * from "./VirtualizedTable";
-export * from "./VirtualizedTable";
-export * from "./VirtualizedTableComponents/VirtualizedTableBody";
-export * from "./VirtualizedTableComponents/VirtualizedTableBodyCell";
-export * from "./VirtualizedTableComponents/VirtualizedTableBodyRow";
-export * from "./VirtualizedTableComponents/VirtualizedTableHeaderCell";
-export * from "./VirtualizedTableComponents/VirtualizedTableHeaderRow";
+export { VirtualizedTable } from "./VirtualizedTable";
+
+export * from "./VirtualizedTableComponents";

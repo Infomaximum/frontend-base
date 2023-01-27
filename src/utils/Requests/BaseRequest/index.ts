@@ -1,2 +1,1 @@
-export * from './BaseRequest';
-export * from './BaseRequest';
+export { BaseRequest } from "./BaseRequest";

@@ -37,7 +37,7 @@ const mapTreeData = (
   });
 };
 
-const Tree: React.FC<ITreeProps> & {
+const TreeComponent: React.FC<ITreeProps> & {
   SwitcherIcon: React.ReactElement;
   DisabledNodeClassName: string;
   UnselectableNodeClassName: string;
@@ -46,7 +46,7 @@ const Tree: React.FC<ITreeProps> & {
 
   return (
     <AntTree
-      switcherIcon={Tree.SwitcherIcon}
+      switcherIcon={TreeComponent.SwitcherIcon}
       {...props}
       treeData={treeData}
       css={treeStyle}
@@ -54,13 +54,13 @@ const Tree: React.FC<ITreeProps> & {
   );
 };
 
-Tree.SwitcherIcon = (
+TreeComponent.SwitcherIcon = (
   <span css={treeSwitcherIconContainerStyle}>
     <DownOutlined css={treeSwitcherIconStyle} />
   </span>
 );
 
-Tree.DisabledNodeClassName = "disabled-node-tree";
-Tree.UnselectableNodeClassName = "unselectable-node-tree";
+TreeComponent.DisabledNodeClassName = "disabled-node-tree";
+TreeComponent.UnselectableNodeClassName = "unselectable-node-tree";
 
-export default Tree;
+export const Tree = TreeComponent;

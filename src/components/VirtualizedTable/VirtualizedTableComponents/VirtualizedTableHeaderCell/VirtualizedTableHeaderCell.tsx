@@ -25,7 +25,7 @@ const getSorterArrowStyle = (isUp: boolean, isActive: boolean) => {
   return isActive ? sorterArrowDownActiveStyle : sorterArrowDownStyle;
 };
 
-const VirtualizedTableHeaderCell = <T extends TDictionary>(
+const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
   props: IVirtualizedTableHeaderCellProps<T>
 ) => {
   const { column, onSorterChange, columnsOrders, isSorted, sortOrder } = props;
@@ -89,8 +89,10 @@ const VirtualizedTableHeaderCell = <T extends TDictionary>(
   );
 };
 
-const MemoVirtualizedTableHeaderCell = memo(VirtualizedTableHeaderCell);
+const MemoVirtualizedTableHeaderCell = memo(
+  VirtualizedTableHeaderCellComponent
+);
 
-export default <T extends TDictionary>(
+export const VirtualizedTableHeaderCell = <T extends TDictionary>(
   props: IVirtualizedTableHeaderCellProps<T>
 ) => <MemoVirtualizedTableHeaderCell {...props} />;

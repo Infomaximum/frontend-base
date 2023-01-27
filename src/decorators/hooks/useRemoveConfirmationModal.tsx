@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Deferred } from "@im/utils";
 import type { TLocalizationDescription } from "@im/utils";
 import { useLocalization } from "./useLocalization";
-import RemoveConfirmationModal from "../../components/modals/RemoveConfirmationModal/RemoveConfirmationModal";
+import { RemoveConfirmationModal } from "../../components/modals/RemoveConfirmationModal/RemoveConfirmationModal";
 
 type TRemoveConfirmationParams<T> = {
   /** Колбек который будет вызван после подтверждения удаления данных */

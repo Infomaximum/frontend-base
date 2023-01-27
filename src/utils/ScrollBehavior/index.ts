@@ -1,2 +1,1 @@
-export * from './ScrollBehavior';
-export * from './ScrollBehavior';
+export { ScrollBehavior, globalScrollBehavior } from "./ScrollBehavior";

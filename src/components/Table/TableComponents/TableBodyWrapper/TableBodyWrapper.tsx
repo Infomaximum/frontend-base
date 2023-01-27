@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { ITableBodyWrapperProps } from "./TableBodyWrapper.types";
 
-const TableBodyWrapper: React.FC<ITableBodyWrapperProps> = forwardRef(
+const TableBodyWrapperComponent: React.FC<ITableBodyWrapperProps> = forwardRef(
   ({ children, ...restProps }, ref: React.Ref<HTMLTableSectionElement>) => {
     return (
       <tbody {...restProps} ref={ref}>
@@ -11,4 +11,4 @@ const TableBodyWrapper: React.FC<ITableBodyWrapperProps> = forwardRef(
   }
 );
 
-export default TableBodyWrapper;
+export const TableBodyWrapper = TableBodyWrapperComponent;

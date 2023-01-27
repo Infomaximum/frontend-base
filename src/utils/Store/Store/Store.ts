@@ -2,7 +2,7 @@
 import type { NCore } from "@im/core";
 import { get, isArray, isNil, reduce } from "lodash";
 import { action, computed, makeObservable, observable } from "mobx";
-import typenameToModel from "../../../models/typenameToModel";
+import { typenameToModel } from "../../../models/typenameToModel";
 import type { TInferredVariables } from "@im/utils";
 import { BaseRequest } from "../../Requests/BaseRequest/BaseRequest";
 import { BaseErrorHandler } from "../../ErrorHandlers/BaseErrorHandler/BaseErrorHandler";

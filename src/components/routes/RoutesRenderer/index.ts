@@ -1,2 +1,1 @@
-export { default as RoutesRenderer } from './RoutesRenderer';
-export * from './RoutesRenderer';
+export { RoutesRenderer } from "./RoutesRenderer";

@@ -19,15 +19,15 @@ import {
   interleaveWith,
 } from "./Breadcrumbs.utils";
 import { Menu } from "antd";
-import Dropdown from "../Dropdown/Dropdown";
+import { Dropdown } from "../Dropdown/Dropdown";
 import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
-import EllipsisTooltip from "../EllipsisTooltip/EllipsisTooltip";
-import Tooltip from "../Tooltip/Tooltip";
+import { EllipsisTooltip } from "../EllipsisTooltip/EllipsisTooltip";
+import { Tooltip } from "../Tooltip/Tooltip";
 import { useNavigate } from "react-router";
 import { ellipsisStyle } from "../../styles/common.styles";
 
 // "Хлебные крошки" для нового списка сотрудников, который еще не реализован
-const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
+const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
   items,
   visibleCount,
   homePath,
@@ -150,4 +150,4 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
   );
 };
 
-export default Breadcrumbs;
+export const Breadcrumbs = BreadcrumbsComponent;

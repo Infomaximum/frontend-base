@@ -8,7 +8,7 @@ import {
 } from "./RestLoadingIndicator.styles";
 import type { IRestLoadingIndicatorProps } from "./RestLoadingIndicator.types";
 
-const RestLoadingIndicator: React.FC<IRestLoadingIndicatorProps> = ({
+const RestLoadingIndicatorComponent: React.FC<IRestLoadingIndicatorProps> = ({
   currentCount,
   totalCount,
 }) => {
@@ -31,4 +31,4 @@ const RestLoadingIndicator: React.FC<IRestLoadingIndicatorProps> = ({
   );
 };
 
-export default RestLoadingIndicator;
+export const RestLoadingIndicator = RestLoadingIndicatorComponent;

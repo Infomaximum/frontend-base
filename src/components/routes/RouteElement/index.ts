@@ -1,2 +1,1 @@
-export { default as RouteElement } from './RouteElement';
-export * from './RouteElement';
+export { RouteElement } from "./RouteElement";

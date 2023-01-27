@@ -1,2 +1,1 @@
-export { default as Redirect } from './Redirect';
-export * from './Redirect';
+export { Redirect } from "./Redirect";

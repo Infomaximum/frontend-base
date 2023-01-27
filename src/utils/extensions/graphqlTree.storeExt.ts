@@ -121,7 +121,7 @@ function getRestItemStruct(nextCount: number) {
 /**
  * Подменяет getData, формируя из плоских данных дерево
  */
-const graphqlTree =
+export const graphqlTreeStoreExt =
   (params: TTreeBuilderParams): NStore.TPrepareDataFunc<Store<Model>> =>
   ({ data }) =>
     data
@@ -131,5 +131,3 @@ const graphqlTree =
           __typename: params.groupTypename,
         }
       : data;
-
-export default graphqlTree;

@@ -1,1 +1,1 @@
-export { default as withLoc } from './withLoc';
+export { withLoс } from "./withLoc";

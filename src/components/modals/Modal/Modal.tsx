@@ -14,7 +14,7 @@ export const getBoldTitleModal = createSelector(
   )
 );
 
-const Modal: React.FC<IModalProps> = (props) => {
+const ModalComponent: React.FC<IModalProps> = (props) => {
   const { title, ...rest } = props;
 
   const boldTitle = useMemo(
@@ -36,4 +36,4 @@ const Modal: React.FC<IModalProps> = (props) => {
   );
 };
 
-export default Modal;
+export const Modal = ModalComponent;

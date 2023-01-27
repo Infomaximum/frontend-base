@@ -1,4 +1,3 @@
-export * from "./Table";
-export * from "./Table";
-export * from "./Table";
+export { Table } from "./Table";
+
 export * from "./TableComponents";

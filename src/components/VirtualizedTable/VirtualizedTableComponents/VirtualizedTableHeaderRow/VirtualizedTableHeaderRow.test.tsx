@@ -1,6 +1,6 @@
 import enzyme from "enzyme";
 import { Localization } from "@im/utils";
-import VirtualizedTableHeaderRow from "./VirtualizedTableHeaderRow";
+import { VirtualizedTableHeaderRow } from "./VirtualizedTableHeaderRow";
 import type { ColumnType, SortOrder } from "antd/lib/table/interface";
 import { ERROR_MESSAGE } from "../../../../utils/Localization/Localization";
 import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";

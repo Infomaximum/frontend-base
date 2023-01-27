@@ -1,4 +1,4 @@
-import AutoCompleteListModel from "../../../models/AutoCompleteListModel";
+import { AutoCompleteListModel } from "../../../models/AutoCompleteListModel";
 import { forEach } from "lodash";
 import { computed, makeObservable, override } from "mobx";
 import { Store } from "../Store/Store";
@@ -22,7 +22,7 @@ type TPrivateAutoCompleteStoreField = "receiveData";
  * })
  *
  */
-class AutoCompleteStore<
+export class AutoCompleteStore<
   M extends AutoCompleteListModel = AutoCompleteListModel
 > extends Store<M> {
   constructor(params: NStore.TStoreParams<AutoCompleteStore<M>>) {
@@ -93,5 +93,3 @@ class AutoCompleteStore<
     this.requestData({ variables });
   }
 }
-
-export default AutoCompleteStore;

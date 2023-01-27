@@ -1,5 +1,5 @@
-import Button from "../../../../components/Button/Button";
-import Modal from "../../../../components/modals/Modal/Modal";
+import { Button } from "../../../Button/Button";
+import { Modal } from "../../../modals/Modal/Modal";
 import { useLocalization } from "../../../../decorators/hooks/useLocalization";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../../../utils/Localization/Localization";
 import { memo, useMemo } from "react";
 import MarkdownView from "react-showdown";
-import { CloseOutlined } from "../../../../components/Icons/Icons";
+import { CloseOutlined } from "../../../Icons/Icons";
 import {
   bannerContentModalBodyStyle,
   bannerContentModalParagraphStyle,
@@ -16,7 +16,7 @@ import {
 import type { IBannerContentModalProps } from "./BannerContentModal.types";
 import { closeModalIconStyle } from "../../../../styles/common.styles";
 
-const BannerContentModal: React.FC<IBannerContentModalProps> = ({
+const BannerContentModalComponent: React.FC<IBannerContentModalProps> = ({
   visible,
   onCancel,
   md,
@@ -66,4 +66,4 @@ const BannerContentModal: React.FC<IBannerContentModalProps> = ({
   );
 };
 
-export default memo(BannerContentModal);
+export const BannerContentModal = memo(BannerContentModalComponent);

@@ -1,2 +1,1 @@
-export { default as withModalError } from './withModalError';
-export * from './withModalError';
+export { withModalError } from "./withModalError";

@@ -1,1 +1,1 @@
-export { default as AutoCompleteStore } from './AutoCompleteStore';
+export { AutoCompleteStore } from "./AutoCompleteStore";

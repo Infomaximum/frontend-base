@@ -1,11 +1,11 @@
 import { forEach, isNumber } from "lodash";
 import { Group, type IModel } from "@im/models";
-import RestModel from "../models/RestModel";
+import { RestModel } from "../models/RestModel";
 
 /**
  * Класс, рассчитывающий количество элементов в дереве по разным критериям
  */
-class TreeCounter {
+export class TreeCounter {
   /**
    * Флаг выделения всех элементов
    */
@@ -69,5 +69,3 @@ class TreeCounter {
     });
   }
 }
-
-export default TreeCounter;

@@ -18,7 +18,7 @@ import Icon, {
   ExclamationCircleFilled,
 } from "../../components/Icons/Icons";
 
-const Alert: React.FC<IAlertProps> = (props) => {
+const AlertComponent: React.FC<IAlertProps> = (props) => {
   const icon = useMemo(() => {
     let iconComponent: React.FC;
     switch (props.type) {
@@ -91,4 +91,4 @@ const Alert: React.FC<IAlertProps> = (props) => {
   );
 };
 
-export default React.memo(Alert);
+export const Alert = React.memo(AlertComponent);

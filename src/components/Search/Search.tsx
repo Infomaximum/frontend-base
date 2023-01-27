@@ -1,6 +1,6 @@
 import React from "react";
 import type { ISearchProps, ISearchState } from "./Search.types";
-import Input from "../Input/Input";
+import { Input } from "../Input/Input";
 import { isString, isFunction } from "lodash";
 import { KeyupRequestInterval } from "../../utils/const";
 import { SearchOutlined } from "../Icons/Icons";
@@ -11,7 +11,7 @@ import {
 } from "./Search.style";
 import type { Interpolation } from "@emotion/react";
 
-class Search extends React.PureComponent<ISearchProps, ISearchState> {
+class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   public static defaultProps = {
     allowClear: true,
     size: "middle",
@@ -99,4 +99,4 @@ class Search extends React.PureComponent<ISearchProps, ISearchState> {
   }
 }
 
-export default Search;
+export const Search = SearchComponent;

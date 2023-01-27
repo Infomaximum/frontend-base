@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { ITableBodyRowProps } from "./TableBodyRow.types";
 
-const TableBodyRow: React.FC<ITableBodyRowProps> = forwardRef(
+const TableBodyRowComponent: React.FC<ITableBodyRowProps> = forwardRef(
   ({ children, ...restProps }, ref: React.Ref<HTMLTableRowElement>) => {
     return (
       <tr {...restProps} ref={ref}>
@@ -11,4 +11,4 @@ const TableBodyRow: React.FC<ITableBodyRowProps> = forwardRef(
   }
 );
 
-export default TableBodyRow;
+export const TableBodyRow = TableBodyRowComponent;

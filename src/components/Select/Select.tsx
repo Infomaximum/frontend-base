@@ -25,7 +25,7 @@ import {
   tagStyle,
 } from "./Select.styles";
 import type { ISelectProps } from "./Select.types";
-import Tag from "../Tag/Tag";
+import { Tag } from "../Tag/Tag";
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import type { ArrayInterpolation } from "@emotion/react";
 import ArrowDownSVG from "../../resources/icons/ArrowDown.svg";
@@ -65,7 +65,7 @@ import type { BaseSelectRef } from "rc-select";
 
 const { OptGroup, Option } = AntSelect;
 
-const Select = <T extends SelectValue = SelectValue>({
+const SelectComponent = <T extends SelectValue = SelectValue>({
   dropdownPlacement = "left",
   suffixIcon: suffixIconProps,
   disabled,
@@ -373,7 +373,7 @@ const Select = <T extends SelectValue = SelectValue>({
   );
 };
 
-Select.Option = Option;
-Select.OptGroup = OptGroup;
+SelectComponent.Option = Option;
+SelectComponent.OptGroup = OptGroup;
 
-export default Select;
+export const Select = SelectComponent;

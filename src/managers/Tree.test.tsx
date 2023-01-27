@@ -1,7 +1,7 @@
-import Tree from "./Tree";
+import { TreeManager } from "./Tree";
 import { InvalidIndex } from "@im/utils";
 import { buildTreeFromList } from "../utils/extensions/graphqlTree.storeExt";
-import RestModel from "../models/RestModel";
+import { RestModel } from "../models/RestModel";
 import { cloneDeep, set, unset, xor } from "lodash";
 import {
   Group,
@@ -190,7 +190,7 @@ function assertContainSameElements(arr1: any[], arr2: any[]) {
   expect(xor(arr1, arr2)).toHaveLength(0);
 }
 
-const testState = (tree: Tree, expectedState: TExpectedState) => {
+const testState = (tree: TreeManager, expectedState: TExpectedState) => {
   const checkedState = tree.getCheckedStateDispatchData();
 
   assertContainSameElements(
@@ -213,9 +213,9 @@ const testState = (tree: Tree, expectedState: TExpectedState) => {
   });
 };
 
-describe("Тесты методов класса 'Tree'", () => {
+describe("Тесты методов класса 'TreeManager'", () => {
   it("Выделение группы с 'Показать ещё'", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -253,7 +253,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Выделение группы без 'Показать ещё'", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -288,7 +288,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Выделение всего списка с 'Показать ещё'", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -302,7 +302,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Выделение всего списка без 'Показать ещё'", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -316,7 +316,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Очистка выделенных элементов", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -329,7 +329,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Раскрытие невыделенного 'Показать ещё' в группе", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -362,7 +362,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Выделение элементов при раскрытии 'Показать ещё' в группе", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -397,7 +397,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Выделение элементов, найденных в 'Показать ещё', если группа была выделена", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -434,7 +434,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Выделение элементов при раскрытии 'Показать ещё' в корне списка", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -451,7 +451,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Раскрытие невыделенного 'Показать ещё' в корне списка", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -474,7 +474,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("'Показать ещё' в отфильтрованном дереве никогда не выделяется", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -496,7 +496,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Удаление выделения с элементов при удалении самих элементов", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -540,7 +540,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Выделение элементов по умолчанию (defaultCheckedModels)", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -572,7 +572,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Получение ключей групп, которые должны быть раскрытыми", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: false,
@@ -585,7 +585,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Получение ключей групп, которые должны быть раскрытыми при групповом выделении", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
@@ -598,7 +598,7 @@ describe("Тесты методов класса 'Tree'", () => {
   });
 
   it("Снятое выделение не возвращается к элементу при удалении фильтров [PT-12905]", () => {
-    const tree = new Tree({
+    const tree = new TreeManager({
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,

@@ -1,6 +1,6 @@
 import React from "react";
 import { generatePath } from "react-router-dom";
-import Redirect from "../../../components/routes/Redirect/Redirect";
+import { Redirect } from "../../../components/routes/Redirect/Redirect";
 import { useParams } from "react-router";
 
 export const withRedirect = (redirectPath: string) => () => {

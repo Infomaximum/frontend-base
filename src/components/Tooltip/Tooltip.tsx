@@ -11,7 +11,7 @@ import {
 const tooltipOffset = [0, 2];
 const align = { offset: tooltipOffset };
 
-const Tooltip: FC<ITooltipProps> = ({
+const TooltipComponent: FC<ITooltipProps> = ({
   placement,
   overlayInnerStyle: overlayInnerStyleProp,
   overlayStyle: overlayStyleProp,
@@ -51,4 +51,4 @@ const Tooltip: FC<ITooltipProps> = ({
   );
 };
 
-export default Tooltip;
+export const Tooltip = TooltipComponent;

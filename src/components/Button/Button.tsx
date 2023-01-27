@@ -14,9 +14,9 @@ import {
   primaryNotificationButtonStyle,
 } from "./Button.styles";
 import type { Interpolation } from "@emotion/react";
-import Tooltip from "../../components/Tooltip/Tooltip";
+import { Tooltip } from "../../components/Tooltip/Tooltip";
 
-const Button: React.FC<IButtonProps> = React.forwardRef(
+const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
   (props, ref: React.Ref<HTMLButtonElement>) => {
     const { type: typeProps, ...rest } = props;
     const onlyIcon = !props.children;
@@ -82,8 +82,8 @@ const Button: React.FC<IButtonProps> = React.forwardRef(
   }
 );
 
-Button.defaultProps = {
+ButtonComponent.defaultProps = {
   type: "ghost",
 };
 
-export default memo(Button);
+export const Button = memo(ButtonComponent);

@@ -1,2 +1,1 @@
-export * from './BaseStore';
-export * from './BaseStore';
+export { BaseStore } from "./BaseStore";

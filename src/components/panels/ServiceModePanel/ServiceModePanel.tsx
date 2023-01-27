@@ -3,7 +3,7 @@ import type { IServiceModePanelProps } from "./ServiceModePanel.types";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { SERVICE_MODE } from "../../../utils/Localization/Localization";
 import { authorizationServiceModePanelTestId } from "../../../utils/TestIds";
-import Banner from "../../Banner/Banner";
+import { Banner } from "../../Banner/Banner";
 import { useTheme } from "../../../decorators/hooks/useTheme";
 import { WarningOutlined } from "../../Icons/Icons";
 import {
@@ -12,7 +12,7 @@ import {
   iconStyle,
 } from "./ServiceModePanel.styles";
 
-const ServiceModePanel: React.FC<IServiceModePanelProps> = ({
+const ServiceModePanelComponent: React.FC<IServiceModePanelProps> = ({
   serviceModeMessage,
 }) => {
   const localization = useLocalization();
@@ -38,4 +38,4 @@ const ServiceModePanel: React.FC<IServiceModePanelProps> = ({
   );
 };
 
-export default memo(ServiceModePanel);
+export const ServiceModePanel = memo(ServiceModePanelComponent);

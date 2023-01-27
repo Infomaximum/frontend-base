@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from "react";
 import type { IInlineTagsProps } from "./InlineTags.types";
-import Tooltip from "../../../components/Tooltip/Tooltip";
+import { Tooltip } from "../../../components/Tooltip/Tooltip";
 import { map, last, join, take, drop } from "lodash";
 import {
   containerStyle,
@@ -13,9 +13,12 @@ import {
   outerEllipsisText,
   tooltipSeparator,
 } from "./InlineTags.utils";
-import Tag from "../../../components/Tag/Tag";
+import { Tag } from "../../../components/Tag/Tag";
 
-const InlineTags: React.FC<IInlineTagsProps> = ({ tags, measuredWidth }) => {
+const InlineTagsComponent: React.FC<IInlineTagsProps> = ({
+  tags,
+  measuredWidth,
+}) => {
   const [placedTags, outsideTags] = useMemo(() => {
     const numberOfPlacedTags = getNumberOfPlacedTags(tags, measuredWidth);
 
@@ -64,4 +67,4 @@ const InlineTags: React.FC<IInlineTagsProps> = ({ tags, measuredWidth }) => {
   );
 };
 
-export default memo(InlineTags);
+export const InlineTags = memo(InlineTagsComponent);

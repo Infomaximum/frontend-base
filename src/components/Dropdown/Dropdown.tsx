@@ -22,7 +22,7 @@ import {
  * Обертка, позволяющая дольше сохранять положение снизу за счет сжатия.
  * Игнорирует переданный вертикальный `placement`: компонент сам управляет вертикальным положением.
  */
-const Dropdown: React.FC<IDropdownProps> = ({
+const DropdownComponent: React.FC<IDropdownProps> = ({
   children: button,
   overlay,
   visible,
@@ -102,4 +102,4 @@ const Dropdown: React.FC<IDropdownProps> = ({
   );
 };
 
-export default memo(Dropdown);
+export const Dropdown = memo(DropdownComponent);

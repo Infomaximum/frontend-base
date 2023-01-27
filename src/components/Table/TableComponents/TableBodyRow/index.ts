@@ -1,2 +1,1 @@
-export { default as TableBodyRow } from './TableBodyRow';
-export * from './TableBodyRow';
+export { TableBodyRow } from "./TableBodyRow";

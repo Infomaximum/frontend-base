@@ -1,11 +1,11 @@
 import React from "react";
 import { render, screen, getByText } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Select from "./Select";
+import { Select } from "./Select";
 import "@testing-library/jest-dom";
 import type { ISelectProps } from "./Select.types";
 import { mapChildrenToOptions } from "./Select.utils";
-import Tooltip from "../Tooltip/Tooltip";
+import { Tooltip } from "../Tooltip/Tooltip";
 import { textWrapperStyle } from "./Select.styles";
 
 enum EElement {

@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { ExclamationCircleFilled } from "../Icons/Icons";
 import { Row, Col, Popover } from "antd";
-import Button from "../Button/Button";
-import withLoc from "../../decorators/hocs/withLoc/withLoc";
+import { Button } from "../Button/Button";
+import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
 import type { IConfirmPopoverProps } from "./ConfirmPopover.types";
 import { CANCEL, CONFIRM } from "../../utils/Localization/Localization";
 import {
@@ -17,7 +17,7 @@ import {
 
 const buttonsSize = "small";
 
-const ConfirmPopover: React.FC<IConfirmPopoverProps> = ({
+const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
   localization,
   loading,
   okText,
@@ -77,4 +77,4 @@ const ConfirmPopover: React.FC<IConfirmPopoverProps> = ({
   );
 };
 
-export default withLoc(ConfirmPopover);
+export const ConfirmPopover = withLoc(ConfirmPopoverComponent);

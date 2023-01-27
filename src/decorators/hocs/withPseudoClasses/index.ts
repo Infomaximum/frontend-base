@@ -1,1 +1,1 @@
-export { default as withPseudoClasses } from './withPseudoClasses';
+export { withPseudoClasses } from "./withPseudoClasses";

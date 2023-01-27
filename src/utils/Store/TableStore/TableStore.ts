@@ -28,7 +28,7 @@ type TPrivateTableStoreField =
  * })
  *
  */
-class TableStore<M extends Model = never> extends Store<M> {
+export class TableStore<M extends Model = never> extends Store<M> {
   private _checkedState: NTableStore.TCheckedRows = {};
   protected _expandedState: string[] = [];
   private _showMore: NTableStore.TShowMore = {};
@@ -154,5 +154,3 @@ class TableStore<M extends Model = never> extends Store<M> {
     return this._isTree;
   }
 }
-
-export default TableStore;

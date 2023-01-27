@@ -69,5 +69,3 @@ export const withPseudoClasses: TPropInjector<IWithPseudoClassesProps> = (
 
   return hoistNonReactStatics(Class, Component);
 };
-
-export default withPseudoClasses;

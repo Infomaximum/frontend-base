@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from "react";
 import { Menu } from "antd";
-import Dropdown from "../../components/Dropdown/Dropdown";
+import { Dropdown } from "../Dropdown/Dropdown";
 import type { MenuProps, SubMenuProps } from "antd/lib/menu";
-import withFeature from "../../decorators/hocs/withFeature/withFeature";
+import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import {
   wrapperContextMenuStyle,
   threeDotsButtonStyle,
@@ -25,14 +25,14 @@ import {
   contextMenuDropDownBtnTestId,
 } from "../../utils/TestIds";
 import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
-import Button from "../../components/Button/Button";
+import { Button } from "../Button/Button";
 import type { ItemType } from "antd/lib/menu/hooks/useItems";
 import { useFeature } from "../../decorators/hooks/useFeature";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { sortByPriority } from "../../utils/Routes/routes";
 import { isShowElement } from "../../utils/access";
 import { sortByTitle } from "../../utils/sortings";
-import withTheme from "../../decorators/hocs/withTheme/withTheme";
+import { withTheme } from "../../decorators/hocs/withTheme/withTheme";
 
 const dropdownTrigger: ["click"] = ["click"];
 
@@ -49,7 +49,7 @@ const isSubMenu = (item: TContextMenuParamItem): item is IContextSubMenuParam =>
 
 const subMenuPopupOffset: SubMenuProps["popupOffset"] = [0, -4];
 
-const ContextMenu: React.FC<IContextMenuProps> = (props) => {
+const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   const {
     placement,
     content,
@@ -223,4 +223,4 @@ const ContextMenu: React.FC<IContextMenuProps> = (props) => {
   );
 };
 
-export default withFeature(withTheme(ContextMenu));
+export const ContextMenu = withFeature(withTheme(ContextMenuComponent));

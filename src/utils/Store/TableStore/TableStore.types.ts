@@ -1,9 +1,9 @@
 import type { IModel } from "@im/models";
-import type TreeCounter from "../../../managers/TreeCounter";
+import type { TreeCounter } from "../../../managers/TreeCounter";
 import type { ELimitsStateNames } from "../../../utils/const";
 import type { NStore } from "../Store/Store.types";
-import type RestModel from "../../../models/RestModel";
-import type TableStore from "./TableStore";
+import type { RestModel } from "../../../models/RestModel";
+import type { TableStore } from "./TableStore";
 
 export declare namespace NTableStore {
   type TTableStoreParams<S extends TableStore<any>> = NStore.TStoreParams<S> & {

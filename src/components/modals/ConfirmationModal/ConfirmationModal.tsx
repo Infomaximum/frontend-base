@@ -1,6 +1,6 @@
 import { useState, FC, useMemo, useCallback, useRef, useEffect } from "react";
-import Button from "../../Button/Button";
-import Modal from "../../modals/Modal/Modal";
+import { Button } from "../../Button/Button";
+import { Modal } from "../../modals/Modal/Modal";
 import {
   APPLY,
   CANCEL,
@@ -28,7 +28,7 @@ import type { IConfirmationModalProps } from "./ConfirmationModal.types";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useTheme } from "../../../decorators/hooks/useTheme";
 
-const ConfirmationModal: FC<IConfirmationModalProps> = (props) => {
+const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
   const {
     buttonOkType = "primary",
     disabledConfirmButton = false,
@@ -166,4 +166,4 @@ const ConfirmationModal: FC<IConfirmationModalProps> = (props) => {
   );
 };
 
-export default ConfirmationModal;
+export const ConfirmationModal = ConfirmationModalComponent;

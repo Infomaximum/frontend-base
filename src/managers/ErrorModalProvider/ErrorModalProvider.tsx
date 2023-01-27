@@ -1,6 +1,7 @@
 import type { NCore } from "@im/core";
-import ErrorModalContext, {
-  IErrorModalContextContextData,
+import {
+  ErrorModalContext,
+  type IErrorModalContextContextData,
 } from "../../decorators/contexts/ErrorModalContext";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
@@ -12,7 +13,7 @@ import type {
   IErrorModalProviderProps,
 } from "./ErrorModalProvider.types";
 
-const ErrorModalProvider: FC<IErrorModalProviderProps> = ({
+export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({
   children,
   isDebugMode,
 }) => {
@@ -87,5 +88,3 @@ const ErrorModalProvider: FC<IErrorModalProviderProps> = ({
     </ErrorModalContext.Provider>
   );
 };
-
-export default ErrorModalProvider;

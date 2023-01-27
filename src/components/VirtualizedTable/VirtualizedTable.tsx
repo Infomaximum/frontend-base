@@ -30,14 +30,14 @@ import {
   virtualizedTableTestId,
 } from "../../utils/TestIds";
 import { ESortDirection } from "../../utils/const";
-import VirtualizedTableHeaderRow from "./VirtualizedTableComponents/VirtualizedTableHeaderRow/VirtualizedTableHeaderRow";
-import VirtualizedTableBodyRow from "./VirtualizedTableComponents/VirtualizedTableBodyRow/VirtualizedTableBodyRow";
-import VirtualizedTableBody from "./VirtualizedTableComponents/VirtualizedTableBody/VirtualizedTableBody";
+import { VirtualizedTableHeaderRow } from "./VirtualizedTableComponents/VirtualizedTableHeaderRow/VirtualizedTableHeaderRow";
+import { VirtualizedTableBodyRow } from "./VirtualizedTableComponents/VirtualizedTableBodyRow/VirtualizedTableBodyRow";
+import { VirtualizedTableBody } from "./VirtualizedTableComponents/VirtualizedTableBody/VirtualizedTableBody";
 import { assertSimple } from "@im/asserts";
 import type { SorterResult, SortOrder } from "antd/lib/table/interface";
 import { borderTopStyle } from "../Table/Table.styles";
 import { observer } from "mobx-react";
-import RestModel from "../../models/RestModel";
+import { RestModel } from "../../models/RestModel";
 import { withSpinPropsReplacer } from "./VirtualizedTable.utils";
 
 const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [
@@ -49,7 +49,7 @@ const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [
  * Таблица для виртуализированной отрисовки больших данных, стилизованная под AntTable и
  * реализующая часть интерфейса AntTable.
  */
-class VirtualizedTable<T extends TRow> extends PureComponent<
+class VirtualizedTableComponent<T extends TRow> extends PureComponent<
   IVirtualizedTableProps<T | null>,
   IVirtualizedTableState<T | null>
 > {
@@ -458,4 +458,6 @@ class VirtualizedTable<T extends TRow> extends PureComponent<
   }
 }
 
-export default observer(withSpinPropsReplacer(VirtualizedTable));
+export const VirtualizedTable = observer(
+  withSpinPropsReplacer(VirtualizedTableComponent)
+);

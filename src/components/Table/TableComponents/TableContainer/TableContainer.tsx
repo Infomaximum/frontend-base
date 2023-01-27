@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { ITableContainerProps } from "./TableContainer.types";
 
-const TableContainer: React.FC<ITableContainerProps> = forwardRef(
+const TableContainerComponent: React.FC<ITableContainerProps> = forwardRef(
   ({ children, ...restProps }, ref: React.Ref<HTMLTableElement>) => {
     return (
       <table {...restProps} ref={ref}>
@@ -11,4 +11,4 @@ const TableContainer: React.FC<ITableContainerProps> = forwardRef(
   }
 );
 
-export default TableContainer;
+export const TableContainer = TableContainerComponent;

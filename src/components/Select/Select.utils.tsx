@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, RefObject, useEffect } from "react";
-import Select from "./Select";
-import Tooltip from "../Tooltip/Tooltip";
+import { Select } from "./Select";
+import { Tooltip } from "../Tooltip/Tooltip";
 import {
   find,
   has,

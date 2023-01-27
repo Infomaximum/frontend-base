@@ -10,7 +10,7 @@ import type { IBannerAlertProps } from "./BannerAlert.types";
 import { isFunction } from "lodash";
 import { crossCloseBannerTestId } from "../../../../utils/TestIds";
 
-const BannerAlert = forwardRef<HTMLDivElement, IBannerAlertProps>(
+const BannerAlertComponent = forwardRef<HTMLDivElement, IBannerAlertProps>(
   (props, ref) => {
     const {
       children,
@@ -44,4 +44,4 @@ const BannerAlert = forwardRef<HTMLDivElement, IBannerAlertProps>(
   }
 );
 
-export default BannerAlert;
+export const BannerAlert = BannerAlertComponent;

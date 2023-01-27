@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import Dropdown from "../Dropdown";
+import { Dropdown } from "../Dropdown";
 import type {
   IBaseDropdownProps,
   IBaseDropdownState,
@@ -18,7 +18,7 @@ export enum EBaseDropdownPlacement {
 
 export const BaseDropdownContext = createContext(false);
 
-class BaseDropdown extends React.PureComponent<
+class BaseDropdownComponent extends React.PureComponent<
   IBaseDropdownProps,
   IBaseDropdownState
 > {
@@ -140,4 +140,4 @@ class BaseDropdown extends React.PureComponent<
   }
 }
 
-export default BaseDropdown;
+export const BaseDropdown = BaseDropdownComponent;

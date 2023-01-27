@@ -12,7 +12,7 @@ import { useRoutes } from "react-router";
 import { RoutesContext } from "../../decorators/contexts/RoutesContext";
 import { useFeature } from "../../decorators/hooks/useFeature";
 
-const RouterProvider: FC<IRouterProviderProps> = ({
+const RouterProviderComponent: FC<IRouterProviderProps> = ({
   layout: LayoutProps,
   isAuthorizedUser,
   isSystemInitialized,
@@ -55,4 +55,4 @@ const RouterProvider: FC<IRouterProviderProps> = ({
   return renderedRoutes;
 };
 
-export default observer(RouterProvider);
+export const RouterProvider = observer(RouterProviderComponent);

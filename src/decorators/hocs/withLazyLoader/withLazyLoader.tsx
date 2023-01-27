@@ -1,10 +1,10 @@
 import type { ComponentType } from "react";
 import { lazy, Suspense } from "react";
-import Spinner from "../../../components/Spinner/Spinner";
+import { Spinner } from "../../../components/Spinner/Spinner";
 
 const spinner = <Spinner />;
 
-const withLazyLoader = <
+export const withLazyLoader = <
   T extends () => Promise<{ default: ComponentType<any> }>
 >(
   Component: T
@@ -25,5 +25,3 @@ const withLazyLoader = <
 
   return LComponent;
 };
-
-export default withLazyLoader;

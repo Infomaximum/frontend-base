@@ -2,12 +2,12 @@ import { FC, memo, useCallback } from "react";
 import { CopyOutlined } from "../Icons";
 import type { IClipboardIconProps } from "./ClipboardIcon.types";
 import { iconStyle, tooltipStyle } from "./ClipboardIcon.styles";
-import Tooltip from "../../Tooltip/Tooltip";
+import { Tooltip } from "../../Tooltip/Tooltip";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { COPY_TO_CLIPBOARD } from "../../../utils/Localization/Localization";
 import copyToClipboard from "copy-to-clipboard";
 
-export const ClipboardIcon: FC<IClipboardIconProps> = memo(
+const ClipboardIconComponent: FC<IClipboardIconProps> = memo(
   ({ onClick = copyToClipboard, text, ...rest }) => {
     const localization = useLocalization();
 
@@ -25,3 +25,5 @@ export const ClipboardIcon: FC<IClipboardIconProps> = memo(
     );
   }
 );
+
+export const ClipboardIcon = ClipboardIconComponent;

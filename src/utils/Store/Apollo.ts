@@ -1,9 +1,14 @@
-import type { DocumentNode, NextLink, Operation, NormalizedCacheObject } from "@apollo/client";
+import type {
+  DocumentNode,
+  NextLink,
+  Operation,
+  NormalizedCacheObject,
+} from "@apollo/client";
 import { ApolloClient, ApolloLink, InMemoryCache, split } from "@apollo/client";
 import type { OperationDefinitionNode } from "graphql";
 import type { TApolloLinks } from "./apollo.types";
-import createUploadLink from "./createUploadLink";
-import createWebSocketLink from "./createWebSocketLink";
+import { createUploadLink } from "./createUploadLink";
+import { createWebSocketLink } from "./createWebSocketLink";
 
 class Apollo {
   public apolloClient!: ApolloClient<NormalizedCacheObject>;
@@ -14,7 +19,8 @@ class Apollo {
     return new ApolloLink((operation: Operation, forward?: NextLink) => {
       if (process.env.NODE_ENV === "development") {
         const operationType =
-          (operation.query.definitions[0] as OperationDefinitionNode).operation || "";
+          (operation.query.definitions[0] as OperationDefinitionNode)
+            .operation || "";
         const operationName = operation.operationName || "no_name";
 
         operation.setContext(() => {
@@ -88,15 +94,24 @@ class Apollo {
       // работа с http-заголовками ответа сервера
       const afterwareLink = this.getAfterwareLink(graphqlURL);
 
-      const hasSubscriptionOperation = ({ query: { definitions } }: { query: DocumentNode }) =>
+      const hasSubscriptionOperation = ({
+        query: { definitions },
+      }: {
+        query: DocumentNode;
+      }) =>
         definitions.some(
-          (v) => v.kind === "OperationDefinition" && v?.operation === "subscription"
+          (v) =>
+            v.kind === "OperationDefinition" && v?.operation === "subscription"
         );
 
       const uploadLink = createUploadLink(graphqlURL);
       const { webSocketLink, subscriptionClient } = createWebSocketLink();
 
-      const link = split(hasSubscriptionOperation, webSocketLink, afterwareLink.concat(uploadLink));
+      const link = split(
+        hasSubscriptionOperation,
+        webSocketLink,
+        afterwareLink.concat(uploadLink)
+      );
 
       this.apolloLinks = {
         webSocketLink,

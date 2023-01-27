@@ -20,7 +20,7 @@ export const getBoldTitle = createSelector(
   (title: React.ReactNode) => <span style={boldTitleStyle}>{title}</span>
 );
 
-const Drawer: React.FC<IDrawerProps> = (props) => {
+const DrawerComponent: React.FC<IDrawerProps> = (props) => {
   const { title, closeIcon: closeIconProps, visible, ...rest } = props;
   const [isFirstRender, firstRenderCheck] = useState(true);
 
@@ -60,4 +60,4 @@ const Drawer: React.FC<IDrawerProps> = (props) => {
   );
 };
 
-export default Drawer;
+export const Drawer = DrawerComponent;

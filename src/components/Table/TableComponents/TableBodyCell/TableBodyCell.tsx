@@ -1,10 +1,10 @@
-import Tooltip from "../../../Tooltip/Tooltip";
+import { Tooltip } from "../../../Tooltip/Tooltip";
 import { isArray, isString, last } from "lodash";
 import React, { forwardRef } from "react";
 import { tableBodyCellStyle } from "./TableBodyCell.styles";
 import type { ITableBodyCellProps } from "./TableBodyCell.types";
 
-const TableBodyCell: React.FC<ITableBodyCellProps> = forwardRef(
+const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
   (
     { children, showTooltip, ...restProps },
     ref: React.Ref<HTMLTableCellElement>
@@ -42,6 +42,6 @@ const TableBodyCell: React.FC<ITableBodyCellProps> = forwardRef(
   }
 );
 
-TableBodyCell.defaultProps = { showTooltip: true };
+TableBodyCellComponent.defaultProps = { showTooltip: true };
 
-export default TableBodyCell;
+export const TableBodyCell = TableBodyCellComponent;

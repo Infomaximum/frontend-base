@@ -1,7 +1,7 @@
 import type { ICollapseProps } from "./Collapse.types";
 import { Collapse as AntCollapse } from "antd";
 
-const Collapse: React.FC<ICollapseProps> = (props) => {
+const CollapseComponent: React.FC<ICollapseProps> = (props) => {
   const { children, collapseStyle, ...rest } = props;
 
   return (
@@ -11,4 +11,4 @@ const Collapse: React.FC<ICollapseProps> = (props) => {
   );
 };
 
-export default Collapse;
+export const Collapse = CollapseComponent;

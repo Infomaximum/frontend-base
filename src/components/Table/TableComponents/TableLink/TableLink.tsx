@@ -2,9 +2,9 @@ import { cloneElement, FC, isValidElement, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ellipsisStyle, tableLinkStyle } from "./TableLink.styles";
 import type { ITableLinkProps } from "./TableLink.types";
-import Tooltip from "../../../Tooltip/Tooltip";
+import { Tooltip } from "../../../Tooltip/Tooltip";
 
-const TableLink: FC<ITableLinkProps> = ({
+const TableLinkComponent: FC<ITableLinkProps> = ({
   ellipsis = true,
   title,
   children,
@@ -34,4 +34,4 @@ const TableLink: FC<ITableLinkProps> = ({
   );
 };
 
-export default memo(TableLink);
+export const TableLink = memo(TableLinkComponent);

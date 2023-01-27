@@ -5,7 +5,7 @@ import type { IRadioProps } from "./Radio.types";
 
 const { Group, Button } = AntRadio;
 
-class Radio extends PureComponent<IRadioProps> {
+class RadioComponent extends PureComponent<IRadioProps> {
   public static Button = Button;
   public static Group = Group;
 
@@ -18,4 +18,4 @@ class Radio extends PureComponent<IRadioProps> {
   }
 }
 
-export default Radio;
+export const Radio = RadioComponent;

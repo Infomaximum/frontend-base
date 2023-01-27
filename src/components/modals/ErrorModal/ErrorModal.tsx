@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import type { IErrorModalProps } from "./ErrorModal.types";
-import Modal from "../../modals/Modal/Modal";
-import Button from "../../Button/Button";
+import { Modal } from "../../modals/Modal/Modal";
+import { Button } from "../../Button/Button";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import {
   modalFooterStyle,
@@ -29,7 +29,7 @@ import { CloseCircleOutlined, InfoCircleOutlined } from "../../Icons/Icons";
 import { observer } from "mobx-react";
 import { useFooterAndTitleHeight } from "./ErrorModal.utils";
 
-export const ErrorModal: React.FC<IErrorModalProps> = observer(
+const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
   ({ error, showModal, onCloseModal, isDebugMode }) => {
     const localization = useLocalization();
 
@@ -110,3 +110,5 @@ export const ErrorModal: React.FC<IErrorModalProps> = observer(
     );
   }
 );
+
+export const ErrorModal = ErrorModalComponent;

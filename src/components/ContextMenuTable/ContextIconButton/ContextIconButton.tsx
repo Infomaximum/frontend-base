@@ -6,7 +6,7 @@ import {
   disabledButtonStyle,
 } from "./ContextIconButton.styles";
 import { useTheme } from "../../../decorators/hooks/useTheme";
-import Tooltip from "../../Tooltip/Tooltip";
+import { Tooltip } from "../../Tooltip/Tooltip";
 
 export enum EContextIconButtonColors {
   DEFAULT = "DEFAULT",
@@ -14,7 +14,7 @@ export enum EContextIconButtonColors {
 }
 
 /** Иконка отображаемая вместо контекстного меню в таблицах */
-const ContextIconButton: React.FC<IEditableRowButtonProps> & {
+const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
   colors: typeof EContextIconButtonColors;
 } = ({
   color,
@@ -72,10 +72,10 @@ const ContextIconButton: React.FC<IEditableRowButtonProps> & {
   );
 };
 
-ContextIconButton.colors = EContextIconButtonColors;
+ContextIconButtonComponent.colors = EContextIconButtonColors;
 
-ContextIconButton.defaultProps = {
-  color: ContextIconButton.colors.DEFAULT,
+ContextIconButtonComponent.defaultProps = {
+  color: ContextIconButtonComponent.colors.DEFAULT,
 };
 
-export default ContextIconButton;
+export const ContextIconButton = ContextIconButtonComponent;

@@ -1,13 +1,13 @@
 import { assertSimple } from "@im/asserts";
 import { IModel, IModelParams, Model } from "@im/models";
 
-import typenameToModel from "./typenameToModel";
+import { typenameToModel } from "./typenameToModel";
 
 interface IRestParams extends IModelParams {
   parent: IModel;
 }
 
-class RestModel extends Model {
+export class RestModel extends Model {
   public static override get typename() {
     return "rest";
   }
@@ -46,5 +46,3 @@ class RestModel extends Model {
 }
 
 typenameToModel.registrationModels([RestModel]);
-
-export default RestModel;

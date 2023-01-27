@@ -18,8 +18,8 @@ import {
   pointerCardStyle,
   focusStyle,
 } from "./ApplicationCard.styles";
-import ContextMenu from "../../components/ContextMenu/ContextMenu";
-import InlineTags from "./InlineTags/InlineTags";
+import { ContextMenu } from "../../components/ContextMenu/ContextMenu";
+import { InlineTags } from "./InlineTags/InlineTags";
 import { isEmpty, isFunction } from "lodash";
 import { applicationCardTestId } from "../../utils/TestIds";
 import { DELETE } from "../../utils/Localization/Localization";
@@ -27,7 +27,7 @@ import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { Link } from "react-router-dom";
 import type { Interpolation } from "@emotion/react";
 
-const ApplicationCard = forwardRef<
+const ApplicationCardComponent = forwardRef<
   HTMLAnchorElement | HTMLDivElement,
   IApplicationCardProps
 >(
@@ -156,4 +156,4 @@ const ApplicationCard = forwardRef<
   }
 );
 
-export default memo(ApplicationCard);
+export const ApplicationCard = memo(ApplicationCardComponent);

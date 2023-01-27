@@ -1,1 +1,1 @@
-export { default as withFormProvider } from './withFormProvider';
+export { withFormProvider } from "./withFormProvider";

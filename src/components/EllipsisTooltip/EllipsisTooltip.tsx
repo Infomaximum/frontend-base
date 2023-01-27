@@ -4,12 +4,12 @@ import {
   ellipsisStyleForSafari,
 } from "./EllipsisTooltip.styles";
 import type { IEllipsisTooltipProps } from "./EllipsisTooltip.types";
-import Tooltip from "../Tooltip/Tooltip";
+import { Tooltip } from "../Tooltip/Tooltip";
 import { EUserAgents, userAgent } from "@im/utils";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 
-const EllipsisTooltip: FC<IEllipsisTooltipProps> = ({
+const EllipsisTooltipComponent: FC<IEllipsisTooltipProps> = ({
   children,
   title,
   placement,
@@ -41,4 +41,4 @@ const EllipsisTooltip: FC<IEllipsisTooltipProps> = ({
   );
 };
 
-export default memo(EllipsisTooltip);
+export const EllipsisTooltip = memo(EllipsisTooltipComponent);

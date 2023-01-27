@@ -8,7 +8,7 @@ import type {
 import { observer } from "mobx-react";
 import { useModalError } from "../../hooks/useModalError";
 
-const withModalError: TPropInjector<
+export const withModalError: TPropInjector<
   IWithModalErrorProps,
   IWithModalAdditionalProps
 > = (Component: any) => {
@@ -26,5 +26,3 @@ const withModalError: TPropInjector<
 
   return hoistNonReactStatics(WithModalError, Component) as any;
 };
-
-export default withModalError;

@@ -5,9 +5,9 @@ import type {
   TContextMenuItem,
 } from "./ContextMenuTable.types";
 import { threeDotsStyle } from "./ContextMenuTable.styles";
-import ContextMenu from "../ContextMenu/ContextMenu";
+import { ContextMenu } from "../ContextMenu/ContextMenu";
 
-const ContextMenuTable: React.FC<IContextMenuTableProps> = ({
+const ContextMenuTableComponent: React.FC<IContextMenuTableProps> = ({
   onSelect,
   data,
   items,
@@ -59,4 +59,4 @@ const ContextMenuTable: React.FC<IContextMenuTableProps> = ({
   );
 };
 
-export default React.memo(ContextMenuTable);
+export const ContextMenuTable = React.memo(ContextMenuTableComponent);

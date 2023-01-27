@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { tableHeaderCellStyle } from "./TableHeaderCell.styles";
 import type { ITableHeaderCellProps } from "./TableHeaderCell.types";
 
-const TableHeaderCell: React.FC<ITableHeaderCellProps> = forwardRef(
+const TableHeaderCellComponent: React.FC<ITableHeaderCellProps> = forwardRef(
   ({ children, ...restProps }, ref: React.Ref<HTMLTableCellElement>) => {
     return (
       <th {...restProps} css={tableHeaderCellStyle} ref={ref} title={undefined}>
@@ -12,4 +12,4 @@ const TableHeaderCell: React.FC<ITableHeaderCellProps> = forwardRef(
   }
 );
 
-export default TableHeaderCell;
+export const TableHeaderCell = TableHeaderCellComponent;

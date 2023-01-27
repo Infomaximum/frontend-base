@@ -102,7 +102,7 @@ const populateWithRest = (
  * (next_count, next_windows_count)
  * @returns {Function}
  */
-export const showMoreAdd = (
+export const showMoreAddStoreExt = (
   params = {}
 ): NStore.TPrepareDataFunc<Store<Model>> => {
   const { groupFieldNames = ["items"], nextCountFieldNames = ["next_count"] } =

@@ -1,2 +1,1 @@
-export * from './ContainerExt';
-export * from './ContainerExt';
+export { ContainerExt } from "./ContainerExt";

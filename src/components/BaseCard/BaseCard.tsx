@@ -10,7 +10,7 @@ import { isFunction } from "lodash";
 import type { IBaseCardProps } from "./BaseCard.types";
 import { useTheme } from "../../decorators/hooks/useTheme";
 
-const BaseCard: React.FC<IBaseCardProps> = (props) => {
+const BaseCardComponent: React.FC<IBaseCardProps> = (props) => {
   const theme = useTheme();
   const { title, styleWrapper, headStyle, bodyStyle, onAnimationEnd, menu } =
     props;
@@ -65,4 +65,4 @@ const BaseCard: React.FC<IBaseCardProps> = (props) => {
   );
 };
 
-export default React.memo(BaseCard);
+export const BaseCard = React.memo(BaseCardComponent);

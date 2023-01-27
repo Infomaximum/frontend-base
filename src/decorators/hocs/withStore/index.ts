@@ -1,2 +1,1 @@
-export * from './withStore';
-export * from './withStore';
+export { withStore } from "./withStore";

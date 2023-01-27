@@ -1,7 +1,6 @@
-export * from "./Download";
 export * from "./ErrorModalProvider";
 export * from "./Errors";
 export * from "./RouterProvider";
-export * from "./Tree";
-export * from "./Tree";
-export { default as TreeCounter } from "./TreeCounter";
+export { DownloadManager } from "./Download";
+export { TreeManager, EAddingRowMethod } from "./Tree";
+export { TreeCounter } from "./TreeCounter";

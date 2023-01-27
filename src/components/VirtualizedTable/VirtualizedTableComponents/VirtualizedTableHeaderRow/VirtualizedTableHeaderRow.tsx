@@ -7,9 +7,9 @@ import {
   virtualizedTableCheckboxTestId,
 } from "../../../../utils/TestIds";
 import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
-import Checkbox from "../../../Checkbox/Checkbox";
+import { Checkbox } from "../../../Checkbox/Checkbox";
 import type { IVirtualizedTableHeaderRowProps } from "./VirtualizedTableHeaderRow.types";
-import VirtualizedTableHeaderCell from "../VirtualizedTableHeaderCell/VirtualizedTableHeaderCell";
+import { VirtualizedTableHeaderCell } from "../VirtualizedTableHeaderCell/VirtualizedTableHeaderCell";
 import {
   virtualizedTableHeaderRowStyle,
   virtualizedTableHeaderRowWrapperStyle,
@@ -19,11 +19,11 @@ import {
   virtualizedTableBodyRowLoadingCoverStyle,
   virtualizedTableCheckboxCellStyle,
 } from "../VirtualizedTableBodyRow/VirtualizedTableBodyRow.styles";
-import TableCheckboxCell from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
+import { TableCheckboxCell } from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
 import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
 import { TABLE_HEADER_ID } from "../../../../utils/const";
 
-export class VirtualizedTableHeaderRow<T = TRow> extends PureComponent<
+export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
   IVirtualizedTableHeaderRowProps<T>
 > {
   private getHeaderStyle = createSelector(
@@ -115,4 +115,4 @@ export class VirtualizedTableHeaderRow<T = TRow> extends PureComponent<
   }
 }
 
-export default VirtualizedTableHeaderRow;
+export const VirtualizedTableHeaderRow = VirtualizedTableHeaderRowComponent;

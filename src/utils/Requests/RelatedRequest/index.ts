@@ -1,2 +1,1 @@
-export { default as RelatedRequest } from './RelatedRequest';
-export * from './RelatedRequest';
+export { RelatedRequest } from "./RelatedRequest";

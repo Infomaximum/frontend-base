@@ -13,7 +13,7 @@ import {
 } from "./TableExpandIcon.styles";
 import type { ITableExpandIconProps } from "./TableExpandIcon.types";
 
-const TableExpandIcon = <T extends TDictionary>(
+const TableExpandIconComponent = <T extends TDictionary>(
   props: ITableExpandIconProps<T | null>
 ) => {
   const { onExpand, record, expanded, expandable } = props;
@@ -44,4 +44,4 @@ const TableExpandIcon = <T extends TDictionary>(
   );
 };
 
-export default memo(TableExpandIcon);
+export const TableExpandIcon = memo(TableExpandIconComponent);

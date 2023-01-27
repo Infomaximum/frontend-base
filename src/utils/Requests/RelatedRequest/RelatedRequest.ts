@@ -7,7 +7,7 @@ import type { NCore } from "@im/core";
 import { v4 as uuid4 } from "uuid";
 import { assertSimple } from "@im/asserts";
 
-class RelatedRequest extends BaseRequest {
+export class RelatedRequest extends BaseRequest {
   public override async requestData(
     params: NRequests.TRequestDataParams<TRelatedRequestData>
   ): Promise<any> {
@@ -81,5 +81,3 @@ class RelatedRequest extends BaseRequest {
     );
   }
 }
-
-export default RelatedRequest;

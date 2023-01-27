@@ -106,7 +106,7 @@ function proxyResponseAxiosFetch(
   return Promise.resolve(new Response(body, options));
 }
 
-function createUploadLink(graphqlURL: string) {
+export function createUploadLink(graphqlURL: string) {
   return new ApolloLink((operation) => {
     const uri = selectURI(operation, graphqlURL);
 
@@ -205,5 +205,3 @@ function createUploadLink(graphqlURL: string) {
     });
   });
 }
-
-export default createUploadLink;

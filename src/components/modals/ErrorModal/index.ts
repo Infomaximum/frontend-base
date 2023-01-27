@@ -1,4 +1,1 @@
-export * from './ErrorModal';
-export * from './ErrorModal';
-export * from './ErrorModal';
-export * from './ErrorModal';
+export { ErrorModal } from "./ErrorModal";

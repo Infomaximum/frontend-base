@@ -1,6 +1,6 @@
 import type { Interpolation } from "@emotion/react";
 import { get, isString } from "lodash";
-import EllipsisTooltip from "../../../EllipsisTooltip/EllipsisTooltip";
+import { EllipsisTooltip } from "../../../EllipsisTooltip/EllipsisTooltip";
 import { useCallback } from "react";
 import {
   virtualizedTableCellExpandedTextStyle,
@@ -10,10 +10,10 @@ import {
 } from "./VirtualizedTableBodyCell.styles";
 import type { IVirtualizedTableBodyCellProps } from "./VirtualizedTableBodyCell.types";
 import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
-import TableExpandIcon from "../../../Table/TableComponents/TableExpandIcon/TableExpandIcon";
+import { TableExpandIcon } from "../../../Table/TableComponents/TableExpandIcon/TableExpandIcon";
 import { contextMenuColumnKey } from "../../../../utils/const";
 
-const VirtualizedTableBodyCell = <T extends TRow>(
+const VirtualizedTableBodyCellComponent = <T extends TRow>(
   props: IVirtualizedTableBodyCellProps<T | null>
 ) => {
   const {
@@ -103,4 +103,4 @@ const VirtualizedTableBodyCell = <T extends TRow>(
   );
 };
 
-export default VirtualizedTableBodyCell;
+export const VirtualizedTableBodyCell = VirtualizedTableBodyCellComponent;

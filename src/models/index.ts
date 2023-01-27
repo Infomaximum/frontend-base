@@ -1,3 +1,3 @@
-export { default as AutoCompleteListModel } from './AutoCompleteListModel';
-export { default as RestModel } from './RestModel';
-export { default as typenameToModel } from './typenameToModel';
+export { AutoCompleteListModel } from "./AutoCompleteListModel";
+export { RestModel } from "./RestModel";
+export { typenameToModel } from "./typenameToModel";

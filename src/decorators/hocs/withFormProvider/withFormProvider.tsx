@@ -1,6 +1,6 @@
 import type { TPropInjector } from "@im/utils";
 import type { IFormProvider } from "../../contexts/FormContext";
-import FormContext from "../../contexts/FormContext";
+import { FormContext } from "../../contexts/FormContext";
 import hoistNonReactStatics from "hoist-non-react-statics";
 
 export interface IWithFormProviderProps {
@@ -8,7 +8,7 @@ export interface IWithFormProviderProps {
   formName: string;
 }
 
-const withFormProvider: TPropInjector<IWithFormProviderProps> = (
+export const withFormProvider: TPropInjector<IWithFormProviderProps> = (
   Component: any
 ) => {
   const WithFormProviderComponent = (props: any) => (
@@ -21,5 +21,3 @@ const withFormProvider: TPropInjector<IWithFormProviderProps> = (
 
   return hoistNonReactStatics(WithFormProviderComponent, Component);
 };
-
-export default withFormProvider;

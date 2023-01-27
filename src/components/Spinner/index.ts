@@ -1,3 +1,1 @@
-export * from './Spinner';
-export { default as Spinner } from './Spinner';
-export * from './Spinner';
+export { Spinner } from "./Spinner";

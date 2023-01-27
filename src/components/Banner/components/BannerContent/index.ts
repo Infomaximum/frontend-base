@@ -1,3 +1,1 @@
-export * from './BannerContent';
-export { default as BannerContent } from './BannerContent';
-export * from './BannerContent';
+export { BannerContent } from "./BannerContent";

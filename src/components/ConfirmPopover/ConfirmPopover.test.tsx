@@ -1,4 +1,4 @@
-import ConfirmPopover from "./ConfirmPopover";
+import { ConfirmPopover } from "./ConfirmPopover";
 import type { IConfirmPopoverProps } from "./ConfirmPopover.types";
 import { mount } from "enzyme";
 import { Localization } from "@im/utils";
@@ -6,7 +6,7 @@ import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,
 } from "../../utils/TestIds";
-import Button from "../Button/Button";
+import { Button } from "../Button/Button";
 
 describe("Тест компонента ConfirmPopover", () => {
   const showPopoverButtonTestId = "show-popover";

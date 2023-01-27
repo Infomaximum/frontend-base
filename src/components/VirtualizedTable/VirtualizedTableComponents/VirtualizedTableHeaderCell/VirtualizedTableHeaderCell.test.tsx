@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import VirtualizedTableHeaderCell from "./VirtualizedTableHeaderCell";
+import { VirtualizedTableHeaderCell } from "./VirtualizedTableHeaderCell";
 
 it("Тест компонента VirtualizedTableHeaderCell", async () => {
   const user = userEvent.setup();
