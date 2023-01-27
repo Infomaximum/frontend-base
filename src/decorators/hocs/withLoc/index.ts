@@ -1,1 +1,1 @@
-export { withLoс } from "./withLoc";
+export { withLoc } from "./withLoc";

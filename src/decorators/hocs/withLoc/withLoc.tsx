@@ -7,7 +7,7 @@ export interface IWithLocProps {
   localization: Localization;
 }
 
-export const withLoс: TPropInjector<IWithLocProps> = (Component: any) => {
+export const withLoc: TPropInjector<IWithLocProps> = (Component: any) => {
   const LocalizedComponent = (props: any) => (
     <LocalizationContext.Consumer>
       {(localization: Localization) => (
