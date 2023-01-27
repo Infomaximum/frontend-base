@@ -2,35 +2,69 @@
 
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-
 const packageJson = require("./package.json");
+const webpack = require("webpack");
+const AutoExport = require("webpack-auto-export");
+const fs = require("fs/promises");
 
 const isProduction = process.env.NODE_ENV == "production";
 
+const deepReadDir = async (dirPath, arr) =>
+  await Promise.all(
+    (
+      await fs.readdir(dirPath, { withFileTypes: true })
+    ).map(async (dirent) => {
+      const _path = path.join(dirPath, dirent.name);
+
+      return dirent.isDirectory()
+        ? (arr.push(_path), await deepReadDir(_path, arr))
+        : _path;
+    })
+  );
+
+const getEntities = async (ent) => {
+  const result = [];
+
+  await deepReadDir(path.resolve(__dirname, "src", ent), result);
+
+  return [
+    ent,
+    ...result.flat(Number.POSITIVE_INFINITY).map((p) => {
+      return path.relative(path.resolve(__dirname, "src"), p);
+    }),
+  ];
+};
+
 /** @type {import("webpack").Configuration} */
-const config = {
+const getConfig = async () => ({
   entry: ["./src/App.less", "./src/index.ts"],
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: packageJson.main,
+    filename: "index.js",
     library: { name: packageJson.name, type: "umd" },
     globalObject: "this",
     clean: true,
   },
   plugins: [
-    new MiniCssExtractPlugin(),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "package.json"),
-          to: path.resolve(__dirname, "dist"),
-        },
-        {
-          from: path.resolve(__dirname, "LICENSE"),
-          to: path.resolve(__dirname, "dist"),
-        },
-      ],
+    new webpack.ProgressPlugin(),
+    // new AutoExport({
+    //   extension: ".ts", // define extension of generated index file
+    //   exportType: "detect", // the default way to export. values can be: 'named' | 'default' | 'detect'
+    //   baseDir: "./src", // base directory to observe the changes
+    //   paths: [
+    //     { path: ".", ignore: /App|svg|global|resources/ },
+    //     ...(await getEntities("")),
+    //     // ...(await getEntities("components")),
+    //     // ...(await getEntities("utils")),
+    //     // ...(await getEntities("managers")),
+    //     // ...(await getEntities("decorators")),
+    //     // ...(await getEntities("models")),
+    //     // ...(await getEntities("styles")),
+    //   ],
+    // }),
+
+    new MiniCssExtractPlugin({
+      filename: "main.css",
     }),
   ],
   externals: {
@@ -64,6 +98,9 @@ const config = {
           },
           {
             loader: "ts-loader",
+            options: {
+              onlyCompileBundledFiles: true,
+            },
           },
         ],
       },
@@ -97,18 +134,27 @@ const config = {
   },
   resolve: {
     alias: {
-      components: "/components/",
+      [packageJson.name]: path.resolve(__dirname, "src/"),
+
+      [`${packageJson.name}/components`]: path.resolve(
+        __dirname,
+        "src/components"
+      ),
+      [`${packageJson.name}/utils`]: path.resolve(__dirname, "src/utils"),
     },
     extensions: [".tsx", ".ts", ".jsx", ".js", ".mjs"],
     plugins: [],
   },
-};
+});
 
-module.exports = () => {
+module.exports = async () => {
+  const config = await getConfig();
+
   if (isProduction) {
     config.mode = "production";
   } else {
     config.mode = "development";
   }
+
   return config;
 };

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "noEmit": false,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "declaration": true
   },
   "exclude": ["/node_modules/", "**/node_modules", "**/.*/"],
   "include": ["src"]
