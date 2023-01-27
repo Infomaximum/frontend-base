@@ -4,9 +4,10 @@
   "license": "Apache-2.0",
   "author": "IM FrontEnd Team",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./types/index.d.ts",
   "files": [
     "dist/",
+    "types/",
     "LICENSE",
     "README.md"
   ],
@@ -30,6 +31,7 @@
     "antd": "4.22.1",
     "axios": "1.2.3",
     "axios-retry": "3.4.0",
+    "copy-to-clipboard": "3.3.3",
     "final-form": "4.20.6",
     "graphql-tag": "2.12.6",
     "graphql-ws": "5.11.2",
@@ -68,6 +70,7 @@
     "@types/webpack-env": "1.18.0",
     "babel-loader": "9.1.2",
     "conventional-changelog-cli": "2.2.2",
+    "copy-webpack-plugin": "^11.0.0",
     "cross-env": "7.0.3",
     "css-loader": "6.7.3",
     "enzyme": "3.11.0",

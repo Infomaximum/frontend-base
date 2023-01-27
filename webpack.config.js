@@ -6,6 +6,7 @@ const packageJson = require("./package.json");
 const webpack = require("webpack");
 const AutoExport = require("webpack-auto-export");
 const fs = require("fs/promises");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -62,6 +63,15 @@ const getConfig = async () => ({
     //     // ...(await getEntities("styles")),
     //   ],
     // }),
+
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src", "App.less"),
+          to: path.resolve(__dirname, "dist", "main.less"),
+        },
+      ],
+    }),
 
     new MiniCssExtractPlugin({
       filename: "main.css",
