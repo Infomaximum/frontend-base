@@ -1,5 +1,5 @@
 import { isMatch, find, isObject } from "lodash";
-import type { Localization } from "@im/utils";
+import type { Localization } from "@im/localization";
 import type { NCore } from "@im/core";
 import { Expander } from "@im/core";
 
@@ -7,7 +7,10 @@ export const isErrorMatchWithPreparer = function (
   error: NCore.TError,
   preparer: NCore.TErrorPreparer
 ) {
-  return preparer.code === error.code && isMatch(error.params, preparer.params as any);
+  return (
+    preparer.code === error.code &&
+    isMatch(error.params, preparer.params as any)
+  );
 };
 
 export const findErrorByCode = (error: NCore.TError) =>

@@ -1,4 +1,4 @@
-import { Localization } from "@im/utils";
+import { Localization } from "@im/localization";
 import enzyme from "enzyme";
 import { Notification } from "./Notification";
 import type { NCore } from "@im/core";

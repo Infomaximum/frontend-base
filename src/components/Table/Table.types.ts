@@ -1,5 +1,5 @@
 import type { ColumnProps, TableProps } from "antd/lib/table";
-import type { Localization } from "@im/utils";
+import type { Localization } from "@im/localization";
 import type { Interpolation } from "@emotion/react";
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 
