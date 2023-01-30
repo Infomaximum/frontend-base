@@ -6200,11 +6200,6 @@ watchpack@^2.4.0:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
-webpack-auto-export@0.1.0:
-  version "0.1.0"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/webpack-auto-export/-/webpack-auto-export-0.1.0.tgz#21db6752619d102333f30a725c0f084d4e068400"
-  integrity sha512-vt4WK2lIIxU3sr+zK81pdcW3qSBdkFXKfsO0Yy/T8zHntO3RXbdUX+vcc3TQfQ1V1JfRCGUyLPEQ4w3j0HnHMQ==
-
 webpack-cli@5.0.1:
   version "5.0.1"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/webpack-cli/-/webpack-cli-5.0.1.tgz#95fc0495ac4065e9423a722dec9175560b6f2d9a"
