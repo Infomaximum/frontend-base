@@ -1,46 +1,17 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
-
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const packageJson = require("./package.json");
 const webpack = require("webpack");
-const AutoExport = require("webpack-auto-export");
-const fs = require("fs/promises");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
-
-const deepReadDir = async (dirPath, arr) =>
-  await Promise.all(
-    (
-      await fs.readdir(dirPath, { withFileTypes: true })
-    ).map(async (dirent) => {
-      const _path = path.join(dirPath, dirent.name);
-
-      return dirent.isDirectory()
-        ? (arr.push(_path), await deepReadDir(_path, arr))
-        : _path;
-    })
-  );
-
-const getEntities = async (ent) => {
-  const result = [];
-
-  await deepReadDir(path.resolve(__dirname, "src", ent), result);
-
-  return [
-    ent,
-    ...result.flat(Number.POSITIVE_INFINITY).map((p) => {
-      return path.relative(path.resolve(__dirname, "src"), p);
-    }),
-  ];
-};
 
 /** @type {import("webpack").Configuration} */
 const getConfig = async () => ({
   entry: ["./src/App.less", "./src/index.ts"],
   output: {
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
     filename: "index.js",
     library: { name: packageJson.name, type: "umd" },
     globalObject: "this",
@@ -48,22 +19,6 @@ const getConfig = async () => ({
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    // new AutoExport({
-    //   extension: ".ts", // define extension of generated index file
-    //   exportType: "detect", // the default way to export. values can be: 'named' | 'default' | 'detect'
-    //   baseDir: "./src", // base directory to observe the changes
-    //   paths: [
-    //     { path: ".", ignore: /App|svg|global|resources/ },
-    //     ...(await getEntities("")),
-    //     // ...(await getEntities("components")),
-    //     // ...(await getEntities("utils")),
-    //     // ...(await getEntities("managers")),
-    //     // ...(await getEntities("decorators")),
-    //     // ...(await getEntities("models")),
-    //     // ...(await getEntities("styles")),
-    //   ],
-    // }),
-
     new CopyPlugin({
       patterns: [
         {
@@ -149,9 +104,6 @@ const getConfig = async () => ({
         test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,
         type: "asset",
       },
-
-      // Add your rules for custom modules here
-      // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
   resolve: {
