@@ -7,16 +7,18 @@ export const bannerContentStyle = (theme: TTheme) =>
 
 export const bannerContentParagraphStyle = {
   margin: 0,
+  wordBreak: "break-word",
 } as const;
 
-export const bannerContentShowMoreStyle = (backgroundColor: string | undefined) => () =>
-  ({
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-    display: "inline-block",
-    background: backgroundColor,
-  } as const);
+export const bannerContentShowMoreStyle =
+  (backgroundColor: string | undefined) => () =>
+    ({
+      position: "absolute",
+      bottom: 0,
+      right: 0,
+      display: "inline-block",
+      background: backgroundColor,
+    } as const);
 
 export const bannerContentShowMoreButtonStyle = (theme: TTheme) =>
   ({

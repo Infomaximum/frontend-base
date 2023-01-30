@@ -7,4 +7,5 @@ export interface IDropdownPendingPlaceholderProps {
   searchText?: TNullable<string>;
   /** Есть ли у пользователя доступ к контенту */
   hasAccess?: boolean;
+  emptyText?: string;
 }

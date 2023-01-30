@@ -1,6 +1,7 @@
 export const cardWidth = 264;
 export const cardLeftPadding = 7;
-export const getCardRightPadding = (hasContextMenu: boolean) => (hasContextMenu ? 40 : 16);
+export const getCardRightPadding = (hasContextMenu: boolean) =>
+  hasContextMenu ? 40 : 16;
 
 export const cardStyle = (theme: TTheme) =>
   ({
@@ -63,6 +64,7 @@ const getTextClampStyle = (numberOfLines: number) =>
     textOverflow: "ellipsis",
     display: "-webkit-box",
     WebkitBoxOrient: "vertical",
+    wordBreak: "break-word",
   } as const);
 
 export const titleStyle = (theme: TTheme) =>

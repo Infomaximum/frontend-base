@@ -16,76 +16,79 @@ export const multipleSelectStyle = {
     },
 };
 
-export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => {
-  const iconWidth = 16;
-  const spaceAroundIcons = 8;
+export const displaySelectStyle =
+  (iconSlotCount: number) => (theme: TTheme) => {
+    const iconWidth = 16;
+    const spaceAroundIcons = 8;
 
-  const getSuffixWidth = (iconsCount: number) =>
-    iconsCount * iconWidth + (iconsCount + 1) * spaceAroundIcons;
+    const getSuffixWidth = (iconsCount: number) =>
+      iconsCount * iconWidth + (iconsCount + 1) * spaceAroundIcons;
 
-  return {
-    display: "block",
-    color: theme.grey9Color,
-    lineHeight: "22px",
+    return {
+      display: "block",
+      color: theme.grey9Color,
+      lineHeight: "22px",
 
-    ".ant-select-selector": {
-      paddingRight: `${iconSlotCount ? getSuffixWidth(iconSlotCount) : 3}px !important`,
+      ".ant-select-selector": {
+        paddingRight: `${
+          iconSlotCount ? getSuffixWidth(iconSlotCount) : 3
+        }px !important`,
 
-      ".ant-select-selection-search-input": {
-        textOverflow: "ellipsis",
+        ".ant-select-selection-search-input": {
+          textOverflow: "ellipsis",
+        },
+
+        // overlay для работы cursor: pointer
+        "&:before": {
+          position: "absolute",
+          width: `${getSuffixWidth(iconSlotCount)}px`,
+          height: "26px",
+          top: 0,
+          right: 0,
+          cursor: "pointer",
+          content: "''",
+        },
+
+        ".ant-select-selection-placeholder": {
+          width: `calc(100% - ${getSuffixWidth(iconSlotCount)}px)`,
+        },
       },
-
-      // overlay для работы cursor: pointer
-      "&:before": {
-        position: "absolute",
-        width: `${getSuffixWidth(iconSlotCount)}px`,
-        height: "26px",
-        top: 0,
-        right: 0,
-        cursor: "pointer",
-        content: "''",
+      ".ant-select-selection-item": {
+        paddingRight: "0px !important",
+        display: "flex",
+        alignItems: "center",
+        // Для центрирования тегов
+        "> span": {
+          display: "flex",
+          alignItems: "center",
+        },
       },
-
-      ".ant-select-selection-placeholder": {
-        width: `calc(100% - ${getSuffixWidth(iconSlotCount)}px)`,
+      ".ant-select-arrow, .ant-select-clear": {
+        top: "6px",
+        marginTop: 0,
+        width: `${iconWidth}px`,
+        height: "unset",
+        alignItems: "unset",
+        fontSize: "14px",
+        lineHeight: 1.25,
       },
-    },
-    ".ant-select-selection-item": {
-      paddingRight: "0px !important",
-      display: "flex",
-      alignItems: "center",
-      // Для центрирования тегов
-      "> span": {
+      ".ant-select-clear": {
+        opacity: 1,
+        color: `${theme.grey6Color}`,
+        right: `${iconSlotCount ? getSuffixWidth(iconSlotCount - 1) : 7}px`,
+        ":hover": {
+          color: theme.grey9Color,
+        },
+      },
+      ".ant-select-arrow": {
+        right: spaceAroundIcons,
+      },
+      ".ant-select.ant-select-in-form-item": {
         display: "flex",
         alignItems: "center",
       },
-    },
-    ".ant-select-arrow, .ant-select-clear": {
-      top: "6px",
-      marginTop: 0,
-      width: `${iconWidth}px`,
-      height: "unset",
-      alignItems: "unset",
-      fontSize: "14px",
-      lineHeight: 1.25,
-    },
-    ".ant-select-clear": {
-      opacity: 1,
-      color: `${theme.grey6Color}`,
-      right: `${iconSlotCount ? getSuffixWidth(iconSlotCount - 1) : 7}px`,
-      ":hover": {
-        color: theme.grey9Color,
-      },
-    },
-    ".ant-select-arrow": {
-      right: spaceAroundIcons,
-    },
-    ".ant-select.ant-select-in-form-item": {
-      display: "flex",
-      alignItems: "center",
-    },
-  } as const;
-};
+    } as const;
+  };
 
 export const commonTagStyle = (theme: TTheme) => ({
   fontSize: `${theme.h5FontSize}px`,
@@ -93,6 +96,19 @@ export const commonTagStyle = (theme: TTheme) => ({
   margin: "2px 4px 2px 0",
   display: "flex",
   alignItems: "center",
+  paddingRight: 0,
+
+  ".anticon-close": {
+    width: 24,
+    height: 22,
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: "5px",
+  },
+
+  ".ant-tag-close-icon, .anticon-close": {
+    marginLeft: 0,
+  },
 });
 
 export const disableTagStyle = (theme: TTheme) => ({

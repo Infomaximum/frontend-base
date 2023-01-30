@@ -51,3 +51,4 @@ export { default as CreditCardOutlined } from "@ant-design/icons/CreditCardOutli
 export { default as FolderFilled } from "@ant-design/icons/FolderFilled";
 export { default as SyncOutlined } from "@ant-design/icons/SyncOutlined";
 export { default as HomeOutlined } from "@ant-design/icons/HomeOutlined";
+export { default as EllipsisOutlined } from "@ant-design/icons/EllipsisOutlined";

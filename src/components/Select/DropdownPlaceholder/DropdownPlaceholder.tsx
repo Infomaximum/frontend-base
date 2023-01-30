@@ -25,6 +25,7 @@ import {
 const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
   searchText,
   hasAccess = true,
+  emptyText,
 }) => {
   const localization = useLocalization();
 
@@ -53,7 +54,7 @@ const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
       key="empty-select"
       image={<NothingFoundBox />}
       imageStyle={emptyImageStyle}
-      description={localization.getLocalized(EMPTY_HERE)}
+      description={emptyText ?? localization.getLocalized(EMPTY_HERE)}
       css={emptyStyle}
     />
   );

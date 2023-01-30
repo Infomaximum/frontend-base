@@ -9,9 +9,13 @@ import { DropdownPlaceholder } from "../DropdownPlaceholder/DropdownPlaceholder"
  */
 const DropdownPendingPlaceholderComponent: React.FC<
   IDropdownPendingPlaceholderProps
-> = ({ isDataLoaded, loading, searchText, hasAccess = true }) => {
+> = ({ isDataLoaded, loading, searchText, hasAccess = true, emptyText }) => {
   return useLastLoaded(loading, isDataLoaded, () => (
-    <DropdownPlaceholder searchText={searchText} hasAccess={hasAccess} />
+    <DropdownPlaceholder
+      searchText={searchText}
+      hasAccess={hasAccess}
+      emptyText={emptyText}
+    />
   ));
 };
 
