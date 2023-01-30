@@ -5,6 +5,7 @@ export * from "./components";
 export * from "./decorators";
 export * from "./managers";
 export * from "./models";
+export * from "./resources";
 export * from "./styles";
 export * from "./utils";
 
