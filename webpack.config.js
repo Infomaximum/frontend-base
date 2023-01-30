@@ -90,6 +90,18 @@ const getConfig = async () => ({
       commonjs: "react-dom",
       amd: "react-dom",
     },
+    "react-router": {
+      root: "ReactRouter",
+      commonjs2: "react-router",
+      commonjs: "react-router",
+      amd: "react-router",
+    },
+    "react-router-dom": {
+      root: "ReactRouterDom",
+      commonjs2: "react-router-dom",
+      commonjs: "react-router-dom",
+      amd: "react-router-dom",
+    },
   },
   module: {
     rules: [
@@ -155,6 +167,7 @@ const getConfig = async () => ({
     extensions: [".tsx", ".ts", ".jsx", ".js", ".mjs"],
     plugins: [],
   },
+  devtool: "source-map",
 });
 
 module.exports = async () => {
