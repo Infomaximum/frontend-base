@@ -1,7 +1,7 @@
 import { ThemeContext } from "../../decorators/contexts/ThemeContext";
 // eslint-disable-next-line im/ban-import-entity
 import { theme } from "../../styles/theme";
-import { Localization } from "@im/utils";
+import { Localization } from "@im/localization";
 import { reduce } from "lodash";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

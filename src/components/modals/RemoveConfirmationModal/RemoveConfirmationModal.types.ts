@@ -1,5 +1,5 @@
 import type React from "react";
-import type { TLocalizationDescription } from "@im/utils";
+import type { TLocalizationDescription } from "@im/localization";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
 
 export interface IRemoveConfirmationModalProps extends IWithLocProps {

@@ -1,5 +1,5 @@
 import enzyme from "enzyme";
-import { Localization } from "@im/utils";
+import { Localization } from "@im/localization";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableBodyRow";
 import type { ColumnType } from "antd/lib/table";
 import { ERROR_MESSAGE } from "../../../../utils/Localization/Localization";

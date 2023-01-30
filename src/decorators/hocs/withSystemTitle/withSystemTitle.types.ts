@@ -1,5 +1,5 @@
 import type { Model } from "@im/models";
-import type { TLocalizationDescription } from "@im/utils";
+import type { TLocalizationDescription } from "@im/localization";
 import type { Store } from "../../../utils/Store/Store/Store";
 
 export type TParams = {

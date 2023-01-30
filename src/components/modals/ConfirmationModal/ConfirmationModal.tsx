@@ -6,7 +6,7 @@ import {
   CANCEL,
   DO_NOT_SAVE,
 } from "../../../utils/Localization/Localization";
-import type { TLocalizationDescription } from "@im/utils";
+import type { TLocalizationDescription } from "@im/localization";
 import {
   bodyModalStyle,
   bodyStyle,

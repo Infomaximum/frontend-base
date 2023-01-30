@@ -3,7 +3,7 @@ import type {
   TDictionary as TDictionaryUtils,
   TNullable as TNullableUtils,
   valueof as valueofUtils,
-} from "@im/utils/utils/types/utility.types";
+} from "@im/utils/dist/utils/types/utility.types";
 import type { theme } from "./styles/theme";
 
 type TFrontendConfigImage = {

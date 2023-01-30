@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Interpolation } from "@emotion/react";
-import type { TLocalizationDescription } from "@im/utils";
+import type { TLocalizationDescription } from "@im/localization";
 import type { AntdIconProps } from "../../Icons/Icons";
 import type { TButtonType } from "../../Button/Button.types";
 

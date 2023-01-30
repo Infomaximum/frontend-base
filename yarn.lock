@@ -1170,11 +1170,6 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/asserts/-/asserts-1.0.3.tgz#2745385ee88f44d0f32bb8bede98df6a68afa348"
   integrity sha512-ChzOwv9DDXQCF5U/cU1yHATgX8i1ed2OSKy9Bn/gJNlYeqV5Q5T3deUpNpfobAhfeXJuCpp4K54OeqF8/zj01A==
 
-"@im/configs@^1.2.0":
-  version "1.2.0"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/configs/-/configs-1.2.0.tgz#7668c81fef537a613ed0824376b891ff00a57ece"
-  integrity sha512-75qMxGrppIqgw2NlhVg0As3emdR8Ib/X82L9XN70vsOqPGRon5n73GinVBXqVYT39A23HCgymvUxpxI8g3jb3w==
-
 "@im/configs@^1.2.1":
   version "1.2.1"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/configs/-/configs-1.2.1.tgz#ff6bf56520679a068dbda753cb9ad60ec3dce4a6"
@@ -1182,8 +1177,8 @@
 
 "@im/core@^6.0.0-rc":
   version "6.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-6.0.0-rc.tgz#6d38463eca8350d402e459064516171749b336ac"
-  integrity sha512-juOTNCfsMFIeptM1ECrHDgNiPsksKHwaAlXiroTivd0v2HhXsgikFX9STl+t8HyCKnJRHr+AYu/r/0ggouYYqg==
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-6.0.0-rc.tgz#f990d5b2c9c885cc80c3e576b9cf019e4db6422d"
+  integrity sha512-xL4ibsINdR9gMwI5RqVEmy3KoBWLqKybVB8sc+cdvPqfcKMfdoim2QsLPxsyEuBPGjLOGBgPsLSn16oW+oVR5g==
   dependencies:
     "@im/asserts" "^1.0.3"
     "@im/utils" "^6.0.0-rc"
@@ -1209,11 +1204,11 @@
 
 "@im/utils@^6.0.0-rc":
   version "6.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0-rc.tgz#dbb65ebdf9ace122aef26c5c0d4d7da4db0cf612"
-  integrity sha512-LBuCluEWqv10BfcJ2RJOoKAygmeWu3hVzf0M7gyUlTlFi13692pOnYsqTbk+n4R77o3GPemty5QtC7h4+7wdAQ==
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0-rc.tgz#fa7fc65d72b546f1435897ebdb93d2b918a759bc"
+  integrity sha512-Au2lJfT0kJjiYY6ye9xp13LxY97LpkziAX/TO+WugGeraT8IssIp8MAGiGQeDMNazgQY2L2Wy6zs+K2v8pD9Gg==
   dependencies:
     "@im/asserts" "^1.0.0"
-    "@im/configs" "^1.2.0"
+    "@im/configs" "^1.2.1"
     "@im/localization" "^1.0.1"
     "@im/models" "^1.2.0"
     crypto-js "4.1.1"

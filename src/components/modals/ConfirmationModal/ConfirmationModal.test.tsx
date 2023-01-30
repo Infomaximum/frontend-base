@@ -1,7 +1,7 @@
 import type { ReactWrapper } from "enzyme";
 import { mount } from "enzyme";
 import { ConfirmationModal } from "./ConfirmationModal";
-import { Localization } from "@im/utils";
+import { Localization } from "@im/localization";
 import { ModalAnimationInterval } from "../../../utils/const";
 import {
   confirmationModalAdditionalButtonTestId,
