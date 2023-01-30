@@ -1204,8 +1204,8 @@
 
 "@im/utils@^6.0.0-rc":
   version "6.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0-rc.tgz#fa7fc65d72b546f1435897ebdb93d2b918a759bc"
-  integrity sha512-Au2lJfT0kJjiYY6ye9xp13LxY97LpkziAX/TO+WugGeraT8IssIp8MAGiGQeDMNazgQY2L2Wy6zs+K2v8pD9Gg==
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0-rc.tgz#2f91787b9e95002c92bd78a497eee8e26b116812"
+  integrity sha512-LZ35eBpbdb8IADzH97BjdJWf2uqhoGpvyIwc+XgxFjM+Cy+M3n90N1alML1fFboCNrgmQ0VIqk6tFauz4c91vQ==
   dependencies:
     "@im/asserts" "^1.0.0"
     "@im/configs" "^1.2.1"
