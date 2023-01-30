@@ -1,6 +1,5 @@
-import type { TPropInjector } from "@im/utils/";
+import type { TPropInjector, Localization } from "@im/utils";
 import { LocalizationContext } from "../../contexts/LocalizationContext";
-import type { Localization } from "@im/utils";
 import hoistNonReactStatics from "hoist-non-react-statics";
 
 export interface IWithLocProps {
