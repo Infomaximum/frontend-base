@@ -14,7 +14,6 @@ import {
   virtualizedTableHeaderRowStyle,
   virtualizedTableHeaderRowWrapperStyle,
 } from "./VirtualizedTableHeaderRow.styles";
-import { createSelector } from "reselect";
 import {
   virtualizedTableBodyRowLoadingCoverStyle,
   virtualizedTableCheckboxCellStyle,
