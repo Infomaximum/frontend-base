@@ -3,6 +3,7 @@ import type { ELimitsStateNames } from "../../utils/const";
 import type { RestModel } from "../../models/RestModel";
 import type { TableStore } from "../../utils/Store/TableStore/TableStore";
 import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
+import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 
 export interface IShowMoreOwnProps {
   tableStore: TableStore<Model>;
@@ -15,4 +16,7 @@ export interface IShowMoreOwnProps {
   queryVariables?: TDictionary;
 }
 
-export interface IShowMoreProps extends IShowMoreOwnProps, IWithLocProps {}
+export interface IShowMoreProps
+  extends IShowMoreOwnProps,
+    IWithLocProps,
+    IWithThemeProps<TTheme> {}

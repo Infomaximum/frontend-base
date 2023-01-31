@@ -34,6 +34,7 @@ import { TableCheckboxCell } from "./TableComponents/TableCheckboxCell/TableChec
 import { createSelector } from "reselect";
 import { TABLE_HEADER_ID, loaderDelay } from "../../utils/const";
 import { AutoSizer } from "react-virtualized";
+import { cssStyleConversion } from "../../styles";
 
 class TableComponent<T extends TDictionary> extends Component<
   ITableProps<T>,
@@ -229,14 +230,14 @@ class TableComponent<T extends TDictionary> extends Component<
   };
 
   private getStyleTable = (): Interpolation<TTheme> => {
-    const { dataSource, customStyle, isShowDividers } = this.props;
+    const { dataSource, customStyle, isShowDividers, theme } = this.props;
 
     const styles: Interpolation<TTheme>[] = [];
 
     if (!dataSource || isEmpty(dataSource)) {
       styles.push(emptyTableStyle);
     } else {
-      styles.push(customStyle);
+      styles.push(cssStyleConversion(theme, customStyle));
     }
 
     if (!isShowDividers) {
@@ -320,7 +321,7 @@ class TableComponent<T extends TDictionary> extends Component<
             ) : (
               <ConfigProvider renderEmpty={this.getEmpty}>
                 {rest.showHeader !== undefined && !rest.showHeader ? (
-                  <div css={borderTopStyle} />
+                  <div css={borderTopStyle(this.props.theme)} />
                 ) : null}
                 <AntTable<T>
                   {...rest}

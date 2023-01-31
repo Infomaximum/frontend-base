@@ -14,6 +14,7 @@ import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,
 } from "../../utils/TestIds";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 const buttonsSize = "small";
 
@@ -28,6 +29,8 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
   trigger = "click",
   ...rest
 }) => {
+  const theme = useTheme();
+
   const onCancel = useCallback(
     () => onVisibleChange?.(false),
     [onVisibleChange]
@@ -35,9 +38,9 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
 
   const content = (
     <>
-      <Row align="middle" gutter={8} css={popoverTitleRowStyle}>
+      <Row align="middle" gutter={8} css={popoverTitleRowStyle(theme)}>
         <Col>
-          <ExclamationCircleFilled css={popoverTitleIconStyle} />
+          <ExclamationCircleFilled css={popoverTitleIconStyle(theme)} />
         </Col>
         <Col>{text}</Col>
       </Row>
@@ -55,7 +58,7 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
         <Col>
           <Button
             size={buttonsSize}
-            css={popoverPrimaryButtonStyle}
+            css={popoverPrimaryButtonStyle(theme)}
             onClick={onSubmit}
             loading={loading}
             test-id={confirmPopoverOkButtonTestId}

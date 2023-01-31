@@ -15,46 +15,49 @@ import {
 } from "./Button.styles";
 import type { Interpolation } from "@emotion/react";
 import { Tooltip } from "../../components/Tooltip/Tooltip";
+import { useTheme } from "../../decorators";
 
 const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
   (props, ref: React.Ref<HTMLButtonElement>) => {
     const { type: typeProps, ...rest } = props;
     const onlyIcon = !props.children;
 
+    const theme = useTheme();
+
     const buttonStyles = useMemo(() => {
-      const styles: Interpolation<TTheme> = [defaultButtonStyle];
+      const styles: Interpolation<TTheme> = [defaultButtonStyle(theme)];
 
       switch (typeProps) {
         case "primary":
-          styles.push(primaryButtonStyle);
+          styles.push(primaryButtonStyle(theme));
           break;
         case "primary-dark":
-          styles.push(primaryDarkButtonStyle);
+          styles.push(primaryDarkButtonStyle(theme));
           break;
         case "primary-notification":
-          styles.push(primaryNotificationButtonStyle);
+          styles.push(primaryNotificationButtonStyle(theme));
           break;
         case "ghost":
-          styles.push(ghostButtonStyle);
+          styles.push(ghostButtonStyle(theme));
           break;
         case "ghost-dark":
-          styles.push(ghostDarkButtonStyle);
+          styles.push(ghostDarkButtonStyle(theme));
           break;
         case "text":
-          styles.push(textButtonStyle);
+          styles.push(textButtonStyle(theme));
           break;
       }
 
       if (rest.size === "small") {
         if (onlyIcon) {
-          styles.push(smallOnlyIconStyle);
+          styles.push(smallOnlyIconStyle());
         } else {
-          styles.push(smallButtonStyle);
+          styles.push(smallButtonStyle(theme));
         }
       }
 
       return styles;
-    }, [typeProps, rest.size, onlyIcon]);
+    }, [typeProps, rest.size, onlyIcon, theme]);
 
     const getType = () => {
       switch (typeProps) {

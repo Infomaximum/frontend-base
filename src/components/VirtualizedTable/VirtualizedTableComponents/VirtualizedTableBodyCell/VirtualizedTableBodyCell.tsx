@@ -12,6 +12,8 @@ import type { IVirtualizedTableBodyCellProps } from "./VirtualizedTableBodyCell.
 import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
 import { TableExpandIcon } from "../../../Table/TableComponents/TableExpandIcon/TableExpandIcon";
 import { contextMenuColumnKey } from "../../../../utils/const";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { cssStyleConversion } from "../../../../styles";
 
 const VirtualizedTableBodyCellComponent = <T extends TRow>(
   props: IVirtualizedTableBodyCellProps<T | null>
@@ -27,6 +29,9 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
     isTree,
     indentLeft,
   } = props;
+
+  const theme = useTheme();
+
   const { key, dataIndex, width, minWidth, enableCellClick } = column;
   const isFirstColumn = index === 0;
 
@@ -76,7 +81,7 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
     (hasExpander && enableRowClick && key !== contextMenuColumnKey) ||
     (hasExpander && enableCellClick) ? (
       <span
-        css={virtualizedTableCellExpandedTextStyle}
+        css={virtualizedTableCellExpandedTextStyle(theme)}
         onClick={handleRowContentClick}
       >
         {wrapInEllipsis(node)}
@@ -93,7 +98,10 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   return (
     <div
       key={key}
-      css={[virtualizedTableCellStyle, cellCustomStyle]}
+      css={cssStyleConversion(theme, [
+        virtualizedTableCellStyle,
+        cellCustomStyle,
+      ])}
       style={getVirtualizedTableCellFlexStyle(width, minWidth)}
     >
       {isTree && isFirstColumn && getIndentBlock()}

@@ -22,13 +22,13 @@ export const cardStyle = (theme: TTheme) =>
     },
   } as const);
 
-export const pointerCardStyle = () => ({
+export const pointerCardStyle = {
   cursor: "pointer",
-});
+};
 
-export const cardWithContextMenuStyle = () => ({
+export const cardWithContextMenuStyle = {
   padding: `5px 7px 7px ${cardLeftPadding}px`,
-});
+};
 
 export const contextMenuStyle = (theme: TTheme) =>
   ({

@@ -4,6 +4,7 @@ import { Modal as AntModal } from "antd";
 import { createSelector } from "reselect";
 import { boldTitleStyle, titleStyle } from "./Modal.styles";
 import { modalTitleTestId } from "../../../utils/TestIds";
+import { useTheme } from "../../../decorators/hooks/useTheme";
 
 export const getBoldTitleModal = createSelector(
   (title: React.ReactNode) => title,
@@ -16,14 +17,15 @@ export const getBoldTitleModal = createSelector(
 
 const ModalComponent: React.FC<IModalProps> = (props) => {
   const { title, ...rest } = props;
+  const theme = useTheme();
 
   const boldTitle = useMemo(
     () => (
-      <span test-id={modalTitleTestId} css={titleStyle}>
+      <span test-id={modalTitleTestId} css={titleStyle(theme)}>
         {title}
       </span>
     ),
-    [title]
+    [title, theme]
   );
 
   return (

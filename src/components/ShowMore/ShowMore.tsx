@@ -7,6 +7,7 @@ import type { IShowMoreProps } from "./ShowMore.types";
 import { tableShowMoreButtonTestId } from "../../utils/TestIds";
 import { buttonStyle, ghostButtonStyle } from "./ShowMore.styles";
 import { observer } from "mobx-react";
+import { withTheme } from "../../decorators/hocs/withTheme/withTheme";
 
 class ShowMoreComponent extends React.PureComponent<IShowMoreProps> {
   public static defaultProps = {
@@ -25,7 +26,7 @@ class ShowMoreComponent extends React.PureComponent<IShowMoreProps> {
   };
 
   public override render(): React.ReactNode {
-    const { model, localization, mode } = this.props;
+    const { model, localization, mode, theme } = this.props;
 
     const nextCountValue = model.getNextCount();
     const showMoreCaption = nextCountValue
@@ -36,7 +37,7 @@ class ShowMoreComponent extends React.PureComponent<IShowMoreProps> {
       <Button
         type="link"
         onClick={this.handleClick}
-        css={mode === "ghost" ? ghostButtonStyle : buttonStyle}
+        css={mode === "ghost" ? ghostButtonStyle(theme) : buttonStyle}
         test-id={tableShowMoreButtonTestId}
       >
         <ArrowDownOutlined key="icon" />
@@ -46,4 +47,4 @@ class ShowMoreComponent extends React.PureComponent<IShowMoreProps> {
   }
 }
 
-export const ShowMore = withLoc(observer(ShowMoreComponent));
+export const ShowMore = withLoc(withTheme(observer(ShowMoreComponent)));

@@ -26,6 +26,7 @@ import { DELETE } from "../../utils/Localization/Localization";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { Link } from "react-router-dom";
 import type { Interpolation } from "@emotion/react";
+import { useTheme } from "../../decorators";
 
 const ApplicationCardComponent = forwardRef<
   HTMLAnchorElement | HTMLDivElement,
@@ -45,6 +46,7 @@ const ApplicationCardComponent = forwardRef<
     ref
   ) => {
     const localization = useLocalization();
+    const theme = useTheme();
     const [contextMenuInFocus, setContextMenuInFocus] = useState(false);
     const handleClick = useCallback(() => {
       if (isFunction(onClick)) {
@@ -88,15 +90,19 @@ const ApplicationCardComponent = forwardRef<
     const contextMenu = useMemo(() => {
       if (hasContextMenu) {
         return (
-          <div css={contextMenuStyle} onBlur={handleBlur} onFocus={handleFocus}>
+          <div
+            css={contextMenuStyle(theme)}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+          >
             <ContextMenu content={contextMenuItems} placement="bottomRight" />
           </div>
         );
       }
-    }, [hasContextMenu, handleBlur, handleFocus, contextMenuItems]);
+    }, [hasContextMenu, handleBlur, handleFocus, contextMenuItems, theme]);
 
     const cardStyles = useMemo(() => {
-      const styles: Interpolation<TTheme> = [cardStyle];
+      const styles: Interpolation<TTheme> = [cardStyle(theme)];
 
       if (onClick || pathname) {
         styles.push(pointerCardStyle);
@@ -107,18 +113,18 @@ const ApplicationCardComponent = forwardRef<
       }
 
       if (contextMenuInFocus) {
-        styles.push(focusStyle);
+        styles.push(focusStyle(theme));
       }
 
       return styles;
-    }, [contextMenuInFocus, hasContextMenu, onClick, pathname]);
+    }, [contextMenuInFocus, hasContextMenu, onClick, pathname, theme]);
 
     const tagsMeasuredWidth =
       measuredWidth - (cardLeftPadding + getCardRightPadding(hasContextMenu));
 
     const content = (
       <div css={contentStyle}>
-        <div css={titleStyle}>{entity.getName()}</div>
+        <div css={titleStyle(theme)}>{entity.getName()}</div>
         <InlineTags tags={entity.tags} measuredWidth={tagsMeasuredWidth} />
       </div>
     );

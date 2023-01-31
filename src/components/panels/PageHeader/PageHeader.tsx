@@ -9,6 +9,8 @@ import {
 } from "./PageHeader.styles";
 import { pageHeaderBackButtonTestId } from "../../../utils/TestIds";
 import type { IPageHeaderProps } from "./PageHeader.types";
+import { useTheme } from "../../../decorators/hooks/useTheme";
+import { cssStyleConversion } from "../../../styles";
 
 const PageHeaderComponent: React.FC<IPageHeaderProps> = (props) => {
   const {
@@ -20,26 +22,46 @@ const PageHeaderComponent: React.FC<IPageHeaderProps> = (props) => {
     ...rest
   } = props;
 
+  const theme = useTheme();
+
   const memoizedTitle = useMemo(() => {
     const testId = props["test-id"]
       ? `${props["test-id"]}_${pageHeaderBackButtonTestId}`
       : pageHeaderBackButtonTestId;
 
     return (
-      <div onClick={onBack} css={titleWrapperStyle ?? headerTitleWrapperStyle}>
-        {leftOutlinedIcon ?? (
-          <ArrowLeftOutlined test-id={testId} css={iconBackStyle} />
+      <div
+        onClick={onBack}
+        css={cssStyleConversion(
+          theme,
+          titleWrapperStyle ?? headerTitleWrapperStyle
         )}
-        <span css={titleStyle ?? pageHeaderTitleStyle}>{title}</span>
+      >
+        {leftOutlinedIcon ?? (
+          <ArrowLeftOutlined test-id={testId} css={iconBackStyle(theme)} />
+        )}
+        <span
+          css={cssStyleConversion(theme, titleStyle ?? pageHeaderTitleStyle)}
+        >
+          {title}
+        </span>
       </div>
     );
-  }, [title, titleStyle, onBack, props, leftOutlinedIcon, titleWrapperStyle]);
+  }, [
+    title,
+    titleStyle,
+    onBack,
+    props,
+    leftOutlinedIcon,
+    titleWrapperStyle,
+    theme,
+  ]);
 
   return (
     <AntPageHeader
       ghost={false}
       backIcon={false}
-      css={pageHeaderStyle}
+      css={pageHeaderStyle(theme)}
       title={memoizedTitle}
       {...rest}
     />

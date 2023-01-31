@@ -73,7 +73,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   );
 
   const theeDotsBtn = useMemo(() => {
-    const threeDotsButtonStyles = [threeDotsButtonStyle, buttonStyle];
+    const threeDotsButtonStyles = [threeDotsButtonStyle(theme), buttonStyle];
 
     if (children) {
       return children;
@@ -88,7 +88,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
         </Button>
       );
     }
-  }, [buttonStyle, children]);
+  }, [buttonStyle, children, theme]);
 
   const dropDownContent = useMemo(() => {
     if (!withoutChildWrapper) {

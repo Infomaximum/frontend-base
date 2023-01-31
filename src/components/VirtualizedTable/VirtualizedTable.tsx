@@ -39,6 +39,7 @@ import { borderTopStyle } from "../Table/Table.styles";
 import { observer } from "mobx-react";
 import { RestModel } from "../../models/RestModel";
 import { withSpinPropsReplacer } from "./VirtualizedTable.utils";
+import { withTheme } from "../../decorators";
 
 const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [
   SortOrder,
@@ -414,6 +415,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
       scrollAreaHeight,
       empty,
       onScroll,
+      theme,
     } = this.props;
 
     const itemsCount = this.state.surfaceNodes.length;
@@ -438,7 +440,9 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
           />
         )}
         {this.loader}
-        {!showHeader && isShowDividers ? <div css={borderTopStyle} /> : null}
+        {!showHeader && isShowDividers ? (
+          <div css={borderTopStyle(theme)} />
+        ) : null}
         {itemsCount ? (
           <VirtualizedTableBody
             vListRef={this.vListRef}
@@ -459,5 +463,5 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
 }
 
 export const VirtualizedTable = observer(
-  withSpinPropsReplacer(VirtualizedTableComponent)
+  withTheme(withSpinPropsReplacer(VirtualizedTableComponent))
 );

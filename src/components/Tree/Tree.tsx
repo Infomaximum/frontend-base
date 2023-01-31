@@ -9,6 +9,7 @@ import {
 import { DownOutlined } from "../Icons/Icons";
 import type { DataNode } from "antd/lib/tree";
 import { map } from "lodash";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 /** Метод возвращает новые данные дерева с добавлением classNames для различных состояний */
 const mapTreeData = (
@@ -38,25 +39,26 @@ const mapTreeData = (
 };
 
 const TreeComponent: React.FC<ITreeProps> & {
-  SwitcherIcon: React.ReactElement;
+  getSwitcherIcon: (theme: TTheme) => React.ReactElement;
   DisabledNodeClassName: string;
   UnselectableNodeClassName: string;
 } = (props) => {
+  const theme = useTheme();
   const treeData = useMemo(() => mapTreeData(props.treeData), [props.treeData]);
 
   return (
     <AntTree
-      switcherIcon={TreeComponent.SwitcherIcon}
+      switcherIcon={TreeComponent.getSwitcherIcon(theme)}
       {...props}
       treeData={treeData}
-      css={treeStyle}
+      css={treeStyle(theme)}
     />
   );
 };
 
-TreeComponent.SwitcherIcon = (
-  <span css={treeSwitcherIconContainerStyle}>
-    <DownOutlined css={treeSwitcherIconStyle} />
+TreeComponent.getSwitcherIcon = (theme: TTheme) => (
+  <span css={treeSwitcherIconContainerStyle(theme)}>
+    <DownOutlined css={treeSwitcherIconStyle(theme)} />
   </span>
 );
 

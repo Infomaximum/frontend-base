@@ -13,6 +13,7 @@ import {
   bannerContentStyle,
 } from "./BannerContent.styles";
 import { showMoreBannerTestId } from "../../../../utils/TestIds";
+import { useTheme } from "../../../../decorators";
 
 const BannerContentComponent: React.FC<IBannerContentProps> = ({
   md,
@@ -24,6 +25,7 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [containerWidth, setContainerRef] = useContainerWidth();
   const localization = useLocalization();
+  const theme = useTheme();
 
   useEffect(() => {
     setContainerRef(contentRef.current);
@@ -68,7 +70,7 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
   const mdViewOptions = useMemo(() => ({ strikethrough: true }), []);
 
   return (
-    <div ref={contentRef} className={className} css={bannerContentStyle}>
+    <div ref={contentRef} className={className} css={bannerContentStyle(theme)}>
       <MarkdownView
         markdown={md}
         components={mdViewComponents}
@@ -79,7 +81,7 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
           {`... `}
           <Button
             type="link"
-            css={bannerContentShowMoreButtonStyle}
+            css={bannerContentShowMoreButtonStyle(theme)}
             onClick={handleShowMoreButtonClick}
             test-id={showMoreBannerTestId}
           >

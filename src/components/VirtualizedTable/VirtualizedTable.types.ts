@@ -7,6 +7,7 @@ import type React from "react";
 import type { ScrollParams } from "react-virtualized";
 import type { TBaseRow, TExtendColumns } from "../../managers/Tree";
 import type { IBaseColumnConfig } from "../Table/Table.types";
+import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 
 export interface IColumnProps<T = any> extends IBaseColumnConfig<T> {
   /** Позволяет раскрыть строку виртуализированной таблицы при клике на конкретную ячейку */
@@ -31,6 +32,7 @@ export interface IVirtualizedTableProps<T>
       | "onChange"
     >,
     IWithLocProps,
+    IWithThemeProps<TTheme>,
     IWithSpinPropsReplacer {
   loading: boolean;
   targetAll?: boolean;

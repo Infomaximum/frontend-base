@@ -12,11 +12,15 @@ import {
   tableExpandIconStyle,
 } from "./TableExpandIcon.styles";
 import type { ITableExpandIconProps } from "./TableExpandIcon.types";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
 
 const TableExpandIconComponent = <T extends TDictionary>(
   props: ITableExpandIconProps<T | null>
 ) => {
   const { onExpand, record, expanded, expandable } = props;
+
+  const theme = useTheme();
+
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       onExpand(record, e);
@@ -30,7 +34,7 @@ const TableExpandIconComponent = <T extends TDictionary>(
       type="button"
       onClick={handleClick}
       css={[
-        tableExpandIconStyle,
+        tableExpandIconStyle(theme),
         !expandable ? tableExpandIconHiddenStyle : null,
       ]}
       test-id={tableExpanderTestId}

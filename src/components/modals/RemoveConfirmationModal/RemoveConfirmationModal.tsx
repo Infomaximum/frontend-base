@@ -25,6 +25,7 @@ import type {
   IRemoveConfirmationModalProps,
   IRemoveConfirmationModalState,
 } from "./RemoveConfirmationModal.types";
+import { withTheme } from "../../../decorators";
 
 class RemoveConfirmationModalComponent extends PureComponent<
   IRemoveConfirmationModalProps,
@@ -40,18 +41,18 @@ class RemoveConfirmationModalComponent extends PureComponent<
   } as const;
 
   private getContentBodyModal = () => {
-    const { localization, title } = this.props;
+    const { localization, title, theme } = this.props;
 
     return (
       <div css={modalContentStyle}>
         <div>
-          <CloseCircleOutlined css={iconStyle} />
+          <CloseCircleOutlined css={iconStyle(theme)} />
         </div>
         <div>
-          <span css={titleModalStyle}>
+          <span css={titleModalStyle(theme)}>
             {title ? title : localization.getLocalized(DELETION)}
           </span>
-          <span css={bodyModalStyle}>{this.props.children}</span>
+          <span css={bodyModalStyle(theme)}>{this.props.children}</span>
         </div>
       </div>
     );
@@ -142,5 +143,5 @@ class RemoveConfirmationModalComponent extends PureComponent<
 }
 
 export const RemoveConfirmationModal = withLoc(
-  RemoveConfirmationModalComponent
+  withTheme(RemoveConfirmationModalComponent)
 );

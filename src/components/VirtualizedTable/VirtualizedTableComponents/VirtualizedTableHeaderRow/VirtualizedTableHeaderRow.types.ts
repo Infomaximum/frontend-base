@@ -1,3 +1,4 @@
+import type { IWithThemeProps } from "../../../../decorators/hocs/withTheme/withTheme";
 import type {
   IVirtualizedTableProps,
   IVirtualizedTableState,
@@ -10,7 +11,8 @@ export interface IVirtualizedTableHeaderRowProps<T>
     Pick<
       IVirtualizedTableHeaderCellProps<T>,
       "onSorterChange" | "columnsOrders"
-    > {
+    >,
+    IWithThemeProps<TTheme> {
   isTableEmpty: boolean;
   isCheckable: boolean;
   isSelectionEmpty: boolean;

@@ -14,6 +14,7 @@ import {
   NO_ACCESS,
   NOTHING_FOUND_CHANGE_QUERY,
 } from "../../../utils/Localization/Localization";
+import { useTheme } from "../../../decorators/hooks/useTheme";
 
 /**
  * Placeholder выпадающего списка (данные запрашиваются 1 раз).
@@ -28,6 +29,7 @@ const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
   emptyText,
 }) => {
   const localization = useLocalization();
+  const theme = useTheme();
 
   if (!!searchText) {
     return (
@@ -44,7 +46,7 @@ const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
         image={<NoAccess />}
         imageStyle={emptyImageStyle}
         description={localization.getLocalized(NO_ACCESS)}
-        css={emptyStyle}
+        css={emptyStyle(theme)}
       />
     );
   }
@@ -55,7 +57,7 @@ const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
       image={<NothingFoundBox />}
       imageStyle={emptyImageStyle}
       description={emptyText ?? localization.getLocalized(EMPTY_HERE)}
-      css={emptyStyle}
+      css={emptyStyle(theme)}
     />
   );
 };

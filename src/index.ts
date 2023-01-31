@@ -1,6 +1,17 @@
 import "./global.types";
 import "./svg.types";
 
+import { configure } from "mobx";
+
+configure({
+  useProxies: "never",
+  enforceActions: "always",
+  computedRequiresReaction: false,
+  reactionRequiresObservable: false,
+  observableRequiresReaction: false,
+  disableErrorBoundaries: true,
+});
+
 export * from "./components";
 export * from "./decorators";
 export * from "./managers";

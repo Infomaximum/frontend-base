@@ -21,6 +21,7 @@ import {
 } from "./Empty.styles";
 import type { IEmptyProps } from "./Empty.types";
 import { isBoolean, isUndefined } from "lodash";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 const EmptyComponent: React.FC<IEmptyProps> = ({
   isFiltersEmpty,
@@ -33,6 +34,7 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
   customEmptyTableStyle,
 }) => {
   const localization = useLocalization();
+  const theme = useTheme();
 
   let emptyImage: React.ReactNode = <EmptyHereForNowSVG />;
   let emptyCaption: React.ReactNode = localization.getLocalized(EMPTY_HERE);
@@ -55,9 +57,9 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
   }
 
   const emptyDescription = (
-    <span css={emptyDescriptionStyle}>{emptyCaption}</span>
+    <span css={emptyDescriptionStyle(theme)}>{emptyCaption}</span>
   );
-  const emptyHint = hint && <span css={emptyHintStyle}>{hint}</span>;
+  const emptyHint = hint && <span css={emptyHintStyle(theme)}>{hint}</span>;
 
   const defaultEmptyContent = (
     <AntEmpty

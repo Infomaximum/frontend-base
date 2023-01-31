@@ -17,8 +17,11 @@ import Icon, {
   CheckCircleFilled,
   ExclamationCircleFilled,
 } from "../../components/Icons/Icons";
+import { useTheme } from "../../decorators";
 
 const AlertComponent: React.FC<IAlertProps> = (props) => {
+  const theme = useTheme();
+
   const icon = useMemo(() => {
     let iconComponent: React.FC;
     switch (props.type) {
@@ -37,30 +40,30 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
   }, [props.type]);
 
   const customStyle = useMemo(() => {
-    const style: Interpolation<TTheme> = [alertStyle];
+    const style: Interpolation<TTheme> = [alertStyle(theme)];
     switch (props.type) {
       case "success":
-        style.push(successAlertStyle);
+        style.push(successAlertStyle(theme));
         break;
       case "error":
-        style.push(errorAlertStyle);
+        style.push(errorAlertStyle(theme));
         break;
       case "info":
-        style.push(infoAlertStyle);
+        style.push(infoAlertStyle(theme));
         break;
       case "warning":
-        style.push(warningAlertStyle);
+        style.push(warningAlertStyle(theme));
         break;
       default:
-        style.push(infoAlertStyle);
+        style.push(infoAlertStyle(theme));
     }
 
     if (props.banner) {
-      style.push(alertBannerStyle);
+      style.push(alertBannerStyle(theme));
     }
 
     return style;
-  }, [props.type, props.banner]);
+  }, [props.type, props.banner, theme]);
 
   const hasDescription = !!props.description;
 
@@ -75,9 +78,9 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
   const memoizedDescription = useMemo(
     () =>
       props.description ? (
-        <span css={alertDescriptionStyle}>{props.description}</span>
+        <span css={alertDescriptionStyle(theme)}>{props.description}</span>
       ) : null,
-    [props.description]
+    [props.description, theme]
   );
 
   return (

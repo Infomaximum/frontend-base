@@ -6,7 +6,7 @@ export const loaderWrapperStyle = {
   maxHeight: "400px",
 } as const;
 
-export const getEmptyContentStyle = (maxHeight: number) => () =>
+export const getEmptyContentStyle = (maxHeight: number) =>
   ({
     padding: "16px",
     height: `${maxHeight}px`,

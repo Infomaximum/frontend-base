@@ -6,12 +6,15 @@ import type {
 } from "./ContextMenuTable.types";
 import { threeDotsStyle } from "./ContextMenuTable.styles";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 const ContextMenuTableComponent: React.FC<IContextMenuTableProps> = ({
   onSelect,
   data,
   items,
 }) => {
+  const theme = useTheme();
+
   const content = map(
     items,
     ({
@@ -54,7 +57,7 @@ const ContextMenuTableComponent: React.FC<IContextMenuTableProps> = ({
     <ContextMenu
       content={content}
       placement="bottomRight"
-      css={threeDotsStyle}
+      css={threeDotsStyle(theme)}
     />
   );
 };

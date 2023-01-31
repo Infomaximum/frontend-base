@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ellipsisStyle, tableLinkStyle } from "./TableLink.styles";
 import type { ITableLinkProps } from "./TableLink.types";
 import { Tooltip } from "../../../Tooltip/Tooltip";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
 
 const TableLinkComponent: FC<ITableLinkProps> = ({
   ellipsis = true,
@@ -10,9 +11,11 @@ const TableLinkComponent: FC<ITableLinkProps> = ({
   children,
   ...restProps
 }) => {
+  const theme = useTheme();
+
   const styles = useMemo(
-    () => [tableLinkStyle, ellipsis ? ellipsisStyle : null],
-    [ellipsis]
+    () => [tableLinkStyle(theme), ellipsis ? ellipsisStyle : null],
+    [ellipsis, theme]
   );
 
   const clearTitle = useMemo(() => {

@@ -28,10 +28,12 @@ import { kebabCase } from "lodash";
 import { CloseCircleOutlined, InfoCircleOutlined } from "../../Icons/Icons";
 import { observer } from "mobx-react";
 import { useFooterAndTitleHeight } from "./ErrorModal.utils";
+import { useTheme } from "../../../decorators/hooks/useTheme";
 
 const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
   ({ error, showModal, onCloseModal, isDebugMode }) => {
     const localization = useLocalization();
+    const theme = useTheme();
 
     const { footerHeight, footerCBRef, titleHeight, titleCBRef } =
       useFooterAndTitleHeight();
@@ -75,22 +77,28 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
         centered={true}
         closable={false}
         zIndex={1050}
-        css={modalStyle}
+        css={modalStyle(theme)}
         bodyStyle={bodyModalStyle}
         footer={footer}
       >
         <div key="modal-icon-wrap" css={iconWrapStyle}>
           {isInfo ? (
-            <InfoCircleOutlined key="info-icon-modal" css={infoIconStyle} />
+            <InfoCircleOutlined
+              key="info-icon-modal"
+              css={infoIconStyle(theme)}
+            />
           ) : (
-            <CloseCircleOutlined key="close-icon-modal" css={errorIconStyle} />
+            <CloseCircleOutlined
+              key="close-icon-modal"
+              css={errorIconStyle(theme)}
+            />
           )}
         </div>
         <div key="modal-error-content" css={modalContentStyle}>
           <span
             key="title-error-modal"
             test-id={titleModalTestId}
-            css={titleStyle}
+            css={titleStyle(theme)}
             ref={titleCBRef}
           >
             {error.title || localization.getLocalized(ERROR_MESSAGE)}
@@ -99,7 +107,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
             <p
               key="content-error-modal"
               test-id={contentModalTestId}
-              css={textStyle(titleHeight, footerHeight)}
+              css={textStyle(titleHeight, footerHeight)(theme)}
             >
               {error.message}{" "}
               {isDebugMode && error.traceId && `[${error.traceId}]`}

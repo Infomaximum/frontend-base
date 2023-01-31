@@ -25,6 +25,7 @@ import { EllipsisTooltip } from "../EllipsisTooltip/EllipsisTooltip";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { useNavigate } from "react-router";
 import { ellipsisStyle } from "../../styles/common.styles";
+import { useTheme } from "../../decorators";
 
 // "Хлебные крошки" для нового списка сотрудников, который еще не реализован
 const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
@@ -43,6 +44,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
   const [labeledCrumbsWidth, setLabeledCrumbsElement] = useContainerWidth();
 
   const navigate = useNavigate();
+  const theme = useTheme();
 
   function createCrumbHandler(path: string) {
     return () => navigate(path);
@@ -52,11 +54,11 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
     return (
       <div
         key="home"
-        css={crumbStyle(crumbXPadding)}
+        css={crumbStyle(crumbXPadding)(theme)}
         onClick={createCrumbHandler(homePath)}
       >
         <Tooltip title={homeTitle} placement="bottomLeft">
-          <HomeOutlined css={homeIconStyle} key="home" />
+          <HomeOutlined css={homeIconStyle(theme)} key="home" />
         </Tooltip>
       </div>
     );
@@ -81,7 +83,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
 
     return (
       <Dropdown key="show-more" overlay={menu}>
-        <div css={crumbStyle(crumbXPadding)}>
+        <div css={crumbStyle(crumbXPadding)(theme)}>
           <Tooltip title={showMoreTitle} placement="bottomLeft">
             <ThreeDotsSVG style={threeDotsIconStyle} />
           </Tooltip>
@@ -91,7 +93,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
   }
 
   const renderSeparator = (i: number) => (
-    <div key={i} css={separatorStyle(separatorWidth)}>
+    <div key={i} css={separatorStyle(separatorWidth)(theme)}>
       {"/"}
     </div>
   );

@@ -6,6 +6,8 @@ import type {
 } from "./BaseDropdown.types";
 import { menuStyle, mainBaseDropdownOverlayStyle } from "./BaseDropdown.styles";
 import { DropdownAnimationInterval } from "../../../utils/const";
+import { withTheme } from "../../../decorators";
+import { cssStyleConversion } from "../../../styles";
 
 export enum EBaseDropdownPlacement {
   bottomLeft = "bottomLeft",
@@ -103,10 +105,14 @@ class BaseDropdownComponent extends React.PureComponent<
 
   private get menu() {
     const { isShowMenu, isShowChildren } = this.state;
+    const { theme, menuStyle: menuStyleProps } = this.props;
 
     return (
       <>
-        <div key="wrapper-menu" css={[menuStyle, this.props.menuStyle]}>
+        <div
+          key="wrapper-menu"
+          css={cssStyleConversion(theme, [menuStyle, menuStyleProps])}
+        >
           {isShowMenu || (!isShowMenu && isShowChildren)
             ? this.props.children
             : null}
@@ -140,4 +146,4 @@ class BaseDropdownComponent extends React.PureComponent<
   }
 }
 
-export const BaseDropdown = BaseDropdownComponent;
+export const BaseDropdown = withTheme(BaseDropdownComponent);

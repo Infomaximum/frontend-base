@@ -21,14 +21,17 @@ import type {
 } from "./Input.types";
 import type { AutoSizeType } from "rc-textarea";
 import type { InputRef, PasswordProps } from "antd/lib/input";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
   (props, ref: Ref<InputRef>) => {
+    const theme = useTheme();
+
     return (
       <AntInput
         {...props}
         ref={ref}
-        css={props.disabled ? disabledInputStyle : defaultInputStyle}
+        css={props.disabled ? disabledInputStyle : defaultInputStyle(theme)}
       />
     );
   }
@@ -37,11 +40,12 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
 const InputPassword: ForwardRefExoticComponent<
   PasswordProps & RefAttributes<any>
 > = forwardRef((props, ref: Ref<InputRef>) => {
+  const theme = useTheme();
   return (
     <AntInput.Password
       {...props}
       ref={ref}
-      css={props.disabled ? disabledInputStyle : defaultInputStyle}
+      css={props.disabled ? disabledInputStyle : defaultInputStyle(theme)}
     />
   );
 });
@@ -49,6 +53,8 @@ const InputPassword: ForwardRefExoticComponent<
 const TextArea: ForwardRefExoticComponent<
   ITextAreaProps & RefAttributes<TextAreaRef>
 > = forwardRef((props, ref: Ref<TextAreaRef>) => {
+  const theme = useTheme();
+
   const autoSize = useMemo<AutoSizeType>(
     () => ({
       minRows: 3,
@@ -62,7 +68,7 @@ const TextArea: ForwardRefExoticComponent<
       autoSize={autoSize} // системное поведение по умолчанию
       {...props}
       ref={ref}
-      css={props.disabled ? disabledTextAreaStyle : undefined}
+      css={props.disabled ? disabledTextAreaStyle(theme) : undefined}
     />
   );
 });

@@ -7,17 +7,19 @@ import {
   spinStyle,
 } from "./RestLoadingIndicator.styles";
 import type { IRestLoadingIndicatorProps } from "./RestLoadingIndicator.types";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 const RestLoadingIndicatorComponent: React.FC<IRestLoadingIndicatorProps> = ({
   currentCount,
   totalCount,
 }) => {
   const localization = useLocalization();
+  const theme = useTheme();
 
   return (
     <div css={containerStyle}>
       <Space size={16}>
-        <div css={labelStyle}>
+        <div css={labelStyle(theme)}>
           {localization.getLocalized(SHOWING_OF, {
             templateData: {
               currentCount,

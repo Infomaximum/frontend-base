@@ -3,12 +3,15 @@ import { isArray, isString, last } from "lodash";
 import React, { forwardRef } from "react";
 import { tableBodyCellStyle } from "./TableBodyCell.styles";
 import type { ITableBodyCellProps } from "./TableBodyCell.types";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
 
 const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
   (
     { children, showTooltip, ...restProps },
     ref: React.Ref<HTMLTableCellElement>
   ) => {
+    const theme = useTheme();
+
     const getTitle = () => {
       let title: string | null = null;
 
@@ -31,7 +34,12 @@ const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
     };
 
     return (
-      <td {...restProps} css={tableBodyCellStyle} ref={ref} title={undefined}>
+      <td
+        {...restProps}
+        css={tableBodyCellStyle(theme)}
+        ref={ref}
+        title={undefined}
+      >
         {showTooltip ? (
           <Tooltip title={getTitle()}>{children}</Tooltip>
         ) : (

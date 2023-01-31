@@ -49,7 +49,7 @@ const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
 
     const styleFromColor = {
       [RED]: redButtonStyle(theme)(size),
-      [DEFAULT]: defaultButtonStyle(size),
+      [DEFAULT]: defaultButtonStyle(size)(theme),
     };
 
     return (

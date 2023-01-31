@@ -1,8 +1,11 @@
 import type React from "react";
 import type { TLocalizationDescription } from "@im/localization";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
+import type { IWithThemeProps } from "../../../decorators/hocs/withTheme/withTheme";
 
-export interface IRemoveConfirmationModalProps extends IWithLocProps {
+export interface IRemoveConfirmationModalProps
+  extends IWithLocProps,
+    IWithThemeProps<TTheme> {
   /**
    * Отобразить/скрыть модальное окно
    */

@@ -62,6 +62,7 @@ import {
   DropdownAnimationInterval,
 } from "../../utils/const";
 import type { BaseSelectRef } from "rc-select";
+import { useTheme } from "../../decorators/hooks/useTheme";
 
 const { OptGroup, Option } = AntSelect;
 
@@ -99,6 +100,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   ...rest
 }: ISelectProps<T>) => {
   const localization = useLocalization();
+  const theme = useTheme();
   showSearch = showSearch ?? (mode ? true : false); // значение по умолчанию в соответствии с antd
   showArrow = !disabled && showArrow; // системное поведение
 
@@ -250,21 +252,24 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       const { label, closable, onClose } = props;
 
       const closeIcon = (
-        <CloseOutlined onMouseDown={handleMouseDown} css={closeIconStyle} />
+        <CloseOutlined
+          onMouseDown={handleMouseDown}
+          css={closeIconStyle(theme)}
+        />
       );
 
       return (
         <Tag
           closable={closable}
           onClose={onClose}
-          css={!closable ? disableTagStyle : tagStyle}
+          css={!closable ? disableTagStyle(theme) : tagStyle(theme)}
           closeIcon={closeIcon}
         >
           {label}
         </Tag>
       );
     },
-    [handleMouseDown]
+    [handleMouseDown, theme]
   );
 
   const suffixIcon = useMemo(() => {
@@ -280,8 +285,13 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       return suffixIconProps;
     }
 
-    return <ArrowDownSVG key="select-icon-suffix-down" css={suffixIconStyle} />;
-  }, [loadingState, suffixIconProps]);
+    return (
+      <ArrowDownSVG
+        key="select-icon-suffix-down"
+        css={suffixIconStyle(theme)}
+      />
+    );
+  }, [loadingState, suffixIconProps, theme]);
 
   const getPlaceholder = () => {
     return disabled
@@ -302,10 +312,10 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     ]).length;
 
     const selectStyles: ArrayInterpolation<TTheme> = [
-      displaySelectStyle(iconSlotCount),
+      displaySelectStyle(iconSlotCount)(theme),
     ];
     if (disabled) {
-      selectStyles.push(disableSelectStyle);
+      selectStyles.push(disableSelectStyle(theme));
     }
 
     if (mode === "multiple") {
@@ -313,7 +323,14 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     }
 
     return selectStyles;
-  }, [disabled, isClearIconOverSuffix, isShowIconClear, mode, showArrow]);
+  }, [
+    disabled,
+    isClearIconOverSuffix,
+    isShowIconClear,
+    mode,
+    showArrow,
+    theme,
+  ]);
 
   const getOptionLabelProp = () => {
     if (optionLabelProp) {

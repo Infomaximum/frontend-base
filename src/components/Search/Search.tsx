@@ -10,15 +10,16 @@ import {
   searchSmallInputStyle,
 } from "./Search.style";
 import type { Interpolation } from "@emotion/react";
+import { withTheme } from "../../decorators";
 
 class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   public static defaultProps = {
     allowClear: true,
-    size: "middle",
+    size: "middle" as const,
   };
 
-  private static prefixIcon = (
-    <SearchOutlined key="search-icon" css={iconStyle} />
+  private static getPrefixIcon = (theme: TTheme) => (
+    <SearchOutlined key="search-icon" css={iconStyle(theme)} />
   );
 
   private timer: NodeJS.Timer | undefined;
@@ -71,7 +72,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   };
 
   public override render() {
-    const { onChange, value, size, ...rest } = this.props;
+    const { onChange, value, size, theme, ...rest } = this.props;
 
     let inputStyle: Interpolation<TTheme>;
 
@@ -80,7 +81,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
         inputStyle = searchMiddleInputStyle;
         break;
       case "small":
-        inputStyle = searchSmallInputStyle;
+        inputStyle = searchSmallInputStyle(theme);
         break;
       default:
         break;
@@ -90,7 +91,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
       <Input
         css={inputStyle}
         key="search"
-        prefix={Search.prefixIcon}
+        prefix={SearchComponent.getPrefixIcon(theme)}
         {...rest}
         value={this.state.searchText}
         onChange={this.handleChangeState}
@@ -99,4 +100,4 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   }
 }
 
-export const Search = SearchComponent;
+export const Search = withTheme(SearchComponent);

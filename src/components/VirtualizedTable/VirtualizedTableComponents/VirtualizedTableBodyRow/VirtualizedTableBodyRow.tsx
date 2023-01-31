@@ -20,6 +20,7 @@ import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
 import { TableCheckboxCell } from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
 
 export const VirtualizedTableBodyRowComponent = <T extends TRow>(
   props: IVirtualizedTableBodyRowProps<T | null>
@@ -41,6 +42,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     onExpanderChange,
     isShowDivider,
   } = props;
+  const theme = useTheme();
   const isRowDisable = checkboxProps ? checkboxProps.disabled : false;
 
   const selectChange = useCallback(
@@ -57,7 +59,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     const Component = selectionType === "radio" ? Radio : Checkbox;
 
     return (
-      <div css={virtualizedTableCheckboxCellStyle}>
+      <div css={virtualizedTableCheckboxCellStyle(theme)}>
         <TableCheckboxCell>
           <Component
             checked={isChecked}
@@ -75,8 +77,8 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
       <div
         css={[
           isChecked
-            ? checkedVirtualizedTableBodyRowStyle
-            : usualVirtualizedTableBodyRowStyle,
+            ? checkedVirtualizedTableBodyRowStyle(theme)
+            : usualVirtualizedTableBodyRowStyle(theme),
           enableRowClick &&
             !isRowDisable &&
             clickableVirtualizedTableBodyRowStyle,
@@ -104,7 +106,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
       </div>
       {loading && (
         <div
-          css={virtualizedTableBodyRowLoadingCoverStyle}
+          css={virtualizedTableBodyRowLoadingCoverStyle(theme)}
           test-id={tableRowLoadingTestId}
         />
       )}

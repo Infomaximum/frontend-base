@@ -16,13 +16,22 @@ import {
   virtualizedTableHeaderSortedCellStyle,
   virtualizedTableHeaderSortedCellActiveStyle,
 } from "./VirtualizedTableHeaderCell.styles";
+import { useTheme } from "../../../../decorators/hooks/useTheme";
 
-const getSorterArrowStyle = (isUp: boolean, isActive: boolean) => {
+const getSorterArrowStyle = (
+  isUp: boolean,
+  isActive: boolean,
+  theme: TTheme
+) => {
   if (isUp) {
-    return isActive ? sorterArrowUpActiveStyle : sorterArrowUpStyle;
+    return isActive
+      ? sorterArrowUpActiveStyle(theme)
+      : sorterArrowUpStyle(theme);
   }
 
-  return isActive ? sorterArrowDownActiveStyle : sorterArrowDownStyle;
+  return isActive
+    ? sorterArrowDownActiveStyle(theme)
+    : sorterArrowDownStyle(theme);
 };
 
 const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
@@ -31,6 +40,8 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
   const { column, onSorterChange, columnsOrders, isSorted, sortOrder } = props;
   const { key, title, width, sorter: isColumnSorter, minWidth } = column || {};
 
+  const theme = useTheme();
+
   const handleClick = useMemo(
     () => (isColumnSorter ? () => onSorterChange(column) : undefined),
     [column, isColumnSorter, onSorterChange]
@@ -38,15 +49,17 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
 
   const cellStyle = useMemo(() => {
     if (!isColumnSorter) {
-      return virtualizedTableHeaderCellStyle;
+      return virtualizedTableHeaderCellStyle(theme);
     }
 
     return [
-      virtualizedTableHeaderCellStyle,
-      virtualizedTableHeaderSortedCellStyle,
-      isSorted && sortOrder && virtualizedTableHeaderSortedCellActiveStyle,
+      virtualizedTableHeaderCellStyle(theme),
+      virtualizedTableHeaderSortedCellStyle(theme),
+      isSorted &&
+        sortOrder &&
+        virtualizedTableHeaderSortedCellActiveStyle(theme),
     ];
-  }, [isColumnSorter, isSorted, sortOrder]);
+  }, [isColumnSorter, isSorted, sortOrder, theme]);
 
   const getSorterButton = () => {
     const isUpActive = isSorted && sortOrder === ESortDirection.ASC;
@@ -59,13 +72,15 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
         <Col css={sorterColumnStyle}>
           {includes(columnOrders, ESortDirection.ASC) && (
             <Row key="asc">
-              <CaretUpOutlined css={getSorterArrowStyle(true, isUpActive)} />
+              <CaretUpOutlined
+                css={getSorterArrowStyle(true, isUpActive, theme)}
+              />
             </Row>
           )}
           {includes(columnOrders, ESortDirection.DESC) && (
             <Row key="desc">
               <CaretDownOutlined
-                css={getSorterArrowStyle(false, isDownActive)}
+                css={getSorterArrowStyle(false, isDownActive, theme)}
               />
             </Row>
           )}

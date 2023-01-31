@@ -27,9 +27,9 @@ export const alertStyle = (theme: TTheme) =>
     },
   } as const);
 
-export const boldTitleStyle = () => ({
+export const boldTitleStyle = {
   fontWeight: "bold",
-});
+};
 
 export const alertDescriptionStyle = (theme: TTheme) => ({
   color: theme.grey8Color,

@@ -32,7 +32,7 @@ const ServiceModePanelComponent: React.FC<IServiceModePanelProps> = ({
       test-id={authorizationServiceModePanelTestId}
       icon={icon}
       backgroundColor={theme.brandDarkColor}
-      css={serviceModeBannerStyle}
+      css={serviceModeBannerStyle(theme)}
       wrapperContentStyle={wrapperContentStyle}
     />
   );

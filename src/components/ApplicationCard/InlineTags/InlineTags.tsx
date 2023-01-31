@@ -14,11 +14,14 @@ import {
   tooltipSeparator,
 } from "./InlineTags.utils";
 import { Tag } from "../../../components/Tag/Tag";
+import { useTheme } from "../../../decorators";
 
 const InlineTagsComponent: React.FC<IInlineTagsProps> = ({
   tags,
   measuredWidth,
 }) => {
+  const theme = useTheme();
+
   const [placedTags, outsideTags] = useMemo(() => {
     const numberOfPlacedTags = getNumberOfPlacedTags(tags, measuredWidth);
 
@@ -53,11 +56,11 @@ const InlineTagsComponent: React.FC<IInlineTagsProps> = ({
           placement="bottomLeft"
           title={join(tagNames, tooltipSeparator)}
         >
-          <div css={ellipsisStyle}>{outerEllipsisText}</div>
+          <div css={ellipsisStyle(theme)}>{outerEllipsisText}</div>
         </Tooltip>
       );
     }
-  }, [outsideTags]);
+  }, [outsideTags, theme]);
 
   return (
     <div style={containerStyle}>

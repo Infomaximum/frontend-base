@@ -6,7 +6,7 @@ export const borderTopStyle = (theme: TTheme) =>
     height: "0",
   } as const);
 
-export const emptyTableStyle = () => ({
+export const emptyTableStyle = {
   ".ant-table-tbody > tr > td": {
     borderBottom: "none",
   },
@@ -14,7 +14,7 @@ export const emptyTableStyle = () => ({
   ".ant-table .ant-table-expanded-row-fixed": {
     width: "100% !important",
   },
-});
+};
 
 export const transparentBordersStyle = {
   ".ant-table-cell": {

@@ -139,12 +139,12 @@ export const suffixIconStyle = (theme: TTheme) => ({
   },
 });
 
-export const suffixIconSpinnerStyle = () => ({
+export const suffixIconSpinnerStyle = {
   height: "14px",
   ".ant-spin": {
     lineHeight: "unset",
   },
-});
+};
 
 export const textWrapperStyle = {
   whiteSpace: "nowrap",

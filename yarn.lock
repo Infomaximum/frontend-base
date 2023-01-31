@@ -1016,7 +1016,7 @@
     "@babel/helper-validator-option" "^7.18.6"
     "@babel/plugin-transform-typescript" "^7.18.6"
 
-"@babel/runtime@^7.10.0", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.15.4", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.0", "@babel/runtime@^7.20.7", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.0", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.15.4", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.0", "@babel/runtime@^7.20.7", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.20.13"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
   integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
@@ -1067,7 +1067,7 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@emotion/babel-plugin@11.10.5", "@emotion/babel-plugin@^11.7.1":
+"@emotion/babel-plugin@11.10.5", "@emotion/babel-plugin@^11.10.5":
   version "11.10.5"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/babel-plugin/-/babel-plugin-11.10.5.tgz#65fa6e1790ddc9e23cc22658a4c5dea423c55c3c"
   integrity sha512-xE7/hyLHJac7D2Ve9dKroBBZqBT7WuPQmWcq7HSGb84sUuP4mlOWoB8dvVfD9yk5DHkU1m6RW7xSoDtnQHNQeA==
@@ -1085,7 +1085,7 @@
     source-map "^0.5.7"
     stylis "4.1.3"
 
-"@emotion/cache@^11.7.1":
+"@emotion/cache@^11.10.5":
   version "11.10.5"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/cache/-/cache-11.10.5.tgz#c142da9351f94e47527ed458f7bbbbe40bb13c12"
   integrity sha512-dGYHWyzTdmK+f2+EnIGBpkz1lKc4Zbj2KHd4cX3Wi8/OWr5pKslNjc3yABKH4adRGCvSX4VDC0i04mrrq0aiRA==
@@ -1106,20 +1106,21 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/memoize/-/memoize-0.8.0.tgz#f580f9beb67176fa57aae70b08ed510e1b18980f"
   integrity sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==
 
-"@emotion/react@11.8.2":
-  version "11.8.2"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/react/-/react-11.8.2.tgz#e51f5e6372e22e82780836c9288da19af4b51e70"
-  integrity sha512-+1bcHBaNJv5nkIIgnGKVsie3otS0wF9f1T1hteF3WeVvMNQEtfZ4YyFpnphGoot3ilU/wWMgP2SgIDuHLE/wAA==
+"@emotion/react@11.10.5":
+  version "11.10.5"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/react/-/react-11.10.5.tgz#95fff612a5de1efa9c0d535384d3cfa115fe175d"
+  integrity sha512-TZs6235tCJ/7iF6/rvTaOH4oxQg2gMAcdHemjwLKIjKz4rRuYe1HJ2TQJKnAcRAfOUDdU8XoDadCe1rl72iv8A==
   dependencies:
-    "@babel/runtime" "^7.13.10"
-    "@emotion/babel-plugin" "^11.7.1"
-    "@emotion/cache" "^11.7.1"
-    "@emotion/serialize" "^1.0.2"
-    "@emotion/utils" "^1.1.0"
-    "@emotion/weak-memoize" "^0.2.5"
+    "@babel/runtime" "^7.18.3"
+    "@emotion/babel-plugin" "^11.10.5"
+    "@emotion/cache" "^11.10.5"
+    "@emotion/serialize" "^1.1.1"
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
+    "@emotion/utils" "^1.2.0"
+    "@emotion/weak-memoize" "^0.3.0"
     hoist-non-react-statics "^3.3.1"
 
-"@emotion/serialize@^1.0.2", "@emotion/serialize@^1.1.1":
+"@emotion/serialize@^1.1.1":
   version "1.1.1"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/serialize/-/serialize-1.1.1.tgz#0595701b1902feded8a96d293b26be3f5c1a5cf0"
   integrity sha512-Zl/0LFggN7+L1liljxXdsVSVlg6E/Z/olVWpfxUTxOAmi8NU7YoeWeLfi1RmnB2TATHoaWwIBRoL+FvAJiTUQA==
@@ -1140,15 +1141,15 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/unitless/-/unitless-0.8.0.tgz#a4a36e9cbdc6903737cd20d38033241e1b8833db"
   integrity sha512-VINS5vEYAscRl2ZUDiT3uMPlrFQupiKgHz5AA4bCH1miKBg4qtwkim1qPmJj/4WG6TreYMY111rEFsjupcOKHw==
 
-"@emotion/utils@^1.1.0", "@emotion/utils@^1.2.0":
+"@emotion/use-insertion-effect-with-fallbacks@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/use-insertion-effect-with-fallbacks/-/use-insertion-effect-with-fallbacks-1.0.0.tgz#ffadaec35dbb7885bd54de3fa267ab2f860294df"
+  integrity sha512-1eEgUGmkaljiBnRMTdksDV1W4kUnmwgp7X9G8B++9GYwl1lUdqSndSriIrTJ0N7LQaoauY9JJ2yhiOYK5+NI4A==
+
+"@emotion/utils@^1.2.0":
   version "1.2.0"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/utils/-/utils-1.2.0.tgz#9716eaccbc6b5ded2ea5a90d65562609aab0f561"
   integrity sha512-sn3WH53Kzpw8oQ5mgMmIzzyAaH2ZqFEbozVVBSYp538E06OSE6ytOp7pRAjNQR+Q/orwqdQYJSe2m3hCOeznkw==
-
-"@emotion/weak-memoize@^0.2.5":
-  version "0.2.5"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
-  integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
 "@emotion/weak-memoize@^0.3.0":
   version "0.3.0"
@@ -1165,10 +1166,10 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz#98c23c950a3d9b6c8f0daed06da6c3af06981340"
   integrity sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==
 
-"@im/asserts@^1.0.0", "@im/asserts@^1.0.3":
-  version "1.0.3"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/asserts/-/asserts-1.0.3.tgz#2745385ee88f44d0f32bb8bede98df6a68afa348"
-  integrity sha512-ChzOwv9DDXQCF5U/cU1yHATgX8i1ed2OSKy9Bn/gJNlYeqV5Q5T3deUpNpfobAhfeXJuCpp4K54OeqF8/zj01A==
+"@im/asserts@^1.0.0":
+  version "1.0.4"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/asserts/-/asserts-1.0.4.tgz#6f026f4eb5e68272852792b0050b6a0491502414"
+  integrity sha512-GQQh6DDrMPJQW7a//AUFlDTqYgOcSLjckzJWlD2fW1S6UUVbRl3MoKtH1EIBorxs3qk0w/TCjrSn3cHpwbVNxg==
 
 "@im/configs@^1.2.1":
   version "1.2.1"
@@ -1177,17 +1178,10 @@
 
 "@im/core@^6.0.0-rc":
   version "6.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-6.0.0-rc.tgz#f990d5b2c9c885cc80c3e576b9cf019e4db6422d"
-  integrity sha512-xL4ibsINdR9gMwI5RqVEmy3KoBWLqKybVB8sc+cdvPqfcKMfdoim2QsLPxsyEuBPGjLOGBgPsLSn16oW+oVR5g==
-  dependencies:
-    "@im/asserts" "^1.0.3"
-    "@im/utils" "^6.0.0-rc"
-    lodash "4.17.21"
-    mobx "6.6.1"
-    reflect-metadata "0.1.13"
-    uuid "9.0.0"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-6.0.0-rc.tgz#e8c38c584f54fc96136b86f98d5adf115a4fea50"
+  integrity sha512-a6P/A6Jb6ocVc7cRge5fzUUUEvBO+fG3KTRnx+PBuW43s4U/KKS2WLdVv4SlCEgmXz12EzLT+Ws1tbarw86oHw==
 
-"@im/localization@^1.0.1", "@im/localization@^1.0.3":
+"@im/localization@^1.0.3":
   version "1.0.3"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/localization/-/localization-1.0.3.tgz#f646c652db813357e571b9f5d3f2c37507024325"
   integrity sha512-ooNelK7BSfnNTr4ShUGer85nXuHsyd1jNtgjaqM2QhUXNgsTa+28ftxRuz+ZZ8jq8Jr6ppmLgysuSNa7R9F6wA==
@@ -1195,22 +1189,15 @@
     "@im/asserts" "^1.0.0"
 
 "@im/models@^1.2.0":
-  version "1.2.0"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/models/-/models-1.2.0.tgz#f74998ec6ae3aefa6afa92b59e5653068b668b8b"
-  integrity sha512-BiVT7RlUKK7WTU6/aSoVbnn/Ji3Os2CfJ1Z6JlGIaH0eXpLWXRHu/LIjFiMPf/nTNy7Kqf51aqL007aYgSi2Og==
-  dependencies:
-    "@im/asserts" "^1.0.0"
-    lodash.get "4.4.2"
+  version "1.3.2"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/models/-/models-1.3.2.tgz#b820d11c5a7f8142d4d1b4756617461ec71cde81"
+  integrity sha512-JQc8f/vsTp7hX00kg8B+Emk9oCj+Ft4YZgJwGgtATO90WstwB0z1NV16e0vpyRVVQG7nSV96rVN0KNclh6LukQ==
 
 "@im/utils@^6.0.0-rc":
   version "6.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0-rc.tgz#2f91787b9e95002c92bd78a497eee8e26b116812"
-  integrity sha512-LZ35eBpbdb8IADzH97BjdJWf2uqhoGpvyIwc+XgxFjM+Cy+M3n90N1alML1fFboCNrgmQ0VIqk6tFauz4c91vQ==
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0-rc.tgz#3d4622c1437534fab65e94f96503077eddb780cb"
+  integrity sha512-SUyq2FCglQ4XiaMXaT7IrswkVrigRcNLld0j8FTkbbOIp9vpidpsLthdezFj47s4E25GyL/ePL2KLdEnTjTzoA==
   dependencies:
-    "@im/asserts" "^1.0.0"
-    "@im/configs" "^1.2.1"
-    "@im/localization" "^1.0.1"
-    "@im/models" "^1.2.0"
     crypto-js "4.1.1"
     graphql "16.3.0"
     graphql-tag "2.12.6"
@@ -4147,11 +4134,6 @@ lodash.flattendeep@^4.4.0:
   resolved "https://npm.office.infomaximum.com/repository/npm-group/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
   integrity sha512-uHaJFihxmJcEX3kT4I23ABqKKalJ/zDrDg0lsFtc1h+3uw49SIJ5beyhx5ExVRti3AvKoOJngIj7xz3oylPdWQ==
 
-lodash.get@4.4.2:
-  version "4.4.2"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-  integrity sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==
-
 lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
@@ -5378,11 +5360,6 @@ redent@^3.0.0:
   dependencies:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
-
-reflect-metadata@0.1.13:
-  version "0.1.13"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
-  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
 
 regenerate-unicode-properties@^10.1.0:
   version "10.1.0"

@@ -32,32 +32,7 @@ const getConfig = async () => ({
       filename: "main.css",
     }),
   ],
-  externals: {
-    react: {
-      root: "React",
-      commonjs2: "react",
-      commonjs: "react",
-      amd: "react",
-    },
-    "react-dom": {
-      root: "ReactDOM",
-      commonjs2: "react-dom",
-      commonjs: "react-dom",
-      amd: "react-dom",
-    },
-    "react-router": {
-      root: "ReactRouter",
-      commonjs2: "react-router",
-      commonjs: "react-router",
-      amd: "react-router",
-    },
-    "react-router-dom": {
-      root: "ReactRouterDom",
-      commonjs2: "react-router-dom",
-      commonjs: "react-router-dom",
-      amd: "react-router-dom",
-    },
-  },
+  externals: Object.keys(packageJson.peerDependencies),
   module: {
     rules: [
       {

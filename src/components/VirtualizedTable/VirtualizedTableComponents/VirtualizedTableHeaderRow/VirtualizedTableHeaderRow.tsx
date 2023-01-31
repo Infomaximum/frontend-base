@@ -22,22 +22,23 @@ import {
 import { TableCheckboxCell } from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
 import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
 import { TABLE_HEADER_ID } from "../../../../utils/const";
+import { withTheme } from "../../../../decorators";
 
 export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
   IVirtualizedTableHeaderRowProps<T>
 > {
-  private getHeaderStyle = createSelector(
-    (scrollOffset) => scrollOffset,
-    (scrollOffset: number | undefined, isShowDivider: boolean) => isShowDivider,
-    (scrollOffset, isShowDivider) => [
-      virtualizedTableHeaderRowStyle,
-      scrollOffset ? { paddingRight: `${scrollOffset}px` } : undefined,
-      isShowDivider ? null : withoutDividerStyle,
-    ]
-  );
+  private getHeaderStyle = (
+    scrollOffset: number | undefined,
+    isShowDivider: boolean,
+    theme: TTheme
+  ) => [
+    virtualizedTableHeaderRowStyle(theme),
+    scrollOffset ? { paddingRight: `${scrollOffset}px` } : undefined,
+    isShowDivider ? null : withoutDividerStyle,
+  ];
 
   private get checkbox() {
-    const { targetAll, isCheckable, isSelectionEmpty, isTableEmpty } =
+    const { targetAll, isCheckable, isSelectionEmpty, isTableEmpty, theme } =
       this.props;
 
     if (isCheckable) {
@@ -49,7 +50,10 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
       const isIndeterminate = !isTableEmpty && !targetAll && !isSelectionEmpty;
 
       return (
-        <div css={virtualizedTableCheckboxCellStyle} key="wrapper-checkbox">
+        <div
+          css={virtualizedTableCheckboxCellStyle(theme)}
+          key="wrapper-checkbox"
+        >
           <TableCheckboxCell>
             <Checkbox
               key="checkbox"
@@ -91,7 +95,7 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
   };
 
   public override render() {
-    const { scrollOffset, isShowDivider } = this.props;
+    const { scrollOffset, isShowDivider, theme } = this.props;
 
     return (
       <div
@@ -101,18 +105,23 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
       >
         <div
           key="wrapper"
-          css={this.getHeaderStyle(scrollOffset, isShowDivider)}
+          css={this.getHeaderStyle(scrollOffset, isShowDivider, theme)}
           test-id={virtualizedTableHeaderTestId}
         >
           {this.checkbox}
           {this.content}
         </div>
         {this.props.loading && (
-          <div key="block" css={virtualizedTableBodyRowLoadingCoverStyle} />
+          <div
+            key="block"
+            css={virtualizedTableBodyRowLoadingCoverStyle(theme)}
+          />
         )}
       </div>
     );
   }
 }
 
-export const VirtualizedTableHeaderRow = VirtualizedTableHeaderRowComponent;
+export const VirtualizedTableHeaderRow = withTheme(
+  VirtualizedTableHeaderRowComponent
+);
