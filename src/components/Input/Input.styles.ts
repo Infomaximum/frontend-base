@@ -20,3 +20,29 @@ export const defaultInputStyle = (theme: TTheme) => ({
   height: "28px",
   padding: "2px 7px",
 });
+
+export const defaultPasswordInputStyle = (theme: TTheme) => ({
+  ...defaultInputStyle(theme),
+  ".ant-input-suffix": {
+    marginRight: "-8px",
+    marginLeft: 0,
+    ".ant-input-password-icon.anticon": {
+      width: "28px",
+      height: "28px",
+      display: "flex",
+      alignItems: "center",
+      paddingLeft: "5px",
+      color: theme.grey6Color,
+      ":hover": {
+        color: theme.grey7Color,
+      },
+    },
+  },
+});
+
+export const disabledPasswordInputStyle = {
+  ...disabledInputStyle,
+  ".ant-input-password-icon.anticon": {
+    display: "none",
+  },
+};

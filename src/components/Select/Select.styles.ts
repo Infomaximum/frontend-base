@@ -1,3 +1,5 @@
+import { first, last, sum, takeRight, tail } from "lodash";
+
 export const disableSelectStyle = (theme: TTheme) => ({
   backgroundColor: theme.grey3Color,
   borderRadius: "4px",
@@ -18,11 +20,10 @@ export const multipleSelectStyle = {
 
 export const displaySelectStyle =
   (iconSlotCount: number) => (theme: TTheme) => {
-    const iconWidth = 16;
-    const spaceAroundIcons = 8;
-
-    const getSuffixWidth = (iconsCount: number) =>
-      iconsCount * iconWidth + (iconsCount + 1) * spaceAroundIcons;
+    const iconWidths = takeRight([24, 28], iconSlotCount);
+    const suffixWidth = sum(iconWidths);
+    const iconHeight = 28;
+    const inputRightPadding = suffixWidth ? 4 : 3;
 
     return {
       display: "block",
@@ -30,27 +31,34 @@ export const displaySelectStyle =
       lineHeight: "22px",
 
       ".ant-select-selector": {
-        paddingRight: `${
-          iconSlotCount ? getSuffixWidth(iconSlotCount) : 3
-        }px !important`,
+        paddingRight: `${suffixWidth}px !important`,
 
         ".ant-select-selection-search-input": {
           textOverflow: "ellipsis",
         },
 
+        ".ant-select-selection-overflow": {
+          paddingRight: `${inputRightPadding}px`,
+        },
+
+        "& > .ant-select-selection-search": {
+          right: `${suffixWidth}px`,
+          paddingRight: `${inputRightPadding}px`,
+        },
+
         // overlay для работы cursor: pointer
         "&:before": {
           position: "absolute",
-          width: `${getSuffixWidth(iconSlotCount)}px`,
-          height: "26px",
-          top: 0,
-          right: 0,
+          width: `${suffixWidth}px`,
+          height: `${iconHeight}px`,
+          top: "-1px",
+          right: "-1px",
           cursor: "pointer",
           content: "''",
         },
 
         ".ant-select-selection-placeholder": {
-          width: `calc(100% - ${getSuffixWidth(iconSlotCount)}px)`,
+          width: `calc(100% - ${suffixWidth}px)`,
         },
       },
       ".ant-select-selection-item": {
@@ -64,24 +72,30 @@ export const displaySelectStyle =
         },
       },
       ".ant-select-arrow, .ant-select-clear": {
-        top: "6px",
+        top: 0,
         marginTop: 0,
-        width: `${iconWidth}px`,
-        height: "unset",
-        alignItems: "unset",
-        fontSize: "14px",
-        lineHeight: 1.25,
+        height: `${iconHeight}px`,
       },
       ".ant-select-clear": {
+        width: `${first(iconWidths)}px`,
+        right: `${sum(tail(iconWidths))}px`,
         opacity: 1,
         color: `${theme.grey6Color}`,
-        right: `${iconSlotCount ? getSuffixWidth(iconSlotCount - 1) : 7}px`,
+        background: "transparent",
+        display: "flex",
+        alignItems: "center",
+        fontSize: "14px",
+        paddingLeft: "5px",
         ":hover": {
           color: theme.grey9Color,
         },
+        ".anticon-close-circle": {
+          background: theme.grey1Color, // для перекрытия иконки стрелки
+        },
       },
       ".ant-select-arrow": {
-        right: spaceAroundIcons,
+        width: `${last(iconWidths)}px`,
+        right: 0,
       },
       ".ant-select.ant-select-in-form-item": {
         display: "flex",
@@ -116,6 +130,7 @@ export const disableTagStyle = (theme: TTheme) => ({
   background: theme.grey3Color,
   border: `1px solid ${theme.grey5Color}`,
   color: theme.grey7Color,
+  paddingRight: "7px",
 });
 
 export const tagStyle = (theme: TTheme) => ({
@@ -133,14 +148,25 @@ export const closeIconStyle = (theme: TTheme) => ({
 });
 
 export const suffixIconStyle = (theme: TTheme) => ({
-  fill: theme.grey6Color,
+  paddingLeft: "5px",
+  display: "flex",
+  width: "100%",
+  height: "100%",
+  alignItems: "center",
+  pointerEvents: "auto" as const, // в antd по умолчанию none
+  svg: {
+    fill: theme.grey6Color,
+  },
   ":hover": {
-    fill: theme.grey9Color,
+    svg: {
+      fill: theme.grey9Color,
+    },
   },
 });
 
 export const suffixIconSpinnerStyle = {
   height: "14px",
+  paddingLeft: "5px",
   ".ant-spin": {
     lineHeight: "unset",
   },
@@ -151,3 +177,8 @@ export const textWrapperStyle = {
   textOverflow: "ellipsis",
   overflow: "hidden",
 } as const;
+
+export const arrowSuffixIconStyle = (theme: TTheme) => ({
+  ...suffixIconStyle(theme),
+  pointerEvents: "none" as const,
+});

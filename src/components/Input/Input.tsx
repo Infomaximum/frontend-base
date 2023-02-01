@@ -13,6 +13,8 @@ import {
   defaultInputStyle,
   disabledInputStyle,
   disabledTextAreaStyle,
+  disabledPasswordInputStyle,
+  defaultPasswordInputStyle,
 } from "./Input.styles";
 import type {
   IInputProps,
@@ -45,7 +47,11 @@ const InputPassword: ForwardRefExoticComponent<
     <AntInput.Password
       {...props}
       ref={ref}
-      css={props.disabled ? disabledInputStyle : defaultInputStyle(theme)}
+      css={
+        props.disabled
+          ? disabledPasswordInputStyle
+          : defaultPasswordInputStyle(theme)
+      }
     />
   );
 });

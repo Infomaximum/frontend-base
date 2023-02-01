@@ -43,9 +43,10 @@ const scrollStyle = (theme: TTheme) => {
       ...scrollDefaultStyle(theme),
     },
 
-    ".CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scroll, .rc-virtual-list-holder": {
-      ...scrollDefaultStyle(theme),
-    },
+    ".CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scroll, .rc-virtual-list-holder":
+      {
+        ...scrollDefaultStyle(theme),
+      },
 
     ".ant-dropdown *": {
       ...scrollDefaultStyle(theme),
@@ -110,19 +111,30 @@ const fixIEBugs = () => {
   }
 
   return {
-    "@media only screen and (-ms-high-contrast: active), (-ms-high-contrast: none)": {
-      /* Фикс для IE, чтобы теги внутри Select'а c mode = "tags" не растягивали контейнер вправо,
+    "@media only screen and (-ms-high-contrast: active), (-ms-high-contrast: none)":
+      {
+        /* Фикс для IE, чтобы теги внутри Select'а c mode = "tags" не растягивали контейнер вправо,
      а переходили на новую строку*/
-      ".ant-form-item-control-input": {
-        position: "relative",
-        display: "block", // flex у анта
-        alignItems: "center",
-        minHeight: "28px",
-      },
+        ".ant-form-item-control-input": {
+          position: "relative",
+          display: "block", // flex у анта
+          alignItems: "center",
+          minHeight: "28px",
+        },
 
-      // Фикс для IE, чтобы при открытии дропдауна не мерцал дропдаун
-      ".ant-select-dropdown": {
-        ".ant-select-item": {
+        // Фикс для IE, чтобы при открытии дропдауна не мерцал дропдаун
+        ".ant-select-dropdown": {
+          ".ant-select-item": {
+            ":after": {
+              content: "''",
+              position: "fixed",
+              display: "block",
+            },
+          },
+        },
+
+        // Фикс для IE, чтобы при открытии дропдауна не мерцала страница
+        ".ant-layout": {
           ":after": {
             content: "''",
             position: "fixed",
@@ -130,16 +142,6 @@ const fixIEBugs = () => {
           },
         },
       },
-
-      // Фикс для IE, чтобы при открытии дропдауна не мерцала страница
-      ".ant-layout": {
-        ":after": {
-          content: "''",
-          position: "fixed",
-          display: "block",
-        },
-      },
-    },
 
     // Фикс высоты Picker'ов IE
     ".ant-picker-input > input": {
@@ -302,13 +304,6 @@ const antGlobalStyle = (theme: TTheme) => ({
   ".ant-picker-suffix": {
     pointerEvents: "unset",
     cursor: "pointer",
-  },
-
-  ".ant-input-password-icon.anticon": {
-    color: theme.grey6Color,
-    ":hover": {
-      color: theme.grey7Color,
-    },
   },
 });
 

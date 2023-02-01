@@ -16,12 +16,12 @@ import React, {
 } from "react";
 import {
   closeIconStyle,
+  arrowSuffixIconStyle,
   disableSelectStyle,
   disableTagStyle,
   displaySelectStyle,
   multipleSelectStyle,
   suffixIconSpinnerStyle,
-  suffixIconStyle,
   tagStyle,
 } from "./Select.styles";
 import type { ISelectProps } from "./Select.types";
@@ -286,10 +286,9 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     }
 
     return (
-      <ArrowDownSVG
-        key="select-icon-suffix-down"
-        css={suffixIconStyle(theme)}
-      />
+      <div key="select-icon-suffix-down" css={arrowSuffixIconStyle(theme)}>
+        <ArrowDownSVG />
+      </div>
     );
   }, [loadingState, suffixIconProps, theme]);
 
@@ -305,10 +304,10 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     allowClear && ((isOpen && !!searchValue) || !isEmpty(value));
 
   const style = useMemo(() => {
-    // `arrow` всегда занимает место, а `clear` только когда не отображается поверх `arrow`
+    // `arrow` всегда занимает место, а `clear` только когда не отображается поверх `arrow` или когда нет `arrow`
     const iconSlotCount = filter([
       showArrow,
-      isShowIconClear && !isClearIconOverSuffix,
+      isShowIconClear && (!isClearIconOverSuffix || !showArrow),
     ]).length;
 
     const selectStyles: ArrayInterpolation<TTheme> = [
