@@ -8,6 +8,7 @@ const isProduction = process.env.NODE_ENV == "production";
 
 /** @type {import("webpack").Configuration} */
 const getConfig = async () => ({
+  mode: "production",
   entry: ["./src/App.less", "./src/index.ts"],
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -82,19 +83,12 @@ const getConfig = async () => ({
     ],
   },
   resolve: {
-    alias: {
-      [packageJson.name]: path.resolve(__dirname, "src/"),
-
-      [`${packageJson.name}/components`]: path.resolve(
-        __dirname,
-        "src/components"
-      ),
-      [`${packageJson.name}/utils`]: path.resolve(__dirname, "src/utils"),
-    },
     extensions: [".tsx", ".ts", ".jsx", ".js", ".mjs"],
-    plugins: [],
   },
-  devtool: "source-map",
+  optimization: {
+    minimize: true,
+  },
+  devtool: false,
 });
 
 module.exports = async () => {
