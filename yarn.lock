@@ -1195,8 +1195,8 @@
 
 "@im/utils@^99.0.0-rc":
   version "99.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-99.0.0-rc.tgz#a06c3271d6bedae53e8ca3e4fd12803a6f6bd34f"
-  integrity sha512-alfIAo99cZAr61WnXMBKB+BMOQiv1lg4hEov6MIuPg6oHg4/syCCK6hYXZYkEeFf7js3vAhtl0ycj/ZXXYqWKA==
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-99.0.0-rc.tgz#6618a761dc91144445ae88c53b2e9dc31691bc3d"
+  integrity sha512-aUFJsYrTRBzbPqEKCRZh+yGV7HG+FnFBSj7rixT4elZRote4wWN14p4WHL9y6NVInnY/eBByCxtZXl06qcnnwg==
   dependencies:
     crypto-js "4.1.1"
     graphql "16.3.0"
