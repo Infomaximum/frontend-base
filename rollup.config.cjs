@@ -1,3 +1,4 @@
+const packageJSON = require("./package.json");
 const typescript = require("@rollup/plugin-typescript");
 const resolve = require("@rollup/plugin-node-resolve");
 const commonjs = require("@rollup/plugin-commonjs");
@@ -7,7 +8,7 @@ const less = require("rollup-plugin-less");
 const svgr = require("@svgr/rollup");
 const json = require("@rollup/plugin-json");
 const copy = require("rollup-plugin-copy");
-const packageJSON = require("./package.json");
+const { svgURLPlugin } = require("./configs/rollup/svgURLPlugin");
 
 const externalPackages = [
   ...Object.keys(packageJSON.dependencies || {}),
@@ -44,7 +45,12 @@ const config = [
     ],
   },
   {
-    input: ["src/index.ts", "src/components/index.ts", "src/models/index.ts"],
+    input: [
+      "src/index.ts",
+      "src/components/index.ts",
+      "src/models/index.ts",
+      "src/layouts/index.ts",
+    ],
     output: {
       dir: "dist",
       format: "es",
@@ -65,6 +71,7 @@ const config = [
       resolve(),
       commonjs(),
       json(),
+      svgURLPlugin(),
       svgr({
         svgoConfig: {
           plugins: [
