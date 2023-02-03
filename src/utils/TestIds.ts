@@ -78,4 +78,8 @@ export const tableShowMoreButtonTestId = "table_show-more-button";
 export const pageHeaderBackButtonTestId = "page-header_back-btn";
 
 // Authorization
-export const authorizationServiceModePanelTestId = "authorization-service-mode-panel";
+export const authorizationServiceModePanelTestId =
+  "authorization-service-mode-panel";
+
+// UnAuthorizedLayout
+export const unAuthorizedLayoutBackNavLinkTestId = "link-back";

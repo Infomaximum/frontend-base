@@ -114,3 +114,7 @@ export const TABLE_HEADER_ID = "table-header-id";
 export const VIRTUALIZED_TABLE_BODY_ID = "virtualized-table-body-id";
 /** Для работы со скоролом в контейнере с контентом*/
 export const MAIN_LAYOUT_CONTENT_ID = "main-layout-content-id";
+
+export enum EErrorBoundaryCodesBase {
+  unAuthorizedLayout = "unAuthorizedLayout",
+}

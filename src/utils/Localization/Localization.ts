@@ -129,13 +129,33 @@ export const NOTHING_FOUND_CHANGE_QUERY = {
 };
 
 export const SHOWING_OF = {
-  ru: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
-    `Показано ${currentCount} из ${totalCount}`,
-  en: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
-    `Showing ${currentCount} of the ${totalCount}`,
+  ru: ({
+    currentCount,
+    totalCount,
+  }: {
+    currentCount: number;
+    totalCount: number;
+  }) => `Показано ${currentCount} из ${totalCount}`,
+  en: ({
+    currentCount,
+    totalCount,
+  }: {
+    currentCount: number;
+    totalCount: number;
+  }) => `Showing ${currentCount} of the ${totalCount}`,
 };
 
 export const SERVICE_MODE = {
   ru: "Система находится в сервисном режиме: ведутся регламентно-технические работы.",
   en: "System is in a service mode: regulatory and technical work is going.",
+};
+
+export const PROCESET = {
+  ru: "Proceset",
+  en: "Proceset",
+};
+
+export const LOG_IN = {
+  ru: "Вход",
+  en: "Login",
 };
