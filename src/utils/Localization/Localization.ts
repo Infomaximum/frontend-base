@@ -150,11 +150,6 @@ export const SERVICE_MODE = {
   en: "System is in a service mode: regulatory and technical work is going.",
 };
 
-export const PROCESET = {
-  ru: "Proceset",
-  en: "Proceset",
-};
-
 export const LOG_IN = {
   ru: "Вход",
   en: "Login",

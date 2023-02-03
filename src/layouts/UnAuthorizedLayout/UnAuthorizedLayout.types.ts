@@ -4,6 +4,7 @@ import type { NCore } from "@im/core";
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 import type { IWithSystemTitleProps } from "../../decorators/hocs/withSystemTitle/withSystemTitle.types";
 import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
+import type { TLocalizationDescription } from "@im/localization";
 
 export interface IUnAuthorizedLayoutProps
   extends IWithThemeProps<TTheme>,
@@ -19,6 +20,8 @@ export interface IUnAuthorizedLayoutProps
   wrapperStyle?: Interpolation<TTheme>;
 
   route: NCore.IRoutes;
+
+  productNameLoc?: TLocalizationDescription;
 }
 
 export interface IUnAuthorizedLayoutState {

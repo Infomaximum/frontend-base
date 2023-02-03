@@ -20,7 +20,7 @@ import type {
   IUnAuthorizedLayoutState,
 } from "./UnAuthorizedLayout.types";
 import { observer } from "mobx-react";
-import { LOG_IN, PROCESET } from "../../utils/Localization/Localization";
+import { LOG_IN } from "../../utils/Localization/Localization";
 import { ArrowLeftOutlined } from "../../components/Icons/Icons";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { BaseCard } from "../../components/BaseCard";
@@ -64,19 +64,21 @@ class UnAuthorized extends PureComponent<
   }
 
   public override componentDidMount() {
-    const { localization, route } = this.props;
+    const { localization, route, productNameLoc } = this.props;
+
+    const localizations: string[] = [];
 
     if (route?.systemTitleLoc) {
-      this.props.buildSystemTitle([
-        localization.getLocalized(route.systemTitleLoc),
-        localization.getLocalized(PROCESET),
-      ]);
+      localizations.push(localization.getLocalized(route.systemTitleLoc));
     } else {
-      this.props.buildSystemTitle([
-        localization.getLocalized(LOG_IN),
-        localization.getLocalized(PROCESET),
-      ]);
+      localizations.push(localization.getLocalized(LOG_IN));
     }
+
+    if (productNameLoc) {
+      localizations.push(localization.getLocalized(productNameLoc));
+    }
+
+    this.props.buildSystemTitle(localizations);
   }
 
   public handleAnimationComplete = () => {
