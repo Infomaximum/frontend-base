@@ -25,7 +25,7 @@ import type {
   IRemoveConfirmationModalProps,
   IRemoveConfirmationModalState,
 } from "./RemoveConfirmationModal.types";
-import { withTheme } from "../../../decorators";
+import { withTheme } from "../../../decorators/hocs/withTheme";
 
 class RemoveConfirmationModalComponent extends PureComponent<
   IRemoveConfirmationModalProps,

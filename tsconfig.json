@@ -5,7 +5,7 @@
     "noEmit": false,
     "jsx": "preserve",
     "declaration": true,
-    "declarationDir": "types"
+    "declarationDir": "dist"
   },
   "exclude": ["/node_modules/", "**/node_modules", "**/.*/"],
   "include": ["src"]
