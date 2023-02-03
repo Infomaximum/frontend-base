@@ -1,5 +1,5 @@
 import enzyme from "enzyme";
-import SettingsItem from "./SettingsItem";
+import { SettingsItem } from "./SettingsItem";
 import { settingsItemTitleTestId } from "../../../utils/TestIds";
 import { Link } from "react-router-dom";
 import { getRouterWrapper, testLocalization } from "../../../utils";

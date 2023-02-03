@@ -9,7 +9,7 @@ import { matchPath, useLocation, useNavigate } from "react-router";
 import { assertSimple } from "@im/asserts";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 
-const SettingsItem: React.FC<ISettingsItemProps> = ({
+const SettingsItemComponent: React.FC<ISettingsItemProps> = ({
   onClick,
   title,
   routes,
@@ -56,4 +56,4 @@ const SettingsItem: React.FC<ISettingsItemProps> = ({
   );
 };
 
-export default SettingsItem;
+export const SettingsItem = SettingsItemComponent;

@@ -1,12 +1,12 @@
 import enzyme from "enzyme";
-import Settings from "./Settings";
+import { Settings } from "./Settings";
 import type { NCore } from "@im/core";
 
 import {
   moduleGroupPath,
   getDisplayedSettingsRoutes,
 } from "../../utils/Routes";
-import SettingsItem from "./SettingsItem/SettingsItem";
+import { SettingsItem } from "./SettingsItem/SettingsItem";
 import {
   getDefaultWrappers,
   testLocalization,

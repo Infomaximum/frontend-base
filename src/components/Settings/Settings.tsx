@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { ISettingsProps } from "./Settings.types";
-import SettingsItem from "./SettingsItem/SettingsItem";
+import { SettingsItem } from "./SettingsItem/SettingsItem";
 import {
   calculateSize,
   leftColumnStyles,
@@ -13,7 +13,7 @@ import { useLocalization } from "../../decorators/hooks/useLocalization";
 
 const { Content } = Layout;
 
-const Settings: FC<ISettingsProps> = ({
+const SettingsComponent: FC<ISettingsProps> = ({
   routes: settingRoutes,
   onItemClick,
 }) => {
@@ -63,4 +63,4 @@ const Settings: FC<ISettingsProps> = ({
   );
 };
 
-export default Settings;
+export const Settings = SettingsComponent;
