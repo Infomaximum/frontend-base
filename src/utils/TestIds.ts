@@ -83,3 +83,6 @@ export const authorizationServiceModePanelTestId =
 
 // UnAuthorizedLayout
 export const unAuthorizedLayoutBackNavLinkTestId = "link-back";
+
+// SettingsItem
+export const settingsItemTitleTestId = "settings-item-title-test-id";

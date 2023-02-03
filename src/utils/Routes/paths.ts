@@ -13,3 +13,6 @@ export const inviteSetPasswordPath = `${rootPath}invite-set-password/:token`;
 export const updatePasswordPath = `${rootPath}update-password`;
 export const enterActivationPath = `${rootPath}enter-activation-key`;
 /*------------------------------ Логин [END] -----------------------------------*/
+
+// Перенаправление на предыдущую страницу (применяется, для перезагрузки текущей страницы настроек)
+export const goBackPath = `${rootPath}go-back`;
