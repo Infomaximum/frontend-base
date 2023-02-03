@@ -24,6 +24,7 @@ export * from "./Radio";
 export * from "./RestLoadingIndicator";
 export * from "./Search";
 export * from "./Select";
+export * from "./Settings";
 export * from "./ShowMore";
 export * from "./Spinner";
 export * from "./Switch";
