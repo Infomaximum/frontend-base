@@ -33,3 +33,27 @@ export const closeModalIconStyle = (theme: TTheme) => ({
     color: theme.grey9Color,
   },
 });
+
+//для дальнейшей кастомизации стилей всех лаяутов
+export const commonLayoutStyle = () =>
+  ({
+    height: "100%",
+    position: "relative",
+  } as const);
+
+export const commonContentStyle = () =>
+  ({
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    overflowY: "auto",
+    padding: "0px",
+    position: "relative",
+  } as const);
+
+export const commonContentListStyle = () =>
+  ({
+    ...commonContentStyle(),
+    padding: `16px 24px 0 24px`,
+    overflow: "hidden",
+  } as const);
