@@ -12,6 +12,7 @@ export * from "./ConfirmPopover";
 export * from "./ContextMenu";
 export * from "./ContextMenuTable";
 export * from "./Dropdown";
+export * from "./HeaderMenu";
 export * from "./EllipsisTooltip";
 export * from "./Empty";
 export * from "./ErrorBoundary";

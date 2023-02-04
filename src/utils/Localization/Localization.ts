@@ -154,3 +154,18 @@ export const LOG_IN = {
   ru: "Вход",
   en: "Login",
 };
+
+export const SETTINGS = {
+  ru: "Настройки",
+  en: "Settings",
+};
+
+export const LOG_OUT = {
+  ru: "Выйти",
+  en: "Log out",
+};
+
+export const ERROR_404 = {
+  ru: "Ошибка 404",
+  en: "Error 404",
+};

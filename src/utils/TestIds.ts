@@ -86,3 +86,21 @@ export const unAuthorizedLayoutBackNavLinkTestId = "link-back";
 
 // SettingsItem
 export const settingsItemTitleTestId = "settings-item-title-test-id";
+
+// HeaderMenu
+export const headerMenuTestId = "header-menu";
+export const headerMenuTitleTestId = "header-menu-title";
+export const headerMenuBodyLeftTestId = "header-menu-body-left";
+export const headerMenuBodyCenterTestId = "header-menu-body-center";
+export const headerMenuBodyRightTestId = "header-menu-body-right";
+export const headerMenuBackUrlTestId = "header-menu-back-url";
+export const headerMenuLogoTestId = "header-menu-logo";
+export const headerMenuSettingsTestId = "header-menu-settings";
+export const headerMenuUserAvatarTestId = "header-menu-user-avatar";
+
+// ProfileSettingsContainer
+export const logoutButtonTestId = "logout-button";
+
+// NavigationTabs
+export const navigationTabTestId = "navigation-tabs_tab";
+export const navigationTabsTestId = "tabs";
