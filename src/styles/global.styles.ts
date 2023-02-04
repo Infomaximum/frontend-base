@@ -264,6 +264,10 @@ const antGlobalStyle = (theme: TTheme) => ({
     marginLeft: "6px !important",
   },
 
+  ".ant-modal": {
+    margin: "0 auto",
+  },
+
   ".ant-modal-header": {
     padding: "12px 48px 14px 24px",
     background: theme.grey3Color,
