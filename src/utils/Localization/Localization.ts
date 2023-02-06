@@ -239,3 +239,8 @@ export const SWITCHED_OFF = {
   ru: "Откл",
   en: "Off",
 };
+
+export const NOT_SET = {
+  ru: "Не задано",
+  en: "Not specified",
+};
