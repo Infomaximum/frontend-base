@@ -10,7 +10,10 @@ export abstract class BaseStore {
   public static debugStores(stores?: BaseStore[]) {
     if (process.env.NODE_ENV === "development") {
       spy((event) => {
-        if (event.type === "action" && (stores ? includes(stores, event.object) : true)) {
+        if (
+          event.type === "action" &&
+          (stores ? includes(stores, event.object) : true)
+        ) {
           // eslint-disable-next-line no-console
           console.warn(
             `${(event.object as BaseStore)?.name ?? event.name}: ${

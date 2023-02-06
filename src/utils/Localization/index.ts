@@ -1,2 +1,2 @@
-export * from './ErrorLocalization';
-export * from './Localization';
+export * from "./ErrorLocalization";
+export * from "./Localization";

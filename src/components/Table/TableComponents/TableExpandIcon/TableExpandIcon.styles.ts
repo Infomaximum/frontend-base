@@ -5,7 +5,9 @@ export const tableExpandIconStyle = (theme: TTheme) =>
     transition: "300ms",
     minWidth: `${17 + theme.tableCellHorizontalPadding}px`, // размер иконки + отступы
     height: `calc(100% + ${theme.tableCellVerticalPadding * 2}px)`,
-    padding: `${theme.tableCellVerticalPadding}px ${theme.tableCellHorizontalPadding / 2}px`,
+    padding: `${theme.tableCellVerticalPadding}px ${
+      theme.tableCellHorizontalPadding / 2
+    }px`,
     margin: `-${theme.tableCellVerticalPadding}px 
       ${theme.tableCellHorizontalPadding / 2}px 
       -${theme.tableCellVerticalPadding}px 

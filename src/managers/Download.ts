@@ -28,7 +28,9 @@ export class DownloadManager {
             const fetchedError = get(error, "response.data.error");
 
             if (fetchedError) {
-              const err = await new BaseErrorHandler().prepareError(fetchedError);
+              const err = await new BaseErrorHandler().prepareError(
+                fetchedError
+              );
 
               reject(err);
             }

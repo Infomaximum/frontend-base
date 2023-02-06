@@ -18,7 +18,9 @@ type TNavigationContextWithBlock = ContextType<typeof NavigationContext> & {
  * @source https://github.com/remix-run/react-router/commit/256cad70d3fd4500b1abcfea66f3ee622fb90874
  */
 export function useBlocker(blocker: Blocker, when = true) {
-  const { navigator } = useContext(NavigationContext) as TNavigationContextWithBlock;
+  const { navigator } = useContext(
+    NavigationContext
+  ) as TNavigationContextWithBlock;
 
   useEffect(() => {
     if (!when) {

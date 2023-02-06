@@ -158,15 +158,17 @@ export const CANNOT_DELETE_YOUR_PROFILE_AND_NON_EMPTY_DEPARTMENTS = {
   en: "Cannot delete your profile and non-empty departments",
 };
 
-export const CANNOT_DELETE_YOUR_PROFILE_ADMINISTRATORS_AND_NON_EMPTY_DEPARTMENTS = {
-  ru: "Невозможно удалить свой профиль, «Администраторов» и непустые отделы",
-  en: 'Cannot delete your profile, "Administrators" and non-empty departments',
-};
+export const CANNOT_DELETE_YOUR_PROFILE_ADMINISTRATORS_AND_NON_EMPTY_DEPARTMENTS =
+  {
+    ru: "Невозможно удалить свой профиль, «Администраторов» и непустые отделы",
+    en: 'Cannot delete your profile, "Administrators" and non-empty departments',
+  };
 
-export const DELETE_EMPLOYEES_FROM_DEPARTMENTS_CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN = {
-  ru: "Удалите сотрудников из отделов, измените роли доступа у сотрудников и повторите попытку.",
-  en: "Delete employees from departments, change employee access roles and try again.",
-};
+export const DELETE_EMPLOYEES_FROM_DEPARTMENTS_CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN =
+  {
+    ru: "Удалите сотрудников из отделов, измените роли доступа у сотрудников и повторите попытку.",
+    en: "Delete employees from departments, change employee access roles and try again.",
+  };
 
 export const NEW_PASSWORD_EQUALS_CURRENT_PASSWORD = {
   ru: "Вы уже вводили такой пароль",

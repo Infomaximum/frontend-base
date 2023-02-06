@@ -5,10 +5,14 @@ export declare namespace NRequests {
   /** Интерфейс для инстансов выполнения запросов и мутаций из сторов */
   interface IRequest {
     /** Метод выполнения запросов */
-    requestData<TData extends TDictionary>(params: TRequestDataParams): Promise<TData | null>;
+    requestData<TData extends TDictionary>(
+      params: TRequestDataParams
+    ): Promise<TData | null>;
 
     /** Метод выполнения мутаций */
-    submitData<TData extends TDictionary>(params: TSubmitDataParams): Promise<TData | null>;
+    submitData<TData extends TDictionary>(
+      params: TSubmitDataParams
+    ): Promise<TData | null>;
     /** Метод выполнения подписки */
     subscribe(params: TSubscribeParams): void;
     /** Отписывается от изменений с сервера */

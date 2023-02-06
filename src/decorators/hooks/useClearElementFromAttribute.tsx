@@ -21,7 +21,10 @@ export const useClearElementFromAttribute = <T extends HTMLElement>({
     });
 
     if (element) {
-      observer.observe(element, { attributeFilter: [removableAttribute], attributes: true });
+      observer.observe(element, {
+        attributeFilter: [removableAttribute],
+        attributes: true,
+      });
     }
 
     return () => observer.disconnect();

@@ -13,7 +13,10 @@ export const emptyHintStyle = (theme: TTheme) => ({
   color: theme.grey7Color,
 });
 
-export const wrapperEmptyTableStyle = { position: "relative", marginTop: "72px" } as const;
+export const wrapperEmptyTableStyle = {
+  position: "relative",
+  marginTop: "72px",
+} as const;
 
 export const wrapperEmptyStyle = {} as const;
 

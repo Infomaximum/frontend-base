@@ -42,7 +42,9 @@ describe("Тест Breadcrumbs", () => {
     ];
 
     cases.forEach(({ params, result }) => {
-      expect(calcShrinkMask(params.widths, params.maxTotalWidth, params.minWidth)).toEqual(result);
+      expect(
+        calcShrinkMask(params.widths, params.maxTotalWidth, params.minWidth)
+      ).toEqual(result);
     });
   });
 });

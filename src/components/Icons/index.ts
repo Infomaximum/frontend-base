@@ -1,2 +1,2 @@
-export * from './ClipboardIcon';
-export * from './Icons';
+export * from "./ClipboardIcon";
+export * from "./Icons";

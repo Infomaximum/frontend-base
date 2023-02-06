@@ -48,7 +48,10 @@ export const getColorConfigList = (theme: TTheme): TAvatarColorConfig[] => [
   },
 ];
 
-export const getIconAvatarStyle = (theme: TTheme, avatarColorConfig: TAvatarColorConfig) => ({
+export const getIconAvatarStyle = (
+  theme: TTheme,
+  avatarColorConfig: TAvatarColorConfig
+) => ({
   color: avatarColorConfig.letterColor,
   backgroundColor: avatarColorConfig.backgroundColor,
   fontSize: `${theme.h5FontSize}px`,

@@ -1,7 +1,19 @@
 import type { DropdownProps } from "antd";
-import { constant, isFunction, last, lowerFirst, mapValues, words } from "lodash";
+import {
+  constant,
+  isFunction,
+  last,
+  lowerFirst,
+  mapValues,
+  words,
+} from "lodash";
 import React, { RefObject, useCallback, useState } from "react";
-import type { IDropdownParams, IDropdownProps, IFreeSpace, TXPlacement } from "./Dropdown.types";
+import type {
+  IDropdownParams,
+  IDropdownProps,
+  IFreeSpace,
+  TXPlacement,
+} from "./Dropdown.types";
 
 export const defaultTrigger = ["click"] as ["click"];
 
@@ -30,7 +42,9 @@ export function createBottomAlignConfig(
   };
 }
 
-export function extractXPlacement(placement: IDropdownProps["placement"]): TXPlacement {
+export function extractXPlacement(
+  placement: IDropdownProps["placement"]
+): TXPlacement {
   const xPlacement = lowerFirst(last(words(placement)));
 
   switch (xPlacement) {
@@ -55,11 +69,17 @@ export function useDropdownPosition(
 ) {
   const maxHeight = itemHeight * visibleMaxCount + padding * 2;
 
-  const [actualMaxHeight, setActualMaxHeight] = useState<number | undefined>(maxHeight);
+  const [actualMaxHeight, setActualMaxHeight] = useState<number | undefined>(
+    maxHeight
+  );
   const [align, setAlign] = useState<DropdownProps["align"]>();
 
   const compute = useCallback(
-    (getPopupContainer: (t: HTMLElement) => HTMLElement = constant(document.body)) => {
+    (
+      getPopupContainer: (t: HTMLElement) => HTMLElement = constant(
+        document.body
+      )
+    ) => {
       const target = targetRef.current;
 
       if (!target) {
@@ -69,12 +89,16 @@ export function useDropdownPosition(
       const popupContainer = getPopupContainer(target);
 
       const containerGap = 8;
-      const freeSpace = mapValues(defineDropdownFreeSpace(target, popupContainer), (n) =>
-        Math.floor(n - targetGap - containerGap)
+      const freeSpace = mapValues(
+        defineDropdownFreeSpace(target, popupContainer),
+        (n) => Math.floor(n - targetGap - containerGap)
       );
 
       const isAbove = shouldDropdownBeAbove(freeSpace, maxHeight);
-      const actualMaxHeight = Math.min(isAbove ? freeSpace.top : freeSpace.bottom, maxHeight);
+      const actualMaxHeight = Math.min(
+        isAbove ? freeSpace.top : freeSpace.bottom,
+        maxHeight
+      );
 
       setActualMaxHeight(actualMaxHeight);
       setAlign(
@@ -91,11 +115,16 @@ export function useDropdownPosition(
 
 /** Должен ли Dropdown находиться над целевым элементом */
 function shouldDropdownBeAbove(freeSpace: IFreeSpace, maxHeight: number) {
-  return freeSpace.bottom < shrinkK * maxHeight && freeSpace.top > freeSpace.bottom;
+  return (
+    freeSpace.bottom < shrinkK * maxHeight && freeSpace.top > freeSpace.bottom
+  );
 }
 
 /** Определить, сколько свободного места для рисования Dropdown под и над целевым элементом */
-function defineDropdownFreeSpace(target: Element, container: HTMLElement): IFreeSpace {
+function defineDropdownFreeSpace(
+  target: Element,
+  container: HTMLElement
+): IFreeSpace {
   const targetRect = target.getBoundingClientRect();
 
   const containerTopBound = defineContainerTopBound(container);
