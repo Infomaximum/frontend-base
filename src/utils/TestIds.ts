@@ -132,3 +132,6 @@ export const optionalDrawerFormSelectTestId = "optional-drawer-form_select";
 // FieldTooltip
 export const fieldTooltipPromptTestId = "prompt";
 export const fieldTooltipPromptButtonTestId = "prompt-button";
+
+// PasswordWithButtonFormField
+export const changePasswordButtonTestId = "change-password-button";

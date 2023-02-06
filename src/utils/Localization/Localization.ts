@@ -244,3 +244,13 @@ export const NOT_SET = {
   ru: "Не задано",
   en: "Not specified",
 };
+
+export const PASSWORD = {
+  ru: "Пароль",
+  en: "Password",
+};
+
+export const CHANGE_PASSWORD = {
+  ru: "Изменить пароль",
+  en: "Change password",
+};
