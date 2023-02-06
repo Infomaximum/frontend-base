@@ -93,7 +93,7 @@ function showMessageGrid(props: IMessageProps, notification: ReactNode) {
   }
 }
 
-export default class Message {
+class MessageComponent {
   /**
    * Возвращающая ссылку на созданный профиль
    * @param navigate
@@ -586,3 +586,5 @@ export default class Message {
     }
   }
 }
+
+export const Message = MessageComponent;

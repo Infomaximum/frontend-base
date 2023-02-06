@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { shallow } from "enzyme";
-import Message from "./Message";
+import { Message } from "./Message";
 import { Localization } from "@im/localization";
 import {
   SWITCHED_ENABLED,

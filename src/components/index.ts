@@ -20,6 +20,7 @@ export * from "./Icons";
 export * from "./Input";
 export * from "./InputNumber";
 export * from "./Notification";
+export * from "./Message";
 export * from "./Panel";
 export * from "./Radio";
 export * from "./RestLoadingIndicator";
