@@ -115,3 +115,20 @@ export const removeMessageTestId = "remove-message";
 export const moveMessageTestId = "move-message";
 export const massAssignMessageTestId = "mass-assign-message";
 export const bindMessageTestId = "bind-message";
+
+// DrawerForm
+export const drawerFormTestId = "drawer-form";
+export const drawerFormCancelButtonTestId = `${drawerFormTestId}_button-cancel`;
+export const drawerFormCloseIconTestId = `${drawerFormTestId}_close-icon`;
+
+// ModalForm
+export const modalFormTestId = "modal-form";
+export const modalFormCancelButtonTestId = `${modalFormTestId}_button-cancel`;
+export const modalFormCloseIconTestId = `${modalFormTestId}_close-icon`;
+
+// OptionalDrawerForm
+export const optionalDrawerFormSelectTestId = "optional-drawer-form_select";
+
+// FieldTooltip
+export const fieldTooltipPromptTestId = "prompt";
+export const fieldTooltipPromptButtonTestId = "prompt-button";

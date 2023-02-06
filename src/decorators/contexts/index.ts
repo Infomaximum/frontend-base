@@ -7,3 +7,5 @@ export { LocalizationContext } from "./LocalizationContext";
 export { RoutesContext } from "./RoutesContext";
 export { ThemeContext, ThemeProvider } from "./ThemeContext";
 export { MainSystemPagePathContext } from "./MainSystemPagePathContext";
+export { EditableRowContext } from "./EditableRowContext";
+export { EditableTableContext } from "./EditableTableContext";
