@@ -1,6 +1,6 @@
 export type TOmittedConnectedFormProps<T extends Record<string, any>> = Omit<
   T,
-  typeof omittedPropsConnectedForm[number]
+  (typeof omittedPropsConnectedForm)[number]
 >;
 
 export const omittedPropsConnectedForm = [

@@ -2,8 +2,10 @@ import type { ComponentType } from "react";
 import type { FieldProps, FieldRenderProps } from "react-final-form";
 import type { Interpolation } from "@emotion/react";
 
-export interface IFieldProps<V, T extends FieldRenderProps<V> = FieldRenderProps<V>>
-  extends FieldProps<V, T> {
+export interface IFieldProps<
+  V,
+  T extends FieldRenderProps<V> = FieldRenderProps<V>
+> extends FieldProps<V, T> {
   /**
    * Имя поля формы
    */

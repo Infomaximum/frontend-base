@@ -63,8 +63,12 @@ export const parsePhoneNumber = (formValue: string) => {
 };
 
 /** Конвертирует в значение без пробелов */
-export const convertToNotWhitespace = (formValue: string) => formValue.replace(/\s/g, "");
+export const convertToNotWhitespace = (formValue: string) =>
+  formValue.replace(/\s/g, "");
 
-export const convertToMaxLengthValue = (maxLength: number) => (formValue: string) => {
-  return formValue.length > maxLength ? formValue.slice(0, maxLength) : formValue;
-};
+export const convertToMaxLengthValue =
+  (maxLength: number) => (formValue: string) => {
+    return formValue.length > maxLength
+      ? formValue.slice(0, maxLength)
+      : formValue;
+  };

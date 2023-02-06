@@ -5,4 +5,6 @@ export interface IEditableTableContextData {
   focusedFieldNameRef?: React.MutableRefObject<string | null>;
 }
 
-export const EditableTableContext = createContext<IEditableTableContextData>({});
+export const EditableTableContext = createContext<IEditableTableContextData>(
+  {}
+);

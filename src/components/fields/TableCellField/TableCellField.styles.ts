@@ -3,8 +3,12 @@ export const formItemStyle = {
 };
 
 export const editableCellWrapperStyle = (theme: TTheme) => ({
-  marginLeft: `${theme.editableTableMarginLeft - theme.tableCellHorizontalPadding}px`,
-  marginRight: `${theme.editableTableMarginRight - theme.tableCellHorizontalPadding}px`,
+  marginLeft: `${
+    theme.editableTableMarginLeft - theme.tableCellHorizontalPadding
+  }px`,
+  marginRight: `${
+    theme.editableTableMarginRight - theme.tableCellHorizontalPadding
+  }px`,
 });
 
 export const commonEditableCellStyle = (theme: TTheme) => ({
