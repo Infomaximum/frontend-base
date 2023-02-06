@@ -169,3 +169,73 @@ export const ERROR_404 = {
   ru: "Ошибка 404",
   en: "Error 404",
 };
+
+export const CHANGES_SAVED = {
+  ru: "изменения сохранены",
+  en: "changes saved",
+};
+
+export const RENAMED_MASCULINE = {
+  ru: "переименован",
+  en: "renamed",
+};
+
+export const RENAMED_FEMININE = {
+  ru: "переименована",
+  en: "renamed",
+};
+
+export const DELETED_MASCULINE = {
+  ru: "удален",
+  en: "deleted",
+};
+
+export const DELETED_FEMININE = {
+  ru: "удалена",
+  en: "deleted",
+};
+
+export const OBJECTS_DELETED = {
+  ru: "Объекты удалены",
+  en: "Objects deleted",
+};
+
+export const SAVED = {
+  ru: "Сохранено",
+  en: "Saved",
+};
+
+export const MASS_ACTION = {
+  ru: "Массовое действие",
+  en: "Mass action",
+};
+
+export const APPLIED_TO = {
+  ru: "применено к",
+  en: "applied to",
+};
+
+export const CREATED_FEMININE = {
+  ru: "Создана",
+  en: "Created",
+};
+
+export const CREATED_MASCULINE = {
+  ru: "Создан",
+  en: "Created",
+};
+
+export const MOVED_TO = {
+  ru: "перемещен в",
+  en: "has been moved to",
+};
+
+export const SWITCHED_ENABLED = {
+  ru: "Вкл",
+  en: "On",
+};
+
+export const SWITCHED_OFF = {
+  ru: "Откл",
+  en: "Off",
+};

@@ -104,3 +104,14 @@ export const logoutButtonTestId = "logout-button";
 // NavigationTabs
 export const navigationTabTestId = "navigation-tabs_tab";
 export const navigationTabsTestId = "tabs";
+
+// Message
+export const customMessageTestId = "custom-message";
+export const standardMessageTestId = "standard-message";
+export const createMessageTestId = "create-message";
+export const renameMessageTestId = "rename-message";
+export const changeMessageTestId = "change-message";
+export const removeMessageTestId = "remove-message";
+export const moveMessageTestId = "move-message";
+export const massAssignMessageTestId = "mass-assign-message";
+export const bindMessageTestId = "bind-message";
