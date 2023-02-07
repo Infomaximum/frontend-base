@@ -12,7 +12,7 @@ import { Field as FinalField } from "react-final-form";
 import type { FieldRenderProps } from "react-final-form";
 import { Input } from "../../Input";
 import { Select } from "../../Select";
-import { SelectField } from "../SelectField";
+import { SelectFormField } from "../SelectField";
 import { Field, FormField } from "../FormField";
 
 const InputContainer: React.FC<IInputContainerProps> = (props) => {
@@ -41,8 +41,8 @@ const SelectContainer: React.FC<ISelectContainerProps> = ({
 };
 
 class SelectInputFieldComponent extends React.PureComponent<ISelectInputComponentFieldProps> {
-  public static Option = SelectField.Option;
-  public static OptionGroup = SelectField.OptGroup;
+  public static Option = SelectFormField.Option;
+  public static OptionGroup = SelectFormField.OptGroup;
   public static inputFieldName = "inputField" as const;
   public static selectFieldName = "selectField" as const;
 

@@ -5,7 +5,7 @@ import {
   wrapperInputFieldStyle,
   removeButtonStyle,
 } from "./InputFieldArrayItem.styles";
-import { InputField } from "../../InputField";
+import { InputFormField } from "../../InputField";
 import { Button } from "../../../Button/Button";
 import { removeInputFieldButtonTestId } from "../../../../utils/TestIds";
 import { CloseOutlined } from "../../../Icons/Icons";
@@ -31,7 +31,7 @@ const InputFieldArrayItem: React.FC<InputFieldArrayItemProps> = (props) => {
   }, [fieldEntityIndex, onRemoveFieldEntity]);
 
   return (
-    <InputField
+    <InputFormField
       key={fieldEntityPath}
       name={fieldEntityPath}
       wrapperComponentStyle={wrapperInputFieldStyle}

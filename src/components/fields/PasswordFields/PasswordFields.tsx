@@ -58,7 +58,7 @@ import {
 } from "../../../utils/TestIds";
 import { observer } from "mobx-react";
 import type { Unsubscribe } from "final-form";
-import { convertToNotWhitespace, InputField } from "../InputField";
+import { convertToNotWhitespace, InputFormField } from "../InputField";
 import {
   CheckCircleFilled,
   CheckOutlined,
@@ -443,7 +443,7 @@ class PasswordFieldsComponent extends PureComponent<
 
     return [
       currentPasswordFieldName ? (
-        <InputField
+        <InputFormField
           key={currentPasswordFieldName}
           name={currentPasswordFieldName}
           disabled={disabled}
@@ -471,7 +471,7 @@ class PasswordFieldsComponent extends PureComponent<
           css={inputFieldStyle}
         />
       ) : null,
-      <InputField
+      <InputFormField
         key={passwordFieldName}
         name={passwordFieldName}
         autoComplete="off"
@@ -529,7 +529,7 @@ class PasswordFieldsComponent extends PureComponent<
         css={inputFieldStyle}
       />,
       withRepeatPasswordField ? (
-        <InputField
+        <InputFormField
           key={REPEAT_NEW_PASSWORD_FIELD}
           name={REPEAT_NEW_PASSWORD_FIELD}
           autoComplete="off"

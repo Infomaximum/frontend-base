@@ -11,7 +11,7 @@ import {
 } from "../../../../utils/TestIds";
 import { Button } from "../../../Button/Button";
 import { CloseOutlined } from "../../../Icons/Icons";
-import { DatePickerField } from "../../DatePickerField";
+import { DatePickerFormField } from "../../DatePickerField";
 
 const DatePickerFieldArrayItem: React.FC<IDatePickerFieldArrayItemProps> = (
   props
@@ -55,7 +55,7 @@ const DatePickerFieldArrayItem: React.FC<IDatePickerFieldArrayItemProps> = (
   }, [fieldEntityIndex, fieldsLength, props?.showTime, readOnly, removeField]);
 
   return (
-    <DatePickerField
+    <DatePickerFormField
       key={fieldEntityPath}
       name={fieldEntityPath}
       css={datePickerStyle}
