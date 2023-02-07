@@ -12,6 +12,7 @@ export * from "./ConfirmPopover";
 export * from "./ContextMenu";
 export * from "./ContextMenuTable";
 export * from "./DataTable";
+export * from "./drawers";
 export * from "./drawers/Drawer";
 export * from "./Dropdown";
 export * from "./EditableDataTable";
