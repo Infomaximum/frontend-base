@@ -1,6 +1,11 @@
 import { MillisecondsPerSecond } from "@im/utils";
 
 /**
+ * минимальная длина пароля
+ */
+export const MIN_PASSWORD_LENGTH = 4;
+
+/**
  * Доступные языки
  */
 export const LANGUAGE = {

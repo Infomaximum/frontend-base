@@ -254,3 +254,173 @@ export const CHANGE_PASSWORD = {
   ru: "Изменить пароль",
   en: "Change password",
 };
+
+export const ENTER_QUERY_OR_CHOOSE = {
+  ru: ({
+    currentCount,
+    generalCount,
+  }: {
+    currentCount: number;
+    generalCount: number;
+  }) =>
+    `Показаны ${currentCount} из ${generalCount} значений. Введите поисковой запрос или выберите из списка.`,
+  en: ({
+    currentCount,
+    generalCount,
+  }: {
+    currentCount: number;
+    generalCount: number;
+  }) =>
+    `Showing ${currentCount} of "${generalCount}" values. Enter a search query or select from the list.`,
+};
+
+export const REFINE_QUERY = {
+  ru: ({
+    currentCount,
+    generalCount,
+  }: {
+    currentCount: number;
+    generalCount: number;
+  }) =>
+    `Показаны ${currentCount} из ${generalCount} найденных значений. Уточните запрос, чтобы увидеть другие.`,
+  en: ({
+    currentCount,
+    generalCount,
+  }: {
+    currentCount: number;
+    generalCount: number;
+  }) =>
+    `Showing ${currentCount} of the ${generalCount} values found. Refine the query to see others.`,
+};
+
+export const SHOWED_ALL_CHANGE_QUERY = {
+  ru: "Показаны все найденные значения. Измените запрос, чтобы увидеть другие.",
+  en: "All values found are shown. Change the query to see others.",
+};
+
+export const CURRENT_PASSWORD = {
+  ru: "Текущий пароль",
+  en: "Current password",
+};
+
+export const ENTER_NEW_PASSWORD = {
+  ru: "Введите новый пароль",
+  en: "Enter new password",
+};
+
+export const REPEAT_NEW_PASSWORD = {
+  ru: "Повторите новый пароль",
+  en: "Repeat new password",
+};
+
+export const LATIN_UPPERCASE_LETTERS = {
+  // out of date
+  ru: "латинские прописные буквы (A-Z)",
+  en: "English uppercase characters (A-Z)",
+};
+
+export const LATIN_LOWERCASE_LETTERS = {
+  // out of date
+  ru: "латинские строчные буквы (a-z)",
+  en: "English lowercase characters (a-z)",
+};
+
+export const NUMBERS = {
+  // out of date
+  ru: "цифры (0-9)",
+  en: "base 10 digits (0-9)",
+};
+
+export const NON_ALPHABETIC_CHARACTERS = {
+  // out of date
+  ru: "неалфавитные символы (!, $, #, % и т.д.)",
+  en: "non-alphabetic characters (!, $, #, %, etc.)",
+};
+
+export const NOT_LESS_SYMBOL = {
+  ru: ({ minLength }: { minLength: number }) => ({
+    s: `не менее ${minLength} символа`,
+    p1: `не менее ${minLength} символов`,
+  }),
+  en: ({ minLength }: { minLength: number }) => ({
+    s: `${minLength} character at least`,
+    p1: `${minLength} characters at least`,
+  }),
+};
+
+export const PASSWORDS_MUST_BE_EQUAL = {
+  // out of date
+  ru: "Подтверждение не совпадает с паролем",
+  en: "Confirmation does not match the password",
+};
+
+export const YOU_NEED_SET_PASSWORD = {
+  ru: "Сначала нужно задать пароль здесь",
+  en: "First you need to set a password here",
+};
+
+export const PASSWORD_IS_NOT_SECURE = {
+  ru: "Пароль не соответствует требованиям безопасности",
+  en: "The password does not meet the security requirements",
+};
+
+export const START_DATE = {
+  ru: "Начальная дата",
+  en: "Start date",
+};
+
+export const END_DATE = {
+  ru: "Конечная дата",
+  en: "End date",
+};
+
+export const START_MONTH = {
+  ru: "Начальный месяц",
+  en: "Start month",
+};
+
+export const END_MONTH = {
+  ru: "Конечный месяц",
+  en: "End month",
+};
+
+export const WEEK = {
+  ru: "Неделя",
+  en: "Week",
+};
+
+export const CLICK_OR_DRAG_FILE = {
+  ru: "Нажмите или перетащите файл сюда",
+  en: "Click or drag file here",
+};
+
+export const FILE_FORMAT = {
+  ru: ({ fileFormat }: { fileFormat: string }) => `Формат файла: ${fileFormat}`,
+  en: ({ fileFormat }: { fileFormat: string }) => `File format: ${fileFormat}`,
+};
+
+export const UPLOAD_THE_FILE_IN_THE_FORMAT = (accept: string) => ({
+  ru: `Загрузите файл в формате ${accept}`,
+  en: `Upload the file in the format ${accept}`,
+});
+
+export const SEARCH = {
+  ru: "Поиск",
+  en: "Search",
+};
+
+export const SELECTED = {
+  ru: "Выбрано",
+  en: "Selected",
+};
+
+export const ALL = {
+  // out of date
+  ru: "Все",
+  en: "All",
+};
+
+export const EMPTY_STRING = {
+  ru: "Пустая строка",
+  en: "Empty string",
+};

@@ -1,3 +1,10 @@
+export default {
+  PASSWORDS_MUST_BE_EQUAL: "passwords_must_be_equal",
+  YOU_NEED_SET_PASSWORD: "you_need_set_password",
+  PASSWORD_IS_NOT_SECURE: "password_is_not_secure",
+  SELECT_OPTION: "item-select",
+};
+
 // Modal
 export const modalTitleTestId = "modal-title";
 
@@ -135,3 +142,67 @@ export const fieldTooltipPromptButtonTestId = "prompt-button";
 
 // PasswordWithButtonFormField
 export const changePasswordButtonTestId = "change-password-button";
+
+//DatePickerFieldArray
+export const removeDatePickerFieldButtonTestId =
+  "remove-date_picker-field-button";
+export const removeDateTimePickerFieldButtonTestId =
+  "remove-date_time_picker-field-button";
+
+//InputFieldArray
+export const removeInputFieldButtonTestId = "remove-input-field-button";
+export const removeInputNumberFieldButtonTestId =
+  "remove-input_number-field-button";
+
+// AutoCompleteField/Select
+export const autocompleteSelectTestId = "autocomplete_select";
+export const autocompleteSelectSuffixButtonTestId = `${autocompleteSelectTestId}_suffix-button`;
+export const autocompleteSelectOptionTestId = `${autocompleteSelectTestId}_option`;
+
+// InputDrawerField/Select
+export const inputDrawerSelectTestId = "input-drawer_select";
+export const inputDrawerSelectSuffixButtonTestId = `${inputDrawerSelectTestId}_suffix-button`;
+
+// PasswordFields
+const passwordFieldsHasTestId = "password-has";
+export const passwordFieldsHasValidLengthTestId = `${passwordFieldsHasTestId}-valid-length`;
+export const passwordFieldsHasUppercaseTestId = `${passwordFieldsHasTestId}-uppercase`;
+export const passwordFieldsHasLowercaseTestId = `${passwordFieldsHasTestId}-lowercase`;
+export const passwordFieldsHasNumbersTestId = `${passwordFieldsHasTestId}-numbers`;
+export const passwordFieldsHasNonAlphabeticTestId = `${passwordFieldsHasTestId}-non-alphabetic`;
+
+export const passwordFieldsGreenCheckIconTestId = "green-check-icon";
+export const passwordFieldsGrayCheckIconTestId = "gray-check-icon";
+export const passwordFieldsRedCheckIconTestId = "red-check-icon";
+export const passwordFieldsFieldsValidIconTestId = "fields-valid-icon";
+
+export const passwordFieldsPasswordNotificationTestId = "password-notification";
+export const passwordFieldsPopoverTestId = "password-fields_popover";
+
+// RangePickerField
+export const defaultRangePickerFieldTestId = "range-picker-field";
+
+// TimeInputsRange
+export const timeInputsRangeTestId = "time-inputs-range";
+
+// TopPanel
+const topPanelTestId = "top-panel";
+export const topPanelTagCounterTestId = `${topPanelTestId}_tag-counter`;
+export const topPanelSearchInputTestId = `${topPanelTestId}_search-input`;
+
+// DataTableHeader
+export const dataTableHeaderInputSearchTestId = "data-table_input-search";
+
+// DataTableDrawer
+const dataTableDrawerTestId = "data-table-drawer";
+export const dataTableDrawerCancelButtonTestId = `${dataTableDrawerTestId}_cancel-button`;
+export const dataTableDrawerOkButtonTestId = `${dataTableDrawerTestId}_ok-button`;
+
+// ControlCell
+export const controlCellTestId = "control-cell";
+export const controlCellCheckTestId = "check";
+export const controlCellRemoveTestId = "remove";
+export const controlCellCloseTestId = "close";
+
+// EditableDataTable
+export const editableDataTableAddButtonTestId = "editable-data-table";

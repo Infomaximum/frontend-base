@@ -1,10 +1,12 @@
 /// <reference types="@emotion/react/types/css-prop" />
+import type { Model } from "@im/models";
 import type {
   TDictionary as TDictionaryUtils,
   TNullable as TNullableUtils,
   valueof as valueofUtils,
 } from "@im/utils/dist/utils/types/utility.types";
 import type { theme } from "./styles/theme";
+import type { Store } from "./utils/Store/Store";
 
 type TFrontendConfigImage = {
   // id родительского элемента в который будет добавлена картинка
@@ -28,6 +30,11 @@ declare global {
   type TNullable<T> = TNullableUtils<T>;
 
   type valueof<T> = valueofUtils<T>;
+
+  type TQueryVarModifierExt<S extends Store<Model> = Store<Model>> = (
+    variables: TDictionary,
+    queryParams: { store: S }
+  ) => void;
 
   // eslint-disable-next-line im/naming-interfaces-and-types
   interface Window {
