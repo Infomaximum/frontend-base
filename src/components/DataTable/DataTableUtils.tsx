@@ -7,7 +7,7 @@ import type { IShowMoreOwnProps } from "../ShowMore/ShowMore.types";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
 import type { ITableTopButtonDisabledProps } from "./TopPanel/TopPanel.types";
 
-export function getTableTopButtonDisabledStatus(
+function getTableTopButtonDisabledStatus(
   disabledProps: ITableTopButtonDisabledProps
 ) {
   const {
@@ -63,7 +63,7 @@ export function getTableTopButtonDisabledStatus(
  * @param checkedModels модели элементов, выбранных через чекбоксы
  * @param primeModel модель, имеющая приоритет над checkedModels (выбранная через контекстное меню)
  */
-export function getSelectedEntitiesIds(
+function getSelectedEntitiesIds(
   checkedModels?: (IModel | IGroup | RestModel)[],
   primeModel?: IModel | IGroup
 ): [number[], number[]] {
@@ -91,7 +91,7 @@ export function getSelectedEntitiesIds(
   return [itemsIds, groupsIds];
 }
 
-export const getColumnsWithShowMore = (
+const getColumnsWithShowMore = (
   columns: IColumnProps<TBaseRow>[] | undefined,
   props: Omit<IShowMoreOwnProps, "model">
 ) =>
@@ -120,3 +120,9 @@ export const getColumnsWithShowMore = (
       },
     })
   );
+
+export {
+  getTableTopButtonDisabledStatus,
+  getSelectedEntitiesIds,
+  getColumnsWithShowMore,
+};

@@ -1,9 +1,7 @@
-export default {
-  PASSWORDS_MUST_BE_EQUAL: "passwords_must_be_equal",
-  YOU_NEED_SET_PASSWORD: "you_need_set_password",
-  PASSWORD_IS_NOT_SECURE: "password_is_not_secure",
-  SELECT_OPTION: "item-select",
-};
+export const passwordsMustBeEqualTestId = "passwords_must_be_equal";
+export const passwordIsNotSecureTestId = "password_is_not_secure";
+export const youNeedSetPasswordTestId = "you_need_set_password";
+export const itemSelectTestId = "item-select";
 
 // Modal
 export const modalTitleTestId = "modal-title";

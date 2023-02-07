@@ -1,2 +1,2 @@
-export { EditableDataTableKeys } from "./EditableDataTable";
+export { EditableDataTableKeys, EditableDataTable } from "./EditableDataTable";
 export * from "./EditableRow";

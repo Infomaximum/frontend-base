@@ -46,9 +46,7 @@ import { withLoc } from "../../decorators/hocs/withLoc";
 import { withTheme } from "../../decorators/hocs/withTheme";
 import { withLocation } from "../../decorators";
 
-export const dataTableHeaderHeight = 40; // высота хэдера 28px + marginBottom 12px
-
-export const emptyColumnKey = "empty-column";
+const emptyColumnKey = "empty-column";
 
 class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
   IDataTableProps<T>,
@@ -676,4 +674,4 @@ const DataTable = <T extends TBaseRow = TBaseRow>(
   props: IDataTableOwnProps<T>
 ) => <_DataTableComponent {...props} />;
 
-export { DataTable };
+export { DataTable, emptyColumnKey };

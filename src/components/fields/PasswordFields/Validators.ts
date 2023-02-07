@@ -9,7 +9,11 @@ import {
   YOU_NEED_SET_PASSWORD,
   PASSWORD_IS_NOT_SECURE,
 } from "../../../utils/Localization/Localization";
-import TestIds from "../../../utils/TestIds";
+import {
+  passwordIsNotSecureTestId,
+  passwordsMustBeEqualTestId,
+  youNeedSetPasswordTestId,
+} from "../../../utils/TestIds";
 import { MIN_PASSWORD_LENGTH } from "../../../utils/const";
 import type { Localization } from "@im/localization";
 import type { IComplexPasswordModel } from "./PasswordFields.types";
@@ -255,7 +259,7 @@ const isValidRepeatPassword: TFieldValidatorSelector<string> =
 
     return sameAs(newPasswordFieldNameName, {
       message: local.getLocalized(passwordsMustBeEqualLoc),
-      code: TestIds.PASSWORDS_MUST_BE_EQUAL,
+      code: PASSWORDS_MUST_BE_EQUAL,
     })(repeatPasswordValue, allValues);
   };
 
@@ -337,7 +341,7 @@ const isValidNewPassword: TFieldValidatorSelector<string> =
     if (!newPasswordValue && repeatPasswordValue) {
       return {
         message: local.getLocalized(youNeedSetPasswordLoc),
-        code: TestIds.YOU_NEED_SET_PASSWORD,
+        code: youNeedSetPasswordTestId,
       };
     }
 
@@ -349,7 +353,7 @@ const isValidNewPassword: TFieldValidatorSelector<string> =
       return isValidPassword(
         {
           message: local.getLocalized(isValidPasswordLoc),
-          code: TestIds.PASSWORD_IS_NOT_SECURE,
+          code: passwordIsNotSecureTestId,
         },
         complexPassword
       )(newPasswordValue, allValues);
@@ -361,7 +365,7 @@ const isValidNewPassword: TFieldValidatorSelector<string> =
     ) {
       return {
         message: local.getLocalized(isValidPasswordLoc),
-        code: TestIds.PASSWORD_IS_NOT_SECURE,
+        code: passwordIsNotSecureTestId,
       };
     }
 
@@ -383,7 +387,7 @@ export const isValidPasswordMemoize = createSelector(
     isValidPassword(
       {
         message,
-        code: TestIds.PASSWORD_IS_NOT_SECURE,
+        code: passwordIsNotSecureTestId,
       },
       complexPassword
     )
