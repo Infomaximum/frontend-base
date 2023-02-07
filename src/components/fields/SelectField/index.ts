@@ -1,4 +1,1 @@
-export {
-  SelectFormField as SelectField,
-  SelectTableCellField,
-} from "./SelectField";
+export { SelectFormField, SelectTableCellField } from "./SelectField";

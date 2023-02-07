@@ -1,7 +1,4 @@
-export {
-  InputTableCellField,
-  InputFormField as InputField,
-} from "./InputField";
+export { InputTableCellField, InputFormField } from "./InputField";
 
 export {
   convertToMaxLengthValue,

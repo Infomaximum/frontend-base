@@ -1,1 +1,1 @@
-export { DatePickerFormField as DatePickerField } from "./DatePickerField";
+export { DatePickerFormField } from "./DatePickerField";
