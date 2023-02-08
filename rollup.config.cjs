@@ -51,6 +51,7 @@ const config = [
       "src/libs/utils/index.ts",
       "src/components/index.ts",
       "src/models/index.ts",
+      "src/store/index.ts",
       "src/layouts/index.ts",
     ],
     output: {

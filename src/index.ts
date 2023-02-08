@@ -4,6 +4,7 @@
 /// <reference path="components/index.ts" />
 /// <reference path="layouts/index.ts" />
 /// <reference path="models/index.ts" />
+/// <reference path="store/index.ts" />
 /// <reference path="libs/core/index.ts" />
 /// <reference path="libs/utils/index.ts" />
 
