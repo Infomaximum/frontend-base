@@ -18,11 +18,13 @@ import enUS from "antd/es/locale/en_US";
 import ruRu from "antd/es/locale/ru_RU";
 import { ConfigProvider } from "antd";
 import { AppErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
+import { historyStore } from "../../store/historyStore";
+import type { TFeatureEnabledChecker } from "@im/utils";
 
 export interface IAppProviderProps extends IRouterProviderProps {
-  baseName: string;
+  baseName?: string;
   language: ELanguages;
-  featureChecker?: () => boolean;
+  featureChecker?: TFeatureEnabledChecker;
 
   isDebugMode?: boolean;
   mainSystemPagePath?: string;
@@ -74,7 +76,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
         value={mainSystemPagePath ?? rootPath}
       >
         <DebugModeContext.Provider value={!!isDebugMode}>
-          <BrowserRouter basename={baseName}>
+          <BrowserRouter basename={baseName ?? historyStore.basename}>
             <ThemeProvider theme={themeProps ?? theme}>
               <LocalizationContext.Provider value={localizationInstance}>
                 <FeatureContext.Provider
