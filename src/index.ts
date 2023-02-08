@@ -1,5 +1,9 @@
-import "./global.types";
-import "./svg.types";
+/// <reference path="./global.types.ts" />
+/// <reference path="./svg.types.ts" />
+
+/// <reference path="components/index.ts" />
+/// <reference path="layouts/index.ts" />
+/// <reference path="models/index.ts" />
 
 import { configure } from "mobx";
 

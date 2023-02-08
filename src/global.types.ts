@@ -1,4 +1,5 @@
 /// <reference types="@emotion/react/types/css-prop" />
+
 import type { Model } from "@im/models";
 import type {
   TDictionary as TDictionaryUtils,
