@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
-    "axios": "^1.2.3",
+    "axios": "^1.0.0",
     "axios-retry": "^3.4.0",
     "copy-to-clipboard": "^3.3.3",
     "graphql-tag": "^2.12.6",
