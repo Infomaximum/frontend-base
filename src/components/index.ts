@@ -46,3 +46,4 @@ export * from "./Tag";
 export * from "./Tooltip";
 export * from "./Tree";
 export * from "./VirtualizedTable";
+export * from "./WrapperContainer";

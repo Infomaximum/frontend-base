@@ -116,11 +116,7 @@
     "lint": "tsc --noEmit",
     "prettier": "prettier --find-config-path --ignore-path ../../.prettierignore --write ./src",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "build": "rollup -c",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch",
-    "preinstall": "node ./syncDevAndPeerDependencies.js"
+    "build": " node ./syncDevAndPeerDependencies.js && rollup -c"
   },
   "husky": {
     "hooks": {
