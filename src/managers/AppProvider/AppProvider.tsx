@@ -1,15 +1,22 @@
 import { Global } from "@emotion/react";
 import { ELanguages, Localization } from "@im/localization";
-import { FC, useMemo } from "react";
+import moment from "moment";
+import { FC, useEffect, useMemo } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
 import { FeatureContext } from "../../decorators/contexts/FeatureContext";
 import { LocalizationContext } from "../../decorators/contexts/LocalizationContext";
+import { MainSystemPagePathContext } from "../../decorators/contexts/MainSystemPagePathContext";
 import { ThemeProvider } from "../../decorators/contexts/ThemeContext";
 import { globalStyles, theme } from "../../styles";
+import { rootPath } from "../../utils";
 import { ErrorModalProvider } from "../ErrorModalProvider/ErrorModalProvider";
 import { RouterProvider } from "../RouterProvider/RouterProvider";
 import type { IRouterProviderProps } from "../RouterProvider/RouterProvider.types";
 import { DataInitializer } from "./DataInitializer";
+import enUS from "antd/es/locale/en_US";
+import ruRu from "antd/es/locale/ru_RU";
+import { ConfigProvider } from "antd";
 
 export interface IAppProviderProps extends IRouterProviderProps {
   baseName: string;
@@ -17,6 +24,7 @@ export interface IAppProviderProps extends IRouterProviderProps {
   featureChecker?: () => boolean;
 
   isDebugMode?: boolean;
+  mainSystemPagePath?: string;
 }
 
 const defaultChecker = () => true;
@@ -33,6 +41,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     unAuthorizedRoutes,
     unInitializeRoutes,
     isDebugMode,
+    mainSystemPagePath,
   } = props;
 
   const localizationInstance = useMemo(
@@ -40,29 +49,51 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     [language]
   );
 
-  return (
-    <BrowserRouter basename={baseName}>
-      <ThemeProvider theme={theme}>
-        <LocalizationContext.Provider value={localizationInstance}>
-          <FeatureContext.Provider value={featureChecker ?? defaultChecker}>
-            <ErrorModalProvider isDebugMode={!!isDebugMode}>
-              <DataInitializer>
-                <Global styles={globalStyles(theme)} />
+  useEffect(() => {
+    const currentLanguage = localizationInstance.getLanguage();
 
-                <RouterProvider
-                  layout={layout}
-                  isAuthorizedUser={isAuthorizedUser}
-                  isSystemInitialized={isSystemInitialized}
-                  unInitializeRoutes={unInitializeRoutes}
-                  routesConfig={routesConfig}
-                  unAuthorizedRoutes={unAuthorizedRoutes}
-                />
-              </DataInitializer>
-            </ErrorModalProvider>
-          </FeatureContext.Provider>
-        </LocalizationContext.Provider>
-      </ThemeProvider>
-    </BrowserRouter>
+    moment.locale(currentLanguage);
+  }, [localizationInstance]);
+
+  const locale = useMemo(() => {
+    const { Language } = Localization;
+
+    const currentLanguage = localizationInstance.getLanguage();
+
+    const locale = currentLanguage === Language.en ? enUS : ruRu;
+
+    return locale;
+  }, [localizationInstance]);
+
+  return (
+    <MainSystemPagePathContext.Provider value={mainSystemPagePath ?? rootPath}>
+      <DebugModeContext.Provider value={!!isDebugMode}>
+        <BrowserRouter basename={baseName}>
+          <ThemeProvider theme={theme}>
+            <LocalizationContext.Provider value={localizationInstance}>
+              <FeatureContext.Provider value={featureChecker ?? defaultChecker}>
+                <ErrorModalProvider isDebugMode={!!isDebugMode}>
+                  <ConfigProvider locale={locale}>
+                    <DataInitializer>
+                      <Global styles={globalStyles(theme)} />
+
+                      <RouterProvider
+                        layout={layout}
+                        isAuthorizedUser={isAuthorizedUser}
+                        isSystemInitialized={isSystemInitialized}
+                        unInitializeRoutes={unInitializeRoutes}
+                        routesConfig={routesConfig}
+                        unAuthorizedRoutes={unAuthorizedRoutes}
+                      />
+                    </DataInitializer>
+                  </ConfigProvider>
+                </ErrorModalProvider>
+              </FeatureContext.Provider>
+            </LocalizationContext.Provider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </DebugModeContext.Provider>
+    </MainSystemPagePathContext.Provider>
   );
 };
 
