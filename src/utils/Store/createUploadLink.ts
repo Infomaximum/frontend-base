@@ -138,7 +138,7 @@ export function createUploadLink(graphqlURL: string) {
      */
     let customBody: FormData;
     if (files && files.length) {
-      delete options.headers["content-type"];
+      options?.headers && delete options.headers["content-type"];
       customBody = new FormData();
       customBody.append("operationName", body.operationName as string);
       customBody.append("variables", JSON.stringify(body.variables));
