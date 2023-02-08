@@ -47,6 +47,8 @@ const config = [
   {
     input: [
       "src/index.ts",
+      "src/libs/core/index.ts",
+      "src/libs/utils/index.ts",
       "src/components/index.ts",
       "src/models/index.ts",
       "src/layouts/index.ts",
