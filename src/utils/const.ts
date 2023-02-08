@@ -121,5 +121,6 @@ export const VIRTUALIZED_TABLE_BODY_ID = "virtualized-table-body-id";
 export const MAIN_LAYOUT_CONTENT_ID = "main-layout-content-id";
 
 export enum EErrorBoundaryCodesBase {
+  app = "app",
   unAuthorizedLayout = "unAuthorizedLayout",
 }

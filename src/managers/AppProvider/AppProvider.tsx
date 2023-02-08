@@ -9,7 +9,7 @@ import { LocalizationContext } from "../../decorators/contexts/LocalizationConte
 import { MainSystemPagePathContext } from "../../decorators/contexts/MainSystemPagePathContext";
 import { ThemeProvider } from "../../decorators/contexts/ThemeContext";
 import { globalStyles, theme } from "../../styles";
-import { rootPath } from "../../utils";
+import { EErrorBoundaryCodesBase, rootPath } from "../../utils";
 import { ErrorModalProvider } from "../ErrorModalProvider/ErrorModalProvider";
 import { RouterProvider } from "../RouterProvider/RouterProvider";
 import type { IRouterProviderProps } from "../RouterProvider/RouterProvider.types";
@@ -17,6 +17,7 @@ import { DataInitializer } from "./DataInitializer";
 import enUS from "antd/es/locale/en_US";
 import ruRu from "antd/es/locale/ru_RU";
 import { ConfigProvider } from "antd";
+import { AppErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 
 export interface IAppProviderProps extends IRouterProviderProps {
   baseName: string;
@@ -68,34 +69,40 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
   }, [localizationInstance]);
 
   return (
-    <MainSystemPagePathContext.Provider value={mainSystemPagePath ?? rootPath}>
-      <DebugModeContext.Provider value={!!isDebugMode}>
-        <BrowserRouter basename={baseName}>
-          <ThemeProvider theme={themeProps ?? theme}>
-            <LocalizationContext.Provider value={localizationInstance}>
-              <FeatureContext.Provider value={featureChecker ?? defaultChecker}>
-                <ErrorModalProvider isDebugMode={!!isDebugMode}>
-                  <ConfigProvider locale={locale}>
-                    <DataInitializer>
-                      <Global styles={globalStyles(theme)} />
+    <AppErrorBoundary code={EErrorBoundaryCodesBase.app}>
+      <MainSystemPagePathContext.Provider
+        value={mainSystemPagePath ?? rootPath}
+      >
+        <DebugModeContext.Provider value={!!isDebugMode}>
+          <BrowserRouter basename={baseName}>
+            <ThemeProvider theme={themeProps ?? theme}>
+              <LocalizationContext.Provider value={localizationInstance}>
+                <FeatureContext.Provider
+                  value={featureChecker ?? defaultChecker}
+                >
+                  <ErrorModalProvider isDebugMode={!!isDebugMode}>
+                    <ConfigProvider locale={locale}>
+                      <DataInitializer>
+                        <Global styles={globalStyles(theme)} />
 
-                      <RouterProvider
-                        layout={layout}
-                        isAuthorizedUser={isAuthorizedUser}
-                        isSystemInitialized={isSystemInitialized}
-                        unInitializeRoutes={unInitializeRoutes}
-                        routesConfig={routesConfig}
-                        unAuthorizedRoutes={unAuthorizedRoutes}
-                      />
-                    </DataInitializer>
-                  </ConfigProvider>
-                </ErrorModalProvider>
-              </FeatureContext.Provider>
-            </LocalizationContext.Provider>
-          </ThemeProvider>
-        </BrowserRouter>
-      </DebugModeContext.Provider>
-    </MainSystemPagePathContext.Provider>
+                        <RouterProvider
+                          layout={layout}
+                          isAuthorizedUser={isAuthorizedUser}
+                          isSystemInitialized={isSystemInitialized}
+                          unInitializeRoutes={unInitializeRoutes}
+                          routesConfig={routesConfig}
+                          unAuthorizedRoutes={unAuthorizedRoutes}
+                        />
+                      </DataInitializer>
+                    </ConfigProvider>
+                  </ErrorModalProvider>
+                </FeatureContext.Provider>
+              </LocalizationContext.Provider>
+            </ThemeProvider>
+          </BrowserRouter>
+        </DebugModeContext.Provider>
+      </MainSystemPagePathContext.Provider>
+    </AppErrorBoundary>
   );
 };
 
