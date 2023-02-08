@@ -107,6 +107,7 @@
     "rollup-plugin-copy": "3.4.0",
     "rollup-plugin-delete": "2.0.0",
     "rollup-plugin-less": "1.1.3",
+    "semver": "7.3.8",
     "tslib": "2.4.1",
     "typescript": "4.7.4"
   },
@@ -118,7 +119,8 @@
     "build": "rollup -c",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "preinstall": "node ./syncDevAndPeerDepandencies.js"
   },
   "husky": {
     "hooks": {
