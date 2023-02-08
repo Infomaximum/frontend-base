@@ -25,6 +25,7 @@ export interface IAppProviderProps extends IRouterProviderProps {
 
   isDebugMode?: boolean;
   mainSystemPagePath?: string;
+  theme?: TTheme;
 }
 
 const defaultChecker = () => true;
@@ -42,6 +43,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     unInitializeRoutes,
     isDebugMode,
     mainSystemPagePath,
+    theme: themeProps,
   } = props;
 
   const localizationInstance = useMemo(
@@ -69,7 +71,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     <MainSystemPagePathContext.Provider value={mainSystemPagePath ?? rootPath}>
       <DebugModeContext.Provider value={!!isDebugMode}>
         <BrowserRouter basename={baseName}>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={themeProps ?? theme}>
             <LocalizationContext.Provider value={localizationInstance}>
               <FeatureContext.Provider value={featureChecker ?? defaultChecker}>
                 <ErrorModalProvider isDebugMode={!!isDebugMode}>
