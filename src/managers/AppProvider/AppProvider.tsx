@@ -29,6 +29,8 @@ export interface IAppProviderProps extends IRouterProviderProps {
   isDebugMode?: boolean;
   mainSystemPagePath?: string;
   theme?: TTheme;
+
+  children?: (children: React.ReactNode) => React.ReactNode;
 }
 
 const defaultChecker = () => true;
@@ -47,6 +49,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     isDebugMode,
     mainSystemPagePath,
     theme: themeProps,
+    children,
   } = props;
 
   const localizationInstance = useMemo(
@@ -70,6 +73,19 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     return locale;
   }, [localizationInstance]);
 
+  const _theme = themeProps ?? theme;
+
+  const routerProvider = (
+    <RouterProvider
+      layout={layout}
+      isAuthorizedUser={isAuthorizedUser}
+      isSystemInitialized={isSystemInitialized}
+      unInitializeRoutes={unInitializeRoutes}
+      routesConfig={routesConfig}
+      unAuthorizedRoutes={unAuthorizedRoutes}
+    />
+  );
+
   return (
     <AppErrorBoundary code={EErrorBoundaryCodesBase.app}>
       <MainSystemPagePathContext.Provider
@@ -77,7 +93,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
       >
         <DebugModeContext.Provider value={!!isDebugMode}>
           <BrowserRouter basename={baseName ?? historyStore.basename}>
-            <ThemeProvider theme={themeProps ?? theme}>
+            <ThemeProvider theme={_theme}>
               <LocalizationContext.Provider value={localizationInstance}>
                 <FeatureContext.Provider
                   value={featureChecker ?? defaultChecker}
@@ -85,16 +101,11 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
                   <ErrorModalProvider isDebugMode={!!isDebugMode}>
                     <ConfigProvider locale={locale}>
                       <DataInitializer>
-                        <Global styles={globalStyles(theme)} />
+                        <Global styles={globalStyles(_theme)} />
 
-                        <RouterProvider
-                          layout={layout}
-                          isAuthorizedUser={isAuthorizedUser}
-                          isSystemInitialized={isSystemInitialized}
-                          unInitializeRoutes={unInitializeRoutes}
-                          routesConfig={routesConfig}
-                          unAuthorizedRoutes={unAuthorizedRoutes}
-                        />
+                        {typeof children === "function"
+                          ? children(routerProvider)
+                          : routerProvider}
                       </DataInitializer>
                     </ConfigProvider>
                   </ErrorModalProvider>

@@ -1,7 +1,5 @@
-import { cookies } from "@im/utils";
 import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useModalError } from "../../decorators/hooks/useModalError";
 import { useMountEffect } from "../../decorators/hooks/useMountEffect";
 import { useWillMountEffect } from "../../decorators/hooks/useWillMountEffect";
 import { historyStore } from "../../store/historyStore";
@@ -13,7 +11,6 @@ interface IDataInitializerProps {
 const DataInitializer: FC<IDataInitializerProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { showModalError } = useModalError();
 
   useWillMountEffect(() => {
     historyStore.navigate = navigate;
@@ -33,7 +30,7 @@ const DataInitializer: FC<IDataInitializerProps> = ({ children }) => {
     }
   });
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export { DataInitializer };
