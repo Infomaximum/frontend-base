@@ -25,7 +25,6 @@ import { ArrowLeftOutlined } from "../../components/Icons/Icons";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { BaseCard } from "../../components/BaseCard";
 import { withLoc, withSystemTitle, withTheme } from "../../decorators/hocs";
-import { CompanyNameSVG } from "../../resources/icons";
 
 const { Content } = Layout;
 
@@ -111,6 +110,8 @@ class UnAuthorized extends PureComponent<
 
   public override render() {
     const { showAnimate } = this.state;
+    const { wrapperStyle, bodyStyle, children, topPanel, companyLogo } =
+      this.props;
 
     const wrapperContentStyles = [
       wrapperContentLoginStyle,
@@ -120,19 +121,17 @@ class UnAuthorized extends PureComponent<
     return (
       <Layout css={layoutStyle}>
         <ErrorBoundary code={EErrorBoundaryCodesBase.unAuthorizedLayout}>
-          {this.props.topPanel}
+          {topPanel}
           <Content css={unAuthorizedContentStyle}>
-            <div css={companyNameStyle}>
-              <CompanyNameSVG />
-            </div>
+            {!!companyLogo && <div css={companyNameStyle}>{companyLogo}</div>}
             <BaseCard
-              styleWrapper={[wrapperContentStyles, this.props.wrapperStyle]}
+              styleWrapper={[wrapperContentStyles, wrapperStyle]}
               headStyle={headStyle}
-              bodyStyle={this.props.bodyStyle}
+              bodyStyle={bodyStyle}
               title={this.getHeaderTitle()}
               onAnimationEnd={this.handleAnimationComplete}
             >
-              {this.props.children}
+              {children}
             </BaseCard>
           </Content>
         </ErrorBoundary>

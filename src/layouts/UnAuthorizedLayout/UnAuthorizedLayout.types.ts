@@ -22,6 +22,8 @@ export interface IUnAuthorizedLayoutProps
   route: NCore.IRoutes;
 
   productNameLoc?: TLocalizationDescription;
+  /** Логотип который отображается над формой */
+  companyLogo?: React.ReactNode;
 }
 
 export interface IUnAuthorizedLayoutState {

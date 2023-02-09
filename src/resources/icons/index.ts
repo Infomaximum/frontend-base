@@ -4,7 +4,6 @@ export { default as ArrowDownSVG } from "./ArrowDown.svg";
 export { default as ArrowRightSVG } from "./ArrowRight.svg";
 export { default as ArrowUpSVG } from "./ArrowUp.svg";
 export { default as BarsSVG } from "./Bars.svg";
-export { default as CompanyNameSVG } from "./CompanyName.svg";
 export { default as ControlsSVG } from "./Controls.svg";
 export { default as EmptyHereForNowSVG } from "./EmptyHereForNow.svg";
 export { default as EmptyPresentedLargeImageSVG } from "./EmptyPresentedLargeImage.svg";
