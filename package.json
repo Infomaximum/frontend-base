@@ -96,7 +96,7 @@
     "typescript": "4.7.4"
   },
   "scripts": {
-    "release": "tsc --noEmit && standard-version && rollup -c",
+    "release": "rollup -c && standard-version",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests",
     "lint": "tsc --noEmit",
     "prettier": "prettier --find-config-path --ignore-path ../../.prettierignore --write ./src",
