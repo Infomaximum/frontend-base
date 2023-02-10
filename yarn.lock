@@ -1160,10 +1160,10 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/configs/-/configs-1.2.1.tgz#ff6bf56520679a068dbda753cb9ad60ec3dce4a6"
   integrity sha512-qeCK1Sag7bv40jaChHo0PIeXmPhdMc7F0LDL8E/UfAVcXhOZqSo5gXqM8D0PcqMts+vWaPs5+iKBZg2DoNXm6g==
 
-"@im/core@^99.0.0-rc":
-  version "99.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-99.0.0-rc.tgz#6ffa819d194f789fe7486a97d0362e0c16960e01"
-  integrity sha512-ovFRmRYl/PCXbrQSkr1EICt6N3HSeAf3bubFffnXGxThqVNTe9p55tp2CwigNJ+2dbRLj2qWEIK1AVOkqLhFMA==
+"@im/core@^7.0.0":
+  version "7.0.0"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-7.0.0.tgz#e69b4133725cc78260737c57a6be20a1309a00d0"
+  integrity sha512-AJbvhiVQvgDj3oKuiGwIl5x9eeeyP+6rWYJ6w5H3HNkcshgqcrL3wqAeTeSsBP3CEsnpA4QjrfB3wjWiOKk5IA==
 
 "@im/localization@^1.0.3":
   version "1.0.3"
@@ -1177,10 +1177,10 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/models/-/models-1.3.2.tgz#b820d11c5a7f8142d4d1b4756617461ec71cde81"
   integrity sha512-JQc8f/vsTp7hX00kg8B+Emk9oCj+Ft4YZgJwGgtATO90WstwB0z1NV16e0vpyRVVQG7nSV96rVN0KNclh6LukQ==
 
-"@im/utils@^99.0.0-rc":
-  version "99.0.0-rc"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-99.0.0-rc.tgz#b52b3c5dde087fe30fd0058d8ee977422a640fe1"
-  integrity sha512-RC0A7dBkAxNSAf7ILxcKUXHn/Vpz5e8xNAWoQjKLq2cBJRlHOSLpGDobRivVjbsaJrLdbcBcoTnoYPLeTDQ9EQ==
+"@im/utils@^6.0.0":
+  version "6.0.0"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0.tgz#affc5c9bb936c34c0e0400b2a75eb0fcbd084371"
+  integrity sha512-ZyDtMrarG4NCvp9P8HEItitXnx0D6D8657GeevLVYcgtudATsYLYAotzJv+KadEmQ+turEt6Ho6t7/EgknhC9A==
   dependencies:
     "@types/hoist-non-react-statics" "3.3.1"
     crypto-js "4.1.1"

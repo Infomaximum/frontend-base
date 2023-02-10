@@ -19,10 +19,10 @@
   },
   "dependencies": {
     "@im/asserts": "^1.0.4",
-    "@im/core": "^99.0.0-rc",
+    "@im/core": "^7.0.0",
     "@im/localization": "^1.0.3",
     "@im/models": "^1.2.0",
-    "@im/utils": "^99.0.0-rc",
+    "@im/utils": "^6.0.0",
     "@apollo/client": "^3.7.0",
     "@ant-design/icons": "^4.0.0",
     "@emotion/react": "^11.0.0",
