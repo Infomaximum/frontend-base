@@ -1,1 +1,1 @@
-export { InputNumberFormField } from "./InputNumberField";
+export { InputNumberFormField, roundToPrecision } from "./InputNumberField";
