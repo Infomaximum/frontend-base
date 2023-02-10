@@ -2,6 +2,7 @@ import type { IDropdownProps } from "../../components/Dropdown/Dropdown.types";
 import type { EOperationType } from "@im/utils";
 import type { Interpolation } from "@emotion/react";
 import type { SubMenuProps } from "antd/lib/menu/SubMenu";
+import type { MenuProps } from "antd";
 
 export enum ESortingMethodsNames {
   priority = "priority",
@@ -12,6 +13,11 @@ export type TContextMenuParamItem =
   | IContextMenuParam
   | IContextMenuDivider
   | IContextSubMenuParam;
+
+export type TOnItemClickParam = {
+  param: Parameters<NonNullable<MenuProps["onClick"]>>[0];
+  item: IContextMenuParam;
+};
 
 export interface IContextMenuParam {
   key?: string;
@@ -52,6 +58,7 @@ export interface IContextMenuProps
   buttonStyle?: Interpolation<TTheme>;
   withoutChildWrapper?: boolean;
   dropdownStyle?: React.CSSProperties;
+  onItemClick?: (params: TOnItemClickParam) => void;
 
   /** Определяет метод сортировки пунктов контекстного меню. */
   sortBy?: keyof typeof ESortingMethodsNames;

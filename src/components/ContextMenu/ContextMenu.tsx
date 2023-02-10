@@ -17,7 +17,7 @@ import {
   IContextMenuProps,
   TSortingMethodsList,
 } from "./ContextMenu.types";
-import { map, isEmpty, forEach } from "lodash";
+import { map, isEmpty, forEach, isFunction } from "lodash";
 import {
   contextMenuTestId,
   contextMenuItemTestId,
@@ -60,6 +60,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
     sortBy = ESortingMethodsNames.priority,
     children,
     "test-id": testId,
+    onItemClick,
     ...rest
   } = props;
   const { isFeatureEnabled } = useFeature();
@@ -173,8 +174,12 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
         const style = itemStyle(item.disabled, item.action);
 
         const wrappedClickFunction: MenuProps["onClick"] = (param) => {
-          param.domEvent.stopPropagation();
-          item.clickHandler();
+          if (isFunction(onItemClick)) {
+            onItemClick({ param, item });
+          } else {
+            param.domEvent.stopPropagation();
+            item.clickHandler();
+          }
         };
 
         return {
@@ -186,7 +191,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
           "test-id": testId,
         };
       }),
-    [sortBy, theme]
+    [onItemClick, sortBy, theme]
   );
 
   const menuItems = useMemo(
