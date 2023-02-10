@@ -15,6 +15,19 @@ All notable changes to this project will be documented in this file. See [standa
 * исправил скрипт запуска релиза ([798c385](https://git.office.infomaximum.com/frontend/base-pkg/commit/798c385df39658270cc6995bd876f59766ee0df0))
 * исправил скрипт запуска релиза ([de27bae](https://git.office.infomaximum.com/frontend/base-pkg/commit/de27baeaaae3e0625f4821774ea93693cd66f8eb))
 
+## [1.1.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.0.0...v1.1.0) (2023-02-10)
+
+
+### Features
+
+* перенес изменения с платформы ([8959af0](https://git.office.infomaximum.com/frontend/base-pkg/commit/8959af0a9013903013ae8803afdbcd4a5a7165c8))
+
+
+### Bug Fixes
+
+* исправил скрипт запуска релиза ([798c385](https://git.office.infomaximum.com/frontend/base-pkg/commit/798c385df39658270cc6995bd876f59766ee0df0))
+* исправил скрипт запуска релиза ([de27bae](https://git.office.infomaximum.com/frontend/base-pkg/commit/de27baeaaae3e0625f4821774ea93693cd66f8eb))
+
 ## 1.0.0 (2023-02-10)
 
 
