@@ -1,4 +1,5 @@
 export * from "./DropdownPendingPlaceholder";
 export * from "./DropdownPlaceholder";
 export { Select } from "./Select";
-export { suffixIconStyle } from "./Select.styles";
+export { replaceBrowserTooltip, optionParsersForSearch } from "./Select.utils";
+export { suffixIconStyle, commonTagStyle } from "./Select.styles";
