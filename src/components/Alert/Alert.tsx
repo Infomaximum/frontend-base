@@ -12,7 +12,8 @@ import {
   alertBannerStyle,
 } from "./Alert.styles";
 import type { Interpolation } from "@emotion/react";
-import Icon, {
+import {
+  Icon,
   CloseCircleFilled,
   CheckCircleFilled,
   ExclamationCircleFilled,

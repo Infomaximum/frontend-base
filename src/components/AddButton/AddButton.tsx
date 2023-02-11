@@ -2,7 +2,7 @@ import { memo, useMemo, FC } from "react";
 import type { IAddButtonProps } from "./AddButton.types";
 import { Button } from "../../components/Button/Button";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
-import Icon from "../../components/Icons/Icons";
+import { Icon } from "../../components/Icons/Icons";
 import PlusSVG from "../../resources/icons/Plus.svg";
 import { ADD } from "../../utils/Localization/Localization";
 import { addButtonTestId } from "../../utils/TestIds";
