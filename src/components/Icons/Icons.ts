@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-export { default } from "@ant-design/icons";
+export { default as Icon } from "@ant-design/icons";
 export type { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
 
 export { default as CopyOutlined } from "@ant-design/icons/CopyOutlined";
