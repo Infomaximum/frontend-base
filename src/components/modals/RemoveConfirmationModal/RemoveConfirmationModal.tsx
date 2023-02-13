@@ -73,7 +73,7 @@ class RemoveConfirmationModalComponent extends PureComponent<
     this.afterCloseModal(this.props.onAfterCancel);
   };
 
-  private handleConfirm() {
+  private handleConfirm = () => {
     const { onConfirm, onAfterConfirm, onAfterCancel } = this.props;
 
     this.setState(
@@ -93,7 +93,7 @@ class RemoveConfirmationModalComponent extends PureComponent<
           });
       }
     );
-  }
+  };
 
   private getFooterModal = () => {
     const { localization, buttonRemoveText } = this.props;
