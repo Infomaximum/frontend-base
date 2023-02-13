@@ -259,7 +259,7 @@ const isValidRepeatPassword: TFieldValidatorSelector<string> =
 
     return sameAs(newPasswordFieldNameName, {
       message: local.getLocalized(passwordsMustBeEqualLoc),
-      code: PASSWORDS_MUST_BE_EQUAL,
+      code: passwordsMustBeEqualTestId,
     })(repeatPasswordValue, allValues);
   };
 
