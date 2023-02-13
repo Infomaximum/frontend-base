@@ -1,0 +1,1 @@
+export { withFormSubmitPromise } from "./withFormSubmitPromise";

@@ -1,12 +1,12 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@im/configs/tsconfig.lib.json",
   "compilerOptions": {
-    "paths": {
-      "@im/base/*": ["base/*"],
-      "@im/core": ["core/*"],
-      "@im/utils": ["utils/*"]
-    },
-    "noUncheckedIndexedAccess": true
+    "outDir": "dist",
+    "noEmit": false,
+    "jsx": "preserve",
+    "declaration": true,
+    "declarationDir": "dist"
   },
-  "include": ["../core", "../utils", "src"]
+  "exclude": ["/node_modules/", "**/node_modules", "**/.*/"],
+  "include": ["src"]
 }

@@ -1,0 +1,1 @@
+export { withLoc } from "./withLoc";

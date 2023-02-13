@@ -1,0 +1,1 @@
+export { TableExpandIcon } from "./TableExpandIcon";

@@ -1,0 +1,1 @@
+export { withLocation } from "./withLocation";

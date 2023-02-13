@@ -1,0 +1,1 @@
+export { withRedirect } from "./withRedirect";

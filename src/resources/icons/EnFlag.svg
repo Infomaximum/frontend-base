@@ -1,0 +1,27 @@
+<svg
+    width="12"
+    height="12"
+    viewBox="0 0 12 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <use fill="#FFF" fillOpacity=".01" href="#path0_fill" />
+    <use fill="#00247D" transform="translate(0 1)" href="#path1_fill" />
+    <use fill="#F0F0F0" transform="translate(0 4.5)" href="#path2_fill" />
+    <use fill="#F0F0F0" transform="translate(5 1)" href="#path3_fill" />
+    <use fill="#CF142B" transform="translate(0 5)" href="#path4_fill" />
+    <use fill="#CF142B" transform="translate(5.5 1)" href="#path5_fill" />
+    <use fill="#F0F0F0" transform="translate(0 1)" href="#path6_fill" />
+    <use fill="#F0F0F0" transform="matrix(1 0 0 -1 7 4.5)" href="#path6_fill" />
+    <use fill="#F0F0F0" transform="rotate(180 6 5)" href="#path6_fill" />
+    <use fill="#F0F0F0" transform="matrix(-1 0 0 1 5 6.5)" href="#path6_fill" />
+    <defs>
+      <path id="path0_fill" d="M0 0h12v12H0V0z" />
+      <path id="path1_fill" d="M0 0h12v9H0V0z" />
+      <path id="path2_fill" d="M0 0h12v2H0V0z" />
+      <path id="path3_fill" d="M0 0h2v9H0V0z" />
+      <path id="path4_fill" d="M0 0h12v1H0V0z" />
+      <path id="path5_fill" d="M0 0h1v9H0V0z" />
+      <path id="path6_fill" d="M0 .5l4 3h1V3L1 0H0v.5z" />
+    </defs>
+  </svg>
