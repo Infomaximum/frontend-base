@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.4.1...v1.5.0) (2023-02-14)
+
+
+### Features
+
+* добавил экспорт стилей ([073a30c](https://git.office.infomaximum.com/frontend/base-pkg/commit/073a30c18937f4ab6b3d6b82e7c4b0fb29f6fb4c))
+
+
+### Bug Fixes
+
+* убрал переопределение анимации открытия дроверов ([9fe76be](https://git.office.infomaximum.com/frontend/base-pkg/commit/9fe76be1a7ab3ad36a5b3fca6abcdbb1b75477a9))
+
 ### [1.4.1](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.4.0...v1.4.1) (2023-02-13)
 
 
