@@ -20,11 +20,6 @@ export const drawerStyle = (theme: TTheme) => ({
   ".ant-drawer-content-wrapper": {
     maxWidth: "90%",
   },
-  "&.ant-drawer > *": {
-    transition: `transform 0.15s cubic-bezier(0.7, 0.3, 0.1, 1),
-    box-shadow 0.15s cubic-bezier(0.7, 0.3, 0.1, 1),
-    -webkit-transform 0.15s cubic-bezier(0.7, 0.3, 0.1, 1)`,
-  },
   ".ant-drawer-close": {
     marginRight: "-12px",
   },

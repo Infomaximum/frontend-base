@@ -32,13 +32,13 @@ const DrawerComponent: React.FC<IDrawerProps> = (props) => {
   }, []);
 
   const boldTitle = useMemo(
-    () => <span css={titleStyle(theme)}>{title}</span>,
-    [title, theme]
+    () => <span css={titleStyle}>{title}</span>,
+    [title]
   );
 
   const closeIcon = useMemo(() => {
     return (
-      <div css={closeIconWrapperStyle(theme)}>
+      <div css={closeIconWrapperStyle}>
         <CloseOutlined
           css={closeIconStyle}
           key="drawer-close-button"
@@ -46,11 +46,11 @@ const DrawerComponent: React.FC<IDrawerProps> = (props) => {
         />
       </div>
     );
-  }, [theme]);
+  }, []);
 
   return (
     <AntDrawer
-      css={drawerStyle(theme)}
+      css={drawerStyle}
       headerStyle={headerDrawerStyle(theme)}
       title={title && boldTitle}
       closeIcon={closeIcon}
