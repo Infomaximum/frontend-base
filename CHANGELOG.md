@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.6.2...v1.7.0) (2023-02-15)
+
+
+### Features
+
+* добавил передачу пропса dropdownStyle в Select ([49a7165](https://git.office.infomaximum.com/frontend/base-pkg/commit/49a7165e54a069302216205e596956a60a016222))
+
 ### [1.6.2](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.6.1...v1.6.2) (2023-02-15)
 
 
