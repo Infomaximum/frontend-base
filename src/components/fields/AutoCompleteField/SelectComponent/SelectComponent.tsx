@@ -496,6 +496,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
       onDeselect,
       onClear,
       onClick,
+      dropdownStyle,
     } = this.props;
 
     const { searchText, isFocused } = this.state;
@@ -519,6 +520,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           open={autocompleteStore.isDataLoaded && isFocused ? undefined : false}
           key="ant-select"
           mode={mode}
+          dropdownStyle={dropdownStyle}
           placeholder={placeholder}
           loading={this.isFirstLoading() && this.state.hasBeenOpenedDropdown}
           labelInValue={true}
