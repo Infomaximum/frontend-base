@@ -1,1 +1,1 @@
-export { Drawer } from "./Drawer";
+export { Drawer, getBoldTitle } from "./Drawer";
