@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.6.1...v1.6.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* исправил отсутствие экспорта  getBoldTitleModal ([b9d1d07](https://git.office.infomaximum.com/frontend/base-pkg/commit/b9d1d07d760f6fe0366b91535828f62fda61ea0a))
+
 ### [1.6.1](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.6.0...v1.6.1) (2023-02-15)
 
 
