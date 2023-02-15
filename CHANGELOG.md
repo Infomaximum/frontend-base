@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.6.0...v1.6.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* исправил отсутствие экспорты ([2c0c3ab](https://git.office.infomaximum.com/frontend/base-pkg/commit/2c0c3abfcea9189cd59c5aabf89f153d93781174))
+* исправил проблему с отсутствием привязки к контексту ([8514f9c](https://git.office.infomaximum.com/frontend/base-pkg/commit/8514f9ccef4da25fb0a02348354f6f305e7037ae))
+
 ## [1.6.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.4.1...v1.6.0) (2023-02-14)
 
 
