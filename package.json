@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@im/asserts": "^1.0.4",
-    "@im/core": "^7.0.0",
+    "@im/core": "^8.0.0",
     "@im/localization": "^1.0.3",
     "@im/models": "^1.2.0",
     "@im/utils": "^6.0.0",

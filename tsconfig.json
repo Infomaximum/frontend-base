@@ -5,6 +5,8 @@
     "noEmit": false,
     "jsx": "preserve",
     "declaration": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
     "declarationDir": "dist"
   },
   "exclude": ["/node_modules/", "**/node_modules", "**/.*/"],

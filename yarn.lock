@@ -1160,12 +1160,14 @@
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/configs/-/configs-1.2.1.tgz#ff6bf56520679a068dbda753cb9ad60ec3dce4a6"
   integrity sha512-qeCK1Sag7bv40jaChHo0PIeXmPhdMc7F0LDL8E/UfAVcXhOZqSo5gXqM8D0PcqMts+vWaPs5+iKBZg2DoNXm6g==
 
-"@im/core@^7.0.0":
-  version "7.0.0"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-7.0.0.tgz#e69b4133725cc78260737c57a6be20a1309a00d0"
-  integrity sha512-AJbvhiVQvgDj3oKuiGwIl5x9eeeyP+6rWYJ6w5H3HNkcshgqcrL3wqAeTeSsBP3CEsnpA4QjrfB3wjWiOKk5IA==
+"@im/core@^8.0.0":
+  version "8.0.0"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-8.0.0.tgz#8491359184e533df6c102bd95d13d3fbee3e4834"
+  integrity sha512-HSmxL5DKJSeMok5FzdLbEjVUzuWZm8fY71F+rVjWjCiDPCDysSyFKvX242mglwj5nVCR6cGg3rUnQOVRpe4EHw==
+  dependencies:
+    reflect-metadata "0.1.13"
 
-"@im/localization@^1.0.3":
+"@im/localization@^1.0.1", "@im/localization@^1.0.3":
   version "1.0.3"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/localization/-/localization-1.0.3.tgz#f646c652db813357e571b9f5d3f2c37507024325"
   integrity sha512-ooNelK7BSfnNTr4ShUGer85nXuHsyd1jNtgjaqM2QhUXNgsTa+28ftxRuz+ZZ8jq8Jr6ppmLgysuSNa7R9F6wA==
@@ -1178,16 +1180,19 @@
   integrity sha512-JQc8f/vsTp7hX00kg8B+Emk9oCj+Ft4YZgJwGgtATO90WstwB0z1NV16e0vpyRVVQG7nSV96rVN0KNclh6LukQ==
 
 "@im/utils@^6.0.0":
-  version "6.1.0"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.1.0.tgz#5c802f9d18c4928d6caf06d5c57f33ad1bd9ac1d"
-  integrity sha512-QZQI7yDehoiygW4b2xCDxuZfiVpiSZmFBM+V/z08q2XGvBOIADctaA6cwm5Y/kL2yB19AHm58izTkLUZexdCig==
+  version "6.2.1"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.2.1.tgz#f97260cb7ebf4c9276eb3f13565c4f5c873474f5"
+  integrity sha512-D/smKSGEP6hzdYW1lIcViSMGohluXflIsDn5a0A7ghlHsysZ0bQKbp5OunkqMl40IqmgLTOzVMP7K2huD3eAiQ==
   dependencies:
+    "@im/asserts" "^1.0.0"
+    "@im/localization" "^1.0.1"
+    "@im/models" "^1.2.0"
     "@types/hoist-non-react-statics" "3.3.1"
     crypto-js "4.1.1"
     graphql "16.3.0"
     graphql-tag "2.12.6"
     lodash "4.17.21"
-    moment "2.29.4"
+    moment "^2.29.2"
     reselect "4.1.7"
     universal-cookie "4.0.4"
 
@@ -4308,7 +4313,7 @@ modify-values@^1.0.0:
   resolved "https://npm.office.infomaximum.com/repository/npm-group/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
   integrity sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==
 
-moment@2.29.4, moment@^2.24.0, moment@^2.29.2:
+moment@^2.24.0, moment@^2.29.2:
   version "2.29.4"
   resolved "https://npm.office.infomaximum.com/repository/npm-group/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -5285,6 +5290,11 @@ redent@^3.0.0:
   dependencies:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
+
+reflect-metadata@0.1.13:
+  version "0.1.13"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
 
 regenerate-unicode-properties@^10.1.0:
   version "10.1.0"
