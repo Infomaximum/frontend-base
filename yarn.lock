@@ -1178,9 +1178,9 @@
   integrity sha512-JQc8f/vsTp7hX00kg8B+Emk9oCj+Ft4YZgJwGgtATO90WstwB0z1NV16e0vpyRVVQG7nSV96rVN0KNclh6LukQ==
 
 "@im/utils@^6.0.0":
-  version "6.0.0"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.0.0.tgz#affc5c9bb936c34c0e0400b2a75eb0fcbd084371"
-  integrity sha512-ZyDtMrarG4NCvp9P8HEItitXnx0D6D8657GeevLVYcgtudATsYLYAotzJv+KadEmQ+turEt6Ho6t7/EgknhC9A==
+  version "6.1.0"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.1.0.tgz#5c802f9d18c4928d6caf06d5c57f33ad1bd9ac1d"
+  integrity sha512-QZQI7yDehoiygW4b2xCDxuZfiVpiSZmFBM+V/z08q2XGvBOIADctaA6cwm5Y/kL2yB19AHm58izTkLUZexdCig==
   dependencies:
     "@types/hoist-non-react-statics" "3.3.1"
     crypto-js "4.1.1"
