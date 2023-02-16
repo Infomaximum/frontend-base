@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="./global.types.ts" />
 /// <reference path="./svg.types.ts" />
 

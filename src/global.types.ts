@@ -30,6 +30,7 @@ declare global {
 
   type TNullable<T> = TNullableUtils<T>;
 
+  // eslint-disable-next-line im/naming-interfaces-and-types
   type valueof<T> = valueofUtils<T>;
 
   type TQueryVarModifierExt<S extends Store<Model> = Store<Model>> = (

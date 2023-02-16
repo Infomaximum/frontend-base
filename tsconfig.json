@@ -9,6 +9,6 @@
     "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
     "declarationDir": "dist"
   },
-  "exclude": ["/node_modules/", "**/node_modules", "**/.*/"],
+  "exclude": ["/node_modules/", "**/node_modules", "**/.*/", "./dist"],
   "include": ["src"]
 }
