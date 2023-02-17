@@ -1161,9 +1161,9 @@
   integrity sha512-qeCK1Sag7bv40jaChHo0PIeXmPhdMc7F0LDL8E/UfAVcXhOZqSo5gXqM8D0PcqMts+vWaPs5+iKBZg2DoNXm6g==
 
 "@im/core@^8.0.0":
-  version "8.0.0"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-8.0.0.tgz#8491359184e533df6c102bd95d13d3fbee3e4834"
-  integrity sha512-HSmxL5DKJSeMok5FzdLbEjVUzuWZm8fY71F+rVjWjCiDPCDysSyFKvX242mglwj5nVCR6cGg3rUnQOVRpe4EHw==
+  version "8.0.1"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/core/-/core-8.0.1.tgz#9e9572ea8dadd19607323f21c38683fc73f0914d"
+  integrity sha512-ivq5Ok/NVyXoxGDufXS/RwU3F6us8U+2Je0fqnFCeo1CVaNOFQc7u+ayy4OJ8VG8/INWIXMBWPlKtl1B1oN9pg==
   dependencies:
     reflect-metadata "0.1.13"
 
