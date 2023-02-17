@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.8.0...v1.8.1) (2023-02-17)
+
+
+### Bug Fixes
+
+* исправил импорты из @im/base ([71bed55](https://git.office.infomaximum.com/frontend/base-pkg/commit/71bed55410937ae0fdb39be6f9b4518249770d2a))
+
 ## [1.8.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.7.0...v1.8.0) (2023-02-15)
 
 
