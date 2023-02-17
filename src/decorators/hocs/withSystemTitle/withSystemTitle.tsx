@@ -30,18 +30,11 @@ export const withSystemTitle = (
         this.buildSystemTitle = this.buildSystemTitle.bind(this);
       }
 
-      public static getDerivedStateFromProps(
-        props: any,
-        state: IWithSystemTitleState
-      ) {
+      public static getDerivedStateFromProps(props: any, state: IWithSystemTitleState) {
         if (!state.isCustomTitle) {
-          const crumbs = getBreadcrumbs(
-            props.location.pathname,
-            "systemTitleLoc"
-          );
+          const crumbs = getBreadcrumbs(props.location.pathname, "systemTitleLoc");
 
-          const modelDisplayName =
-            (store ?? props)?.model?.getDisplayName() ?? "";
+          const modelDisplayName = (store ?? props)?.model?.getDisplayName() ?? "";
 
           let systemTitle = "";
 
@@ -49,16 +42,12 @@ export const withSystemTitle = (
             const crumb = crumbs[i];
 
             if (i === crumbs.length - 1 && crumb) {
-              systemTitle += props.localization.getLocalized(
-                crumb.systemTitleLoc
-              );
+              systemTitle += props.localization.getLocalized(crumb.systemTitleLoc);
               continue;
             }
 
             if (crumb) {
-              systemTitle += ` - ${props.localization.getLocalized(
-                crumb.systemTitleLoc
-              )}`;
+              systemTitle += ` - ${props.localization.getLocalized(crumb.systemTitleLoc)}`;
             }
           }
 
@@ -71,9 +60,7 @@ export const withSystemTitle = (
                 continue;
               }
 
-              systemTitle += ` - ${props.localization.getLocalized(
-                titleLocList[i]
-              )}`;
+              systemTitle += ` - ${props.localization.getLocalized(titleLocList[i])}`;
             }
           }
 

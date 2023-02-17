@@ -20,8 +20,7 @@ export interface IMonthPickerProps
   extends IMonthPickerOwnProps,
     FieldRenderProps<TMonthPickerFieldValue> {}
 
-export interface IMonthPickerOwnProps
-  extends Omit<MonthPickerProps, TOmitMonthPickerProps> {
+export interface IMonthPickerOwnProps extends Omit<MonthPickerProps, TOmitMonthPickerProps> {
   momentFormat?: string;
   readOnly?: boolean;
 }

@@ -1,4 +1,1 @@
-export {
-  EditableRowButton,
-  EEditableRowButtonTypes,
-} from "./EditableRowButton";
+export { EditableRowButton, EEditableRowButtonTypes } from "./EditableRowButton";

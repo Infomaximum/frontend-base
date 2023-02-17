@@ -41,9 +41,7 @@ const routes = [
 ];
 
 const renderMountComponent = (title: string) => {
-  return enzyme.mount(
-    getRouterWrapper(<SettingsItem title={title} routes={routes} />)
-  );
+  return enzyme.mount(getRouterWrapper(<SettingsItem title={title} routes={routes} />));
 };
 
 describe("Тест компонента SettingsItem", () => {
@@ -51,17 +49,13 @@ describe("Тест компонента SettingsItem", () => {
     const component = renderMountComponent(title);
 
     expect(component.find(SettingsItem).prop("title")).toEqual(title);
-    expect(
-      component.find(`div[test-id="${settingsItemTitleTestId}"]`).text()
-    ).toEqual(title);
+    expect(component.find(`div[test-id="${settingsItemTitleTestId}"]`).text()).toEqual(title);
   });
 
   it("Корректное отображение количества Link", () => {
     const componentFirst = renderMountComponent(title);
 
-    expect(componentFirst.find(SettingsItem).find(Link).length).toEqual(
-      routes.length
-    );
+    expect(componentFirst.find(SettingsItem).find(Link).length).toEqual(routes.length);
   });
 
   it("Тестирование локализации", () => {
@@ -75,8 +69,6 @@ describe("Тест компонента SettingsItem", () => {
   it("Тестирование содержимого to у Link", () => {
     const component = renderMountComponent(title);
 
-    expect(component.find(SettingsItem).find(Link).at(0).prop("to")).toEqual(
-      path
-    );
+    expect(component.find(SettingsItem).find(Link).at(0).prop("to")).toEqual(path);
   });
 });

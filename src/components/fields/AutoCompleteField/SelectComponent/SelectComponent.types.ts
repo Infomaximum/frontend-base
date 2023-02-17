@@ -40,10 +40,7 @@ export interface ISelectComponentProps
 
   labelPropsGetter?: (
     value: IModel
-  ) => React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  >;
+  ) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
   "test-id"?: string;
   /** Есть ли доступ к данным селекта*/
   isHasAccess?: boolean;

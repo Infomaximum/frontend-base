@@ -15,8 +15,7 @@ import type { IWithFeatureProps } from "../../../decorators/hocs/withFeature/wit
 /**
  * Интерфейс для описание пропсов которые можно передавать извне
  */
-export interface IFormOwnProps<T extends IBaseFormProps = IBaseFormProps>
-  extends IBaseFormProps {
+export interface IFormOwnProps<T extends IBaseFormProps = IBaseFormProps> extends IBaseFormProps {
   "test-id"?: string;
   blockUri?: string;
   onKeyDown?: (event: KeyboardEvent, formProvider?: IFormProvider) => void;
@@ -52,12 +51,7 @@ export interface IFormOwnProps<T extends IBaseFormProps = IBaseFormProps>
   notification?:
     | React.ReactNode
     | (() => React.ReactNode)
-    | [
-        (
-          formValues?: TDictionary,
-          props?: any
-        ) => React.ReactNode | React.ReactNode[]
-      ];
+    | [(formValues?: TDictionary, props?: any) => React.ReactNode | React.ReactNode[]];
 
   /**
    * Флаг указывающий на то, нужно ли сортировать элементы формы по приоритету

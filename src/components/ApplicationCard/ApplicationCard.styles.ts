@@ -1,7 +1,6 @@
 export const cardWidth = 264;
 export const cardLeftPadding = 7;
-export const getCardRightPadding = (hasContextMenu: boolean) =>
-  hasContextMenu ? 40 : 16;
+export const getCardRightPadding = (hasContextMenu: boolean) => (hasContextMenu ? 40 : 16);
 
 export const cardStyle = (theme: TTheme) =>
   ({

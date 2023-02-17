@@ -62,9 +62,7 @@ describe("Тест компонента VirtualizedTableBodyCell", () => {
       />
     );
 
-    expect(
-      screen.queryByText("Подготовленное значение - Test caption")
-    ).toBeInTheDocument();
+    expect(screen.queryByText("Подготовленное значение - Test caption")).toBeInTheDocument();
   });
 
   it("Отображение кнопки расскрытия", async () => {

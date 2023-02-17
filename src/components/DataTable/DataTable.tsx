@@ -1,29 +1,9 @@
 import React from "react";
-import {
-  isFunction,
-  filter,
-  drop,
-  isEmpty,
-  isUndefined,
-  some,
-  compact,
-  uniq,
-} from "lodash";
+import { isFunction, filter, drop, isEmpty, isUndefined, some, compact, uniq } from "lodash";
 import { InvalidIndex } from "@im/utils";
-import {
-  hiddenCheckbox,
-  weightLabelStyle,
-  spinnerWrapperStyle,
-} from "./DataTable.style";
-import type {
-  IDataTableProps,
-  IDataTableState,
-  IDataTableOwnProps,
-} from "./DataTable.types";
-import {
-  DataTableHeader,
-  headerModes,
-} from "./DataTableHeader/DataTableHeader";
+import { hiddenCheckbox, weightLabelStyle, spinnerWrapperStyle } from "./DataTable.style";
+import type { IDataTableProps, IDataTableState, IDataTableOwnProps } from "./DataTable.types";
+import { DataTableHeader, headerModes } from "./DataTableHeader/DataTableHeader";
 import { getColumnsWithShowMore } from "./DataTableUtils";
 import type { TableRowSelection } from "antd/lib/table/interface";
 import { observer } from "mobx-react";
@@ -52,20 +32,19 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
   IDataTableProps<T>,
   IDataTableState<T>
 > {
-  public static defaultProps: Readonly<Partial<IDataTableOwnProps<TBaseRow>>> =
-    {
-      selectionType: "checkbox",
-      headerMode: headerModes.NONE,
-      size: "middle",
-      isGroupSelection: false,
-      isCheckable: true,
-      requestOnMount: true,
-      clearOnUnmount: false,
-      subscribeOnMount: true,
-      unsubscribeOnUnmount: true,
-      isFiltersEmpty: true,
-      isExpandRowsAfterModelChange: true,
-    };
+  public static defaultProps: Readonly<Partial<IDataTableOwnProps<TBaseRow>>> = {
+    selectionType: "checkbox",
+    headerMode: headerModes.NONE,
+    size: "middle",
+    isGroupSelection: false,
+    isCheckable: true,
+    requestOnMount: true,
+    clearOnUnmount: false,
+    subscribeOnMount: true,
+    unsubscribeOnUnmount: true,
+    isFiltersEmpty: true,
+    isExpandRowsAfterModelChange: true,
+  };
 
   private static checkBoxProps = {
     empty: {},
@@ -104,8 +83,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     this.disposer = this.getReaction();
 
     this.treeLogic = new TreeManager({
-      defaultCheckedModels:
-        defaultCheckedModels || tableStore.checkedState.accumulatedModels,
+      defaultCheckedModels: defaultCheckedModels || tableStore.checkedState.accumulatedModels,
       isGroupSelection,
       erasedKeys,
       isCheckable,
@@ -138,10 +116,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     }
 
     if (!isUndefined(defaultCheckedModels) && !isEmpty(defaultCheckedModels)) {
-      tableStore.setTopRowsModels(
-        defaultCheckedModels,
-        this.props.queryVariables
-      );
+      tableStore.setTopRowsModels(defaultCheckedModels, this.props.queryVariables);
     }
 
     if (tableStore.model) {
@@ -169,9 +144,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     }
   }
 
-  public override componentDidUpdate(
-    prevProps: Readonly<IDataTableProps<T>>
-  ): void {
+  public override componentDidUpdate(prevProps: Readonly<IDataTableProps<T>>): void {
     const {
       columns,
       queryVariables,
@@ -239,17 +212,15 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
    */
   private listenLeavingOfRouteBranch(callback: () => void) {
     const sourcePathname = this.props.location.pathname;
-    const dispose = this.props.listenLocationChange(
-      ({ location: { pathname } }) => {
-        if (
-          pathname.indexOf(`${getBasePrefix()}${sourcePathname}`) !== 0 &&
-          pathname !== goBackPath
-        ) {
-          callback();
-          dispose();
-        }
+    const dispose = this.props.listenLocationChange(({ location: { pathname } }) => {
+      if (
+        pathname.indexOf(`${getBasePrefix()}${sourcePathname}`) !== 0 &&
+        pathname !== goBackPath
+      ) {
+        callback();
+        dispose();
       }
-    );
+    });
   }
 
   private getReaction() {
@@ -285,11 +256,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       variables: queryVariables,
     });
 
-    if (
-      subscribeOnMount &&
-      tableStore.isHasSubscription &&
-      !tableStore.isSubscribed
-    ) {
+    if (subscribeOnMount && tableStore.isHasSubscription && !tableStore.isSubscribed) {
       tableStore.subscribe();
     }
   };
@@ -378,32 +345,21 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     this.onSelect(undefined, selected);
   };
 
-  private onSelect = (
-    record: TExtendColumns<T> | undefined,
-    selected: boolean
-  ) => {
+  private onSelect = (record: TExtendColumns<T> | undefined, selected: boolean) => {
     if (this.isRestModel(record?.model)) {
       return;
     }
 
     const { selectionType } = this.props;
 
-    this.treeLogic.handleSelect(
-      record,
-      selected,
-      selectionType,
-      this.blockedRowKeys
-    );
+    this.treeLogic.handleSelect(record, selected, selectionType, this.blockedRowKeys);
     this.applySelectionChange();
   };
 
-  private updateRowSelectionConfig = (
-    selectedRowKeys: string[] | number[] | undefined
-  ) => {
+  private updateRowSelectionConfig = (selectedRowKeys: string[] | number[] | undefined) => {
     const { rowSelection, selectionType } = this.props;
 
-    const rowSelectionConfig: TableRowSelection<T> | undefined = this
-      .isShowCheckboxes
+    const rowSelectionConfig: TableRowSelection<T> | undefined = this.isShowCheckboxes
       ? {
           ...rowSelection,
           selectedRowKeys,
@@ -426,9 +382,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       return true;
     }
 
-    return isFeatureEnabled
-      ? isShowElement(checkboxesAccessRules, isFeatureEnabled)
-      : false;
+    return isFeatureEnabled ? isShowElement(checkboxesAccessRules, isFeatureEnabled) : false;
   }
 
   private getCheckboxProps = (record: TExtendColumns<T>) => {
@@ -436,12 +390,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
 
     const isRestModel = this.isRestModel(record.model);
 
-    if (
-      record.model &&
-      isFunction(rowDisable) &&
-      !isRestModel &&
-      rowDisable(record.model)
-    ) {
+    if (record.model && isFunction(rowDisable) && !isRestModel && rowDisable(record.model)) {
       this.blockedRowKeys?.push(record.model.getInnerName());
       return DataTableComponent.checkBoxProps.disabled;
     }
@@ -450,9 +399,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       return DataTableComponent.checkBoxProps.indeterminate;
     }
 
-    return isRestModel
-      ? hiddenCheckbox
-      : DataTableComponent.checkBoxProps.empty;
+    return isRestModel ? hiddenCheckbox : DataTableComponent.checkBoxProps.empty;
   };
 
   private clearCheck = () => {
@@ -476,16 +423,9 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     tableStore.expandRows(expandedRows);
   };
 
-  private updateColumnConfig = <T extends TBaseRow>(
-    columns: IColumnProps<T>[] | undefined
-  ) => {
-    const {
-      sortColumnsByPriority,
-      tableStore,
-      limitStateName,
-      queryVariables,
-      showMoreMode,
-    } = this.props;
+  private updateColumnConfig = <T extends TBaseRow>(columns: IColumnProps<T>[] | undefined) => {
+    const { sortColumnsByPriority, tableStore, limitStateName, queryVariables, showMoreMode } =
+      this.props;
 
     const columnsWithShowMore = getColumnsWithShowMore(columns, {
       tableStore,
@@ -495,21 +435,15 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     });
 
     const extendedColumns = compact([
-      columnsWithShowMore[0]
-        ? this.getColumnWithBoldGroups(columnsWithShowMore[0])
-        : null,
+      columnsWithShowMore[0] ? this.getColumnWithBoldGroups(columnsWithShowMore[0]) : null,
       ...drop(columnsWithShowMore),
     ]);
 
     if (!!this.state.contextMenuColumn) {
       /* добавляем пустую колонку, чтобы она заняла все свободное пространство,
           и контекстное меню было всегда гарантированно справа (фиксит если заполненность < 100%) */
-      const isAllColumnWithWidth = !some(extendedColumns, (col) =>
-        isUndefined(col.width)
-      );
-      const shouldAddEmptyColumn = !extendedColumns.find(
-        (column) => column.key === emptyColumnKey
-      );
+      const isAllColumnWithWidth = !some(extendedColumns, (col) => isUndefined(col.width));
+      const shouldAddEmptyColumn = !extendedColumns.find((column) => column.key === emptyColumnKey);
 
       if (isAllColumnWithWidth && shouldAddEmptyColumn) {
         extendedColumns.push({ key: "empty-column" });
@@ -519,9 +453,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     }
 
     this.setState({
-      extendedColumns: sortColumnsByPriority
-        ? sortByPriority(extendedColumns)
-        : extendedColumns,
+      extendedColumns: sortColumnsByPriority ? sortByPriority(extendedColumns) : extendedColumns,
     });
   };
 
@@ -529,8 +461,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
    * Возвращает колонку с контекстным меню, если есть доступ
    */
   private getContextMenuColumn(): IColumnProps<T> | undefined {
-    const { contextMenuGetter, onContextMenuSelect, isFeatureEnabled, theme } =
-      this.props;
+    const { contextMenuGetter, onContextMenuSelect, isFeatureEnabled, theme } = this.props;
 
     if (contextMenuGetter && onContextMenuSelect) {
       return {
@@ -555,8 +486,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
             contextMenuGetter(record.model),
             (item) =>
               !item.accessRules ||
-              (!!isFeatureEnabled &&
-                isShowElement(item.accessRules, isFeatureEnabled))
+              (!!isFeatureEnabled && isShowElement(item.accessRules, isFeatureEnabled))
           );
 
           return (
@@ -575,20 +505,14 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
   /**
    * Добавляет в колонку с моделью Group жирную обводку контента
    */
-  private getColumnWithBoldGroups<T extends TBaseRow>(
-    column: IColumnProps<T>
-  ): IColumnProps<T> {
+  private getColumnWithBoldGroups<T extends TBaseRow>(column: IColumnProps<T>): IColumnProps<T> {
     return {
       ...column,
       render(text: string, record: T, index: number) {
         const recordModel: IModel | undefined = record.model;
 
         const textNode: React.ReactNode =
-          recordModel instanceof Group ? (
-            <span css={weightLabelStyle}>{text}</span>
-          ) : (
-            text
-          );
+          recordModel instanceof Group ? <span css={weightLabelStyle}>{text}</span> : text;
 
         if (column.render) {
           return column.render(textNode, record, index);
@@ -670,8 +594,8 @@ const _DataTableComponent = withFeature(
   withTheme(withLocation(withLoc(observer(DataTableComponent))))
 );
 
-const DataTable = <T extends TBaseRow = TBaseRow>(
-  props: IDataTableOwnProps<T>
-) => <_DataTableComponent {...props} />;
+const DataTable = <T extends TBaseRow = TBaseRow>(props: IDataTableOwnProps<T>) => (
+  <_DataTableComponent {...props} />
+);
 
 export { DataTable, emptyColumnKey };

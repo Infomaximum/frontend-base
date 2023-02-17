@@ -51,17 +51,13 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
     }
   };
 
-  private handleDisableBrowserAutocomplete(
-    event: React.FocusEvent<HTMLInputElement>
-  ) {
+  private handleDisableBrowserAutocomplete(event: React.FocusEvent<HTMLInputElement>) {
     event.target.removeAttribute("readonly");
   }
 
   // text-overflow: "ellipsis" не работает для инпутов в IE, если не установлен атрибут "readonly"
   // https://stackoverflow.com/questions/9771795/how-to-use-text-overflow-ellipsis-in-an-html-input-field
-  private handleSetReadOnlyAttribute(
-    event: React.FocusEvent<HTMLInputElement>
-  ) {
+  private handleSetReadOnlyAttribute(event: React.FocusEvent<HTMLInputElement>) {
     (event.target as any).createTextRange()?.scrollIntoView(); // метод из IE - возврат каретки в начало строки
 
     event.target.setAttribute("readonly", "");
@@ -106,16 +102,12 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
   };
 
   public override render() {
-    const { readOnly, localization, disableBrowserAutocomplete, ...rest } =
-      this.props;
+    const { readOnly, localization, disableBrowserAutocomplete, ...rest } = this.props;
 
     if (readOnly) {
       let value = this.props.input?.value;
 
-      if (
-        localization &&
-        (value === "" || value === undefined || value === null)
-      ) {
+      if (localization && (value === "" || value === undefined || value === null)) {
         value = localization.getLocalized(NOT_SET);
       }
 
@@ -127,8 +119,7 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
     }
     const { input, meta, inputComponent, trimValue, ...props } = rest;
 
-    const isReadOnlyIE =
-      userAgent() === EUserAgents.MSIE && !this.props.autoFocus;
+    const isReadOnlyIE = userAgent() === EUserAgents.MSIE && !this.props.autoFocus;
 
     const _Input = inputComponent as React.ComponentType<InputProps>;
 
@@ -147,9 +138,7 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
   }
 }
 
-const InputWithLoc = withLoc(
-  InputComponent as any
-) as React.ComponentType<IInputComponentProps>;
+const InputWithLoc = withLoc(InputComponent as any) as React.ComponentType<IInputComponentProps>;
 
 const InputFieldComponent: FC<IInputFieldProps> = ({
   parse,
@@ -189,9 +178,7 @@ const InputFormField: React.FC<IInputFormFieldProps> = (props) => {
   return <FormField component={InputFieldComponent} {...props} />;
 };
 
-const InputTableCellField: React.FC<
-  IInputFieldProps & ICommonTableCellProps
-> = (props) => {
+const InputTableCellField: React.FC<IInputFieldProps & ICommonTableCellProps> = (props) => {
   return <TableCellField component={InputFieldComponent} {...props} />;
 };
 

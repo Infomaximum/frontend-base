@@ -12,8 +12,7 @@ import { useTheme } from "../../decorators/hooks/useTheme";
 
 const BaseCardComponent: React.FC<IBaseCardProps> = (props) => {
   const theme = useTheme();
-  const { title, styleWrapper, headStyle, bodyStyle, onAnimationEnd, menu } =
-    props;
+  const { title, styleWrapper, headStyle, bodyStyle, onAnimationEnd, menu } = props;
 
   const containerDefaultStyle = React.useMemo(
     () => [
@@ -33,10 +32,7 @@ const BaseCardComponent: React.FC<IBaseCardProps> = (props) => {
   );
 
   const bodyDefaultStyle = React.useMemo(
-    () => [
-      cardBodyDefault,
-      isFunction(bodyStyle) ? bodyStyle(theme) : bodyStyle,
-    ],
+    () => [cardBodyDefault, isFunction(bodyStyle) ? bodyStyle(theme) : bodyStyle],
     [bodyStyle, theme]
   );
 

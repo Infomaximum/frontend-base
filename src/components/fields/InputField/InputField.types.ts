@@ -11,9 +11,7 @@ export interface IInputComponentProps
   extends IInputComponentOwnProps,
     FieldRenderProps<TInputFieldValue> {}
 
-export interface IInputComponentOwnProps
-  extends Omit<InputProps, "name">,
-    Partial<IWithLocProps> {
+export interface IInputComponentOwnProps extends Omit<InputProps, "name">, Partial<IWithLocProps> {
   readOnly?: boolean;
   value?: TInputFieldValue;
   trimValue?: boolean;

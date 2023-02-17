@@ -16,11 +16,7 @@ type TLoggerParams = {
 /**
  * хук для логирования жизненного цикла компонента
  */
-export const useLogger = ({
-  componentName,
-  logLevel = "warn",
-  ...rest
-}: TLoggerParams) => {
+export const useLogger = ({ componentName, logLevel = "warn", ...rest }: TLoggerParams) => {
   const isFirstMount = useFirstMountState();
 
   const logger = useMemo(() => {

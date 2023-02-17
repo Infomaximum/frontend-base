@@ -37,10 +37,7 @@ const RangePicker: React.FC<IRangePickerProps> = ({
   );
 
   const localization = useLocalization();
-  const placeholder = useMemo(
-    () => getPlaceholder(localization),
-    [localization]
-  );
+  const placeholder = useMemo(() => getPlaceholder(localization), [localization]);
 
   const format = momentFormat || "DD.MM.YYYY";
 
@@ -64,15 +61,12 @@ const RangePicker: React.FC<IRangePickerProps> = ({
 };
 
 const RangePickerField: React.FC<IRangePickerFieldProps> = (props) => {
-  const isEqual = useCallback(
-    (date1: [Moment, Moment], date2: [Moment, Moment]) => {
-      if (!date1 && !date2) {
-        return true;
-      }
-      return date1?.[0].isSame(date2?.[0]) && date1?.[1].isSame(date2?.[1]);
-    },
-    []
-  );
+  const isEqual = useCallback((date1: [Moment, Moment], date2: [Moment, Moment]) => {
+    if (!date1 && !date2) {
+      return true;
+    }
+    return date1?.[0].isSame(date2?.[0]) && date1?.[1].isSame(date2?.[1]);
+  }, []);
 
   return <Field component={RangePicker} {...props} isEqual={isEqual} />;
 };
@@ -81,9 +75,9 @@ const RangePickerFormField: React.FC<IRangePickerFormFieldProps> = (props) => {
   return <FormField component={RangePickerField} {...props} />;
 };
 
-const RangePickerTableCellField: React.FC<
-  IRangePickerFieldProps & ICommonTableCellProps
-> = (props) => {
+const RangePickerTableCellField: React.FC<IRangePickerFieldProps & ICommonTableCellProps> = (
+  props
+) => {
   return <TableCellField component={RangePickerField} {...props} />;
 };
 

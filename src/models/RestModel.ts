@@ -13,10 +13,7 @@ export class RestModel extends Model {
   }
 
   constructor(params: IRestParams) {
-    assertSimple(
-      !!params.parent,
-      "Не задана родительская модель для RestModel модели!"
-    );
+    assertSimple(!!params.parent, "Не задана родительская модель для RestModel модели!");
     super(params);
   }
 

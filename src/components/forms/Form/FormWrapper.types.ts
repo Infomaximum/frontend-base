@@ -6,10 +6,7 @@ import type { NCore } from "@im/core";
 
 export interface IFormWrapperProps<T extends IBaseFormProps = IBaseFormProps>
   extends Omit<IFormOwnProps<T>, "formName">,
-    Omit<
-      TRemoveIndex<FormProps>,
-      "component" | "form" | "onSubmit" | "children"
-    > {
+    Omit<TRemoveIndex<FormProps>, "component" | "form" | "onSubmit" | "children"> {
   /**
    * Имя формы (нужно для формирования "test-id" у элементов формы и правильной работы Prompt)
    */

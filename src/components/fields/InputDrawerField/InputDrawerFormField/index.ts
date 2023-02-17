@@ -1,4 +1,1 @@
-export {
-  InputDrawerFormField,
-  InputDrawerTableCellField,
-} from "./InputDrawerField";
+export { InputDrawerFormField, InputDrawerTableCellField } from "./InputDrawerField";

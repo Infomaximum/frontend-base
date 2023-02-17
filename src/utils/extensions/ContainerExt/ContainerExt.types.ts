@@ -10,8 +10,7 @@ export type TInitialValuesModifier<P = unknown> = (
   containerProps?: P
 ) => void;
 
-export type TInitialValuesModifierList<P = unknown> =
-  TInitialValuesModifier<P>[];
+export type TInitialValuesModifierList<P = unknown> = TInitialValuesModifier<P>[];
 
 export type TQueryBuilderModifier = (
   queryBuilder: GraphQlQuery,

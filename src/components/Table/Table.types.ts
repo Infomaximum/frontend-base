@@ -35,9 +35,7 @@ export interface ITableOwnProps<T> extends TTableProps<T> {
   isStretchToBottom?: boolean;
 }
 
-export interface ITableProps<T>
-  extends IWithThemeProps<TTheme>,
-    ITableOwnProps<T> {}
+export interface ITableProps<T> extends IWithThemeProps<TTheme>, ITableOwnProps<T> {}
 
 export interface ITableState {
   isExpandableTable: boolean | undefined;

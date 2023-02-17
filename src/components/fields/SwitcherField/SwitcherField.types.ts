@@ -5,12 +5,9 @@ import type { IFormFieldProps } from "../FormField/FormField.types";
 
 export type TSwitcherFieldValue = boolean;
 
-export interface ISwitcherProps
-  extends ISwitcherOwnProps,
-    FieldRenderProps<TSwitcherFieldValue> {}
+export interface ISwitcherProps extends ISwitcherOwnProps, FieldRenderProps<TSwitcherFieldValue> {}
 
-export interface ISwitcherOwnProps
-  extends Omit<SwitchProps, "onBlur" | "value"> {
+export interface ISwitcherOwnProps extends Omit<SwitchProps, "onBlur" | "value"> {
   value?: boolean;
   readOnly?: boolean;
   "test-id"?: string;

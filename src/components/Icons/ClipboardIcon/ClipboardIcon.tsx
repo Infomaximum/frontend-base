@@ -18,10 +18,7 @@ const ClipboardIconComponent: FC<IClipboardIconProps> = memo(
     }, [onClick, text]);
 
     return (
-      <Tooltip
-        css={tooltipStyle}
-        title={localization.getLocalized(COPY_TO_CLIPBOARD)}
-      >
+      <Tooltip css={tooltipStyle} title={localization.getLocalized(COPY_TO_CLIPBOARD)}>
         <CopyOutlined {...rest} css={iconStyle(theme)} onClick={handleClick} />
       </Tooltip>
     );

@@ -1,8 +1,4 @@
-import type {
-  IFormData,
-  IFormProvider,
-  TFormAccess,
-} from "../contexts/FormContext";
+import type { IFormData, IFormProvider, TFormAccess } from "../contexts/FormContext";
 import type { FormSubscriber, FormSubscription } from "final-form";
 import { isFunction, noop } from "lodash";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -12,12 +8,8 @@ export const useForm = <TFormValues extends TDictionary = TDictionary>(
   subscriber?: FormSubscriber<TFormValues>,
   subscription?: FormSubscription
 ) => {
-  const [formData, _setFormData] = useState<
-    IFormData<TFormValues> | undefined
-  >();
-  const [formProvider, _setFormProvider] = useState<
-    IFormProvider<TFormValues> | undefined
-  >();
+  const [formData, _setFormData] = useState<IFormData<TFormValues> | undefined>();
+  const [formProvider, _setFormProvider] = useState<IFormProvider<TFormValues> | undefined>();
   const [access, setAccess] = useState<TFormAccess>({
     hasReadAccess: true,
     hasWriteAccess: true,
@@ -29,13 +21,8 @@ export const useForm = <TFormValues extends TDictionary = TDictionary>(
 
   useEffect(() => {
     const unsubscribe =
-      formProvider &&
-      isFunction(subscriberCB.current) &&
-      subscriptionParams.current
-        ? formProvider.subscribe(
-            subscriberCB.current,
-            subscriptionParams.current
-          )
+      formProvider && isFunction(subscriberCB.current) && subscriptionParams.current
+        ? formProvider.subscribe(subscriberCB.current, subscriptionParams.current)
         : noop;
 
     return unsubscribe;

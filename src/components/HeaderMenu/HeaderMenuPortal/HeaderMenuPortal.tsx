@@ -1,11 +1,5 @@
 import { Col } from "antd";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { generatePath, Link, useParams } from "react-router-dom";
 import {
   titleStyle,
@@ -85,12 +79,8 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
 } = ({ children }) => {
   const headerContainer = useContext(HeaderMenuContext);
   const mainSystemPagePath = useContext(MainSystemPagePathContext);
-  const [currentWrapperWidth, setCurrentWrapperWidth] = useState(
-    window.innerWidth
-  );
-  const [sideColumnWidth, setSideColumnWidth] = useState(
-    calculateValues(currentWrapperWidth)
-  );
+  const [currentWrapperWidth, setCurrentWrapperWidth] = useState(window.innerWidth);
+  const [sideColumnWidth, setSideColumnWidth] = useState(calculateValues(currentWrapperWidth));
   const { isFeatureEnabled } = useFeature();
 
   const getVisibleSettingsIcon = useCallback(
@@ -98,9 +88,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
     []
   );
 
-  const [isVisibleSettingsIcon, setVisibleSettingsIcon] = useState(
-    getVisibleSettingsIcon
-  );
+  const [isVisibleSettingsIcon, setVisibleSettingsIcon] = useState(getVisibleSettingsIcon);
 
   const params = useParams();
 
@@ -134,8 +122,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
     );
   }, [children]);
 
-  const { headerTitle, headerBodyLeft, headerBodyRight, headerBodyCenter } =
-    mappedChildren;
+  const { headerTitle, headerBodyLeft, headerBodyRight, headerBodyCenter } = mappedChildren;
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -192,15 +179,8 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
             <HeaderAppsIconSVG />
           </Link>
         )}
-        <div
-          css={customTitleStyle ?? titleStyle}
-          test-id={headerMenuTitleTestId}
-        >
-          {loading ? (
-            <Spinner wrapperStyle={spinnerStyle} size="small" />
-          ) : (
-            children
-          )}
+        <div css={customTitleStyle ?? titleStyle} test-id={headerMenuTitleTestId}>
+          {loading ? <Spinner wrapperStyle={spinnerStyle} size="small" /> : children}
         </div>
       </Col>
     );
@@ -230,10 +210,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
           flex="auto"
           css={wrapMenuStyle}
           test-id={headerMenuBodyCenterTestId}
-          style={getHeaderBodyCenterStyle(
-            sideColumnWidth,
-            isVisibleSettingsIcon
-          )}
+          style={getHeaderBodyCenterStyle(sideColumnWidth, isVisibleSettingsIcon)}
         >
           {headerBodyCenterChildren}
         </Col>
@@ -255,10 +232,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
           test-id={headerMenuBodyRightTestId}
           style={
             isHeaderBodyCenterChildren
-              ? getHeaderBodyRightWithCenterStyle(
-                  sideColumnWidth,
-                  isVisibleSettingsIcon
-                )
+              ? getHeaderBodyRightWithCenterStyle(sideColumnWidth, isVisibleSettingsIcon)
               : !isUndefined(headerBodyLeftChildren)
               ? headerBodyRightWithLeftWithoutCenterStyle
               : headerBodyRightWithoutLeftAndCenterStyle
@@ -272,8 +246,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
     return null;
   };
 
-  const headerBodyCenterChildren =
-    document.getElementById(navigationTabsTestId);
+  const headerBodyCenterChildren = document.getElementById(navigationTabsTestId);
 
   return headerContainer
     ? ReactDOM.createPortal(

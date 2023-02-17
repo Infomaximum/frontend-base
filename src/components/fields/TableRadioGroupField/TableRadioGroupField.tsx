@@ -4,11 +4,7 @@ import type {
   ITableRadioGroupFieldContainerProps,
   ITableRadioGroupFormFieldProps,
 } from "./TableRadioGroupField.types";
-import {
-  tableRadioGroupStyle,
-  radioStyle,
-  labelStyle,
-} from "./TableRadioGroupField.styles";
+import { tableRadioGroupStyle, radioStyle, labelStyle } from "./TableRadioGroupField.styles";
 import type { RadioChangeEvent } from "antd/lib/radio";
 import { createSelector } from "reselect";
 import type { IBaseColumnConfig } from "../../Table/Table.types";
@@ -18,9 +14,9 @@ import { Field, FormField } from "../FormField";
 
 /** Пример использования в AccessToSystemFilterDrawer */
 
-class TableRadioGroupContainer<
-  T extends Record<string, any>
-> extends React.PureComponent<ITableRadioGroupFieldContainerProps<T>> {
+class TableRadioGroupContainer<T extends Record<string, any>> extends React.PureComponent<
+  ITableRadioGroupFieldContainerProps<T>
+> {
   private getColumnConfig = createSelector(
     (columns: IBaseColumnConfig<T>[] | undefined) => columns,
     (columns) => {
@@ -30,11 +26,7 @@ class TableRadioGroupContainer<
             dataIndex: "caption",
             key: "caption",
             render: (text: React.ReactNode, record: any) => (
-              <Radio
-                value={record?.value}
-                style={radioStyle}
-                test-id={record?.["test-id"]}
-              >
+              <Radio value={record?.value} style={radioStyle} test-id={record?.["test-id"]}>
                 <span style={labelStyle}>{text}</span>
               </Radio>
             ),
@@ -81,9 +73,7 @@ class TableRadioGroupContainer<
   }
 }
 
-const TableRadioGroupField: React.FC<ITableRadioGroupFieldProps> = <
-  T extends Record<string, any>
->(
+const TableRadioGroupField: React.FC<ITableRadioGroupFieldProps> = <T extends Record<string, any>>(
   props: ITableRadioGroupFieldProps<T>
 ) => <Field component={TableRadioGroupContainer} {...props} />;
 

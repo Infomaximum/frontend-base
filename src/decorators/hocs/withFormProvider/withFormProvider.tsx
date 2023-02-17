@@ -8,9 +8,7 @@ export interface IWithFormProviderProps {
   formName: string;
 }
 
-export const withFormProvider: TPropInjector<IWithFormProviderProps> = (
-  Component: any
-) => {
+export const withFormProvider: TPropInjector<IWithFormProviderProps> = (Component: any) => {
   const WithFormProviderComponent = (props: any) => (
     <FormContext.Consumer>
       {({ formProvider, formName }) => (

@@ -32,8 +32,7 @@ const getComponent = (formProvider = getFormProvider()) => {
 };
 
 const getComponentProps = (component: ReactWrapper<ISubmitFormButtonProps>) => {
-  const getProps = () =>
-    component.find(Button).props() as unknown as ISubmitFormButtonProps;
+  const getProps = () => component.find(Button).props() as unknown as ISubmitFormButtonProps;
 
   return {
     isDisabled: () => getProps().disabled,

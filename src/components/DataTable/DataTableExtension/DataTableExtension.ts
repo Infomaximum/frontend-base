@@ -30,9 +30,7 @@ class DataTableExtension implements IDataTableExtension {
     this.dataSourceExtension.add(dataExtension);
   }
 
-  public addQueryVariableExtension(
-    queryVariableExtension: TQueryVarModifierExt
-  ): void {
+  public addQueryVariableExtension(queryVariableExtension: TQueryVarModifierExt): void {
     this.queryVariableExtensions.add(queryVariableExtension);
   }
 
@@ -53,10 +51,7 @@ class DataTableExtension implements IDataTableExtension {
     isFeatureEnabled: TFeatureEnabledChecker | undefined
   ): void {
     this.columnConfigExtension.forEach((columnExtensionGetter) => {
-      const columnExtension = columnExtensionGetter(
-        localization,
-        isFeatureEnabled
-      );
+      const columnExtension = columnExtensionGetter(localization, isFeatureEnabled);
 
       if (!isNil(columnExtension)) {
         baseConfig.push(columnExtension);
@@ -72,10 +67,7 @@ class DataTableExtension implements IDataTableExtension {
     });
   }
 
-  public extendQueryVariable(
-    variables: TDictionary,
-    queryParams: { store: unknown }
-  ): void {
+  public extendQueryVariable(variables: TDictionary, queryParams: { store: unknown }): void {
     this.queryVariableExtensions.forEach((extension) => {
       if (isFunction(extension)) {
         extension(variables, queryParams);

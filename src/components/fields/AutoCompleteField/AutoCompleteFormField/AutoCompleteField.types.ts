@@ -20,12 +20,7 @@ export interface IAutoCompleteProps
 export interface IAutoCompleteOwnProps
   extends Omit<
       SelectProps<TAutoCompleteFieldValue>,
-      | "onChange"
-      | "onFocus"
-      | "onBlur"
-      | "value"
-      | "notFoundContent"
-      | "children"
+      "onChange" | "onFocus" | "onBlur" | "value" | "notFoundContent" | "children"
     >,
     IWithFeatureProps,
     Partial<Pick<IDataTableDrawerOwnProps, "tableStore" | "headerMode">> {
@@ -111,10 +106,7 @@ export interface IAutoCompleteOwnProps
    */
   labelPropsGetter?: (
     value: IModel
-  ) => React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  >;
+  ) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
   /**
    * Ключи доступа к данным

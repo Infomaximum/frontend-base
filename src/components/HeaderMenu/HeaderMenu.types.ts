@@ -6,7 +6,5 @@ export type TRenderSettingsFooterDrawerParams = {
 
 export interface IHeaderMenuProps
   extends Pick<IProfileDropdownProps, "userName" | "userId" | "onLogout"> {
-  renderSettingsFooterDrawer?: (
-    params: TRenderSettingsFooterDrawerParams
-  ) => React.ReactNode;
+  renderSettingsFooterDrawer?: (params: TRenderSettingsFooterDrawerParams) => React.ReactNode;
 }

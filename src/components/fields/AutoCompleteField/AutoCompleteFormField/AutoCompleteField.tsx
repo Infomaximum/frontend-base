@@ -18,10 +18,7 @@ import { TableCellField } from "../../TableCellField/TableCellField";
 import { headerModes } from "../../../DataTable/DataTableHeader/DataTableHeader";
 import { DataTableDrawer } from "../../../drawers/DataTableDrawer/DataTableDrawer";
 
-class AutoComplete extends React.PureComponent<
-  IAutoCompleteProps,
-  IAutoCompleteState
-> {
+class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoCompleteState> {
   public static defaultProps: Partial<IAutoCompleteProps> = {
     mode: undefined,
     isDrawerEnabled: true,
@@ -53,9 +50,7 @@ class AutoComplete extends React.PureComponent<
     } = this.props;
 
     if (onChange) {
-      const newValue = removeContradictions
-        ? this.removeContradictions(value)
-        : value;
+      const newValue = removeContradictions ? this.removeContradictions(value) : value;
 
       onChange(newValue ?? []);
 
@@ -81,18 +76,12 @@ class AutoComplete extends React.PureComponent<
     }
   };
 
-  private removeContradictions(
-    models: TAutoCompleteFieldValue
-  ): TAutoCompleteFieldValue {
-    const modelsMap = new Map(
-      map(models, (model) => [model.getInnerName(), model])
-    );
+  private removeContradictions(models: TAutoCompleteFieldValue): TAutoCompleteFieldValue {
+    const modelsMap = new Map(map(models, (model) => [model.getInnerName(), model]));
 
     // Если хотя бы один родитель элемента есть в списке, удаляем элемент из списка
     forEach(models, (model) => {
-      const parents = (
-        model as IModel & { getParents?(): TNullable<IModel[]> }
-      ).getParents?.();
+      const parents = (model as IModel & { getParents?(): TNullable<IModel[]> }).getParents?.();
       if (some(parents, (parent) => modelsMap.has(parent.getInnerName()))) {
         modelsMap.delete(model.getInnerName());
       }
@@ -206,8 +195,7 @@ class AutoComplete extends React.PureComponent<
           requestOnMount={requestOnMount}
           handlerDisplayValues={handlerDisplayValues}
           isHasAccess={
-            !!isFeatureEnabled &&
-            every(dataAccessKeys, (accessKey) => isFeatureEnabled(accessKey))
+            !!isFeatureEnabled && every(dataAccessKeys, (accessKey) => isFeatureEnabled(accessKey))
           }
           handlerTitleValues={handlerTitleValues}
           handlerDisplaySelectedValues={handlerDisplaySelectedValues}
@@ -236,9 +224,7 @@ const AutoCompleteField: React.FC<IAutoCompleteFieldProps> = (props) => (
   <Field component={AutoCompleteWithFeature} isEqual={isEqual} {...props} />
 );
 
-const AutoCompleteFormField: React.FC<IAutoCompleteFormFieldProps> = (
-  props
-) => (
+const AutoCompleteFormField: React.FC<IAutoCompleteFormFieldProps> = (props) => (
   <FormField
     component={AutoCompleteField}
     wrapperComponentStyle={wrapperAutocompleteStyle}
@@ -246,9 +232,9 @@ const AutoCompleteFormField: React.FC<IAutoCompleteFormFieldProps> = (
   />
 );
 
-const AutoCompleteTableCellField: React.FC<
-  IAutoCompleteFieldProps & ICommonTableCellProps
-> = (props) => {
+const AutoCompleteTableCellField: React.FC<IAutoCompleteFieldProps & ICommonTableCellProps> = (
+  props
+) => {
   return <TableCellField component={AutoCompleteField} {...props} />;
 };
 

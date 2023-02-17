@@ -69,9 +69,7 @@ class WrappedArrayField extends React.PureComponent<
   private getResultFormItemStyle = createSelector(
     (formItemStyle?: Interpolation<TTheme>) => formItemStyle,
     (formItemStyle) => {
-      const resultFormItemStyle: Interpolation<TTheme> = [
-        wrappedArrayFieldStyle,
-      ];
+      const resultFormItemStyle: Interpolation<TTheme> = [wrappedArrayFieldStyle];
 
       if (formItemStyle) {
         resultFormItemStyle.push(formItemStyle);
@@ -82,12 +80,8 @@ class WrappedArrayField extends React.PureComponent<
   );
 
   private handleAddFieldEntity = () => {
-    const {
-      formProvider,
-      defaultEntityValue,
-      addEntityButtonPosition,
-      arrayFieldName,
-    } = this.props;
+    const { formProvider, defaultEntityValue, addEntityButtonPosition, arrayFieldName } =
+      this.props;
 
     if (formProvider) {
       const addMethod =
@@ -220,8 +214,7 @@ class WrappedArrayField extends React.PureComponent<
   };
 
   public override render() {
-    const { label, wrapperCol, addEntityButtonPosition, formItemStyle } =
-      this.props;
+    const { label, wrapperCol, addEntityButtonPosition, formItemStyle } = this.props;
 
     return (
       <FormOption
@@ -241,10 +234,7 @@ class WrappedArrayField extends React.PureComponent<
 
 const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
   const { accessKeys, readOnly, accessKey, ...rest } = props;
-  const { hasReadAccess } = getAccessParameters(
-    rest.isFeatureEnabled,
-    accessKeys
-  );
+  const { hasReadAccess } = getAccessParameters(rest.isFeatureEnabled, accessKeys);
 
   const { formProvider } = useContext(FormContext);
 

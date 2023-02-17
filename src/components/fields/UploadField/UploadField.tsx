@@ -134,8 +134,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
 
     if (this.props.multiList) {
       const fileList = this.props.input.value.filter(
-        (fileFromInput: UploadChangeParam["file"]) =>
-          fileFromInput.uid !== file.uid
+        (fileFromInput: UploadChangeParam["file"]) => fileFromInput.uid !== file.uid
       );
       this.handleInputChange(fileList);
     } else {
@@ -145,9 +144,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
 
   private handleChange = (info: UploadChangeParam) => {
     if (!isEqual(info.file?.status, fileStatusRemoved)) {
-      this.handleInputChange(
-        this.props.multiList ? info.fileList : [info.file]
-      );
+      this.handleInputChange(this.props.multiList ? info.fileList : [info.file]);
     } else {
       const newFileList = info.fileList.filter(
         (fileFromList) => fileFromList.uid !== info.file.uid
@@ -165,17 +162,14 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
     // Для невалидных файлов ant не генерирует uid
     if (!isString(get(e.dataTransfer, "files[0].uid")) && accept) {
       Message.showMessage({
-        notification: localization.getLocalized(
-          UPLOAD_THE_FILE_IN_THE_FORMAT(accept)
-        ),
+        notification: localization.getLocalized(UPLOAD_THE_FILE_IN_THE_FORMAT(accept)),
         type: "error",
       });
     }
   };
 
   private renderUsualMode(): React.ReactNode {
-    const { caption, fieldStyle, readOnly, meta, multiList, input, ...rest } =
-      this.props;
+    const { caption, fieldStyle, readOnly, meta, multiList, input, ...rest } = this.props;
 
     return (
       <Upload
@@ -193,17 +187,8 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
   }
 
   private renderDragAndDropMode(): React.ReactNode {
-    const {
-      caption,
-      fieldStyle,
-      readOnly,
-      meta,
-      multiList,
-      input,
-      accept,
-      localization,
-      ...rest
-    } = this.props;
+    const { caption, fieldStyle, readOnly, meta, multiList, input, accept, localization, ...rest } =
+      this.props;
 
     //TODO: Антон Тамбовцев. Написать свой плейсхолдер
     return (
@@ -221,9 +206,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
         <p style={uploadIconStyle}>
           <InboxOutlinedSVG />
         </p>
-        <p className="ant-upload-text">
-          {localization.getLocalized(CLICK_OR_DRAG_FILE)}
-        </p>
+        <p className="ant-upload-text">{localization.getLocalized(CLICK_OR_DRAG_FILE)}</p>
         {!accept ? null : (
           <p className="ant-upload-hint">
             {localization.getLocalized(FILE_FORMAT, {
@@ -240,9 +223,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
   public override render() {
     const { mode } = this.props;
     const isUsual = mode === UploadComponent.AVAILABLE_MODE_LIST.USUAL;
-    const resultComponent = isUsual
-      ? this.renderUsualMode()
-      : this.renderDragAndDropMode();
+    const resultComponent = isUsual ? this.renderUsualMode() : this.renderDragAndDropMode();
 
     return <div ref={this.wrapperRef}>{resultComponent}</div>;
   }
@@ -252,10 +233,7 @@ const UploadField: React.FC<IUploadProps> = ({ readOnly, ...rest }) => {
   return (
     <FormContext.Consumer>
       {(formData) => {
-        if (
-          (readOnly === undefined && !formData.access.hasWriteAccess) ||
-          readOnly
-        ) {
+        if ((readOnly === undefined && !formData.access.hasWriteAccess) || readOnly) {
           return null;
         }
 
@@ -274,9 +252,7 @@ const UploadFormField: FC<IUploadFormFieldProps> & {
 } = (props) => {
   const localization = useLocalization();
 
-  return (
-    <FormField component={UploadField} localization={localization} {...props} />
-  );
+  return <FormField component={UploadField} localization={localization} {...props} />;
 };
 
 UploadFormField.AVAILABLE_MODE_LIST = UploadComponent.AVAILABLE_MODE_LIST;

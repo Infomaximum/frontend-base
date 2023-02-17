@@ -13,9 +13,7 @@ type TRemoveConfirmationParams<T> = {
 };
 
 /** Отображает модальное окно подтверждения удаления данных  */
-export const useRemoveConfirmationModal = <T,>(
-  params: TRemoveConfirmationParams<T>
-) => {
+export const useRemoveConfirmationModal = <T,>(params: TRemoveConfirmationParams<T>) => {
   const localization = useLocalization();
 
   const arg = useRef(params);
@@ -63,9 +61,7 @@ export const useRemoveConfirmationModal = <T,>(
           onAfterCancel={handleAfterCancel}
           onConfirm={handleConfirm}
           title={
-            typeof titleLoc === "function"
-              ? titleLoc(data)
-              : localization.getLocalized(titleLoc)
+            typeof titleLoc === "function" ? titleLoc(data) : localization.getLocalized(titleLoc)
           }
         >
           {typeof bodyLoc === "function"
@@ -76,14 +72,7 @@ export const useRemoveConfirmationModal = <T,>(
         </RemoveConfirmationModal>
       );
     }
-  }, [
-    params,
-    data,
-    handleAfterCancel,
-    handleConfirm,
-    isShowRemoveModal,
-    localization,
-  ]);
+  }, [params, data, handleAfterCancel, handleConfirm, isShowRemoveModal, localization]);
 
   return { renderRemoveModal, handleRemoveEntity };
 };

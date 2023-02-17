@@ -31,10 +31,7 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
 }) => {
   const theme = useTheme();
 
-  const onCancel = useCallback(
-    () => onVisibleChange?.(false),
-    [onVisibleChange]
-  );
+  const onCancel = useCallback(() => onVisibleChange?.(false), [onVisibleChange]);
 
   const content = (
     <>
@@ -71,12 +68,7 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
   );
 
   return (
-    <Popover
-      trigger={trigger}
-      content={content}
-      onVisibleChange={onVisibleChange}
-      {...rest}
-    />
+    <Popover trigger={trigger} content={content} onVisibleChange={onVisibleChange} {...rest} />
   );
 };
 

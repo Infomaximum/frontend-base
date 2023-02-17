@@ -5,6 +5,4 @@ import type { TableStore } from "../Store/TableStore/TableStore";
 export const wrapInFakeListPrepareData =
   (fakeListTypename: string): NStore.TPrepareDataFunc<TableStore<any>> =>
   ({ data }) =>
-    data
-      ? { id: InvalidIndex, items: data, __typename: fakeListTypename }
-      : data;
+    data ? { id: InvalidIndex, items: data, __typename: fakeListTypename } : data;

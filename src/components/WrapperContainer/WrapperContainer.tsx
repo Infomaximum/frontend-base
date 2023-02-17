@@ -3,10 +3,7 @@ import { Layout } from "antd";
 import type { IWrapperContainerProps } from "./WrapperContainer.types";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { assertSimple } from "@im/asserts";
-import {
-  commonContentStyle,
-  commonLayoutStyle,
-} from "../../styles/common.styles";
+import { commonContentStyle, commonLayoutStyle } from "../../styles/common.styles";
 import { HeaderMenuPortal } from "../HeaderMenu/HeaderMenuPortal/HeaderMenuPortal";
 import { MAIN_LAYOUT_CONTENT_ID } from "../../utils/const";
 

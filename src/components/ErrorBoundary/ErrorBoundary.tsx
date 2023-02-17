@@ -10,10 +10,7 @@ import type {
 
 const AppErrorHandlingService = new ErrorHandling();
 
-class ErrorBoundaryComponent extends Component<
-  IErrorBoundaryProps,
-  IErrorBoundaryState
-> {
+class ErrorBoundaryComponent extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
   public static getDerivedStateFromError() {
     return { hasError: true };
   }
@@ -52,9 +49,7 @@ class ErrorBoundaryComponent extends Component<
     } else {
       // eslint-disable-next-line no-console
       console.error(
-        `ошибка произошла по пути ${this.getPathName()} ошибка ${error} код: ${
-          this.props.code
-        }`
+        `ошибка произошла по пути ${this.getPathName()} ошибка ${error} код: ${this.props.code}`
       );
     }
   }
@@ -73,8 +68,8 @@ class ErrorBoundaryComponent extends Component<
   }
 }
 
-export const AppErrorBoundary = withModalError(
-  ErrorBoundaryComponent
-) as unknown as ComponentType<Omit<IAppErrorBoundaryProps, "showModalError">>;
+export const AppErrorBoundary = withModalError(ErrorBoundaryComponent) as unknown as ComponentType<
+  Omit<IAppErrorBoundaryProps, "showModalError">
+>;
 
 export const ErrorBoundary = withModalError(ErrorBoundaryComponent);

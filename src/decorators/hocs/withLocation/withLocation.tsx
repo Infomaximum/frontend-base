@@ -5,9 +5,7 @@ import { UNSAFE_NavigationContext, useLocation } from "react-router";
 import type { IWithLocationProps } from "./withLocation.types";
 import type { History } from "history";
 
-export const withLocation: TPropInjector<IWithLocationProps> = (
-  Component: any
-) => {
+export const withLocation: TPropInjector<IWithLocationProps> = (Component: any) => {
   const WithLocation = (props: any) => {
     const location = useLocation();
     const { navigator } = useContext(UNSAFE_NavigationContext);

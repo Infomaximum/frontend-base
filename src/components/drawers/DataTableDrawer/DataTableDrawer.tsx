@@ -10,14 +10,7 @@ import {
   dataTableDrawerCancelButtonTestId,
   dataTableDrawerOkButtonTestId,
 } from "../../../utils/TestIds";
-import {
-  filter,
-  debounce,
-  sortBy,
-  isEqual,
-  isUndefined,
-  isEmpty,
-} from "lodash";
+import { filter, debounce, sortBy, isEqual, isUndefined, isEmpty } from "lodash";
 import { DataTableDrawerContent } from "./DataTableDrawerContent/DataTableDrawerContent";
 import { observer } from "mobx-react";
 import { useTheme } from "../../../decorators/hooks/useTheme";
@@ -83,20 +76,10 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
   });
 
   useEffect(() => {
-    if (
-      tableStore.checkedState &&
-      !initialSelectedKeys &&
-      !isLoading &&
-      !tableStore.isLoading
-    ) {
+    if (tableStore.checkedState && !initialSelectedKeys && !isLoading && !tableStore.isLoading) {
       setInitialSelectedKeys(sortBy(tableStore.checkedState.accumulatedKeys));
     }
-  }, [
-    initialSelectedKeys,
-    isLoading,
-    tableStore.checkedState,
-    tableStore.isLoading,
-  ]);
+  }, [initialSelectedKeys, isLoading, tableStore.checkedState, tableStore.isLoading]);
 
   const cancelButtonProps = useMemo(
     () =>
@@ -117,10 +100,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
   const handleSaveData = useCallback(
     async (formValues: TDictionary, option: string) => {
       const selectedModels = tableStore.checkedState?.accumulatedModels ?? [];
-      const models = filter(
-        selectedModels,
-        (model) => !(model instanceof RestModel)
-      );
+      const models = filter(selectedModels, (model) => !(model instanceof RestModel));
 
       await onSaveData(models, formValues, option);
     },
@@ -165,12 +145,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
       return disableSubmitFormButton;
     }
 
-    if (
-      isEqual(
-        initialSelectedKeys,
-        sortBy(tableStore.checkedState.accumulatedKeys)
-      )
-    ) {
+    if (isEqual(initialSelectedKeys, sortBy(tableStore.checkedState.accumulatedKeys))) {
       return true;
     }
 
@@ -208,8 +183,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
       initialValues={initialValues}
       disableSubmitFormButton={isDisableSubmitFormButton()}
       disableSubmitFormButtonOnEmpty={
-        disableSubmitFormButtonOnEmpty &&
-        tableStore.checkedState.accumulatedKeys?.length === 0
+        disableSubmitFormButtonOnEmpty && tableStore.checkedState.accumulatedKeys?.length === 0
       }
       contents={contents}
       defaultContent={getDefaultContent()}

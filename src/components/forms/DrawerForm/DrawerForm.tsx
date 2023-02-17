@@ -11,10 +11,7 @@ import {
 } from "./DrawerForm.styles";
 import { EFormLayoutType } from "../BaseForm/BaseForm.types";
 import type { NCore } from "@im/core";
-import {
-  drawerFormCancelButtonTestId,
-  drawerFormTestId,
-} from "../../../utils/TestIds";
+import { drawerFormCancelButtonTestId, drawerFormTestId } from "../../../utils/TestIds";
 import type { IDrawerFormProps, IDrawerFormState } from "./DrawerForm.types";
 import type { FormApi } from "final-form";
 import type { IFormData } from "../../../decorators/contexts/FormContext";
@@ -24,10 +21,7 @@ import { Button } from "../../Button/Button";
 import { Drawer } from "../../drawers/Drawer/Drawer";
 import { Empty } from "../../Empty/Empty";
 
-class DrawerFormComponent extends React.PureComponent<
-  IDrawerFormProps,
-  IDrawerFormState
-> {
+class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerFormState> {
   public static defaultProps = {
     bodyStyle: drawerBodyStyle,
     isHasAccess: true,
@@ -183,11 +177,7 @@ class DrawerFormComponent extends React.PureComponent<
       >
         {!isHasAccess ? (
           <div css={noAccessStyle}>
-            <Empty
-              isFiltersEmpty={true}
-              isSearchEmpty={true}
-              isHasAccess={isHasAccess}
-            />
+            <Empty isFiltersEmpty={true} isSearchEmpty={true} isHasAccess={isHasAccess} />
           </div>
         ) : (
           <Form

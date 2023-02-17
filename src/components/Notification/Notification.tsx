@@ -26,9 +26,7 @@ const NotificationComponent: FC<INotificationProps> = ({ error }) => {
         type="error"
         showIcon={true}
         message={error.message ? error.title : undefined}
-        description={
-          isDebugMode && traceId ? `${message} [${traceId}]` : message
-        }
+        description={isDebugMode && traceId ? `${message} [${traceId}]` : message}
       />
     </div>
   );

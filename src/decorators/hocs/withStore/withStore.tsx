@@ -37,11 +37,7 @@ export const withStore =
           query();
         }
 
-        if (
-          subscribeOnMount &&
-          store.isHasSubscription &&
-          !store.isSubscribed
-        ) {
+        if (subscribeOnMount && store.isHasSubscription && !store.isSubscribed) {
           subscribe();
         }
       });
@@ -55,11 +51,7 @@ export const withStore =
           store.cancelRequest();
         }
 
-        if (
-          unsubscribeOnUnmount &&
-          store.isHasSubscription &&
-          store.isSubscribed
-        ) {
+        if (unsubscribeOnUnmount && store.isHasSubscription && store.isSubscribed) {
           unsubscribe();
         }
       });

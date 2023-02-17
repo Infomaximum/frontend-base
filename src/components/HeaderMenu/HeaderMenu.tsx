@@ -11,10 +11,7 @@ import {
   footerStyle,
 } from "./HeaderMenu.styles";
 import { find, forEach, isEmpty } from "lodash";
-import {
-  headerMenuSettingsTestId,
-  headerMenuTestId,
-} from "../../utils/TestIds";
+import { headerMenuSettingsTestId, headerMenuTestId } from "../../utils/TestIds";
 import { SETTINGS } from "../../utils/Localization/Localization";
 import { observer } from "mobx-react";
 import { ProfileDropdown } from "./ProfileDropdown/ProfileDropdown";
@@ -35,8 +32,7 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
   ({ renderSettingsFooterDrawer, userId, userName, onLogout }, ref) => {
     const localization = useLocalization();
     const theme = useTheme();
-    const [showSettingsDrawer, setShowSettingsDrawer] =
-      useState<boolean>(false);
+    const [showSettingsDrawer, setShowSettingsDrawer] = useState<boolean>(false);
     const routes = useContext(RoutesContext);
 
     const settingsRoutes = useMemo(() => {
@@ -52,14 +48,11 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
 
       const items: IProfileMenuItem[] = [];
 
-      forEach(
-        profileRoute?.routes,
-        ({ isRedirectRoute, key, loc, path, icon }) => {
-          if (!isRedirectRoute && key && loc && path && icon) {
-            items.push({ key, loc, path, icon });
-          }
+      forEach(profileRoute?.routes, ({ isRedirectRoute, key, loc, path, icon }) => {
+        if (!isRedirectRoute && key && loc && path && icon) {
+          items.push({ key, loc, path, icon });
         }
-      );
+      });
 
       return items;
     }, [routes]);
@@ -125,9 +118,7 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
           <Col
             flex="auto"
             style={
-              isVisibleSettingsIcon
-                ? headerWithSettingsIconStyle
-                : headerWithoutSettingsIconStyle
+              isVisibleSettingsIcon ? headerWithSettingsIconStyle : headerWithoutSettingsIconStyle
             }
           >
             <Row align="middle" css={headerRowStyle} ref={ref} />

@@ -1,7 +1,4 @@
-import type {
-  IFieldProps,
-  IWrappedFieldProps,
-} from "../FormField/Field/Field.types";
+import type { IFieldProps, IWrappedFieldProps } from "../FormField/Field/Field.types";
 import type { Localization } from "@im/localization";
 import type { FieldRenderProps } from "react-final-form";
 

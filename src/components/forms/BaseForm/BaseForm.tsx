@@ -13,21 +13,14 @@ import { isUndefined, isNull } from "lodash";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { HeaderMenuPortal } from "../../HeaderMenu/HeaderMenuPortal/HeaderMenuPortal";
-import {
-  modalFormLayout,
-  typeLLayout,
-  typeMLayout,
-  typeSLayout,
-} from "../../../styles/formLayout";
+import { modalFormLayout, typeLLayout, typeMLayout, typeSLayout } from "../../../styles/formLayout";
 import { assertSimple } from "@im/asserts";
 import { Notification } from "../../Notification";
 import { SAVE } from "../../../utils/Localization/Localization";
 
 const { Footer, Content } = Layout;
 
-const BaseFormComponent: React.FC<
-  IBaseFormProps & { children: React.ReactNode }
-> = (props) => {
+const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }> = (props) => {
   const {
     error: errorProp,
     submitError,
@@ -59,11 +52,7 @@ const BaseFormComponent: React.FC<
       return null;
     }
 
-    return (
-      <Footer css={props.customFooterStyle ?? formFooterStyle}>
-        {props.footer}
-      </Footer>
-    );
+    return <Footer css={props.customFooterStyle ?? formFooterStyle}>{props.footer}</Footer>;
   }, [formData.access.hasWriteAccess, props.customFooterStyle, props.footer]);
 
   const header = useMemo(() => {
@@ -72,18 +61,10 @@ const BaseFormComponent: React.FC<
     }
 
     if (isUndefined(props.header)) {
-      return (
-        <HeaderMenuPortal.Body align="right">
-          {defaultHeader}
-        </HeaderMenuPortal.Body>
-      );
+      return <HeaderMenuPortal.Body align="right">{defaultHeader}</HeaderMenuPortal.Body>;
     }
 
-    return (
-      <HeaderMenuPortal.Body align="right">
-        {props.header}
-      </HeaderMenuPortal.Body>
-    );
+    return <HeaderMenuPortal.Body align="right">{props.header}</HeaderMenuPortal.Body>;
   }, [defaultHeader, formData.access.hasWriteAccess, props.header]);
 
   const { labelCol, notificationCol, wrapperCol } = useMemo(() => {
@@ -135,9 +116,7 @@ const BaseFormComponent: React.FC<
           {props.children}
         </div>
       </Content>
-      {!isNull(props.header) ? (
-        <HeaderMenuPortal>{header}</HeaderMenuPortal>
-      ) : null}
+      {!isNull(props.header) ? <HeaderMenuPortal>{header}</HeaderMenuPortal> : null}
       {props.footer ? footer : null}
     </AntForm>
   );

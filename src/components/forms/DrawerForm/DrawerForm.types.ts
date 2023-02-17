@@ -9,10 +9,7 @@ export interface IOkButtonProps extends Omit<ButtonProps, "icon"> {}
 
 export interface IDrawerFormProps
   extends Omit<DrawerProps, "onOk" | "onCancel" | "visible">,
-    Pick<
-      IFormWrapperProps,
-      "form" | "initialValues" | "notification" | "setFormData"
-    > {
+    Pick<IFormWrapperProps, "form" | "initialValues" | "notification" | "setFormData"> {
   okText: string;
   cancelText: string;
   disableSubmitOnPristine?: boolean;

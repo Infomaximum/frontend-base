@@ -1,8 +1,5 @@
 import { FC, memo, useMemo, cloneElement, isValidElement } from "react";
-import {
-  ellipsisTextWrapper,
-  ellipsisStyleForSafari,
-} from "./EllipsisTooltip.styles";
+import { ellipsisTextWrapper, ellipsisStyleForSafari } from "./EllipsisTooltip.styles";
 import type { IEllipsisTooltipProps } from "./EllipsisTooltip.types";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { EUserAgents, userAgent } from "@im/utils";
@@ -16,10 +13,7 @@ const EllipsisTooltipComponent: FC<IEllipsisTooltipProps> = ({
   customTextWrapperStyle,
   ...rest
 }) => {
-  const css = [
-    customTextWrapperStyle,
-    isSafari ? ellipsisStyleForSafari : null,
-  ];
+  const css = [customTextWrapperStyle, isSafari ? ellipsisStyleForSafari : null];
   const clearTitle = useMemo(() => {
     /** Если это элемент, то нужно убрать некоторые стили которые были добавлены */
     if (isValidElement(title)) {

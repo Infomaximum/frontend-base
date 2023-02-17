@@ -47,14 +47,9 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
 
   private getSelectValue = createSelector(
     (localization) => localization,
-    (localization: Localization, fieldValue: IModel[] | undefined) =>
-      fieldValue,
+    (localization: Localization, fieldValue: IModel[] | undefined) => fieldValue,
     (localization, fieldValue) => {
-      const {
-        handlerDisplaySelectedValues,
-        handlerTitleValues,
-        labelPropsGetter,
-      } = this.props;
+      const { handlerDisplaySelectedValues, handlerTitleValues, labelPropsGetter } = this.props;
 
       return fieldValue
         ? map(fieldValue, (model) => {
@@ -62,13 +57,9 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
               ? handlerDisplaySelectedValues(model)
               : model?.getDisplayName();
 
-            const labelProps = labelPropsGetter
-              ? labelPropsGetter(model)
-              : null;
+            const labelProps = labelPropsGetter ? labelPropsGetter(model) : null;
 
-            const title = handlerTitleValues
-              ? handlerTitleValues(model)
-              : model?.getDisplayName();
+            const title = handlerTitleValues ? handlerTitleValues(model) : model?.getDisplayName();
 
             return {
               value: model?.getInnerName(),
@@ -127,9 +118,7 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
 
     if (mode === "multiple") {
       const selectedModelsCount = fieldValue.length;
-      const resultValue: IModel[] = Array(
-        selectedModelsCount ? selectedModelsCount - 1 : 0
-      );
+      const resultValue: IModel[] = Array(selectedModelsCount ? selectedModelsCount - 1 : 0);
 
       for (let i = 0, j = 0; i < selectedModelsCount; i += 1) {
         if (fieldValue[i]?.getInnerName() !== selectStruct.value) {

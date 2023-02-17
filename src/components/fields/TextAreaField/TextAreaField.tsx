@@ -5,10 +5,7 @@ import type {
   ITextAreaFormFieldProps,
 } from "./TextAreaField.types";
 import type { TextAreaRef } from "antd/lib/input/TextArea";
-import {
-  textAreaFieldStyles,
-  textAreaWrapperStyle,
-} from "./TextAreaField.styles";
+import { textAreaFieldStyles, textAreaWrapperStyle } from "./TextAreaField.styles";
 import { Field, FormField } from "../FormField";
 import { Input } from "../../Input";
 
@@ -59,9 +56,7 @@ class TextAreaWrapper extends React.PureComponent<ITextAreaProps> {
   }
 }
 
-const TextAreaField: React.FC<ITextAreaFieldProps> = (
-  props: ITextAreaFieldProps
-) => {
+const TextAreaField: React.FC<ITextAreaFieldProps> = (props: ITextAreaFieldProps) => {
   return <Field component={TextAreaWrapper} {...props} />;
 };
 

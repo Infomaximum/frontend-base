@@ -32,10 +32,8 @@ const getFormFieldsErrorByValue = (
 
   map(formRegisteredFields, (formFieldPath) => {
     if (
-      formFieldPath.toLowerCase().indexOf(error.params[ERROR_FIELD_NAME]) !==
-        -1 &&
-      get(formValues, formFieldPath).toString() ===
-        error.params[ERROR_FIELD_VALUE].toString()
+      formFieldPath.toLowerCase().indexOf(error.params[ERROR_FIELD_NAME]) !== -1 &&
+      get(formValues, formFieldPath).toString() === error.params[ERROR_FIELD_VALUE].toString()
     ) {
       set(formFieldsError, formFieldPath, {
         code: error.code,
@@ -66,25 +64,19 @@ export const getFormFieldsError = (
   formRegisteredFields: TRegisteredFields
 ) => {
   if (error.params && error.params[ERROR_FIELD_NAME]) {
-    const serverFieldName = error.params[
-      ERROR_FIELD_NAME
-    ].toUpperCase() as string;
+    const serverFieldName = error.params[ERROR_FIELD_NAME].toUpperCase() as string;
     const snakeCaseFieldName = error.params[ERROR_FIELD_NAME].replace(
       /_([a-z])/g,
       (match: string) => match[1]?.toUpperCase()
     );
 
-    if (
-      formRegisteredFields.find((fieldName) => fieldName === serverFieldName)
-    ) {
+    if (formRegisteredFields.find((fieldName) => fieldName === serverFieldName)) {
       return {
         [serverFieldName]: getNormalizedError(error),
       };
     }
 
-    if (
-      formRegisteredFields.find((fieldName) => fieldName === snakeCaseFieldName)
-    ) {
+    if (formRegisteredFields.find((fieldName) => fieldName === snakeCaseFieldName)) {
       return {
         [snakeCaseFieldName]: getNormalizedError(error),
       };
@@ -115,9 +107,7 @@ export const getFormFieldsError = (
  * Метод возвращает имя поля с ошибкой
  * @param errors
  */
-export const findErrorFieldName = (
-  errors: Record<string, any> | undefined
-): string | undefined => {
+export const findErrorFieldName = (errors: Record<string, any> | undefined): string | undefined => {
   let errorFieldName: string | undefined;
   forEach(errors, (error, fieldName) => {
     if (error && !errorFieldName && fieldName !== FORM_ERROR) {

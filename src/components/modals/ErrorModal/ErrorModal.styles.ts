@@ -11,31 +11,25 @@ export const titleStyle = (theme: TTheme) => ({
   lineHeight: "24px",
 });
 
-export const textStyle =
-  (titleHeight: number, footerHeight: number) => (theme: TTheme) =>
-    ({
-      margin: `${marginTopText}px 0px 0px`,
-      color: theme.grey8Color,
-      overflowY: "auto",
-      display: "flex",
-      flexDirection: "column",
-      wordBreak: "break-word",
-      maxHeight:
-        userAgent() === EUserAgents.MSIE
-          ? `calc(100vh - ${
-              /* Фикс высоты в IE, в других браузерах нормально определяется максимальная высота
-               * Высота описания ошибка + высота футора + 1px бордер у футора + паддинги тела модалки(верхний и нижний, поэтому x2) +
-               * + паддинги самой модалки от края экрана(верхний и нижний, поэтому x2) + margin от текста ошибки то тайтла
-               */
-              titleHeight +
-              footerHeight +
-              1 +
-              bodyModalPadding * 2 +
-              modalPadding * 2 +
-              marginTopText
-            }px)`
-          : undefined,
-    } as const);
+export const textStyle = (titleHeight: number, footerHeight: number) => (theme: TTheme) =>
+  ({
+    margin: `${marginTopText}px 0px 0px`,
+    color: theme.grey8Color,
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+    wordBreak: "break-word",
+    maxHeight:
+      userAgent() === EUserAgents.MSIE
+        ? `calc(100vh - ${
+            /* Фикс высоты в IE, в других браузерах нормально определяется максимальная высота
+             * Высота описания ошибка + высота футора + 1px бордер у футора + паддинги тела модалки(верхний и нижний, поэтому x2) +
+             * + паддинги самой модалки от края экрана(верхний и нижний, поэтому x2) + margin от текста ошибки то тайтла
+             */
+            titleHeight + footerHeight + 1 + bodyModalPadding * 2 + modalPadding * 2 + marginTopText
+          }px)`
+        : undefined,
+  } as const);
 
 export const iconWrapStyle = {
   position: "absolute" as const,

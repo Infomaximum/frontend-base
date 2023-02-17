@@ -37,10 +37,7 @@ class WeekPicker extends React.PureComponent<IWeekPickerProps> {
     return (
       <AntWeekPicker
         key="ant-date-week-picker"
-        format={
-          momentFormat ||
-          `w [${localization.getLocalized(WEEK).toLowerCase()}] GGGG`
-        }
+        format={momentFormat || `w [${localization.getLocalized(WEEK).toLowerCase()}] GGGG`}
         onChange={this.handleChange}
         value={value}
         {...rest}
@@ -55,13 +52,7 @@ const WeekPickerField: React.FC<IWeekPickerFieldProps> = (props) => {
 
 const WeekPickerFormField: React.FC<IWeekPickerFormFieldProps> = (props) => {
   const localization = useLocalization();
-  return (
-    <FormField
-      component={WeekPickerField}
-      {...props}
-      localization={localization}
-    />
-  );
+  return <FormField component={WeekPickerField} {...props} localization={localization} />;
 };
 
 export { WeekPickerFormField };

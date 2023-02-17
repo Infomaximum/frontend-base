@@ -1,8 +1,4 @@
-import type {
-  DefaultOptionType,
-  SelectProps,
-  SelectValue,
-} from "antd/lib/select";
+import type { DefaultOptionType, SelectProps, SelectValue } from "antd/lib/select";
 import type { TXPlacement } from "../Dropdown/Dropdown.types";
 
 export interface ISelectProps<T extends SelectValue = SelectValue>

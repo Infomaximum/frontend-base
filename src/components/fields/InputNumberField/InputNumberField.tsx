@@ -6,10 +6,7 @@ import type {
 } from "./InputNumberField.types";
 import { InputNumber as AntInputNumber } from "antd";
 import { isNumber, isInteger, isNil, isNull } from "lodash";
-import {
-  antInputNumberStyle,
-  defaultWrapperComponentStyle,
-} from "./InputNumberField.styles";
+import { antInputNumberStyle, defaultWrapperComponentStyle } from "./InputNumberField.styles";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { NOT_SET } from "../../../utils/Localization/Localization";
 import { Input } from "../../Input/Input";
@@ -19,10 +16,7 @@ import { FormField } from "../FormField/FormField";
 const isFloat = (value: string | number | undefined | null) =>
   isNumber(value) && Number(value) !== value;
 
-const roundToPrecision = (
-  value?: number | string | null,
-  precision?: number
-): string => {
+const roundToPrecision = (value?: number | string | null, precision?: number): string => {
   if (!isNumber(value)) {
     return roundToPrecision(0, precision);
   }
@@ -117,8 +111,7 @@ const InputNumberField: React.FC<IInputNumberFieldProps> = (props) => {
 };
 
 const InputNumberFormField: React.FC<IInputNumberFormFieldProps> = (props) => {
-  const { wrapperComponentStyle = defaultWrapperComponentStyle, ...rest } =
-    props;
+  const { wrapperComponentStyle = defaultWrapperComponentStyle, ...rest } = props;
 
   return (
     <FormField
@@ -129,9 +122,4 @@ const InputNumberFormField: React.FC<IInputNumberFormFieldProps> = (props) => {
   );
 };
 
-export {
-  InputNumberFormField,
-  InputNumberField,
-  roundToPrecision,
-  InputNumber,
-};
+export { InputNumberFormField, InputNumberField, roundToPrecision, InputNumber };

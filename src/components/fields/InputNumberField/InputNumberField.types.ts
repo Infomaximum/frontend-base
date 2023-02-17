@@ -10,10 +10,7 @@ export interface IInputNumberProps
     FieldRenderProps<TInputNumberFieldValue> {}
 
 export interface IInputNumberOwnProps
-  extends Omit<
-    InputNumberProps<any>,
-    "onChange" | "onBlur" | "value" | "name" | "defaultValue"
-  > {
+  extends Omit<InputNumberProps<any>, "onChange" | "onBlur" | "value" | "name" | "defaultValue"> {
   readOnly?: boolean;
 }
 

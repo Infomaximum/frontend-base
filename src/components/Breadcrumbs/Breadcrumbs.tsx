@@ -13,11 +13,7 @@ import {
   threeDotsIconStyle,
 } from "./Breadcrumbs.styles";
 import type { IBreadcrumbsProps } from "./Breadcrumbs.types";
-import {
-  calcShrinkMask,
-  getTextWidth,
-  interleaveWith,
-} from "./Breadcrumbs.utils";
+import { calcShrinkMask, getTextWidth, interleaveWith } from "./Breadcrumbs.utils";
 import { Menu } from "antd";
 import { Dropdown } from "../Dropdown/Dropdown";
 import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
@@ -52,11 +48,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
 
   function renderHome() {
     return (
-      <div
-        key="home"
-        css={crumbStyle(crumbXPadding)(theme)}
-        onClick={createCrumbHandler(homePath)}
-      >
+      <div key="home" css={crumbStyle(crumbXPadding)(theme)} onClick={createCrumbHandler(homePath)}>
         <Tooltip title={homeTitle} placement="bottomLeft">
           <HomeOutlined css={homeIconStyle(theme)} key="home" />
         </Tooltip>
@@ -100,9 +92,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
 
   function getTextShrinks() {
     const minWidth = 85;
-    const widths = visibleItems.map(({ name }) =>
-      getTextWidth(name, crumbFontSize)
-    );
+    const widths = visibleItems.map(({ name }) => getTextWidth(name, crumbFontSize));
     /** Доступная ширина под текст крошек */
     const excessTextWidth =
       labeledCrumbsWidth - size(widths) * (crumbXPadding * 2 + separatorWidth);
@@ -121,10 +111,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
 
       return (
         <div key={item.key} css={style} onClick={createCrumbHandler(item.path)}>
-          <EllipsisTooltip
-            css={{ fontSize: crumbFontSize }}
-            placement="bottomLeft"
-          >
+          <EllipsisTooltip css={{ fontSize: crumbFontSize }} placement="bottomLeft">
             {item.name}
           </EllipsisTooltip>
         </div>
@@ -132,11 +119,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
     });
 
     return (
-      <div
-        key="text-crumbs"
-        css={labeledCrumbsContainerStyle}
-        ref={setLabeledCrumbsElement}
-      >
+      <div key="text-crumbs" css={labeledCrumbsContainerStyle} ref={setLabeledCrumbsElement}>
         {interleaveWith(renderSeparator, crumbs)}
       </div>
     );

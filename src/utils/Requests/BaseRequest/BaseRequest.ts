@@ -31,8 +31,7 @@ export class BaseRequest implements NRequests.IRequest {
   };
 
   constructor(params: TRequestParams) {
-    this.errorHandlerInstance =
-      params.errorHandlerInstance ?? new BaseErrorHandler();
+    this.errorHandlerInstance = params.errorHandlerInstance ?? new BaseErrorHandler();
   }
 
   /** Отмена запросов и мутаций */
@@ -88,11 +87,7 @@ export class BaseRequest implements NRequests.IRequest {
   }
 
   /** Выполняет запросы на сервер */
-  public async requestData({
-    query,
-    variables,
-    cancelable,
-  }: NRequests.TRequestDataParams) {
+  public async requestData({ query, variables, cancelable }: NRequests.TRequestDataParams) {
     const apolloClient = apolloInstance.apolloClient;
 
     const { cancelToken, cancelCallback } = this.getCancelToken();
@@ -131,10 +126,9 @@ export class BaseRequest implements NRequests.IRequest {
         data = response?.data;
       }
     } catch (err) {
-      const error: NCore.TError | undefined =
-        await this.errorHandlerInstance.prepareError(err, {
-          traceId,
-        });
+      const error: NCore.TError | undefined = await this.errorHandlerInstance.prepareError(err, {
+        traceId,
+      });
 
       throw error || err;
     } finally {
@@ -145,12 +139,7 @@ export class BaseRequest implements NRequests.IRequest {
   }
 
   /** Отправляет мутации на сервер */
-  public async submitData({
-    mutation,
-    variables,
-    cancelable,
-    files,
-  }: NRequests.TSubmitDataParams) {
+  public async submitData({ mutation, variables, cancelable, files }: NRequests.TSubmitDataParams) {
     const apolloClient = apolloInstance.apolloClient;
 
     const { cancelToken, cancelCallback } = this.getCancelToken();
@@ -190,10 +179,9 @@ export class BaseRequest implements NRequests.IRequest {
         data = response?.data;
       }
     } catch (err) {
-      const error: NCore.TError | undefined =
-        await this.errorHandlerInstance.prepareError(err, {
-          traceId,
-        });
+      const error: NCore.TError | undefined = await this.errorHandlerInstance.prepareError(err, {
+        traceId,
+      });
 
       throw error || err;
     } finally {
@@ -223,15 +211,13 @@ export class BaseRequest implements NRequests.IRequest {
         }
       },
       (err) => {
-        this.errorHandlerInstance
-          .prepareError(err.originalError, {})
-          .then((error) => {
-            if (isFunction(params.onError)) {
-              (params.onError as (typeof params)["onError"])({
-                error: error || err,
-              });
-            }
-          });
+        this.errorHandlerInstance.prepareError(err.originalError, {}).then((error) => {
+          if (isFunction(params.onError)) {
+            (params.onError as (typeof params)["onError"])({
+              error: error || err,
+            });
+          }
+        });
       }
     );
   }

@@ -1,11 +1,4 @@
-import {
-  memo,
-  useMemo,
-  useCallback,
-  forwardRef,
-  type ForwardedRef,
-  useState,
-} from "react";
+import { memo, useMemo, useCallback, forwardRef, type ForwardedRef, useState } from "react";
 import type { IApplicationCardProps } from "./ApplicationCard.types";
 import {
   titleStyle,
@@ -68,14 +61,7 @@ const ApplicationCardComponent = forwardRef<
       }
 
       return menuItems;
-    }, [
-      contextMenuGetter,
-      entity,
-      isReadOnly,
-      hasDeleteAccess,
-      localization,
-      onRemove,
-    ]);
+    }, [contextMenuGetter, entity, isReadOnly, hasDeleteAccess, localization, onRemove]);
 
     const hasContextMenu = !isEmpty(contextMenuItems);
 
@@ -90,11 +76,7 @@ const ApplicationCardComponent = forwardRef<
     const contextMenu = useMemo(() => {
       if (hasContextMenu) {
         return (
-          <div
-            css={contextMenuStyle(theme)}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          >
+          <div css={contextMenuStyle(theme)} onBlur={handleBlur} onFocus={handleFocus}>
             <ContextMenu content={contextMenuItems} placement="bottomRight" />
           </div>
         );
@@ -136,9 +118,7 @@ const ApplicationCardComponent = forwardRef<
           css={cardStyles}
           onClick={onClick && handleClick}
           ref={ref as ForwardedRef<HTMLAnchorElement>}
-          test-id={`${applicationCardTestId}-${
-            entity.contentTypename
-          }-${entity.getId()}`}
+          test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
         >
           {content}
           {contextMenu}
@@ -151,9 +131,7 @@ const ApplicationCardComponent = forwardRef<
         css={cardStyles}
         onClick={onClick && handleClick}
         ref={ref as ForwardedRef<HTMLDivElement>}
-        test-id={`${applicationCardTestId}-${
-          entity.contentTypename
-        }-${entity.getId()}`}
+        test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
       >
         {content}
         {contextMenu}

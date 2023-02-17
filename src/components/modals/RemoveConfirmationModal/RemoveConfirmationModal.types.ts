@@ -3,9 +3,7 @@ import type { TLocalizationDescription } from "@im/localization";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
 import type { IWithThemeProps } from "../../../decorators/hocs/withTheme/withTheme";
 
-export interface IRemoveConfirmationModalProps
-  extends IWithLocProps,
-    IWithThemeProps<TTheme> {
+export interface IRemoveConfirmationModalProps extends IWithLocProps, IWithThemeProps<TTheme> {
   /**
    * Отобразить/скрыть модальное окно
    */

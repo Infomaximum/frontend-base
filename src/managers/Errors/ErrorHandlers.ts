@@ -153,8 +153,7 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
   {
     code: EErrorCode.EMPLOYEE_SELF_REMOVE_ADMIN_NOT_EMPTY_DEPARTMENT,
     title: CANNOT_DELETE_YOUR_PROFILE_ADMINISTRATORS_AND_NON_EMPTY_DEPARTMENTS,
-    description:
-      DELETE_EMPLOYEES_FROM_DEPARTMENTS_CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN,
+    description: DELETE_EMPLOYEES_FROM_DEPARTMENTS_CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN,
   },
   /*** ============================ errorHandlers для страницы employee [END]  ============================ ***/
   {

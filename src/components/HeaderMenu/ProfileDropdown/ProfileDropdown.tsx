@@ -1,8 +1,5 @@
 import { LOG_OUT } from "../../../utils/Localization/Localization";
-import {
-  headerMenuUserAvatarTestId,
-  logoutButtonTestId,
-} from "../../../utils/TestIds";
+import { headerMenuUserAvatarTestId, logoutButtonTestId } from "../../../utils/TestIds";
 import { Col, Menu, Row } from "antd";
 import { iconsHoverStyle } from "../HeaderMenu.styles";
 import type { IProfileDropdownProps } from "./ProfileDropdown.types";
@@ -47,9 +44,7 @@ const ProfileDropdownComponent: React.FC<IProfileDropdownProps> = ({
 
         return {
           key,
-          className: isCurrentPath
-            ? antDropdownMenuSelectedItemClassName
-            : undefined,
+          className: isCurrentPath ? antDropdownMenuSelectedItemClassName : undefined,
           label: isCurrentPath ? content : <Link to={path}>{content}</Link>,
         };
       }),
@@ -57,11 +52,7 @@ const ProfileDropdownComponent: React.FC<IProfileDropdownProps> = ({
       {
         key: "logout",
         onClick: onLogout,
-        label: renderItem(
-          <LogoutSVG />,
-          localization.getLocalized(LOG_OUT),
-          logoutButtonTestId
-        ),
+        label: renderItem(<LogoutSVG />, localization.getLocalized(LOG_OUT), logoutButtonTestId),
       },
     ];
   }, [onLogout, localization, location.pathname, menuItemsProp]);

@@ -8,10 +8,7 @@ import type { Model, TModelStruct } from "@im/models";
 
 /** Пространство для типов базового стора */
 export declare namespace NStore {
-  type TPrepareDataFuncParams<
-    S extends Store<M> = Store<any>,
-    M extends Model = Model
-  > = {
+  type TPrepareDataFuncParams<S extends Store<M> = Store<any>, M extends Model = Model> = {
     data: TModelStruct | null;
     store: S;
     variables: TDictionary | undefined;
@@ -31,11 +28,7 @@ export declare namespace NStore {
     store: S;
   };
 
-  type TQueryParamsGetter<
-    S extends Store<M>,
-    M extends Model = Model,
-    T = unknown
-  > = (
+  type TQueryParamsGetter<S extends Store<M>, M extends Model = Model, T = unknown> = (
     this: S,
     params: TParamsGetterArg<S, M>
   ) => {
@@ -90,11 +83,7 @@ export declare namespace NStore {
   }
 
   interface IActionSubscribeParams {
-    onMessage: (params: {
-      first: boolean;
-      response: TDictionary;
-      store: unknown;
-    }) => void;
+    onMessage: (params: { first: boolean; response: TDictionary; store: unknown }) => void;
   }
 
   export type TStoreSubscriptionConfig = {
@@ -104,11 +93,7 @@ export declare namespace NStore {
       /** Переменные запроса */
       variables?: TDictionary;
     };
-    onMessage?: (params: {
-      first: boolean;
-      response: TDictionary;
-      store: unknown;
-    }) => void;
+    onMessage?: (params: { first: boolean; response: TDictionary; store: unknown }) => void;
     onError?: (params: { error: NCore.TError; store: unknown }) => void;
   };
 

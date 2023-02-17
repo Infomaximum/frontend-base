@@ -5,11 +5,7 @@ export const getBasePrefix = () => window.imFrontEndSystem.basePrefix;
 /** Сохраняет текущий путь если выкидывает на страницу с логином */
 export const savePathToLocalStorage = (): void => {
   setPathToLocalStorage(
-    replace(
-      window.location.pathname,
-      new RegExp(`(\/[\w \.-]*)*${getBasePrefix()}`),
-      ""
-    )
+    replace(window.location.pathname, new RegExp(`(\/[\w \.-]*)*${getBasePrefix()}`), "")
   );
 };
 
@@ -22,8 +18,7 @@ export const setPathToLocalStorage = (path: string): void => {
  * Получает текущий путь для возвращения на страницу с которой выкинуло
  * @returns {string}
  */
-export const getPathToLocalStorage = (): string | null =>
-  localStorage.getItem("currentPath");
+export const getPathToLocalStorage = (): string | null => localStorage.getItem("currentPath");
 
 /**
  * Удаляет путь для возвращения на страницу с которой выкинуло
@@ -51,8 +46,7 @@ export const getGraphqlURL = () => `${getApiPrefix()}/graphql`;
 /**
  * Текущий хост без протокола
  */
-export const getCurrentHostWithoutProtocol = () =>
-  `${window.location.host}${getApiPrefix()}/`;
+export const getCurrentHostWithoutProtocol = () => `${window.location.host}${getApiPrefix()}/`;
 
 /**
  * Текущий хост c протоколом

@@ -11,9 +11,7 @@ import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 import { DataTable } from "../../DataTable/DataTable";
 
-class DataTableComponent<T extends TBaseRow> extends PureComponent<
-  IDataTableComponentProps<T>
-> {
+class DataTableComponent<T extends TBaseRow> extends PureComponent<IDataTableComponentProps<T>> {
   public handleCheckChange = (selectedModels: TDataTableFieldValue): void => {
     if (this.props.input.onChange) {
       this.props.input.onChange(selectedModels);
@@ -22,27 +20,17 @@ class DataTableComponent<T extends TBaseRow> extends PureComponent<
 
   public override render() {
     const { input, meta, ...rest } = this.props;
-    return (
-      <DataTable {...input} {...rest} onCheckChange={this.handleCheckChange} />
-    );
+    return <DataTable {...input} {...rest} onCheckChange={this.handleCheckChange} />;
   }
 }
 
-function DataTableField<T extends TBaseRow = TBaseRow>(
-  props: IDataTableFieldProps<T>
-) {
+function DataTableField<T extends TBaseRow = TBaseRow>(props: IDataTableFieldProps<T>) {
   return <Field {...props} component={DataTableComponent} />;
 }
 
-function DataTableFormField<T extends TBaseRow = TBaseRow>(
-  props: IDataTableFormFieldProps<T>
-) {
+function DataTableFormField<T extends TBaseRow = TBaseRow>(props: IDataTableFormFieldProps<T>) {
   return (
-    <FormField
-      {...props}
-      wrapperComponentStyle={wrapperFieldStyle}
-      component={DataTableField}
-    />
+    <FormField {...props} wrapperComponentStyle={wrapperFieldStyle} component={DataTableField} />
   );
 }
 

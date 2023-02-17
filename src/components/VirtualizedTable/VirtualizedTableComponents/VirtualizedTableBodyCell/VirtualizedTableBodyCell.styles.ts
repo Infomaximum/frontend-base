@@ -4,10 +4,7 @@ import { EUserAgents, userAgent } from "@im/utils";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 
-export const getVirtualizedTableCellFlexStyle = (
-  width?: ReactText,
-  minWidth?: ReactText
-) => {
+export const getVirtualizedTableCellFlexStyle = (width?: ReactText, minWidth?: ReactText) => {
   return { flexBasis: width ?? 0, flexGrow: width ? 0 : 1, minWidth };
 };
 

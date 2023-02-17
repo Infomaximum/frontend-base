@@ -2,14 +2,7 @@ import { assertSimple } from "@im/asserts";
 // eslint-disable-next-line im/ban-import-entity
 import { Dropdown as AntDropdown } from "antd";
 import { noop } from "lodash";
-import React, {
-  isValidElement,
-  useCallback,
-  useRef,
-  useMemo,
-  memo,
-  useEffect,
-} from "react";
+import React, { isValidElement, useCallback, useRef, useMemo, memo, useEffect } from "react";
 import type { IDropdownProps } from "./Dropdown.types";
 import {
   defaultTrigger,
@@ -45,9 +38,7 @@ const DropdownComponent: React.FC<IDropdownProps> = ({
   const position = useDropdownPosition(buttonRef, config, xPlacement);
 
   // Не сжимаем Dropdown, если он отображается поверх контента
-  const computePosition = trigger.includes("contextMenu")
-    ? noop
-    : position.compute;
+  const computePosition = trigger.includes("contextMenu") ? noop : position.compute;
 
   const handleVisibleChange = useCallback(
     (isVisible: boolean) => {
@@ -74,15 +65,9 @@ const DropdownComponent: React.FC<IDropdownProps> = ({
     [propsOverlayStyle, maxHeight]
   );
 
-  const align = useMemo(
-    () => ({ ...position.align, ...propsAlign }),
-    [propsAlign, position.align]
-  );
+  const align = useMemo(() => ({ ...position.align, ...propsAlign }), [propsAlign, position.align]);
 
-  assertSimple(
-    isValidElement(button),
-    "Dropdown используется для невалидной кнопки"
-  );
+  assertSimple(isValidElement(button), "Dropdown используется для невалидной кнопки");
 
   return (
     <AntDropdown

@@ -1,7 +1,4 @@
-import type {
-  IDataTableOwnProps,
-  IDataTableProps,
-} from "../DataTable/DataTable.types";
+import type { IDataTableOwnProps, IDataTableProps } from "../DataTable/DataTable.types";
 import type { TAccess } from "@im/utils";
 import type { MutableRefObject } from "react";
 import type { EditableDataTableKeys } from "./EditableDataTable";
@@ -23,8 +20,7 @@ export interface IEditableDataTableProvider {
   handleAddRow(): void;
 }
 
-export interface IEditableDataTableOwnProps<T>
-  extends Omit<IDataTableOwnProps<T>, "addRows"> {
+export interface IEditableDataTableOwnProps<T> extends Omit<IDataTableOwnProps<T>, "addRows"> {
   /**
    * Ключ, задающий уникальность таблице, чтобы не возникало конфликтов в именах форм.
    */

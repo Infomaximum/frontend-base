@@ -61,11 +61,7 @@ const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
 
   return (
     <Tooltip title={!disabled ? title : undefined}>
-      <div
-        css={buttonStyle}
-        onClick={!disabled ? handleClick : undefined}
-        {...rest}
-      >
+      <div css={buttonStyle} onClick={!disabled ? handleClick : undefined} {...rest}>
         {icon}
       </div>
     </Tooltip>

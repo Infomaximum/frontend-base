@@ -37,8 +37,7 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
   ];
 
   private get checkbox() {
-    const { targetAll, isCheckable, isSelectionEmpty, isTableEmpty, theme } =
-      this.props;
+    const { targetAll, isCheckable, isSelectionEmpty, isTableEmpty, theme } = this.props;
 
     if (isCheckable) {
       assertSimple(
@@ -49,10 +48,7 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
       const isIndeterminate = !isTableEmpty && !targetAll && !isSelectionEmpty;
 
       return (
-        <div
-          css={virtualizedTableCheckboxCellStyle(theme)}
-          key="wrapper-checkbox"
-        >
+        <div css={virtualizedTableCheckboxCellStyle(theme)} key="wrapper-checkbox">
           <TableCheckboxCell>
             <Checkbox
               key="checkbox"
@@ -97,11 +93,7 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
     const { scrollOffset, isShowDivider, theme } = this.props;
 
     return (
-      <div
-        key="wrapper-header"
-        css={virtualizedTableHeaderRowWrapperStyle}
-        id={TABLE_HEADER_ID}
-      >
+      <div key="wrapper-header" css={virtualizedTableHeaderRowWrapperStyle} id={TABLE_HEADER_ID}>
         <div
           key="wrapper"
           css={this.getHeaderStyle(scrollOffset, isShowDivider, theme)}
@@ -111,16 +103,11 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
           {this.content}
         </div>
         {this.props.loading && (
-          <div
-            key="block"
-            css={virtualizedTableBodyRowLoadingCoverStyle(theme)}
-          />
+          <div key="block" css={virtualizedTableBodyRowLoadingCoverStyle(theme)} />
         )}
       </div>
     );
   }
 }
 
-export const VirtualizedTableHeaderRow = withTheme(
-  VirtualizedTableHeaderRowComponent
-);
+export const VirtualizedTableHeaderRow = withTheme(VirtualizedTableHeaderRowComponent);

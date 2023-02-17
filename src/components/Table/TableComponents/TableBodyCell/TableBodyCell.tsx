@@ -6,10 +6,7 @@ import type { ITableBodyCellProps } from "./TableBodyCell.types";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 
 const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
-  (
-    { children, showTooltip, ...restProps },
-    ref: React.Ref<HTMLTableCellElement>
-  ) => {
+  ({ children, showTooltip, ...restProps }, ref: React.Ref<HTMLTableCellElement>) => {
     const theme = useTheme();
 
     const getTitle = () => {
@@ -34,17 +31,8 @@ const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
     };
 
     return (
-      <td
-        {...restProps}
-        css={tableBodyCellStyle(theme)}
-        ref={ref}
-        title={undefined}
-      >
-        {showTooltip ? (
-          <Tooltip title={getTitle()}>{children}</Tooltip>
-        ) : (
-          children
-        )}
+      <td {...restProps} css={tableBodyCellStyle(theme)} ref={ref} title={undefined}>
+        {showTooltip ? <Tooltip title={getTitle()}>{children}</Tooltip> : children}
       </td>
     );
   }

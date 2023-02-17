@@ -1,11 +1,7 @@
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { SHOWING_OF } from "../../utils/Localization/Localization";
 import { Space, Spin } from "antd";
-import {
-  containerStyle,
-  labelStyle,
-  spinStyle,
-} from "./RestLoadingIndicator.styles";
+import { containerStyle, labelStyle, spinStyle } from "./RestLoadingIndicator.styles";
 import type { IRestLoadingIndicatorProps } from "./RestLoadingIndicator.types";
 import { useTheme } from "../../decorators/hooks/useTheme";
 

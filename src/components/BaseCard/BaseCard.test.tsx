@@ -35,17 +35,13 @@ describe("Тест компонента BaseCard", () => {
   });
 
   it("Наличие 'card-header' если есть 'title'", () => {
-    const component = mount(
-      getRouterWrapper(<BaseCard title="Заголовок">TEST</BaseCard>)
-    );
+    const component = mount(getRouterWrapper(<BaseCard title="Заголовок">TEST</BaseCard>));
 
     expect(component.find("div > div").exists()).toEqual(true);
   });
 
   it("Наличие 'wrapper-menu' и 'card-header' если есть 'menu'", () => {
-    const component = mount(
-      getRouterWrapper(<BaseCard menu="Меню">TEST</BaseCard>)
-    );
+    const component = mount(getRouterWrapper(<BaseCard menu="Меню">TEST</BaseCard>));
 
     expect(component.find("div > div").exists()).toEqual(true);
     expect(component.find("div > div > div").exists()).toEqual(true);

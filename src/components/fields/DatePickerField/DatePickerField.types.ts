@@ -6,20 +6,13 @@ import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 
 type TDatePickerFieldValue = NonNullable<DatePickerProps["value"]>;
-type TOmitDatePickerProps =
-  | "onChange"
-  | "onBlur"
-  | "onFocus"
-  | "format"
-  | "value"
-  | "name";
+type TOmitDatePickerProps = "onChange" | "onBlur" | "onFocus" | "format" | "value" | "name";
 
 export interface IDatePickerProps
   extends IDatePickerOwnProps,
     FieldRenderProps<TDatePickerFieldValue> {}
 
-export interface IDatePickerOwnProps
-  extends Omit<DatePickerProps, TOmitDatePickerProps> {
+export interface IDatePickerOwnProps extends Omit<DatePickerProps, TOmitDatePickerProps> {
   // Почему-то DatePickerProps не содержит данный тип
   showTime?: PickerDateProps<Moment>["showTime"];
   momentFormat?: DatePickerProps["format"];

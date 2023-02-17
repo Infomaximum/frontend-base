@@ -1,9 +1,6 @@
 import type React from "react";
 import type { Localization, TLocalizationDescription } from "@im/localization";
-import {
-  SWITCHED_OFF,
-  SWITCHED_ENABLED,
-} from "../../utils/Localization/Localization";
+import { SWITCHED_OFF, SWITCHED_ENABLED } from "../../utils/Localization/Localization";
 import { switchedEnabledStyles, switchedOffStyles } from "./Message.styles";
 
 export const getStyledAndLocalizedEntities = (
@@ -19,16 +16,10 @@ export const getStyledAndLocalizedEntities = (
 
   if (status) {
     statusLoc = (
-      <span css={switchedEnabledStyles}>
-        {localization.getLocalized(SWITCHED_ENABLED)}
-      </span>
+      <span css={switchedEnabledStyles}>{localization.getLocalized(SWITCHED_ENABLED)}</span>
     );
   } else if (!locTerm) {
-    statusLoc = (
-      <span css={switchedOffStyles}>
-        {localization.getLocalized(SWITCHED_OFF)}
-      </span>
-    );
+    statusLoc = <span css={switchedOffStyles}>{localization.getLocalized(SWITCHED_OFF)}</span>;
   }
 
   return statusLoc;

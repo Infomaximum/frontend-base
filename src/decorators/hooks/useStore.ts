@@ -29,10 +29,7 @@ export interface IMutation<V extends TDictionary = never>
   variables?: V;
 }
 
-export const useStore = <S extends Store<Model>>(
-  store: S,
-  params?: TStoreParams
-) => {
+export const useStore = <S extends Store<Model>>(store: S, params?: TStoreParams) => {
   const requestOnMount = params?.requestOnMount ?? false;
   const clearOnUnmount = params?.clearOnUnmount ?? true;
   const cancelRequestOnUnmount = params?.cancelRequestOnUnmount ?? true;
@@ -47,10 +44,7 @@ export const useStore = <S extends Store<Model>>(
   const unsubscribe = store.unsubscribe;
 
   const mutate = useCallback(
-    <
-      T extends NStore.IActionSubmitDataParams,
-      Variables = TInferredVariables<T, "mutation">
-    >(
+    <T extends NStore.IActionSubmitDataParams, Variables = TInferredVariables<T, "mutation">>(
       params: IMutation<Variables>
     ) => store.submitData(params),
     [store]

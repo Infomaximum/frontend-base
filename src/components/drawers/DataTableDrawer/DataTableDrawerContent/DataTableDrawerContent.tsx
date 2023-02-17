@@ -11,9 +11,7 @@ import { useLocalization } from "../../../../decorators/hooks/useLocalization";
 import { DataTable } from "../../../DataTable/DataTable";
 import { ELimitsStateNames } from "../../../../utils/const";
 
-const DataTableDrawerContentComponent: React.FC<
-  IDataTableDrawerContentProps
-> = ({
+const DataTableDrawerContentComponent: React.FC<IDataTableDrawerContentProps> = ({
   handlerTableDisplayValues,
   rowBuilder: propsRowBuilder,
   columns,
@@ -33,9 +31,7 @@ const DataTableDrawerContentComponent: React.FC<
           dataIndex: "name",
           title: localization.getLocalized(ALL),
           ellipsis: true,
-          render: (text) => (
-            <EllipsisTooltip title={text}>{text}</EllipsisTooltip>
-          ),
+          render: (text) => <EllipsisTooltip title={text}>{text}</EllipsisTooltip>,
         },
       ],
     [localization, columns]
@@ -47,8 +43,7 @@ const DataTableDrawerContentComponent: React.FC<
         return propsRowBuilder(model);
       }
 
-      let name =
-        model.getDisplayName?.() || localization.getLocalized(EMPTY_STRING);
+      let name = model.getDisplayName?.() || localization.getLocalized(EMPTY_STRING);
 
       if (isFunction(handlerTableDisplayValues)) {
         const value = handlerTableDisplayValues(model);

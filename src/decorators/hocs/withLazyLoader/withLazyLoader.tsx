@@ -4,9 +4,7 @@ import { Spinner } from "../../../components/Spinner/Spinner";
 
 const spinner = <Spinner />;
 
-export const withLazyLoader = <
-  T extends () => Promise<{ default: ComponentType<any> }>
->(
+export const withLazyLoader = <T extends () => Promise<{ default: ComponentType<any> }>>(
   Component: T
 ) => {
   const LazyComponent = lazy(Component);

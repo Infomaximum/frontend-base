@@ -17,25 +17,17 @@ const MessageBody: React.FC<IMessageBodyProps> = (props) => {
   const theme = useTheme();
 
   const setTimer = () => {
-    closeMessageTimer.current = setTimeout(
-      () => message.destroy(props.messageKey),
-      props.duration
-    );
+    closeMessageTimer.current = setTimeout(() => message.destroy(props.messageKey), props.duration);
   };
 
-  const stopTimer = () =>
-    closeMessageTimer.current && clearTimeout(closeMessageTimer.current);
+  const stopTimer = () => closeMessageTimer.current && clearTimeout(closeMessageTimer.current);
 
   const destroyMessage = () => message.destroy(props.messageKey);
 
   useEffect(setTimer, []);
 
   return (
-    <div
-      css={messageBodyStyle}
-      onMouseEnter={stopTimer}
-      onMouseLeave={setTimer}
-    >
+    <div css={messageBodyStyle} onMouseEnter={stopTimer} onMouseLeave={setTimer}>
       <div css={notificationsWrapperStyle}>{messageBody}</div>
       <CloseOutlined
         css={closeIconHoverStyle}

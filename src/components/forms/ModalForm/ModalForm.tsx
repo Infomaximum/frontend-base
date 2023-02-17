@@ -18,10 +18,7 @@ import { Modal } from "../../modals/Modal/Modal";
 import { Form } from "../Form";
 import { closeModalIconStyle } from "../../../styles/common.styles";
 
-class ModalFormComponent extends React.PureComponent<
-  IModalFormProps,
-  IModalFormState
-> {
+class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalFormState> {
   public static defaultProps = {
     bodyStyle: modalBodyStyle,
   };
@@ -76,13 +73,8 @@ class ModalFormComponent extends React.PureComponent<
   };
 
   private renderFooter(): React.ReactNode {
-    const {
-      okText,
-      cancelText,
-      form,
-      disableSubmitOnPristine,
-      disableSubmitOnInvalid,
-    } = this.props;
+    const { okText, cancelText, form, disableSubmitOnPristine, disableSubmitOnInvalid } =
+      this.props;
 
     return (
       this.state.formProvider && (
@@ -127,10 +119,7 @@ class ModalFormComponent extends React.PureComponent<
     } = this.props;
 
     const closeIcon = (
-      <CloseOutlined
-        test-id={modalFormCloseIconTestId}
-        css={closeModalIconStyle}
-      />
+      <CloseOutlined test-id={modalFormCloseIconTestId} css={closeModalIconStyle} />
     );
 
     return (

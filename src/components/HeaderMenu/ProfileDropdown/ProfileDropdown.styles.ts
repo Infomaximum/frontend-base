@@ -1,8 +1,6 @@
 export const antDropdownMenuItemClassName = "ant-dropdown-menu-item";
-export const antDropdownMenuSelectedItemClassName =
-  "ant-dropdown-menu-selected-item";
-export const antDropdownMenuItemDividerClassName =
-  "ant-dropdown-menu-item-divider";
+export const antDropdownMenuSelectedItemClassName = "ant-dropdown-menu-selected-item";
+export const antDropdownMenuItemDividerClassName = "ant-dropdown-menu-item-divider";
 
 export const menuStyle = (theme: TTheme) => ({
   minWidth: "160px",

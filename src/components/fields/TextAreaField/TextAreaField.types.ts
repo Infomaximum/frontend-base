@@ -5,9 +5,7 @@ import type { IFormFieldProps } from "../FormField/FormField.types";
 
 export type TTextAreaFieldValue = string;
 
-export interface ITextAreaProps
-  extends TextAreaProps,
-    FieldRenderProps<TTextAreaFieldValue> {}
+export interface ITextAreaProps extends TextAreaProps, FieldRenderProps<TTextAreaFieldValue> {}
 
 export interface ITextAreaFieldProps
   extends Omit<IFieldProps<ITextAreaProps>, "component">,

@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useLastLoaded<T>(
-  loading: boolean,
-  isDataLoaded: boolean,
-  createValue: () => T
-) {
+export function useLastLoaded<T>(loading: boolean, isDataLoaded: boolean, createValue: () => T) {
   const [value, setValue] = useState<T | null>(null);
 
   useEffect(() => {

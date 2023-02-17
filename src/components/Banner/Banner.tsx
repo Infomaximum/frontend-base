@@ -15,10 +15,7 @@ import {
 import { BannerAlert } from "./components/BannerAlert/BannerAlert";
 import { isFunction } from "lodash";
 import { MillisecondsPerSecond } from "@im/utils";
-import {
-  bannerDontShowAgainTestId,
-  closeBannerButtonTestId,
-} from "../../utils/TestIds";
+import { bannerDontShowAgainTestId, closeBannerButtonTestId } from "../../utils/TestIds";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 
 const BannerComponent: FC<IBannerProps> = ({

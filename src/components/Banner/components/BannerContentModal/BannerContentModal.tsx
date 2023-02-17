@@ -2,10 +2,7 @@ import { Button } from "../../../Button/Button";
 import { Modal } from "../../../modals/Modal/Modal";
 import { useLocalization } from "../../../../decorators/hooks/useLocalization";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
-import {
-  NOTIFICATION,
-  CLOSE,
-} from "../../../../utils/Localization/Localization";
+import { NOTIFICATION, CLOSE } from "../../../../utils/Localization/Localization";
 import { memo, useMemo } from "react";
 import MarkdownView from "react-showdown";
 import { CloseOutlined } from "../../../Icons/Icons";
@@ -57,11 +54,7 @@ const BannerContentModalComponent: React.FC<IBannerContentModalProps> = ({
       centered={true}
       closeIcon={closeIcon}
     >
-      <MarkdownView
-        markdown={md}
-        components={mdViewComponents}
-        options={mdViewOptions}
-      />
+      <MarkdownView markdown={md} components={mdViewComponents} options={mdViewOptions} />
     </Modal>
   );
 };

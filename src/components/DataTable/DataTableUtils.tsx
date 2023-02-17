@@ -7,9 +7,7 @@ import type { IShowMoreOwnProps } from "../ShowMore/ShowMore.types";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
 import type { ITableTopButtonDisabledProps } from "./TopPanel/TopPanel.types";
 
-function getTableTopButtonDisabledStatus(
-  disabledProps: ITableTopButtonDisabledProps
-) {
+function getTableTopButtonDisabledStatus(disabledProps: ITableTopButtonDisabledProps) {
   const {
     treeCounter,
     empty = false,
@@ -39,20 +37,13 @@ function getTableTopButtonDisabledStatus(
 
   return !(
     (empty && totalCheckedCount === 0) ||
-    (singleGroup &&
-      groupsCheckedCount === 1 &&
-      itemsCheckedShallowCount === 0) ||
-    (shallowSingleGroup &&
-      groupsCheckedShallowCount === 1 &&
-      itemsCheckedShallowCount === 0) ||
-    (onlyGroup &&
-      groupsCheckedShallowCount > 1 &&
-      itemsCheckedShallowCount === 0) ||
+    (singleGroup && groupsCheckedCount === 1 && itemsCheckedShallowCount === 0) ||
+    (shallowSingleGroup && groupsCheckedShallowCount === 1 && itemsCheckedShallowCount === 0) ||
+    (onlyGroup && groupsCheckedShallowCount > 1 && itemsCheckedShallowCount === 0) ||
     (singleItem && groupsCheckedCount === 0 && itemsCheckedCount === 1) ||
     (onlyItem && groupsCheckedCount === 0 && itemsCheckedCount > 1) ||
     (singleAnything && totalCheckedCount === 1) ||
-    (shallowSingleAnything &&
-      groupsCheckedShallowCount + itemsCheckedShallowCount === 1) ||
+    (shallowSingleAnything && groupsCheckedShallowCount + itemsCheckedShallowCount === 1) ||
     (anything && totalCheckedCount > 0) ||
     (full && targetAll)
   );
@@ -95,34 +86,23 @@ const getColumnsWithShowMore = (
   columns: IColumnProps<TBaseRow>[] | undefined,
   props: Omit<IShowMoreOwnProps, "model">
 ) =>
-  map(
-    columns,
-    ({ render, ...rest }: IColumnProps<TBaseRow>, index: number) => ({
-      ...rest,
-      render(text: string, record: TBaseRow, rowIndex: number) {
-        const { model } = record;
+  map(columns, ({ render, ...rest }: IColumnProps<TBaseRow>, index: number) => ({
+    ...rest,
+    render(text: string, record: TBaseRow, rowIndex: number) {
+      const { model } = record;
 
-        if (model instanceof RestModel) {
-          return index === 0 ? (
-            <ShowMore
-              key={`show-more-${model.getInnerName()}`}
-              model={model}
-              {...props}
-            />
-          ) : null;
-        }
+      if (model instanceof RestModel) {
+        return index === 0 ? (
+          <ShowMore key={`show-more-${model.getInnerName()}`} model={model} {...props} />
+        ) : null;
+      }
 
-        if (render) {
-          return render(text, record, rowIndex);
-        }
+      if (render) {
+        return render(text, record, rowIndex);
+      }
 
-        return text;
-      },
-    })
-  );
+      return text;
+    },
+  }));
 
-export {
-  getTableTopButtonDisabledStatus,
-  getSelectedEntitiesIds,
-  getColumnsWithShowMore,
-};
+export { getTableTopButtonDisabledStatus, getSelectedEntitiesIds, getColumnsWithShowMore };

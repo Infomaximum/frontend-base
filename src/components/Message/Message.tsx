@@ -12,12 +12,7 @@ import {
   uniqueId,
 } from "lodash";
 import { generatePath } from "react-router";
-import {
-  entityStyle,
-  messageNoticeStyle,
-  messageStyle,
-  nameStyles,
-} from "./Message.styles";
+import { entityStyle, messageNoticeStyle, messageStyle, nameStyles } from "./Message.styles";
 import {
   CHANGES_SAVED,
   RENAMED_MASCULINE,
@@ -57,9 +52,7 @@ import { Localization, TLocalizationDescription } from "@im/localization";
 const duration = 4000;
 
 function showMessageGrid(props: IMessageProps, notification: ReactNode) {
-  const messageDuration = props.messageDuration
-    ? props.messageDuration * 1000
-    : duration;
+  const messageDuration = props.messageDuration ? props.messageDuration * 1000 : duration;
 
   const messageKey = uniqueId("message-key");
 
@@ -130,11 +123,7 @@ class MessageComponent {
    */
   public static getCustomMessage(notification: string | React.ReactNode) {
     return !isUndefined(notification) ? (
-      <div
-        css={messageStyle}
-        key="custom-message-content"
-        test-id={customMessageTestId}
-      >
+      <div css={messageStyle} key="custom-message-content" test-id={customMessageTestId}>
         {notification}
       </div>
     ) : null;
@@ -164,11 +153,7 @@ class MessageComponent {
     }
 
     return (
-      <div
-        css={messageStyle}
-        key="standard-message-content"
-        test-id={standardMessageTestId}
-      >
+      <div css={messageStyle} key="standard-message-content" test-id={standardMessageTestId}>
         {message}
       </div>
     );
@@ -204,23 +189,13 @@ class MessageComponent {
         : entity;
 
       return localization.getLanguage() === Localization.Language.ru ? (
-        <div
-          css={messageStyle}
-          key="standard-message-content"
-          test-id={createMessageTestId}
-        >
+        <div css={messageStyle} key="standard-message-content" test-id={createMessageTestId}>
           {`${prefix} ${entityFirstSymbolLower} `}
           <b>{this.getProfileLink(navigate, path, linkCaption)}</b>
         </div>
       ) : (
-        <div
-          css={messageStyle}
-          key="standard-message-content"
-          test-id={createMessageTestId}
-        >
-          {`${entity} `}{" "}
-          <b>{this.getProfileLink(navigate, path, linkCaption)}</b>{" "}
-          {` ${postfix}`}
+        <div css={messageStyle} key="standard-message-content" test-id={createMessageTestId}>
+          {`${entity} `} <b>{this.getProfileLink(navigate, path, linkCaption)}</b> {` ${postfix}`}
         </div>
       );
     }
@@ -251,15 +226,9 @@ class MessageComponent {
     return changes;
   }
 
-  public static getRenameMessage(
-    formValues: TDictionary,
-    props: IMessageMethodProps
-  ) {
+  public static getRenameMessage(formValues: TDictionary, props: IMessageMethodProps) {
     const { initialValues, localization, blockUri } = props;
-    const changes: string[] = this.getKeysOfChangedFormFieldList(
-      formValues,
-      initialValues
-    );
+    const changes: string[] = this.getKeysOfChangedFormFieldList(formValues, initialValues);
     if (props.messageOptions) {
       const { nameFieldKeyList, entityLoc, navigate } = props.messageOptions;
       const feminineGenus = props.messageOptions?.feminineGenus;
@@ -269,34 +238,17 @@ class MessageComponent {
       );
 
       // имя до изменений по InitialValues формы
-      const nameByInitialValues: string = this.getName(
-        nameFieldKeyList,
-        initialValues
-      );
+      const nameByInitialValues: string = this.getName(nameFieldKeyList, initialValues);
 
-      if (
-        difference(nameFieldKeyList, changes).length !== nameFieldKeyList.length
-      ) {
+      if (difference(nameFieldKeyList, changes).length !== nameFieldKeyList.length) {
         // имя после изменений по значениям формы
-        const nameByFormValues: string = this.getName(
-          nameFieldKeyList,
-          formValues
-        );
+        const nameByFormValues: string = this.getName(nameFieldKeyList, formValues);
 
         return (
-          <div
-            css={messageStyle}
-            key="rename-message-content"
-            test-id={renameMessageTestId}
-          >
-            {`${localization.getLocalized(entityLoc)}`}{" "}
-            <b>{nameByInitialValues}</b>
+          <div css={messageStyle} key="rename-message-content" test-id={renameMessageTestId}>
+            {`${localization.getLocalized(entityLoc)}`} <b>{nameByInitialValues}</b>
             {` ${locRenamed}: `}
-            {Message.getProfileLink(
-              navigate,
-              generatePath(blockUri),
-              nameByFormValues
-            )}
+            {Message.getProfileLink(navigate, generatePath(blockUri), nameByFormValues)}
           </div>
         );
       }
@@ -321,46 +273,28 @@ class MessageComponent {
   /**
    * Метод возвращающий сообщение об изменениях
    */
-  public static getChangeMessage(
-    formValues: TDictionary,
-    props: IMessageMethodProps
-  ) {
+  public static getChangeMessage(formValues: TDictionary, props: IMessageMethodProps) {
     const { initialValues, localization, blockUri } = props;
-    const changes: string[] = this.getKeysOfChangedFormFieldList(
-      formValues,
-      initialValues
-    );
+    const changes: string[] = this.getKeysOfChangedFormFieldList(formValues, initialValues);
 
     if (props.messageOptions) {
       const { nameFieldKeyList, entityLoc, navigate } = props.messageOptions;
 
       // имя до изменений по InitialValues формы
-      const nameByInitialValues: string = this.getName(
-        nameFieldKeyList,
-        initialValues
-      );
+      const nameByInitialValues: string = this.getName(nameFieldKeyList, initialValues);
 
       // имя после изменений по значениям формы
-      const nameByFormValues: string = this.getName(
-        nameFieldKeyList,
-        formValues
-      );
+      const nameByFormValues: string = this.getName(nameFieldKeyList, formValues);
 
       const getChangeMessageByName = (name: string) => (
-        <div
-          css={messageStyle}
-          key="change-message-content"
-          test-id={changeMessageTestId}
-        >
+        <div css={messageStyle} key="change-message-content" test-id={changeMessageTestId}>
           {`${localization.getLocalized(entityLoc)} `}
           {Message.getProfileLink(navigate, generatePath(blockUri), name)}
           {`: ${localization.getLocalized(CHANGES_SAVED)}`}
         </div>
       );
 
-      if (
-        difference(nameFieldKeyList, changes).length === nameFieldKeyList.length
-      ) {
+      if (difference(nameFieldKeyList, changes).length === nameFieldKeyList.length) {
         return getChangeMessageByName(nameByInitialValues);
       } else if (difference(changes, nameFieldKeyList).length !== 0) {
         return getChangeMessageByName(nameByFormValues);
@@ -388,27 +322,17 @@ class MessageComponent {
     } = props;
     if (entityLoc) {
       return (
-        <div
-          css={messageStyle}
-          key="remove-message"
-          test-id={removeMessageTestId}
-        >
+        <div css={messageStyle} key="remove-message" test-id={removeMessageTestId}>
           {`${localization.getLocalized(entityLoc)} `}
           <b css={nameStyles}>{name}</b>
-          {` ${localization.getLocalized(
-            feminineGenus ? DELETED_FEMININE : DELETED_MASCULINE
-          )}`}
+          {` ${localization.getLocalized(feminineGenus ? DELETED_FEMININE : DELETED_MASCULINE)}`}
         </div>
       );
     }
 
     if (messageLoc && !messageLocTemplateDataBold) {
       return (
-        <div
-          css={messageStyle}
-          key="remove-message-content"
-          test-id={removeMessageTestId}
-        >
+        <div css={messageStyle} key="remove-message-content" test-id={removeMessageTestId}>
           {localization.getLocalized(messageLoc)}
         </div>
       );
@@ -421,11 +345,7 @@ class MessageComponent {
       messageLocStartEnd?.messageEnd
     ) {
       return (
-        <div
-          css={messageStyle}
-          key="remove-message"
-          test-id={removeMessageTestId}
-        >
+        <div css={messageStyle} key="remove-message" test-id={removeMessageTestId}>
           {`${localization.getLocalized(messageLocStartEnd.messageStart)} `}
           <b css={nameStyles}>{` ${messageLocTemplateDataBold} `}</b>
           {` ${localization.getLocalized(messageLocStartEnd.messageEnd)}`}
@@ -434,11 +354,7 @@ class MessageComponent {
     }
 
     return (
-      <div
-        css={messageStyle}
-        key="remove-message-content"
-        test-id={removeMessageTestId}
-      >
+      <div css={messageStyle} key="remove-message-content" test-id={removeMessageTestId}>
         {localization.getLocalized(OBJECTS_DELETED)}
       </div>
     );
@@ -478,22 +394,11 @@ class MessageComponent {
         : entityPlace;
 
       return (
-        <div
-          css={messageStyle}
-          key="move-message-content"
-          test-id={moveMessageTestId}
-        >
+        <div css={messageStyle} key="move-message-content" test-id={moveMessageTestId}>
           {`${localization.getLocalized(entityLoc)} `}
-          <b>
-            {this.getProfileLink(
-              navigate,
-              entityInstancePath,
-              entityInstanceLinkCaption
-            )}
-          </b>
+          <b>{this.getProfileLink(navigate, entityInstancePath, entityInstanceLinkCaption)}</b>
           {` ${localization.getLocalized(MOVED_TO)} `}
-          {entityPlaceFirstSymbolLower}{" "}
-          <b css={nameStyles}>{entityInstancePlace}</b>
+          {entityPlaceFirstSymbolLower} <b css={nameStyles}>{entityInstancePlace}</b>
         </div>
       );
     }
@@ -510,19 +415,13 @@ class MessageComponent {
    */
   public static getMassAssignMessage(params: TGetMassAssignMessageParams) {
     const { localization, entityLoc, entities, targetObjectList } = params;
-    const filerTargetObjectList = filter(
-      targetObjectList,
-      (target) => target.count >= 1
-    );
+    const filerTargetObjectList = filter(targetObjectList, (target) => target.count >= 1);
     let targetObjectsLoc: string = "";
     forEach(filerTargetObjectList, (value, index) => {
       const lastIndex = filerTargetObjectList.length - 1;
-      const targetEssence = `${value.count} ${localization.getLocalized(
-        value.loc,
-        {
-          count: value.count,
-        }
-      )}`;
+      const targetEssence = `${value.count} ${localization.getLocalized(value.loc, {
+        count: value.count,
+      })}`;
 
       if (lastIndex > 0 && lastIndex !== index) {
         targetObjectsLoc += `${targetEssence}, `;
@@ -536,11 +435,7 @@ class MessageComponent {
       localization.getLocalized(MASS_ACTION).substr(1);
 
     return localization.getLanguage() === Localization.Language.ru ? (
-      <div
-        css={messageStyle}
-        key="mass-assign-message-content"
-        test-id={massAssignMessageTestId}
-      >
+      <div css={messageStyle} key="mass-assign-message-content" test-id={massAssignMessageTestId}>
         {`${localization.getLocalized(MASS_ACTION)} `}
         <b css={entityStyle}>
           {localization.getLocalized(entityLoc)} – {entities}
@@ -548,11 +443,7 @@ class MessageComponent {
         {` ${localization.getLocalized(APPLIED_TO)} ${targetObjectsLoc}`}
       </div>
     ) : (
-      <div
-        css={messageStyle}
-        key="mass-assign-message-content"
-        test-id={massAssignMessageTestId}
-      >
+      <div css={messageStyle} key="mass-assign-message-content" test-id={massAssignMessageTestId}>
         <b css={entityStyle}>
           {localization.getLocalized(entityLoc)} – {entities}
         </b>

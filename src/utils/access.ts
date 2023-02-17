@@ -14,12 +14,8 @@ export function isShowElement(
 ) {
   const checkAccess = (accessRules: TAccessRules | undefined) =>
     every(accessRules, (accessTypes: EOperationType[], accessKey) =>
-      every(accessTypes, (accessType) =>
-        isFeatureEnabled(accessKey, { accessType })
-      )
+      every(accessTypes, (accessType) => isFeatureEnabled(accessKey, { accessType }))
     );
 
-  return isArray(accessRules)
-    ? some(accessRules, checkAccess)
-    : checkAccess(accessRules);
+  return isArray(accessRules) ? some(accessRules, checkAccess) : checkAccess(accessRules);
 }

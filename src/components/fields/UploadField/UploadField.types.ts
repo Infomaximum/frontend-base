@@ -8,11 +8,8 @@ import type { UploadFormField } from "./UploadField";
 
 export type TUploadFieldValue = UploadChangeParam["file"][];
 
-export interface IUploadComponentProps
-  extends IUploadComponentOwnProps,
-    FieldRenderProps<any> {}
-export interface IUploadComponentOwnProps
-  extends Omit<UploadProps, "onChange"> {
+export interface IUploadComponentProps extends IUploadComponentOwnProps, FieldRenderProps<any> {}
+export interface IUploadComponentOwnProps extends Omit<UploadProps, "onChange"> {
   name: string;
   onChange?: (value?: TUploadFieldValue) => void;
   value?: UploadChangeParam["file"];

@@ -1,24 +1,15 @@
 import { PureComponent } from "react";
 import { Popover } from "antd";
-import type {
-  IFieldTooltipProps,
-  IFieldTooltipState,
-} from "./FieldTooltip.types";
+import type { IFieldTooltipProps, IFieldTooltipState } from "./FieldTooltip.types";
 import {
   captionStyle,
   questionIconShowPopoverStyle,
   questionIconStyle,
 } from "./FieldTooltip.styles";
-import {
-  fieldTooltipPromptTestId,
-  fieldTooltipPromptButtonTestId,
-} from "../../utils/TestIds";
+import { fieldTooltipPromptTestId, fieldTooltipPromptButtonTestId } from "../../utils/TestIds";
 import { QuestionCircleOutlined } from "../Icons/Icons";
 
-class FieldTooltipComponent extends PureComponent<
-  IFieldTooltipProps,
-  IFieldTooltipState
-> {
+class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTooltipState> {
   private static readonly align = {
     offset: [0, -22],
   };
@@ -44,11 +35,7 @@ class FieldTooltipComponent extends PureComponent<
   private get prompt() {
     const { promptText, promptTestId } = this.props;
 
-    return (
-      <div test-id={`${fieldTooltipPromptTestId}_${promptTestId}`}>
-        {promptText}
-      </div>
-    );
+    return <div test-id={`${fieldTooltipPromptTestId}_${promptTestId}`}>{promptText}</div>;
   }
 
   public override render() {
@@ -85,11 +72,7 @@ class FieldTooltipComponent extends PureComponent<
             <QuestionCircleOutlined
               style={iconStyle}
               key="question-circle-popover-icon"
-              css={
-                this.state.showPopover
-                  ? questionIconShowPopoverStyle
-                  : questionIconStyle
-              }
+              css={this.state.showPopover ? questionIconShowPopoverStyle : questionIconStyle}
               role="button"
               test-id={`${fieldTooltipPromptButtonTestId}_${promptTestId}`}
             />

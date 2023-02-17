@@ -24,8 +24,7 @@ export interface ITimeInputsRangeProps
   isExcludeLowValues?: boolean;
 }
 
-export interface ITimeInputsRangeOwnProps
-  extends Omit<InputProps, TOmitTimeInputsRangeProps> {}
+export interface ITimeInputsRangeOwnProps extends Omit<InputProps, TOmitTimeInputsRangeProps> {}
 
 export interface ITimeInputsRangeFieldProps
   extends Omit<IFieldProps<TTimeInputsRangeValue>, "component">,

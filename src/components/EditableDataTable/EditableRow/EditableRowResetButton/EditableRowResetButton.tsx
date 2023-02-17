@@ -5,9 +5,7 @@ import { useFormButtonState } from "../../../forms/SubmitFormButton/hooks/useFor
 import { assertSimple } from "@im/asserts";
 import { FormContext } from "../../../../decorators/contexts/FormContext";
 
-const EditableRowResetButtonComponent: React.FC<
-  IEditableRowResetButtonProps
-> = ({
+const EditableRowResetButtonComponent: React.FC<IEditableRowResetButtonProps> = ({
   onCancel,
   formProvider: formProviderProp,
   formName: formNameProp,

@@ -63,10 +63,9 @@ export class RelatedRequest extends BaseRequest {
             response = combinedResponse?.data ?? combinedResponse;
           }
         } catch (e) {
-          const error: NCore.TError | undefined =
-            await this.errorHandlerInstance.prepareError(e, {
-              traceId,
-            });
+          const error: NCore.TError | undefined = await this.errorHandlerInstance.prepareError(e, {
+            traceId,
+          });
 
           throw error || e;
         }

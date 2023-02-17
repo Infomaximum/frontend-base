@@ -5,12 +5,7 @@ import type { NCore } from "@im/core";
 import { useFeature } from "../../../decorators/hooks/useFeature";
 import { withFormSubmitPromise } from "../../../decorators";
 import type { IFormWrapperProps, TWrappedError } from "./FormWrapper.types";
-import {
-  ComponentPropsWithoutRef,
-  FC,
-  PropsWithChildren,
-  useMemo,
-} from "react";
+import { ComponentPropsWithoutRef, FC, PropsWithChildren, useMemo } from "react";
 import { forEach } from "lodash";
 import { FormComponent } from "./Form";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
@@ -78,10 +73,7 @@ const FormWrapper: FC<IFormWrapperProps> = ({
      * @param _
      * @param state
      */
-    const clearSubmitError: Mutator<unknown, typeof rest.initialValues> = (
-      _,
-      state
-    ) => {
+    const clearSubmitError: Mutator<unknown, typeof rest.initialValues> = (_, state) => {
       state.formState.submitError = null;
     };
 
@@ -103,10 +95,7 @@ const FormWrapper: FC<IFormWrapperProps> = ({
      * @param _
      * @param state
      */
-    const clearSubmitErrors: Mutator<unknown, typeof rest.initialValues> = (
-      _,
-      state
-    ) => {
+    const clearSubmitErrors: Mutator<unknown, typeof rest.initialValues> = (_, state) => {
       state.formState.submitErrors = undefined;
     };
 
@@ -175,13 +164,8 @@ const FormWrapper: FC<IFormWrapperProps> = ({
 
 export const Form = withFormSubmitPromise(FormWrapper) as <
   FormProps extends IFormWrapperProps = IFormWrapperProps,
-  ComponentProps = ComponentPropsWithoutRef<
-    NonNullable<FormProps["component"]>
-  >,
-  ClearComponentProps extends IBaseFormProps = Exclude<
-    ComponentProps,
-    React.HTMLAttributes<any>
-  >,
+  ComponentProps = ComponentPropsWithoutRef<NonNullable<FormProps["component"]>>,
+  ClearComponentProps extends IBaseFormProps = Exclude<ComponentProps, React.HTMLAttributes<any>>,
   TrueConnectFormProps = Omit<FormProps, "component" | keyof IBaseFormProps>
 >(
   props: PropsWithChildren<

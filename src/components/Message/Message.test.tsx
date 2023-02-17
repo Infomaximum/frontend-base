@@ -2,10 +2,7 @@ import React, { useCallback } from "react";
 import { shallow } from "enzyme";
 import { Message } from "./Message";
 import { Localization } from "@im/localization";
-import {
-  SWITCHED_ENABLED,
-  SWITCHED_OFF,
-} from "../../utils/Localization/Localization";
+import { SWITCHED_ENABLED, SWITCHED_OFF } from "../../utils/Localization/Localization";
 import type { ReactElement } from "react";
 import type {
   IMessageProps,
@@ -106,9 +103,7 @@ describe("Тесты методов класса 'Message'", () => {
       ) as ReactElement
     );
     component.find("a").simulate("click", { preventDefault });
-    expect(component.find("div").text()).toEqual(
-      `Создана роль доступа ${linkCaption}`
-    );
+    expect(component.find("div").text()).toEqual(`Создана роль доступа ${linkCaption}`);
     expect(navigate).toHaveBeenLastCalledWith(path, {
       state: { displayName: linkCaption },
     });
@@ -171,10 +166,7 @@ describe("Тесты методов класса 'Message'", () => {
     });
 
     it("Если выбран 1 сотрудник и 0 отлелов", () => {
-      params.targetObjectList = [
-        targetObjectEmployee,
-        nullTargetObjectDepartment,
-      ];
+      params.targetObjectList = [targetObjectEmployee, nullTargetObjectDepartment];
 
       expect(component(params).find("div").text()).toEqual(
         "Массовое действие Роль доступа – Сотрудник применено к 1 сотруднику"
@@ -231,12 +223,7 @@ describe("Тесты методов класса 'Message'", () => {
     let linkCaption: string;
     const getComponent = () =>
       shallow(
-        Message.getStandardMessage(
-          localizedPrefix,
-          navigate,
-          path,
-          linkCaption
-        ) as ReactElement
+        Message.getStandardMessage(localizedPrefix, navigate, path, linkCaption) as ReactElement
       );
 
     it("Если метод возвращает обычное сообщение", () => {
@@ -249,9 +236,7 @@ describe("Тесты методов класса 'Message'", () => {
       linkCaption = "модель";
 
       getComponent().find("a").simulate("click", { preventDefault });
-      expect(getComponent().find("div").text()).toEqual(
-        `${localizedPrefix}: ${linkCaption}`
-      );
+      expect(getComponent().find("div").text()).toEqual(`${localizedPrefix}: ${linkCaption}`);
       expect(navigate).toHaveBeenLastCalledWith(path, {
         state: { displayName: linkCaption },
       });
@@ -259,8 +244,7 @@ describe("Тесты методов класса 'Message'", () => {
   });
 
   describe("Тесты метода 'getRemoveMessage'", () => {
-    const component = (props: TRemoveMessageProps) =>
-      shallow(Message.getRemoveMessage(props));
+    const component = (props: TRemoveMessageProps) => shallow(Message.getRemoveMessage(props));
     const props = {
       feminineGenus: true,
       localization,
@@ -268,9 +252,7 @@ describe("Тесты методов класса 'Message'", () => {
 
     it("сообщение об удалении объекта сущности", () => {
       const nextProps = { ...props, entityLoc: ACCESS_ROLE, name: "сотрудник" };
-      expect(component(nextProps).find("div").text()).toEqual(
-        "Роль доступа сотрудник удалена"
-      );
+      expect(component(nextProps).find("div").text()).toEqual("Роль доступа сотрудник удалена");
     });
 
     it("сообщение об удалении объектов сущности", () => {
@@ -310,9 +292,7 @@ describe("Тесты методов класса 'Message'", () => {
       const component = !!message && shallow(message);
 
       expect(component && component.find("div").text()).toEqual(
-        `Сотрудник ${initialValues[EFieldName.Name]} переименован: ${
-          formValues[EFieldName.Name]
-        }`
+        `Сотрудник ${initialValues[EFieldName.Name]} переименован: ${formValues[EFieldName.Name]}`
       );
 
       component && component.find("a").simulate("click", { preventDefault });
@@ -364,8 +344,7 @@ describe("Тесты методов класса 'Message'", () => {
     const component = shallow(<TestComponent notification="Message test" />);
     const simulateCLick = () => component.find("button").simulate("click");
     const setPropsType = (type: string) => component.setProps({ type });
-    const isIconElement = (selector: string) =>
-      !!document.querySelector(selector);
+    const isIconElement = (selector: string) => !!document.querySelector(selector);
 
     // Тест работает только если закоментировать другие тесты
     xit("Тест на продолжительность сообщения", (done) => {

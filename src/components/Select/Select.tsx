@@ -1,19 +1,8 @@
 // eslint-disable-next-line im/ban-import-entity
 import { Select as AntSelect, Spin } from "antd";
 import type { SelectValue } from "antd/lib/select";
-import {
-  CheckOutlined,
-  CloseCircleOutlined,
-  CloseOutlined,
-} from "../Icons/Icons";
-import React, {
-  MouseEvent,
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-  useEffect,
-} from "react";
+import { CheckOutlined, CloseCircleOutlined, CloseOutlined } from "../Icons/Icons";
+import React, { MouseEvent, useState, useCallback, useMemo, useRef, useEffect } from "react";
 import {
   closeIconStyle,
   arrowSuffixIconStyle,
@@ -41,15 +30,7 @@ import {
   useRemoveFocusedClass,
   useSelectDropdownPosition,
 } from "./Select.utils";
-import {
-  filter,
-  first,
-  isArray,
-  isEmpty,
-  isFunction,
-  isUndefined,
-  noop,
-} from "lodash";
+import { filter, first, isArray, isEmpty, isFunction, isUndefined, noop } from "lodash";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import {
   ENTER_OR_SELECT_FROM_THE_LIST,
@@ -57,10 +38,7 @@ import {
   SELECT_FROM_LIST,
 } from "../../utils/Localization/Localization";
 import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
-import {
-  suffixLoaderDelay,
-  DropdownAnimationInterval,
-} from "../../utils/const";
+import { suffixLoaderDelay, DropdownAnimationInterval } from "../../utils/const";
 import type { BaseSelectRef } from "rc-select";
 import { useTheme } from "../../decorators/hooks/useTheme";
 
@@ -140,9 +118,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     dropdownPlacement
   );
 
-  const computeDropdownPosition = isFunction(dropdownRender)
-    ? noop
-    : dropdownPosition.compute;
+  const computeDropdownPosition = isFunction(dropdownRender) ? noop : dropdownPosition.compute;
 
   useBlurOnResize(selectRef.current);
   useGlobalScrollBehavior(isOpen);
@@ -188,13 +164,9 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   const handleFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement>) => {
       const activeOption =
-        selectTextOnFocus &&
-        isValidValue(value) &&
-        findActiveOption(value, options);
+        selectTextOnFocus && isValidValue(value) && findActiveOption(value, options);
 
-      const searchText = activeOption
-        ? prepareOptionForSearch(activeOption)
-        : "";
+      const searchText = activeOption ? prepareOptionForSearch(activeOption) : "";
 
       if (searchText) {
         setTimeout(() => {
@@ -207,14 +179,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       setSearchValueState(searchText);
       onSearch?.(searchText);
     },
-    [
-      value,
-      options,
-      selectTextOnFocus,
-      prepareOptionForSearch,
-      onFocus,
-      onSearch,
-    ]
+    [value, options, selectTextOnFocus, prepareOptionForSearch, onFocus, onSearch]
   );
 
   const handleBlur = useCallback(
@@ -251,12 +216,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     (props: CustomTagProps) => {
       const { label, closable, onClose } = props;
 
-      const closeIcon = (
-        <CloseOutlined
-          onMouseDown={handleMouseDown}
-          css={closeIconStyle(theme)}
-        />
-      );
+      const closeIcon = <CloseOutlined onMouseDown={handleMouseDown} css={closeIconStyle(theme)} />;
 
       return (
         <Tag
@@ -300,8 +260,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       : localization.getLocalized(SELECT_FROM_LIST);
   };
 
-  const isShowIconClear =
-    allowClear && ((isOpen && !!searchValue) || !isEmpty(value));
+  const isShowIconClear = allowClear && ((isOpen && !!searchValue) || !isEmpty(value));
 
   const style = useMemo(() => {
     // `arrow` всегда занимает место, а `clear` только когда не отображается поверх `arrow` или когда нет `arrow`
@@ -310,9 +269,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       isShowIconClear && (!isClearIconOverSuffix || !showArrow),
     ]).length;
 
-    const selectStyles: ArrayInterpolation<TTheme> = [
-      displaySelectStyle(iconSlotCount)(theme),
-    ];
+    const selectStyles: ArrayInterpolation<TTheme> = [displaySelectStyle(iconSlotCount)(theme)];
     if (disabled) {
       selectStyles.push(disableSelectStyle(theme));
     }
@@ -322,14 +279,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     }
 
     return selectStyles;
-  }, [
-    disabled,
-    isClearIconOverSuffix,
-    isShowIconClear,
-    mode,
-    showArrow,
-    theme,
-  ]);
+  }, [disabled, isClearIconOverSuffix, isShowIconClear, mode, showArrow, theme]);
 
   const getOptionLabelProp = () => {
     if (optionLabelProp) {
@@ -338,10 +288,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 
     // Исправление warning [PT-12871]
     // По ключу "NULL" в опции ничего нет, поэтому однозначно используется label из value
-    if (
-      process.env.NODE_ENV === "development" &&
-      isLabeled(isArray(value) ? value[0] : value)
-    ) {
+    if (process.env.NODE_ENV === "development" && isLabeled(isArray(value) ? value[0] : value)) {
       return "NULL";
     }
 

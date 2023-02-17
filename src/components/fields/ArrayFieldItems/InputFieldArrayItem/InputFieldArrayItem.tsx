@@ -1,10 +1,7 @@
 import type { InputFieldArrayItemProps } from "./InputFieldArrayItem.types";
 import React, { useCallback } from "react";
 import { isFunction } from "lodash";
-import {
-  wrapperInputFieldStyle,
-  removeButtonStyle,
-} from "./InputFieldArrayItem.styles";
+import { wrapperInputFieldStyle, removeButtonStyle } from "./InputFieldArrayItem.styles";
 import { InputFormField } from "../../InputField";
 import { Button } from "../../../Button/Button";
 import { removeInputFieldButtonTestId } from "../../../../utils/TestIds";

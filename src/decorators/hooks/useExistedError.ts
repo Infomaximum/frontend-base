@@ -6,10 +6,7 @@ import { useRef } from "react";
  * защищает от того, что вложенный в обертку контейнер может очистить стор с ошибкой,
  * и запросы будут повторятся при монтировании контейнера
  */
-export const useExistedError = (
-  error: NCore.TError | undefined,
-  code?: string
-) => {
+export const useExistedError = (error: NCore.TError | undefined, code?: string) => {
   const isError = useRef(false);
 
   if (!isError.current && error && (!code || error?.code === code)) {

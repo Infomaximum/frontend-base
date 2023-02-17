@@ -38,14 +38,11 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
       );
     }
 
-    const { submitting, pristine, hasValidationErrors } =
-      useFormButtonState(formProvider);
+    const { submitting, pristine, hasValidationErrors } = useFormButtonState(formProvider);
 
     const isDisabled =
       disabled ??
-      (submitting ||
-        (disableOnPristine && pristine) ||
-        (disableOnInvalid && hasValidationErrors));
+      (submitting || (disableOnPristine && pristine) || (disableOnInvalid && hasValidationErrors));
 
     const handleClick = useCallback(async () => {
       setIsSubmitting(true);

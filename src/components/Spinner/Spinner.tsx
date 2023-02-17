@@ -5,25 +5,12 @@ import type { ISpinnerProps } from "./Spinner.types";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { loaderDelay } from "../../utils/const";
 
-const SpinnerComponent: React.FC<ISpinnerProps> = ({
-  labelLoc,
-  size,
-  wrapperStyle,
-  ...rest
-}) => {
+const SpinnerComponent: React.FC<ISpinnerProps> = ({ labelLoc, size, wrapperStyle, ...rest }) => {
   const localization = useLocalization();
 
   return (
-    <div
-      key="wrapper-spinner"
-      test-id={wrapperSpinnerTestId}
-      css={wrapperStyle}
-    >
-      <Spin
-        size={size}
-        tip={labelLoc && localization.getLocalized(labelLoc)}
-        {...rest}
-      />
+    <div key="wrapper-spinner" test-id={wrapperSpinnerTestId} css={wrapperStyle}>
+      <Spin size={size} tip={labelLoc && localization.getLocalized(labelLoc)} {...rest} />
     </div>
   );
 };

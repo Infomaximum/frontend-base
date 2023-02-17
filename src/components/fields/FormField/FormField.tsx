@@ -49,10 +49,7 @@ function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
 
   const fieldTestId = formName && fieldName && `${formName}_${fieldName}`;
 
-  const { hasReadAccess } = getAccessParameters(
-    isFeatureEnabled,
-    restProps.accessKeys
-  );
+  const { hasReadAccess } = getAccessParameters(isFeatureEnabled, restProps.accessKeys);
 
   useEffect(() => {
     //очищаем ошибку как только вносим изменение в форму, чтобы ошибка не висела

@@ -16,16 +16,11 @@ export declare interface IPasswordValidators {
     value: string | undefined,
     complexPassword: IComplexPasswordModel | null
   ) => boolean | "";
-  getMessage: (
-    localization: Localization,
-    complexPassword: IComplexPasswordModel | null
-  ) => string;
+  getMessage: (localization: Localization, complexPassword: IComplexPasswordModel | null) => string;
   "test-id"?: string;
 }
 
-export declare interface IPasswordFieldsProps
-  extends IWithLocProps,
-    IWithFormProviderProps {
+export declare interface IPasswordFieldsProps extends IWithLocProps, IWithFormProviderProps {
   passwordFieldName: string;
   passwordFieldLabel?: string;
   passwordFieldPlaceholder?: string;

@@ -9,8 +9,6 @@ export type TButtonSize = ButtonProps["size"];
 
 type TButtonProps = Omit<ButtonProps, "type">;
 
-export interface IButtonProps
-  extends TButtonProps,
-    React.RefAttributes<HTMLElement> {
+export interface IButtonProps extends TButtonProps, React.RefAttributes<HTMLElement> {
   type?: TButtonType;
 }

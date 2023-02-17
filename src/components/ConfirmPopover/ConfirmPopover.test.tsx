@@ -12,9 +12,7 @@ describe("Тест компонента ConfirmPopover", () => {
   const showPopoverButtonTestId = "show-popover";
   const bodyText = "body text";
 
-  const getMountedComponent = (
-    extraProps: Partial<IConfirmPopoverProps> = {}
-  ) => {
+  const getMountedComponent = (extraProps: Partial<IConfirmPopoverProps> = {}) => {
     const props = {
       text: bodyText,
       loading: false,
@@ -56,9 +54,7 @@ describe("Тест компонента ConfirmPopover", () => {
 
     expect(getOkButton(component).text()).toBe(okText);
     expect(getCancelButton(component).text()).toBe(cancelText);
-    expect(component.find("Popover").find("Row").find("Col").at(1).text()).toBe(
-      bodyText
-    );
+    expect(component.find("Popover").find("Row").find("Col").at(1).text()).toBe(bodyText);
   });
 
   it("Видимость компонента управляется пропом visible", () => {

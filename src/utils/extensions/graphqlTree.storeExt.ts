@@ -29,10 +29,7 @@ const defaultItemWrapperField = "element";
  * Функция работает только если родительские элементы приходят в списке раньше своих дочерних.
  * Иначе потребуются более затратные вычисления.
  */
-export function buildTreeFromList(
-  sourceList: TModelStruct[],
-  params: TTreeBuilderParams
-) {
+export function buildTreeFromList(sourceList: TModelStruct[], params: TTreeBuilderParams) {
   const {
     parentsIdsField,
     groupTypename,
@@ -107,10 +104,7 @@ export function buildTreeFromList(
 }
 
 function getRestItemStruct(nextCount: number) {
-  assertSimple(
-    nextCount !== 0,
-    `Попытка принять элемент с ${nextCountKey} = 0 за "Показать еще"`
-  );
+  assertSimple(nextCount !== 0, `Попытка принять элемент с ${nextCountKey} = 0 за "Показать еще"`);
 
   return {
     next_count: nextCount,

@@ -6,10 +6,7 @@ import type { IFormWrapperProps } from "../Form/FormWrapper.types";
 
 export interface IModalFormProps
   extends Omit<ModalProps, "onOk" | "onCancel">,
-    Pick<
-      IFormWrapperProps,
-      "form" | "initialValues" | "notification" | "setFormData"
-    > {
+    Pick<IFormWrapperProps, "form" | "initialValues" | "notification" | "setFormData"> {
   okText: string;
   cancelText: string;
   disableSubmitOnPristine?: boolean;

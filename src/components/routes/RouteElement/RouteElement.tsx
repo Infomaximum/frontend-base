@@ -8,10 +8,7 @@ const RouteElementComponent: React.FC<IRouteElementProps> = ({ route }) => {
   const navigate = useNavigate();
   const match = useMatch({ path: route.path || "", end: !!route.exact });
 
-  assertSimple(
-    !!route.component,
-    `Для роута "${route.key}" не задан component`
-  );
+  assertSimple(!!route.component, `Для роута "${route.key}" не задан component`);
 
   const RouteComponent = route.component;
 
@@ -19,14 +16,7 @@ const RouteElementComponent: React.FC<IRouteElementProps> = ({ route }) => {
     return null;
   }
 
-  return (
-    <RouteComponent
-      route={route}
-      location={location}
-      navigate={navigate}
-      match={match}
-    />
-  );
+  return <RouteComponent route={route} location={location} navigate={navigate} match={match} />;
 };
 
 export const RouteElement = memo(RouteElementComponent);

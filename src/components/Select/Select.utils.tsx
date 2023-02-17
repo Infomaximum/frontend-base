@@ -1,23 +1,10 @@
 import React, { ReactElement, ReactNode, RefObject, useEffect } from "react";
 import { Select } from "./Select";
 import { Tooltip } from "../Tooltip/Tooltip";
-import {
-  find,
-  has,
-  isArray,
-  isEmpty,
-  isNil,
-  isNumber,
-  isString,
-  map,
-} from "lodash";
+import { find, has, isArray, isEmpty, isNil, isNumber, isString, map } from "lodash";
 import { textWrapperStyle } from "./Select.styles";
 import { useDropdownPosition } from "../Dropdown/Dropdown.utils";
-import type {
-  DefaultOptionType,
-  LabeledValue,
-  SelectValue,
-} from "antd/lib/select";
+import type { DefaultOptionType, LabeledValue, SelectValue } from "antd/lib/select";
 import type { IDropdownParams, TXPlacement } from "../Dropdown/Dropdown.types";
 import { globalScrollBehavior } from "../../utils/ScrollBehavior/ScrollBehavior";
 import type { BaseSelectRef } from "rc-select";
@@ -79,14 +66,8 @@ export const useSelectDropdownPosition = (
 ) => {
   const dropdownPadding = 4;
   const dropdownConfig = { ...options, padding: dropdownPadding } as const;
-  const { height, ...rest } = useDropdownPosition(
-    fieldWrapperRef,
-    dropdownConfig,
-    xPlacement
-  );
-  const listHeight = isNumber(height)
-    ? height - dropdownPadding * 2
-    : undefined;
+  const { height, ...rest } = useDropdownPosition(fieldWrapperRef, dropdownConfig, xPlacement);
+  const listHeight = isNumber(height) ? height - dropdownPadding * 2 : undefined;
 
   return { listHeight, ...rest } as const;
 };
@@ -120,9 +101,7 @@ export const textContent = (node: ReactNode): string => {
 
   const children = (node as ReactElement).props?.children;
 
-  return isArray(children)
-    ? children.map(textContent).join("")
-    : textContent(children);
+  return isArray(children) ? children.map(textContent).join("") : textContent(children);
 };
 
 const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
@@ -147,9 +126,7 @@ const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
   return { value, label, key: element.key, ...rest } as DefaultOptionType;
 };
 
-export const mapChildrenToOptions = (
-  children: React.ReactNode
-): DefaultOptionType[] => {
+export const mapChildrenToOptions = (children: React.ReactNode): DefaultOptionType[] => {
   return (
     React.Children.map(children, (child) => {
       if (!React.isValidElement(child)) {
@@ -159,9 +136,7 @@ export const mapChildrenToOptions = (
       if (child.type === Select.OptGroup) {
         return {
           label: child?.props.label as string,
-          options: child?.props?.children.map(
-            buildOption
-          ) as DefaultOptionType[],
+          options: child?.props?.children.map(buildOption) as DefaultOptionType[],
         };
       }
 
@@ -203,25 +178,18 @@ export const optionToValue = (option?: DefaultOptionType): SelectValue => {
 
 export const useGlobalScrollBehavior = (isOpen: boolean) => {
   useEffect(() => {
-    isOpen
-      ? globalScrollBehavior.hideScroll()
-      : globalScrollBehavior.showScroll();
+    isOpen ? globalScrollBehavior.hideScroll() : globalScrollBehavior.showScroll();
   }, [isOpen]);
 };
 
 // todo: Удалить после перехода на antd v5, если исправится [BI-9255]
-export const useRemoveFocusedClass = (
-  isOpen: boolean,
-  element: HTMLElement | null
-) => {
+export const useRemoveFocusedClass = (isOpen: boolean, element: HTMLElement | null) => {
   const antSelectFocusedClass = "ant-select-focused";
 
   useEffect(() => {
     if (element && !isOpen) {
       if (!element.contains(document.activeElement)) {
-        element
-          .querySelector(`.${antSelectFocusedClass}`)
-          ?.classList.remove(antSelectFocusedClass);
+        element.querySelector(`.${antSelectFocusedClass}`)?.classList.remove(antSelectFocusedClass);
       }
     }
   }, [element, isOpen]);

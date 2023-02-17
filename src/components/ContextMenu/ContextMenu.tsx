@@ -66,12 +66,9 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   const { isFeatureEnabled } = useFeature();
   const theme = useTheme();
 
-  const handleClickContextMenu = useCallback(
-    (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      e.stopPropagation();
-    },
-    []
-  );
+  const handleClickContextMenu = useCallback((e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
+  }, []);
 
   const theeDotsBtn = useMemo(() => {
     const threeDotsButtonStyles = [threeDotsButtonStyle(theme), buttonStyle];
@@ -119,17 +116,12 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
       forEach(items, (item) => {
         if (isDivider(item)) {
           filteredItems.push(item);
-        } else if (
-          !item.accessRules ||
-          isShowElement(item.accessRules, isFeatureEnabled)
-        ) {
+        } else if (!item.accessRules || isShowElement(item.accessRules, isFeatureEnabled)) {
           filteredItems.push(
             (item as IContextSubMenuParam).children
               ? {
                   ...item,
-                  children: getFilteredItems(
-                    (item as IContextSubMenuParam).children
-                  ),
+                  children: getFilteredItems((item as IContextSubMenuParam).children),
                 }
               : item
           );
@@ -194,10 +186,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
     [onItemClick, sortBy, theme]
   );
 
-  const menuItems = useMemo(
-    () => getMenuItems(filteredItems),
-    [filteredItems, getMenuItems]
-  );
+  const menuItems = useMemo(() => getMenuItems(filteredItems), [filteredItems, getMenuItems]);
 
   const renderContextMenuItems = useCallback(() => {
     return (

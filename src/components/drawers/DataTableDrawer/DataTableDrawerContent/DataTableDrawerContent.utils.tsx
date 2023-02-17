@@ -4,10 +4,7 @@ import { handleErrorInternal } from "../../../../managers/Errors/Errors";
 import { Alert } from "../../../Alert/Alert";
 import { errorAlertStyle } from "./DataTableDrawerContent.styles";
 
-export function renderErrorAlert(
-  error: NCore.TError,
-  localization: Localization
-) {
+export function renderErrorAlert(error: NCore.TError, localization: Localization) {
   const preparedError = handleErrorInternal(error, localization);
 
   if (preparedError) {

@@ -8,12 +8,7 @@ const TableHeaderCellComponent: React.FC<ITableHeaderCellProps> = forwardRef(
     const theme = useTheme();
 
     return (
-      <th
-        {...restProps}
-        css={tableHeaderCellStyle(theme)}
-        ref={ref}
-        title={undefined}
-      >
+      <th {...restProps} css={tableHeaderCellStyle(theme)} ref={ref} title={undefined}>
         {children}
       </th>
     );

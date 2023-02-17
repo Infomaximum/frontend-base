@@ -83,8 +83,7 @@ export const tableShowMoreButtonTestId = "table_show-more-button";
 export const pageHeaderBackButtonTestId = "page-header_back-btn";
 
 // Authorization
-export const authorizationServiceModePanelTestId =
-  "authorization-service-mode-panel";
+export const authorizationServiceModePanelTestId = "authorization-service-mode-panel";
 
 // UnAuthorizedLayout
 export const unAuthorizedLayoutBackNavLinkTestId = "link-back";
@@ -142,15 +141,12 @@ export const fieldTooltipPromptButtonTestId = "prompt-button";
 export const changePasswordButtonTestId = "change-password-button";
 
 //DatePickerFieldArray
-export const removeDatePickerFieldButtonTestId =
-  "remove-date_picker-field-button";
-export const removeDateTimePickerFieldButtonTestId =
-  "remove-date_time_picker-field-button";
+export const removeDatePickerFieldButtonTestId = "remove-date_picker-field-button";
+export const removeDateTimePickerFieldButtonTestId = "remove-date_time_picker-field-button";
 
 //InputFieldArray
 export const removeInputFieldButtonTestId = "remove-input-field-button";
-export const removeInputNumberFieldButtonTestId =
-  "remove-input_number-field-button";
+export const removeInputNumberFieldButtonTestId = "remove-input_number-field-button";
 
 // AutoCompleteField/Select
 export const autocompleteSelectTestId = "autocomplete_select";

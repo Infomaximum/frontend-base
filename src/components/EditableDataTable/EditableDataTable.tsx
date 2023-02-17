@@ -5,10 +5,7 @@ import type {
   IEditableDataTableState,
   IEditableRow,
 } from "./EditableDataTable.types";
-import type {
-  IDataTableProps,
-  THeaderButtonObject,
-} from "../DataTable/DataTable.types";
+import type { IDataTableProps, THeaderButtonObject } from "../DataTable/DataTable.types";
 import type { NCore } from "@im/core";
 import { createSelector } from "reselect";
 import { some, find, without, isFunction, merge, compact } from "lodash";
@@ -18,10 +15,7 @@ import {
   sortingRowStyle,
 } from "./EditableDataTable.styles";
 import { getAccessParameters } from "@im/utils";
-import {
-  controlCellRemoveTestId,
-  editableDataTableAddButtonTestId,
-} from "../../utils/TestIds";
+import { controlCellRemoveTestId, editableDataTableAddButtonTestId } from "../../utils/TestIds";
 import { EditableRow } from "./EditableRow/EditableRow";
 import { EditableRowButton } from "./EditableRow/EditableRowButton/EditableRowButton";
 import { ControlPanel } from "./EditableRow/ControlPanel/ControlPanel";
@@ -39,10 +33,7 @@ import { DataTable } from "../DataTable/DataTable";
 import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
 import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import { withModalError } from "../../decorators/hocs/withModalError/withModalError";
-import type {
-  IFormData,
-  IFormProvider,
-} from "../../decorators/contexts/FormContext";
+import type { IFormData, IFormProvider } from "../../decorators/contexts/FormContext";
 
 const EditableDataTableKeys = {
   // Ключ для кастомной колонки с кнопками (добавить в columns)
@@ -59,9 +50,7 @@ const EditableDataTableKeys = {
  * Редактируемая таблица.
  */
 
-class EditableDataTableComponent<
-  T extends IEditableRow = IEditableRow
-> extends React.PureComponent<
+class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends React.PureComponent<
   IEditableDataTableProps<T>,
   IEditableDataTableState<T>
 > {
@@ -89,8 +78,7 @@ class EditableDataTableComponent<
     },
   };
 
-  private focusedFieldNameRef: MutableRefObject<string | null> =
-    React.createRef();
+  private focusedFieldNameRef: MutableRefObject<string | null> = React.createRef();
   private readonly contextValue = {
     focusedFieldNameRef: this.focusedFieldNameRef,
   };
@@ -117,13 +105,7 @@ class EditableDataTableComponent<
     prevProps: IEditableDataTableProps<T>,
     prevState: IEditableDataTableState<T>
   ) {
-    const {
-      isFeatureEnabled,
-      accessKeys,
-      someAccessKeys,
-      customAccess,
-      onResetRow,
-    } = this.props;
+    const { isFeatureEnabled, accessKeys, someAccessKeys, customAccess, onResetRow } = this.props;
     const { addedRow, editingRowKey } = this.state;
 
     if (
@@ -173,26 +155,19 @@ class EditableDataTableComponent<
   );
 
   private getTableComponents = createSelector(
-    (tableComponents: IEditableDataTableOwnProps<T>["tableComponents"]) =>
-      tableComponents,
+    (tableComponents: IEditableDataTableOwnProps<T>["tableComponents"]) => tableComponents,
     (tableComponents) => merge(this.tableComponents, tableComponents)
   );
 
   private updateAccess() {
-    const { customAccess, isFeatureEnabled, accessKeys, someAccessKeys } =
-      this.props;
+    const { customAccess, isFeatureEnabled, accessKeys, someAccessKeys } = this.props;
 
     this.setState({
-      access:
-        customAccess ??
-        getAccessParameters(isFeatureEnabled, accessKeys, someAccessKeys),
+      access: customAccess ?? getAccessParameters(isFeatureEnabled, accessKeys, someAccessKeys),
     });
   }
 
-  private handleKeyPress = (
-    event: KeyboardEvent,
-    formProvider: IFormProvider
-  ) => {
+  private handleKeyPress = (event: KeyboardEvent, formProvider: IFormProvider) => {
     const { isSubmitting } = this.state;
 
     if (!isSubmitting && formProvider) {
@@ -248,8 +223,7 @@ class EditableDataTableComponent<
   };
 
   private onRow = (record: T) => {
-    const { key, [EditableDataTableKeys.isRowEditDenied]: isRowEditDenied } =
-      record;
+    const { key, [EditableDataTableKeys.isRowEditDenied]: isRowEditDenied } = record;
     const { isSubmitting } = this.state;
     const { isSorting } = this.props;
     const isClickable =
@@ -262,11 +236,7 @@ class EditableDataTableComponent<
     if (record) {
       return {
         key,
-        css: isSorting
-          ? sortingRowStyle
-          : isClickable
-          ? clickableRowStyle
-          : undefined,
+        css: isSorting ? sortingRowStyle : isClickable ? clickableRowStyle : undefined,
         onClick: isClickable ? this.getRowClickHandler(record) : null,
         formProps: this.isRowEditing(key) ? this.getFormProps(record) : null,
       };
@@ -355,17 +325,12 @@ class EditableDataTableComponent<
       width: "84px",
       onCell: () => ({ style: { maxWidth: "84px" } }),
       render: (_: any, record: T) => {
-        const {
-          key,
-          [EditableDataTableKeys.isRowRemoveDenied]: isRowRemoveDenied,
-        } = record;
+        const { key, [EditableDataTableKeys.isRowRemoveDenied]: isRowRemoveDenied } = record;
         const { removingRowKey, isSubmitting } = this.state;
         const { onRemoveRow } = this.props;
 
         const isShowButtonRemove =
-          this.state.access?.hasDeleteAccess &&
-          Boolean(onRemoveRow) &&
-          !isRowRemoveDenied;
+          this.state.access?.hasDeleteAccess && Boolean(onRemoveRow) && !isRowRemoveDenied;
 
         const removeButton = isShowButtonRemove ? (
           <EditableRowButton
@@ -380,10 +345,7 @@ class EditableDataTableComponent<
         ) : null;
 
         return (
-          <ControlPanel
-            isEditing={this.isRowEditing(key)}
-            onCancel={this.handleResetEditing}
-          >
+          <ControlPanel isEditing={this.isRowEditing(key)} onCancel={this.handleResetEditing}>
             {removeButton}
           </ControlPanel>
         );
@@ -415,9 +377,7 @@ class EditableDataTableComponent<
       key: EditableDataTableKeys.buttonAdd,
       component: (
         <AddButton
-          disabled={
-            Boolean(editingState.addedRow) || Boolean(editingState.isSubmitting)
-          }
+          disabled={Boolean(editingState.addedRow) || Boolean(editingState.isSubmitting)}
           onClick={this.handleAddRow}
           test-id={`${tableKey}_${editableDataTableAddButtonTestId}`}
         />

@@ -10,9 +10,7 @@ export interface ISelectWithStoreComponentProps
   extends ISelectWithStoreComponentOwnProps,
     FieldRenderProps<TSelectWithStoreFieldValue> {}
 
-export interface ISelectWithStoreComponentOwnProps
-  extends IWithLocProps,
-    ISelectWithStoreProps {
+export interface ISelectWithStoreComponentOwnProps extends IWithLocProps, ISelectWithStoreProps {
   readOnly?: boolean;
 }
 

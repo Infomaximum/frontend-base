@@ -8,9 +8,7 @@ import type { TRowDisable } from "../../DataTable/DataTable.types";
 
 export type TAutoFillFieldValue = IModel;
 
-export interface IAutoFillProps
-  extends IAutoFillOwnProps,
-    FieldRenderProps<any> {}
+export interface IAutoFillProps extends IAutoFillOwnProps, FieldRenderProps<any> {}
 
 export interface IAutoFillOwnProps
   extends Omit<

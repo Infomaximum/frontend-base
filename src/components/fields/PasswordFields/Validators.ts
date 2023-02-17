@@ -1,8 +1,4 @@
-import {
-  notEmptyMemoize,
-  TFieldValidatorSelector,
-  TValidationError,
-} from "@im/utils";
+import { notEmptyMemoize, TFieldValidatorSelector, TValidationError } from "@im/utils";
 import { createSelector } from "reselect";
 import {
   PASSWORDS_MUST_BE_EQUAL,
@@ -35,11 +31,8 @@ const youNeedSetPasswordLoc = YOU_NEED_SET_PASSWORD;
 export const isValidCurrentPasswordMemoize = createSelector(
   (local: Localization) => local,
   (local: Localization, newPasswordFieldName: string) => newPasswordFieldName,
-  (
-    local: Localization,
-    newPasswordFieldName: string,
-    currentPasswordFieldName: string
-  ) => currentPasswordFieldName,
+  (local: Localization, newPasswordFieldName: string, currentPasswordFieldName: string) =>
+    currentPasswordFieldName,
   (
     local: Localization,
     newPasswordFieldName: string,
@@ -105,8 +98,7 @@ const isValidCurrentPassword: TFieldValidatorSelector<string> =
  */
 export const isValidRepeatPasswordMemoize = createSelector(
   (local: Localization) => local,
-  (local: Localization, complexPassword: IComplexPasswordModel | null) =>
-    complexPassword,
+  (local: Localization, complexPassword: IComplexPasswordModel | null) => complexPassword,
   (
     local: Localization,
     complexPassword: IComplexPasswordModel | null,
@@ -175,11 +167,7 @@ export const passwordHasValidLength = (
     "getMinPasswordLength" in complexPassword &&
     typeof complexPassword.getMinPasswordLength === "function"
   ) {
-    return (
-      value &&
-      value.length >=
-        (complexPassword.getMinPasswordLength() || MIN_PASSWORD_LENGTH)
-    );
+    return value && value.length >= (complexPassword.getMinPasswordLength() || MIN_PASSWORD_LENGTH);
   }
   return value && value.length >= MIN_PASSWORD_LENGTH;
 };
@@ -189,24 +177,21 @@ export const passwordHasValidLength = (
  * @param value - значение поля
  * @returns boolean
  */
-export const passwordHasUppercase = (value: string) =>
-  value && value.search(/[A-Z]/) !== -1;
+export const passwordHasUppercase = (value: string) => value && value.search(/[A-Z]/) !== -1;
 
 /**
  * Валидатор для проверки на соответствие пароля условию содержания в нем букв в нижнем регистре
  * @param value - значение поля
  * @returns boolean
  */
-export const passwordHasLowercase = (value: string) =>
-  value && value.search(/[a-z]/) !== -1;
+export const passwordHasLowercase = (value: string) => value && value.search(/[a-z]/) !== -1;
 
 /**
  * Валидатор для проверки на соответствие пароля условию содержания в нем цифр
  * @param value - значение поля
  * @returns boolean
  */
-export const passwordHasNumbers = (value: string) =>
-  value && value.search(/\d/) !== -1;
+export const passwordHasNumbers = (value: string) => value && value.search(/\d/) !== -1;
 
 /**
  * Валидатор для проверки на соответствие пароля условию содержания в неалфавитных символов
@@ -217,8 +202,7 @@ export const passwordHasNonAlphabetic = (value: string) =>
   value && value.search(/[.,/#!$%^&*;:"'|{}@<>\\=\-_`~()\[\]?+]/) !== -1;
 
 const isValidPassword: TFieldValidatorSelector<string> =
-  (error: TValidationError, complexPassword: IComplexPasswordModel | null) =>
-  (value) =>
+  (error: TValidationError, complexPassword: IComplexPasswordModel | null) => (value) =>
     passwordHasValidLength(value, complexPassword) &&
     passwordHasUppercase(value) &&
     passwordHasLowercase(value) &&
@@ -275,8 +259,7 @@ const isValidRepeatPassword: TFieldValidatorSelector<string> =
  */
 export const isValidNewPasswordMemoize = createSelector(
   (local: Localization) => local,
-  (local: Localization, complexPassword: IComplexPasswordModel | null) =>
-    complexPassword,
+  (local: Localization, complexPassword: IComplexPasswordModel | null) => complexPassword,
   (
     local: Localization,
     complexPassword: IComplexPasswordModel | null,
@@ -381,8 +364,7 @@ const isValidNewPassword: TFieldValidatorSelector<string> =
  */
 export const isValidPasswordMemoize = createSelector(
   (local: Localization) => local.getLocalized(isValidPasswordLoc),
-  (local: Localization, complexPassword: IComplexPasswordModel | null) =>
-    complexPassword,
+  (local: Localization, complexPassword: IComplexPasswordModel | null) => complexPassword,
   (message, complexPassword) =>
     isValidPassword(
       {

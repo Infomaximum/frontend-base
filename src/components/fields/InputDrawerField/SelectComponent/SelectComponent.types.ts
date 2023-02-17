@@ -3,10 +3,7 @@ import type { SelectProps } from "antd";
 import type React from "react";
 import type { IWithLocProps } from "../../../../decorators/hocs/withLoc/withLoc";
 
-type TAntSelectProps = Omit<
-  SelectProps<any>,
-  "value" | "onChange" | "notFoundContent"
->;
+type TAntSelectProps = Omit<SelectProps<any>, "value" | "onChange" | "notFoundContent">;
 
 export interface ISelectOwnProps extends TAntSelectProps {
   value?: IModel[];
@@ -31,10 +28,7 @@ export interface ISelectOwnProps extends TAntSelectProps {
 
   labelPropsGetter?: (
     value: IModel
-  ) => React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  >;
+  ) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
   "test-id"?: string;
 }
 
@@ -42,10 +36,7 @@ export interface IStateProps {
   modelsList?: TDictionary<IModel>;
 }
 
-export interface ISelectProps
-  extends ISelectOwnProps,
-    IStateProps,
-    IWithLocProps {}
+export interface ISelectProps extends ISelectOwnProps, IStateProps, IWithLocProps {}
 
 export interface ISelectState {
   firstLoading: boolean;

@@ -17,10 +17,7 @@ export interface ICheckboxComponentOwnProps
 }
 
 export interface ICheckboxFieldProps
-  extends Omit<
-      IFieldProps<TCheckboxFieldValue>,
-      "component" | "onChange" | "name"
-    >,
+  extends Omit<IFieldProps<TCheckboxFieldValue>, "component" | "onChange" | "name">,
     ICheckboxComponentOwnProps {
   name: string;
 }

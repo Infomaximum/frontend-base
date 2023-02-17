@@ -1,8 +1,4 @@
-import {
-  wrapMenuStyle,
-  iconsHoverStyle,
-  HEADER_MENU_ICONS_WIDTH,
-} from "../HeaderMenu.styles";
+import { wrapMenuStyle, iconsHoverStyle, HEADER_MENU_ICONS_WIDTH } from "../HeaderMenu.styles";
 
 const HEADER_LEFT_ICON_WIDTH = 50;
 
@@ -55,10 +51,7 @@ export const getHeaderTitleStyle = (sideColumnWidth: number) => ({
   width: `${sideColumnWidth}px`,
 });
 
-export const getHeaderBodyCenterStyle = (
-  sideColumnWidth: number,
-  isSettingsIcon: boolean
-) => ({
+export const getHeaderBodyCenterStyle = (sideColumnWidth: number, isSettingsIcon: boolean) => ({
   flex: "none",
   width: `calc(100% - ${sideColumnWidth * 2}px + ${
     HEADER_MENU_ICONS_WIDTH * (isSettingsIcon ? 2 : 1)
@@ -71,9 +64,7 @@ export const getHeaderBodyRightWithCenterStyle = (
   isSettingsIcon: boolean
 ) =>
   ({
-    width: `${
-      sideColumnWidth - HEADER_MENU_ICONS_WIDTH * (isSettingsIcon ? 2 : 1)
-    }px`,
+    width: `${sideColumnWidth - HEADER_MENU_ICONS_WIDTH * (isSettingsIcon ? 2 : 1)}px`,
     flex: "auto",
     justifyContent: "flex-end",
     position: "absolute",

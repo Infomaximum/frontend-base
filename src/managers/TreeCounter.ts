@@ -42,8 +42,7 @@ export class TreeCounter {
       this.countCheckedShallowEntities(shellModels);
 
       this.totalCheckedCount = this.itemsCheckedCount + this.groupsCheckedCount;
-      this.targetAll =
-        totalCount !== 0 && totalCount === this.totalCheckedCount;
+      this.targetAll = totalCount !== 0 && totalCount === this.totalCheckedCount;
     }
   }
 

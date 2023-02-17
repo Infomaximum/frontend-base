@@ -42,9 +42,7 @@ export class ContainerExt<P = unknown> {
    * Добавляет геттер компонентов формы в список
    * @param formElementsGetter - геттер компонентов формы
    */
-  public pushFormElementsGetter(
-    formElementsGetter: TFormElementsGetter<P>
-  ): void {
+  public pushFormElementsGetter(formElementsGetter: TFormElementsGetter<P>): void {
     this.formElementsGetterList.push(formElementsGetter);
   }
 
@@ -63,9 +61,7 @@ export class ContainerExt<P = unknown> {
    * Добавляет модификатор начальных данных формы в список
    * @param initialValuesModifier - модификатор начальных данных формы
    */
-  public pushInitialValuesModifier(
-    initialValuesModifier: TInitialValuesModifier
-  ): void {
+  public pushInitialValuesModifier(initialValuesModifier: TInitialValuesModifier): void {
     this.initialValuesModifierList.push(initialValuesModifier);
   }
 
@@ -87,9 +83,7 @@ export class ContainerExt<P = unknown> {
    * Добавляет модификатор queryBuilder запроса контейнера в список
    * @param queryBuilderModifier - модификатор queryBuilder
    */
-  public pushQueryBuilderModifier(
-    queryBuilderModifier: TQueryBuilderModifier
-  ): void {
+  public pushQueryBuilderModifier(queryBuilderModifier: TQueryBuilderModifier): void {
     this.queryBuilderModifierList.push(queryBuilderModifier);
   }
 
@@ -122,20 +116,14 @@ export class ContainerExt<P = unknown> {
     forEach(this.mutationConfigCallbackList, (config) => {
       const mutation = config.mutations?.(containerProps);
       const variableName = config.variableNames?.(containerProps);
-      mutationConfig.mutations = mutationConfig.mutations.concat(
-        mutation || ""
-      );
-      mutationConfig.variableNames = mutationConfig.variableNames.concat(
-        variableName || ""
-      );
+      mutationConfig.mutations = mutationConfig.mutations.concat(mutation || "");
+      mutationConfig.variableNames = mutationConfig.variableNames.concat(variableName || "");
     });
 
     return mutationConfig;
   }
 
-  public pushMutationConfigGetter(
-    mutationConfigGetter: TMutationConfigGetter<P>
-  ) {
+  public pushMutationConfigGetter(mutationConfigGetter: TMutationConfigGetter<P>) {
     this.mutationConfigCallbackList.push(mutationConfigGetter);
   }
 }

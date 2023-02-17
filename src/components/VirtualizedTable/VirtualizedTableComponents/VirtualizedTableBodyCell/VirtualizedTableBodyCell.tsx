@@ -36,9 +36,7 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   const isFirstColumn = index === 0;
 
   const content = get(record, dataIndex as string);
-  const node = column.render
-    ? column.render(dataIndex ? content : record, record, index)
-    : content;
+  const node = column.render ? column.render(dataIndex ? content : record, record, index) : content;
 
   const handleRowContentClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -80,28 +78,20 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   const cellContent =
     (hasExpander && enableRowClick && key !== contextMenuColumnKey) ||
     (hasExpander && enableCellClick) ? (
-      <span
-        css={virtualizedTableCellExpandedTextStyle(theme)}
-        onClick={handleRowContentClick}
-      >
+      <span css={virtualizedTableCellExpandedTextStyle(theme)} onClick={handleRowContentClick}>
         {wrapInEllipsis(node)}
       </span>
     ) : (
       wrapInEllipsis(node)
     );
 
-  const cellCustomStyle = column?.onCell?.(record)?.style as
-    | Interpolation<TTheme>
-    | undefined;
+  const cellCustomStyle = column?.onCell?.(record)?.style as Interpolation<TTheme> | undefined;
 
   /* Учет isTree нужен для того, чтобы не оставлять промежутков в плоских списках*/
   return (
     <div
       key={key}
-      css={cssStyleConversion(theme, [
-        virtualizedTableCellStyle,
-        cellCustomStyle,
-      ])}
+      css={cssStyleConversion(theme, [virtualizedTableCellStyle, cellCustomStyle])}
       style={getVirtualizedTableCellFlexStyle(width, minWidth)}
     >
       {isTree && isFirstColumn && getIndentBlock()}

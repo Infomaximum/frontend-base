@@ -11,9 +11,7 @@ export interface IVirtualizedTableBodyRowProps<T>
   isCheckable: boolean;
   onSelectChange(record: T | null, isChecking: boolean): void;
   selectionType?: TableRowSelection<T>["type"];
-  checkboxProps?: ReturnType<
-    NonNullable<TableRowSelection<T>["getCheckboxProps"]>
-  >;
+  checkboxProps?: ReturnType<NonNullable<TableRowSelection<T>["getCheckboxProps"]>>;
   isTree: boolean;
   hasExpander: boolean;
   isExpanded: boolean;

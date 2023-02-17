@@ -1,20 +1,14 @@
 import React, { useMemo } from "react";
 import type { ITreeProps } from "./Tree.types";
 import { Tree as AntTree } from "antd";
-import {
-  treeStyle,
-  treeSwitcherIconContainerStyle,
-  treeSwitcherIconStyle,
-} from "./Tree.styles";
+import { treeStyle, treeSwitcherIconContainerStyle, treeSwitcherIconStyle } from "./Tree.styles";
 import { DownOutlined } from "../Icons/Icons";
 import type { DataNode } from "antd/lib/tree";
 import { map } from "lodash";
 import { useTheme } from "../../decorators/hooks/useTheme";
 
 /** Метод возвращает новые данные дерева с добавлением classNames для различных состояний */
-const mapTreeData = (
-  treeData: DataNode[] | undefined
-): DataNode[] | undefined => {
+const mapTreeData = (treeData: DataNode[] | undefined): DataNode[] | undefined => {
   if (!treeData) {
     return;
   }

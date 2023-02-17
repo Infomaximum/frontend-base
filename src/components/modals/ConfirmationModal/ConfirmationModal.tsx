@@ -1,11 +1,7 @@
 import { useState, FC, useMemo, useCallback, useRef, useEffect } from "react";
 import { Button } from "../../Button/Button";
 import { Modal } from "../../modals/Modal/Modal";
-import {
-  APPLY,
-  CANCEL,
-  DO_NOT_SAVE,
-} from "../../../utils/Localization/Localization";
+import { APPLY, CANCEL, DO_NOT_SAVE } from "../../../utils/Localization/Localization";
 import type { TLocalizationDescription } from "@im/localization";
 import {
   bodyModalStyle,
@@ -119,11 +115,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
             {localization.getLocalized(additionalButtonCaption)}
           </Button>
         ) : null}
-        <Button
-          type="ghost"
-          onClick={handleCancel}
-          test-id={confirmationModalCancelButtonTestId}
-        >
+        <Button type="ghost" onClick={handleCancel} test-id={confirmationModalCancelButtonTestId}>
           {localization.getLocalized(CANCEL)}
         </Button>
         <Button

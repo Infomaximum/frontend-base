@@ -3,16 +3,10 @@ import { TestIdAttr, getAccessParameters } from "@im/utils";
 import type { IFormProps, IFormState } from "./Form.types";
 import { isFunction, omit } from "lodash";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
-import {
-  omittedPropsConnectedForm,
-  TOmittedConnectedFormProps,
-} from "./Form.utils";
+import { omittedPropsConnectedForm, TOmittedConnectedFormProps } from "./Form.utils";
 import type { Location } from "react-router";
 import { BaseForm } from "../BaseForm/BaseForm";
-import {
-  FormContext,
-  IFormProvider,
-} from "../../../decorators/contexts/FormContext";
+import { FormContext, IFormProvider } from "../../../decorators/contexts/FormContext";
 import { contains } from "../../../utils/URI/URI";
 import { FormConfirmationModal } from "../../modals/FormConfirmationModal/FormConfirmationModal";
 import { assertSimple } from "@im/asserts";
@@ -22,12 +16,8 @@ class FormComponent extends Component<IFormProps, IFormState> {
     component: BaseForm,
   };
 
-  public static getDerivedStateFromProps(
-    nextProps: IFormProps,
-    prevState: IFormState
-  ) {
-    const { accessKeys, someAccessKeys, isFeatureEnabled, customAccess } =
-      nextProps;
+  public static getDerivedStateFromProps(nextProps: IFormProps, prevState: IFormState) {
+    const { accessKeys, someAccessKeys, isFeatureEnabled, customAccess } = nextProps;
 
     if (
       (accessKeys || someAccessKeys || customAccess) &&
@@ -40,9 +30,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
       return {
         contextData: {
           ...prevState.contextData,
-          access:
-            customAccess ??
-            getAccessParameters(isFeatureEnabled, accessKeys, someAccessKeys),
+          access: customAccess ?? getAccessParameters(isFeatureEnabled, accessKeys, someAccessKeys),
         },
         accessKeys,
         someAccessKeys,
@@ -68,13 +56,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
   constructor(props: IFormProps) {
     super(props);
 
-    const {
-      accessKeys,
-      someAccessKeys,
-      customAccess,
-      isFeatureEnabled,
-      formName,
-    } = props;
+    const { accessKeys, someAccessKeys, customAccess, isFeatureEnabled, formName } = props;
 
     const state: IFormState = {
       contextData: {
@@ -86,8 +68,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
 
     if ((accessKeys || someAccessKeys || customAccess) && isFeatureEnabled) {
       state.contextData.access =
-        customAccess ??
-        getAccessParameters(isFeatureEnabled, accessKeys, someAccessKeys);
+        customAccess ?? getAccessParameters(isFeatureEnabled, accessKeys, someAccessKeys);
       state.customAccess = customAccess;
       state.accessKeys = accessKeys;
       state.someAccessKeys = someAccessKeys;
@@ -129,10 +110,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
     return false;
   }
 
-  public override componentDidUpdate(
-    prevProps: IFormProps,
-    prevState: IFormState
-  ) {
+  public override componentDidUpdate(prevProps: IFormProps, prevState: IFormState) {
     const {
       onSubmitSuccessed,
       submitSucceeded,
@@ -143,12 +121,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
     const prevAccess = prevState.contextData.access;
     const access = this.state.contextData.access;
 
-    if (
-      onSubmitSuccessed &&
-      prevProps.submitting &&
-      !submitting &&
-      submitSucceeded
-    ) {
+    if (onSubmitSuccessed && prevProps.submitting && !submitting && submitSucceeded) {
       onSubmitSuccessed(this.getFormProvider());
     }
 
@@ -170,10 +143,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
     const { onKeyDown } = this.props;
 
     if (this.wrapperRef.current && isFunction(onKeyDown)) {
-      this.wrapperRef.current.removeEventListener(
-        "keydown",
-        this.handleKeyDown
-      );
+      this.wrapperRef.current.removeEventListener("keydown", this.handleKeyDown);
     }
   }
 
@@ -275,11 +245,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
 
     return (
       <FormContext.Provider value={this.state.contextData}>
-        <Component
-          key="component-form"
-          attributes={this.getAttributes()}
-          {...formComponentProps}
-        >
+        <Component key="component-form" attributes={this.getAttributes()} {...formComponentProps}>
           {this.getFields()}
           {this.getFormConfirmationModal()}
         </Component>

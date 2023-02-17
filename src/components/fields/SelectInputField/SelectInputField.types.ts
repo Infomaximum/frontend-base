@@ -1,9 +1,6 @@
 import type { InputProps } from "antd/lib/input";
 import type { FieldRenderProps } from "react-final-form";
-import type {
-  IFieldProps,
-  IWrappedFieldProps,
-} from "../FormField/Field/Field.types";
+import type { IFieldProps, IWrappedFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 import type { ISelectFormFieldProps } from "../SelectField/SelectField.types";
 
@@ -21,17 +18,13 @@ export interface ISelectInputComponentFieldOwnProps {
   autoFocus?: boolean;
 }
 
-export interface ISelectInputProps
-  extends Omit<IFieldProps<TSelectInputFieldValue>, "component"> {}
+export interface ISelectInputProps extends Omit<IFieldProps<TSelectInputFieldValue>, "component"> {}
 
-export interface IInputContainerProps
-  extends FieldRenderProps<TSelectInputFieldValue>,
-    InputProps {
+export interface IInputContainerProps extends FieldRenderProps<TSelectInputFieldValue>, InputProps {
   readOnly?: boolean;
 }
 
-export interface ISelectContainerProps
-  extends FieldRenderProps<TSelectInputFieldValue> {
+export interface ISelectContainerProps extends FieldRenderProps<TSelectInputFieldValue> {
   readOnly?: boolean;
   onChangeCallback?: ISelectFormFieldProps["onChange"];
 }

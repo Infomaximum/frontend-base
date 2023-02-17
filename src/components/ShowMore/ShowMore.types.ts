@@ -16,7 +16,4 @@ export interface IShowMoreOwnProps {
   queryVariables?: TDictionary;
 }
 
-export interface IShowMoreProps
-  extends IShowMoreOwnProps,
-    IWithLocProps,
-    IWithThemeProps<TTheme> {}
+export interface IShowMoreProps extends IShowMoreOwnProps, IWithLocProps, IWithThemeProps<TTheme> {}

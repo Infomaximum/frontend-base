@@ -6,10 +6,7 @@ import type { Interpolation } from "@emotion/react";
 import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IWithFeatureProps } from "../../../decorators/hocs/withFeature/withFeature.types";
 
-export interface IFieldEntityComponentProps<
-  FV = any,
-  T extends HTMLElement = HTMLElement
-> {
+export interface IFieldEntityComponentProps<FV = any, T extends HTMLElement = HTMLElement> {
   onRemoveFieldEntity: (index: number) => void;
   fieldEntityPath: string;
   fieldEntityIndex: number;
@@ -89,10 +86,8 @@ export interface ICommonArrayFieldProps {
   autoFocus?: boolean;
 }
 
-export interface IWrappedArrayFieldProps<
-  FV = any,
-  T extends HTMLElement = HTMLElement
-> extends FieldArrayRenderProps<FV, T>,
+export interface IWrappedArrayFieldProps<FV = any, T extends HTMLElement = HTMLElement>
+  extends FieldArrayRenderProps<FV, T>,
     FormItemProps,
     ICommonArrayFieldProps {
   accessKey?: string;

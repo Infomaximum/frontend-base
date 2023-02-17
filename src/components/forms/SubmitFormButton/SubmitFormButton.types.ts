@@ -3,8 +3,7 @@ import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IButtonProps } from "../../Button/Button.types";
 import type { AntdIconProps } from "../../Icons/Icons";
 
-export interface ISubmitFormButtonProps
-  extends Pick<IButtonProps, "size" | "type" | "ghost"> {
+export interface ISubmitFormButtonProps extends Pick<IButtonProps, "size" | "type" | "ghost"> {
   /**
    *  Надпись на кнопке, локализованная строка
    */

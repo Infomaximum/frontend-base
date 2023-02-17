@@ -9,9 +9,7 @@ import {
 import type { ITagProps } from "./InlineTags.types";
 
 const getTextWidth = (() => {
-  const context = document
-    .createElement("canvas")
-    .getContext("2d") as CanvasRenderingContext2D;
+  const context = document.createElement("canvas").getContext("2d") as CanvasRenderingContext2D;
 
   return (text: string, fontSize: number) => {
     context.font = `${fontSize}px 'Roboto'`;
@@ -28,14 +26,10 @@ export const tooltipSeparator = "; ";
 
 const minTagWidth = getTagWidth(`Aa...`);
 const outerEllipsisWidth =
-  getTextWidth(outerEllipsisText, outerEllipsisFontSize) +
-  outerEllipsisPaddingLeft;
+  getTextWidth(outerEllipsisText, outerEllipsisFontSize) + outerEllipsisPaddingLeft;
 
 /* Из переданных тегов возвращает количество поместившихся в контейнер */
-export const getNumberOfPlacedTags = (
-  tags: ITagProps[],
-  containerWidth: number
-) => {
+export const getNumberOfPlacedTags = (tags: ITagProps[], containerWidth: number) => {
   const isTagTooOutOfBounds = (leftBound: number, isLast: boolean) => {
     const freeSpace = isLast
       ? containerWidth - leftBound

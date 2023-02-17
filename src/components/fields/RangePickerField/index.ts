@@ -1,7 +1,4 @@
-export {
-  RangePickerFormField,
-  RangePickerTableCellField,
-} from "./RangePickerField";
+export { RangePickerFormField, RangePickerTableCellField } from "./RangePickerField";
 
 export {
   getPlaceholderLocalizationByPicker,

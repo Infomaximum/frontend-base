@@ -70,9 +70,7 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
 
   const memoizedMessage = useMemo(
     () =>
-      props.message ? (
-        <span css={hasDescription && boldTitleStyle}>{props.message}</span>
-      ) : null,
+      props.message ? <span css={hasDescription && boldTitleStyle}>{props.message}</span> : null,
     [hasDescription, props.message]
   );
 

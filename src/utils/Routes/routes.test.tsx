@@ -2,12 +2,7 @@ import type { NCore } from "@im/core";
 import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
 import type { ReactElement } from "react";
 import { moduleGroupPath } from "./paths";
-import {
-  getRelativeRoutePath,
-  routesMap,
-  breadcrumbsPacker,
-  removeModulesLayer,
-} from "./routes";
+import { getRelativeRoutePath, routesMap, breadcrumbsPacker, removeModulesLayer } from "./routes";
 
 describe("Тесты методов работы с роутингом - routes", () => {
   describe("Удаления из роутов слоя для группировки модулей", () => {
@@ -18,19 +13,13 @@ describe("Тесты методов работы с роутингом - routes"
         routes: [
           {
             path: moduleGroupPath,
-            routes: [
-              { path: "/b/a" },
-              { path: "/b/b", routes: [{ path: "b/b/a" }] },
-            ],
+            routes: [{ path: "/b/a" }, { path: "/b/b", routes: [{ path: "b/b/a" }] }],
           },
         ],
       },
       {
         path: "/c",
-        routes: [
-          { path: "/c/a" },
-          { path: "/c/b", routes: [{ path: "c/b/a" }] },
-        ],
+        routes: [{ path: "/c/a" }, { path: "/c/b", routes: [{ path: "c/b/a" }] }],
       },
     ];
 
@@ -39,17 +28,11 @@ describe("Тесты методов работы с роутингом - routes"
         { path: "/a" },
         {
           path: "/b",
-          routes: [
-            { path: "/b/a" },
-            { path: "/b/b", routes: [{ path: "b/b/a" }] },
-          ],
+          routes: [{ path: "/b/a" }, { path: "/b/b", routes: [{ path: "b/b/a" }] }],
         },
         {
           path: "/c",
-          routes: [
-            { path: "/c/a" },
-            { path: "/c/b", routes: [{ path: "c/b/a" }] },
-          ],
+          routes: [{ path: "/c/a" }, { path: "/c/b", routes: [{ path: "c/b/a" }] }],
         },
       ]);
     });
@@ -102,11 +85,7 @@ describe("Тесты методов работы с роутингом - routes"
     });
 
     it("Для всех роутов есть локализации", () => {
-      expect(generateCrumbsLocs(routes1, "/b/ba/baa")).toEqual([
-        "b",
-        "ba",
-        "baa",
-      ]);
+      expect(generateCrumbsLocs(routes1, "/b/ba/baa")).toEqual(["b", "ba", "baa"]);
     });
 
     const routes2 = [
@@ -152,20 +131,11 @@ describe("Тесты методов работы с роутингом - routes"
     ];
 
     it(`Единственная локализованная вкладка профиля не попадает в "крошки"`, () => {
-      expect(generateCrumbsLocs(routes2, "/a/aa/aaa/aaaa")).toEqual([
-        "a",
-        "aa",
-        "aaaa",
-      ]);
+      expect(generateCrumbsLocs(routes2, "/a/aa/aaa/aaaa")).toEqual(["a", "aa", "aaaa"]);
     });
 
     it(`При наличии нескольких локализованных вкладок, вкладка профиля попадает в "крошки"`, () => {
-      expect(generateCrumbsLocs(routes2, "/a/ab/aba/abaa")).toEqual([
-        "a",
-        "ab",
-        "aba",
-        "abaa",
-      ]);
+      expect(generateCrumbsLocs(routes2, "/a/ab/aba/abaa")).toEqual(["a", "ab", "aba", "abaa"]);
     });
   });
 
@@ -213,13 +183,11 @@ describe("Тесты методов работы с роутингом - routes"
       };
       const routeConfig: NCore.IRoutes[] = [route];
 
+      expect(((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement).type).toBe(
+        RouteElement
+      );
       expect(
-        ((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement)
-          .type
-      ).toBe(RouteElement);
-      expect(
-        ((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement)
-          .props.route.key
+        ((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement).props.route.key
       ).toEqual(route.key);
     });
 
@@ -242,9 +210,7 @@ describe("Тесты методов работы с роутингом - routes"
 
       const routeConfig: NCore.IRoutes[] = [routeA];
 
-      expect(
-        routesMap(routeConfig).find((route) => route.key === routeB.key)
-      ).not.toBeUndefined();
+      expect(routesMap(routeConfig).find((route) => route.key === routeB.key)).not.toBeUndefined();
     });
 
     it("Роуты с типом layout на первом уровне вложенности, когда layout вложен в layout", () => {
@@ -267,12 +233,8 @@ describe("Тесты методов работы с роутингом - routes"
 
       const routeConfig: NCore.IRoutes[] = [routeA];
 
-      expect(
-        routesMap(routeConfig).find((route) => route.key === routeB.key)
-      ).not.toBeUndefined();
-      expect(
-        routesMap(routeConfig).find((route) => route.key === routeC.key)
-      ).not.toBeUndefined();
+      expect(routesMap(routeConfig).find((route) => route.key === routeB.key)).not.toBeUndefined();
+      expect(routesMap(routeConfig).find((route) => route.key === routeC.key)).not.toBeUndefined();
     });
 
     it("Дочерние роуты не преобразуются в плоский список внутри layout, если layout на первом уровне вложенности", () => {
@@ -296,9 +258,7 @@ describe("Тесты методов работы с роутингом - routes"
 
       expect(routesMap(routeConfig)[0]?.key).toEqual(routeA.key);
       expect(routesMap(routeConfig)[0]?.routes?.[0]?.key).toEqual(routeB.key);
-      expect(routesMap(routeConfig)[0]?.routes?.[0]?.routes?.[0]?.key).toEqual(
-        routeC.key
-      );
+      expect(routesMap(routeConfig)[0]?.routes?.[0]?.routes?.[0]?.key).toEqual(routeC.key);
     });
 
     it("Дочерние роуты не преобразуются в плоский список внутри layout, если layout на втором уровне вложенности", () => {
@@ -350,9 +310,7 @@ describe("Тесты методов работы с роутингом - routes"
           }),
         ])
       );
-      expect(
-        routesMap(routeConfig).find((route) => route.key === routeB.key)?.routes
-      ).toEqual(
+      expect(routesMap(routeConfig).find((route) => route.key === routeB.key)?.routes).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             key: routeC.key,

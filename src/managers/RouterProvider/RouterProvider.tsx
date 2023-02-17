@@ -24,11 +24,7 @@ const RouterProviderComponent: FC<IRouterProviderProps> = ({
 
   const resolvedRoutes = useMemo(() => {
     return isFeatureEnabled
-      ? getRoutes(
-          sortPriority(
-            resolveConstraintsInRoutes(routesConfig, isFeatureEnabled)
-          )
-        )
+      ? getRoutes(sortPriority(resolveConstraintsInRoutes(routesConfig, isFeatureEnabled)))
       : null;
   }, [routesConfig, isFeatureEnabled]);
 

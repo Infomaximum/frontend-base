@@ -1,10 +1,7 @@
 import type { FC } from "react";
 import type { ISettingsProps } from "./Settings.types";
 import { SettingsItem } from "./SettingsItem/SettingsItem";
-import {
-  calculateSize,
-  leftColumnStyles,
-} from "./SettingsItem/SettingsItem.styles";
+import { calculateSize, leftColumnStyles } from "./SettingsItem/SettingsItem.styles";
 import { forEach, map } from "lodash";
 import { Layout, Space } from "antd";
 import { settingsContentStyle } from "./Settings.styles";
@@ -13,10 +10,7 @@ import { useLocalization } from "../../decorators/hooks/useLocalization";
 
 const { Content } = Layout;
 
-const SettingsComponent: FC<ISettingsProps> = ({
-  routes: settingRoutes,
-  onItemClick,
-}) => {
+const SettingsComponent: FC<ISettingsProps> = ({ routes: settingRoutes, onItemClick }) => {
   const localization = useLocalization();
 
   const getColumns = () => {

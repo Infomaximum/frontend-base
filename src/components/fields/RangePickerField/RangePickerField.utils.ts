@@ -12,16 +12,10 @@ import type { Localization } from "@im/localization";
 
 const getPreparedValue = (timestampRange: [number, number]) =>
   timestampRange
-    ? (map(timestampRange, (timestamp) => moment.unix(timestamp)) as [
-        Moment,
-        Moment
-      ])
+    ? (map(timestampRange, (timestamp) => moment.unix(timestamp)) as [Moment, Moment])
     : null;
 
-const getRangePickerReadOnlyValue = (
-  range: [Moment, Moment],
-  format: string
-) => {
+const getRangePickerReadOnlyValue = (range: [Moment, Moment], format: string) => {
   return range ? map(range, (value) => value.format(format)).join(" — ") : null;
 };
 
@@ -36,10 +30,7 @@ const getPlaceholderLocalizationByPicker = (
 ): [string, string] | undefined => {
   switch (picker) {
     case "month":
-      return [
-        localization.getLocalized(START_MONTH),
-        localization.getLocalized(END_MONTH),
-      ];
+      return [localization.getLocalized(START_MONTH), localization.getLocalized(END_MONTH)];
     default:
       return;
   }

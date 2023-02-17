@@ -17,12 +17,7 @@ const renderComponent = () => {
   return enzyme
     .shallow(
       <BrowserRouter>
-        <HeaderMenu
-          ref={headerRef}
-          userId={1}
-          userName="test"
-          onLogout={noop}
-        />
+        <HeaderMenu ref={headerRef} userId={1} userName="test" onLogout={noop} />
         <HeaderMenuContext.Provider value={headerRef?.current}>
           <HeaderMenuPortal key="test_headerMenu">
             <HeaderMenuPortal.Title key="header-menu-title">
@@ -50,13 +45,13 @@ describe("Тесты для HeaderMenuPortal", () => {
     expect(renderComponent().find(HeaderMenuPortal.Body).length).toEqual(1);
   });
   it("Тест получения значения HeaderMenuPortal.Title", () => {
-    expect(
-      renderComponent().find(HeaderMenuPortal.Title).prop("children")
-    ).toEqual(localization.getLocalized(ERROR_404));
+    expect(renderComponent().find(HeaderMenuPortal.Title).prop("children")).toEqual(
+      localization.getLocalized(ERROR_404)
+    );
   });
   it("Тест получения значения HeaderMenuPortal.Body", () => {
-    expect(
-      renderComponent().find(HeaderMenuPortal.Body).prop("children")
-    ).toEqual(localization.getLocalized(LOG_OUT));
+    expect(renderComponent().find(HeaderMenuPortal.Body).prop("children")).toEqual(
+      localization.getLocalized(LOG_OUT)
+    );
   });
 });

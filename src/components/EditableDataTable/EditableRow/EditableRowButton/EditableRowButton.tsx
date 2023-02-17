@@ -46,11 +46,7 @@ const EditableRowButtonComponent: React.FC<IEditableRowButtonProps> & {
   }
 
   return (
-    <div
-      css={buttonStyle}
-      onClick={!disabled ? handleClick : undefined}
-      {...rest}
-    >
+    <div css={buttonStyle} onClick={!disabled ? handleClick : undefined} {...rest}>
       {children}
     </div>
   );

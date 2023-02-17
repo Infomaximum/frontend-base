@@ -1,8 +1,5 @@
 import React, { memo, useContext, useState, useMemo, useCallback } from "react";
-import type {
-  ITableCellProps,
-  ITableCellFieldFormItemProps,
-} from "./TableCellField.types";
+import type { ITableCellProps, ITableCellFieldFormItemProps } from "./TableCellField.types";
 import { FormOption } from "../FormOption/FormOption";
 import {
   formItemStyle,
@@ -21,20 +18,14 @@ import { EditableTableContext } from "../../../decorators/contexts/EditableTable
 export const editableCellClassName = "editable-cell-wrapper";
 export const editableCellParentClassName = "editable-cell-wrapper-parent";
 
-const TableCellFieldFormItem = <
-  V,
-  P extends FieldRenderProps<V> = FieldRenderProps<V>
->({
+const TableCellFieldFormItem = <V, P extends FieldRenderProps<V> = FieldRenderProps<V>>({
   component: FieldComponent,
   ...restProps
 }: ITableCellFieldFormItemProps<V, P>) => {
   const localization = useLocalization();
-  const [fieldProvider, setFieldProvider] =
-    useState<TFieldProvider<any> | null>(null);
+  const [fieldProvider, setFieldProvider] = useState<TFieldProvider<any> | null>(null);
 
-  const meta = fieldProvider?.meta as
-    | (FieldMetaState<any> & { form: string })
-    | undefined;
+  const meta = fieldProvider?.meta as (FieldMetaState<any> & { form: string }) | undefined;
   const fieldTestId = meta && `${meta.form}_${restProps.name}`;
 
   return (
@@ -49,10 +40,7 @@ const TableCellFieldFormItem = <
   );
 };
 
-const TableCellFieldComponent = <
-  V,
-  P extends FieldRenderProps<V> = FieldRenderProps<V>
->({
+const TableCellFieldComponent = <V, P extends FieldRenderProps<V> = FieldRenderProps<V>>({
   defaultContent,
   width,
   isNeedEllipsis,
@@ -61,10 +49,7 @@ const TableCellFieldComponent = <
   const { isEditing } = useContext(EditableRowContext);
   const { focusedFieldNameRef } = useContext(EditableTableContext);
 
-  const wrapperStyle = useMemo(
-    () => [editableCellWrapperStyle, { maxWidth: width }],
-    [width]
-  );
+  const wrapperStyle = useMemo(() => [editableCellWrapperStyle, { maxWidth: width }], [width]);
 
   const editableCellStyle = useMemo(() => {
     if (isNeedEllipsis) {
@@ -83,19 +68,11 @@ const TableCellFieldComponent = <
   }, [name, focusedFieldNameRef, isEditing]);
 
   return (
-    <div
-      className={editableCellParentClassName}
-      css={wrapperStyle}
-      onClick={handleClick}
-    >
+    <div className={editableCellParentClassName} css={wrapperStyle} onClick={handleClick}>
       {isEditing ? (
         <TableCellFieldFormItem
           {...restProps}
-          autoFocus={hasAutoFocus(
-            name,
-            focusedFieldNameRef?.current ?? null,
-            autoFocus
-          )}
+          autoFocus={hasAutoFocus(name, focusedFieldNameRef?.current ?? null, autoFocus)}
         />
       ) : (
         <div className={editableCellClassName} css={editableCellStyle}>

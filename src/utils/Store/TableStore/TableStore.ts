@@ -139,10 +139,7 @@ export class TableStore<M extends Model = never> extends Store<M> {
   }
 
   // Override
-  public override searchValueChange(
-    value: string | undefined,
-    variables?: TDictionary
-  ) {
+  public override searchValueChange(value: string | undefined, variables?: TDictionary) {
     super.searchValueChange(value);
     this.requestData({ variables });
   }

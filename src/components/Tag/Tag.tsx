@@ -2,11 +2,7 @@ import { FC, useMemo } from "react";
 import type { ITagProps } from "./Tag.types";
 // eslint-disable-next-line im/ban-import-entity
 import { Tag as AntTag } from "antd";
-import {
-  getTagStyle,
-  notClosableTagStyle,
-  tagContentStyle,
-} from "./Tag.styles";
+import { getTagStyle, notClosableTagStyle, tagContentStyle } from "./Tag.styles";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { get } from "lodash";
 import { Tooltip } from "../Tooltip/Tooltip";
@@ -17,22 +13,16 @@ const TagComponent: FC<ITagProps> = (props) => {
   const { tagsStyles } = theme;
   const { closable, color: colorProps = "default", children, title } = props;
 
-  const { backgroundColor, borderColor, textColor } = (get(
-    tagsStyles,
-    colorProps
-  ) as valueof<typeof tagsStyles> | undefined) ?? {
+  const { backgroundColor, borderColor, textColor } = (get(tagsStyles, colorProps) as
+    | valueof<typeof tagsStyles>
+    | undefined) ?? {
     backgroundColor: theme.grey3Color,
     borderColor: theme.grey4Color,
     textColor: theme.grey8Color,
   };
 
   const tagStyle = useMemo(
-    () =>
-      getTagStyle(
-        String(borderColor),
-        String(textColor),
-        String(backgroundColor)
-      ),
+    () => getTagStyle(String(borderColor), String(textColor), String(backgroundColor)),
     [backgroundColor, borderColor, textColor]
   );
 
@@ -46,13 +36,7 @@ const TagComponent: FC<ITagProps> = (props) => {
 
   return (
     <Tooltip title={title}>
-      <AntTag
-        key={colorProps}
-        {...props}
-        css={tagCssRule}
-        color={colorProps}
-        title={undefined}
-      >
+      <AntTag key={colorProps} {...props} css={tagCssRule} color={colorProps} title={undefined}>
         <div css={tagContentStyle}>{children}</div>
       </AntTag>
     </Tooltip>

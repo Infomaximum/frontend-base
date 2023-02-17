@@ -28,13 +28,7 @@ enum ECountOfDigits {
 }
 
 const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
-  const {
-    input,
-    readOnly,
-    withSeconds,
-    isExcludeLowValues = true,
-    disabled,
-  } = props;
+  const { input, readOnly, withSeconds, isExcludeLowValues = true, disabled } = props;
 
   const FIELD_CONST = useMemo(
     () => ({
@@ -63,9 +57,7 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
       if (milliseconds > 0 && milliseconds <= 9) {
         resultInitialValues.push("");
       } else {
-        resultInitialValues.push(
-          moment.utc(milliseconds).format(FIELD_CONST.format)
-        );
+        resultInitialValues.push(moment.utc(milliseconds).format(FIELD_CONST.format));
       }
     } else {
       resultInitialValues.push(moment(begin).format(FIELD_CONST.format));
@@ -79,9 +71,7 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
       if (milliseconds > 0 && milliseconds <= 9) {
         resultInitialValues.push("");
       } else {
-        resultInitialValues.push(
-          moment.utc(milliseconds).format(FIELD_CONST.format)
-        );
+        resultInitialValues.push(moment.utc(milliseconds).format(FIELD_CONST.format));
       }
     } else {
       resultInitialValues.push(moment(end).format(FIELD_CONST.format));
@@ -90,8 +80,7 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
     return resultInitialValues;
   }, [FIELD_CONST.format, input.value]);
 
-  const [inputValues, setInputValues] =
-    useState<[string, string]>(initialInputs);
+  const [inputValues, setInputValues] = useState<[string, string]>(initialInputs);
 
   const handleChange = useCallback(
     ({ target: { value, name } }: ChangeEvent<HTMLInputElement>) => {
@@ -175,9 +164,7 @@ const TimeInputsRangeField: FC<ITimeInputsRangeFieldProps> = (props) => {
   return <Field component={TimeInputsRange} {...props} />;
 };
 
-const TimeInputsRangeFormField: FC<ITimeInputsRangeFormFieldProps> = (
-  props
-) => {
+const TimeInputsRangeFormField: FC<ITimeInputsRangeFormFieldProps> = (props) => {
   return <FormField component={TimeInputsRangeField} {...props} />;
 };
 

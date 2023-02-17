@@ -9,11 +9,7 @@ import {
   bodyModalStyle,
   modalContentStyle,
 } from "./RemoveConfirmationModal.styles";
-import {
-  CANCEL,
-  DELETE,
-  DELETION,
-} from "../../../utils/Localization/Localization";
+import { CANCEL, DELETE, DELETION } from "../../../utils/Localization/Localization";
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
 import { ModalAnimationInterval } from "../../../utils/const";
 import { isFunction } from "lodash";
@@ -142,6 +138,4 @@ class RemoveConfirmationModalComponent extends PureComponent<
   }
 }
 
-export const RemoveConfirmationModal = withLoc(
-  withTheme(RemoveConfirmationModalComponent)
-);
+export const RemoveConfirmationModal = withLoc(withTheme(RemoveConfirmationModalComponent));

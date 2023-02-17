@@ -31,10 +31,7 @@ const DrawerComponent: React.FC<IDrawerProps> = (props) => {
     firstRenderCheck(false);
   }, []);
 
-  const boldTitle = useMemo(
-    () => <span css={titleStyle}>{title}</span>,
-    [title]
-  );
+  const boldTitle = useMemo(() => <span css={titleStyle}>{title}</span>, [title]);
 
   const closeIcon = useMemo(() => {
     return (

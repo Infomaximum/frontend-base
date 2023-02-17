@@ -9,10 +9,7 @@ export enum ESortingMethodsNames {
   title = "title",
 }
 
-export type TContextMenuParamItem =
-  | IContextMenuParam
-  | IContextMenuDivider
-  | IContextSubMenuParam;
+export type TContextMenuParamItem = IContextMenuParam | IContextMenuDivider | IContextSubMenuParam;
 
 export type TOnItemClickParam = {
   param: Parameters<NonNullable<MenuProps["onClick"]>>[0];
@@ -51,8 +48,7 @@ export interface IContextSubMenuParam
   children: TContextMenuParamItem[];
 }
 
-export interface IContextMenuProps
-  extends Omit<IDropdownProps, "overlay" | "overlayStyle"> {
+export interface IContextMenuProps extends Omit<IDropdownProps, "overlay" | "overlayStyle"> {
   content: TContextMenuParamItem[];
   "test-id"?: string;
   buttonStyle?: Interpolation<TTheme>;

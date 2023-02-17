@@ -19,9 +19,7 @@ export const getThemeWrapper = (element: JSX.Element) => {
 
 export const getLocalizationWrapper = (element: JSX.Element) => {
   return (
-    <LocalizationContext.Provider value={testLocalization}>
-      {element}
-    </LocalizationContext.Provider>
+    <LocalizationContext.Provider value={testLocalization}>{element}</LocalizationContext.Provider>
   );
 };
 
@@ -42,13 +40,9 @@ const wrappers: Record<TWrapperKey, (element: JSX.Element) => JSX.Element> = {
   localization: getLocalizationWrapper,
 };
 
-export const getDefaultWrappers = (
-  wrapperKey: TWrapperKey[],
-  element: JSX.Element
-) =>
+export const getDefaultWrappers = (wrapperKey: TWrapperKey[], element: JSX.Element) =>
   reduce(
     wrappers,
-    (acc, func, key) =>
-      wrapperKey.includes(key as TWrapperKey) ? func(acc) : acc,
+    (acc, func, key) => (wrapperKey.includes(key as TWrapperKey) ? func(acc) : acc),
     element
   );

@@ -17,13 +17,8 @@ export interface IWithPseudoClassesState {
  * @param {React.ComponentType} Component
  * @returns {Function}
  */
-export const withPseudoClasses: TPropInjector<IWithPseudoClassesProps> = (
-  Component: any
-) => {
-  const Class: any = class extends PureComponent<
-    IWithPseudoClassesProps,
-    IWithPseudoClassesState
-  > {
+export const withPseudoClasses: TPropInjector<IWithPseudoClassesProps> = (Component: any) => {
+  const Class: any = class extends PureComponent<IWithPseudoClassesProps, IWithPseudoClassesState> {
     public override state = {} as IWithPseudoClassesState;
 
     constructor(props: IWithPseudoClassesProps) {

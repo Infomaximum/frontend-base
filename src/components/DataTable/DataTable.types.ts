@@ -1,8 +1,5 @@
 import type { headerModes } from "./DataTableHeader/DataTableHeader";
-import type {
-  TableRowSelection,
-  RowSelectionType,
-} from "antd/lib/table/interface";
+import type { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
 import type { IEditableDataTableState } from "../EditableDataTable/EditableDataTable.types";
 import type { Group, IModel } from "@im/models";
 import type { TAccessRules } from "../../utils/access";

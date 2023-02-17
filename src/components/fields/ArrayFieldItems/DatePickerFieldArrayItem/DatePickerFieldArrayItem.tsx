@@ -1,10 +1,7 @@
 import type { IDatePickerFieldArrayItemProps } from "./DatePickerFieldArrayItem.types";
 import React, { useCallback, useMemo } from "react";
 import { isFunction } from "lodash";
-import {
-  datePickerStyle,
-  removeButtonStyle,
-} from "./DatePickerFieldArrayItem.styles";
+import { datePickerStyle, removeButtonStyle } from "./DatePickerFieldArrayItem.styles";
 import {
   removeDatePickerFieldButtonTestId,
   removeDateTimePickerFieldButtonTestId,
@@ -13,9 +10,7 @@ import { Button } from "../../../Button/Button";
 import { CloseOutlined } from "../../../Icons/Icons";
 import { DatePickerFormField } from "../../DatePickerField";
 
-const DatePickerFieldArrayItem: React.FC<IDatePickerFieldArrayItemProps> = (
-  props
-) => {
+const DatePickerFieldArrayItem: React.FC<IDatePickerFieldArrayItemProps> = (props) => {
   const {
     fieldEntityPath,
     fields,

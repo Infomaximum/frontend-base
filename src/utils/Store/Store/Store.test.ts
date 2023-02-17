@@ -72,9 +72,7 @@ describe("Тестирование Store", () => {
   });
 
   it("Запрос (requestData) выполняется успешно", async () => {
-    requestInstanceMocks.requestData.mockResolvedValue(
-      fakeServerResponseRequestData
-    );
+    requestInstanceMocks.requestData.mockResolvedValue(fakeServerResponseRequestData);
 
     const store = getStore();
 
@@ -93,9 +91,7 @@ describe("Тестирование Store", () => {
     expect(store.model).toBeNull();
 
     expect(requestInstanceMocks.requestData).toBeCalledTimes(1);
-    expect(
-      requestInstanceMocks.requestData.mock.calls[0][0].variables.id
-    ).toEqual(fakeId);
+    expect(requestInstanceMocks.requestData.mock.calls[0][0].variables.id).toEqual(fakeId);
 
     await promise;
 
@@ -138,9 +134,7 @@ describe("Тестирование Store", () => {
   });
 
   it("Мутация (submitData) выполняется успешно", async () => {
-    requestInstanceMocks.submitData.mockResolvedValue(
-      fakeServerResponseSubmitData
-    );
+    requestInstanceMocks.submitData.mockResolvedValue(fakeServerResponseSubmitData);
 
     const store = getStore();
 
@@ -167,8 +161,7 @@ describe("Тестирование Store", () => {
 
     await promise;
 
-    const { id, first_name } =
-      requestInstanceMocks.submitData.mock.calls[0][0].variables;
+    const { id, first_name } = requestInstanceMocks.submitData.mock.calls[0][0].variables;
 
     expect(requestInstanceMocks.submitData).toBeCalledTimes(1);
     expect(id).toEqual(fakeId);

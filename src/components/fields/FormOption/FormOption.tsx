@@ -12,8 +12,7 @@ import type { Interpolation } from "@emotion/react";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import { FieldTooltip } from "../../FieldTooltip/FieldTooltip";
 
-const getPopupContainer = (element: HTMLElement) =>
-  element.closest("form") ?? element;
+const getPopupContainer = (element: HTMLElement) => element.closest("form") ?? element;
 
 const FormItem = Form.Item;
 
@@ -97,16 +96,9 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
   return (
     <FormItem
       label={formOptionLabel}
-      validateStatus={
-        (touched && invalid) || highlightFieldWithError ? "error" : "success"
-      }
+      validateStatus={(touched && invalid) || highlightFieldWithError ? "error" : "success"}
       help={
-        (touched &&
-          invalid &&
-          error &&
-          error.message &&
-          error.code &&
-          formOptionError) ||
+        (touched && invalid && error && error.message && error.code && formOptionError) ||
         (highlightFieldWithError ? "" : null)
       }
       css={formItemStyle}
@@ -114,9 +106,7 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
       {...fieldOwnProps}
     >
       <div
-        style={
-          promptText || rightLabel ? formOptionComponentWrapperStyle : undefined
-        }
+        style={promptText || rightLabel ? formOptionComponentWrapperStyle : undefined}
         key="component-wrapper"
         css={wrapperComponentStyle}
       >

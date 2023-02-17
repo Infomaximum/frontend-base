@@ -1,9 +1,6 @@
 import React, { createContext } from "react";
 import { Dropdown } from "../Dropdown";
-import type {
-  IBaseDropdownProps,
-  IBaseDropdownState,
-} from "./BaseDropdown.types";
+import type { IBaseDropdownProps, IBaseDropdownState } from "./BaseDropdown.types";
 import { menuStyle, mainBaseDropdownOverlayStyle } from "./BaseDropdown.styles";
 import { DropdownAnimationInterval } from "../../../utils/const";
 import { withTheme } from "../../../decorators";
@@ -20,10 +17,7 @@ export enum EBaseDropdownPlacement {
 
 export const BaseDropdownContext = createContext(false);
 
-class BaseDropdownComponent extends React.PureComponent<
-  IBaseDropdownProps,
-  IBaseDropdownState
-> {
+class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBaseDropdownState> {
   private readonly buttonRef: React.RefObject<HTMLElement> = React.createRef();
   private animationTimer: NodeJS.Timeout | null = null;
 
@@ -109,13 +103,8 @@ class BaseDropdownComponent extends React.PureComponent<
 
     return (
       <>
-        <div
-          key="wrapper-menu"
-          css={cssStyleConversion(theme, [menuStyle, menuStyleProps])}
-        >
-          {isShowMenu || (!isShowMenu && isShowChildren)
-            ? this.props.children
-            : null}
+        <div key="wrapper-menu" css={cssStyleConversion(theme, [menuStyle, menuStyleProps])}>
+          {isShowMenu || (!isShowMenu && isShowChildren) ? this.props.children : null}
         </div>
       </>
     );

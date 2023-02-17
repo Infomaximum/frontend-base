@@ -20,19 +20,12 @@ const mapModelToSelectOption = (model: Model) => ({
 });
 
 const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
-  const {
-    store: storeProps,
-    dataAccessKeys,
-    value: valueProps,
-    onChange,
-    ...rest
-  } = props;
+  const { store: storeProps, dataAccessKeys, value: valueProps, onChange, ...rest } = props;
   const { isFeatureEnabled } = useFeature();
   const [searchText, setSearchText] = useState("");
 
   const isHasAccess =
-    !!isFeatureEnabled &&
-    every(dataAccessKeys, (accessKey) => isFeatureEnabled(accessKey));
+    !!isFeatureEnabled && every(dataAccessKeys, (accessKey) => isFeatureEnabled(accessKey));
 
   const { store } = useStore(storeProps, {
     requestOnMount: true,
@@ -59,16 +52,9 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
 
   const handleChange = useCallback<Required<ISelectProps>["onChange"]>(
     (_, options) => {
-      assertSimple(
-        isArray(options),
-        "В качестве value поддерживается только массив"
-      );
+      assertSimple(isArray(options), "В качестве value поддерживается только массив");
       if (onChange && modelsCollection) {
-        onChange(
-          compact(
-            map(options, (item) => item.value && modelsCollection[item.value])
-          )
-        );
+        onChange(compact(map(options, (item) => item.value && modelsCollection[item.value])));
       }
     },
     [modelsCollection, onChange]
@@ -89,9 +75,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
       onSearch={setSearchText}
       searchValue={searchText}
       optionFilterProp={optionFilterProp}
-      notFoundContent={
-        <DropdownPlaceholder hasAccess={isHasAccess} searchText={searchText} />
-      }
+      notFoundContent={<DropdownPlaceholder hasAccess={isHasAccess} searchText={searchText} />}
     />
   );
 };

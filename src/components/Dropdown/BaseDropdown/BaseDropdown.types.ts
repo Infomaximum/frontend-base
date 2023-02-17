@@ -4,9 +4,7 @@ import type { IWithThemeProps } from "../../../decorators/hocs/withTheme/withThe
 import type { IDropdownParams } from "../Dropdown.types";
 import type { EBaseDropdownPlacement } from "./BaseDropdown";
 
-export interface IBaseDropdownProps
-  extends Partial<IDropdownParams>,
-    IWithThemeProps<TTheme> {
+export interface IBaseDropdownProps extends Partial<IDropdownParams>, IWithThemeProps<TTheme> {
   button: JSX.Element;
   placement?: EBaseDropdownPlacement;
   /**

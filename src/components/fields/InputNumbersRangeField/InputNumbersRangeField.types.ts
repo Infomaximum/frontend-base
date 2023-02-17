@@ -6,10 +6,7 @@ import type {
   TInputNumberFieldValue,
 } from "../InputNumberField/InputNumberField.types";
 
-export type TInputNumbersRangeFieldValue = [
-  TInputNumberFieldValue,
-  TInputNumberFieldValue
-];
+export type TInputNumbersRangeFieldValue = [TInputNumberFieldValue, TInputNumberFieldValue];
 
 export interface IInputNumbersRangeProps
   extends IInputNumberOwnProps,

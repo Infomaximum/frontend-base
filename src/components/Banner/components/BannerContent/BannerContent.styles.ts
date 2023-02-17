@@ -10,9 +10,7 @@ export const bannerContentParagraphStyle = {
   wordBreak: "break-word",
 } as const;
 
-export const bannerContentShowMoreStyle = (
-  backgroundColor: string | undefined
-) =>
+export const bannerContentShowMoreStyle = (backgroundColor: string | undefined) =>
   ({
     position: "absolute",
     bottom: 0,

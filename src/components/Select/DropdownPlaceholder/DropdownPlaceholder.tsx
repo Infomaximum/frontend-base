@@ -1,11 +1,7 @@
 import type React from "react";
 import { Empty } from "antd";
 import type { IDropdownPlaceholderProps } from "./DropdownPlaceholder.types";
-import {
-  emptyStyle,
-  emptyImageStyle,
-  hintStyle,
-} from "./DropdownPlaceholder.styles";
+import { emptyStyle, emptyImageStyle, hintStyle } from "./DropdownPlaceholder.styles";
 import NothingFoundBox from "../../../resources/icons/NothingFoundBox.svg";
 import NoAccess from "../../../resources/icons/NoAccess.svg";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
@@ -32,11 +28,7 @@ const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
   const theme = useTheme();
 
   if (!!searchText) {
-    return (
-      <span css={hintStyle}>
-        {localization.getLocalized(NOTHING_FOUND_CHANGE_QUERY)}
-      </span>
-    );
+    return <span css={hintStyle}>{localization.getLocalized(NOTHING_FOUND_CHANGE_QUERY)}</span>;
   }
 
   if (!hasAccess) {

@@ -48,8 +48,7 @@ class SelectInputFieldComponent extends React.PureComponent<ISelectInputComponen
 
   public override render() {
     const { children, placeholder } = this.props;
-    const { input, readOnly, autoFocus } = this
-      .props as ISelectInputComponentFieldProps &
+    const { input, readOnly, autoFocus } = this.props as ISelectInputComponentFieldProps &
       FieldRenderProps<TSelectInputFieldValue>;
 
     return (
@@ -87,9 +86,7 @@ class SelectInputField extends React.PureComponent<ISelectInputProps> {
 
   public override render() {
     const { name, ...rest } = this.props;
-    return (
-      <Field name={name} component={SelectInputFieldComponent} {...rest} />
-    );
+    return <Field name={name} component={SelectInputFieldComponent} {...rest} />;
   }
 }
 

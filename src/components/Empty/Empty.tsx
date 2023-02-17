@@ -45,9 +45,7 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
       emptyCaption = localization.getLocalized(NOTHING_FOUND);
     } else if (isBoolean(isFiltersEmpty) && !isFiltersEmpty) {
       emptyImage = <NoObjectsMatchingFilterCriteriaSVG />;
-      emptyCaption = localization.getLocalized(
-        NO_OBJECTS_MATCHING_FILTER_CRITERIA
-      );
+      emptyCaption = localization.getLocalized(NO_OBJECTS_MATCHING_FILTER_CRITERIA);
     } else if (isBoolean(isHasAccess) && !isHasAccess) {
       emptyImage = <NoAccessImage />;
       emptyCaption = localization.getLocalized(NO_ACCESS);
@@ -56,9 +54,7 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
     emptyCaption = description;
   }
 
-  const emptyDescription = (
-    <span css={emptyDescriptionStyle(theme)}>{emptyCaption}</span>
-  );
+  const emptyDescription = <span css={emptyDescriptionStyle(theme)}>{emptyCaption}</span>;
   const emptyHint = hint && <span css={emptyHintStyle(theme)}>{hint}</span>;
 
   const defaultEmptyContent = (
@@ -75,11 +71,7 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
 
   return (
     <div
-      css={
-        !!isTableComponent
-          ? [wrapperEmptyTableStyle, customEmptyTableStyle]
-          : wrapperEmptyStyle
-      }
+      css={!!isTableComponent ? [wrapperEmptyTableStyle, customEmptyTableStyle] : wrapperEmptyStyle}
     >
       {isUndefined(emptyContent) ? defaultEmptyContent : emptyContent}
     </div>

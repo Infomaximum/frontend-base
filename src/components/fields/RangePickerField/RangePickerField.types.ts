@@ -23,8 +23,7 @@ export interface IRangePickerProps
   extends IRangePickerOwnProps,
     FieldRenderProps<TRangePickerFieldValue> {}
 
-export interface IRangePickerOwnProps
-  extends Omit<RangePickerProps, TOmitRangePickerProps> {
+export interface IRangePickerOwnProps extends Omit<RangePickerProps, TOmitRangePickerProps> {
   // Почему-то RangePickerProps не содержит данный тип
   showTime?: RangePickerDateProps<Moment>["showTime"];
   momentFormat?: string;

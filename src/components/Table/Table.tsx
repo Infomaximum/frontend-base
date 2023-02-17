@@ -14,11 +14,7 @@ import {
   filter,
   isFunction,
 } from "lodash";
-import {
-  emptyTableStyle,
-  borderTopStyle,
-  transparentBordersStyle,
-} from "./Table.styles";
+import { emptyTableStyle, borderTopStyle, transparentBordersStyle } from "./Table.styles";
 import { type Interpolation, withTheme } from "@emotion/react";
 import { Empty } from "../Empty/Empty";
 import { observer } from "mobx-react";
@@ -36,10 +32,7 @@ import { TABLE_HEADER_ID, loaderDelay } from "../../utils/const";
 import { AutoSizer } from "react-virtualized";
 import { cssStyleConversion } from "../../styles";
 
-class TableComponent<T extends TDictionary> extends Component<
-  ITableProps<T>,
-  ITableState
-> {
+class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, ITableState> {
   public static defaultProps = {
     isShowDividers: true,
     showHeader: true,
@@ -51,9 +44,7 @@ class TableComponent<T extends TDictionary> extends Component<
   private headerHtml: HTMLElement | null = null;
 
   private expandable: ITableProps<T>["expandable"] = {
-    expandIcon: (props: RenderExpandIconProps<T>) => (
-      <TableExpandIcon {...props} />
-    ),
+    expandIcon: (props: RenderExpandIconProps<T>) => <TableExpandIcon {...props} />,
   };
 
   private components: ITableProps<T>["components"] = {
@@ -76,9 +67,7 @@ class TableComponent<T extends TDictionary> extends Component<
 
   public override componentDidMount() {
     if (this.wrapperRef.current) {
-      this.headerHtml = this.wrapperRef.current.querySelector(
-        `[id=${TABLE_HEADER_ID}]`
-      );
+      this.headerHtml = this.wrapperRef.current.querySelector(`[id=${TABLE_HEADER_ID}]`);
 
       if (this.props.isStretchToBottom) {
         window.addEventListener("resize", this.updateOnResize);
@@ -140,8 +129,7 @@ class TableComponent<T extends TDictionary> extends Component<
   private replaceScrollAreaHeight = createSelector(
     (y) => y,
     (y: number, scroll: ITableOwnProps<T>["scroll"]) => scroll,
-    (y: number, scroll: ITableOwnProps<T>["scroll"]) =>
-      ({ ...scroll, y } as const)
+    (y: number, scroll: ITableOwnProps<T>["scroll"]) => ({ ...scroll, y } as const)
   );
 
   private get headerHeight() {
@@ -151,9 +139,7 @@ class TableComponent<T extends TDictionary> extends Component<
       return 0;
     }
 
-    return this.headerHtml
-      ? this.headerHtml.offsetHeight
-      : theme.commonTableRowHeight;
+    return this.headerHtml ? this.headerHtml.offsetHeight : theme.commonTableRowHeight;
   }
 
   public updateOnResize = () => {
@@ -212,12 +198,7 @@ class TableComponent<T extends TDictionary> extends Component<
 
       newRowProps.onClick = (e) => {
         e.preventDefault();
-        rowSelection?.onSelect?.(
-          record,
-          !isSelected,
-          selectedRows,
-          e.nativeEvent
-        );
+        rowSelection?.onSelect?.(record, !isSelected, selectedRows, e.nativeEvent);
       };
 
       newRowProps.style = {
@@ -262,12 +243,7 @@ class TableComponent<T extends TDictionary> extends Component<
       : 0;
   }
 
-  private renderCheckboxCell(
-    value: boolean,
-    record: T,
-    index: number,
-    children: React.ReactNode
-  ) {
+  private renderCheckboxCell(value: boolean, record: T, index: number, children: React.ReactNode) {
     return <TableCheckboxCell>{children}</TableCheckboxCell>;
   }
 
@@ -290,8 +266,7 @@ class TableComponent<T extends TDictionary> extends Component<
 
     /** Передана ли явно высота области прокрутки */
     const isExplicitHeight = has(this.props.scroll, "y");
-    const isStretchedHeight =
-      !isExplicitHeight && (isStretchByParent || isStretchToBottom);
+    const isStretchedHeight = !isExplicitHeight && (isStretchByParent || isStretchToBottom);
 
     return (
       <div style={this.wrapperStyle} ref={this.wrapperRef}>
@@ -301,10 +276,7 @@ class TableComponent<T extends TDictionary> extends Component<
             const scrollAreaHeight = height - this.headerHeight - 1;
 
             const scroll = isStretchedHeight
-              ? this.replaceScrollAreaHeight(
-                  scrollAreaHeight,
-                  this.props.scroll
-                )
+              ? this.replaceScrollAreaHeight(scrollAreaHeight, this.props.scroll)
               : this.props.scroll;
 
             return isVirtualized ? (
@@ -329,9 +301,7 @@ class TableComponent<T extends TDictionary> extends Component<
                   loading={loading}
                   columns={columns}
                   showSorterTooltip={false}
-                  expandable={
-                    this.state.isExpandableTable ? this.expandable : undefined
-                  }
+                  expandable={this.state.isExpandableTable ? this.expandable : undefined}
                   components={this.getTableComponents(components)}
                   rowSelection={this.getRowSelectionConfig(rowSelection)}
                   scroll={scroll}

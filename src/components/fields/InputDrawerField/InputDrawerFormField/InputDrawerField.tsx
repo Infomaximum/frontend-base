@@ -17,10 +17,7 @@ import { TableCellField } from "../../TableCellField/TableCellField";
 import { headerModes } from "../../../DataTable/DataTableHeader/DataTableHeader";
 import { DataTableDrawer } from "../../../drawers/DataTableDrawer/DataTableDrawer";
 
-class InputDrawer extends React.PureComponent<
-  IInputDrawerProps,
-  IInputDrawerState
-> {
+class InputDrawer extends React.PureComponent<IInputDrawerProps, IInputDrawerState> {
   public static defaultProps: Partial<IInputDrawerProps> = {
     mode: undefined,
     isDrawerEnabled: true,
@@ -52,9 +49,7 @@ class InputDrawer extends React.PureComponent<
     } = this.props;
 
     if (onChange) {
-      const newValue = removeContradictions
-        ? this.removeContradictions(value)
-        : value;
+      const newValue = removeContradictions ? this.removeContradictions(value) : value;
 
       onChange(newValue ?? []);
 
@@ -80,18 +75,12 @@ class InputDrawer extends React.PureComponent<
     }
   };
 
-  private removeContradictions(
-    models: TInputDrawerFieldValue
-  ): TInputDrawerFieldValue {
-    const modelsMap = new Map(
-      map(models, (model) => [model.getInnerName(), model])
-    );
+  private removeContradictions(models: TInputDrawerFieldValue): TInputDrawerFieldValue {
+    const modelsMap = new Map(map(models, (model) => [model.getInnerName(), model]));
 
     // Если хотя бы один родитель элемента есть в списке, удаляем элемент из списка
     forEach(models, (model) => {
-      const parents = (
-        model as IModel & { getParents?(): TNullable<IModel[]> }
-      ).getParents?.();
+      const parents = (model as IModel & { getParents?(): TNullable<IModel[]> }).getParents?.();
       if (some(parents, (parent) => modelsMap.has(parent.getInnerName()))) {
         modelsMap.delete(model.getInnerName());
       }
@@ -182,9 +171,7 @@ class InputDrawer extends React.PureComponent<
           onFocus={this.handleFocus}
           placeholder={placeholder}
           onChange={this.handleChange}
-          onSuffixClick={
-            isDrawerEnabled && !isDisabled ? this.showDrawer : undefined
-          }
+          onSuffixClick={isDrawerEnabled && !isDisabled ? this.showDrawer : undefined}
           hintContainer={hintContainer}
           handlerDisplayValues={handlerDisplayValues}
           handlerTitleValues={handlerTitleValues}
@@ -214,9 +201,9 @@ const InputDrawerFormField: React.FC<IInputDrawerFormFieldProps> = (props) => (
   />
 );
 
-const InputDrawerTableCellField: React.FC<
-  IInputDrawerFieldProps & ICommonTableCellProps
-> = (props) => {
+const InputDrawerTableCellField: React.FC<IInputDrawerFieldProps & ICommonTableCellProps> = (
+  props
+) => {
   return <TableCellField component={InputDrawerField} {...props} />;
 };
 

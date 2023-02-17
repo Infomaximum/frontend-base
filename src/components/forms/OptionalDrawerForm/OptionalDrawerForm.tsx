@@ -1,21 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  SelectFormField,
-  SelectFieldComponent,
-} from "../../fields/SelectField/SelectField";
+import { SelectFormField, SelectFieldComponent } from "../../fields/SelectField/SelectField";
 import type { IOptionalDrawerFormProps } from "./OptionalDrawerForm.types";
 import { filter, first, gt, map, size } from "lodash";
 import { Col, Row } from "antd";
 import type { IDrawerFormProps } from "../DrawerForm/DrawerForm.types";
-import {
-  extractActiveContent,
-  optionalDrawerFormSelect,
-} from "./OptionalDrawerForm.utils";
-import {
-  contentWrapperStyle,
-  headerStyle,
-  stretchStyle,
-} from "./OptionalDrawerForm.styles";
+import { extractActiveContent, optionalDrawerFormSelect } from "./OptionalDrawerForm.utils";
+import { contentWrapperStyle, headerStyle, stretchStyle } from "./OptionalDrawerForm.styles";
 import { optionalDrawerFormSelectTestId } from "../../../utils/TestIds";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useForm } from "../../../decorators/hooks/useForm";
@@ -75,12 +65,7 @@ const OptionalDrawerFormComponent: React.FC<IOptionalDrawerFormProps> = ({
   const selectOptions = useMemo(
     () =>
       map(filter(optionsConfig, "label"), ({ label, value, disabled }) => (
-        <Option
-          key={value}
-          test-id={`select-option-${value}`}
-          value={value}
-          disabled={disabled}
-        >
+        <Option key={value} test-id={`select-option-${value}`} value={value} disabled={disabled}>
           <span title={undefined}>{label}</span>
         </Option>
       )),

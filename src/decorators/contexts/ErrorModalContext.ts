@@ -3,10 +3,7 @@ import { assertSimple } from "@im/asserts";
 import { createContext } from "react";
 
 export interface IErrorModalContextContextData {
-  showModalError: (
-    error: NCore.TError | undefined,
-    closeCb?: () => void
-  ) => void;
+  showModalError: (error: NCore.TError | undefined, closeCb?: () => void) => void;
 }
 
 export const ErrorModalContext = createContext<IErrorModalContextContextData>({

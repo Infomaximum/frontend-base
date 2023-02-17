@@ -27,11 +27,7 @@ const populateWithRest = (
   let items: any[] | null = null;
   let newData: TModelStruct | null = null;
 
-  for (
-    let groupIndex = 0;
-    groupIndex < groupFieldNames.length;
-    groupIndex += 1
-  ) {
+  for (let groupIndex = 0; groupIndex < groupFieldNames.length; groupIndex += 1) {
     groupFieldName = groupFieldNames[groupIndex] ?? null;
     if (groupFieldName && data[groupFieldName]) {
       newData = { ...data };
@@ -74,11 +70,7 @@ const populateWithRest = (
   if (items) {
     for (let itemIndex = 0; itemIndex < items.length; itemIndex += 1) {
       const item = items[itemIndex];
-      items[itemIndex] = populateWithRest(
-        item,
-        groupFieldNames,
-        nextCountFieldNames
-      );
+      items[itemIndex] = populateWithRest(item, groupFieldNames, nextCountFieldNames);
     }
   }
 
@@ -102,12 +94,8 @@ const populateWithRest = (
  * (next_count, next_windows_count)
  * @returns {Function}
  */
-export const showMoreAddStoreExt = (
-  params = {}
-): NStore.TPrepareDataFunc<Store<Model>> => {
-  const { groupFieldNames = ["items"], nextCountFieldNames = ["next_count"] } =
-    params as IParams;
+export const showMoreAddStoreExt = (params = {}): NStore.TPrepareDataFunc<Store<Model>> => {
+  const { groupFieldNames = ["items"], nextCountFieldNames = ["next_count"] } = params as IParams;
 
-  return ({ data }) =>
-    data ? populateWithRest(data, groupFieldNames, nextCountFieldNames) : data;
+  return ({ data }) => (data ? populateWithRest(data, groupFieldNames, nextCountFieldNames) : data);
 };

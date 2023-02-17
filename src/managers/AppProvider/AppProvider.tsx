@@ -52,10 +52,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     children,
   } = props;
 
-  const localizationInstance = useMemo(
-    () => new Localization({ language }),
-    [language]
-  );
+  const localizationInstance = useMemo(() => new Localization({ language }), [language]);
 
   useEffect(() => {
     const currentLanguage = localizationInstance.getLanguage();
@@ -88,24 +85,18 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
 
   return (
     <AppErrorBoundary code={EErrorBoundaryCodesBase.app}>
-      <MainSystemPagePathContext.Provider
-        value={mainSystemPagePath ?? rootPath}
-      >
+      <MainSystemPagePathContext.Provider value={mainSystemPagePath ?? rootPath}>
         <DebugModeContext.Provider value={!!isDebugMode}>
           <BrowserRouter basename={baseName ?? historyStore.basename}>
             <ThemeProvider theme={_theme}>
               <LocalizationContext.Provider value={localizationInstance}>
-                <FeatureContext.Provider
-                  value={featureChecker ?? defaultChecker}
-                >
+                <FeatureContext.Provider value={featureChecker ?? defaultChecker}>
                   <ErrorModalProvider isDebugMode={!!isDebugMode}>
                     <ConfigProvider locale={locale}>
                       <DataInitializer>
                         <Global styles={globalStyles(_theme)} />
 
-                        {typeof children === "function"
-                          ? children(routerProvider)
-                          : routerProvider}
+                        {typeof children === "function" ? children(routerProvider) : routerProvider}
                       </DataInitializer>
                     </ConfigProvider>
                   </ErrorModalProvider>

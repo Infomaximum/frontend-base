@@ -9,9 +9,7 @@ import type { RadioChangeEvent } from "antd/lib/radio";
 import { radioGroupStyle } from "./RadioGroupField.style";
 import { Field, FormField } from "../FormField";
 
-const RadioGroupContainer: React.FC<IRadioGroupFieldContainerProps> = (
-  props
-) => {
+const RadioGroupContainer: React.FC<IRadioGroupFieldContainerProps> = (props) => {
   const { children, readOnly, disabled, input, ...rest } = props;
 
   const onChange = React.useCallback(

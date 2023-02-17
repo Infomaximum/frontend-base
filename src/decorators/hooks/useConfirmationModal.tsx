@@ -64,9 +64,7 @@ export const useConfirmationModal = <T,>(params: TConfirmationParams<T>) => {
       const { loc, titleLoc } = params;
 
       const title =
-        typeof titleLoc === "function"
-          ? titleLoc(data)
-          : localization.getLocalized(titleLoc);
+        typeof titleLoc === "function" ? titleLoc(data) : localization.getLocalized(titleLoc);
 
       return (
         <ConfirmationModal
@@ -75,20 +73,11 @@ export const useConfirmationModal = <T,>(params: TConfirmationParams<T>) => {
           onConfirm={handleConfirm}
           buttonOkText={SAVE}
         >
-          {typeof loc === "function"
-            ? loc(data)
-            : localization.getLocalized(loc)}
+          {typeof loc === "function" ? loc(data) : localization.getLocalized(loc)}
         </ConfirmationModal>
       );
     }
-  }, [
-    params,
-    data,
-    handleAfterCancel,
-    handleConfirm,
-    isShowModal,
-    localization,
-  ]);
+  }, [params, data, handleAfterCancel, handleConfirm, isShowModal, localization]);
 
   return { renderConfirmationModal, handleAction };
 };

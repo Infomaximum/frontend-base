@@ -10,9 +10,7 @@ import { LoadingOutlined } from "../../../Icons/Icons";
 /**
  * Кнопка, которая делает submit текущих значений формы-строки таблицы
  */
-const EditableRowSubmitButtonComponent: React.FC<
-  IEditableRowSubmitButtonProps
-> = ({
+const EditableRowSubmitButtonComponent: React.FC<IEditableRowSubmitButtonProps> = ({
   disableOnPristine = true,
   disableOnInvalid = false,
   formProvider: formProviderProp,
@@ -31,14 +29,11 @@ const EditableRowSubmitButtonComponent: React.FC<
     );
   }
 
-  const { submitting, pristine, hasValidationErrors } =
-    useFormButtonState(formProvider);
+  const { submitting, pristine, hasValidationErrors } = useFormButtonState(formProvider);
 
   const isDisabled =
     disabled ??
-    (submitting ||
-      (disableOnPristine && pristine) ||
-      (disableOnInvalid && hasValidationErrors));
+    (submitting || (disableOnPristine && pristine) || (disableOnInvalid && hasValidationErrors));
 
   const handleClick = formProvider.submit;
 

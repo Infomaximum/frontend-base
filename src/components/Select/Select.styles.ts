@@ -18,91 +18,90 @@ export const multipleSelectStyle = {
     },
 };
 
-export const displaySelectStyle =
-  (iconSlotCount: number) => (theme: TTheme) => {
-    const iconWidths = takeRight([24, 28], iconSlotCount);
-    const suffixWidth = sum(iconWidths);
-    const iconHeight = 28;
-    const inputRightPadding = suffixWidth ? 4 : 3;
+export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => {
+  const iconWidths = takeRight([24, 28], iconSlotCount);
+  const suffixWidth = sum(iconWidths);
+  const iconHeight = 28;
+  const inputRightPadding = suffixWidth ? 4 : 3;
 
-    return {
-      display: "block",
-      color: theme.grey9Color,
-      lineHeight: "22px",
+  return {
+    display: "block",
+    color: theme.grey9Color,
+    lineHeight: "22px",
 
-      ".ant-select-selector": {
-        paddingRight: `${suffixWidth}px !important`,
+    ".ant-select-selector": {
+      paddingRight: `${suffixWidth}px !important`,
 
-        ".ant-select-selection-search-input": {
-          textOverflow: "ellipsis",
-        },
-
-        ".ant-select-selection-overflow": {
-          paddingRight: `${inputRightPadding}px`,
-        },
-
-        "& > .ant-select-selection-search": {
-          right: `${suffixWidth}px`,
-          paddingRight: `${inputRightPadding}px`,
-        },
-
-        // overlay для работы cursor: pointer
-        "&:before": {
-          position: "absolute",
-          width: `${suffixWidth}px`,
-          height: `${iconHeight}px`,
-          top: "-1px",
-          right: "-1px",
-          cursor: "pointer",
-          content: "''",
-        },
-
-        ".ant-select-selection-placeholder": {
-          width: `calc(100% - ${suffixWidth}px)`,
-        },
+      ".ant-select-selection-search-input": {
+        textOverflow: "ellipsis",
       },
-      ".ant-select-selection-item": {
-        paddingRight: "0px !important",
-        display: "flex",
-        alignItems: "center",
-        // Для центрирования тегов
-        "> span": {
-          display: "flex",
-          alignItems: "center",
-        },
+
+      ".ant-select-selection-overflow": {
+        paddingRight: `${inputRightPadding}px`,
       },
-      ".ant-select-arrow, .ant-select-clear": {
-        top: 0,
-        marginTop: 0,
+
+      "& > .ant-select-selection-search": {
+        right: `${suffixWidth}px`,
+        paddingRight: `${inputRightPadding}px`,
+      },
+
+      // overlay для работы cursor: pointer
+      "&:before": {
+        position: "absolute",
+        width: `${suffixWidth}px`,
         height: `${iconHeight}px`,
+        top: "-1px",
+        right: "-1px",
+        cursor: "pointer",
+        content: "''",
       },
-      ".ant-select-clear": {
-        width: `${first(iconWidths)}px`,
-        right: `${sum(tail(iconWidths))}px`,
-        opacity: 1,
-        color: `${theme.grey6Color}`,
-        background: "transparent",
-        display: "flex",
-        alignItems: "center",
-        fontSize: "14px",
-        paddingLeft: "5px",
-        ":hover": {
-          color: theme.grey9Color,
-        },
-        ".anticon-close-circle": {
-          background: theme.grey1Color, // для перекрытия иконки стрелки
-        },
+
+      ".ant-select-selection-placeholder": {
+        width: `calc(100% - ${suffixWidth}px)`,
       },
-      ".ant-select-arrow": {
-        width: `${last(iconWidths)}px`,
-        right: 0,
-      },
-      ".ant-select.ant-select-in-form-item": {
+    },
+    ".ant-select-selection-item": {
+      paddingRight: "0px !important",
+      display: "flex",
+      alignItems: "center",
+      // Для центрирования тегов
+      "> span": {
         display: "flex",
         alignItems: "center",
       },
-    } as const;
-  };
+    },
+    ".ant-select-arrow, .ant-select-clear": {
+      top: 0,
+      marginTop: 0,
+      height: `${iconHeight}px`,
+    },
+    ".ant-select-clear": {
+      width: `${first(iconWidths)}px`,
+      right: `${sum(tail(iconWidths))}px`,
+      opacity: 1,
+      color: `${theme.grey6Color}`,
+      background: "transparent",
+      display: "flex",
+      alignItems: "center",
+      fontSize: "14px",
+      paddingLeft: "5px",
+      ":hover": {
+        color: theme.grey9Color,
+      },
+      ".anticon-close-circle": {
+        background: theme.grey1Color, // для перекрытия иконки стрелки
+      },
+    },
+    ".ant-select-arrow": {
+      width: `${last(iconWidths)}px`,
+      right: 0,
+    },
+    ".ant-select.ant-select-in-form-item": {
+      display: "flex",
+      alignItems: "center",
+    },
+  } as const;
+};
 
 export const commonTagStyle = (theme: TTheme) => ({
   fontSize: `${theme.h5FontSize}px`,

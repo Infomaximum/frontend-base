@@ -13,10 +13,7 @@ export interface ITableRadioGroupFieldContainerProps<T>
 
 export interface ITableRadioGroupFieldContainerOwnProps<T>
   extends Omit<RadioGroupProps, "name">,
-    Omit<
-      ITableOwnProps<T>,
-      "onChange" | "targetAll" | "isVirtualized" | "headerMode"
-    > {
+    Omit<ITableOwnProps<T>, "onChange" | "targetAll" | "isVirtualized" | "headerMode"> {
   readOnly?: boolean;
   rightLabel?: React.ReactNode;
   tableProps?: Omit<ITableOwnProps<T>, "onChange" | "localization">;
@@ -25,10 +22,7 @@ export interface ITableRadioGroupFieldContainerOwnProps<T>
 export interface ITableRadioGroupFieldProps<
   T extends Record<string, unknown> = Record<string, unknown>
 > extends Omit<
-      IFieldProps<
-        TTableRadioGroupFieldValue,
-        ITableRadioGroupFieldContainerProps<T>
-      >,
+      IFieldProps<TTableRadioGroupFieldValue, ITableRadioGroupFieldContainerProps<T>>,
       "component"
     >,
     ITableRadioGroupFieldContainerOwnProps<T> {
@@ -38,10 +32,7 @@ export interface ITableRadioGroupFieldProps<
 export interface ITableRadioGroupFormFieldProps<
   T extends Record<string, unknown> = Record<string, unknown>
 > extends Omit<
-      IFormFieldProps<
-        TTableRadioGroupFieldValue,
-        ITableRadioGroupFieldContainerProps<T>
-      >,
+      IFormFieldProps<TTableRadioGroupFieldValue, ITableRadioGroupFieldContainerProps<T>>,
       "component"
     >,
     ITableRadioGroupFieldContainerOwnProps<T> {}

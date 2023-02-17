@@ -11,9 +11,7 @@ const SwitchComponent: FC<ISwitchProps> = (props) => {
   return (
     <AntSwitch
       {...props}
-      css={
-        props.checked ? checkedSwitchStyle(theme) : uncheckedSwitchStyle(theme)
-      }
+      css={props.checked ? checkedSwitchStyle(theme) : uncheckedSwitchStyle(theme)}
     />
   );
 };

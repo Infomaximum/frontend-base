@@ -3,13 +3,7 @@ import { InvalidIndex } from "@im/utils";
 import { buildTreeFromList } from "../utils/extensions/graphqlTree.storeExt";
 import { RestModel } from "../models/RestModel";
 import { cloneDeep, set, unset, xor } from "lodash";
-import {
-  Group,
-  IModel,
-  Model,
-  TModelStruct,
-  TypenameToModel,
-} from "@im/models";
+import { Group, IModel, Model, TModelStruct, TypenameToModel } from "@im/models";
 import { assertSimple } from "@im/asserts";
 
 type TItems = TreeItemModel | TreeGroupModel | RestModel;
@@ -64,10 +58,7 @@ class TreeItemModel extends Model {
 
 typenameToModel.registrationModels([TreeGroupModel, TreeItemModel, RestModel]);
 
-const generateRawData = (
-  data: TNestedData,
-  parents: number[]
-): TModelStruct[] => {
+const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] => {
   const checkIsGroup = (data: TNestedData): data is TNestedGroup => {
     return (data as TNestedGroup).items !== undefined;
   };
@@ -89,9 +80,7 @@ const generateRawData = (
   if (checkIsGroup(data)) {
     const nextParents = ~data.id ? [...parents, data.id] : parents;
 
-    const children = data.items.flatMap((item: TNestedData) =>
-      generateRawData(item, nextParents)
-    );
+    const children = data.items.flatMap((item: TNestedData) => generateRawData(item, nextParents));
 
     return [
       {
@@ -274,10 +263,7 @@ describe("Тесты методов класса 'TreeManager'", () => {
       indeterminateKeys: [],
     });
 
-    const expectedAfterSecondClick = [
-      "tree_component_model_10",
-      "tree_component_model_11",
-    ];
+    const expectedAfterSecondClick = ["tree_component_model_10", "tree_component_model_11"];
 
     tree.handleSelect(tree.getNodeByKey("tree_component_group_9"), false);
     testState(tree, {
@@ -465,12 +451,8 @@ describe("Тесты методов класса 'TreeManager'", () => {
     tree.updateSelection();
 
     const checkedState = tree.getCheckedStateDispatchData();
-    expect(checkedState.accumulatedKeys).not.toContain(
-      "tree_component_model_18"
-    );
-    expect(checkedState.accumulatedKeys).not.toContain(
-      "tree_component_model_19"
-    );
+    expect(checkedState.accumulatedKeys).not.toContain("tree_component_model_18");
+    expect(checkedState.accumulatedKeys).not.toContain("tree_component_model_19");
   });
 
   it("'Показать ещё' в отфильтрованном дереве никогда не выделяется", () => {
@@ -544,9 +526,7 @@ describe("Тесты методов класса 'TreeManager'", () => {
       rowBuilder,
       isCheckable: true,
       isGroupSelection: true,
-      defaultCheckedModels: [
-        new TreeGroupModel({ struct: { id: 5, __typename: typenameGroup } }),
-      ],
+      defaultCheckedModels: [new TreeGroupModel({ struct: { id: 5, __typename: typenameGroup } })],
     });
     tree.onModelChange(rootModel, {});
     tree.updateSelection();
@@ -612,8 +592,6 @@ describe("Тесты методов класса 'TreeManager'", () => {
     tree.onModelChange(rootModel, { isFilteredTree: false });
     tree.updateSelection();
 
-    expect(tree.getCheckedStateDispatchData().keys).not.toContain(
-      "tree_component_model_12"
-    );
+    expect(tree.getCheckedStateDispatchData().keys).not.toContain("tree_component_model_12");
   });
 });

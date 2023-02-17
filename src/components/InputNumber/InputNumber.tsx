@@ -4,16 +4,12 @@ import { forwardRef } from "react";
 import { disabledInputStyle } from "./InputNumber.styles";
 import type { IInputNumberProps } from "./InputNumber.types";
 
-const InputNumberComponent: FC<
-  IInputNumberProps & RefAttributes<HTMLInputElement>
-> = forwardRef((props, ref: Ref<HTMLInputElement>) => {
-  return (
-    <AntInputNumber
-      {...props}
-      ref={ref}
-      css={props.disabled ? disabledInputStyle : undefined}
-    />
-  );
-});
+const InputNumberComponent: FC<IInputNumberProps & RefAttributes<HTMLInputElement>> = forwardRef(
+  (props, ref: Ref<HTMLInputElement>) => {
+    return (
+      <AntInputNumber {...props} ref={ref} css={props.disabled ? disabledInputStyle : undefined} />
+    );
+  }
+);
 
 export const InputNumber = InputNumberComponent;

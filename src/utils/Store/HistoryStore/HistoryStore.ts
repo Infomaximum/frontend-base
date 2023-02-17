@@ -26,27 +26,20 @@ export class HistoryStore {
      */
     if (
       process.env.NODE_ENV !== "test" &&
-      !pathname.includes(
-        basePrefix.at(-1) === "/" ? `${basePrefix}/` : basePrefix
-      )
+      !pathname.includes(basePrefix.at(-1) === "/" ? `${basePrefix}/` : basePrefix)
     ) {
       window.history.replaceState(
         "",
         "",
         `${
-          pathname.at(-1) !== "/"
-            ? pathname
-            : pathname.substring(0, pathname.length - 1)
+          pathname.at(-1) !== "/" ? pathname : pathname.substring(0, pathname.length - 1)
         }${basePrefix}`
       );
     }
   }
 
   public get location() {
-    assertSimple(
-      !!this._location,
-      "Объект location не инициализирован в historyStore"
-    );
+    assertSimple(!!this._location, "Объект location не инициализирован в historyStore");
 
     return this._location;
   }
@@ -56,10 +49,7 @@ export class HistoryStore {
   }
 
   public get navigate() {
-    assertSimple(
-      !!this._navigate,
-      "Метод navigate не инициализирован в historyStore"
-    );
+    assertSimple(!!this._navigate, "Метод navigate не инициализирован в historyStore");
 
     return this._navigate;
   }

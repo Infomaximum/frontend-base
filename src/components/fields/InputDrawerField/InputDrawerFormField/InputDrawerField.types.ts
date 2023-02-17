@@ -74,10 +74,7 @@ export interface IInputDrawerOwnProps
    */
   labelPropsGetter?: (
     value: IModel
-  ) => React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  >;
+  ) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 }
 
 export interface IInputDrawerState {

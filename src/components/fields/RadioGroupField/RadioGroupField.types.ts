@@ -9,8 +9,7 @@ export interface IRadioGroupFieldContainerProps
   extends IRadioGroupFieldContainerOwnProps,
     FieldRenderProps<TRadioFroupFieldValue> {}
 
-export interface IRadioGroupFieldContainerOwnProps
-  extends Omit<RadioGroupProps, "name"> {
+export interface IRadioGroupFieldContainerOwnProps extends Omit<RadioGroupProps, "name"> {
   readOnly?: boolean;
   rightLabel?: React.ReactNode;
 }

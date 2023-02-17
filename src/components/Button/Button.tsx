@@ -73,13 +73,7 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
 
     return (
       <Tooltip title={props.title}>
-        <AntButton
-          {...rest}
-          css={buttonStyles}
-          ref={ref}
-          title={undefined}
-          type={getType()}
-        />
+        <AntButton {...rest} css={buttonStyles} ref={ref} title={undefined} type={getType()} />
       </Tooltip>
     );
   }

@@ -6,17 +6,12 @@ import type { IOptionalDrawerFormProps } from "../../forms/OptionalDrawerForm/Op
 import type { IModel } from "@im/models";
 import type { IColumnProps } from "../../VirtualizedTable/VirtualizedTable.types";
 
-export interface IDataTableDrawerOwnProps<
-  T extends IConvertedModel = IConvertedModel
-> extends DrawerProps,
+export interface IDataTableDrawerOwnProps<T extends IConvertedModel = IConvertedModel>
+  extends DrawerProps,
     Omit<IDataTableDrawerContentProps<T>, "columns">,
     Pick<
       IOptionalDrawerFormProps,
-      | "optionsConfig"
-      | "defaultOption"
-      | "defaultContent"
-      | "contents"
-      | "setFormData"
+      "optionsConfig" | "defaultOption" | "defaultContent" | "contents" | "setFormData"
     > {
   selectedModels?: IModel[];
   onSaveData(
@@ -33,12 +28,7 @@ export interface IDataTableDrawerOwnProps<
   notification?:
     | React.ReactNode
     | (() => React.ReactNode)
-    | [
-        (
-          formValues?: TDictionary,
-          props?: any
-        ) => React.ReactNode | React.ReactNode[]
-      ];
+    | [(formValues?: TDictionary, props?: any) => React.ReactNode | React.ReactNode[]];
   /**
    * Запрещать ли submit при пустой форме
    */
@@ -54,9 +44,8 @@ export interface IDataTableDrawerOwnProps<
   disableSubmitFormButton?: boolean;
 }
 
-export interface IDataTableDrawerProps<
-  T extends IConvertedModel = IConvertedModel
-> extends IDataTableDrawerOwnProps<T> {
+export interface IDataTableDrawerProps<T extends IConvertedModel = IConvertedModel>
+  extends IDataTableDrawerOwnProps<T> {
   treeCheckedStateCleanSetter?: (treeCheckedStateCleaner: () => void) => void;
 }
 

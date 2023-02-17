@@ -6,10 +6,7 @@ import type {
   ISelectFormFieldProps,
   ISelectComponentProps,
 } from "./SelectField.types";
-import {
-  defaultWrapperComponentStyle,
-  defaultSelectFieldStyle,
-} from "./SelectField.styles";
+import { defaultWrapperComponentStyle, defaultSelectFieldStyle } from "./SelectField.styles";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
 import { isNil } from "lodash";
 import { Select } from "../../Select/Select";
@@ -55,9 +52,7 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
   );
 
   if (localization && readOnly && isNil(value)) {
-    return (
-      <Input value={localization.getLocalized(NOT_SELECTED)} disabled={true} />
-    );
+    return <Input value={localization.getLocalized(NOT_SELECTED)} disabled={true} />;
   }
 
   return (
@@ -78,12 +73,7 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
 });
 
 export const SelectFieldComponent: React.FC<ISelectFieldProps> = (props) => {
-  const {
-    searchValue: searchValueProps,
-    onSearch,
-    showSearch = false,
-    ...rest
-  } = props;
+  const { searchValue: searchValueProps, onSearch, showSearch = false, ...rest } = props;
 
   const [searchValueState, setSearchValueState] = useState("");
 
@@ -128,9 +118,9 @@ export class SelectFormFieldComponent extends React.PureComponent<ISelectFormFie
   }
 }
 
-export const SelectTableCellField: React.FC<
-  ISelectFieldProps & ICommonTableCellProps
-> = (props) => {
+export const SelectTableCellField: React.FC<ISelectFieldProps & ICommonTableCellProps> = (
+  props
+) => {
   return <TableCellField component={SelectFieldComponent} {...props} />;
 };
 

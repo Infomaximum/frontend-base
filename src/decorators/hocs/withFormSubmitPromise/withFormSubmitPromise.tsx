@@ -2,10 +2,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { map, forEach, isArray, isFunction } from "lodash";
 import type { TPropInjector } from "@im/utils";
 import { FormCancelSymbol } from "@im/utils";
-import type {
-  IWithFormSubmitPromiseProps,
-  TFormConfig,
-} from "./withFormSubmitPromise.types";
+import type { IWithFormSubmitPromiseProps, TFormConfig } from "./withFormSubmitPromise.types";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import {
   excludeArrayFieldWrapperNames,
@@ -18,14 +15,8 @@ import { handleErrorInternal } from "../../../managers/Errors/Errors";
 import type { IFormProvider } from "../../contexts/FormContext";
 import { Message } from "../../../components/Message/Message";
 
-const withFormSubmitPromise: TPropInjector<IWithFormSubmitPromiseProps> = (
-  Component: any
-) => {
-  const WithFormSubmitPromise: React.FC<any> = ({
-    onSubmit,
-    notification,
-    ...rest
-  }) => {
+const withFormSubmitPromise: TPropInjector<IWithFormSubmitPromiseProps> = (Component: any) => {
+  const WithFormSubmitPromise: React.FC<any> = ({ onSubmit, notification, ...rest }) => {
     const localization = useLocalization();
     const formConfigRef = useRef<TFormConfig>({});
 
@@ -66,14 +57,10 @@ const withFormSubmitPromise: TPropInjector<IWithFormSubmitPromiseProps> = (
           await onSubmit(formValues, form, callback);
 
           if (notification) {
-            const resultNotification = isArray(notification)
-              ? notification
-              : [notification];
+            const resultNotification = isArray(notification) ? notification : [notification];
 
             const notifications = map(resultNotification, (notification) =>
-              isFunction(notification)
-                ? notification(formValues, rest)
-                : notification
+              isFunction(notification) ? notification(formValues, rest) : notification
             );
 
             forEach(notifications, (notification) => {
@@ -106,9 +93,7 @@ const withFormSubmitPromise: TPropInjector<IWithFormSubmitPromiseProps> = (
           const errorFieldName = findErrorFieldName(formFieldsError);
 
           if (errorFieldName) {
-            const errorField = document.querySelector(
-              `[data-name=${errorFieldName}]`
-            );
+            const errorField = document.querySelector(`[data-name=${errorFieldName}]`);
 
             if (errorField) {
               errorField.scrollIntoView({ behavior: "smooth" });
@@ -121,9 +106,7 @@ const withFormSubmitPromise: TPropInjector<IWithFormSubmitPromiseProps> = (
       [localization, notification, onSubmit, rest]
     );
 
-    return (
-      <Component key="connectedForm" {...rest} onSubmit={handleFormSubmit} />
-    );
+    return <Component key="connectedForm" {...rest} onSubmit={handleFormSubmit} />;
   };
 
   return hoistNonReactStatics(WithFormSubmitPromise, Component) as any;

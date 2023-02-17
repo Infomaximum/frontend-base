@@ -17,20 +17,13 @@ class WrappedField<V> extends React.PureComponent<IWrappedFieldProps<V>> {
   }
 
   public override componentDidUpdate(prevProps: IWrappedFieldProps<V>) {
-    if (
-      this.props.setFieldProvider &&
-      !isEqual(this.props.meta, prevProps.meta)
-    ) {
+    if (this.props.setFieldProvider && !isEqual(this.props.meta, prevProps.meta)) {
       this.props.setFieldProvider({ meta: this.props.meta });
     }
   }
 
   public override render() {
-    const {
-      fieldComponent: FieldComponent,
-      setFieldProvider,
-      ...rest
-    } = this.props;
+    const { fieldComponent: FieldComponent, setFieldProvider, ...rest } = this.props;
 
     return FieldComponent ? <FieldComponent {...rest} /> : null;
   }
@@ -56,10 +49,7 @@ const FieldComponent = <V, P extends FieldRenderProps<V> = FieldRenderProps<V>>(
   const { hasWriteAccess } = getAccessParameters(isFeatureEnabled, accessKeys);
   const { access, formProvider } = useContext(FormContext);
 
-  const {
-    hasReadAccess: isFormHasAccess,
-    hasWriteAccess: isFormHasWriteAccess,
-  } = access;
+  const { hasReadAccess: isFormHasAccess, hasWriteAccess: isFormHasWriteAccess } = access;
 
   const validate = useMemo(() => {
     if (isFunction(validateProp)) {
@@ -79,9 +69,7 @@ const FieldComponent = <V, P extends FieldRenderProps<V> = FieldRenderProps<V>>(
         const formValues = formProvider.getState().values;
         const value = formValues[props.name];
         const fieldState = formProvider.getFieldState(props.name);
-        formProvider.mutators.setFieldError?.(
-          validate(value, formValues, fieldState)
-        );
+        formProvider.mutators.setFieldError?.(validate(value, formValues, fieldState));
       } else {
         formProvider.mutators.setFieldError?.();
       }

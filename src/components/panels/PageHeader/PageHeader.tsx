@@ -13,14 +13,7 @@ import { useTheme } from "../../../decorators/hooks/useTheme";
 import { cssStyleConversion } from "../../../styles";
 
 const PageHeaderComponent: React.FC<IPageHeaderProps> = (props) => {
-  const {
-    title,
-    onBack,
-    titleStyle,
-    leftOutlinedIcon,
-    titleWrapperStyle,
-    ...rest
-  } = props;
+  const { title, onBack, titleStyle, leftOutlinedIcon, titleWrapperStyle, ...rest } = props;
 
   const theme = useTheme();
 
@@ -32,30 +25,13 @@ const PageHeaderComponent: React.FC<IPageHeaderProps> = (props) => {
     return (
       <div
         onClick={onBack}
-        css={cssStyleConversion(
-          theme,
-          titleWrapperStyle ?? headerTitleWrapperStyle
-        )}
+        css={cssStyleConversion(theme, titleWrapperStyle ?? headerTitleWrapperStyle)}
       >
-        {leftOutlinedIcon ?? (
-          <ArrowLeftOutlined test-id={testId} css={iconBackStyle(theme)} />
-        )}
-        <span
-          css={cssStyleConversion(theme, titleStyle ?? pageHeaderTitleStyle)}
-        >
-          {title}
-        </span>
+        {leftOutlinedIcon ?? <ArrowLeftOutlined test-id={testId} css={iconBackStyle(theme)} />}
+        <span css={cssStyleConversion(theme, titleStyle ?? pageHeaderTitleStyle)}>{title}</span>
       </div>
     );
-  }, [
-    title,
-    titleStyle,
-    onBack,
-    props,
-    leftOutlinedIcon,
-    titleWrapperStyle,
-    theme,
-  ]);
+  }, [title, titleStyle, onBack, props, leftOutlinedIcon, titleWrapperStyle, theme]);
 
   return (
     <AntPageHeader

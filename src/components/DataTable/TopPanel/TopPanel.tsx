@@ -4,10 +4,7 @@ import { SEARCH, SELECTED } from "../../../utils/Localization/Localization";
 import { headerStyle, rightButtonsColStyle } from "./TopPanel.styles";
 import { headerModes } from "../DataTableHeader/DataTableHeader";
 import { forEach, map, mapValues } from "lodash";
-import {
-  topPanelTagCounterTestId,
-  topPanelSearchInputTestId,
-} from "../../../utils/TestIds";
+import { topPanelTagCounterTestId, topPanelSearchInputTestId } from "../../../utils/TestIds";
 import type { ITopPanelProps } from "./TopPanel.types";
 import { searchBreakpoints } from "../../../styles/searchLayout";
 import { observer } from "mobx-react";
@@ -51,14 +48,8 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
         if (buttonObject) {
           const { accessRules, component, float } = buttonObject;
 
-          if (
-            component &&
-            isFeatureEnabled &&
-            isShowElement(accessRules, isFeatureEnabled)
-          ) {
-            float === "right"
-              ? rightButtons.push(component)
-              : leftButtons.push(component);
+          if (component && isFeatureEnabled && isShowElement(accessRules, isFeatureEnabled)) {
+            float === "right" ? rightButtons.push(component) : leftButtons.push(component);
           }
         }
       });
@@ -80,15 +71,11 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
 
   const [leftButtons, rightButtons] = sortedButtons;
 
-  const isShowSearch =
-    Boolean(onInputChange) && headerMode !== headerModes.WITHOUT_SEARCH;
+  const isShowSearch = Boolean(onInputChange) && headerMode !== headerModes.WITHOUT_SEARCH;
   const isShowButtons = !!leftButtons?.length || !!rightButtons?.length;
 
   const buttonsBreakpoints = useMemo(
-    () =>
-      isShowSearch
-        ? mapValues(searchBreakpoints, (span) => 24 - span)
-        : { span: 24 },
+    () => (isShowSearch ? mapValues(searchBreakpoints, (span) => 24 - span) : { span: 24 }),
     [isShowSearch]
   );
 
@@ -113,14 +100,10 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
       <Row align="middle" justify="space-between" gutter={8}>
         <Col {...buttonsBreakpoints}>
           <Row align="middle" gutter={24}>
-            {leftButtons?.length ? (
-              <Col>{getButtonsRow(leftButtons)}</Col>
-            ) : null}
+            {leftButtons?.length ? <Col>{getButtonsRow(leftButtons)}</Col> : null}
             <Col>{selectionTag}</Col>
             {rightButtons?.length ? (
-              <Col css={rightButtonsColStyle}>
-                {getButtonsRow(rightButtons)}
-              </Col>
+              <Col css={rightButtonsColStyle}>{getButtonsRow(rightButtons)}</Col>
             ) : null}
           </Row>
         </Col>
@@ -128,9 +111,7 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
           <Col {...searchBreakpoints}>
             <Search
               key="input-search"
-              placeholder={
-                searchPlaceholder || localization.getLocalized(SEARCH)
-              }
+              placeholder={searchPlaceholder || localization.getLocalized(SEARCH)}
               onChange={onInputChange}
               test-id={topPanelSearchInputTestId}
               value={searchValue}

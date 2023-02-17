@@ -103,8 +103,7 @@ export class Store<M extends Model = never> extends BaseStore {
     this.dataPath = params.dataPath;
     this.prepareData = params.prepareData;
     this.requestInstance =
-      params.requestInstance ??
-      new BaseRequest({ errorHandlerInstance: new BaseErrorHandler() });
+      params.requestInstance ?? new BaseRequest({ errorHandlerInstance: new BaseErrorHandler() });
     this.subscriptionConfig = params.subscriptionConfig;
     this.isHasSubscription = Boolean(params.subscriptionConfig);
   }
@@ -315,8 +314,7 @@ export class Store<M extends Model = never> extends BaseStore {
 
     this.requestInstance.subscribe({
       onMessage: ({ first, response }) => {
-        const onMessage =
-          params?.onMessage || self.subscriptionConfig?.onMessage;
+        const onMessage = params?.onMessage || self.subscriptionConfig?.onMessage;
 
         onMessage?.({
           first,
@@ -348,21 +346,14 @@ export class Store<M extends Model = never> extends BaseStore {
   }
 
   /** Подготавливает данные для сохранения */
-  protected getPreparedData(
-    data: TDictionary | null,
-    dataPath: string,
-    variables?: TDictionary
-  ) {
+  protected getPreparedData(data: TDictionary | null, dataPath: string, variables?: TDictionary) {
     const prepareDataGetters =
-      this.prepareData &&
-      (isArray(this.prepareData) ? this.prepareData : [this.prepareData]);
+      this.prepareData && (isArray(this.prepareData) ? this.prepareData : [this.prepareData]);
 
     return reduce(
       prepareDataGetters,
       (acc, func) =>
-        typeof func === "function"
-          ? func({ data: acc, store: this, variables })
-          : acc,
+        typeof func === "function" ? func({ data: acc, store: this, variables }) : acc,
 
       get(data, dataPath) as TModelStruct | null
     );

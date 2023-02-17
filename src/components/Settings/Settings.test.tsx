@@ -2,15 +2,9 @@ import enzyme from "enzyme";
 import { Settings } from "./Settings";
 import type { NCore } from "@im/core";
 
-import {
-  moduleGroupPath,
-  getDisplayedSettingsRoutes,
-} from "../../utils/Routes";
+import { moduleGroupPath, getDisplayedSettingsRoutes } from "../../utils/Routes";
 import { SettingsItem } from "./SettingsItem/SettingsItem";
-import {
-  getDefaultWrappers,
-  testLocalization,
-} from "../../utils/tests/wrappers";
+import { getDefaultWrappers, testLocalization } from "../../utils/tests/wrappers";
 
 const BASE_MODULE = {
   ru: "Base",
@@ -107,9 +101,7 @@ const renderMountComponent = (route: NCore.IRoutes) => {
 };
 
 const renderShallowComponent = (route: NCore.IRoutes) => {
-  return enzyme.shallow(
-    <Settings routes={getDisplayedSettingsRoutes(route.routes ?? []) ?? []} />
-  );
+  return enzyme.shallow(<Settings routes={getDisplayedSettingsRoutes(route.routes ?? []) ?? []} />);
 };
 
 describe("Тест компонента Settings", () => {
@@ -117,9 +109,7 @@ describe("Тест компонента Settings", () => {
     const component1 = renderShallowComponent(routes1);
     const component2 = renderShallowComponent(routes2);
 
-    expect(component1.find(SettingsItem).length).toEqual(
-      routes1.routes?.length
-    );
+    expect(component1.find(SettingsItem).length).toEqual(routes1.routes?.length);
     expect(component2.find(SettingsItem).length).toEqual(1);
   });
 

@@ -8,10 +8,7 @@ import type { IVirtualizedTableHeaderCellProps } from "../VirtualizedTableHeader
 export interface IVirtualizedTableHeaderRowProps<T>
   extends Pick<IVirtualizedTableProps<T>, "columns" | "targetAll" | "loading">,
     Pick<IVirtualizedTableState<T>, "sorter">,
-    Pick<
-      IVirtualizedTableHeaderCellProps<T>,
-      "onSorterChange" | "columnsOrders"
-    >,
+    Pick<IVirtualizedTableHeaderCellProps<T>, "onSorterChange" | "columnsOrders">,
     IWithThemeProps<TTheme> {
   isTableEmpty: boolean;
   isCheckable: boolean;

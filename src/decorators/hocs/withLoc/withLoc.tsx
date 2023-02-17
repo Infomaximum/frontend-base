@@ -10,9 +10,7 @@ export interface IWithLocProps {
 export const withLoc: TPropInjector<IWithLocProps> = (Component: any) => {
   const LocalizedComponent = (props: any) => (
     <LocalizationContext.Consumer>
-      {(localization: Localization) => (
-        <Component {...props} localization={localization} />
-      )}
+      {(localization: Localization) => <Component {...props} localization={localization} />}
     </LocalizationContext.Consumer>
   );
 

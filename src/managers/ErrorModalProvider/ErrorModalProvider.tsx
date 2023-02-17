@@ -13,14 +13,11 @@ import type {
   IErrorModalProviderProps,
 } from "./ErrorModalProvider.types";
 
-export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({
-  children,
-  isDebugMode,
-}) => {
+export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isDebugMode }) => {
   const [showModal, setShowModal] = useState(false);
-  const [errorConfig, setErrorConfig] = useState<
-    IErrorModalProviderConfigState | undefined
-  >(undefined);
+  const [errorConfig, setErrorConfig] = useState<IErrorModalProviderConfigState | undefined>(
+    undefined
+  );
   const localization = useLocalization();
 
   useEffect(() => {

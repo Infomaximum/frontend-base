@@ -24,9 +24,7 @@ class ControlPanel extends PureComponent<IControlPanelProps> {
   public override render() {
     const { isEditing, children } = this.props;
 
-    return (
-      <div css={containerStyle}>{isEditing ? this.formButtons : children}</div>
-    );
+    return <div css={containerStyle}>{isEditing ? this.formButtons : children}</div>;
   }
 }
 

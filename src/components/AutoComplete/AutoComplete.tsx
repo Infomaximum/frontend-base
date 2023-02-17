@@ -22,15 +22,9 @@ const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
   const fieldWrapperRef = useRef<HTMLDivElement>(null);
 
   const dropdownConfig = { itemHeight: listItemHeight } as const;
-  const dropdownPosition = useSelectDropdownPosition(
-    fieldWrapperRef,
-    dropdownConfig,
-    "left"
-  );
+  const dropdownPosition = useSelectDropdownPosition(fieldWrapperRef, dropdownConfig, "left");
 
-  const computeDropdownPosition = isFunction(dropdownRender)
-    ? noop
-    : dropdownPosition.compute;
+  const computeDropdownPosition = isFunction(dropdownRender) ? noop : dropdownPosition.compute;
 
   const handleDropdownVisibleChange = useCallback(
     (shouldOpen: boolean) => {
@@ -70,7 +64,4 @@ const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
   );
 };
 
-export const AutoComplete = hoistNonReactStatics(
-  AutoCompleteComponent,
-  AntAutoComplete
-);
+export const AutoComplete = hoistNonReactStatics(AutoCompleteComponent, AntAutoComplete);

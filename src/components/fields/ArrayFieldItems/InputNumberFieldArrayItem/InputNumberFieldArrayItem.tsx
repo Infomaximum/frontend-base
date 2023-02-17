@@ -10,9 +10,7 @@ import { removeInputNumberFieldButtonTestId } from "../../../../utils/TestIds";
 import { CloseOutlined } from "../../../Icons/Icons";
 import { InputNumberFormField } from "../../InputNumberField/InputNumberField";
 
-const InputNumberFieldArrayItem: React.FC<InputNumberFieldArrayItemProps> = (
-  props
-) => {
+const InputNumberFieldArrayItem: React.FC<InputNumberFieldArrayItemProps> = (props) => {
   const {
     fieldEntityPath,
     fields,

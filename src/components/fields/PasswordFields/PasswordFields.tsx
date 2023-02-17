@@ -157,10 +157,7 @@ const ValidFieldIcon = (disabled?: boolean) => (
   />
 );
 
-class PasswordFieldsComponent extends PureComponent<
-  IPasswordFieldsProps,
-  IPasswordFieldsState
-> {
+class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPasswordFieldsState> {
   public static defaultProps = {
     withLabels: true,
     requestOnMount: true,
@@ -182,24 +179,20 @@ class PasswordFieldsComponent extends PureComponent<
   }
 
   public override componentDidMount() {
-    const { formProvider, passwordFieldName, complexPasswordStore } =
-      this.props;
+    const { formProvider, passwordFieldName, complexPasswordStore } = this.props;
 
     complexPasswordStore.requestData();
 
     if (formProvider) {
       this.unsubscribeFormProvider = formProvider.subscribe(
         ({ values }) => {
-          const passwordFieldState =
-            formProvider.getFieldState(passwordFieldName);
+          const passwordFieldState = formProvider.getFieldState(passwordFieldName);
 
           this.setState({
             newPasswordValue: values[passwordFieldName],
             repeatPasswordValue: values[REPEAT_NEW_PASSWORD_FIELD],
             touchedWithError:
-              passwordFieldState &&
-              passwordFieldState.touched &&
-              passwordFieldState.error,
+              passwordFieldState && passwordFieldState.touched && passwordFieldState.error,
           });
         },
         {
@@ -273,8 +266,7 @@ class PasswordFieldsComponent extends PureComponent<
     if (newPasswordValue) {
       validationStatuses = map(
         hardPassword ? passwordValidators : [passwordValidators[0]],
-        (passwordValidator) =>
-          !!passwordValidator?.validator(newPasswordValue, model)
+        (passwordValidator) => !!passwordValidator?.validator(newPasswordValue, model)
       );
 
       valid = true;
@@ -328,10 +320,7 @@ class PasswordFieldsComponent extends PureComponent<
     const notificationFields = map(
       hardPassword ? passwordValidators : [passwordValidators[0]],
       (passwordValidator, index) => {
-        const valueIsValid: boolean = !!passwordValidator?.validator(
-          newPasswordValue,
-          model
-        );
+        const valueIsValid: boolean = !!passwordValidator?.validator(newPasswordValue, model);
 
         const containerKey = `pass-notification-field-container-${index}`;
         const messageKey = `pass-notification-field-message-${index}`;
@@ -359,9 +348,7 @@ class PasswordFieldsComponent extends PureComponent<
       }
     );
 
-    return (
-      <div test-id={passwordFieldsPopoverTestId}>{notificationFields}</div>
-    );
+    return <div test-id={passwordFieldsPopoverTestId}>{notificationFields}</div>;
   };
 
   private getTriggerNode(triggerNode: HTMLElement) {
@@ -430,16 +417,10 @@ class PasswordFieldsComponent extends PureComponent<
     const CurrentPasswordIcon = this.state.currentPasswordInputType
       ? EyeInvisibleOutlined
       : EyeOutlined;
-    const NewPasswordIcon = newPasswordInputType
-      ? EyeInvisibleOutlined
-      : EyeOutlined;
-    const RepeatNewPassIcon = repeatNewPasswordInputType
-      ? EyeInvisibleOutlined
-      : EyeOutlined;
+    const NewPasswordIcon = newPasswordInputType ? EyeInvisibleOutlined : EyeOutlined;
+    const RepeatNewPassIcon = repeatNewPasswordInputType ? EyeInvisibleOutlined : EyeOutlined;
 
-    const isVisiblePopover = Boolean(
-      showPopover || (touchedWithError && newPasswordFieldFocus)
-    );
+    const isVisiblePopover = Boolean(showPopover || (touchedWithError && newPasswordFieldFocus));
 
     return [
       currentPasswordFieldName ? (
@@ -449,17 +430,14 @@ class PasswordFieldsComponent extends PureComponent<
           disabled={disabled}
           suffix={
             <CurrentPasswordIcon
-              onClick={
-                disabled ? undefined : this.changeCurrentPasswordInputType
-              }
+              onClick={disabled ? undefined : this.changeCurrentPasswordInputType}
               css={eyeIconStyle}
               style={disabled ? opacity : undefined}
             />
           }
           label={
             withLabels
-              ? currentPasswordFieldLabel ||
-                localization.getLocalized(currentPasswordLoc)
+              ? currentPasswordFieldLabel || localization.getLocalized(currentPasswordLoc)
               : undefined
           }
           placeholder={currentPasswordFieldPlaceholder}
@@ -502,11 +480,7 @@ class PasswordFieldsComponent extends PureComponent<
               >
                 <QuestionCircleOutlined
                   key="question-circle-popover-icon"
-                  css={
-                    isVisiblePopover
-                      ? questionIconShowPopoverStyle
-                      : questionIconStyle
-                  }
+                  css={isVisiblePopover ? questionIconShowPopoverStyle : questionIconStyle}
                   onMouseDown={disabled ? undefined : this.togglePopover}
                   style={disabled ? opacity : undefined}
                 />
@@ -517,15 +491,10 @@ class PasswordFieldsComponent extends PureComponent<
           </>
         }
         label={
-          withLabels
-            ? passwordFieldLabel || localization.getLocalized(newPasswordLoc)
-            : undefined
+          withLabels ? passwordFieldLabel || localization.getLocalized(newPasswordLoc) : undefined
         }
         placeholder={passwordFieldPlaceholder}
-        type={
-          newPasswordInputTypeProps ??
-          (newPasswordInputType ? "password" : "text")
-        }
+        type={newPasswordInputTypeProps ?? (newPasswordInputType ? "password" : "text")}
         css={inputFieldStyle}
       />,
       withRepeatPasswordField ? (
@@ -540,9 +509,7 @@ class PasswordFieldsComponent extends PureComponent<
           suffix={
             <>
               <RepeatNewPassIcon
-                onClick={
-                  disabled ? undefined : this.changeRepeatNewPasswordInputType
-                }
+                onClick={disabled ? undefined : this.changeRepeatNewPasswordInputType}
                 css={eyeIconStyle}
                 style={disabled ? opacity : undefined}
               />
@@ -558,8 +525,7 @@ class PasswordFieldsComponent extends PureComponent<
           }
           label={
             withLabels
-              ? repeatPasswordFieldLabel ||
-                localization.getLocalized(repeatNewPasswordLoc)
+              ? repeatPasswordFieldLabel || localization.getLocalized(repeatNewPasswordLoc)
               : undefined
           }
           placeholder={repeatPasswordFieldPlaceholder}
@@ -572,8 +538,6 @@ class PasswordFieldsComponent extends PureComponent<
   }
 }
 
-const PasswordFields = withLoc(
-  withFormProvider(observer(PasswordFieldsComponent))
-);
+const PasswordFields = withLoc(withFormProvider(observer(PasswordFieldsComponent)));
 
 export { PasswordFields, passwordValidators };

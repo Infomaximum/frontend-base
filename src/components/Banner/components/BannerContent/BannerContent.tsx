@@ -36,15 +36,9 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
       // Делаем запас в 1px для корректной работы при разных масштабах окна браузера
       const scrollHeight = contentRef.current.scrollHeight - 1;
 
-      if (
-        !showShowMoreButton &&
-        contentRef.current.offsetHeight < scrollHeight
-      ) {
+      if (!showShowMoreButton && contentRef.current.offsetHeight < scrollHeight) {
         setShowShowMoreButton(true);
-      } else if (
-        showShowMoreButton &&
-        contentRef.current.offsetHeight >= scrollHeight
-      ) {
+      } else if (showShowMoreButton && contentRef.current.offsetHeight >= scrollHeight) {
         setShowShowMoreButton(false);
       }
     }
@@ -71,11 +65,7 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
 
   return (
     <div ref={contentRef} className={className} css={bannerContentStyle(theme)}>
-      <MarkdownView
-        markdown={md}
-        components={mdViewComponents}
-        options={mdViewOptions}
-      />
+      <MarkdownView markdown={md} components={mdViewComponents} options={mdViewOptions} />
       {showShowMoreButton ? (
         <div css={bannerContentShowMoreStyle(backgroundColor)}>
           {`... `}
@@ -89,11 +79,7 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
           </Button>
         </div>
       ) : null}
-      <BannerContentModal
-        md={md}
-        visible={showModal}
-        onCancel={handleCloseModal}
-      />
+      <BannerContentModal md={md} visible={showModal} onCancel={handleCloseModal} />
     </div>
   );
 };

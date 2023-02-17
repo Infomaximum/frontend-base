@@ -1,4 +1,1 @@
-export {
-  AutoCompleteFormField,
-  AutoCompleteTableCellField,
-} from "./AutoCompleteField";
+export { AutoCompleteFormField, AutoCompleteTableCellField } from "./AutoCompleteField";

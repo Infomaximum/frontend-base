@@ -1,8 +1,5 @@
 import type { IPasswordWithButtonFieldProps } from "./PasswordWithButtonField.types";
-import {
-  PASSWORD,
-  CHANGE_PASSWORD,
-} from "../../../utils/Localization/Localization";
+import { PASSWORD, CHANGE_PASSWORD } from "../../../utils/Localization/Localization";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { changePasswordButtonTestId } from "../../../utils/TestIds";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
@@ -19,9 +16,11 @@ import { Input } from "../../Input/Input";
  * Если пароль был задан, то отображается кнопка для смены пароля
  * если нет, то отображается инпут
  */
-const PasswordWithButtonFormFieldComponent: React.FC<
-  IPasswordWithButtonFieldProps
-> = ({ hasPassword, priority, ...rest }) => {
+const PasswordWithButtonFormFieldComponent: React.FC<IPasswordWithButtonFieldProps> = ({
+  hasPassword,
+  priority,
+  ...rest
+}) => {
   const localization = useLocalization();
 
   const [isEditablePassword, setEditablePasswordState] = useState(false);

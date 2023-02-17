@@ -13,9 +13,7 @@ export type TFormAccess = {
   hasExecuteAccess: boolean;
 };
 
-export interface IFormContextData<
-  TFormValues extends TDictionary = TDictionary
-> {
+export interface IFormContextData<TFormValues extends TDictionary = TDictionary> {
   access: TFormAccess;
   formProvider?: IFormProvider<TFormValues>;
   formName?: string;

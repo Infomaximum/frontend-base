@@ -61,9 +61,5 @@ export declare namespace NTableStore {
     accumulatedKeys: string[];
   }>;
 
-  type TExcludeClearDataKeys = (
-    | "checkedState"
-    | "expandedState"
-    | "searchValue"
-  )[];
+  type TExcludeClearDataKeys = ("checkedState" | "expandedState" | "searchValue")[];
 }

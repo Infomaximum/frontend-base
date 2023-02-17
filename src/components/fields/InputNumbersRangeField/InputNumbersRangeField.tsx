@@ -15,10 +15,7 @@ import type {
 } from "./InputNumbersRangeField.types";
 import { normalizeRange } from "./InputNumbersRangeField.utils";
 
-const InputNumbersRange: React.FC<IInputNumbersRangeProps> = ({
-  input,
-  ...restProps
-}) => {
+const InputNumbersRange: React.FC<IInputNumbersRangeProps> = ({ input, ...restProps }) => {
   const defaultValue = restProps.min ?? 0;
   const defaultRange = useMemo<TInputNumbersRangeFieldValue>(
     () => [defaultValue, defaultValue],
@@ -30,10 +27,7 @@ const InputNumbersRange: React.FC<IInputNumbersRangeProps> = ({
   const setValues = useCallback(
     (nextValues: TInputNumbersRangeFieldValue) => {
       valuesRef.current = normalizeRange(
-        map(
-          nextValues,
-          (x, i) => x ?? defaultRange[i]
-        ) as TInputNumbersRangeFieldValue
+        map(nextValues, (x, i) => x ?? defaultRange[i]) as TInputNumbersRangeFieldValue
       );
 
       onChange(valuesRef.current);
@@ -92,15 +86,11 @@ const InputNumbersRange: React.FC<IInputNumbersRangeProps> = ({
   );
 };
 
-const InputNumbersRangeField: React.FC<IInputNumbersRangeFieldProps> = (
-  props
-) => {
+const InputNumbersRangeField: React.FC<IInputNumbersRangeFieldProps> = (props) => {
   return <Field component={InputNumbersRange} {...props} />;
 };
 
-const InputNumbersRangeFormField: React.FC<IInputNumbersRangeFormFieldProps> = (
-  props
-) => {
+const InputNumbersRangeFormField: React.FC<IInputNumbersRangeFormFieldProps> = (props) => {
   return <FormField component={InputNumbersRangeField} {...props} />;
 };
 

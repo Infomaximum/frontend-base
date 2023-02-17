@@ -1,10 +1,7 @@
 import type { ReactNode } from "react";
 import type { PopoverProps } from "antd/lib/popover";
 
-type TPopover = Pick<
-  PopoverProps,
-  "placement" | "trigger" | "getPopupContainer"
->;
+type TPopover = Pick<PopoverProps, "placement" | "trigger" | "getPopupContainer">;
 
 export interface IFieldTooltipProps extends TPopover {
   caption?: ReactNode;

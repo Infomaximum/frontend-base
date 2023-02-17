@@ -1,8 +1,5 @@
 import { observer } from "mobx-react";
-import {
-  tableRowCheckboxTestId,
-  tableRowLoadingTestId,
-} from "../../../../utils/TestIds";
+import { tableRowCheckboxTestId, tableRowLoadingTestId } from "../../../../utils/TestIds";
 import {
   virtualizedTableBodyRowLoadingCoverStyle,
   usualVirtualizedTableBodyRowStyle,
@@ -79,9 +76,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
           isChecked
             ? checkedVirtualizedTableBodyRowStyle(theme)
             : usualVirtualizedTableBodyRowStyle(theme),
-          enableRowClick &&
-            !isRowDisable &&
-            clickableVirtualizedTableBodyRowStyle,
+          enableRowClick && !isRowDisable && clickableVirtualizedTableBodyRowStyle,
           isShowDivider ? null : withoutDividerStyle,
         ]}
         onClick={!isRowDisable && enableRowClick ? selectChange : undefined}
@@ -114,6 +109,4 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
   );
 };
 
-export const VirtualizedTableBodyRow = observer(
-  VirtualizedTableBodyRowComponent
-);
+export const VirtualizedTableBodyRow = observer(VirtualizedTableBodyRowComponent);

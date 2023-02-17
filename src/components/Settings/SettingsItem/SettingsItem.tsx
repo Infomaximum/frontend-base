@@ -9,11 +9,7 @@ import { matchPath, useLocation, useNavigate } from "react-router";
 import { assertSimple } from "@im/asserts";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 
-const SettingsItemComponent: React.FC<ISettingsItemProps> = ({
-  onClick,
-  title,
-  routes,
-}) => {
+const SettingsItemComponent: React.FC<ISettingsItemProps> = ({ onClick, title, routes }) => {
   const localization = useLocalization();
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,10 +37,7 @@ const SettingsItemComponent: React.FC<ISettingsItemProps> = ({
           const isCurrentRoute = !!matchPath(route.path, location.pathname);
 
           return (
-            <span
-              key={route.key}
-              onClick={isCurrentRoute ? rerenderCurrentRoute : onClick}
-            >
+            <span key={route.key} onClick={isCurrentRoute ? rerenderCurrentRoute : onClick}>
               <Link to={route.path} css={linkStyle}>
                 {localization.getLocalized(route.loc)}
               </Link>

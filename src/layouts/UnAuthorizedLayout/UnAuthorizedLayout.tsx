@@ -28,10 +28,7 @@ import { withLoc, withSystemTitle, withTheme } from "../../decorators/hocs";
 
 const { Content } = Layout;
 
-class UnAuthorized extends PureComponent<
-  IUnAuthorizedLayoutProps,
-  IUnAuthorizedLayoutState
-> {
+class UnAuthorized extends PureComponent<IUnAuthorizedLayoutProps, IUnAuthorizedLayoutState> {
   public static getDerivedStateFromProps(
     nextProps: Partial<IUnAuthorizedLayoutProps>,
     prevState = {} as IUnAuthorizedLayoutState
@@ -110,8 +107,7 @@ class UnAuthorized extends PureComponent<
 
   public override render() {
     const { showAnimate } = this.state;
-    const { wrapperStyle, bodyStyle, children, topPanel, companyLogo } =
-      this.props;
+    const { wrapperStyle, bodyStyle, children, topPanel, companyLogo } = this.props;
 
     const wrapperContentStyles = [
       wrapperContentLoginStyle,
@@ -140,6 +136,4 @@ class UnAuthorized extends PureComponent<
   }
 }
 
-export const UnAuthorizedLayout = withSystemTitle()(
-  withTheme(withLoc(observer(UnAuthorized)))
-);
+export const UnAuthorizedLayout = withSystemTitle()(withTheme(withLoc(observer(UnAuthorized))));

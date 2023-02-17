@@ -7,10 +7,7 @@ import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { contains } from "../../../utils/URI/URI";
 import { useBlocker } from "../../../decorators/hooks/useBlocker";
 import { useMountEffect } from "../../../decorators/hooks/useMountEffect";
-import {
-  ModalAnimationInterval,
-  Z_INDEX_FORM_CONFIRMATION_MODAL,
-} from "../../../utils/const";
+import { ModalAnimationInterval, Z_INDEX_FORM_CONFIRMATION_MODAL } from "../../../utils/const";
 import {
   SAVE,
   UNABLE_TO_SAVE_CHANGE,
@@ -29,9 +26,7 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   const [hasSubmitErrors, setHasSubmitErrors] = useState<boolean>(
     formProvider?.getState().hasSubmitErrors
   );
-  const [invalid, setInvalid] = useState<boolean>(
-    formProvider?.getState().invalid
-  );
+  const [invalid, setInvalid] = useState<boolean>(formProvider?.getState().invalid);
 
   const retryRef = useRef<() => void>();
 
@@ -130,9 +125,7 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
       iconStyle={iconStyle}
       buttonOkText={SAVE}
       onAfterConfirm={handleSuccess}
-      disabledConfirmButton={
-        invalid || hasSubmitErrors || !!disabledConfirmButton
-      }
+      disabledConfirmButton={invalid || hasSubmitErrors || !!disabledConfirmButton}
       title={title}
       zIndex={Z_INDEX_FORM_CONFIRMATION_MODAL}
     />

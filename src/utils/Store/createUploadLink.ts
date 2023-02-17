@@ -10,12 +10,7 @@ import {
 } from "@apollo/client";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 import axios from "axios";
-import {
-  CancelRequest,
-  EHttpCodes,
-  NetworkFailResendAttemptsCount,
-  ResendDelays,
-} from "@im/utils";
+import { CancelRequest, EHttpCodes, NetworkFailResendAttemptsCount, ResendDelays } from "@im/utils";
 import axiosRetry from "axios-retry";
 
 /**
@@ -73,9 +68,7 @@ axiosRetry(axios, {
  * @param response - ответ от сервера в формате библиотеки Axios
  * @returns Promise, который передаст ответ сервера в формате fetch
  */
-function proxyResponseAxiosFetch(
-  response: AxiosResponse & { message?: string }
-): Promise<any> {
+function proxyResponseAxiosFetch(response: AxiosResponse & { message?: string }): Promise<any> {
   let options: ResponseInit & { url: string };
   let body;
 
@@ -96,10 +89,7 @@ function proxyResponseAxiosFetch(
     status: xhr.status,
     statusText: xhr.statusText,
     headers: new Headers((response.headers as any) || {}),
-    url:
-      "responseURL" in xhr
-        ? xhr.responseURL
-        : xhr.getResponseHeader("X-Request-URL"),
+    url: "responseURL" in xhr ? xhr.responseURL : xhr.getResponseHeader("X-Request-URL"),
   };
   body = "response" in xhr ? xhr.response : xhr.responseText;
 
@@ -127,8 +117,7 @@ export function createUploadLink(graphqlURL: string) {
       fallbackHttpConfig,
       contextConfig
     );
-    const imRequestData =
-      context && context.imRequestData ? context.imRequestData : {};
+    const imRequestData = context && context.imRequestData ? context.imRequestData : {};
     const files = imRequestData.files ? imRequestData.files : [];
 
     /**
@@ -143,9 +132,7 @@ export function createUploadLink(graphqlURL: string) {
       customBody.append("operationName", body.operationName as string);
       customBody.append("variables", JSON.stringify(body.variables));
       customBody.append("query", body.query as string);
-      forEach(files, (file, index) =>
-        customBody.append(index, file, file.name)
-      );
+      forEach(files, (file, index) => customBody.append(index, file, file.name));
     }
 
     return new Observable((observer) => {

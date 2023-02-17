@@ -18,20 +18,12 @@ import {
 } from "./VirtualizedTableHeaderCell.styles";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 
-const getSorterArrowStyle = (
-  isUp: boolean,
-  isActive: boolean,
-  theme: TTheme
-) => {
+const getSorterArrowStyle = (isUp: boolean, isActive: boolean, theme: TTheme) => {
   if (isUp) {
-    return isActive
-      ? sorterArrowUpActiveStyle(theme)
-      : sorterArrowUpStyle(theme);
+    return isActive ? sorterArrowUpActiveStyle(theme) : sorterArrowUpStyle(theme);
   }
 
-  return isActive
-    ? sorterArrowDownActiveStyle(theme)
-    : sorterArrowDownStyle(theme);
+  return isActive ? sorterArrowDownActiveStyle(theme) : sorterArrowDownStyle(theme);
 };
 
 const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
@@ -55,9 +47,7 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
     return [
       virtualizedTableHeaderCellStyle(theme),
       virtualizedTableHeaderSortedCellStyle(theme),
-      isSorted &&
-        sortOrder &&
-        virtualizedTableHeaderSortedCellActiveStyle(theme),
+      isSorted && sortOrder && virtualizedTableHeaderSortedCellActiveStyle(theme),
     ];
   }, [isColumnSorter, isSorted, sortOrder, theme]);
 
@@ -72,16 +62,12 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
         <Col css={sorterColumnStyle}>
           {includes(columnOrders, ESortDirection.ASC) && (
             <Row key="asc">
-              <CaretUpOutlined
-                css={getSorterArrowStyle(true, isUpActive, theme)}
-              />
+              <CaretUpOutlined css={getSorterArrowStyle(true, isUpActive, theme)} />
             </Row>
           )}
           {includes(columnOrders, ESortDirection.DESC) && (
             <Row key="desc">
-              <CaretDownOutlined
-                css={getSorterArrowStyle(false, isDownActive, theme)}
-              />
+              <CaretDownOutlined css={getSorterArrowStyle(false, isDownActive, theme)} />
             </Row>
           )}
         </Col>
@@ -104,9 +90,7 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
   );
 };
 
-const MemoVirtualizedTableHeaderCell = memo(
-  VirtualizedTableHeaderCellComponent
-);
+const MemoVirtualizedTableHeaderCell = memo(VirtualizedTableHeaderCellComponent);
 
 export const VirtualizedTableHeaderCell = <T extends TDictionary>(
   props: IVirtualizedTableHeaderCellProps<T>

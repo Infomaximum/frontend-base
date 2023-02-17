@@ -129,20 +129,10 @@ export const NOTHING_FOUND_CHANGE_QUERY = {
 };
 
 export const SHOWING_OF = {
-  ru: ({
-    currentCount,
-    totalCount,
-  }: {
-    currentCount: number;
-    totalCount: number;
-  }) => `Показано ${currentCount} из ${totalCount}`,
-  en: ({
-    currentCount,
-    totalCount,
-  }: {
-    currentCount: number;
-    totalCount: number;
-  }) => `Showing ${currentCount} of the ${totalCount}`,
+  ru: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
+    `Показано ${currentCount} из ${totalCount}`,
+  en: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
+    `Showing ${currentCount} of the ${totalCount}`,
 };
 
 export const SERVICE_MODE = {
@@ -256,40 +246,16 @@ export const CHANGE_PASSWORD = {
 };
 
 export const ENTER_QUERY_OR_CHOOSE = {
-  ru: ({
-    currentCount,
-    generalCount,
-  }: {
-    currentCount: number;
-    generalCount: number;
-  }) =>
+  ru: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
     `Показаны ${currentCount} из ${generalCount} значений. Введите поисковой запрос или выберите из списка.`,
-  en: ({
-    currentCount,
-    generalCount,
-  }: {
-    currentCount: number;
-    generalCount: number;
-  }) =>
+  en: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
     `Showing ${currentCount} of "${generalCount}" values. Enter a search query or select from the list.`,
 };
 
 export const REFINE_QUERY = {
-  ru: ({
-    currentCount,
-    generalCount,
-  }: {
-    currentCount: number;
-    generalCount: number;
-  }) =>
+  ru: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
     `Показаны ${currentCount} из ${generalCount} найденных значений. Уточните запрос, чтобы увидеть другие.`,
-  en: ({
-    currentCount,
-    generalCount,
-  }: {
-    currentCount: number;
-    generalCount: number;
-  }) =>
+  en: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
     `Showing ${currentCount} of the ${generalCount} values found. Refine the query to see others.`,
 };
 

@@ -6,12 +6,9 @@ import type { TFormButtonState } from "../SubmitFormButton.types";
  * Хук для работы с состояниями для кнопок формы
  * @param formProvider
  */
-export const useFormButtonState = (
-  formProvider: IFormProvider
-): TFormButtonState => {
+export const useFormButtonState = (formProvider: IFormProvider): TFormButtonState => {
   const [formState, setFormState] = useState<TFormButtonState>(() => {
-    const { submitting, pristine, hasValidationErrors } =
-      formProvider.getState();
+    const { submitting, pristine, hasValidationErrors } = formProvider.getState();
 
     return { submitting, pristine, hasValidationErrors };
   });

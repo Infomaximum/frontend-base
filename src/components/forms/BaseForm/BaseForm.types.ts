@@ -20,10 +20,7 @@ export enum EFormLayoutType {
   ModalType = "modal_type",
 }
 
-type TAntFormProps = Pick<
-  FormProps,
-  "layout" | "colon" | "labelAlign" | "labelCol" | "wrapperCol"
->;
+type TAntFormProps = Pick<FormProps, "layout" | "colon" | "labelAlign" | "labelCol" | "wrapperCol">;
 
 /**
  * Интерфейс для описание пропсов которые можно передавать извне в компонент

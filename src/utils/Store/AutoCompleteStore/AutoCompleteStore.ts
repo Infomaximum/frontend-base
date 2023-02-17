@@ -28,12 +28,8 @@ export class AutoCompleteStore<
   constructor(params: NStore.TStoreParams<AutoCompleteStore<M>>) {
     super({
       ...params,
-      getQueryParams(
-        getterQueryParams: NStore.TParamsGetterArg<AutoCompleteStore<M>>
-      ) {
-        const queryParams = (params as NStore.TStoreParams<any>).getQueryParams(
-          getterQueryParams
-        );
+      getQueryParams(getterQueryParams: NStore.TParamsGetterArg<AutoCompleteStore<M>>) {
+        const queryParams = (params as NStore.TStoreParams<any>).getQueryParams(getterQueryParams);
 
         return {
           ...queryParams,
@@ -84,10 +80,7 @@ export class AutoCompleteStore<
       : null;
   }
 
-  public override searchValueChange(
-    value: string | undefined,
-    variables?: TDictionary
-  ) {
+  public override searchValueChange(value: string | undefined, variables?: TDictionary) {
     super.searchValueChange(value);
 
     this.requestData({ variables });

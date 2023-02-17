@@ -15,8 +15,7 @@ export interface IContentConfig {
   matchOptions?: string[];
 }
 
-export interface IOptionalDrawerFormProps
-  extends Omit<IDrawerFormProps, "onSubmit"> {
+export interface IOptionalDrawerFormProps extends Omit<IDrawerFormProps, "onSubmit"> {
   /**
    * Список опций, отображаемых в селекте дровера.
    */

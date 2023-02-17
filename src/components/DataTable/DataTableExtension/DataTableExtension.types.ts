@@ -33,8 +33,5 @@ export interface IDataTableExtension {
     localization?: Localization,
     isFeatureEnabled?: TFeatureEnabledChecker
   ): void;
-  extendQueryVariable(
-    variables: TDictionary,
-    queryParams: { store: unknown }
-  ): void;
+  extendQueryVariable(variables: TDictionary, queryParams: { store: unknown }): void;
 }

@@ -7,10 +7,7 @@ export const isErrorMatchWithPreparer = function (
   error: NCore.TError,
   preparer: NCore.TErrorPreparer
 ) {
-  return (
-    preparer.code === error.code &&
-    isMatch(error.params, preparer.params as any)
-  );
+  return preparer.code === error.code && isMatch(error.params, preparer.params as any);
 };
 
 export const findErrorByCode = (error: NCore.TError) =>

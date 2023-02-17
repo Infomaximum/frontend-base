@@ -35,9 +35,7 @@ describe("Тест компонента ConfirmationModal", () => {
 
     expect(getModal(component).prop("visible")).toEqual(true);
 
-    getButton(component, confirmationModalConfirmButtonTestId).simulate(
-      "click"
-    );
+    getButton(component, confirmationModalConfirmButtonTestId).simulate("click");
 
     expect(component.props().onConfirm).toHaveBeenCalled();
     expect(getModal(component).prop("visible")).toEqual(false);
@@ -69,9 +67,7 @@ describe("Тест компонента ConfirmationModal", () => {
       onAdditionalButtonClick: jest.fn(),
     });
 
-    getButton(component, confirmationModalAdditionalButtonTestId).simulate(
-      "click"
-    );
+    getButton(component, confirmationModalAdditionalButtonTestId).simulate("click");
     expect(component.props().onAdditionalButtonClick).toHaveBeenCalled();
     expect(getModal(component).prop("visible")).toEqual(true);
   });

@@ -1,9 +1,6 @@
 import React from "react";
 import { map, isUndefined, isFunction, isString, isNull } from "lodash";
-import {
-  autocompleteSelectTestId,
-  autocompleteSelectOptionTestId,
-} from "../../../utils/TestIds";
+import { autocompleteSelectTestId, autocompleteSelectOptionTestId } from "../../../utils/TestIds";
 import { observer } from "mobx-react";
 import { closeCircleStyle } from "../AutoCompleteField/SelectComponent/SelectComponent.styles";
 import type {
@@ -25,10 +22,7 @@ import { AutoComplete } from "../../AutoComplete/AutoComplete";
 import { DropdownPendingPlaceholder } from "../../Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
 
-class AutoFill extends React.PureComponent<
-  IAutoFillComponentProps,
-  IAutoFillComponentState
-> {
+class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillComponentState> {
   public static defaultProps = {
     requestOnMount: false,
     showArrow: true,
@@ -71,10 +65,7 @@ class AutoFill extends React.PureComponent<
     prevProps: IAutoFillComponentProps,
     prevState: IAutoFillComponentState
   ): void {
-    if (
-      this.props.isHasAccess &&
-      this.state.searchText !== prevState.searchText
-    ) {
+    if (this.props.isHasAccess && this.state.searchText !== prevState.searchText) {
       this.onSearch();
     }
 
@@ -129,11 +120,7 @@ class AutoFill extends React.PureComponent<
   };
 
   private handleDropdownVisibleChange = (isOpened: boolean): void => {
-    const {
-      autocompleteStore,
-      queryVariables: variables,
-      isHasAccess,
-    } = this.props;
+    const { autocompleteStore, queryVariables: variables, isHasAccess } = this.props;
 
     if (isOpened && !this.state.hasBeenOpenedDropdown) {
       this.setState({
@@ -199,9 +186,7 @@ class AutoFill extends React.PureComponent<
   }
 
   private isOpenedDropdown() {
-    return (
-      this.props.autocompleteStore.isDataLoaded && this.state.isOpenedDropdown
-    );
+    return this.props.autocompleteStore.isDataLoaded && this.state.isOpenedDropdown;
   }
 
   private getSuffixIcon() {
@@ -241,10 +226,7 @@ class AutoFill extends React.PureComponent<
       <>
         <AutoComplete
           key="ant-autocomplete"
-          placeholder={
-            placeholder ||
-            localization.getLocalized(ENTER_OR_SELECT_FROM_THE_LIST)
-          }
+          placeholder={placeholder || localization.getLocalized(ENTER_OR_SELECT_FROM_THE_LIST)}
           loading={this.isFirstLoading() && this.state.hasBeenOpenedDropdown}
           backfill={true}
           onBlur={this.handleBlur}
@@ -265,23 +247,13 @@ class AutoFill extends React.PureComponent<
             />
           }
           clearIcon={AutoFill.clearIcon}
-          suffixIcon={
-            suffixIcon
-              ? suffixIcon
-              : !disabled
-              ? this.getSuffixIcon()
-              : undefined
-          }
+          suffixIcon={suffixIcon ? suffixIcon : !disabled ? this.getSuffixIcon() : undefined}
           onSearch={this.handleSearchChange}
           onSelect={this.handleSelect}
           onDropdownVisibleChange={this.handleDropdownVisibleChange}
           autoFocus={autoFocus}
           test-id={this.props["test-id"] ?? autocompleteSelectTestId}
-          css={
-            autoFillComponentStyle
-              ? autoFillComponentStyle
-              : autoFillComponentArrowIconStyle
-          }
+          css={autoFillComponentStyle ? autoFillComponentStyle : autoFillComponentArrowIconStyle}
           style={style}
           defaultOpen={defaultOpen}
           open={this.isOpenedDropdown()}
@@ -293,9 +265,7 @@ class AutoFill extends React.PureComponent<
             if (isFunction(getPrepareDisplayValue)) {
               displayValue = getPrepareDisplayValue(item?.getDisplayName());
             } else {
-              displayValue = this.getPrepareDisplayValue(
-                item?.getDisplayName()
-              );
+              displayValue = this.getPrepareDisplayValue(item?.getDisplayName());
             }
 
             return (

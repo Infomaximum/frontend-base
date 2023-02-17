@@ -7,10 +7,7 @@ import {
 } from "../../../../utils/TestIds";
 import type React from "react";
 import { memo, useCallback } from "react";
-import {
-  tableExpandIconHiddenStyle,
-  tableExpandIconStyle,
-} from "./TableExpandIcon.styles";
+import { tableExpandIconHiddenStyle, tableExpandIconStyle } from "./TableExpandIcon.styles";
 import type { ITableExpandIconProps } from "./TableExpandIcon.types";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 
@@ -33,10 +30,7 @@ const TableExpandIconComponent = <T extends TDictionary>(
     <button
       type="button"
       onClick={handleClick}
-      css={[
-        tableExpandIconStyle(theme),
-        !expandable ? tableExpandIconHiddenStyle : null,
-      ]}
+      css={[tableExpandIconStyle(theme), !expandable ? tableExpandIconHiddenStyle : null]}
       test-id={tableExpanderTestId}
     >
       {expanded ? (

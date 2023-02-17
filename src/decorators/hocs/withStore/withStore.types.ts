@@ -39,10 +39,7 @@ export interface IWithStoreProps<S extends Store<Model>> {
   /** Отправляет запрос на сервер */
   query<T = TDictionary>(params?: TQueryParams): Promise<T | null>;
   /** Отправляет мутацию на сервер */
-  mutate<
-    T extends IMutateParams<TDictionary>,
-    Variable = TInferredVariables<T, "mutation">
-  >(
+  mutate<T extends IMutateParams<TDictionary>, Variable = TInferredVariables<T, "mutation">>(
     params: IMutateParams<Variable>
   ): Promise<TDictionary | null>;
   /** Отправляет мутацию от формы на сервер */

@@ -12,19 +12,11 @@ describe("Тест withFormSubmitPromise", () => {
         "TEST_FIELD[2]",
         "PHONE_NUMBER[65]",
       ],
-      result: [
-        "TEST_FIELD[0]",
-        "TEST_FIELD[2]",
-        "PHONE_NUMBER[65]",
-        "OTHER_FIELD",
-      ],
+      result: ["TEST_FIELD[0]", "TEST_FIELD[2]", "PHONE_NUMBER[65]", "OTHER_FIELD"],
     };
 
     expect(
-      xor(
-        excludeArrayFieldWrapperNames(shuffle(testFields.fieldNames)),
-        testFields.result
-      )
+      xor(excludeArrayFieldWrapperNames(shuffle(testFields.fieldNames)), testFields.result)
     ).toHaveLength(0);
   });
 });

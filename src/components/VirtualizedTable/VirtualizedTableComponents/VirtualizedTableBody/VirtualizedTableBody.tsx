@@ -17,12 +17,9 @@ const VirtualizedTableBodyComponent: FC<IVirtualizedTableBodyProps> = ({
 }) => {
   const theme = useTheme();
   useEffect(() => {
-    const tableBodyScrollBehavior = new ScrollBehavior(
-      VIRTUALIZED_TABLE_BODY_ID,
-      {
-        isRelativelyWindow: false,
-      }
-    );
+    const tableBodyScrollBehavior = new ScrollBehavior(VIRTUALIZED_TABLE_BODY_ID, {
+      isRelativelyWindow: false,
+    });
 
     // Задержка нужна для того, чтобы получить ширину скролла, после того, как VList будет отрисован
     setTimeout(() => {

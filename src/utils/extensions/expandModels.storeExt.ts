@@ -5,10 +5,7 @@ import { assertSimple } from "@im/asserts";
 import type { Model } from "@im/models";
 
 export const expandModelsStoreExt =
-  (
-    itemWrapperField: string,
-    itemsPath: string = "items"
-  ): NStore.TPrepareDataFunc<Store<Model>> =>
+  (itemWrapperField: string, itemsPath: string = "items"): NStore.TPrepareDataFunc<Store<Model>> =>
   ({ data }) => {
     if (!data) {
       return null;

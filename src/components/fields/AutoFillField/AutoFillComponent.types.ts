@@ -28,9 +28,7 @@ interface IAutoFillComponentOwnProps extends TAutoCompleteProps {
   getPrepareDisplayValue?: (value: string | undefined) => string;
 }
 
-export interface IAutoFillComponentProps
-  extends IAutoFillComponentOwnProps,
-    IWithLocProps {}
+export interface IAutoFillComponentProps extends IAutoFillComponentOwnProps, IWithLocProps {}
 
 export interface IAutoFillComponentState {
   searchText: string | undefined;
