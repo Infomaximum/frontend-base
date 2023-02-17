@@ -4,11 +4,7 @@ import { Input } from "../Input/Input";
 import { isString, isFunction } from "lodash";
 import { KeyupRequestInterval } from "../../utils/const";
 import { SearchOutlined } from "../Icons/Icons";
-import {
-  iconStyle,
-  searchMiddleInputStyle,
-  searchSmallInputStyle,
-} from "./Search.style";
+import { iconStyle, searchMiddleInputStyle, searchSmallInputStyle } from "./Search.style";
 import type { Interpolation } from "@emotion/react";
 import { withTheme } from "../../decorators";
 
@@ -34,10 +30,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
     };
   }
 
-  public override componentDidUpdate(
-    prevProps: ISearchProps,
-    prevState: ISearchState
-  ) {
+  public override componentDidUpdate(prevProps: ISearchProps, prevState: ISearchState) {
     const { searchText } = this.state;
     const { value } = this.props;
 
@@ -50,9 +43,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
     }
   }
 
-  private handleChangeState = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  private handleChangeState = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({
       searchText: e.target.value,
     });

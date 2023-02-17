@@ -53,15 +53,11 @@ const renderComponent = (loading: boolean) => {
 
 describe("Тест компонента VirtualizedTableBodyRow", () => {
   it("Проверка отрисовки компонента VirtualizedTableBodyRow", () => {
-    expect(
-      renderComponent(false).find("VirtualizedTableBodyRow").length
-    ).toEqual(1);
+    expect(renderComponent(false).find(VirtualizedTableBodyRow).length).toEqual(1);
   });
 
   it("Проверка состояния loading", () => {
-    expect(
-      renderComponent(true).find("div[test-id='tableRow-test_loading']").length
-    ).toEqual(1);
+    expect(renderComponent(true).find("div[test-id='tableRow-test_loading']").length).toEqual(1);
   });
 
   it("Проверка onSelectChange ", () => {
@@ -76,9 +72,7 @@ describe("Тест компонента VirtualizedTableBodyRow", () => {
   });
 
   it("Проверка onRowExpanderChange", () => {
-    renderComponent(false)
-      .find(`button[test-id='${tableExpanderTestId}']`)
-      .simulate("click");
+    renderComponent(false).find(`button[test-id='${tableExpanderTestId}']`).simulate("click");
     expect(onRowExpanderChange).toHaveBeenCalled();
   });
 

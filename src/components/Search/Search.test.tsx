@@ -43,7 +43,7 @@ describe("Search", () => {
     expect(component.find(Search).props().onChange).toEqual(mockFunction);
   });
 
-  it("Проверка изменения текста поля ввода и state Search, при изменении поля value", () => {
+  it("Проверка изменения текста поля ввода, при изменении поля value", () => {
     const component = mountSearch(mockFunction);
     const newSearchValue = "newSearchValue";
 
@@ -51,11 +51,11 @@ describe("Search", () => {
 
     component.setProps({ value: newSearchValue });
     component.update();
+
     expect(component.find("input").props().value).toEqual(newSearchValue);
-    expect(component.find(Search).state().searchText).toEqual(newSearchValue);
   });
 
-  it("Проверка изменения текста поля ввода и state Search, при вводе значения в поля ввода", () => {
+  it("Проверка изменения текста поля ввода, при вводе значения в поля ввода", () => {
     const component = mountSearch(mockFunction);
     const newSearchValue = "newSearchValue";
 
@@ -64,6 +64,5 @@ describe("Search", () => {
 
     component.update();
     expect(component.find("input").props().value).toEqual(newSearchValue);
-    expect(component.find(Search).state().searchText).toEqual(newSearchValue);
   });
 });

@@ -34,17 +34,15 @@ const renderComponent = (isLoading: boolean) => {
 
 describe("Тест компонента VirtualizedTableHeaderRow", () => {
   it("Проверка отрисовки компонента VirtualizedTableHeaderRow", () => {
-    expect(
-      renderComponent(false).find("VirtualizedTableHeaderRow").length
-    ).toEqual(1);
+    expect(renderComponent(false).find(VirtualizedTableHeaderRow).length).toEqual(1);
   });
   it("Проверка loading у компонента VirtualizedTableHeaderRow", () => {
     expect(renderComponent(true).prop("loading")).toEqual(true);
   });
   it("Проверка title columns у компонента VirtualizedTableHeaderRow", () => {
-    expect(
-      renderComponent(false).find("div[test-id='virtualized-table_div']").text()
-    ).toEqual(localization.getLocalized(ERROR_MESSAGE));
+    expect(renderComponent(false).find("div[test-id='virtualized-table_div']").text()).toEqual(
+      localization.getLocalized(ERROR_MESSAGE)
+    );
   });
   it("Проверка onSelectChange у компонента VirtualizedTableHeaderRow", () => {
     renderComponent(false)
@@ -55,9 +53,7 @@ describe("Тест компонента VirtualizedTableHeaderRow", () => {
     expect(selectChange).toBeCalled();
   });
   it("Проверка onSorterChange у компонента VirtualizedTableHeaderRow", () => {
-    renderComponent(false)
-      .find("div[test-id='virtualized-table_div']")
-      .simulate("click");
+    renderComponent(false).find("div[test-id='virtualized-table_div']").simulate("click");
     expect(sorterChange).toBeCalled();
   });
 });

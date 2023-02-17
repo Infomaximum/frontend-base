@@ -1,13 +1,3 @@
-import { ConfigsServiceLocator } from "@im/core";
-import { useMemo } from "react";
+import { getInstanceExt } from "@im/core";
 
-export const useExtension: typeof ConfigsServiceLocator.resolve = (
-  extension
-) => {
-  const extensionInstance = useMemo(
-    () => ConfigsServiceLocator.resolve(extension),
-    [extension]
-  );
-
-  return extensionInstance;
-};
+export const useExtension: typeof getInstanceExt = (extension) => getInstanceExt(extension);
