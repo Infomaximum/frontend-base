@@ -20,7 +20,7 @@ const EllipsisTooltipComponent: FC<IEllipsisTooltipProps> = ({
       return cloneElement(title, {
         css: null,
         style: null,
-      });
+      } as any);
     }
 
     return title;
