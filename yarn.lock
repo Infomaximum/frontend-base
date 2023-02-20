@@ -1180,9 +1180,9 @@
   integrity sha512-JQc8f/vsTp7hX00kg8B+Emk9oCj+Ft4YZgJwGgtATO90WstwB0z1NV16e0vpyRVVQG7nSV96rVN0KNclh6LukQ==
 
 "@im/utils@^6.0.0":
-  version "6.2.1"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.2.1.tgz#f97260cb7ebf4c9276eb3f13565c4f5c873474f5"
-  integrity sha512-D/smKSGEP6hzdYW1lIcViSMGohluXflIsDn5a0A7ghlHsysZ0bQKbp5OunkqMl40IqmgLTOzVMP7K2huD3eAiQ==
+  version "6.3.0"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/@im/utils/-/utils-6.3.0.tgz#24968388c75106f154dc1627e19f613222d56d2a"
+  integrity sha512-vjnZii6kysIHhDlOZd8LkAOROEQI0pOdAMW5ynsXlZfwTHGyYXFQUtIdAxH+8nN5kqImSM4qtk/jtvMG8RnmSA==
   dependencies:
     "@im/asserts" "^1.0.0"
     "@im/localization" "^1.0.1"
@@ -4683,10 +4683,10 @@ please-upgrade-node@^3.2.0:
   dependencies:
     semver-compare "^1.0.0"
 
-prettier@2.8.3:
-  version "2.8.3"
-  resolved "https://npm.office.infomaximum.com/repository/npm-group/prettier/-/prettier-2.8.3.tgz#ab697b1d3dd46fb4626fbe2f543afe0cc98d8632"
-  integrity sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==
+prettier@2.8.4:
+  version "2.8.4"
+  resolved "https://npm.office.infomaximum.com/repository/npm-group/prettier/-/prettier-2.8.4.tgz#34dd2595629bfbb79d344ac4a91ff948694463c3"
+  integrity sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==
 
 pretty-format@^27.0.2:
   version "27.5.1"
