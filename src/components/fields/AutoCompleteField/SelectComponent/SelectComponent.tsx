@@ -21,6 +21,7 @@ import {
   ENTER_QUERY_OR_CHOOSE,
   REFINE_QUERY,
   SHOWED_ALL_CHANGE_QUERY,
+  NOT_SELECTED,
 } from "../../../../utils/Localization/Localization";
 import {
   hintContainerStyle,
@@ -42,7 +43,6 @@ import { Group, IModel } from "@im/models";
 import { CloseCircleFilled } from "../../../Icons/Icons";
 import type { Localization } from "@im/localization";
 import { Tooltip } from "../../../Tooltip/Tooltip";
-import { NOT_SELECTED } from "../../../../utils/Localization/Localization";
 import { DropdownAnimationInterval, KeyupRequestInterval } from "../../../../utils/const";
 import { Select } from "../../../Select/Select";
 import { BarsSVG } from "../../../../resources/icons";

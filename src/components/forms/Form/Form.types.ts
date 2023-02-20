@@ -1,9 +1,8 @@
 import type { ElementType } from "react";
 import type { Interpolation } from "@emotion/react";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
-import type { TAccess, TFeatureEnabledChecker, TRemoveIndex } from "@im/utils";
-import type { FormProps, FormRenderProps } from "react-final-form";
-import type { NCore } from "@im/core";
+import type { TAccess, TFeatureEnabledChecker } from "@im/utils";
+import type { FormRenderProps } from "react-final-form";
 import type {
   IFormContextData,
   IFormData,

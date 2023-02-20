@@ -94,7 +94,7 @@
   "scripts": {
     "release": "tsc --noEmit && standard-version && rollup -c",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests",
-    "lint": "tsc --noEmit",
+    "lint": "tsc --noEmit && eslint --cache --ignore-path ../../.eslintignore src/ --ext .ts,.tsx --quiet",
     "prettier": "prettier --find-config-path --ignore-path ../../.prettierignore --write ./src",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "build": "rollup -c"
