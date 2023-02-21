@@ -373,6 +373,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
       withNotEmptyValidation,
       newPasswordIcon,
       newPasswordInputType: newPasswordInputTypeProps,
+      autoFocusFieldName,
       complexPasswordStore,
     } = this.props;
     const {
@@ -447,6 +448,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
           parse={convertToNotWhitespace}
           autoComplete="off"
           css={inputFieldStyle}
+          autoFocus={autoFocusFieldName === currentPasswordFieldName}
         />
       ) : null,
       <InputFormField
@@ -496,6 +498,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
         placeholder={passwordFieldPlaceholder}
         type={newPasswordInputTypeProps ?? (newPasswordInputType ? "password" : "text")}
         css={inputFieldStyle}
+        autoFocus={autoFocusFieldName === passwordFieldName}
       />,
       withRepeatPasswordField ? (
         <InputFormField
