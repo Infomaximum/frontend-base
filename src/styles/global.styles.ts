@@ -210,7 +210,7 @@ const antGlobalStyle = (theme: TTheme) => ({
   ".ant-select-item": {
     color: theme.grey9Color,
     "&.ant-select-item-option-selected": {
-      color: theme.thrust4Color,
+      color: theme.thrust5Color,
       background: "none",
       fontWeight: 400,
     },
@@ -224,7 +224,7 @@ const antGlobalStyle = (theme: TTheme) => ({
     ".anticon": {
       paddingLeft: "2px",
       fontSize: "14px",
-      color: theme.thrust4Color,
+      color: theme.thrust5Color,
     },
   },
 

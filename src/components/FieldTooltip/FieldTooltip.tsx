@@ -3,6 +3,7 @@ import { Popover } from "antd";
 import type { IFieldTooltipProps, IFieldTooltipState } from "./FieldTooltip.types";
 import {
   captionStyle,
+  popoverStyle,
   questionIconShowPopoverStyle,
   questionIconStyle,
 } from "./FieldTooltip.styles";
@@ -68,6 +69,7 @@ class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTool
             arrowPointAtCenter={arrowPointAtCenter}
             align={FieldTooltipComponent.align}
             getPopupContainer={getPopupContainer}
+            overlayStyle={popoverStyle}
           >
             <QuestionCircleOutlined
               style={iconStyle}

@@ -7,6 +7,7 @@ import {
   addEntityButtonStyle,
   buttonDescriptionWrapperStyle,
   wrappedArrayFieldStyle,
+  rowsContainerStyle,
 } from "./ArrayField.styles";
 import type {
   IWrappedArrayFieldProps,
@@ -222,11 +223,13 @@ class WrappedArrayField extends React.PureComponent<
         wrapperCol={wrapperCol}
         formItemStyle={this.getResultFormItemStyle(formItemStyle)}
       >
-        {addEntityButtonPosition === EAddEntityButtonPositions.top
-          ? [this.getAddEntityButton(), this.getFields()]
-          : addEntityButtonPosition === EAddEntityButtonPositions.bottom
-          ? [this.getFields(), this.getAddEntityButton()]
-          : [this.getFields(), null]}
+        <div css={rowsContainerStyle}>
+          {addEntityButtonPosition === EAddEntityButtonPositions.top
+            ? [this.getAddEntityButton(), this.getFields()]
+            : addEntityButtonPosition === EAddEntityButtonPositions.bottom
+            ? [this.getFields(), this.getAddEntityButton()]
+            : [this.getFields(), null]}
+        </div>
       </FormOption>
     );
   }

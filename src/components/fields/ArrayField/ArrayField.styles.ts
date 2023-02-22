@@ -1,28 +1,32 @@
-export const addEntityButtonStyle = (theme: TTheme) => ({
+export const addEntityButtonStyle = {
   padding: 0,
-  marginBottom: `${theme.defaultSpace}px`,
-});
+};
 
-export const buttonDescriptionWrapperStyle = () => ({
+export const buttonDescriptionWrapperStyle = {
   display: "flex",
   alignItems: "center",
   height: "22px",
-});
+};
 
-export const addButtonWrapperStyle = () => ({
+export const addButtonWrapperStyle = {
   display: "flex",
   alignItems: "center",
   marginRight: "6px",
   lineHeight: "20px",
-});
+};
 
-export const addButtonStyle = () => ({
+export const addButtonStyle = {
   width: "1em",
-});
+};
 
-export const wrappedArrayFieldStyle = () => ({
-  marginBottom: 0,
+export const wrappedArrayFieldStyle = {
   ".ant-form-item": {
-    marginBottom: "12px",
+    marginBottom: 0,
   },
+};
+
+export const rowsContainerStyle = (theme: TTheme) => ({
+  display: "flex",
+  flexDirection: "column" as const,
+  gap: `${theme.smallSpace}px`,
 });
