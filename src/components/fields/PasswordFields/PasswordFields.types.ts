@@ -36,6 +36,7 @@ export declare interface IPasswordFieldsProps extends IWithLocProps, IWithFormPr
   disabled?: boolean;
   newPasswordIcon?: ReactNode;
   newPasswordInputType?: "text" | "password";
+  autoFocusFieldName?: string;
 
   complexPasswordStore: IComplexPasswordStore;
 }

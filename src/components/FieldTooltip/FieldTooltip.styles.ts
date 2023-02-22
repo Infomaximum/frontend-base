@@ -22,3 +22,7 @@ export const questionIconStyle = (theme: TTheme) => ({
     color: theme.grey7Color,
   },
 });
+
+export const popoverStyle = {
+  maxWidth: "409px",
+};
