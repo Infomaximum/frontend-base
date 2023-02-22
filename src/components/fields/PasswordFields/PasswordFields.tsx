@@ -41,7 +41,7 @@ import {
   popoverInnerStyle,
   inputFieldStyle,
 } from "./PasswordFields.styles";
-import { map, forEach } from "lodash";
+import { map, forEach, debounce } from "lodash";
 import { MIN_PASSWORD_LENGTH } from "../../../utils/const";
 import {
   passwordFieldsPasswordNotificationTestId,
@@ -292,8 +292,14 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
       : CheckGrayIcon;
   }
 
+  // debounce для игнорирования мгновенного focus-blur, возникающего при клике на область поля
+  // за пределами input. Должно исправиться в antd v5 [PT-12981]
+  private setFocusState = debounce((isFocus: boolean) =>
+    this.setState({ newPasswordFieldFocus: isFocus })
+  );
+
   public handleFocusNewPasswordField = () => {
-    this.setState({ newPasswordFieldFocus: true });
+    this.setFocusState(true);
   };
 
   // показать/скрыть подсказку для поля "Введите новый пароль"
@@ -301,11 +307,10 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
     this.setState((prevState) => ({
       showPopover: !prevState.showPopover,
     }));
-    e.stopPropagation();
   };
 
   public handleBlurNewPasswordField = () => {
-    this.setState({ newPasswordFieldFocus: false });
+    this.setFocusState(false);
   };
 
   // генерирует строки валидации для Popover
@@ -483,7 +488,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
                 <QuestionCircleOutlined
                   key="question-circle-popover-icon"
                   css={isVisiblePopover ? questionIconShowPopoverStyle : questionIconStyle}
-                  onMouseDown={disabled ? undefined : this.togglePopover}
+                  onClick={disabled ? undefined : this.togglePopover}
                   style={disabled ? opacity : undefined}
                 />
               </Popover>
