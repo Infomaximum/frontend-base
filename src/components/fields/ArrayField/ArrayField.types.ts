@@ -5,6 +5,7 @@ import type { TFeatureEnabledChecker } from "@im/utils";
 import type { Interpolation } from "@emotion/react";
 import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IWithFeatureProps } from "../../../decorators/hocs/withFeature/withFeature.types";
+import type { EFormLayoutType } from "../../forms";
 
 export interface IFieldEntityComponentProps<FV = any, T extends HTMLElement = HTMLElement> {
   onRemoveFieldEntity: (index: number) => void;
@@ -94,6 +95,7 @@ export interface IWrappedArrayFieldProps<FV = any, T extends HTMLElement = HTMLE
   isFeatureEnabled?: TFeatureEnabledChecker;
   formProvider: IFormProvider;
   formItemStyle?: Interpolation<TTheme>;
+  layoutType?: EFormLayoutType;
 }
 
 export interface IWrappedArrayFieldState {}

@@ -9,7 +9,7 @@ import {
 } from "./BaseForm.styles";
 import { Layout, Form as AntForm } from "antd";
 import { SubmitFormButton } from "../SubmitFormButton/SubmitFormButton";
-import { isUndefined, isNull } from "lodash";
+import { isUndefined, isNull, isString } from "lodash";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { HeaderMenuPortal } from "../../HeaderMenu/HeaderMenuPortal/HeaderMenuPortal";
@@ -19,6 +19,14 @@ import { Notification } from "../../Notification";
 import { SAVE } from "../../../utils/Localization/Localization";
 
 const { Footer, Content } = Layout;
+
+const addLayoutProp = (children: React.ReactNode, layoutType: EFormLayoutType) =>
+  React.Children.map(children, (child) => {
+    if (React.isValidElement(child) && !isString(child.type) && !child.type.name) {
+      return React.cloneElement(child, { layoutType: layoutType });
+    }
+    return child;
+  });
 
 const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }> = (props) => {
   const {
@@ -113,7 +121,7 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
       >
         <div {...props.attributes}>
           {notification}
-          {props.children}
+          {addLayoutProp(props.children, layoutType)}
         </div>
       </Content>
       {!isNull(props.header) ? <HeaderMenuPortal>{header}</HeaderMenuPortal> : null}

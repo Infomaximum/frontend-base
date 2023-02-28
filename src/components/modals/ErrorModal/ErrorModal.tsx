@@ -21,7 +21,7 @@ import {
 } from "../../../utils/TestIds";
 import { CLOSE, CONTINUE, ERROR_MESSAGE } from "../../../utils/Localization/Localization";
 import { kebabCase } from "lodash";
-import { CloseCircleOutlined, InfoCircleOutlined } from "../../Icons/Icons";
+import { CloseCircleOutlined, CloseOutlined, InfoCircleOutlined } from "../../Icons/Icons";
 import { observer } from "mobx-react";
 import { useFooterAndTitleHeight } from "./ErrorModal.utils";
 import { useTheme } from "../../../decorators/hooks/useTheme";
@@ -71,6 +71,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
         css={modalStyle(theme)}
         bodyStyle={bodyModalStyle}
         footer={footer}
+        closeIcon={<CloseOutlined />}
       >
         <div key="modal-icon-wrap" css={iconWrapStyle}>
           {isInfo ? (

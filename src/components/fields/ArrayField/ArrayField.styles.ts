@@ -1,3 +1,5 @@
+import { EFormLayoutType } from "../../forms";
+
 export const addEntityButtonStyle = {
   padding: 0,
 };
@@ -25,8 +27,8 @@ export const wrappedArrayFieldStyle = {
   },
 };
 
-export const rowsContainerStyle = (theme: TTheme) => ({
+export const rowsContainerStyle = (layoutType?: EFormLayoutType) => (theme: TTheme) => ({
   display: "flex",
   flexDirection: "column" as const,
-  gap: `${theme.smallSpace}px`,
+  gap: `${layoutType === EFormLayoutType.ModalType ? 8 : theme.smallSpace}px`,
 });

@@ -223,7 +223,7 @@ class WrappedArrayField extends React.PureComponent<
         wrapperCol={wrapperCol}
         formItemStyle={this.getResultFormItemStyle(formItemStyle)}
       >
-        <div css={rowsContainerStyle}>
+        <div css={rowsContainerStyle(this.props.layoutType)}>
           {addEntityButtonPosition === EAddEntityButtonPositions.top
             ? [this.getAddEntityButton(), this.getFields()]
             : addEntityButtonPosition === EAddEntityButtonPositions.bottom

@@ -16,7 +16,7 @@ export const getBoldTitleModal = createSelector(
 );
 
 const ModalComponent: React.FC<IModalProps> = (props) => {
-  const { title, ...rest } = props;
+  const { title, width, ...rest } = props;
   const theme = useTheme();
 
   const boldTitle = useMemo(
@@ -33,6 +33,7 @@ const ModalComponent: React.FC<IModalProps> = (props) => {
       maskClosable={false}
       title={title && boldTitle}
       focusTriggerAfterClose={false}
+      width={width ?? 480}
       {...rest}
     />
   );

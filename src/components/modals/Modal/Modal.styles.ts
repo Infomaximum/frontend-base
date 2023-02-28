@@ -1,10 +1,10 @@
 export const boldTitleStyle = {
   fontWeight: 500,
-  lineHeight: "22px",
+  lineHeight: "24px",
   display: "block",
 };
 
 export const titleStyle = (theme: TTheme) => ({
   ...boldTitleStyle,
-  fontSize: theme.h4FontSize,
+  fontSize: theme.subtitleFontSize,
 });
