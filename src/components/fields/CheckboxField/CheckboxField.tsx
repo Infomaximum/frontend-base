@@ -47,4 +47,4 @@ const CheckboxFormField: React.FC<ICheckboxFormFieldProps> = (props) => {
   return <FormField component={CheckboxField} {...props} />;
 };
 
-export { CheckboxFormField };
+export { CheckboxFormField, CheckboxField };

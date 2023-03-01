@@ -164,7 +164,9 @@ const FormWrapper: FC<IFormWrapperProps> = ({
 
 export const Form = withFormSubmitPromise(FormWrapper) as <
   FormProps extends IFormWrapperProps = IFormWrapperProps,
-  ComponentProps = ComponentPropsWithoutRef<NonNullable<FormProps["component"]>>,
+  ComponentProps extends IBaseFormProps = ComponentPropsWithoutRef<
+    NonNullable<FormProps["component"]>
+  >,
   ClearComponentProps extends IBaseFormProps = Exclude<ComponentProps, React.HTMLAttributes<any>>,
   TrueConnectFormProps = Omit<FormProps, "component" | keyof IBaseFormProps>
 >(

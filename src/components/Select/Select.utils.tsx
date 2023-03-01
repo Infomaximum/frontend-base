@@ -38,25 +38,28 @@ export const replaceBrowserTooltip = (children: React.ReactNode) =>
         });
       });
 
-      return React.cloneElement(element, {
+      return React.cloneElement(element as React.ReactElement<{ children: ReactNode[] }>, {
         children: groupChildren,
       });
     }
 
     const { children: optionContent } = element.props;
 
-    return React.cloneElement(element, {
-      title: null,
-      children: isString(optionContent) ? (
-        <Tooltip title={optionContent}>
-          <span style={textWrapperStyle} test-id={element.props["test-id"]}>
-            {optionContent}
-          </span>
-        </Tooltip>
-      ) : (
-        <span test-id={element.props["test-id"]}>{optionContent}</span>
-      ),
-    });
+    return React.cloneElement(
+      element as React.ReactElement<{ children: ReactNode; title: null | undefined | string }>,
+      {
+        title: null,
+        children: isString(optionContent) ? (
+          <Tooltip title={optionContent}>
+            <span style={textWrapperStyle} test-id={element.props["test-id"]}>
+              {optionContent}
+            </span>
+          </Tooltip>
+        ) : (
+          <span test-id={element.props["test-id"]}>{optionContent}</span>
+        ),
+      }
+    );
   });
 
 export const useSelectDropdownPosition = (
@@ -128,14 +131,18 @@ const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
 
 export const mapChildrenToOptions = (children: React.ReactNode): DefaultOptionType[] => {
   return (
-    React.Children.map(children, (child) => {
-      if (!React.isValidElement(child)) {
+    React.Children.map(children, (_child) => {
+      if (!React.isValidElement(_child)) {
         return null;
       }
 
+      const child = _child as React.ReactElement<
+        { children: ReactNode[]; label: string } | undefined
+      >;
+
       if (child.type === Select.OptGroup) {
         return {
-          label: child?.props.label as string,
+          label: child?.props?.label,
           options: child?.props?.children.map(buildOption) as DefaultOptionType[],
         };
       }

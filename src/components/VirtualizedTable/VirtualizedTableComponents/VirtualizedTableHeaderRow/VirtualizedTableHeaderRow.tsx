@@ -8,7 +8,10 @@ import {
 } from "../../../../utils/TestIds";
 import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
 import { Checkbox } from "../../../Checkbox/Checkbox";
-import type { IVirtualizedTableHeaderRowProps } from "./VirtualizedTableHeaderRow.types";
+import type {
+  IVirtualizedTableHeaderRowOwnProps,
+  IVirtualizedTableHeaderRowProps,
+} from "./VirtualizedTableHeaderRow.types";
 import { VirtualizedTableHeaderCell } from "../VirtualizedTableHeaderCell/VirtualizedTableHeaderCell";
 import {
   virtualizedTableHeaderRowStyle,
@@ -23,7 +26,7 @@ import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.
 import { TABLE_HEADER_ID } from "../../../../utils/const";
 import { withTheme } from "../../../../decorators";
 
-export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
+export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends PureComponent<
   IVirtualizedTableHeaderRowProps<T>
 > {
   private getHeaderStyle = (
@@ -110,4 +113,8 @@ export class VirtualizedTableHeaderRowComponent<T = TRow> extends PureComponent<
   }
 }
 
-export const VirtualizedTableHeaderRow = withTheme(VirtualizedTableHeaderRowComponent);
+const VirtualizedTableHeaderRowWithHOCs = withTheme(VirtualizedTableHeaderRowComponent);
+
+export const VirtualizedTableHeaderRow = <T extends TRow>(
+  props: IVirtualizedTableHeaderRowOwnProps<T>
+) => <VirtualizedTableHeaderRowWithHOCs {...props} />;

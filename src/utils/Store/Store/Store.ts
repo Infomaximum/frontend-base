@@ -253,7 +253,7 @@ export class Store<M extends Model = never> extends BaseStore {
   /** Подготавливает данные для мутации на сервер и обрабатывает ответ */
   public async submitData<
     T extends NStore.IActionSubmitDataParams<TDictionary>,
-    Variables = TInferredVariables<T, "mutation">
+    Variables extends TDictionary = TInferredVariables<T, "mutation">
   >({
     mutation,
     variables,

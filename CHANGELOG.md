@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.0.0...v2.0.1) (2023-02-28)
+
+## [2.0.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.8.2...v2.0.0) (2023-02-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* Изменилась система отступов после массива полей
+
+### Features
+
+* добавил экспорт для CheckboxField ([d07a46f](https://git.office.infomaximum.com/frontend/base-pkg/commit/d07a46f4f731a1933a73d848243fbafc0527b8e4))
+* Изменил цвет выбранного значения в селекте ([c07f153](https://git.office.infomaximum.com/frontend/base-pkg/commit/c07f1530174cdf5e29d7c70f9070b75cc1ddb249))
+* поднял приоритет пропса drawerWidth в DataTableDrawer над другими условиями ([37b66be](https://git.office.infomaximum.com/frontend/base-pkg/commit/37b66be5365b4d1607980c66350b7ac28636df3a))
+
+
+### Bug Fixes
+
+* Добавил возможность задавать поле с автофокусом ([c43a9cb](https://git.office.infomaximum.com/frontend/base-pkg/commit/c43a9cbd3524f8110cf067e5e86757141e423ae0))
+* добавил eslint ignore правило ([98f3dcd](https://git.office.infomaximum.com/frontend/base-pkg/commit/98f3dcd87f0bb3be7441fde9ac158ea2bb4ca70c))
+* Исправил отступ после массива полей ([831d31d](https://git.office.infomaximum.com/frontend/base-pkg/commit/831d31d0f357718255c2cdbf27ced8748b3dd365))
+* Исправил появление подсказки при клике на область поля за пределами input ([98f4eb1](https://git.office.infomaximum.com/frontend/base-pkg/commit/98f4eb1fb40ed0df0db3962d2d3f67311825b3a4))
+* исправил типы ([7ec6d66](https://git.office.infomaximum.com/frontend/base-pkg/commit/7ec6d66ade6aa3d53aa4ddaee133d0533124065e))
+* Ограничил максимальную ширину подсказки ([79fb2b2](https://git.office.infomaximum.com/frontend/base-pkg/commit/79fb2b20788a3b2418ed059cb01e85f049f9fff2))
+
 ### [1.8.2](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.8.1...v1.8.2) (2023-02-20)
 
 ### [1.8.1](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.8.0...v1.8.1) (2023-02-17)
