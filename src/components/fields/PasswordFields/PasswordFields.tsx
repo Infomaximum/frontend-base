@@ -303,7 +303,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
   };
 
   // показать/скрыть подсказку для поля "Введите новый пароль"
-  public togglePopover = (e: React.MouseEvent<HTMLDivElement>) => {
+  public togglePopover = () => {
     this.setState((prevState) => ({
       showPopover: !prevState.showPopover,
     }));
