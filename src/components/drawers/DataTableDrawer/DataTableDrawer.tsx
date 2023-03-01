@@ -153,6 +153,10 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
   };
 
   const getWidth = () => {
+    if (drawerWidth) {
+      return drawerWidth;
+    }
+
     if (tableStore.isTree) {
       return theme.drawerXLargeWidth;
     }
@@ -161,7 +165,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
       return theme.drawerLargeWidth;
     }
 
-    return drawerWidth ?? `${theme.drawerMediumWidth}px`;
+    return theme.drawerMediumWidth;
   };
 
   return (

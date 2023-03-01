@@ -11,7 +11,7 @@ class ControlPanel extends PureComponent<IControlPanelProps> {
 
     return (
       <>
-        <EditableRowSubmitButton>
+        <EditableRowSubmitButton disableOnInvalid={true}>
           <CheckOutlined />
         </EditableRowSubmitButton>
         <EditableRowResetButton onCancel={onCancel}>

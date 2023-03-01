@@ -373,7 +373,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
     return (
       <div test-id={virtualizedTableTestId}>
         {showHeader && (
-          <VirtualizedTableHeaderRow
+          <VirtualizedTableHeaderRow<T>
             key="header"
             isTableEmpty={!itemsCount}
             isCheckable={Boolean(rowSelection)}

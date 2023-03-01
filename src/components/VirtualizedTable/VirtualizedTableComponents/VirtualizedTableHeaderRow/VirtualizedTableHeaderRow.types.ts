@@ -5,11 +5,10 @@ import type {
 } from "../../../VirtualizedTable/VirtualizedTable.types";
 import type { IVirtualizedTableHeaderCellProps } from "../VirtualizedTableHeaderCell/VirtualizedTableHeaderCell.types";
 
-export interface IVirtualizedTableHeaderRowProps<T>
+export interface IVirtualizedTableHeaderRowOwnProps<T>
   extends Pick<IVirtualizedTableProps<T>, "columns" | "targetAll" | "loading">,
     Pick<IVirtualizedTableState<T>, "sorter">,
-    Pick<IVirtualizedTableHeaderCellProps<T>, "onSorterChange" | "columnsOrders">,
-    IWithThemeProps<TTheme> {
+    Pick<IVirtualizedTableHeaderCellProps<T>, "onSorterChange" | "columnsOrders"> {
   isTableEmpty: boolean;
   isCheckable: boolean;
   isSelectionEmpty: boolean;
@@ -18,3 +17,7 @@ export interface IVirtualizedTableHeaderRowProps<T>
   scrollOffset?: number;
   isShowDivider: boolean;
 }
+
+export interface IVirtualizedTableHeaderRowProps<T>
+  extends IVirtualizedTableHeaderRowOwnProps<T>,
+    IWithThemeProps<TTheme> {}

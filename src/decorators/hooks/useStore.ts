@@ -7,6 +7,7 @@ import { useMountEffect } from "./useMountEffect";
 import { useUnmountEffect } from "./useUnmountEffect";
 import { useModalError } from "./useModalError";
 import { EErrorCode } from "../../utils/const";
+import type { NCore } from "@im/core";
 
 export type TStoreParams = {
   /** Выполнять ли запрос при маунте компонента `(false)` */
@@ -44,17 +45,22 @@ export const useStore = <S extends Store<Model>>(store: S, params?: TStoreParams
   const unsubscribe = store.unsubscribe;
 
   const mutate = useCallback(
-    <T extends NStore.IActionSubmitDataParams, Variables = TInferredVariables<T, "mutation">>(
+    <
+      T extends NStore.IActionSubmitDataParams,
+      Variables extends TDictionary = TInferredVariables<T, "mutation">
+    >(
       params: IMutation<Variables>
     ) => store.submitData(params),
     [store]
   );
 
   useEffect(() => {
+    const error = store.error as NCore.TError | EErrorCode | undefined;
+
     if (
-      (store.error === EErrorCode.CONNECTION_ERROR ||
-        store.error === EErrorCode.BAD_GATEWAY ||
-        store.error === EErrorCode.GATEWAY_TIMEOUT) &&
+      (error === EErrorCode.CONNECTION_ERROR ||
+        error === EErrorCode.BAD_GATEWAY ||
+        error === EErrorCode.GATEWAY_TIMEOUT) &&
       showModalError &&
       isHandleError
     ) {
