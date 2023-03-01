@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { ISettingsProps } from "./Settings.types";
 import { SettingsItem } from "./SettingsItem/SettingsItem";
-import { calculateSize, leftColumnStyles } from "./SettingsItem/SettingsItem.styles";
+import { calculateSize } from "./SettingsItem/SettingsItem.styles";
 import { forEach, map } from "lodash";
 import { Layout, Space } from "antd";
 import { settingsContentStyle } from "./Settings.styles";
@@ -39,9 +39,9 @@ const SettingsComponent: FC<ISettingsProps> = ({ routes: settingRoutes, onItemCl
 
   return (
     <Content css={settingsContentStyle}>
-      <Space size={48} direction="horizontal" align="start">
+      <Space size={44} direction="horizontal" align="start">
         {map(getColumns(), (column, key) => (
-          <div key={key} css={key === 0 ? leftColumnStyles : undefined}>
+          <div key={key}>
             {map(column, (route) => (
               <SettingsItem
                 key={route.key}

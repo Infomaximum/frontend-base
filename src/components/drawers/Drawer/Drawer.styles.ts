@@ -35,6 +35,7 @@ export const headerDrawerStyle = (theme: TTheme) => ({
   background: theme.grey3Color,
   height: "48px",
   minHeight: "48px",
+  userSelect: "none" as const,
 });
 
 export const closeIconWrapperStyle = (theme: TTheme) => ({

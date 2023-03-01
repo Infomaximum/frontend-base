@@ -13,8 +13,7 @@ export const wrapperStyle: Interpolation<TTheme> = () => ({
   display: "flex",
   flexDirection: "column",
   width: "220px",
-  padding: "8px 0px 0px 0px",
-  margin: "16px 0",
+  marginBottom: "32px",
 });
 
 export const linkStyle: Interpolation<TTheme> = (theme) => ({
@@ -38,7 +37,3 @@ export function calculateSize(route: NCore.IRoutes): number {
     wrapperStyleMarginTop
   );
 }
-
-export const leftColumnStyles = {
-  marginLeft: "24px",
-};

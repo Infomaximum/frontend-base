@@ -37,15 +37,18 @@ export interface IFormMutateParams<Variables extends TDictionary = never>
 
 export interface IWithStoreProps<S extends Store<Model>> {
   /** Отправляет запрос на сервер */
-  query<T = TDictionary>(params?: TQueryParams): Promise<T | null>;
+  query<T extends TDictionary = TDictionary>(params?: TQueryParams): Promise<T | null>;
   /** Отправляет мутацию на сервер */
-  mutate<T extends IMutateParams<TDictionary>, Variable = TInferredVariables<T, "mutation">>(
+  mutate<
+    T extends IMutateParams<TDictionary>,
+    Variable extends TDictionary = TInferredVariables<T, "mutation">
+  >(
     params: IMutateParams<Variable>
   ): Promise<TDictionary | null>;
   /** Отправляет мутацию от формы на сервер */
   formMutate<
     T extends IFormMutateParams<TDictionary>,
-    Variable = TInferredVariables<T, "mutation">
+    Variable extends TDictionary = TInferredVariables<T, "mutation">
   >(
     params: IFormMutateParams<Variable>
   ): Promise<TDictionary | null>;
