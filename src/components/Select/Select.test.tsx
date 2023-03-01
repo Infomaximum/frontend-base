@@ -7,6 +7,7 @@ import type { ISelectProps } from "./Select.types";
 import { mapChildrenToOptions } from "./Select.utils";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { textWrapperStyle } from "./Select.styles";
+import { DropdownAnimationInterval } from "../../utils";
 
 enum EElement {
   FIRST = "FIRST",
@@ -67,6 +68,60 @@ describe("Тест компонента Select", () => {
     expect(screen.getByText(elementDisplayValue[EElement.FIRST])).toBeInTheDocument();
     expect(screen.getByText(elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
     expect(screen.getByText(elementDisplayValue[EElement.THIRD])).toBeInTheDocument();
+  });
+
+  it("Значение очищается, а поисковая строка очищается с задержкой", async () => {
+    const user = userEvent.setup({ delay: null });
+    const handleSearchFn = jest.fn();
+    const handleClearFn = jest.fn();
+    const { getByRole, baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        onClear: handleClearFn,
+        onSearch: handleSearchFn,
+        mode: "multiple",
+      })
+    );
+    const target = getByRole("combobox");
+    expect(target).not.toBeNull();
+    await user.type(target, "s");
+    expect(await screen.findByRole("listbox")).toBeInTheDocument();
+    await user.click(baseElement.getElementsByClassName("ant-select-clear")[0]);
+    expect(handleClearFn).toBeCalled();
+    expect(handleSearchFn).toBeCalledTimes(3);
+    setTimeout(() => {
+      expect(handleSearchFn).toBeCalledTimes(4);
+    }, DropdownAnimationInterval + 150);
+  });
+
+  it("Очистка значения при клике на крестик", async () => {
+    const user = userEvent.setup({ delay: null });
+    const handleSearchFn = jest.fn();
+    const handleClearFn = jest.fn();
+    const { getByRole, baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        onClear: handleClearFn,
+        onSearch: handleSearchFn,
+      })
+    );
+    const target = getByRole("combobox");
+    expect(target).toBeInTheDocument();
+    await user.type(target, "s");
+    expect(await screen.findByRole("listbox")).toBeInTheDocument();
+    await userEvent.click(screen.getByText(elementDisplayValue[EElement.SECOND]));
+    const selected = baseElement.querySelectorAll<HTMLSpanElement>(
+      ".ant-select-selection-item"
+    )?.[0];
+    if (selected) {
+      expect(getByText(selected, elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
+    }
+    await user.click(baseElement.getElementsByClassName("ant-select-clear")[0]);
+    expect(handleClearFn).toBeCalled();
+    const selectedAfterClear = baseElement.querySelectorAll<HTMLSpanElement>(
+      ".ant-select-selection-item"
+    )?.[0];
+    expect(selectedAfterClear).toBeUndefined();
   });
 
   it("Рендер пустого", async () => {

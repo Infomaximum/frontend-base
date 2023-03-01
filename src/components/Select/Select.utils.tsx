@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, RefObject, useEffect } from "react";
+import React, { ReactElement, ReactNode, RefObject, useCallback, useEffect } from "react";
 import { Select } from "./Select";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { find, has, isArray, isEmpty, isNil, isNumber, isString, map } from "lodash";
@@ -8,6 +8,7 @@ import type { DefaultOptionType, LabeledValue, SelectValue } from "antd/lib/sele
 import type { IDropdownParams, TXPlacement } from "../Dropdown/Dropdown.types";
 import { globalScrollBehavior } from "../../utils/ScrollBehavior/ScrollBehavior";
 import type { BaseSelectRef } from "rc-select";
+import type { ISelectProps } from "./Select.types";
 
 export const replaceBrowserTooltip = (children: React.ReactNode) =>
   React.Children.map(children, (element) => {
@@ -210,4 +211,59 @@ export const useBlurOnResize = (element: BaseSelectRef | null) => {
       return () => window.removeEventListener("resize", handleResize);
     }
   }, [element]);
+};
+
+/**
+ * Хук для блокировки ненужных вызовов onSearch из AntSelect при его очистке.
+ * Вызов onSearch в момент перед закрытием Dropdown вызывает мерцание содержимого Dropdown.
+ * Принцип работы хука в перехватывании нажатий по областям очистки и вызове нужных методов вручную.
+ * onSearch с пустой строкой вызовется в эффекте после полного закрытия Dropdown.
+ */
+export const useCustomClearing = (
+  selectWrapper: HTMLDivElement | null,
+  onDropdownVisibleChange: NonNullable<ISelectProps["onDropdownVisibleChange"]>,
+  onChange: NonNullable<ISelectProps["onChange"]>,
+  isMultipleMode: boolean
+) => {
+  const handleMouseDown = useCallback(
+    (e: DocumentEventMap["mousedown"]) => {
+      const target = e.target as Element | null;
+
+      if (!target || !selectWrapper) {
+        return;
+      }
+
+      const isEventOnClearIcon = target.closest(".ant-select-clear");
+
+      if (isEventOnClearIcon) {
+        e.preventDefault();
+        e.stopPropagation();
+        onDropdownVisibleChange(false);
+        // В соответствии с тем, какие аргументы при очистке передает AntSelect, несмотря на типизацию
+        isMultipleMode ? onChange([], []) : onChange(undefined, undefined!);
+        return;
+      }
+
+      // Произошло ли нажатие по области, очищающей поисковую строку
+      const isEventOnClearArea =
+        target.closest(".ant-select-selector") &&
+        !target.closest(".ant-select-selection-search-input");
+
+      const hasSearchValue = selectWrapper.querySelector("input")?.value;
+
+      if (isEventOnClearArea && hasSearchValue) {
+        e.stopPropagation();
+        e.preventDefault();
+        onDropdownVisibleChange(false);
+      }
+    },
+    [onChange, onDropdownVisibleChange, selectWrapper, isMultipleMode]
+  );
+
+  useEffect(() => {
+    if (selectWrapper) {
+      selectWrapper.addEventListener("mousedown", handleMouseDown);
+      return () => selectWrapper.removeEventListener("mousedown", handleMouseDown);
+    }
+  }, [handleMouseDown, selectWrapper]);
 };
