@@ -69,3 +69,10 @@ export const footerStyle = {
   padding: "0px",
   height: "32px",
 };
+
+export const headerSettingsDrawerStyle = {
+  background: "unset",
+  padding: 0,
+  minHeight: "48px",
+  borderBottom: "none",
+};

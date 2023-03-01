@@ -9,16 +9,15 @@ import {
   headerWithSettingsIconStyle,
   headerWithoutSettingsIconStyle,
   footerStyle,
+  headerSettingsDrawerStyle,
 } from "./HeaderMenu.styles";
 import { find, forEach, isEmpty } from "lodash";
 import { headerMenuSettingsTestId, headerMenuTestId } from "../../utils/TestIds";
-import { SETTINGS } from "../../utils/Localization/Localization";
 import { observer } from "mobx-react";
 import { ProfileDropdown } from "./ProfileDropdown/ProfileDropdown";
 import { profileKey, settingsKey } from "../../utils/Routes/keys";
 import type { IProfileMenuItem } from "./ProfileDropdown/ProfileDropdown.types";
 import type { IHeaderMenuProps } from "./HeaderMenu.types";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { RoutesContext } from "../../decorators/contexts/RoutesContext";
 import { getDisplayedSettingsRoutes } from "../../utils/Routes/routes";
@@ -30,7 +29,6 @@ const { Header } = Layout;
 
 const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
   ({ renderSettingsFooterDrawer, userId, userName, onLogout }, ref) => {
-    const localization = useLocalization();
     const theme = useTheme();
     const [showSettingsDrawer, setShowSettingsDrawer] = useState<boolean>(false);
     const routes = useContext(RoutesContext);
@@ -95,7 +93,6 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
     const settingsDrawer = (
       <Drawer
         key="settings-drawer"
-        title={localization.getLocalized(SETTINGS)}
         width={theme.drawerMediumWidth}
         placement="right"
         closable={true}
@@ -105,6 +102,7 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
         footer={footer}
         footerStyle={footerStyle}
         destroyOnClose={true}
+        headerStyle={headerSettingsDrawerStyle}
       >
         {settingsRoutes && !isEmpty(settingsRoutes) ? (
           <Settings onItemClick={handleCloseDrawer} routes={settingsRoutes} />
