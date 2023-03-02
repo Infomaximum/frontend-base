@@ -24,4 +24,5 @@ export const tagContentStyle = {
   textOverflow: "ellipsis",
   overflow: "hidden",
   whiteSpace: "nowrap",
+  userSelect: "none",
 } as const;

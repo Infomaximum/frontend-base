@@ -13,6 +13,7 @@ export const titleStyle = (theme: TTheme) =>
     paddingLeft: "8px",
     paddingRight: "12px",
     background: theme.headerPanel.backgroundColor,
+    userSelect: "none" as const,
   } as const);
 
 export const wrapMenuTitleStyle = (theme: TTheme) => ({
