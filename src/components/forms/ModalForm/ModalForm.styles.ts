@@ -5,9 +5,3 @@ export const formStyle = {
 export const modalBodyStyle = {
   padding: "0 28px 16px",
 };
-
-export const modalFormStyle = {
-  ".ant-form-item": {
-    marginBottom: "12px",
-  },
-} as const;

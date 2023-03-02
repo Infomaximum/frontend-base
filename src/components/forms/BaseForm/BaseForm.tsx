@@ -9,7 +9,7 @@ import {
 } from "./BaseForm.styles";
 import { Layout, Form as AntForm } from "antd";
 import { SubmitFormButton } from "../SubmitFormButton/SubmitFormButton";
-import { isUndefined, isNull, isString } from "lodash";
+import { isUndefined, isNull } from "lodash";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { HeaderMenuPortal } from "../../HeaderMenu/HeaderMenuPortal/HeaderMenuPortal";
@@ -17,16 +17,10 @@ import { modalFormLayout, typeLLayout, typeMLayout, typeSLayout } from "../../..
 import { assertSimple } from "@im/asserts";
 import { Notification } from "../../Notification";
 import { SAVE } from "../../../utils/Localization/Localization";
+import { ESpaceSize } from "../../fields/FormOption/FormOption";
+import { SpaceSizeContext } from "./SpaceSizeContext";
 
 const { Footer, Content } = Layout;
-
-const addLayoutProp = (children: React.ReactNode, layoutType: EFormLayoutType) =>
-  React.Children.map(children, (child) => {
-    if (React.isValidElement(child) && !isString(child.type) && !child.type.name) {
-      return React.cloneElement(child, { layoutType: layoutType });
-    }
-    return child;
-  });
 
 const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }> = (props) => {
   const {
@@ -121,7 +115,11 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
       >
         <div {...props.attributes}>
           {notification}
-          {addLayoutProp(props.children, layoutType)}
+          <SpaceSizeContext.Provider
+            value={layoutType === EFormLayoutType.ModalType ? ESpaceSize.small : ESpaceSize.large}
+          >
+            {props.children}
+          </SpaceSizeContext.Provider>
         </div>
       </Content>
       {!isNull(props.header) ? <HeaderMenuPortal>{header}</HeaderMenuPortal> : null}

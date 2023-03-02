@@ -1,6 +1,6 @@
 import React from "react";
 import { has, isFunction } from "lodash";
-import { formStyle, modalBodyStyle, modalFormStyle } from "./ModalForm.styles";
+import { formStyle, modalBodyStyle } from "./ModalForm.styles";
 import { EFormLayoutType } from "../BaseForm/BaseForm.types";
 import {
   modalFormCancelButtonTestId,
@@ -130,7 +130,6 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
         key="modal-form"
         footer={footer ?? this.renderFooter()}
         bodyStyle={bodyStyle}
-        css={modalFormStyle}
         closeIcon={closeIcon}
         centered={true}
         onCancel={this.handleCancel}

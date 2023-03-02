@@ -1,16 +1,23 @@
-import { FC, useMemo } from "react";
+import { FC, useContext, useMemo } from "react";
 import type { IFormOptionProps } from "./FormOption.types";
 import {
   formOptionLabelStyle,
   formOptionComponentWrapperStyle,
   formOptionTooltipContainerStyle,
   labelWrapperStyle,
+  spaceFormOptionStyle,
 } from "./FormOption.styles";
 import { Form } from "antd";
 import type { ColProps } from "antd/lib/col";
 import type { Interpolation } from "@emotion/react";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import { FieldTooltip } from "../../FieldTooltip/FieldTooltip";
+import { SpaceSizeContext } from "../../forms/BaseForm/SpaceSizeContext";
+
+export enum ESpaceSize {
+  small = "small",
+  large = "large",
+}
 
 const getPopupContainer = (element: HTMLElement) => element.closest("form") ?? element;
 
@@ -36,7 +43,7 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
     touched,
     invalid,
   } = props;
-
+  const spaceSize = useContext(SpaceSizeContext);
   const error = errorProp || submitError;
 
   const fieldOwnProps = useMemo(() => {
@@ -68,8 +75,8 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
   }, [colon, labelAlign, labelCol, wrapperCol]);
 
   const formItemStyle = useMemo(
-    () => [formItemStyleProps, labelWrapperStyle],
-    [formItemStyleProps]
+    () => [spaceFormOptionStyle(spaceSize), formItemStyleProps, labelWrapperStyle],
+    [formItemStyleProps, spaceSize]
   );
 
   const formOptionError = useMemo(

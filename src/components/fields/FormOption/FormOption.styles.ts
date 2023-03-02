@@ -1,3 +1,5 @@
+import { ESpaceSize } from "./FormOption";
+
 export const formOptionLabelStyle = (theme: TTheme) => ({
   color: theme.grey8Color,
 });
@@ -22,3 +24,7 @@ export const labelWrapperStyle = {
     paddingBottom: 0,
   },
 };
+
+export const spaceFormOptionStyle = (spaceSize?: ESpaceSize) => ({
+  marginBottom: `${spaceSize === ESpaceSize.small ? 12 : 24}px`,
+});

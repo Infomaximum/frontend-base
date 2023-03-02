@@ -1,4 +1,4 @@
-import { EFormLayoutType } from "../../forms";
+import { ESpaceSize } from "../FormOption/FormOption";
 
 export const addEntityButtonStyle = {
   padding: 0,
@@ -27,8 +27,8 @@ export const wrappedArrayFieldStyle = {
   },
 };
 
-export const rowsContainerStyle = (layoutType?: EFormLayoutType) => (theme: TTheme) => ({
+export const rowsContainerStyle = (spaceSize: string) => (theme: TTheme) => ({
   display: "flex",
   flexDirection: "column" as const,
-  gap: `${layoutType === EFormLayoutType.ModalType ? 8 : theme.smallSpace}px`,
+  gap: `${spaceSize === ESpaceSize.small ? 8 : theme.smallSpace}px`,
 });
