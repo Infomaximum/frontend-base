@@ -8,6 +8,10 @@ export const getTagStyle = (borderColor?: string, textColor?: string, bgColor?: 
   borderRadius: "12px",
   height: "22px",
   lineHeight: "22px",
+  // Чтобы убрать анимацию при клике по тегу [PT-13063], убрать при обновлении до Antd V5
+  ":after": {
+    animation: "none",
+  },
 });
 
 export const notClosableTagStyle = {
