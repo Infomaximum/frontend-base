@@ -4,7 +4,9 @@ export const boldTitleStyle = {
   display: "block",
 };
 
-export const titleStyle = (theme: TTheme) => ({
-  ...boldTitleStyle,
-  fontSize: theme.subtitleFontSize,
-});
+export const titleStyle = (theme: TTheme) =>
+  ({
+    ...boldTitleStyle,
+    fontSize: theme.h4FontSize,
+    userSelect: "none",
+  } as const);
