@@ -21,7 +21,7 @@ import {
 } from "../../../utils/TestIds";
 import { CLOSE, CONTINUE, ERROR_MESSAGE } from "../../../utils/Localization/Localization";
 import { kebabCase } from "lodash";
-import { CloseCircleOutlined, CloseOutlined, InfoCircleOutlined } from "../../Icons/Icons";
+import { CloseCircleFilled, CloseOutlined, InfoCircleOutlined } from "../../Icons/Icons";
 import { observer } from "mobx-react";
 import { useFooterAndTitleHeight } from "./ErrorModal.utils";
 import { useTheme } from "../../../decorators/hooks/useTheme";
@@ -31,7 +31,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
     const localization = useLocalization();
     const theme = useTheme();
 
-    const { footerHeight, footerCBRef, titleHeight, titleCBRef } = useFooterAndTitleHeight();
+    const { footerCBRef, titleCBRef } = useFooterAndTitleHeight();
 
     const isInfo = error?.typeDisplayedComponent === "info";
 
@@ -58,7 +58,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
     const titleModalTestId = `${modalErrorTitleErrorTestId}_${kebabCase(error.code)}`;
     const contentModalTestId = `${modalErrorContentErrorTestId}_${kebabCase(error.code)}`;
 
-    const modalWidth = !!error.message ? 458 : 416;
+    const modalWidth = !!error.message ? 480 : 416;
 
     return (
       <Modal
@@ -77,7 +77,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
           {isInfo ? (
             <InfoCircleOutlined key="info-icon-modal" css={infoIconStyle(theme)} />
           ) : (
-            <CloseCircleOutlined key="close-icon-modal" css={errorIconStyle(theme)} />
+            <CloseCircleFilled key="close-icon-modal" css={errorIconStyle(theme)} />
           )}
         </div>
         <div key="modal-error-content" css={modalContentStyle}>
@@ -90,11 +90,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
             {error.title || localization.getLocalized(ERROR_MESSAGE)}
           </span>
           {error.message ? (
-            <p
-              key="content-error-modal"
-              test-id={contentModalTestId}
-              css={textStyle(titleHeight, footerHeight)(theme)}
-            >
+            <p key="content-error-modal" test-id={contentModalTestId} css={textStyle(theme)}>
               {error.message} {isDebugMode && error.traceId && `[${error.traceId}]`}
             </p>
           ) : null}

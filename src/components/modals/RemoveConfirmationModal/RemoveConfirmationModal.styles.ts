@@ -1,7 +1,7 @@
 export const iconStyle = (theme: TTheme) => ({
-  fontSize: "19px",
+  fontSize: "20px",
   color: `${theme.red6Color}`,
-  padding: "1px 13px 1px 1px",
+  padding: "1px 12px 1px 1px",
 });
 
 export const bodyStyle = {
