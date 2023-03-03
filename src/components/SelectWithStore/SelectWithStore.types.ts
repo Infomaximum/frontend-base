@@ -18,4 +18,6 @@ export interface ISelectWithStoreProps
   dataAccessKeys?: string[];
   value?: Model[];
   onChange?: (model: Model[]) => void;
+  requestOnMount?: boolean;
+  queryVariables?: TDictionary;
 }

@@ -10,6 +10,7 @@ import { assertSimple } from "@im/asserts";
 import type { ISelectProps } from "../Select/Select.types";
 import { Select } from "../Select/Select";
 import { DropdownPlaceholder } from "../Select/DropdownPlaceholder/DropdownPlaceholder";
+import { useMountEffect } from "../../decorators";
 
 const optionFilterProp = "filterProp";
 
@@ -20,15 +21,27 @@ const mapModelToSelectOption = (model: Model) => ({
 });
 
 const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
-  const { store: storeProps, dataAccessKeys, value: valueProps, onChange, ...rest } = props;
+  const {
+    store: storeProps,
+    dataAccessKeys,
+    value: valueProps,
+    onChange,
+    requestOnMount,
+    queryVariables,
+    ...rest
+  } = props;
   const { isFeatureEnabled } = useFeature();
   const [searchText, setSearchText] = useState("");
 
   const isHasAccess =
     !!isFeatureEnabled && every(dataAccessKeys, (accessKey) => isFeatureEnabled(accessKey));
 
-  const { store } = useStore(storeProps, {
-    requestOnMount: true,
+  const { store } = useStore(storeProps);
+
+  useMountEffect(() => {
+    if (requestOnMount) {
+      fetchData();
+    }
   });
 
   const model = store.model;
@@ -50,11 +63,16 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     [model]
   );
 
+  const fetchData = useCallback(() => {
+    store.requestData({ variables: queryVariables });
+  }, [queryVariables, store]);
+
   const handleChange = useCallback<Required<ISelectProps>["onChange"]>(
     (_, options) => {
-      assertSimple(isArray(options), "В качестве value поддерживается только массив");
+      const optionsArray = isArray(options) ? options : options ? [options] : [];
+
       if (onChange && modelsCollection) {
-        onChange(compact(map(options, (item) => item.value && modelsCollection[item.value])));
+        onChange(compact(map(optionsArray, (item) => item.value && modelsCollection[item.value])));
       }
     },
     [modelsCollection, onChange]
@@ -78,6 +96,10 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
       notFoundContent={<DropdownPlaceholder hasAccess={isHasAccess} searchText={searchText} />}
     />
   );
+};
+
+SelectWithStoreComponent.defaultProps = {
+  requestOnMount: true,
 };
 
 const SelectWithStore = observer(SelectWithStoreComponent);
