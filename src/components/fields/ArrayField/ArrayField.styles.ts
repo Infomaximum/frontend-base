@@ -1,4 +1,4 @@
-import { ESpaceSize } from "../FormOption/FormOption";
+import { ESpaceSize } from "../../../decorators/contexts/SpaceSizeContext";
 
 export const addEntityButtonStyle = {
   padding: 0,

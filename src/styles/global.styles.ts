@@ -262,46 +262,6 @@ const antGlobalStyle = (theme: TTheme) => ({
     marginLeft: "6px !important",
   },
 
-  ".ant-modal": {
-    margin: "0 auto",
-  },
-
-  ".ant-modal-content": {
-    borderRadius: "4px",
-    boxShadow:
-      "0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px (0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05)",
-  },
-
-  ".ant-modal-header": {
-    padding: "20px 54px 12px 28px",
-    border: "none",
-    borderRadius: "4px 4px 0 0",
-  },
-
-  ".ant-modal-footer": {
-    borderTop: "none",
-    padding: "0 28px 20px",
-  },
-
-  ".ant-modal-close": {
-    width: "22px",
-    height: "22px",
-    top: "20px",
-    right: "28px",
-  },
-
-  ".ant-modal-close-x": {
-    width: "100%",
-    height: "100%",
-    fontSize: "14px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    ".ant-modal-close-icon": {
-      display: "block",
-    },
-  },
-
   ".ant-table-fixed-header .ant-table-container .ant-table-body": {
     overflowY: "auto !important",
   },

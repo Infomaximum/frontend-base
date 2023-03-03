@@ -22,7 +22,7 @@ import { PlusSVG } from "../../../resources/icons";
 import { FormOption } from "../FormOption/FormOption";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import { withFeature } from "../../../decorators/hocs/withFeature/withFeature";
-import { SpaceSizeContext } from "../../forms/BaseForm/SpaceSizeContext";
+import { SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
 
 export enum EAddEntityButtonPositions {
   top = "top",

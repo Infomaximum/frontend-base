@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import type { IModalProps } from "./Modal.types";
 import { Modal as AntModal } from "antd";
 import { createSelector } from "reselect";
-import { boldTitleStyle, titleStyle } from "./Modal.styles";
+import { boldTitleStyle, modalStyle, titleStyle } from "./Modal.styles";
 import { modalTitleTestId } from "../../../utils/TestIds";
 import { useTheme } from "../../../decorators/hooks/useTheme";
 
@@ -34,6 +34,7 @@ const ModalComponent: React.FC<IModalProps> = (props) => {
       title={title && boldTitle}
       focusTriggerAfterClose={false}
       width={width ?? 480}
+      css={modalStyle}
       {...rest}
     />
   );

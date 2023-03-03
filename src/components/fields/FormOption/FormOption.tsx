@@ -12,12 +12,7 @@ import type { ColProps } from "antd/lib/col";
 import type { Interpolation } from "@emotion/react";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import { FieldTooltip } from "../../FieldTooltip/FieldTooltip";
-import { SpaceSizeContext } from "../../forms/BaseForm/SpaceSizeContext";
-
-export enum ESpaceSize {
-  small = "small",
-  large = "large",
-}
+import { SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
 
 const getPopupContainer = (element: HTMLElement) => element.closest("form") ?? element;
 

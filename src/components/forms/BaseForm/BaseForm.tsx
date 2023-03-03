@@ -17,8 +17,7 @@ import { modalFormLayout, typeLLayout, typeMLayout, typeSLayout } from "../../..
 import { assertSimple } from "@im/asserts";
 import { Notification } from "../../Notification";
 import { SAVE } from "../../../utils/Localization/Localization";
-import { ESpaceSize } from "../../fields/FormOption/FormOption";
-import { SpaceSizeContext } from "./SpaceSizeContext";
+import { ESpaceSize, SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
 
 const { Footer, Content } = Layout;
 

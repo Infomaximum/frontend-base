@@ -1,4 +1,4 @@
-import { ESpaceSize } from "./FormOption";
+import { ESpaceSize } from "../../../decorators/contexts/SpaceSizeContext";
 
 export const formOptionLabelStyle = (theme: TTheme) => ({
   color: theme.grey8Color,
@@ -25,6 +25,6 @@ export const labelWrapperStyle = {
   },
 };
 
-export const spaceFormOptionStyle = (spaceSize?: ESpaceSize) => ({
-  marginBottom: `${spaceSize === ESpaceSize.small ? 12 : 24}px`,
+export const spaceFormOptionStyle = (spaceSize: ESpaceSize) => (theme: TTheme) => ({
+  marginBottom: `${spaceSize === ESpaceSize.small ? theme.smallSpace : theme.defaultSpace}px`,
 });
