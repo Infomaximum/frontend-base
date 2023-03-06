@@ -1,6 +1,6 @@
 import { FC, useCallback, useMemo, useState } from "react";
-import type { ISelectWithStoreProps } from "./SelectWithStore.types";
-import { compact, every, isArray, isFunction, isNull, isUndefined, map } from "lodash";
+import type { ISelectWithStoreProps, THandlerDisplayValues } from "./SelectWithStore.types";
+import { compact, every, isArray, isFunction, isNull, isString, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";
 import type { Model } from "@im/models";
 import { EllipsisTooltip } from "../EllipsisTooltip";
@@ -14,11 +14,22 @@ import { DropdownAnimationInterval } from "../../utils";
 
 const optionFilterProp = "filterProp";
 
-const mapModelToSelectOption = (model: Model) => ({
-  label: <EllipsisTooltip>{model.getDisplayName()}</EllipsisTooltip>,
-  value: model.getInnerName(),
-  [optionFilterProp]: model.getDisplayName(),
-});
+const mapModelToSelectOption = (model: Model, handlerDisplayValues?: THandlerDisplayValues) => {
+  let label = model.getDisplayName();
+
+  if (isFunction(handlerDisplayValues)) {
+    const newLabel = handlerDisplayValues(model);
+    if (isString(newLabel)) {
+      label = newLabel;
+    }
+  }
+
+  return {
+    label: <EllipsisTooltip>{label}</EllipsisTooltip>,
+    value: model.getInnerName(),
+    [optionFilterProp]: model.getDisplayName(),
+  };
+};
 
 const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
   const {
@@ -32,6 +43,8 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     onFocus,
     onBlur,
     onDropdownVisibleChange,
+    handlerDisplaySelectedValues,
+    handlerDisplayValues,
     ...rest
   } = props;
   const { isFeatureEnabled } = useFeature();
@@ -53,11 +66,11 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
 
   const optionItems = useMemo(() => {
     if (model) {
-      return map(model.getItems(), (item) => mapModelToSelectOption(item));
+      return map(model.getItems(), (item) => mapModelToSelectOption(item, handlerDisplayValues));
     } else {
       return [];
     }
-  }, [model]);
+  }, [model, handlerDisplayValues]);
 
   const modelsCollection = useMemo(
     () =>
@@ -117,8 +130,8 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
   );
 
   const value = useMemo(
-    () => valueProps?.map((item) => mapModelToSelectOption(item)),
-    [valueProps]
+    () => valueProps?.map((item) => mapModelToSelectOption(item, handlerDisplaySelectedValues)),
+    [valueProps, handlerDisplaySelectedValues]
   );
 
   return (
