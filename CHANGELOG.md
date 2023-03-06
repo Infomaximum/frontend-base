@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.0.1...v2.1.0) (2023-03-03)
+
+
+### Features
+
+* Запретил выделение текста в тегах и заголовках модальных окон и дроверов ([c376014](https://git.office.infomaximum.com/frontend/base-pkg/commit/c3760144398b8eb12cd6ccffafdd349b4cabd8d1))
+* Изменил основное меню ([a2d85cb](https://git.office.infomaximum.com/frontend/base-pkg/commit/a2d85cb3183a8ea0a604516bbc94035bc71d13c5))
+
+
+### Bug Fixes
+
+* Сделал, чтобы галочка была задизейблена при невозможности сохранить строку (когда не все поля заполнены) ([820ee82](https://git.office.infomaximum.com/frontend/base-pkg/commit/820ee82c2868a91a696abc744e37d022c3293069))
+* Убрал анимацию при клике по тегу ([d2c2749](https://git.office.infomaximum.com/frontend/base-pkg/commit/d2c274955448d5dca70477b25b3665a535311d5e))
+
 ### [2.0.1](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.0.0...v2.0.1) (2023-02-28)
 
 ## [2.0.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v1.8.2...v2.0.0) (2023-02-22)
