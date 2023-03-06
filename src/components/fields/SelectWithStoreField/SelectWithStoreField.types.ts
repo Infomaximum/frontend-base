@@ -23,4 +23,4 @@ export interface ISelectWithStoreFieldProps
 
 export interface ISelectWithStoreFormFieldProps
   extends Omit<IFormFieldProps<TSelectWithStoreFieldValue>, "component">,
-    Omit<ISelectWithStoreComponentOwnProps, "localization" | "onChange"> {}
+    Omit<ISelectWithStoreComponentOwnProps, "localization" | "onChange" | "onFocus" | "onBlur"> {}

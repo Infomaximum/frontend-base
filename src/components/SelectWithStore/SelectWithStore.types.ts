@@ -20,4 +20,5 @@ export interface ISelectWithStoreProps
   onChange?: (model: Model[]) => void;
   requestOnMount?: boolean;
   queryVariables?: TDictionary;
+  clearDataOnChange?: boolean;
 }

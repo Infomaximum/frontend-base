@@ -1,16 +1,16 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import type { ISelectWithStoreProps } from "./SelectWithStore.types";
-import { compact, every, isArray, map } from "lodash";
+import { compact, every, isArray, isFunction, isNull, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";
 import type { Model } from "@im/models";
 import { EllipsisTooltip } from "../EllipsisTooltip";
 import { useFeature } from "../../decorators/hooks/useFeature";
 import { useStore } from "../../decorators/hooks/useStore";
-import { assertSimple } from "@im/asserts";
 import type { ISelectProps } from "../Select/Select.types";
 import { Select } from "../Select/Select";
 import { DropdownPlaceholder } from "../Select/DropdownPlaceholder/DropdownPlaceholder";
 import { useMountEffect } from "../../decorators";
+import { DropdownAnimationInterval } from "../../utils";
 
 const optionFilterProp = "filterProp";
 
@@ -28,10 +28,15 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     onChange,
     requestOnMount,
     queryVariables,
+    clearDataOnChange,
+    onFocus,
+    onBlur,
+    onDropdownVisibleChange,
     ...rest
   } = props;
   const { isFeatureEnabled } = useFeature();
   const [searchText, setSearchText] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const isHasAccess =
     !!isFeatureEnabled && every(dataAccessKeys, (accessKey) => isFeatureEnabled(accessKey));
@@ -78,6 +83,39 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     [modelsCollection, onChange]
   );
 
+  const handleFocus = useCallback(() => {
+    if (isFunction(onFocus)) {
+      onFocus();
+    }
+
+    setIsFocused(true);
+  }, [onFocus]);
+
+  const handleBlur = useCallback(() => {
+    if (isFunction(onBlur)) {
+      onBlur();
+    }
+
+    setIsFocused(false);
+  }, [onBlur]);
+
+  const handleVisibleChange = useCallback(
+    (isOpened: boolean) => {
+      if (isFunction(onDropdownVisibleChange)) {
+        onDropdownVisibleChange();
+      }
+      if (isOpened && (isUndefined(store.data) || isNull(store.data))) {
+        fetchData();
+      }
+      if (clearDataOnChange && !isOpened) {
+        setTimeout(() => {
+          store.clearData();
+        }, DropdownAnimationInterval);
+      }
+    },
+    [clearDataOnChange, fetchData, onDropdownVisibleChange, store]
+  );
+
   const value = useMemo(
     () => valueProps?.map((item) => mapModelToSelectOption(item)),
     [valueProps]
@@ -87,6 +125,10 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     <Select
       {...rest}
       key="ant-select"
+      open={store.data && isFocused ? undefined : false}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onDropdownVisibleChange={handleVisibleChange}
       onChange={handleChange}
       options={optionItems}
       value={value}
