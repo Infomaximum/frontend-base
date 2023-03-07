@@ -22,7 +22,7 @@ export interface ISelectWithStoreProps
   onChange?: (model: Model[]) => void;
   requestOnMount?: boolean;
   queryVariables?: TDictionary;
-  clearDataOnChange?: boolean;
+  clearDataOnClose?: boolean;
   handlerDisplayValues?: THandlerDisplayValues;
   handlerDisplaySelectedValues?: THandlerDisplayValues;
 }

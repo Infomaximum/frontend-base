@@ -39,7 +39,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     onChange,
     requestOnMount,
     queryVariables,
-    clearDataOnChange,
+    clearDataOnClose,
     onFocus,
     onBlur,
     onDropdownVisibleChange,
@@ -120,13 +120,11 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
       if (isOpened && (isUndefined(store.data) || isNull(store.data))) {
         fetchData();
       }
-      if (clearDataOnChange && !isOpened) {
-        setTimeout(() => {
-          store.clearData();
-        }, DropdownAnimationInterval);
+      if (clearDataOnClose && !isOpened) {
+        store.clearData();
       }
     },
-    [clearDataOnChange, fetchData, onDropdownVisibleChange, store]
+    [clearDataOnClose, fetchData, onDropdownVisibleChange, store]
   );
 
   const value = useMemo(
