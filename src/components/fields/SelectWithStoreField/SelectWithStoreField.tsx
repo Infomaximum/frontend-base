@@ -30,6 +30,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
     showArrow,
     input: { onBlur, value: valueProps, onChange, onFocus, ...restInput },
     store,
+    onChangeCallback,
     ...rest
   } = props;
   const isDisabled = readOnly || disabled;
@@ -40,8 +41,11 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
       if (isFunction(onChange)) {
         onChange(value);
       }
+      if (isFunction(onChangeCallback)) {
+        onChangeCallback(value);
+      }
     },
-    [onChange]
+    [onChange, onChangeCallback]
   );
 
   const handleFocus = useCallback(() => {
