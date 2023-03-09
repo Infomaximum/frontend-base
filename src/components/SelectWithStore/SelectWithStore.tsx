@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, FocusEvent, useCallback, useMemo, useState } from "react";
 import type { ISelectWithStoreProps, THandlerDisplayValues } from "./SelectWithStore.types";
 import { compact, every, isArray, isFunction, isNull, isString, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";
@@ -95,26 +95,32 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     [modelsCollection, onChange]
   );
 
-  const handleFocus = useCallback(() => {
-    if (isFunction(onFocus)) {
-      onFocus();
-    }
+  const handleFocus = useCallback(
+    (e: FocusEvent<HTMLElement>) => {
+      if (isFunction(onFocus)) {
+        onFocus(e);
+      }
 
-    setIsFocused(true);
-  }, [onFocus]);
+      setIsFocused(true);
+    },
+    [onFocus]
+  );
 
-  const handleBlur = useCallback(() => {
-    if (isFunction(onBlur)) {
-      onBlur();
-    }
+  const handleBlur = useCallback(
+    (e: FocusEvent<HTMLElement>) => {
+      if (isFunction(onBlur)) {
+        onBlur(e);
+      }
 
-    setIsFocused(false);
-  }, [onBlur]);
+      setIsFocused(false);
+    },
+    [onBlur]
+  );
 
   const handleVisibleChange = useCallback(
     (isOpened: boolean) => {
       if (isFunction(onDropdownVisibleChange)) {
-        onDropdownVisibleChange();
+        onDropdownVisibleChange(isOpened);
       }
       if (isOpened && (isUndefined(store.data) || isNull(store.data))) {
         fetchData();
