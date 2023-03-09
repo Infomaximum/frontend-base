@@ -1,3 +1,5 @@
+import { ESpaceSize } from "../../../decorators/contexts/SpaceSizeContext";
+
 export const addEntityButtonStyle = {
   padding: 0,
 };
@@ -25,8 +27,8 @@ export const wrappedArrayFieldStyle = {
   },
 };
 
-export const rowsContainerStyle = (theme: TTheme) => ({
+export const rowsContainerStyle = (spaceSize: string) => (theme: TTheme) => ({
   display: "flex",
   flexDirection: "column" as const,
-  gap: `${theme.smallSpace}px`,
+  gap: `${spaceSize === ESpaceSize.small ? 8 : theme.smallSpace}px`,
 });

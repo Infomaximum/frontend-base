@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import type { IModalProps } from "./Modal.types";
 import { Modal as AntModal } from "antd";
 import { createSelector } from "reselect";
-import { boldTitleStyle, titleStyle } from "./Modal.styles";
+import { boldTitleStyle, modalStyle, titleStyle } from "./Modal.styles";
 import { modalTitleTestId } from "../../../utils/TestIds";
 import { useTheme } from "../../../decorators/hooks/useTheme";
 
@@ -16,7 +16,7 @@ export const getBoldTitleModal = createSelector(
 );
 
 const ModalComponent: React.FC<IModalProps> = (props) => {
-  const { title, ...rest } = props;
+  const { title, width, ...rest } = props;
   const theme = useTheme();
 
   const boldTitle = useMemo(
@@ -33,6 +33,8 @@ const ModalComponent: React.FC<IModalProps> = (props) => {
       maskClosable={false}
       title={title && boldTitle}
       focusTriggerAfterClose={false}
+      width={width ?? 480}
+      css={modalStyle}
       {...rest}
     />
   );

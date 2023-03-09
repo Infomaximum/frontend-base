@@ -1,5 +1,5 @@
 import { PureComponent } from "react";
-import { CloseCircleOutlined } from "../../Icons/Icons";
+import { CloseCircleFilled } from "../../Icons/Icons";
 import { Button } from "../../Button/Button";
 import { Modal } from "../../modals/Modal/Modal";
 import {
@@ -42,13 +42,13 @@ class RemoveConfirmationModalComponent extends PureComponent<
     return (
       <div css={modalContentStyle}>
         <div>
-          <CloseCircleOutlined css={iconStyle(theme)} />
+          <CloseCircleFilled css={iconStyle(theme)} />
         </div>
         <div>
-          <span css={titleModalStyle(theme)}>
+          <div css={titleModalStyle(theme)}>
             {title ? title : localization.getLocalized(DELETION)}
-          </span>
-          <span css={bodyModalStyle(theme)}>{this.props.children}</span>
+          </div>
+          {this.props.children && <span css={bodyModalStyle(theme)}>{this.props.children}</span>}
         </div>
       </div>
     );
@@ -122,7 +122,6 @@ class RemoveConfirmationModalComponent extends PureComponent<
   public override render() {
     return (
       <Modal
-        width={416}
         visible={this.state.isVisible}
         closable={false}
         centered={true}

@@ -17,6 +17,7 @@ import { modalFormLayout, typeLLayout, typeMLayout, typeSLayout } from "../../..
 import { assertSimple } from "@im/asserts";
 import { Notification } from "../../Notification";
 import { SAVE } from "../../../utils/Localization/Localization";
+import { ESpaceSize, SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
 
 const { Footer, Content } = Layout;
 
@@ -113,7 +114,11 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
       >
         <div {...props.attributes}>
           {notification}
-          {props.children}
+          <SpaceSizeContext.Provider
+            value={layoutType === EFormLayoutType.ModalType ? ESpaceSize.small : ESpaceSize.large}
+          >
+            {props.children}
+          </SpaceSizeContext.Provider>
         </div>
       </Content>
       {!isNull(props.header) ? <HeaderMenuPortal>{header}</HeaderMenuPortal> : null}

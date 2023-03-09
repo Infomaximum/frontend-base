@@ -1,7 +1,5 @@
 import { scrollDefaultStyle } from "../../../styles/global.styles";
-import { EUserAgents, userAgent } from "@im/utils";
 
-const bodyModalPadding = 32;
 const modalPadding = 48;
 const marginTopText = 8;
 
@@ -9,9 +7,10 @@ export const titleStyle = (theme: TTheme) => ({
   fontSize: `${theme.subtitleFontSize}px`,
   fontWeight: "bold" as const,
   lineHeight: "24px",
+  marginBottom: "12px",
 });
 
-export const textStyle = (titleHeight: number, footerHeight: number) => (theme: TTheme) =>
+export const textStyle = (theme: TTheme) =>
   ({
     margin: `${marginTopText}px 0px 0px`,
     color: theme.grey8Color,
@@ -19,16 +18,6 @@ export const textStyle = (titleHeight: number, footerHeight: number) => (theme: 
     display: "flex",
     flexDirection: "column",
     wordBreak: "break-word",
-    maxHeight:
-      userAgent() === EUserAgents.MSIE
-        ? `calc(100vh - ${
-            /* Фикс высоты в IE, в других браузерах нормально определяется максимальная высота
-             * Высота описания ошибка + высота футора + 1px бордер у футора + паддинги тела модалки(верхний и нижний, поэтому x2) +
-             * + паддинги самой модалки от края экрана(верхний и нижний, поэтому x2) + margin от текста ошибки то тайтла
-             */
-            titleHeight + footerHeight + 1 + bodyModalPadding * 2 + modalPadding * 2 + marginTopText
-          }px)`
-        : undefined,
   } as const);
 
 export const iconWrapStyle = {
@@ -36,7 +25,7 @@ export const iconWrapStyle = {
 };
 
 export const modalContentStyle = {
-  marginLeft: "40px",
+  marginLeft: "32px",
   whiteSpace: "pre-wrap",
   display: "flex",
   flexDirection: "column",
@@ -49,7 +38,7 @@ export const modalFooterStyle = {
 
 export const errorIconStyle = (theme: TTheme) => ({
   color: theme.red6Color,
-  fontSize: "24px",
+  fontSize: "20px",
 });
 
 export const infoIconStyle = (theme: TTheme) => ({
@@ -58,7 +47,7 @@ export const infoIconStyle = (theme: TTheme) => ({
 });
 
 export const bodyModalStyle = {
-  padding: `${bodyModalPadding}px`,
+  padding: `20px 28px 0`,
   overflow: "hidden",
   display: "flex",
 };

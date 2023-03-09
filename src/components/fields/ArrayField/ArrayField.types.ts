@@ -93,6 +93,7 @@ export interface IWrappedArrayFieldProps<FV = any, T extends HTMLElement = HTMLE
   accessKey?: string;
   isFeatureEnabled?: TFeatureEnabledChecker;
   formProvider: IFormProvider;
+  spaceSize: string;
   formItemStyle?: Interpolation<TTheme>;
 }
 
