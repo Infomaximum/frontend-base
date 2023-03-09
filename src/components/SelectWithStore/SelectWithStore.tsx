@@ -10,7 +10,6 @@ import type { ISelectProps } from "../Select/Select.types";
 import { Select } from "../Select/Select";
 import { DropdownPlaceholder } from "../Select/DropdownPlaceholder/DropdownPlaceholder";
 import { useMountEffect } from "../../decorators";
-import { DropdownAnimationInterval } from "../../utils";
 
 const optionFilterProp = "filterProp";
 
