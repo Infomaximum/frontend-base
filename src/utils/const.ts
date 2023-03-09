@@ -56,7 +56,7 @@ export enum EErrorCode {
   /*** ============================ Для страницы employee [END]  ============================ ***/
 }
 
-export const KeyupRequestInterval = 550;
+export const KeyupRequestInterval = 1500;
 
 export const CollapsibleContentAnimationInterval = 150;
 export const ModalAnimationInterval = 300;
