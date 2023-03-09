@@ -22,6 +22,7 @@ import { PlusSVG } from "../../../resources/icons";
 import { FormOption } from "../FormOption/FormOption";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import { withFeature } from "../../../decorators/hocs/withFeature/withFeature";
+import { SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
 
 export enum EAddEntityButtonPositions {
   top = "top",
@@ -216,6 +217,7 @@ class WrappedArrayField extends React.PureComponent<
 
   public override render() {
     const { label, wrapperCol, addEntityButtonPosition, formItemStyle } = this.props;
+    const { spaceSize } = this.props;
 
     return (
       <FormOption
@@ -223,7 +225,7 @@ class WrappedArrayField extends React.PureComponent<
         wrapperCol={wrapperCol}
         formItemStyle={this.getResultFormItemStyle(formItemStyle)}
       >
-        <div css={rowsContainerStyle}>
+        <div css={rowsContainerStyle(spaceSize)}>
           {addEntityButtonPosition === EAddEntityButtonPositions.top
             ? [this.getAddEntityButton(), this.getFields()]
             : addEntityButtonPosition === EAddEntityButtonPositions.bottom
@@ -240,6 +242,7 @@ const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
   const { hasReadAccess } = getAccessParameters(rest.isFeatureEnabled, accessKeys);
 
   const { formProvider } = useContext(FormContext);
+  const spaceSize = useContext(SpaceSizeContext);
 
   if (!hasReadAccess) {
     return null;
@@ -255,6 +258,7 @@ const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
         arrayFieldName={props.name}
         readOnly={readOnly}
         formProvider={formProvider}
+        spaceSize={spaceSize}
       />
     </div>
   );

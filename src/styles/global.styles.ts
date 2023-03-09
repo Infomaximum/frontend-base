@@ -262,26 +262,6 @@ const antGlobalStyle = (theme: TTheme) => ({
     marginLeft: "6px !important",
   },
 
-  ".ant-modal": {
-    margin: "0 auto",
-  },
-
-  ".ant-modal-header": {
-    padding: "12px 48px 14px 24px",
-    background: theme.grey3Color,
-    border: "none",
-  },
-
-  ".ant-modal-footer": {
-    borderTop: `1px solid ${theme.grey45Color}`,
-    padding: "9px 24px 10px",
-  },
-
-  ".ant-modal-close-x": {
-    width: "48px",
-    height: "48px",
-  },
-
   ".ant-table-fixed-header .ant-table-container .ant-table-body": {
     overflowY: "auto !important",
   },

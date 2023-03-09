@@ -95,7 +95,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
       <div css={confirmationModalStyle}>
         {Icon ? <Icon css={styleIcon} /> : null}
         <div>
-          <span css={titleModalStyle(theme)}>{title}</span>
+          <div css={titleModalStyle(theme)}>{title}</div>
           {children && <span css={bodyModalStyle(theme)}>{children}</span>}
         </div>
       </div>
@@ -144,7 +144,6 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
 
   return (
     <Modal
-      width={416}
       visible={isShowModal}
       closable={false}
       centered={true}
