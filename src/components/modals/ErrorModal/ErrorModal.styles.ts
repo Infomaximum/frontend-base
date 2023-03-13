@@ -1,8 +1,5 @@
 import { scrollDefaultStyle } from "../../../styles/global.styles";
 
-const modalPadding = 48;
-const marginTopText = 8;
-
 export const titleStyle = (theme: TTheme) => ({
   fontSize: `${theme.subtitleFontSize}px`,
   fontWeight: "bold" as const,
@@ -12,7 +9,7 @@ export const titleStyle = (theme: TTheme) => ({
 
 export const textStyle = (theme: TTheme) =>
   ({
-    margin: `${marginTopText}px 0px 0px`,
+    margin: `8px 0px 28px`,
     color: theme.grey8Color,
     overflowY: "auto",
     display: "flex",
@@ -64,11 +61,10 @@ export const modalStyle = (theme: TTheme) =>
       maxHeight: "100%",
       display: "flex",
       flexDirection: "column",
-      minHeight: "136px",
       width: "100%",
     },
 
-    padding: `${modalPadding}px 0`,
+    padding: `48px 0`,
     height: "100%",
     display: "inline-flex !important",
     alignItems: "center",
