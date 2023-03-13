@@ -192,33 +192,37 @@ class WrappedArrayField extends React.PureComponent<
   };
 
   private getAddEntityButton = () => {
-    const { addButtonDescription, readOnly, fields } = this.props;
+    const { addButtonDescription, readOnly, fields, additionalButtonContent, formProvider } =
+      this.props;
 
     const isDisabled = fields.value?.some((v) => isNil(v) || v === "");
+    const additionalContent = additionalButtonContent?.(formProvider);
 
     return !readOnly && this.createAccess ? (
-      <Button
-        disabled={isDisabled}
-        key="add-button"
-        type="link"
-        onClick={this.handleAddFieldEntity}
-        css={addEntityButtonStyle}
-        test-id={`button_${this.props["test-id"]}`}
-      >
-        <div css={buttonDescriptionWrapperStyle}>
-          <span css={addButtonWrapperStyle}>
-            <PlusSVG css={addButtonStyle} />
-          </span>
-          {addButtonDescription}
-        </div>
-      </Button>
+      <div key="button-block">
+        <Button
+          disabled={isDisabled}
+          key="add-button"
+          type="link"
+          onClick={this.handleAddFieldEntity}
+          css={addEntityButtonStyle}
+          test-id={`button_${this.props["test-id"]}`}
+        >
+          <div css={buttonDescriptionWrapperStyle}>
+            <span css={addButtonWrapperStyle}>
+              <PlusSVG css={addButtonStyle} />
+            </span>
+            {addButtonDescription}
+          </div>
+        </Button>
+        {additionalContent}
+      </div>
     ) : null;
   };
 
   public override render() {
     const { label, wrapperCol, addEntityButtonPosition, formItemStyle } = this.props;
     const { spaceSize } = this.props;
-
     return (
       <FormOption
         label={label}
@@ -247,7 +251,6 @@ const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
   if (!hasReadAccess) {
     return null;
   }
-
   return (
     <div data-name={props.name}>
       <FieldArray
