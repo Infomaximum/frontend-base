@@ -1,4 +1,4 @@
-import type { DocumentNode } from "@apollo/client";
+import type { DocumentNode } from "graphql";
 
 export type TChainedQueryParams = {
   /**

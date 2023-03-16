@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.1.0...v2.2.0) (2023-03-13)
+
+
+### Features
+
+* Изменил структуру модальных окон ([7be63b9](https://git.office.infomaximum.com/frontend/base-pkg/commit/7be63b92c682d96cce47524502fbf1c78a43ffa6))
+* Изменил структуру ошибок ([56a0d48](https://git.office.infomaximum.com/frontend/base-pkg/commit/56a0d48792fe66264488ec1317a677d1791d8ebe))
+* Увеличил время ожидания после нажатия клавиши ([effdf25](https://git.office.infomaximum.com/frontend/base-pkg/commit/effdf251fc01101f47297150ff5e93e50350a124))
+
+
+### Bug Fixes
+
+* Исправил отступы в модальных окнах ошибок ([df0bf35](https://git.office.infomaximum.com/frontend/base-pkg/commit/df0bf356066f8c2f431dd4744910a00dd78e3eb2))
+* Разрешил конфликты ([b84f168](https://git.office.infomaximum.com/frontend/base-pkg/commit/b84f16854910ab6b7213dc977cf8597677b0008c))
+
 ## [2.1.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.0.1...v2.1.0) (2023-03-03)
 
 
