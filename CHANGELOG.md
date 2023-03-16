@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.2.0...v2.3.0) (2023-03-16)
+
+
+### Features
+
+* добавил возможность передавать pagination ([790b8de](https://git.office.infomaximum.com/frontend/base-pkg/commit/790b8debc25c50554c01ef1d4e6c0838935b94a5))
+* обновил зависимости ([4a72ae2](https://git.office.infomaximum.com/frontend/base-pkg/commit/4a72ae24dd0b500db188496554a65b32ba4cbd18))
+
 ## [2.2.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.1.0...v2.2.0) (2023-03-13)
 
 
