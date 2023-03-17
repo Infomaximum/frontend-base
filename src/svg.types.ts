@@ -1,15 +1,15 @@
 /** Импортировать svg как компонент реакта */
 declare module "*.svg" {
-  const src: React.FC<React.SVGAttributes<SVGElement>>;
-  export default src;
+  const srcSvg: React.FC<React.SVGAttributes<SVGElement>>;
+  export default srcSvg;
 }
 
 /** Импортировать сами svg в base64 */
 declare module "*.svg?url" {
-  const src: string;
-  export default src;
+  const srcSvgUrl: string;
+  export default srcSvgUrl;
 }
 declare module "*.cur" {
-  const src: string;
-  export default src;
+  const srcCur: string;
+  export default srcCur;
 }
