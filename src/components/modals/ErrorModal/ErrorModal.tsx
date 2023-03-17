@@ -64,7 +64,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
       <Modal
         key="modal-error"
         width={modalWidth}
-        visible={showModal}
+        open={showModal}
         centered={true}
         closable={false}
         zIndex={1050}

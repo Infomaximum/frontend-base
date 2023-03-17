@@ -296,6 +296,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                   <div css={borderTopStyle(this.props.theme)} />
                 ) : null}
                 <AntTable<T>
+                  pagination={false}
                   {...rest}
                   css={this.getStyleTable()}
                   loading={loading}
@@ -305,7 +306,6 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                   components={this.getTableComponents(components)}
                   rowSelection={this.getRowSelectionConfig(rowSelection)}
                   scroll={scroll}
-                  pagination={false}
                   onRow={this.handleRow}
                 />
               </ConfigProvider>

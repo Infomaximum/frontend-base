@@ -29,12 +29,12 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
   };
 
   public override readonly state: Readonly<IDrawerFormState> = {
-    isVisible: false,
+    open: false,
     formPristine: true,
   };
 
   public override componentDidMount() {
-    this.setState({ isVisible: true });
+    this.setState({ open: true });
   }
 
   private setFormData = (formData: IFormData) => {
@@ -60,7 +60,7 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
   };
 
   private handleCloseDrawer = (e?: any) => {
-    this.setState({ isVisible: false }, () =>
+    this.setState({ open: false }, () =>
       this.afterCloseDrawer(() => {
         if (isFunction(this.props.onClose)) {
           this.props.onClose(e);
@@ -168,7 +168,7 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
         footer={!isHasAccess ? null : this.renderFooter()}
         destroyOnClose={true}
         keyboard={true}
-        visible={this.state.isVisible}
+        open={this.state.open}
         closable={true}
         onClose={this.handleCloseDrawer}
         title={title}

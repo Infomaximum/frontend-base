@@ -1,5 +1,5 @@
 export interface IBannerContentModalProps {
-  visible: boolean;
+  open: boolean;
   onCancel: () => void;
   md: string;
 }

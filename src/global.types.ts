@@ -1,11 +1,6 @@
 /// <reference types="@emotion/react/types/css-prop" />
 
 import type { Model } from "@im/models";
-import type {
-  TDictionary as TDictionaryUtils,
-  TNullable as TNullableUtils,
-  valueof as valueofUtils,
-} from "@im/utils/dist/utils/types/utility.types";
 import type { theme } from "./styles/theme";
 import type { Store } from "./utils/Store/Store";
 
@@ -26,12 +21,21 @@ type TFrontendConfigFont = {
 };
 
 declare global {
-  type TDictionary<T = any> = TDictionaryUtils<T>;
+  type TDictionary<T = any> = Record<string, T>;
 
-  type TNullable<T> = TNullableUtils<T>;
+  type TNullable<T> = T | null | undefined;
 
   // eslint-disable-next-line im/naming-interfaces-and-types
-  type valueof<T> = valueofUtils<T>;
+  type valueof<T> = T[keyof T];
+
+  /**
+   * Создание брендированного типа
+   */
+  type TBrand<T, B extends string> = T & { readonly _brand: B };
+
+  type TRemoveIndex<T> = {
+    [P in keyof T as string extends P ? never : number extends P ? never : P]: T[P];
+  };
 
   type TQueryVarModifierExt<S extends Store<Model> = Store<Model>> = (
     variables: TDictionary,

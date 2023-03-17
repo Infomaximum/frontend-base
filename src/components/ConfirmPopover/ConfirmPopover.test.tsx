@@ -49,7 +49,7 @@ describe("Тест компонента ConfirmPopover", () => {
     const component = getMountedComponent({
       okText,
       cancelText,
-      visible: true,
+      open: true,
     });
 
     expect(getOkButton(component).text()).toBe(okText);
@@ -57,19 +57,19 @@ describe("Тест компонента ConfirmPopover", () => {
     expect(component.find("Popover").find("Row").find("Col").at(1).text()).toBe(bodyText);
   });
 
-  it("Видимость компонента управляется пропом visible", () => {
-    const component = getMountedComponent({ visible: false });
+  it("Видимость компонента управляется пропом open", () => {
+    const component = getMountedComponent({ open: false });
 
     expect(checkPopoverVisible(component)).toEqual(false);
 
-    component.setProps({ visible: true }).update();
+    component.setProps({ open: true }).update();
 
     expect(checkPopoverVisible(component)).toEqual(true);
   });
 
   it("При нажатии на кнопку подтверждения срабатывает переданный callback onSubmit", () => {
     const component = getMountedComponent({
-      visible: true,
+      open: true,
       onSubmit: jest.fn(),
     });
 
@@ -79,47 +79,47 @@ describe("Тест компонента ConfirmPopover", () => {
   });
 
   it(
-    "При нажатии на кнопку отмены срабатывает переданный callback onVisibleChange" +
+    "При нажатии на кнопку отмены срабатывает переданный callback onOpenChange" +
       " с аргументом false",
     () => {
       const component = getMountedComponent({
-        visible: true,
-        onVisibleChange: jest.fn(),
+        open: true,
+        onOpenChange: jest.fn(),
       });
 
       getCancelButton(component).simulate("click");
 
-      expect(component.props().onVisibleChange).toHaveBeenCalledWith(false);
+      expect(component.props().onOpenChange).toHaveBeenCalledWith(false);
     }
   );
 
   it(
-    "При нажатии за пределами поповера срабатывает переданный callback onVisibleChange" +
+    "При нажатии за пределами поповера срабатывает переданный callback onOpenChange" +
       " с аргументом false",
     () => {
       const component = getMountedComponent({
-        visible: true,
-        onVisibleChange: jest.fn(),
+        open: true,
+        onOpenChange: jest.fn(),
       });
 
       getShowPopoverButton(component).simulate("click");
 
-      expect(component.props().onVisibleChange).toHaveBeenCalledWith(false);
+      expect(component.props().onOpenChange).toHaveBeenCalledWith(false);
     }
   );
 
   it(
     "При нажатии по ребенку поповера, если поповер скрыт, срабатывает переданный" +
-      " callback onVisibleChange с аргументом true",
+      " callback onOpenChange с аргументом true",
     () => {
       const component = getMountedComponent({
-        visible: false,
-        onVisibleChange: jest.fn(),
+        open: false,
+        onOpenChange: jest.fn(),
       });
 
       getShowPopoverButton(component).simulate("click");
 
-      expect(component.props().onVisibleChange).toHaveBeenCalledWith(true);
+      expect(component.props().onOpenChange).toHaveBeenCalledWith(true);
     }
   );
 });

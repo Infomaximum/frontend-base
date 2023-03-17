@@ -31,7 +31,7 @@ const BannerComponent: FC<IBannerProps> = ({
   wrapperContentStyle,
 }) => {
   const localization = useLocalization();
-  const [isVisible, setVisible] = useState(true);
+  const [open, setOpen] = useState(true);
   const [isStartAnimation, setStartAnimation] = useState(false);
 
   /** Обработчик клика по кнопке "Закрыть" */
@@ -43,7 +43,7 @@ const BannerComponent: FC<IBannerProps> = ({
     }
 
     setTimeout(() => {
-      setVisible(false);
+      setOpen(false);
       setStartAnimation(false);
       // отмонтируем после того как анимация закончилась
     }, closeBannerAnimationDuration * MillisecondsPerSecond);
@@ -93,7 +93,7 @@ const BannerComponent: FC<IBannerProps> = ({
     handleDontShowAgainChange,
   ]);
 
-  return content && isVisible ? (
+  return content && open ? (
     <div
       css={[bannerStyle, isStartAnimation && animationBannerStyle]}
       className={className}

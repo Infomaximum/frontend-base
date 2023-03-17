@@ -10,7 +10,7 @@ export interface IBaseDropdownProps extends Partial<IDropdownParams>, IWithTheme
   /**
    * Предназначен для прокидывания состояния видимости наверх и выполнения каких либо действий
    */
-  onVisibleChange?: (isShowMenu: boolean) => void;
+  onOpenChange?: (isShowMenu: boolean) => void;
   overlayStyle?: React.CSSProperties;
   menuStyle?: Interpolation<TTheme>;
   isManualHideMenu?: boolean;

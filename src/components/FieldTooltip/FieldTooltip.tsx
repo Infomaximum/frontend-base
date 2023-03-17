@@ -60,12 +60,12 @@ class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTool
         ) : null}
         {promptText ? (
           <Popover
-            visible={this.state.showPopover}
+            open={this.state.showPopover}
             key="prompt-notification-popover"
             trigger={trigger}
             placement={placement}
             content={this.prompt}
-            onVisibleChange={this.handleVisiblePopover}
+            onOpenChange={this.handleVisiblePopover}
             arrowPointAtCenter={arrowPointAtCenter}
             align={FieldTooltipComponent.align}
             getPopupContainer={getPopupContainer}

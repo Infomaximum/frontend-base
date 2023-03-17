@@ -19,6 +19,6 @@ export interface IModalFormProps
 }
 
 export interface IModalFormState {
-  isVisible: boolean;
+  open: boolean;
   formProvider?: IFormProvider;
 }
