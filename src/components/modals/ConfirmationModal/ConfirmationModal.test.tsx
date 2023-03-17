@@ -33,12 +33,12 @@ describe("Тест компонента ConfirmationModal", () => {
     const component = getTestComponent();
     component.setProps({ afterConfirm: jest.fn() });
 
-    expect(getModal(component).prop("visible")).toEqual(true);
+    expect(getModal(component).prop("open")).toEqual(true);
 
     getButton(component, confirmationModalConfirmButtonTestId).simulate("click");
 
     expect(component.props().onConfirm).toHaveBeenCalled();
-    expect(getModal(component).prop("visible")).toEqual(false);
+    expect(getModal(component).prop("open")).toEqual(false);
 
     setTimeout(() => {
       expect(component.props().afterConfirm).toHaveBeenCalled();
@@ -48,11 +48,11 @@ describe("Тест компонента ConfirmationModal", () => {
 
   xit("Тест кнопки 'CancelButton'", (done) => {
     const component = getTestComponent();
-    expect(getModal(component).prop("visible")).toEqual(true);
+    expect(getModal(component).prop("open")).toEqual(true);
 
     getButton(component, confirmationModalCancelButtonTestId).simulate("click");
 
-    expect(getModal(component).prop("visible")).toEqual(false);
+    expect(getModal(component).prop("open")).toEqual(false);
 
     setTimeout(() => {
       expect(component.props().afterCancel).toHaveBeenCalled();
@@ -69,6 +69,6 @@ describe("Тест компонента ConfirmationModal", () => {
 
     getButton(component, confirmationModalAdditionalButtonTestId).simulate("click");
     expect(component.props().onAdditionalButtonClick).toHaveBeenCalled();
-    expect(getModal(component).prop("visible")).toEqual(true);
+    expect(getModal(component).prop("open")).toEqual(true);
   });
 });

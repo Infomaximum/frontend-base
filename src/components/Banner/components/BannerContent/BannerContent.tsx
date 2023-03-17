@@ -79,7 +79,7 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
           </Button>
         </div>
       ) : null}
-      <BannerContentModal md={md} visible={showModal} onCancel={handleCloseModal} />
+      <BannerContentModal md={md} open={showModal} onCancel={handleCloseModal} />
     </div>
   );
 };

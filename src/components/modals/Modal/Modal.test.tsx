@@ -4,7 +4,7 @@ import { modalTitleTestId } from "../../../utils/TestIds";
 
 describe("Тест компонента Modal", () => {
   it("Тестирование title компонента Modal", () => {
-    const wrapper = mount(<Modal title="Modal" visible={true} />);
+    const wrapper = mount(<Modal title="Modal" open={true} />);
     expect(wrapper.prop("title")).toEqual("Modal");
     expect(wrapper.find(`span[test-id="${modalTitleTestId}"]`).text()).toEqual("Modal");
   });

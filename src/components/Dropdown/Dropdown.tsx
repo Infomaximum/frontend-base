@@ -18,8 +18,8 @@ import {
 const DropdownComponent: React.FC<IDropdownProps> = ({
   children: button,
   overlay,
-  visible,
-  onVisibleChange = noop,
+  open,
+  onOpenChange = noop,
   overlayStyle: propsOverlayStyle,
   trigger = defaultTrigger,
   getPopupContainer,
@@ -40,18 +40,18 @@ const DropdownComponent: React.FC<IDropdownProps> = ({
   // Не сжимаем Dropdown, если он отображается поверх контента
   const computePosition = trigger.includes("contextMenu") ? noop : position.compute;
 
-  const handleVisibleChange = useCallback(
-    (isVisible: boolean) => {
-      isVisible && computePosition(getPopupContainer);
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      open && computePosition(getPopupContainer);
 
-      onVisibleChange(isVisible);
+      onOpenChange(open);
     },
-    [onVisibleChange, computePosition, getPopupContainer]
+    [onOpenChange, computePosition, getPopupContainer]
   );
 
   useEffect(() => {
-    visible && computePosition(getPopupContainer);
-  }, [computePosition, getPopupContainer, visible]);
+    open && computePosition(getPopupContainer);
+  }, [computePosition, getPopupContainer, open]);
 
   const maxHeight = position.height;
   const overlayStyle = useMemo(
@@ -73,10 +73,10 @@ const DropdownComponent: React.FC<IDropdownProps> = ({
     <AntDropdown
       {...restProps}
       align={align}
-      visible={visible}
+      open={open}
       getPopupContainer={getPopupContainer}
       overlay={overlay}
-      onVisibleChange={handleVisibleChange}
+      onOpenChange={handleOpenChange}
       overlayStyle={overlayStyle}
       // Т.к. при скрытии вместо `display: none` продолжит применяться `flex`
       destroyPopupOnHide={true}

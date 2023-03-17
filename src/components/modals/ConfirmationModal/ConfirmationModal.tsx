@@ -144,7 +144,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
 
   return (
     <Modal
-      visible={isShowModal}
+      open={isShowModal}
       closable={false}
       centered={true}
       bodyStyle={bodyStyle}

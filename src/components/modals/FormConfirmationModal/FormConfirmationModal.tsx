@@ -22,7 +22,7 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
 }) => {
   const localization = useLocalization();
 
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [hasSubmitErrors, setHasSubmitErrors] = useState<boolean>(
     formProvider?.getState().hasSubmitErrors
   );
@@ -41,7 +41,7 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
         if (hasValidationErrors && mutators?.touch && errors) {
           mutators.touch(Object.keys(errors));
         }
-        setVisible(true);
+        setOpen(true);
         retryRef.current = tx.retry;
       }
     },
@@ -66,7 +66,7 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   });
 
   const handleHide = useCallback(() => {
-    setVisible(false);
+    setOpen(false);
   }, []);
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
     [invalid, hasSubmitErrors, localization]
   );
 
-  return visible ? (
+  return open ? (
     <ConfirmationModal
       onConfirm={handleSaveButtonClick}
       onAfterCancel={handleHide}
