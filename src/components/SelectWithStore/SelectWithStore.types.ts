@@ -1,6 +1,8 @@
-import type { Group, Model } from "@im/models";
+import type { Group, IModel, Model } from "@im/models";
 import type { Store } from "../../utils/Store";
 import type { ISelectProps } from "../Select/Select.types";
+
+export type THandlerDisplayValues = (value: IModel) => React.ReactNode;
 
 export interface ISelectWithStoreProps
   extends Omit<
@@ -18,4 +20,9 @@ export interface ISelectWithStoreProps
   dataAccessKeys?: string[];
   value?: Model[];
   onChange?: (model: Model[]) => void;
+  requestOnMount?: boolean;
+  queryVariables?: TDictionary;
+  clearDataOnClose?: boolean;
+  handlerDisplayValues?: THandlerDisplayValues;
+  handlerDisplaySelectedValues?: THandlerDisplayValues;
 }
