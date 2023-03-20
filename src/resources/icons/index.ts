@@ -9,6 +9,7 @@ export { default as EmptyHereForNowSVG } from "./EmptyHereForNow.svg";
 export { default as EmptyPresentedLargeImageSVG } from "./EmptyPresentedLargeImage.svg";
 export { default as EnFlagSVG } from "./EnFlag.svg";
 export { default as HeaderAppsIconSVG } from "./HeaderAppsIcon.svg";
+export { default as ImportSVG } from "./Import.svg";
 export { default as InboxOutlinedSVG } from "./InboxOutlined.svg";
 export { default as InfoCircleSVG } from "./InfoCircle.svg";
 export { default as LogoutSVG } from "./Logout.svg";
