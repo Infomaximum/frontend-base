@@ -28,7 +28,7 @@ class RemoveConfirmationModalComponent extends PureComponent<
   IRemoveConfirmationModalState
 > {
   public override readonly state: Readonly<IRemoveConfirmationModalState> = {
-    isVisible: true,
+    open: true,
     isLoading: false,
   };
 
@@ -55,7 +55,7 @@ class RemoveConfirmationModalComponent extends PureComponent<
   };
 
   private onCloseModal() {
-    this.setState({ isVisible: false });
+    this.setState({ open: false });
   }
 
   private afterCloseModal(callback: () => void) {
@@ -122,7 +122,7 @@ class RemoveConfirmationModalComponent extends PureComponent<
   public override render() {
     return (
       <Modal
-        visible={this.state.isVisible}
+        open={this.state.open}
         closable={false}
         centered={true}
         bodyStyle={bodyStyle}

@@ -29,6 +29,7 @@ export const threeDotsButtonStyle = (theme: TTheme) => ({
 
 export const wrapperMenuDropdownStyle = {
   overflow: "auto",
+  userSelect: "none" as const,
 };
 
 export const itemDeleteStyle = (theme: TTheme) => ({
@@ -42,4 +43,5 @@ export const itemStyle =
   (disabled: boolean | undefined, action: string | undefined) => (theme: TTheme) => ({
     padding: "3px 12px 3px 8px",
     color: !disabled ? (action === "delete" ? theme.red6Color : theme.grey9Color) : undefined,
+    userSelect: "none" as const,
   });

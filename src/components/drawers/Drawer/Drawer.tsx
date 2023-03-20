@@ -21,10 +21,10 @@ export const getBoldTitle = createSelector(
 );
 
 const DrawerComponent: React.FC<IDrawerProps> = (props) => {
-  const { title, closeIcon: closeIconProps, visible, ...rest } = props;
+  const { title, closeIcon: closeIconProps, open, ...rest } = props;
   const [isFirstRender, firstRenderCheck] = useState(true);
 
-  const drawerVisible = isFirstRender ? false : visible;
+  const drawerOpen = isFirstRender ? false : open;
   const theme = useTheme();
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const DrawerComponent: React.FC<IDrawerProps> = (props) => {
       title={title && boldTitle}
       closeIcon={closeIcon}
       {...rest}
-      visible={drawerVisible}
+      open={drawerOpen}
     />
   );
 };

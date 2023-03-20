@@ -7,7 +7,7 @@ export interface IRemoveConfirmationModalProps extends IWithLocProps, IWithTheme
   /**
    * Отобразить/скрыть модальное окно
    */
-  visible?: boolean;
+  open?: boolean;
   /**
    * Обработчик кнопки подтверждения
    */
@@ -33,6 +33,6 @@ export interface IRemoveConfirmationModalProps extends IWithLocProps, IWithTheme
 }
 
 export interface IRemoveConfirmationModalState {
-  isVisible: boolean;
+  open: boolean;
   isLoading: boolean;
 }

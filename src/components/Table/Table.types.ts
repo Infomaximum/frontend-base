@@ -7,7 +7,7 @@ export interface IBaseColumnConfig<T> extends Omit<ColumnProps<T>, "children"> {
   children?: IBaseColumnConfig<T>[] | null;
 }
 
-type TTableProps<T> = Omit<TableProps<T>, "pagination" | "columns">;
+type TTableProps<T> = Omit<TableProps<T>, "columns">;
 
 export interface ITableOwnProps<T> extends TTableProps<T> {
   localization: Localization;

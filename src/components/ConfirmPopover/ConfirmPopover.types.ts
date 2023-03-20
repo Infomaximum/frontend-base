@@ -8,8 +8,8 @@ export interface IConfirmPopoverProps
   onSubmit(): void;
   loading: ButtonProps["loading"];
   text: string;
-  visible?: boolean;
+  open?: boolean;
   okText?: string;
   cancelText?: string;
-  onVisibleChange?(value: boolean): void;
+  onOpenChange?(value: boolean): void;
 }

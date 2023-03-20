@@ -426,7 +426,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
     const NewPasswordIcon = newPasswordInputType ? EyeInvisibleOutlined : EyeOutlined;
     const RepeatNewPassIcon = repeatNewPasswordInputType ? EyeInvisibleOutlined : EyeOutlined;
 
-    const isVisiblePopover = Boolean(showPopover || (touchedWithError && newPasswordFieldFocus));
+    const isOpenPopover = Boolean(showPopover || (touchedWithError && newPasswordFieldFocus));
 
     return [
       currentPasswordFieldName ? (
@@ -477,7 +477,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
             )}
             {!this.getValid() ? (
               <Popover
-                visible={isVisiblePopover}
+                open={isOpenPopover}
                 key="password-notification-popover"
                 trigger="click"
                 placement="right"
@@ -487,7 +487,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
               >
                 <QuestionCircleOutlined
                   key="question-circle-popover-icon"
-                  css={isVisiblePopover ? questionIconShowPopoverStyle : questionIconStyle}
+                  css={isOpenPopover ? questionIconShowPopoverStyle : questionIconStyle}
                   onClick={disabled ? undefined : this.togglePopover}
                   style={disabled ? opacity : undefined}
                 />
