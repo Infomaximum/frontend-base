@@ -62,7 +62,7 @@ class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBas
     this.animationTimer && clearTimeout(this.animationTimer);
     this.animationTimer = setTimeout(() => {
       this.setState({ isShowChildren: value });
-      this.props.onVisibleChange?.(value);
+      this.props.onOpenChange?.(value);
     }, DropdownAnimationInterval);
   }
 
@@ -93,8 +93,8 @@ class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBas
     });
   };
 
-  private handleShowMenu = (visible: boolean) => {
-    this.setState({ isShowMenu: visible });
+  private handleShowMenu = (open: boolean) => {
+    this.setState({ isShowMenu: open });
   };
 
   private get menu() {
@@ -117,12 +117,12 @@ class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBas
       <BaseDropdownContext.Provider value={isShowMenu}>
         <Dropdown
           {...rest}
-          visible={isShowMenu}
+          open={isShowMenu}
           overlay={this.menu}
           trigger={["click"]}
           placement={placement}
           overlayStyle={overlayStyle}
-          onVisibleChange={this.handleShowMenu}
+          onOpenChange={this.handleShowMenu}
         >
           {React.cloneElement(button, {
             key: "clone-element_button",

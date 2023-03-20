@@ -1,4 +1,3 @@
-import type { TRemoveIndex } from "@im/utils";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
 import type { IFormOwnProps } from "./Form.types";
 import type { FormProps } from "react-final-form";

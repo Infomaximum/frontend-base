@@ -24,7 +24,7 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
   };
 
   public override readonly state: Readonly<IModalFormState> = {
-    isVisible: true,
+    open: true,
   };
 
   private setFormData = (formData: IFormData) => {
@@ -40,7 +40,7 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
   };
 
   private onCloseModal() {
-    this.setState({ isVisible: false });
+    this.setState({ open: false });
   }
 
   private afterCloseModal(
@@ -55,8 +55,8 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
   private handleCancel = () => {
     this.onCloseModal();
 
-    // если передаем visible, то не нужно закрывать модалку через this.afterCloseModal
-    if (has(this.props, "visible")) {
+    // если передаем open, то не нужно закрывать модалку через this.afterCloseModal
+    if (has(this.props, "open")) {
       this.props.onCancel?.();
     } else {
       this.afterCloseModal(this.props.onCancel);
@@ -124,7 +124,7 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
 
     return (
       <Modal
-        visible={this.state.isVisible}
+        open={this.state.open}
         {...rest}
         title={title}
         key="modal-form"

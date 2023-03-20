@@ -8,7 +8,7 @@ import type { FormProps } from "react-final-form";
 export interface IOkButtonProps extends Omit<ButtonProps, "icon"> {}
 
 export interface IDrawerFormProps
-  extends Omit<DrawerProps, "onOk" | "onCancel" | "visible">,
+  extends Omit<DrawerProps, "onOk" | "onCancel" | "open">,
     Pick<IFormWrapperProps, "form" | "initialValues" | "notification" | "setFormData"> {
   okText: string;
   cancelText: string;
@@ -25,7 +25,7 @@ export interface IDrawerFormProps
 }
 
 export interface IDrawerFormState {
-  isVisible: boolean;
+  open: boolean;
   formProvider?: IFormProvider;
   formPristine?: boolean;
 }

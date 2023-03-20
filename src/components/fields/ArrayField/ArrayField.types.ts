@@ -95,6 +95,7 @@ export interface IWrappedArrayFieldProps<FV = any, T extends HTMLElement = HTMLE
   formProvider: IFormProvider;
   spaceSize: string;
   formItemStyle?: Interpolation<TTheme>;
+  additionalButtonContent?: (formProvider: IFormProvider) => React.ReactElement;
 }
 
 export interface IWrappedArrayFieldState {}
@@ -108,4 +109,5 @@ export interface IArrayFieldProps
   accessKey?: string;
   formItemStyle?: Interpolation<TTheme>;
   children?: React.ReactNode;
+  additionalButtonContent?: (formProvider: IFormProvider) => React.ReactElement;
 }

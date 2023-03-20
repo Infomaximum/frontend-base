@@ -36,6 +36,7 @@ export const iconsHoverStyle = (theme: TTheme) => ({
   flexShrink: 0,
   justifyContent: "center",
   alignItems: "center",
+  userSelect: "none" as const,
 });
 
 export const wrapStaticMenuStyle = (theme: TTheme) => ({

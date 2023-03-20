@@ -14,7 +14,7 @@ import type { IBannerContentModalProps } from "./BannerContentModal.types";
 import { closeModalIconStyle } from "../../../../styles/common.styles";
 
 const BannerContentModalComponent: React.FC<IBannerContentModalProps> = ({
-  visible,
+  open,
   onCancel,
   md,
 }) => {
@@ -46,7 +46,7 @@ const BannerContentModalComponent: React.FC<IBannerContentModalProps> = ({
   return (
     <Modal
       title={localization.getLocalized(NOTIFICATION)}
-      visible={visible}
+      open={open}
       width={theme.modalLargeWidth}
       onCancel={onCancel}
       bodyStyle={bannerContentModalBodyStyle}

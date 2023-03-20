@@ -1,5 +1,5 @@
 import React, { FC, memo, useCallback } from "react";
-import { isEmpty, isNil, map, xor } from "lodash";
+import { isEmpty, isFunction, isNil, map, xor } from "lodash";
 import {
   defaultSelectFieldStyle,
   defaultWrapperComponentStyle,
@@ -28,8 +28,9 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
     readOnly,
     disabled,
     showArrow,
-    input: { onBlur, value: valueProps, ...restInput },
+    input: { onBlur, value: valueProps, onChange, onFocus, ...restInput },
     store,
+    onChangeCallback,
     ...rest
   } = props;
   const isDisabled = readOnly || disabled;
@@ -37,14 +38,27 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
 
   const handleChange = useCallback<NonNullable<ISelectWithStoreProps["onChange"]>>(
     (value) => {
-      const onChange = props.input.onChange;
-
-      if (onChange) {
+      if (isFunction(onChange)) {
         onChange(value);
       }
+      if (isFunction(onChangeCallback)) {
+        onChangeCallback(value);
+      }
     },
-    [props.input.onChange]
+    [onChange, onChangeCallback]
   );
+
+  const handleFocus = useCallback(() => {
+    if (isFunction(onFocus)) {
+      onFocus();
+    }
+  }, [onFocus]);
+
+  const handleBlur = useCallback(() => {
+    if (isFunction(onBlur)) {
+      onBlur();
+    }
+  }, [onBlur]);
 
   if (localization && readOnly && isNil(valueProps)) {
     return <Input value={localization.getLocalized(NOT_SELECTED)} disabled={true} />;
@@ -62,6 +76,8 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
       showArrow={readOnly ? false : showArrow}
       store={store}
       css={defaultSelectFieldStyle}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     />
   );
 });
