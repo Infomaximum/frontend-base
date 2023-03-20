@@ -349,7 +349,13 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   };
 
   private renderOptions(modelList: TDictionary<IModel> | IModel[]): React.ReactNode[] {
-    const { handlerDisplayValues, handlerTitleValues, rowDisable, localization } = this.props;
+    const {
+      handlerDisplayValues,
+      handlerTitleValues,
+      rowDisable,
+      localization,
+      isVisibleOptionsTooltip,
+    } = this.props;
 
     return map(modelList, (item: IModel) => {
       let displayName: React.ReactNode = item?.getDisplayName();
@@ -375,7 +381,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           test-id={autocompleteSelectOptionTestId}
           disabled={rowDisable ? rowDisable(item) : undefined}
         >
-          <Tooltip title={title}>
+          <Tooltip title={title} visible={isVisibleOptionsTooltip}>
             {!isUndefined(displayName) && !isNull(displayName) && displayName !== ""
               ? displayName
               : localization.getLocalized(NOT_SELECTED)}

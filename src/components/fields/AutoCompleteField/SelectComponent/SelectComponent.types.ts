@@ -50,6 +50,10 @@ export interface ISelectComponentProps
    * @return строка по которой сгруппируются значения
    */
   groupBy?(model: IModel): string;
+  /**
+   * Нужен ли тултип в значениях селекта
+   */
+  isVisibleOptionsTooltip?: boolean;
 }
 
 export interface ISelectState {
