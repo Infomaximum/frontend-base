@@ -237,6 +237,9 @@ const antGlobalStyle = (theme: TTheme) => ({
       background: theme.grey4Color,
     },
   },
+  ".ant-dropdown-menu-submenu-title": {
+    paddingRight: "25px",
+  },
 
   ".ant-tabs-nav": {
     ":before": {
