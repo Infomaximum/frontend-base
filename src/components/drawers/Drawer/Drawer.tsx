@@ -47,6 +47,9 @@ const DrawerComponent: React.FC<IDrawerProps> = (props) => {
 
   return (
     <AntDrawer
+      // Не удалять до решения issue https://github.com/ant-design/ant-design/issues/41239
+      getContainer={document.body}
+      autoFocus={false}
       css={drawerStyle}
       headerStyle={headerDrawerStyle(theme)}
       title={title && boldTitle}
