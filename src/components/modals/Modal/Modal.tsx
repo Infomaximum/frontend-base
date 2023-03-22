@@ -30,6 +30,7 @@ const ModalComponent: React.FC<IModalProps> = (props) => {
 
   return (
     <AntModal
+      getContainer={document.body} // todo: Не удалять до решения issue https://github.com/ant-design/ant-design/issues/41239
       maskClosable={false}
       title={title && boldTitle}
       focusTriggerAfterClose={false}
