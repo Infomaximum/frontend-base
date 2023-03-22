@@ -70,58 +70,61 @@ describe("Тест компонента Select", () => {
     expect(screen.getByText(elementDisplayValue[EElement.THIRD])).toBeInTheDocument();
   });
 
-  it("Значение очищается, а поисковая строка очищается с задержкой", async () => {
-    const user = userEvent.setup({ delay: null });
-    const handleSearchFn = jest.fn();
-    const handleClearFn = jest.fn();
-    const { getByRole, baseElement } = render(
+  it("Значение Select очищается при клике на иконку очистки", async () => {
+    const { baseElement } = render(
       renderSelect({
         allowClear: true,
-        onClear: handleClearFn,
-        onSearch: handleSearchFn,
-        mode: "multiple",
+        defaultValue: EElement.SECOND,
       })
     );
-    const target = getByRole("combobox");
-    expect(target).not.toBeNull();
-    await user.type(target, "s");
-    expect(await screen.findByRole("listbox")).toBeInTheDocument();
-    await user.click(baseElement.getElementsByClassName("ant-select-clear")[0]);
-    expect(handleClearFn).toBeCalled();
-    expect(handleSearchFn).toBeCalledTimes(3);
-    setTimeout(() => {
-      expect(handleSearchFn).toBeCalledTimes(4);
-    }, DropdownAnimationInterval + 150);
+    const selectedOption = baseElement.querySelector(".ant-select-selection-item") as HTMLElement;
+    expect(getByText(selectedOption, elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
+
+    await userEvent.click(baseElement.querySelector(".ant-select-clear") as Element);
+    expect(baseElement.querySelector(".ant-select-selection-item")).toBeNull();
   });
 
-  it("Очистка значения при клике на крестик", async () => {
-    const user = userEvent.setup({ delay: null });
-    const handleSearchFn = jest.fn();
-    const handleClearFn = jest.fn();
-    const { getByRole, baseElement } = render(
+  it("Dropdown закрывается при клике на иконку очистки", async () => {
+    const handleDropdownVisibleChange = jest.fn();
+    const { baseElement } = render(
       renderSelect({
         allowClear: true,
-        onClear: handleClearFn,
-        onSearch: handleSearchFn,
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onDropdownVisibleChange: handleDropdownVisibleChange,
       })
     );
-    const target = getByRole("combobox");
-    expect(target).toBeInTheDocument();
-    await user.type(target, "s");
-    expect(await screen.findByRole("listbox")).toBeInTheDocument();
-    await userEvent.click(screen.getByText(elementDisplayValue[EElement.SECOND]));
-    const selected = baseElement.querySelectorAll<HTMLSpanElement>(
-      ".ant-select-selection-item"
-    )?.[0];
-    if (selected) {
-      expect(getByText(selected, elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
-    }
-    await user.click(baseElement.getElementsByClassName("ant-select-clear")[0]);
-    expect(handleClearFn).toBeCalled();
-    const selectedAfterClear = baseElement.querySelectorAll<HTMLSpanElement>(
-      ".ant-select-selection-item"
-    )?.[0];
-    expect(selectedAfterClear).toBeUndefined();
+    await userEvent.click(baseElement.querySelector(".ant-select-clear") as Element);
+    expect(handleDropdownVisibleChange).toBeCalledWith(false);
+  });
+
+  it("Dropdown закрывается при клике вне области текста поисковой строки", async () => {
+    const handleDropdownVisibleChange = jest.fn();
+    const { baseElement } = render(
+      renderSelect({
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onDropdownVisibleChange: handleDropdownVisibleChange,
+      })
+    );
+    await userEvent.click(baseElement.querySelector(".ant-select-selector") as Element);
+    expect(handleDropdownVisibleChange).toHaveBeenCalledWith(false);
+  });
+
+  it("Dropdown не закрывается при клике на текст поисковой строки", async () => {
+    const handleDropdownVisibleChange = jest.fn();
+    const { getByRole } = render(
+      renderSelect({
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onDropdownVisibleChange: handleDropdownVisibleChange,
+      })
+    );
+    await userEvent.click(getByRole("combobox"));
+    expect(handleDropdownVisibleChange).not.toBeCalled();
   });
 
   it("Рендер пустого", async () => {
@@ -354,5 +357,55 @@ describe("Тестирование утилитных функций", () => {
     ];
 
     expect(mappingResult).toEqual(expectedResult);
+  });
+});
+
+describe("Тестирование кастомизации поведения поисковой строки в Select", () => {
+  it("Поисковая строка не очищается при клике на иконку очистки", async () => {
+    const handleClearFn = jest.fn();
+    const { baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onClear: handleClearFn,
+      })
+    );
+    await userEvent.click(baseElement.querySelector(".ant-select-clear") as Element);
+    expect(handleClearFn).not.toBeCalled();
+  });
+
+  it("Поисковая строка не очищается при клике вне области текста поисковой строки", async () => {
+    const handleClearFn = jest.fn();
+    const { baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onClear: handleClearFn,
+      })
+    );
+    await userEvent.click(baseElement.querySelector(".ant-select-selector") as Element);
+    expect(handleClearFn).not.toBeCalled();
+  });
+
+  it("Поисковая строка очищается после закрытия Dropdown", async () => {
+    jest.useFakeTimers();
+    const handleDropdownVisibleChangeFn = jest.fn();
+    const handleSearchFn = jest.fn();
+    const props = {
+      showSearch: true,
+      open: true,
+      searchValue: "search-text",
+      onDropdownVisibleChange: handleDropdownVisibleChangeFn,
+      onSearch: handleSearchFn,
+    };
+    const { rerender } = render(renderSelect(props));
+    rerender(renderSelect({ ...props, open: false }));
+    jest.advanceTimersByTime(DropdownAnimationInterval);
+    expect(handleSearchFn).toBeCalled();
+    jest.useRealTimers();
   });
 });
