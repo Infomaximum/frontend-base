@@ -332,7 +332,6 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         listItemHeight={listItemHeight}
         optionLabelProp={getOptionLabelProp()}
         options={options}
-        autoFocus={false} // т.к. на фокус раскрывается dropdown
         filterOption={filterOption}
       />
     </div>
