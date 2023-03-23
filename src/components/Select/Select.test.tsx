@@ -7,6 +7,7 @@ import type { ISelectProps } from "./Select.types";
 import { mapChildrenToOptions } from "./Select.utils";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { textWrapperStyle } from "./Select.styles";
+import { DropdownAnimationInterval } from "../../utils";
 
 enum EElement {
   FIRST = "FIRST",
@@ -67,6 +68,63 @@ describe("Тест компонента Select", () => {
     expect(screen.getByText(elementDisplayValue[EElement.FIRST])).toBeInTheDocument();
     expect(screen.getByText(elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
     expect(screen.getByText(elementDisplayValue[EElement.THIRD])).toBeInTheDocument();
+  });
+
+  it("Значение Select очищается при клике на иконку очистки", async () => {
+    const { baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        defaultValue: EElement.SECOND,
+      })
+    );
+    const selectedOption = baseElement.querySelector(".ant-select-selection-item") as HTMLElement;
+    expect(getByText(selectedOption, elementDisplayValue[EElement.SECOND])).toBeInTheDocument();
+
+    await userEvent.click(baseElement.querySelector(".ant-select-clear") as Element);
+    expect(baseElement.querySelector(".ant-select-selection-item")).toBeNull();
+  });
+
+  it("Dropdown закрывается при клике на иконку очистки", async () => {
+    const handleDropdownVisibleChange = jest.fn();
+    const { baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onDropdownVisibleChange: handleDropdownVisibleChange,
+      })
+    );
+    await userEvent.click(baseElement.querySelector(".ant-select-clear") as Element);
+    expect(handleDropdownVisibleChange).toBeCalledWith(false);
+  });
+
+  it("Dropdown закрывается при клике вне области текста поисковой строки", async () => {
+    const handleDropdownVisibleChange = jest.fn();
+    const { baseElement } = render(
+      renderSelect({
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onDropdownVisibleChange: handleDropdownVisibleChange,
+      })
+    );
+    await userEvent.click(baseElement.querySelector(".ant-select-selector") as Element);
+    expect(handleDropdownVisibleChange).toHaveBeenCalledWith(false);
+  });
+
+  it("Dropdown не закрывается при клике на текст поисковой строки", async () => {
+    const handleDropdownVisibleChange = jest.fn();
+    const { getByRole } = render(
+      renderSelect({
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onDropdownVisibleChange: handleDropdownVisibleChange,
+      })
+    );
+    await userEvent.click(getByRole("combobox"));
+    expect(handleDropdownVisibleChange).not.toBeCalled();
   });
 
   it("Рендер пустого", async () => {
@@ -299,5 +357,55 @@ describe("Тестирование утилитных функций", () => {
     ];
 
     expect(mappingResult).toEqual(expectedResult);
+  });
+});
+
+describe("Тестирование кастомизации поведения поисковой строки в Select", () => {
+  it("Поисковая строка не очищается при клике на иконку очистки", async () => {
+    const handleClearFn = jest.fn();
+    const { baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onClear: handleClearFn,
+      })
+    );
+    await userEvent.click(baseElement.querySelector(".ant-select-clear") as Element);
+    expect(handleClearFn).not.toBeCalled();
+  });
+
+  it("Поисковая строка не очищается при клике вне области текста поисковой строки", async () => {
+    const handleClearFn = jest.fn();
+    const { baseElement } = render(
+      renderSelect({
+        allowClear: true,
+        showSearch: true,
+        searchValue: "search-text",
+        open: true,
+        onClear: handleClearFn,
+      })
+    );
+    await userEvent.click(baseElement.querySelector(".ant-select-selector") as Element);
+    expect(handleClearFn).not.toBeCalled();
+  });
+
+  it("Поисковая строка очищается после закрытия Dropdown", async () => {
+    jest.useFakeTimers();
+    const handleDropdownVisibleChangeFn = jest.fn();
+    const handleSearchFn = jest.fn();
+    const props = {
+      showSearch: true,
+      open: true,
+      searchValue: "search-text",
+      onDropdownVisibleChange: handleDropdownVisibleChangeFn,
+      onSearch: handleSearchFn,
+    };
+    const { rerender } = render(renderSelect(props));
+    rerender(renderSelect({ ...props, open: false }));
+    jest.advanceTimersByTime(DropdownAnimationInterval);
+    expect(handleSearchFn).toBeCalled();
+    jest.useRealTimers();
   });
 });
