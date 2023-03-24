@@ -1,5 +1,5 @@
-import type { NCore } from "@im/core";
-import type { Localization, TLocalizationDescription } from "@im/localization";
+import type { NCore } from "@infomaximum/module-expander";
+import type { Localization, TLocalizationDescription } from "@infomaximum/localization";
 import type { ConfigOptions } from "antd/lib/message";
 import type { ReactNode } from "react";
 

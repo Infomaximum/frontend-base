@@ -9,7 +9,7 @@ import type {
 } from "./InputDrawerField.types";
 import { isFunction, map, forEach, some, isUndefined, isEqual } from "lodash";
 import { wrapperInputDrawerStyle } from "./InputDrawerField.styles";
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import { Field } from "../../FormField/Field/Field";
 import { FormField } from "../../FormField/FormField";
 import type { ICommonTableCellProps } from "../../TableCellField/TableCellField.types";

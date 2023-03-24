@@ -1,5 +1,5 @@
 import type React from "react";
-import type { TLocalizationDescription } from "@im/localization";
+import type { TLocalizationDescription } from "@infomaximum/localization";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
 import type { IWithThemeProps } from "../../../decorators/hocs/withTheme/withTheme";
 

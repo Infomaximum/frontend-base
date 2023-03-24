@@ -1,4 +1,4 @@
-import { MillisecondsPerSecond } from "@im/utils";
+import { MillisecondsPerSecond } from "@infomaximum/utility";
 
 /**
  * минимальная длина пароля

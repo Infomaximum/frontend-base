@@ -1,5 +1,5 @@
 import type { NStore } from "../Store/Store/Store.types";
-import { InvalidIndex } from "@im/utils";
+import { InvalidIndex } from "@infomaximum/utility";
 import type { TableStore } from "../Store/TableStore/TableStore";
 
 export const wrapInFakeListPrepareData =

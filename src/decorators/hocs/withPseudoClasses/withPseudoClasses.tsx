@@ -1,6 +1,6 @@
 import { PureComponent } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import type { TPropInjector } from "@im/utils";
+import type { TPropInjector } from "@infomaximum/utility";
 
 export interface IWithPseudoClassesProps {
   onMouseEnter: (...args: any) => void;

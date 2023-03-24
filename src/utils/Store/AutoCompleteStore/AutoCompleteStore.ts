@@ -3,7 +3,7 @@ import { forEach } from "lodash";
 import { computed, makeObservable, override } from "mobx";
 import { Store } from "../Store/Store";
 import type { NStore } from "../Store/Store.types";
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 
 type TPrivateAutoCompleteStoreField = "receiveData";
 

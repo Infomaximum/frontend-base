@@ -1,4 +1,4 @@
-import type { EOperationType } from "@im/utils";
+import type { EOperationType } from "@infomaximum/utility";
 import { every, isArray, some } from "lodash";
 import type { IWithFeatureProps } from "../decorators/hocs/withFeature/withFeature.types";
 

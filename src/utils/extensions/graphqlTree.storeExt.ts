@@ -1,9 +1,9 @@
-import type { Model, TModelStruct } from "@im/models";
-import { InvalidIndex } from "@im/utils";
+import type { Model, TModelStruct } from "@infomaximum/graphql-model";
+import { InvalidIndex } from "@infomaximum/utility";
 import { forEach, get, isNull, isEmpty, map } from "lodash";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Store } from "../Store/Store/Store";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 
 type TTreeBuilderParams = {
   // typename группы

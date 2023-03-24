@@ -1,4 +1,4 @@
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { EErrorCode, ERROR_FIELD_NAME } from "../../utils/const";
 import {
   ACCESS_DENIED,

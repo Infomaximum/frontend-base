@@ -1,4 +1,4 @@
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import type { TreeCounter } from "../../../managers/TreeCounter";
 import type { ELimitsStateNames } from "../../../utils/const";
 import type { NStore } from "../Store/Store.types";

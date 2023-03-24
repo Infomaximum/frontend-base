@@ -5,7 +5,7 @@ import { ERROR_404, LOG_OUT } from "../../../utils/Localization/Localization";
 import { BrowserRouter } from "react-router-dom";
 import { createRef } from "react";
 import { HeaderMenuContext } from "../../../decorators/contexts/HeaderMenuContext";
-import { Localization } from "@im/localization";
+import { Localization } from "@infomaximum/localization";
 
 const noop = () => {};
 

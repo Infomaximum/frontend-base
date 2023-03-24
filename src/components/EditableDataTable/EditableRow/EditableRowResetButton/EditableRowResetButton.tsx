@@ -2,7 +2,7 @@ import { useCallback, memo, useContext } from "react";
 import type { IEditableRowResetButtonProps } from "./EditableRowResetButton.types";
 import { EditableRowButton } from "../EditableRowButton/EditableRowButton";
 import { useFormButtonState } from "../../../forms/SubmitFormButton/hooks/useFormButtonState";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { FormContext } from "../../../../decorators/contexts/FormContext";
 
 const EditableRowResetButtonComponent: React.FC<IEditableRowResetButtonProps> = ({

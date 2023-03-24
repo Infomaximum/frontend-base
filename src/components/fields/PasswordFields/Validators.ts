@@ -1,4 +1,8 @@
-import { notEmptyMemoize, type TFieldValidatorSelector, type TValidationError } from "@im/utils";
+import {
+  notEmptyMemoize,
+  type TFieldValidatorSelector,
+  type TValidationError,
+} from "@infomaximum/utility";
 import { createSelector } from "reselect";
 import {
   PASSWORDS_MUST_BE_EQUAL,
@@ -11,7 +15,7 @@ import {
   youNeedSetPasswordTestId,
 } from "../../../utils/TestIds";
 import { MIN_PASSWORD_LENGTH } from "../../../utils/const";
-import type { Localization } from "@im/localization";
+import type { Localization } from "@infomaximum/localization";
 import type { IComplexPasswordModel } from "./PasswordFields.types";
 
 const passwordsMustBeEqualLoc = PASSWORDS_MUST_BE_EQUAL;

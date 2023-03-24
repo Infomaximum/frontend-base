@@ -1,10 +1,10 @@
 import { forEach, map, includes, filter, reduce, every, isEmpty, get, isUndefined } from "lodash";
-import { runDfs } from "@im/utils";
+import { runDfs } from "@infomaximum/utility";
 import { TreeCounter } from "./TreeCounter";
 import type { NTableStore } from "../utils/Store/TableStore/TableStore.types";
 import { RestModel } from "../models/RestModel";
-import { Group, type IModel, Model } from "@im/models";
-import { assertSimple } from "@im/asserts";
+import { Group, type IModel, Model } from "@infomaximum/graphql-model";
+import { assertSimple } from "@infomaximum/assert";
 
 export type TBaseRow = {
   key: string;

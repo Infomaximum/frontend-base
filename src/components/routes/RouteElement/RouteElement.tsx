@@ -1,4 +1,4 @@
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { memo } from "react";
 import { useLocation, useMatch, useNavigate } from "react-router";
 import type { IRouteElementProps } from "./RouteElement.types";

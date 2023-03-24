@@ -1,5 +1,5 @@
 import type React from "react";
-import type { Localization, TLocalizationDescription } from "@im/localization";
+import type { Localization, TLocalizationDescription } from "@infomaximum/localization";
 import { SWITCHED_OFF, SWITCHED_ENABLED } from "../../utils/Localization/Localization";
 import { switchedEnabledStyles, switchedOffStyles } from "./Message.styles";
 

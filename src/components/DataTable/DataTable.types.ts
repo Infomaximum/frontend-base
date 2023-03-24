@@ -1,7 +1,7 @@
 import type { headerModes } from "./DataTableHeader/DataTableHeader";
 import type { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
 import type { IEditableDataTableState } from "../EditableDataTable/EditableDataTable.types";
-import type { Group, IModel } from "@im/models";
+import type { Group, IModel } from "@infomaximum/graphql-model";
 import type { TAccessRules } from "../../utils/access";
 import type { ITableOwnProps } from "../Table/Table.types";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";

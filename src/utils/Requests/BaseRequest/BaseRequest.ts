@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import axios from "axios";
-import { CancelRequest, XTraceIdHeaderKey } from "@im/utils";
+import { CancelRequest, XTraceIdHeaderKey } from "@infomaximum/utility";
 import { isFunction } from "lodash";
 import { apolloInstance } from "../../Store/Apollo";
 import type { NBaseRequest } from "./BaseRequest.types";
@@ -8,7 +8,7 @@ import type { NRequests } from "../Requests.types";
 import { BaseErrorHandler } from "../../ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
 import type { NErrorHandlers } from "../../ErrorHandlers/ErrorHandlers.types";
 import type { Subscription } from "zen-observable-ts";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { v4 as uuid4 } from "uuid";
 
 type TRequestParams = {

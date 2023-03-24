@@ -2,7 +2,7 @@ import { type FC, type FocusEvent, useCallback, useMemo, useState } from "react"
 import type { ISelectWithStoreProps, THandlerDisplayValues } from "./SelectWithStore.types";
 import { compact, every, isArray, isFunction, isNull, isString, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";
-import type { Model } from "@im/models";
+import type { Model } from "@infomaximum/graphql-model";
 import { EllipsisTooltip } from "../EllipsisTooltip";
 import { useFeature } from "../../decorators/hooks/useFeature";
 import { useStore } from "../../decorators/hooks/useStore";

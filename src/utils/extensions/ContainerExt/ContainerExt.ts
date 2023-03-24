@@ -10,7 +10,7 @@ import type {
   TMutationConfigGetter,
 } from "./ContainerExt.types";
 import { forEach } from "lodash";
-import type { GraphQlQuery } from "@im/utils";
+import type { GraphQlQuery } from "@infomaximum/utility";
 import type { NStore } from "../../Store/Store/Store.types";
 
 export class ContainerExt<P = unknown> {

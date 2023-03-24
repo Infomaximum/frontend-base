@@ -10,7 +10,12 @@ import {
 } from "@apollo/client";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 import axios from "axios";
-import { CancelRequest, EHttpCodes, NetworkFailResendAttemptsCount, ResendDelays } from "@im/utils";
+import {
+  CancelRequest,
+  EHttpCodes,
+  NetworkFailResendAttemptsCount,
+  ResendDelays,
+} from "@infomaximum/utility";
 import axiosRetry from "axios-retry";
 
 /**

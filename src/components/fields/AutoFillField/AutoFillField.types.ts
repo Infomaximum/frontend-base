@@ -1,6 +1,6 @@
 import type { FieldRenderProps } from "react-final-form";
 import type { IAutoCompleteProps as IAutoCompleteInternalProps } from "../../AutoComplete/AutoComplete.types";
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 import type { AutoCompleteStore } from "../../../utils/Store/AutoCompleteStore/AutoCompleteStore";

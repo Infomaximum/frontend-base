@@ -5,7 +5,7 @@ import { isFunction } from "lodash";
 import { tableStyle } from "./DataTableDrawerContent.styles";
 import { observer } from "mobx-react";
 import { renderErrorAlert } from "./DataTableDrawerContent.utils";
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import { EllipsisTooltip } from "../../../EllipsisTooltip/EllipsisTooltip";
 import { useLocalization } from "../../../../decorators/hooks/useLocalization";
 import { DataTable } from "../../../DataTable/DataTable";

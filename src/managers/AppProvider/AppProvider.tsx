@@ -1,5 +1,5 @@
 import { Global } from "@emotion/react";
-import { ELanguages, Localization } from "@im/localization";
+import { ELanguages, Localization } from "@infomaximum/localization";
 import moment from "moment";
 import { type FC, useEffect, useMemo } from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -19,7 +19,7 @@ import ruRu from "antd/es/locale/ru_RU";
 import { ConfigProvider } from "antd";
 import { AppErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 import { historyStore } from "../../store/historyStore";
-import type { TFeatureEnabledChecker } from "@im/utils";
+import type { TFeatureEnabledChecker } from "@infomaximum/utility";
 
 export interface IAppProviderProps extends IRouterProviderProps {
   baseName?: string;

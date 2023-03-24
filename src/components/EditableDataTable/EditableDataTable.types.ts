@@ -1,5 +1,5 @@
 import type { IDataTableOwnProps, IDataTableProps } from "../DataTable/DataTable.types";
-import type { TAccess } from "@im/utils";
+import type { TAccess } from "@infomaximum/utility";
 import type { MutableRefObject } from "react";
 import type { EditableDataTableKeys } from "./EditableDataTable";
 import type { EAddingRowMethod, TBaseRow } from "../../managers/Tree";

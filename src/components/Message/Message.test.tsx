@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { shallow } from "enzyme";
 import { Message } from "./Message";
-import { Localization } from "@im/localization";
+import { Localization } from "@infomaximum/localization";
 import { SWITCHED_ENABLED, SWITCHED_OFF } from "../../utils/Localization/Localization";
 import type { ReactElement } from "react";
 import type {

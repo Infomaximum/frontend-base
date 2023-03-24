@@ -9,7 +9,7 @@ import type {
 } from "./InputField.types";
 import { trim, isString, isFunction } from "lodash";
 import type { InputProps } from "antd/lib/input/Input";
-import { EUserAgents, userAgent } from "@im/utils";
+import { EUserAgents, userAgent } from "@infomaximum/utility";
 import { NOT_SET } from "../../../utils/Localization/Localization";
 import { Input } from "../../Input/Input";
 import { withLoc } from "../../../decorators";

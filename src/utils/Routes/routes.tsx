@@ -24,11 +24,11 @@ import {
   rootPath,
   updatePasswordPath,
 } from "./paths";
-import type { NCore } from "@im/core";
-import { Expander } from "@im/core";
-import type { TFeatureEnabledChecker } from "@im/utils";
+import type { NCore } from "@infomaximum/module-expander";
+import { Expander } from "@infomaximum/module-expander";
+import type { TFeatureEnabledChecker } from "@infomaximum/utility";
 import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { getPathToLocalStorage } from "../URI/URI";
 
 /**

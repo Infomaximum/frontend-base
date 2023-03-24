@@ -9,7 +9,7 @@ import type {
 } from "./AutoCompleteField.types";
 import { isFunction, map, forEach, some, isEqual, every } from "lodash";
 import { wrapperAutocompleteStyle } from "./AutoCompleteField.styles";
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import { withFeature } from "../../../../decorators/hocs/withFeature/withFeature";
 import { Field } from "../../FormField/Field/Field";
 import { FormField } from "../../FormField/FormField";

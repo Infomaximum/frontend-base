@@ -1,4 +1,4 @@
-import type { Model } from "@im/models";
+import type { Model } from "@infomaximum/graphql-model";
 import type { ELimitsStateNames } from "../../utils/const";
 import type { RestModel } from "../../models/RestModel";
 import type { TableStore } from "../../utils/Store/TableStore/TableStore";

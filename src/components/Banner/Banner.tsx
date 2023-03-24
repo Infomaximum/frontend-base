@@ -14,7 +14,7 @@ import {
 } from "./Banner.styles";
 import { BannerAlert } from "./components/BannerAlert/BannerAlert";
 import { isFunction } from "lodash";
-import { MillisecondsPerSecond } from "@im/utils";
+import { MillisecondsPerSecond } from "@infomaximum/utility";
 import { bannerDontShowAgainTestId, closeBannerButtonTestId } from "../../utils/TestIds";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 

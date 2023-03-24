@@ -1,6 +1,6 @@
-import type { Localization } from "@im/localization";
-import type { IModel } from "@im/models";
-import type { GraphQlQuery, TFeatureEnabledChecker } from "@im/utils";
+import type { Localization } from "@infomaximum/localization";
+import type { IModel } from "@infomaximum/graphql-model";
+import type { GraphQlQuery, TFeatureEnabledChecker } from "@infomaximum/utility";
 import type { IColumnProps } from "../../VirtualizedTable/VirtualizedTable.types";
 
 export type TDataSourceExt<T extends { [key: string]: any } = TDictionary> = (

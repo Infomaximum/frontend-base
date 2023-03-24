@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import type { IFormFieldProps } from "./FormField.types";
 import { FormOption } from "../FormOption/FormOption";
-import { getAccessParameters } from "@im/utils";
+import { getAccessParameters } from "@infomaximum/utility";
 import type { TFieldProvider } from "./Field/Field.types";
 import type { FieldMetaState } from "react-final-form";
 import { useFeature } from "../../../decorators/hooks/useFeature";

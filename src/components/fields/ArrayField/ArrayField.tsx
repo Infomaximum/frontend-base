@@ -14,7 +14,7 @@ import type {
   IWrappedArrayFieldState,
   IArrayFieldProps,
 } from "./ArrayField.types";
-import { getAccessParameters, EOperationType } from "@im/utils";
+import { getAccessParameters, EOperationType } from "@infomaximum/utility";
 import { createSelector } from "reselect";
 import type { Interpolation } from "@emotion/react";
 import { Button } from "../../Button/Button";

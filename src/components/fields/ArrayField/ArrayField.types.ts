@@ -1,7 +1,7 @@
 import type { FieldArrayRenderProps } from "react-final-form-arrays";
 import type { FormItemProps } from "antd/lib/form/FormItem";
 import type { EAddEntityButtonPositions } from "./ArrayField";
-import type { TFeatureEnabledChecker } from "@im/utils";
+import type { TFeatureEnabledChecker } from "@infomaximum/utility";
 import type { Interpolation } from "@emotion/react";
 import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IWithFeatureProps } from "../../../decorators/hocs/withFeature/withFeature.types";

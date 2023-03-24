@@ -1,10 +1,10 @@
 import type { DocumentNode } from "graphql";
-import type { IDocumentNode } from "@im/utils";
+import type { IDocumentNode } from "@infomaximum/utility";
 import type { NBaseStore } from "../BaseStore/BaseStore.types";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import type { Store } from "./Store";
 import type { NRequests } from "../../Requests/Requests.types";
-import type { Model, TModelStruct } from "@im/models";
+import type { Model, TModelStruct } from "@infomaximum/graphql-model";
 
 /** Пространство для типов базового стора */
 export declare namespace NStore {

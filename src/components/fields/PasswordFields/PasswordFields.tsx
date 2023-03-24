@@ -70,7 +70,7 @@ import {
 } from "../../Icons/Icons";
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
 import { withFormProvider } from "../../../decorators/hocs/withFormProvider/withFormProvider";
-import type { Localization } from "@im/localization";
+import type { Localization } from "@infomaximum/localization";
 
 const REPEAT_NEW_PASSWORD_FIELD = "REPEAT_NEW_PASSWORD";
 

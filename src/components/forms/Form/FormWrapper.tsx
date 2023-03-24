@@ -1,7 +1,7 @@
 import { Form as RFForm, type FormProps } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import type { Mutator } from "final-form";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { useFeature } from "../../../decorators/hooks/useFeature";
 import { withFormSubmitPromise } from "../../../decorators";
 import type { IFormWrapperProps, TWrappedError } from "./FormWrapper.types";

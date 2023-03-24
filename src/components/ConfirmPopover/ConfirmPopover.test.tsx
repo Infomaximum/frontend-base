@@ -1,7 +1,7 @@
 import { ConfirmPopover } from "./ConfirmPopover";
 import type { IConfirmPopoverProps } from "./ConfirmPopover.types";
 import { mount } from "enzyme";
-import { Localization } from "@im/localization";
+import { Localization } from "@infomaximum/localization";
 import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,

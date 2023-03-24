@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import type { Localization } from "@im/localization";
+import type { Localization } from "@infomaximum/localization";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
 import type { IWithFormProviderProps } from "../../../decorators/hocs/withFormProvider/withFormProvider";
 import type { Store } from "../../../utils";
-import type { Model } from "@im/models";
+import type { Model } from "@infomaximum/graphql-model";
 
 export interface IComplexPasswordModel extends Model {
   getMinPasswordLength(): number | undefined;

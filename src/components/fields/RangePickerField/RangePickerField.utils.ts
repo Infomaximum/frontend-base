@@ -8,7 +8,7 @@ import {
   END_MONTH,
 } from "../../../utils/Localization/Localization";
 import type { TPickerValue } from "./RangePickerField.types";
-import type { Localization } from "@im/localization";
+import type { Localization } from "@infomaximum/localization";
 
 const getPreparedValue = (timestampRange: [number, number]) =>
   timestampRange

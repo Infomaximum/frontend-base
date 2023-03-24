@@ -13,7 +13,7 @@ import {
   timeInputWithSecondsStyle,
 } from "./TimeInputsRangeField.styles";
 import { timeInputsRangeTestId } from "../../../utils/TestIds";
-import { formatEnteredTime, type TDurationDescription } from "@im/utils";
+import { formatEnteredTime, type TDurationDescription } from "@infomaximum/utility";
 import { Input } from "../../Input";
 import { Field, FormField } from "../FormField";
 

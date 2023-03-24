@@ -1,4 +1,4 @@
-import { Group, type Model } from "@im/models";
+import { Group, type Model } from "@infomaximum/graphql-model";
 import { typenameToModel } from "./typenameToModel";
 
 /**

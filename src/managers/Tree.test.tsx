@@ -1,10 +1,16 @@
 import { TreeManager } from "./Tree";
-import { InvalidIndex } from "@im/utils";
+import { InvalidIndex } from "@infomaximum/utility";
 import { buildTreeFromList } from "../utils/extensions/graphqlTree.storeExt";
 import { RestModel } from "../models/RestModel";
 import { cloneDeep, set, unset, xor } from "lodash";
-import { Group, type IModel, Model, type TModelStruct, TypenameToModel } from "@im/models";
-import { assertSimple } from "@im/asserts";
+import {
+  Group,
+  type IModel,
+  Model,
+  type TModelStruct,
+  TypenameToModel,
+} from "@infomaximum/graphql-model";
+import { assertSimple } from "@infomaximum/assert";
 
 type TItems = TreeItemModel | TreeGroupModel | RestModel;
 

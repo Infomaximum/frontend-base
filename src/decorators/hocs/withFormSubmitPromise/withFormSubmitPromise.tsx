@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { map, forEach, isArray, isFunction } from "lodash";
-import type { TPropInjector } from "@im/utils";
-import { FormCancelSymbol } from "@im/utils";
+import type { TPropInjector } from "@infomaximum/utility";
+import { FormCancelSymbol } from "@infomaximum/utility";
 import type { IWithFormSubmitPromiseProps, TFormConfig } from "./withFormSubmitPromise.types";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import {

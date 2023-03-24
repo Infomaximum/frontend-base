@@ -1,8 +1,8 @@
 import type { SelectProps } from "antd/lib/select";
 import type { RowSelectionType } from "antd/lib/table/interface";
 import type { FieldRenderProps } from "react-final-form";
-import type { IGroup, IModel } from "@im/models";
-import type { Localization } from "@im/localization";
+import type { IGroup, IModel } from "@infomaximum/graphql-model";
+import type { Localization } from "@infomaximum/localization";
 import type { IFieldProps } from "../../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../../FormField/FormField.types";
 import type { IDataTableDrawerOwnProps } from "../../../drawers/DataTableDrawer/DataTableDrawer.types";

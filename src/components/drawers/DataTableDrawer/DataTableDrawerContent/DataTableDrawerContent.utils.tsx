@@ -1,5 +1,5 @@
-import type { NCore } from "@im/core";
-import type { Localization } from "@im/localization";
+import type { NCore } from "@infomaximum/module-expander";
+import type { Localization } from "@infomaximum/localization";
 import { handleErrorInternal } from "../../../../managers/Errors/Errors";
 import { Alert } from "../../../Alert/Alert";
 import { errorAlertStyle } from "./DataTableDrawerContent.styles";

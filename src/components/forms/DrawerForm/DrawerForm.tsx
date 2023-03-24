@@ -1,6 +1,6 @@
 import React from "react";
 import { isFunction } from "lodash";
-import type { Deferred } from "@im/utils";
+import type { Deferred } from "@infomaximum/utility";
 import { Form } from "../Form";
 import {
   formStyles,
@@ -10,7 +10,7 @@ import {
   formContentStyle,
 } from "./DrawerForm.styles";
 import { EFormLayoutType } from "../BaseForm/BaseForm.types";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { drawerFormCancelButtonTestId, drawerFormTestId } from "../../../utils/TestIds";
 import type { IDrawerFormProps, IDrawerFormState } from "./DrawerForm.types";
 import type { FormApi } from "final-form";

@@ -1,4 +1,4 @@
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import type { FieldRenderProps } from "react-final-form";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
 import type { ISelectWithStoreProps } from "../../SelectWithStore/SelectWithStore.types";

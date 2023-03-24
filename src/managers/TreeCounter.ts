@@ -1,5 +1,5 @@
 import { forEach, isNumber } from "lodash";
-import { Group, type IModel } from "@im/models";
+import { Group, type IModel } from "@infomaximum/graphql-model";
 import { RestModel } from "../models/RestModel";
 
 /**

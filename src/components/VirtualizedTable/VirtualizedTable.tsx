@@ -27,7 +27,7 @@ import { ESortDirection } from "../../utils/const";
 import { VirtualizedTableHeaderRow } from "./VirtualizedTableComponents/VirtualizedTableHeaderRow/VirtualizedTableHeaderRow";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableComponents/VirtualizedTableBodyRow/VirtualizedTableBodyRow";
 import { VirtualizedTableBody } from "./VirtualizedTableComponents/VirtualizedTableBody/VirtualizedTableBody";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import type { SorterResult, SortOrder } from "antd/lib/table/interface";
 import { borderTopStyle } from "../Table/Table.styles";
 import { observer } from "mobx-react";

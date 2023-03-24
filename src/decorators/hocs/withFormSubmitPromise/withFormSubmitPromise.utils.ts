@@ -1,5 +1,5 @@
-import { assertSilent } from "@im/asserts";
-import type { NCore } from "@im/core";
+import { assertSilent } from "@infomaximum/assert";
+import type { NCore } from "@infomaximum/module-expander";
 import { FORM_ERROR } from "final-form";
 import {
   difference,

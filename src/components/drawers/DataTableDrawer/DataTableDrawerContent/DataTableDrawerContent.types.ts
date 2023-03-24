@@ -1,4 +1,4 @@
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import type { TBaseRow } from "../../../../managers/Tree";
 import type { IDataTableOwnProps } from "../../../DataTable/DataTable.types";
 

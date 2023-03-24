@@ -37,7 +37,7 @@ import { MainSystemPagePathContext } from "../../../decorators/contexts/MainSyst
 import { useFeature } from "../../../decorators/hooks/useFeature";
 import { ArrowBackSVG, HeaderAppsIconSVG } from "../../../resources/icons";
 import { Spinner } from "../../Spinner/Spinner";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 
 const assertSimpleText = "Дочерний компонент не должен помещаться в DOM";
 

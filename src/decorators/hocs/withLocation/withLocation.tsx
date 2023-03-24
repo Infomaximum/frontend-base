@@ -1,4 +1,4 @@
-import type { TPropInjector } from "@im/utils";
+import type { TPropInjector } from "@infomaximum/utility";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { useContext } from "react";
 import { UNSAFE_NavigationContext, useLocation } from "react-router";

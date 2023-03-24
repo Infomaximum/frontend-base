@@ -1,5 +1,5 @@
 import { createRef, Children, Component } from "react";
-import { TestIdAttr, getAccessParameters } from "@im/utils";
+import { TestIdAttr, getAccessParameters } from "@infomaximum/utility";
 import type { IFormProps, IFormState } from "./Form.types";
 import { isFunction, omit } from "lodash";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
@@ -9,7 +9,7 @@ import { BaseForm } from "../BaseForm/BaseForm";
 import { FormContext, type IFormProvider } from "../../../decorators/contexts/FormContext";
 import { contains } from "../../../utils/URI/URI";
 import { FormConfirmationModal } from "../../modals/FormConfirmationModal/FormConfirmationModal";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 
 class FormComponent extends Component<IFormProps, IFormState> {
   public static defaultProps = {

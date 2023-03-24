@@ -5,7 +5,7 @@ import {
   routesMap,
   sortPriority,
 } from "../../utils/Routes/routes";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import type { IRouterProviderProps } from "./RouterProvider.types";
 import { observer } from "mobx-react";
 import { useRoutes } from "react-router";

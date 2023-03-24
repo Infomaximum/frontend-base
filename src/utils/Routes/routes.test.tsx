@@ -1,4 +1,4 @@
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
 import type { ReactElement } from "react";
 import { moduleGroupPath } from "./paths";

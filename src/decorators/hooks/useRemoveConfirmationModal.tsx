@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { Deferred } from "@im/utils";
-import type { TLocalizationDescription } from "@im/localization";
+import { Deferred } from "@infomaximum/utility";
+import type { TLocalizationDescription } from "@infomaximum/localization";
 import { useLocalization } from "./useLocalization";
 import { RemoveConfirmationModal } from "../../components/modals/RemoveConfirmationModal/RemoveConfirmationModal";
 

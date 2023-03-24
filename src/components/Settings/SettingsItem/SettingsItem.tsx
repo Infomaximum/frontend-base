@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { settingsItemTitleTestId } from "../../../utils/TestIds";
 import { goBackPath } from "../../../utils/Routes/paths";
 import { matchPath, useLocation, useNavigate } from "react-router";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 
 const SettingsItemComponent: React.FC<ISettingsItemProps> = ({ onClick, title, routes }) => {

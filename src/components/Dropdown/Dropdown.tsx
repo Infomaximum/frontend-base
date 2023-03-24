@@ -1,4 +1,4 @@
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 // eslint-disable-next-line im/ban-import-entity
 import { Dropdown as AntDropdown } from "antd";
 import { noop } from "lodash";

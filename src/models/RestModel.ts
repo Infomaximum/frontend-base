@@ -1,5 +1,5 @@
-import { assertSimple } from "@im/asserts";
-import { type IModel, type IModelParams, Model } from "@im/models";
+import { assertSimple } from "@infomaximum/assert";
+import { type IModel, type IModelParams, Model } from "@infomaximum/graphql-model";
 
 import { typenameToModel } from "./typenameToModel";
 

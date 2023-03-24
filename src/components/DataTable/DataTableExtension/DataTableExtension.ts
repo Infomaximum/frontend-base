@@ -1,6 +1,6 @@
-import type { Localization } from "@im/localization";
-import type { IModel, Model } from "@im/models";
-import type { GraphQlQuery, TFeatureEnabledChecker } from "@im/utils";
+import type { Localization } from "@infomaximum/localization";
+import type { IModel, Model } from "@infomaximum/graphql-model";
+import type { GraphQlQuery, TFeatureEnabledChecker } from "@infomaximum/utility";
 import { assignIn, isNil, isFunction } from "lodash";
 import type { IColumnProps } from "../../VirtualizedTable/VirtualizedTable.types";
 import type {

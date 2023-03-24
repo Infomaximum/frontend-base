@@ -1,4 +1,4 @@
-import { TypenameToModel } from "@im/models";
+import { TypenameToModel } from "@infomaximum/graphql-model";
 
 /**
  * Экземпляр класса TypenameToModel

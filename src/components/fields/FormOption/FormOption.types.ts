@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { ColProps } from "antd/lib/col";
 import type { Interpolation } from "@emotion/react";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 
 export interface IFormOptionProps {

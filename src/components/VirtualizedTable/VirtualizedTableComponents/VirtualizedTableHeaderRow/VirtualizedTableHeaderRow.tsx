@@ -1,5 +1,5 @@
 import { PureComponent } from "react";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { isUndefined, map } from "lodash";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 import {

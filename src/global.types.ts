@@ -1,6 +1,6 @@
 /// <reference types="@emotion/react/types/css-prop" />
 
-import type { Model } from "@im/models";
+import type { Model } from "@infomaximum/graphql-model";
 import type { theme } from "./styles/theme";
 import type { Store } from "./utils/Store/Store";
 

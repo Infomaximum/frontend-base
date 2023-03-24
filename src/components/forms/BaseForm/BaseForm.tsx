@@ -14,7 +14,7 @@ import { FormContext } from "../../../decorators/contexts/FormContext";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { HeaderMenuPortal } from "../../HeaderMenu/HeaderMenuPortal/HeaderMenuPortal";
 import { modalFormLayout, typeLLayout, typeMLayout, typeSLayout } from "../../../styles/formLayout";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { Notification } from "../../Notification";
 import { SAVE } from "../../../utils/Localization/Localization";
 import { ESpaceSize, SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";

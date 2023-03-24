@@ -1,5 +1,5 @@
 import { action, makeObservable, observable, override, computed } from "mobx";
-import type { IModel, Model } from "@im/models";
+import type { IModel, Model } from "@infomaximum/graphql-model";
 import { Store } from "../Store/Store";
 import type { NTableStore } from "./TableStore.types";
 import { isNumber, setWith } from "lodash";

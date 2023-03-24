@@ -1,4 +1,4 @@
-import type { TPropInjector } from "@im/utils";
+import type { TPropInjector } from "@infomaximum/utility";
 import type { IFormProvider } from "../../contexts/FormContext";
 import { FormContext } from "../../contexts/FormContext";
 import hoistNonReactStatics from "hoist-non-react-statics";

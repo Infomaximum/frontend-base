@@ -1,7 +1,7 @@
-import type { IDocumentNode, TInferredVariables } from "@im/utils";
+import type { IDocumentNode, TInferredVariables } from "@infomaximum/utility";
 import type { Store } from "../../../utils/Store/Store/Store";
 import type { NRequests } from "../../../utils/Requests/Requests.types";
-import type { Model } from "@im/models";
+import type { Model } from "@infomaximum/graphql-model";
 
 export type TQueryParams = {
   /** Запрос */

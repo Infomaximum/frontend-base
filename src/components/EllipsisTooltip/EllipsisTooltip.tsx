@@ -2,7 +2,7 @@ import { type FC, memo, useMemo, cloneElement, isValidElement } from "react";
 import { ellipsisTextWrapper, ellipsisStyleForSafari } from "./EllipsisTooltip.styles";
 import type { IEllipsisTooltipProps } from "./EllipsisTooltip.types";
 import { Tooltip } from "../Tooltip/Tooltip";
-import { EUserAgents, userAgent } from "@im/utils";
+import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 

@@ -1,8 +1,8 @@
 import { typenameToModel } from "../../../models/typenameToModel";
-import { graphqlTag } from "@im/utils";
+import { graphqlTag } from "@infomaximum/utility";
 import { forEach, set } from "lodash";
 import { Store } from "./Store";
-import { Model } from "@im/models";
+import { Model } from "@infomaximum/graphql-model";
 
 class TestModel extends Model {
   static override get typename() {

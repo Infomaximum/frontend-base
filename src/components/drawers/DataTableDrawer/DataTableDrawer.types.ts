@@ -3,7 +3,7 @@ import type { ButtonProps } from "antd/lib/button/button";
 import type { DrawerProps } from "antd/lib/drawer";
 import type { IDataTableDrawerContentProps } from "./DataTableDrawerContent/DataTableDrawerContent.types";
 import type { IOptionalDrawerFormProps } from "../../forms/OptionalDrawerForm/OptionalDrawerForm.types";
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import type { IColumnProps } from "../../VirtualizedTable/VirtualizedTable.types";
 
 export interface IDataTableDrawerOwnProps<T extends IConvertedModel = IConvertedModel>

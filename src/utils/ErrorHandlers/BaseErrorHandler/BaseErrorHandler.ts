@@ -1,9 +1,9 @@
-import { EHttpCodes } from "@im/utils";
-import { Expander, type NCore, showGlobalErrorModal } from "@im/core";
+import { EHttpCodes } from "@infomaximum/utility";
+import { Expander, type NCore, showGlobalErrorModal } from "@infomaximum/module-expander";
 import { filter, find, get, isArray, isMatch, isPlainObject } from "lodash";
 import { EErrorCode, PARAMETERS_FIELD_NAME, rootDomNodeName } from "../../const";
 import type { NErrorHandlers } from "../ErrorHandlers.types";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 
 export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
   private prepareInitialServerError(error: any) {

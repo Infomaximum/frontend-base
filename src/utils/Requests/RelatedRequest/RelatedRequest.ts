@@ -2,10 +2,10 @@ import { BaseRequest } from "../BaseRequest/BaseRequest";
 import type { NRequests } from "../Requests.types";
 import type { TRelatedRequestData } from "./RelatedRequest.types";
 import { apolloInstance } from "../../Store/Apollo";
-import { XTraceIdHeaderKey } from "@im/utils";
-import type { NCore } from "@im/core";
+import { XTraceIdHeaderKey } from "@infomaximum/utility";
+import type { NCore } from "@infomaximum/module-expander";
 import { v4 as uuid4 } from "uuid";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 
 export class RelatedRequest extends BaseRequest {
   public override async requestData(

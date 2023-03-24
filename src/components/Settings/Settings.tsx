@@ -5,7 +5,7 @@ import { calculateSize } from "./SettingsItem/SettingsItem.styles";
 import { forEach, map } from "lodash";
 import { Layout, Space } from "antd";
 import { settingsContentStyle } from "./Settings.styles";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 
 const { Content } = Layout;

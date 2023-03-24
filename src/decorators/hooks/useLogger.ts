@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useEffect, useMemo } from "react";
-import { assertSilent } from "@im/asserts";
+import { assertSilent } from "@infomaximum/assert";
 import { useFirstMountState } from "./useFirstMountState";
 import { useMountEffect } from "./useMountEffect";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import type { IWrapperContainerProps } from "../../../components/WrapperContainer/WrapperContainer.types";
 import { WrapperContainer } from "../../../components/WrapperContainer/WrapperContainer";
 

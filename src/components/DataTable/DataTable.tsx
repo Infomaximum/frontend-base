@@ -1,6 +1,6 @@
 import React from "react";
 import { isFunction, filter, drop, isEmpty, isUndefined, some, compact, uniq } from "lodash";
-import { InvalidIndex } from "@im/utils";
+import { InvalidIndex } from "@infomaximum/utility";
 import { hiddenCheckbox, weightLabelStyle, spinnerWrapperStyle } from "./DataTable.style";
 import type { IDataTableProps, IDataTableState, IDataTableOwnProps } from "./DataTable.types";
 import { DataTableHeader, headerModes } from "./DataTableHeader/DataTableHeader";
@@ -11,7 +11,7 @@ import { type IReactionDisposer, reaction } from "mobx";
 import { type TBaseRow, type TExtendColumns, TreeManager } from "../../managers/Tree";
 import { goBackPath } from "../../utils/Routes/paths";
 import { getBasePrefix } from "../../utils/URI/URI";
-import { Group, type IModel } from "@im/models";
+import { Group, type IModel } from "@infomaximum/graphql-model";
 import { RestModel } from "../../models/RestModel";
 import { isShowElement } from "../../utils/access";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";

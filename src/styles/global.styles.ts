@@ -1,5 +1,5 @@
 import type { Interpolation } from "@emotion/react";
-import { userAgent, EUserAgents } from "@im/utils";
+import { userAgent, EUserAgents } from "@infomaximum/utility";
 
 export const SCROLLBAR_WIDTH = 6;
 export const SCROLLBAR_HEIGHT = 6;

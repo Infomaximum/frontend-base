@@ -6,7 +6,7 @@ import type {
   IEditableRow,
 } from "./EditableDataTable.types";
 import type { IDataTableProps, THeaderButtonObject } from "../DataTable/DataTable.types";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { createSelector } from "reselect";
 import { some, find, without, isFunction, merge, compact } from "lodash";
 import {
@@ -14,7 +14,7 @@ import {
   editableDataTableCellStyle,
   sortingRowStyle,
 } from "./EditableDataTable.styles";
-import { getAccessParameters } from "@im/utils";
+import { getAccessParameters } from "@infomaximum/utility";
 import { controlCellRemoveTestId, editableDataTableAddButtonTestId } from "../../utils/TestIds";
 import { EditableRow } from "./EditableRow/EditableRow";
 import { EditableRowButton } from "./EditableRow/EditableRowButton/EditableRowButton";

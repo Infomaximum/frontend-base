@@ -1,7 +1,7 @@
 import { isMatch, find, isObject } from "lodash";
-import type { Localization } from "@im/localization";
-import type { NCore } from "@im/core";
-import { Expander } from "@im/core";
+import type { Localization } from "@infomaximum/localization";
+import type { NCore } from "@infomaximum/module-expander";
+import { Expander } from "@infomaximum/module-expander";
 
 export const isErrorMatchWithPreparer = function (
   error: NCore.TError,

@@ -1,5 +1,5 @@
 import type { IFieldProps, IWrappedFieldProps } from "../FormField/Field/Field.types";
-import type { Localization } from "@im/localization";
+import type { Localization } from "@infomaximum/localization";
 import type { FieldRenderProps } from "react-final-form";
 
 export interface ICommonTableCellProps {

@@ -1,5 +1,5 @@
-import type { NCore } from "@im/core";
-import { assertSimple } from "@im/asserts";
+import type { NCore } from "@infomaximum/module-expander";
+import { assertSimple } from "@infomaximum/assert";
 import { createContext } from "react";
 
 export interface IErrorModalContextContextData {

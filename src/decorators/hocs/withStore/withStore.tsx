@@ -1,7 +1,7 @@
 import type { Store } from "../../../utils/Store/Store/Store";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { type FC, useCallback } from "react";
-import type { TPropInjector } from "@im/utils";
+import type { TPropInjector } from "@infomaximum/utility";
 import { observer } from "mobx-react";
 import { useMountEffect } from "../../hooks/useMountEffect";
 import { useUnmountEffect } from "../../hooks/useUnmountEffect";
@@ -12,7 +12,7 @@ import type {
   TQueryParams,
   TWithStoreParams,
 } from "./withStore.types";
-import type { Model } from "@im/models";
+import type { Model } from "@infomaximum/graphql-model";
 
 export const withStore =
   (

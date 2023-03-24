@@ -2,7 +2,7 @@ import { memo, useContext } from "react";
 import type { IEditableRowSubmitButtonProps } from "./EditableRowSubmitButton.types";
 import { EditableRowButton } from "../EditableRowButton/EditableRowButton";
 import { FormContext } from "../../../../decorators/contexts/FormContext";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { useFormButtonState } from "../../../forms/SubmitFormButton/hooks/useFormButtonState";
 import { submitFormButtonTestId } from "../../../../utils/TestIds";
 import { LoadingOutlined } from "../../../Icons/Icons";

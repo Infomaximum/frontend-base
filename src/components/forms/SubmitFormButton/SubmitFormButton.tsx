@@ -3,7 +3,7 @@ import type { SizeType } from "antd/lib/config-provider/SizeContext";
 import type { ISubmitFormButtonProps } from "./SubmitFormButton.types";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import type { TButtonType } from "../../Button/Button.types";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { Button } from "../../Button/Button";
 import { submitFormButtonTestId } from "../../../utils/TestIds";
 import { useFormButtonState } from "./hooks/useFormButtonState";

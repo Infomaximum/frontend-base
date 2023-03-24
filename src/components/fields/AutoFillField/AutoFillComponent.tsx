@@ -11,8 +11,8 @@ import type {
 import { autoFillComponentArrowIconStyle } from "./AutoFillField.styles";
 import type { DefaultOptionType } from "antd/lib/select";
 import { CloseCircleFilled, SearchOutlined } from "../../Icons/Icons";
-import type { Localization } from "@im/localization";
-import type { IModel } from "@im/models";
+import type { Localization } from "@infomaximum/localization";
+import type { IModel } from "@infomaximum/graphql-model";
 import {
   ENTER_OR_SELECT_FROM_THE_LIST,
   NOT_SELECTED,

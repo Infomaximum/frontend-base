@@ -3,7 +3,7 @@ import hoistNonReactStatics from "hoist-non-react-statics";
 import { getBreadcrumbs } from "../../../utils/Routes/routes";
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
 import { isArray } from "lodash";
-import type { TPropInjector } from "@im/utils";
+import type { TPropInjector } from "@infomaximum/utility";
 import type {
   IWithSystemTitleProps,
   IWithSystemTitleState,

@@ -1,4 +1,4 @@
-import { EUserAgents, userAgent } from "@im/utils";
+import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 

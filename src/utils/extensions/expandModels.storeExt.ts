@@ -1,8 +1,8 @@
 import { get, set, map } from "lodash";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Store } from "../Store/Store/Store";
-import { assertSimple } from "@im/asserts";
-import type { Model } from "@im/models";
+import { assertSimple } from "@infomaximum/assert";
+import type { Model } from "@infomaximum/graphql-model";
 
 export const expandModelsStoreExt =
   (itemWrapperField: string, itemsPath: string = "items"): NStore.TPrepareDataFunc<Store<Model>> =>

@@ -1,5 +1,5 @@
 import type { NavigateFunction, Location } from "react-router";
-import { assertSimple } from "@im/asserts";
+import { assertSimple } from "@infomaximum/assert";
 import { getApiPrefix, getBasePrefix } from "../../URI/URI";
 
 export class HistoryStore {

@@ -15,7 +15,7 @@ import { Input } from "../../Input/Input";
 import { NOT_SELECTED } from "../../../utils/Localization/Localization";
 import { SelectWithStore } from "../../SelectWithStore/SelectWithStore";
 import { Field, FormField } from "../FormField";
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 
 const isSameValue = (currentValue: IModel[], initialValue: IModel[]) => {
   const initialInnerNames = map(initialValue, (item) => item.getInnerName());

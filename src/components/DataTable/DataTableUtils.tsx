@@ -1,4 +1,4 @@
-import { Group, type IGroup, type IModel } from "@im/models";
+import { Group, type IGroup, type IModel } from "@infomaximum/graphql-model";
 import { forEach, map } from "lodash";
 import type { TBaseRow } from "../../managers/Tree";
 import { RestModel } from "../../models/RestModel";

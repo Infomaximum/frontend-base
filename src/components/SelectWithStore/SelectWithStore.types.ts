@@ -1,4 +1,4 @@
-import type { Group, IModel, Model } from "@im/models";
+import type { Group, IModel, Model } from "@infomaximum/graphql-model";
 import type { Store } from "../../utils/Store";
 import type { ISelectProps } from "../Select/Select.types";
 

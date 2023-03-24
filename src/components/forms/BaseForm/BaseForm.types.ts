@@ -1,8 +1,8 @@
 import type { Interpolation } from "@emotion/react";
 import type { FormProps } from "antd/lib/form/Form";
 import type { ColProps } from "antd/lib/grid";
-import type { TestIdAttr } from "@im/utils";
-import type { NCore } from "@im/core";
+import type { TestIdAttr } from "@infomaximum/utility";
+import type { NCore } from "@infomaximum/module-expander";
 
 /**
  * Типы размеров сеток

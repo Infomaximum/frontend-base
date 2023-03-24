@@ -1,8 +1,8 @@
 import { sortBy, find, reverse } from "lodash";
-import { Expander } from "@im/core";
+import { Expander } from "@infomaximum/module-expander";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Store } from "../Store/Store/Store";
-import type { Model } from "@im/models";
+import type { Model } from "@infomaximum/graphql-model";
 
 export const sortPrivilegesExt: NStore.TPrepareDataFunc<Store<Model>> = ({ data }) => {
   const { featureList, featureGroupList } = Expander.getInstance().getFeaturesConfig();

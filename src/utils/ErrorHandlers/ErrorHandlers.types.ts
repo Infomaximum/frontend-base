@@ -1,4 +1,4 @@
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 
 export declare namespace NErrorHandlers {
   /** Интерфейс для инстансов обработки ошибок */

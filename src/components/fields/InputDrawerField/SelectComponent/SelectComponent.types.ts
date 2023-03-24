@@ -1,4 +1,4 @@
-import type { IModel } from "@im/models";
+import type { IModel } from "@infomaximum/graphql-model";
 import type { SelectProps } from "antd";
 import type React from "react";
 import type { IWithLocProps } from "../../../../decorators/hocs/withLoc/withLoc";

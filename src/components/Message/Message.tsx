@@ -45,9 +45,9 @@ import {
 } from "../../utils/TestIds";
 import MessageBody from "./MessageBody";
 import { ThemeContext } from "@emotion/react";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 import { theme } from "../../styles/theme";
-import { Localization, type TLocalizationDescription } from "@im/localization";
+import { Localization, type TLocalizationDescription } from "@infomaximum/localization";
 
 const duration = 4000;
 

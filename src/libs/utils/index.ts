@@ -1,1 +1,1 @@
-export * from "@im/utils";
+export * from "@infomaximum/utility";

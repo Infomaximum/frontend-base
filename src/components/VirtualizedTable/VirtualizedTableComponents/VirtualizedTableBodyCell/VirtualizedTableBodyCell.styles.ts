@@ -1,6 +1,6 @@
 import { tableBodyCellStyle } from "../../../Table/TableComponents/TableBodyCell/TableBodyCell.styles";
 import type { ReactText } from "react";
-import { EUserAgents, userAgent } from "@im/utils";
+import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 

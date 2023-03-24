@@ -1,6 +1,6 @@
 import { compact, isEmpty, size } from "lodash";
 import moment from "moment";
-import { TestIdsUtils } from "@im/utils";
+import { TestIdsUtils } from "@infomaximum/utility";
 import type { TTimeInputsRangeValue } from "./TimeInputsRangeField.types";
 
 export const customRangeValueValidator = (values: TTimeInputsRangeValue) => {

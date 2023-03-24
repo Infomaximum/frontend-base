@@ -1,5 +1,5 @@
 import type { IDropdownProps } from "../../components/Dropdown/Dropdown.types";
-import type { EOperationType } from "@im/utils";
+import type { EOperationType } from "@infomaximum/utility";
 import type { Interpolation } from "@emotion/react";
 import type { SubMenuProps } from "antd/lib/menu/SubMenu";
 import type { MenuProps } from "antd";

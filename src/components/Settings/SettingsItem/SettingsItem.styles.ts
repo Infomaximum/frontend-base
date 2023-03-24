@@ -1,5 +1,5 @@
 import type { Interpolation } from "@emotion/react";
-import type { NCore } from "@im/core";
+import type { NCore } from "@infomaximum/module-expander";
 
 export const titleStyle: Interpolation<TTheme> = (theme) => ({
   fontSize: theme.h5FontSize,

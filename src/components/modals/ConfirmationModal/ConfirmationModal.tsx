@@ -2,7 +2,7 @@ import { useState, type FC, useMemo, useCallback, useRef, useEffect } from "reac
 import { Button } from "../../Button/Button";
 import { Modal } from "../../modals/Modal/Modal";
 import { APPLY, CANCEL, DO_NOT_SAVE } from "../../../utils/Localization/Localization";
-import type { TLocalizationDescription } from "@im/localization";
+import type { TLocalizationDescription } from "@infomaximum/localization";
 import {
   bodyModalStyle,
   bodyStyle,
