@@ -29,6 +29,7 @@ import {
   useBlurOnResize,
   useRemoveFocusedClass,
   useSelectDropdownPosition,
+  useCustomClearing,
 } from "./Select.utils";
 import { filter, first, isArray, isEmpty, isFunction, isUndefined, noop } from "lodash";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
@@ -207,6 +208,8 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     [onDropdownVisibleChange]
   );
 
+  useCustomClearing(fieldWrapperRef.current, handleDropdownVisibleChange, handleChange, !!mode);
+
   const handleMouseDown = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
@@ -329,7 +332,6 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         listItemHeight={listItemHeight}
         optionLabelProp={getOptionLabelProp()}
         options={options}
-        autoFocus={false} // т.к. на фокус раскрывается dropdown
         filterOption={filterOption}
       />
     </div>
