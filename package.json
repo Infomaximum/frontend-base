@@ -5,10 +5,6 @@
   "author": "IM FrontEnd Team",
   "module": "index.js",
   "types": "index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://git.office.infomaximum.com/frontend/base-pkg"
-  },
   "resolutions": {
     "@types/react": "18.0.15"
   },
@@ -114,8 +110,5 @@
   },
   "jira-prepare-commit-msg": {
     "messagePattern": "$M\n[$J]"
-  },
-  "publishConfig": {
-    "registry": "https://npm.office.infomaximum.com/repository/npm-hosted"
   }
 }
