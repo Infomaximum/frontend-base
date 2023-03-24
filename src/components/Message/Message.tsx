@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { message } from "antd";
 import {
   isString,
@@ -47,7 +47,7 @@ import MessageBody from "./MessageBody";
 import { ThemeContext } from "@emotion/react";
 import type { NCore } from "@im/core";
 import { theme } from "../../styles/theme";
-import { Localization, TLocalizationDescription } from "@im/localization";
+import { Localization, type TLocalizationDescription } from "@im/localization";
 
 const duration = 4000;
 

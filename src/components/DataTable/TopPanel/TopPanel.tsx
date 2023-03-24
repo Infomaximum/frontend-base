@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from "react";
+import React, { type FC, useCallback, useMemo } from "react";
 import { Layout, Row, Col } from "antd";
 import { SEARCH, SELECTED } from "../../../utils/Localization/Localization";
 import { headerStyle, rightButtonsColStyle } from "./TopPanel.styles";

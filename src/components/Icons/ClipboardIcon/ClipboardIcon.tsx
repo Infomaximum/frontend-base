@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from "react";
+import { type FC, memo, useCallback } from "react";
 import { CopyOutlined } from "../Icons";
 import type { IClipboardIconProps } from "./ClipboardIcon.types";
 import { iconStyle, tooltipStyle } from "./ClipboardIcon.styles";

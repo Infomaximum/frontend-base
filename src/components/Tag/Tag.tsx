@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { type FC, useMemo } from "react";
 import type { ITagProps } from "./Tag.types";
 // eslint-disable-next-line im/ban-import-entity
 import { Tag as AntTag } from "antd";

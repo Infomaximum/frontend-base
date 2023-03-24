@@ -1,4 +1,4 @@
-import { FC, FocusEvent, useCallback, useMemo, useState } from "react";
+import { type FC, type FocusEvent, useCallback, useMemo, useState } from "react";
 import type { ISelectWithStoreProps, THandlerDisplayValues } from "./SelectWithStore.types";
 import { compact, every, isArray, isFunction, isNull, isString, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";

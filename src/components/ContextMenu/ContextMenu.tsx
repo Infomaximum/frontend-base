@@ -11,11 +11,11 @@ import {
 } from "./ContextMenu.styles";
 import {
   ESortingMethodsNames,
-  IContextMenuDivider,
-  IContextSubMenuParam,
-  TContextMenuParamItem,
-  IContextMenuProps,
-  TSortingMethodsList,
+  type IContextMenuDivider,
+  type IContextSubMenuParam,
+  type TContextMenuParamItem,
+  type IContextMenuProps,
+  type TSortingMethodsList,
 } from "./ContextMenu.types";
 import { map, isEmpty, forEach, isFunction } from "lodash";
 import {

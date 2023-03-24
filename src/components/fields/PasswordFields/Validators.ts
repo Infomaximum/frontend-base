@@ -1,4 +1,4 @@
-import { notEmptyMemoize, TFieldValidatorSelector, TValidationError } from "@im/utils";
+import { notEmptyMemoize, type TFieldValidatorSelector, type TValidationError } from "@im/utils";
 import { createSelector } from "reselect";
 import {
   PASSWORDS_MUST_BE_EQUAL,

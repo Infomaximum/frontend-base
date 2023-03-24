@@ -1,5 +1,5 @@
 import { EHttpCodes } from "@im/utils";
-import { Expander, NCore, showGlobalErrorModal } from "@im/core";
+import { Expander, type NCore, showGlobalErrorModal } from "@im/core";
 import { filter, find, get, isArray, isMatch, isPlainObject } from "lodash";
 import { EErrorCode, PARAMETERS_FIELD_NAME, rootDomNodeName } from "../../const";
 import type { NErrorHandlers } from "../ErrorHandlers.types";

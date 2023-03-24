@@ -7,11 +7,11 @@ import { DataTableHeader, headerModes } from "./DataTableHeader/DataTableHeader"
 import { getColumnsWithShowMore } from "./DataTableUtils";
 import type { TableRowSelection } from "antd/lib/table/interface";
 import { observer } from "mobx-react";
-import { IReactionDisposer, reaction } from "mobx";
-import { TBaseRow, TExtendColumns, TreeManager } from "../../managers/Tree";
+import { type IReactionDisposer, reaction } from "mobx";
+import { type TBaseRow, type TExtendColumns, TreeManager } from "../../managers/Tree";
 import { goBackPath } from "../../utils/Routes/paths";
 import { getBasePrefix } from "../../utils/URI/URI";
-import { Group, IModel } from "@im/models";
+import { Group, type IModel } from "@im/models";
 import { RestModel } from "../../models/RestModel";
 import { isShowElement } from "../../utils/access";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";

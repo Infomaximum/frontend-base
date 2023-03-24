@@ -1,6 +1,6 @@
 import type { Store } from "../../../utils/Store/Store/Store";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import { FC, useCallback } from "react";
+import { type FC, useCallback } from "react";
 import type { TPropInjector } from "@im/utils";
 import { observer } from "mobx-react";
 import { useMountEffect } from "../../hooks/useMountEffect";

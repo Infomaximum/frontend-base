@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
+import { type ChangeEvent, type FC, useCallback, useMemo, useState } from "react";
 import { Space } from "antd";
 import type {
   ITimeInputsRangeFieldProps,
@@ -6,14 +6,14 @@ import type {
   ITimeInputsRangeProps,
 } from "./TimeInputsRangeField.types";
 import { eq, isNil, map } from "lodash";
-import moment, { Duration, isDuration } from "moment";
+import moment, { type Duration, isDuration } from "moment";
 import {
   dashStyle,
   timeInputStyle,
   timeInputWithSecondsStyle,
 } from "./TimeInputsRangeField.styles";
 import { timeInputsRangeTestId } from "../../../utils/TestIds";
-import { formatEnteredTime, TDurationDescription } from "@im/utils";
+import { formatEnteredTime, type TDurationDescription } from "@im/utils";
 import { Input } from "../../Input";
 import { Field, FormField } from "../FormField";
 

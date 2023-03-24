@@ -1,4 +1,4 @@
-import { RefObject, useMemo } from "react";
+import { type RefObject, useMemo } from "react";
 import type { IEditableRowProps, IFormComponentProps } from "./EditableRow.types";
 import { tableRowHeight } from "./EditableRow.styles";
 import { EditableRowContext } from "../../../decorators/contexts/EditableRowContext";

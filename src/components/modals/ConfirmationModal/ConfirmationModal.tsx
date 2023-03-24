@@ -1,4 +1,4 @@
-import { useState, FC, useMemo, useCallback, useRef, useEffect } from "react";
+import { useState, type FC, useMemo, useCallback, useRef, useEffect } from "react";
 import { Button } from "../../Button/Button";
 import { Modal } from "../../modals/Modal/Modal";
 import { APPLY, CANCEL, DO_NOT_SAVE } from "../../../utils/Localization/Localization";

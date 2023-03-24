@@ -1,5 +1,5 @@
 import { assertSimple } from "@im/asserts";
-import { IModel, IModelParams, Model } from "@im/models";
+import { type IModel, type IModelParams, Model } from "@im/models";
 
 import { typenameToModel } from "./typenameToModel";
 

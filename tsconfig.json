@@ -1,5 +1,5 @@
 {
-  "extends": "@im/configs/tsconfig.lib.json",
+  "extends": "@infomaximum/config/tsconfig.lib.json",
   "compilerOptions": {
     "outDir": "dist",
     "noEmit": false,

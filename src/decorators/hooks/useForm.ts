@@ -16,7 +16,7 @@ export const useForm = <TFormValues extends TDictionary = TDictionary>(
     hasExecuteAccess: true,
   });
 
-  const subscriberCB = useRef(subscriber as FormSubscriber<TDictionary>);
+  const subscriberCB = useRef(subscriber);
   const subscriptionParams = useRef(subscription);
 
   useEffect(() => {

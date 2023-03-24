@@ -1,7 +1,14 @@
 // eslint-disable-next-line im/ban-import-entity
 import { Input as AntInput } from "antd";
 import type { TextAreaRef } from "antd/lib/input/TextArea";
-import { FC, ForwardRefExoticComponent, Ref, RefAttributes, useMemo, forwardRef } from "react";
+import {
+  type FC,
+  type ForwardRefExoticComponent,
+  type Ref,
+  type RefAttributes,
+  useMemo,
+  forwardRef,
+} from "react";
 import {
   defaultInputStyle,
   disabledInputStyle,

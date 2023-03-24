@@ -3,7 +3,7 @@ import {
   ErrorModalContext,
   type IErrorModalContextContextData,
 } from "../../decorators/contexts/ErrorModalContext";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { type FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { handleErrorInternal } from "../Errors/Errors";
 import { ModalAnimationInterval } from "../../utils/const";

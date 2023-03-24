@@ -1,5 +1,5 @@
 import { VIRTUALIZED_TABLE_BODY_ID } from "../../../../utils/const";
-import React, { FC, useEffect } from "react";
+import React, { type FC, useEffect } from "react";
 import { AutoSizer, List as VList } from "react-virtualized";
 import { ScrollBehavior } from "../../../../utils/ScrollBehavior/ScrollBehavior";
 import { observer } from "mobx-react";

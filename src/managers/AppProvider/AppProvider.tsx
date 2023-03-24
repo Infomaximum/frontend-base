@@ -1,7 +1,7 @@
 import { Global } from "@emotion/react";
 import { ELanguages, Localization } from "@im/localization";
 import moment from "moment";
-import { FC, useEffect, useMemo } from "react";
+import { type FC, useEffect, useMemo } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
 import { FeatureContext } from "../../decorators/contexts/FeatureContext";

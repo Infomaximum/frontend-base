@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useRef } from "react";
+import { type DependencyList, useEffect, useRef } from "react";
 
 type TEffect<V> = (isActive: () => boolean) => V | Promise<V>;
 type TDestroy<V> = (result?: V) => void;

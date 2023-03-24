@@ -39,7 +39,7 @@ import type { ISelectComponentProps, ISelectState } from "./SelectComponent.type
 import { observer } from "mobx-react";
 import { reaction } from "mobx";
 import type { RawValueType } from "rc-tree-select/lib/TreeSelect";
-import { Group, IModel } from "@im/models";
+import { Group, type IModel } from "@im/models";
 import { CloseCircleFilled } from "../../../Icons/Icons";
 import type { Localization } from "@im/localization";
 import { Tooltip } from "../../../Tooltip/Tooltip";

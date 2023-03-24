@@ -2,7 +2,7 @@ import { Alert } from "../Alert/Alert";
 import { notificationErrorTestId } from "../../utils/TestIds";
 import type { INotificationProps } from "./Notification.types";
 import { observer } from "mobx-react";
-import { FC, useContext } from "react";
+import { type FC, useContext } from "react";
 import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
 
 const NotificationComponent: FC<INotificationProps> = ({ error }) => {

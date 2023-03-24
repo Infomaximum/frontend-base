@@ -1,6 +1,6 @@
 import type { DropdownProps } from "antd";
 import { constant, isFunction, last, lowerFirst, mapValues, words } from "lodash";
-import React, { RefObject, useCallback, useState } from "react";
+import React, { type RefObject, useCallback, useState } from "react";
 import type { IDropdownParams, IDropdownProps, IFreeSpace, TXPlacement } from "./Dropdown.types";
 
 export const defaultTrigger = ["click"] as ["click"];

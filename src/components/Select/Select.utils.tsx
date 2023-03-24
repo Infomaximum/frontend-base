@@ -1,4 +1,10 @@
-import React, { ReactElement, ReactNode, RefObject, useCallback, useEffect } from "react";
+import React, {
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
+  useCallback,
+  useEffect,
+} from "react";
 import { Select } from "./Select";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { find, has, isArray, isEmpty, isNil, isNumber, isString, map } from "lodash";

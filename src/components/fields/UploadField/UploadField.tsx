@@ -1,4 +1,4 @@
-import React, { createRef, HTMLAttributes, FC } from "react";
+import React, { createRef, type HTMLAttributes, type FC } from "react";
 import { Upload } from "antd";
 import type { UploadChangeParam } from "antd/lib/upload";
 import type {

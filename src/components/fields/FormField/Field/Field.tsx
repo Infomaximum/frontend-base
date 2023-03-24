@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo } from "react";
-import { Field as FinalFormField, FieldRenderProps } from "react-final-form";
+import { Field as FinalFormField, type FieldRenderProps } from "react-final-form";
 import type { IFieldProps, IWrappedFieldProps } from "./Field.types";
 import { isArray, isEqual, isFunction } from "lodash";
 import { alternatelyValidators, getAccessParameters } from "@im/utils";

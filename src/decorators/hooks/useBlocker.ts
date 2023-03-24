@@ -1,7 +1,7 @@
 import type { Blocker, History, Transition } from "history";
-import { ContextType, useContext, useEffect } from "react";
+import { type ContextType, useContext, useEffect } from "react";
 import {
-  Navigator as BaseNavigator,
+  type Navigator as BaseNavigator,
   UNSAFE_NavigationContext as NavigationContext,
 } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import { cloneElement, FC, isValidElement, memo, useMemo } from "react";
+import { cloneElement, type FC, isValidElement, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ellipsisStyle, tableLinkStyle } from "./TableLink.styles";
 import type { ITableLinkProps } from "./TableLink.types";

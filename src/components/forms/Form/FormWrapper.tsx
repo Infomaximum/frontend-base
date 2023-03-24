@@ -1,11 +1,11 @@
-import { Form as RFForm, FormProps } from "react-final-form";
+import { Form as RFForm, type FormProps } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import type { Mutator } from "final-form";
 import type { NCore } from "@im/core";
 import { useFeature } from "../../../decorators/hooks/useFeature";
 import { withFormSubmitPromise } from "../../../decorators";
 import type { IFormWrapperProps, TWrappedError } from "./FormWrapper.types";
-import { ComponentPropsWithoutRef, FC, PropsWithChildren, useMemo } from "react";
+import { type ComponentPropsWithoutRef, type FC, type PropsWithChildren, useMemo } from "react";
 import { forEach } from "lodash";
 import { FormComponent } from "./Form";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";

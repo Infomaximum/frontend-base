@@ -1,4 +1,4 @@
-import { useCallback, FC } from "react";
+import { useCallback, type FC } from "react";
 import { DatePicker as AntDatePicker } from "antd";
 import type {
   IDatePickerFieldProps,
@@ -6,7 +6,7 @@ import type {
   IDatePickerProps,
 } from "./DatePickerField.types";
 import { datePickerFieldStyle } from "./DatePickerField.styles";
-import moment, { Moment } from "moment";
+import moment, { type Moment } from "moment";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useClearElementFromAttribute } from "../../../decorators/hooks/useClearElementFromAttribute";
 import { globalScrollBehavior } from "../../../utils/ScrollBehavior/ScrollBehavior";

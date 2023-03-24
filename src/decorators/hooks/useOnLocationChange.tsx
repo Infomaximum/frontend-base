@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Location, useLocation } from "react-router";
+import { type Location, useLocation } from "react-router";
 
 type TLocationChangeHandler = (location: Location) => void;
 

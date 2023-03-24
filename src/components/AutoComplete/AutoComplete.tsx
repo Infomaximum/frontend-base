@@ -1,7 +1,7 @@
 import { AutoComplete as AntAutoComplete, Spin } from "antd";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { isFunction, noop } from "lodash";
-import { FC, useCallback, useMemo, useRef } from "react";
+import { type FC, useCallback, useMemo, useRef } from "react";
 import type { IAutoCompleteProps } from "./AutoComplete.types";
 import { useSelectDropdownPosition } from "../../components/Select/Select.utils";
 import { suffixIconSpinnerStyle } from "./AutoComplete.styles";

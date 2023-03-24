@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from "react";
+import React, { type FC, memo, useCallback } from "react";
 import { isEmpty, isFunction, isNil, map, xor } from "lodash";
 import {
   defaultSelectFieldStyle,

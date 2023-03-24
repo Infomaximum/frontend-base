@@ -8,7 +8,7 @@ import {
   virtualizedTableCheckboxCellStyle,
 } from "./VirtualizedTableBodyRow.styles";
 import type { IVirtualizedTableBodyRowProps } from "./VirtualizedTableBodyRow.types";
-import { MouseEvent, useCallback } from "react";
+import { type MouseEvent, useCallback } from "react";
 import { Radio } from "../../../Radio/Radio";
 import { Checkbox } from "../../../Checkbox/Checkbox";
 import { map } from "lodash";

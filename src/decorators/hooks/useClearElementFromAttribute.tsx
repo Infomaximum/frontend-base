@@ -1,4 +1,4 @@
-import { HTMLAttributes, useEffect, useRef } from "react";
+import { type HTMLAttributes, useEffect, useRef } from "react";
 
 type TParamsType<T extends HTMLElement> = {
   selector: string;

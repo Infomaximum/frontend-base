@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMountEffect } from "../../decorators/hooks/useMountEffect";
 import { useWillMountEffect } from "../../decorators/hooks/useWillMountEffect";

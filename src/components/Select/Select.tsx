@@ -2,7 +2,7 @@
 import { Select as AntSelect, Spin } from "antd";
 import type { SelectValue } from "antd/lib/select";
 import { CheckOutlined, CloseCircleOutlined, CloseOutlined } from "../Icons/Icons";
-import React, { MouseEvent, useState, useCallback, useMemo, useRef, useEffect } from "react";
+import React, { type MouseEvent, useState, useCallback, useMemo, useRef, useEffect } from "react";
 import {
   closeIconStyle,
   arrowSuffixIconStyle,

@@ -1,5 +1,5 @@
 import type { Localization } from "@im/localization";
-import type { IModel } from "@im/models";
+import type { IModel, Model } from "@im/models";
 import type { GraphQlQuery, TFeatureEnabledChecker } from "@im/utils";
 import { assignIn, isNil, isFunction } from "lodash";
 import type { IColumnProps } from "../../VirtualizedTable/VirtualizedTable.types";
@@ -9,6 +9,7 @@ import type {
   TQueryExtension,
   TRowExt,
 } from "./DataTableExtension.types";
+import type { Store } from "../../../utils";
 
 class DataTableExtension implements IDataTableExtension {
   private columnConfigExtension: Set<TRowExt> = new Set();
@@ -67,7 +68,7 @@ class DataTableExtension implements IDataTableExtension {
     });
   }
 
-  public extendQueryVariable(variables: TDictionary, queryParams: { store: unknown }): void {
+  public extendQueryVariable(variables: TDictionary, queryParams: { store: Store<Model> }): void {
     this.queryVariableExtensions.forEach((extension) => {
       if (isFunction(extension)) {
         extension(variables, queryParams);

@@ -1,4 +1,4 @@
-import React, { useMemo, FC } from "react";
+import React, { useMemo, type FC } from "react";
 // eslint-disable-next-line im/ban-import-entity
 import { Tooltip as AntTooltip } from "antd";
 import type { ITooltipProps } from "./Tooltip.types";

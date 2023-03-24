@@ -1,4 +1,4 @@
-import { FC, useContext, useMemo } from "react";
+import { type FC, useContext, useMemo } from "react";
 import type { IFormOptionProps } from "./FormOption.types";
 import {
   formOptionLabelStyle,

@@ -1,4 +1,4 @@
-import { memo, useMemo, FC } from "react";
+import { memo, useMemo, type FC } from "react";
 import type { IAddButtonProps } from "./AddButton.types";
 import { Button } from "../../components/Button/Button";
 import { useLocalization } from "../../decorators/hooks/useLocalization";

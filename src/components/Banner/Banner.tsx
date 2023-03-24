@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, FC } from "react";
+import { useCallback, useMemo, useState, type FC } from "react";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { Checkbox } from "../Checkbox/Checkbox";
 import type { IBannerProps } from "./Banner.types";
