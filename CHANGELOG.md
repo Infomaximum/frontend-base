@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://git.office.infomaximum.com:10122/frontend/base-pkg/compare/v2.3.0...v2.4.0) (2023-03-24)
+
+
+### Features
+
+* вынес локализацию ([2e255b0](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/2e255b01ce006e3ea5b747ca894b1d1f3693ae52))
+* добавил аргументы в прокидываемые функции ([e96244b](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/e96244b2114fe08b121ea68705bc90c4a61e5e8c))
+* добавил возможность изменять label ([2b527a8](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/2b527a81d90ab09cc72ceca6569afeb8898465fe))
+* добавил возможность отключать тултип в значениях селекта ([07e229d](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/07e229d0906cae2ffd960d9aeb4a8557a40954cc))
+* добавил возможность очищать стор при изменении значения и делать запрос если стор пустой ([55f45ae](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/55f45aeb361b5c5d7f6ec4bcd972ecbe83bb6a5d))
+* добавил возможность прокидывать переменные запроса и отключать запрос при монтировании компонента ([f22c15d](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/f22c15d4d0680efa1f93b25cee63d9cb7dbab8a6))
+* добавил вызов функции при изменение в поле селекта ([d56d1cb](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/d56d1cbc5ebf5ea415b6592b5426d3b030338d91))
+* добавил иконку импорта ([004da3b](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/004da3b1096db9d18c594682dbe800d839dbac38))
+* добавлена возможность выводить контент рядом с кнопкой добавления полей ([260f011](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/260f01177e83cf82cc0ae700e579d2f39fbeeabd))
+* изменил очистку стора ([a8a9b02](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/a8a9b023f01012d3463f3da48f0ee92d2034d7b7))
+* поддержал флаг open вместо visible antd ([efb8ed6](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/efb8ed6beeeea24abd4a99a7c87ce8c878678942))
+
+
+### Bug Fixes
+
+* Исправил автофокус полей в модальных окнах ([f3a612f](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/f3a612fb3e7b46021cd220c2e7cff1ea98db5569))
+* Исправлено поведение Select после обновления antd ([27305b0](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/27305b0e0ec17dae6de13878f1d8033049686fa4))
+* отменил выделение аватара и меню (и его подменю) ([b191892](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/b191892ef9e15dd6c260c35d04facb3e67d599be))
+* перенес типы из utils ([bef8a41](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/bef8a41505425b34fd4ed0ac221958d4c1e512b7))
+* Убран запрет задавать автофокус селекту ([0aa47a8](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/0aa47a87c146e50d318ccc790492196e47a2c7ee))
+* удалил информацию о npm ([bddff95](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/bddff95ab9a2722029707e372eb8a2a196ca8af1))
+* удалил локальные данные для npm ([23b3c52](https://git.office.infomaximum.com:10122/frontend/base-pkg/commit/23b3c52f50dd0e587d8c0b9abf9b25ca4d89432f))
+
 ## [2.3.0](https://git.office.infomaximum.com/frontend/base-pkg/compare/v2.2.0...v2.3.0) (2023-03-16)
 
 
