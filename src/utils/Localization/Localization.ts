@@ -390,3 +390,8 @@ export const EMPTY_STRING = {
   ru: "Пустая строка",
   en: "Empty string",
 };
+
+export const COPY = {
+  ru: "Копировать",
+  en: "Copy",
+};
