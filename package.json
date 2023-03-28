@@ -3,6 +3,7 @@
   "version": "2.4.1",
   "license": "Apache-2.0",
   "author": "IM FrontEnd Team",
+  "main": "src/index.ts",
   "module": "index.js",
   "types": "index.d.ts",
   "resolutions": {
@@ -110,5 +111,18 @@
   },
   "jira-prepare-commit-msg": {
     "messagePattern": "$M\n[$J]"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Infomaximum/frontend-base.git"
+  },
+  "keywords": [
+    "base",
+    "react",
+    "frontend"
+  ],
+  "bugs": {
+    "url": "https://github.com/Infomaximum/frontend-base/issues"
+  },
+  "homepage": "https://github.com/Infomaximum/frontend-base#readme"
 }
