@@ -1,0 +1,1 @@
+export { withSystemTitle } from "./withSystemTitle";

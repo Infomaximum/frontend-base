@@ -1,0 +1,14 @@
+{
+  "extends": "@infomaximum/config/tsconfig.lib.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noEmit": false,
+    "jsx": "preserve",
+    "declaration": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
+    "declarationDir": "dist"
+  },
+  "exclude": ["/node_modules/", "**/node_modules", "**/.*/", "./dist"],
+  "include": ["src"]
+}

@@ -1,0 +1,1 @@
+export { withModalError } from "./withModalError";
