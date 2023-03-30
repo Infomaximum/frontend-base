@@ -29,6 +29,7 @@ export type THeaderButtonObject = {
 type TTableProps<T> = Omit<ITableOwnProps<T>, "localization" | "isSearchEmpty">;
 
 export interface IDataTableOwnProps<T> extends TTableProps<T> {
+  customDataSource?: TExtendColumns<T>[];
   columns: IColumnProps<TExtendColumns<T>>[] | undefined;
   contextMenuGetter?(model?: IModel): TContextMenuItem[] | undefined;
   onContextMenuSelect?(action: string, record: TExtendColumns<T>): void;

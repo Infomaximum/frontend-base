@@ -7,7 +7,6 @@ import {
   cardStyle,
   cardLeftPadding,
   getCardRightPadding,
-  cardWithContextMenuStyle,
   pointerCardStyle,
   focusStyle,
 } from "./ApplicationCard.styles";
@@ -20,6 +19,10 @@ import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { Link } from "react-router-dom";
 import type { Interpolation } from "@emotion/react";
 import { useTheme } from "../../decorators";
+import type { TOnItemClickParam } from "../ContextMenu/ContextMenu.types";
+import type { DropdownProps } from "antd/lib/dropdown";
+
+const trigger: DropdownProps["trigger"] = ["contextMenu"];
 
 const ApplicationCardComponent = forwardRef<
   HTMLAnchorElement | HTMLDivElement,
@@ -65,78 +68,81 @@ const ApplicationCardComponent = forwardRef<
 
     const hasContextMenu = !isEmpty(contextMenuItems);
 
-    const handleBlur = useCallback(() => {
-      setContextMenuInFocus(false);
-    }, []);
-
-    const handleFocus = useCallback(() => {
-      setContextMenuInFocus(true);
-    }, []);
-
-    const contextMenu = useMemo(() => {
-      if (hasContextMenu) {
-        return (
-          <div css={contextMenuStyle(theme)} onBlur={handleBlur} onFocus={handleFocus}>
-            <ContextMenu content={contextMenuItems} placement="bottomRight" />
-          </div>
-        );
-      }
-    }, [hasContextMenu, handleBlur, handleFocus, contextMenuItems, theme]);
-
     const cardStyles = useMemo(() => {
       const styles: Interpolation<TTheme> = [cardStyle(theme)];
 
       if (onClick || pathname) {
         styles.push(pointerCardStyle);
       }
-
-      if (hasContextMenu) {
-        styles.push(cardWithContextMenuStyle);
-      }
-
       if (contextMenuInFocus) {
         styles.push(focusStyle(theme));
       }
 
       return styles;
-    }, [contextMenuInFocus, hasContextMenu, onClick, pathname, theme]);
+    }, [contextMenuInFocus, onClick, pathname, theme]);
 
     const tagsMeasuredWidth =
       measuredWidth - (cardLeftPadding + getCardRightPadding(hasContextMenu));
 
-    const content = (
-      <div css={contentStyle}>
-        <div css={titleStyle(theme)}>{entity.getName()}</div>
-        <InlineTags tags={entity.tags} measuredWidth={tagsMeasuredWidth} />
-      </div>
-    );
+    const cardWrapper = useMemo(() => {
+      const content = (
+        <div css={contentStyle}>
+          <div css={titleStyle(theme)}>{entity.getName()}</div>
+          <InlineTags tags={entity.tags} measuredWidth={tagsMeasuredWidth} />
+        </div>
+      );
 
-    if (pathname) {
+      if (pathname) {
+        return (
+          <Link
+            to={pathname}
+            css={cardStyles}
+            onClick={onClick && handleClick}
+            ref={ref as ForwardedRef<HTMLAnchorElement>}
+            test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
+          >
+            {content}
+          </Link>
+        );
+      } else {
+        return (
+          <div
+            css={cardStyles}
+            onClick={onClick && handleClick}
+            ref={ref as ForwardedRef<HTMLDivElement>}
+            test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
+          >
+            {content}
+          </div>
+        );
+      }
+    }, [cardStyles, entity, handleClick, onClick, pathname, ref, tagsMeasuredWidth, theme]);
+
+    const handleOpenChange = useCallback((isOpen: boolean) => {
+      setContextMenuInFocus(isOpen);
+    }, []);
+
+    const onItemClick = useCallback(({ item, param }: TOnItemClickParam) => {
+      setContextMenuInFocus(false);
+      param.domEvent.stopPropagation();
+      item.clickHandler();
+    }, []);
+
+    if (hasContextMenu) {
       return (
-        <Link
-          to={pathname}
-          css={cardStyles}
-          onClick={onClick && handleClick}
-          ref={ref as ForwardedRef<HTMLAnchorElement>}
-          test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
+        <ContextMenu
+          trigger={trigger}
+          onOpenChange={handleOpenChange}
+          content={contextMenuItems}
+          onItemClick={onItemClick}
+          css={contextMenuStyle}
         >
-          {content}
-          {contextMenu}
-        </Link>
+          {cardWrapper}
+        </ContextMenu>
       );
     }
 
-    return (
-      <div
-        css={cardStyles}
-        onClick={onClick && handleClick}
-        ref={ref as ForwardedRef<HTMLDivElement>}
-        test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
-      >
-        {content}
-        {contextMenu}
-      </div>
-    );
+    return cardWrapper;
   }
 );
 

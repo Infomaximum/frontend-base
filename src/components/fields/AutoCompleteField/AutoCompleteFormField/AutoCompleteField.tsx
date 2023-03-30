@@ -7,7 +7,7 @@ import type {
   IAutoCompleteFieldProps,
   TAutoCompleteFieldValue,
 } from "./AutoCompleteField.types";
-import { isFunction, map, forEach, some, isEqual, every } from "lodash";
+import { isFunction, map, forEach, some, every, isEmpty, xorBy } from "lodash";
 import { wrapperAutocompleteStyle } from "./AutoCompleteField.styles";
 import type { IModel } from "@infomaximum/graphql-model";
 import { withFeature } from "../../../../decorators/hocs/withFeature/withFeature";
@@ -17,6 +17,10 @@ import type { ICommonTableCellProps } from "../../TableCellField/TableCellField.
 import { TableCellField } from "../../TableCellField/TableCellField";
 import { headerModes } from "../../../DataTable/DataTableHeader/DataTableHeader";
 import { DataTableDrawer } from "../../../drawers/DataTableDrawer/DataTableDrawer";
+
+const isSameValue = (a: TAutoCompleteFieldValue, b: TAutoCompleteFieldValue) => {
+  return isEmpty(xorBy(a, b, (item) => item.getInnerName()));
+};
 
 class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoCompleteState> {
   public static defaultProps: Partial<IAutoCompleteProps> = {
@@ -221,7 +225,7 @@ const AutoCompleteWithFeature = withFeature(
 ) as React.ComponentType<IAutoCompleteProps>;
 
 const AutoCompleteField: React.FC<IAutoCompleteFieldProps> = (props) => (
-  <Field component={AutoCompleteWithFeature} isEqual={isEqual} {...props} />
+  <Field component={AutoCompleteWithFeature} isEqual={isSameValue} {...props} />
 );
 
 const AutoCompleteFormField: React.FC<IAutoCompleteFormFieldProps> = (props) => (

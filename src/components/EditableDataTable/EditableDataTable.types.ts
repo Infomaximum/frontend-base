@@ -2,7 +2,7 @@ import type { IDataTableOwnProps, IDataTableProps } from "../DataTable/DataTable
 import type { TAccess } from "@infomaximum/utility";
 import type { MutableRefObject } from "react";
 import type { EditableDataTableKeys } from "./EditableDataTable";
-import type { EAddingRowMethod, TBaseRow } from "../../managers/Tree";
+import type { EAddingRowMethod, TBaseRow, TExtendColumns } from "../../managers/Tree";
 import type { IFormWrapperProps } from "../forms/Form/FormWrapper.types";
 import type { IWithModalErrorProps } from "../../decorators/hocs/withModalError/withModalError.types";
 import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
@@ -21,6 +21,7 @@ export interface IEditableDataTableProvider {
 }
 
 export interface IEditableDataTableOwnProps<T> extends Omit<IDataTableOwnProps<T>, "addRows"> {
+  customDataSource?: TExtendColumns<T>[];
   /**
    * Ключ, задающий уникальность таблице, чтобы не возникало конфликтов в именах форм.
    */

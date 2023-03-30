@@ -239,6 +239,8 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
         css: isSorting ? sortingRowStyle : isClickable ? clickableRowStyle : undefined,
         onClick: isClickable ? this.getRowClickHandler(record) : null,
         formProps: this.isRowEditing(key) ? this.getFormProps(record) : null,
+        editingState: this.state,
+        record,
       };
     }
   };

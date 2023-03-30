@@ -8,9 +8,9 @@ export const cardStyle = (theme: TTheme) =>
     cursor: "default",
     position: "relative",
     width: `100%`,
-    height: "86px",
+    height: "76px",
     borderRadius: "2px",
-    padding: `5px 7px 7px ${cardLeftPadding}px`,
+    padding: `6px 7px 4px ${cardLeftPadding}px`,
     border: `1px solid ${theme.grey1Color}`,
     background: theme.grey1Color,
     transition: "300ms",
@@ -25,24 +25,9 @@ export const pointerCardStyle = {
   cursor: "pointer",
 };
 
-export const cardWithContextMenuStyle = {
-  padding: `5px 7px 7px ${cardLeftPadding}px`,
-};
-
-export const contextMenuStyle = (theme: TTheme) =>
-  ({
-    position: "absolute",
-    right: "0",
-    top: "0",
-    button: {
-      width: "24px",
-      height: "24px",
-      backgroundColor: theme.grey1Color,
-      ":hover": {
-        backgroundColor: theme.grey3Color,
-      },
-    },
-  } as const);
+export const contextMenuStyle = {
+  width: "100%",
+} as const;
 
 export const contentStyle = {
   height: "100%",
@@ -72,6 +57,6 @@ export const titleStyle = (theme: TTheme) =>
     color: theme.grey9Color,
     fontWeight: 400,
     fontSize: theme.h4FontSize,
-    lineHeight: "22px",
+    lineHeight: "18px",
     ...getTextClampStyle(2),
   } as const);

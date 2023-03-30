@@ -540,6 +540,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       tableStore,
       isShowDividers,
       searchPlaceholder,
+      customDataSource,
       ...restProps
     } = this.props;
 
@@ -575,7 +576,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           expandedRowKeys={tableStore?.expandedState}
           onExpandedRowsChange={this.handleExpandChange}
           size={size}
-          dataSource={this.state.dataSource}
+          dataSource={customDataSource ?? this.state.dataSource}
           rowSelection={this.state.rowSelectionConfig}
           columns={this.state.extendedColumns}
           showHeader={showHeader}

@@ -105,7 +105,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     this.state = {
       searchText: undefined,
       hasBeenOpenedDropdown: false,
-      isDropdownOpened: false,
+      isDropdownOpened: false, // todo: не всегда соответствует фактическому состоянию открытости
       wasDataSearched: false,
       isFocused: false,
     };
@@ -305,7 +305,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   private handleSearchChange = (searchText: string): void => {
     this.setState({ searchText }, () => {
       if (this.props.isHasAccess) {
-        this.onSearchDebounced();
+        this.props.autocompleteStore.isDataLoaded ? this.onSearchDebounced() : this.onSearch();
       }
     });
   };

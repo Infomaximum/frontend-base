@@ -5,7 +5,7 @@ import { EditableRowContext } from "../../../decorators/contexts/EditableRowCont
 import { useTheme } from "../../../decorators/hooks/useTheme";
 import { Form } from "../../forms/Form/FormWrapper";
 
-const FormComponent: React.FC<IFormComponentProps> = ({
+export const FormComponent: React.FC<IFormComponentProps> = ({
   children,
   attributes,
   rowProps: { className, ...restRowProps },
@@ -24,6 +24,8 @@ const FormComponent: React.FC<IFormComponentProps> = ({
 const EditableRowComponent: React.FC<IEditableRowProps> = ({
   children,
   formProps,
+  editingState,
+  record,
   ...restProps
 }) => {
   const isEditing = Boolean(formProps);

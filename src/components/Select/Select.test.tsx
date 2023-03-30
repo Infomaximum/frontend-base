@@ -142,6 +142,20 @@ describe("Тест компонента Select", () => {
     expect(handleDropdownVisibleChange).not.toBeCalled();
   });
 
+  it("Разрешен ввод поисковой строки, если Dropdown еще не открылся", async () => {
+    const handleSearchFn = jest.fn();
+    const { getByRole } = render(
+      renderSelect({
+        showSearch: true,
+        open: false,
+        onSearch: handleSearchFn,
+      })
+    );
+    await userEvent.click(getByRole("combobox"));
+    await userEvent.keyboard("search-text");
+    expect(handleSearchFn).toBeCalledWith("search-text");
+  });
+
   it("Рендер пустого", async () => {
     const user = userEvent.setup();
     const clickFn = jest.fn();
@@ -391,20 +405,20 @@ describe("Тестирование кастомизации поведения �
     expect(handleSearchFn).not.toBeCalled();
   });
 
-  // it("Поисковая строка не очищается при клике вне области текста поисковой строки", async () => {
-  //   const handleSearchFn = jest.fn();
-  //   const { baseElement } = render(
-  //     renderSelect({
-  //       allowClear: true,
-  //       showSearch: true,
-  //       searchValue: "search-text",
-  //       open: true,
-  //       onSearch: handleSearchFn,
-  //     })
-  //   );
-  //   await userEvent.click(baseElement.querySelector(".ant-select-selector") as Element);
-  //   expect(handleSearchFn).not.toBeCalled();
-  // });
+  it("Поисковая строка не очищается при клике вне области текста поисковой строки", async () => {
+    const handleSearchFn = jest.fn();
+    const props = {
+      allowClear: true,
+      showSearch: true,
+      searchValue: "search-text",
+      open: true,
+      autoFocus: true,
+    };
+    const { baseElement, rerender } = render(renderSelect(props));
+    rerender(renderSelect({ ...props, onSearch: handleSearchFn }));
+    await userEvent.click(baseElement.querySelector(".ant-select-selector") as Element);
+    expect(handleSearchFn).not.toBeCalled();
+  });
 
   it("Поисковая строка очищается после закрытия Dropdown", async () => {
     jest.useFakeTimers();

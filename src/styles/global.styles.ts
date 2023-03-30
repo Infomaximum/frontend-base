@@ -300,7 +300,7 @@ export const forceDisabledAnimationClassName = "force-disabled-animation";
  * */
 const forceDisabledAnimationStyle = {
   [`.${forceDisabledAnimationClassName}`]: {
-    animation: 0,
+    animationDuration: "0s",
   },
 };
 

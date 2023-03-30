@@ -1,9 +1,10 @@
 export const containerStyle = { display: "flex" };
 
-export const tagSidePadding = 7;
+export const tagSidePadding = 5;
 export const tagsGutter = 8;
 export const tagFontSize = 12;
 export const tagBorderWidth = 1;
+export const tagHeight = 16;
 
 export const getTagContainerStyle = (flexShrink: number) =>
   ({
@@ -18,6 +19,7 @@ export const tagStyle = {
   paddingRight: `${tagSidePadding}px`,
   fontSize: `${tagFontSize}px`,
   margin: `${0}px`,
+  height: tagHeight,
 } as const;
 
 export const outerEllipsisFontSize = 12;

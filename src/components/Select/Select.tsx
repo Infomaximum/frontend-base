@@ -103,6 +103,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   const [searchValueState, setSearchValueState] = useState(searchValueProps);
   const loadingState = useDelayedTrue(loadingProps, suffixLoaderDelay);
   const [isFilterable, setIsFilterable] = useState(true);
+  const isSearchHandlerEnabled = useRef(true);
 
   const isOpen = isOpenTest ?? isOpenProps ?? isOpenState;
   const value = isUndefined(valueProps) ? valueState : valueProps;
@@ -142,6 +143,10 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
+  useEffect(() => {
+    isSearchHandlerEnabled.current = true;
+  });
+
   /** Сделан для тестирования, чтобы при открытии с нажатым Alt дропдаун не закрывался */
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -156,6 +161,10 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 
   const handleSearch = useCallback(
     (text: string) => {
+      if (!isSearchHandlerEnabled.current) {
+        return;
+      }
+
       setIsFilterable(true);
       setSearchValueState(text);
       onSearch?.(text);
@@ -203,6 +212,9 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 
   const handleDropdownVisibleChange = useCallback(
     (shouldOpen: boolean) => {
+      // Запрещаем вызов поиска с "" при закрытии dropdown [PT-12466]
+      isSearchHandlerEnabled.current = shouldOpen;
+
       setIsOpenState(shouldOpen);
       onDropdownVisibleChange?.(shouldOpen);
     },
@@ -320,8 +332,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         searchValue={searchValue}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        // Запрещаем вызов поиска с "" при закрытии dropdown [PT-12466]
-        onSearch={showSearch && isOpen ? handleSearch : undefined}
+        onSearch={showSearch ? handleSearch : undefined}
         onChange={handleChange}
         onClear={onClear}
         value={value}
