@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/Infomaximum/frontend-base/compare/v2.5.0...v2.6.0) (2023-03-31)
+
+
+### Features
+
+* восстановлена работоспособность css у HeaderMenu ([5135084](https://github.com/Infomaximum/frontend-base/commit/5135084acdde6bbd551553e4f796c4b3a0ae263b))
+* добавлена возможность кастомизировать стили ([afa989d](https://github.com/Infomaximum/frontend-base/commit/afa989d0c4a091fec53fe045d7b8724454cce0fc))
+
 ## [2.5.0](https://github.com/Infomaximum/frontend-base/compare/v2.4.2...v2.5.0) (2023-03-30)
 
 
