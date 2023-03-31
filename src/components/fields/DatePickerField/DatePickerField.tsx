@@ -23,6 +23,7 @@ const DatePicker: FC<IDatePickerProps> = ({
   input: { value, onChange },
   readOnly,
   onOpenChange,
+  datePickerInputStyle = datePickerFieldStyle,
   ...rest
 }) => {
   const localization = useLocalization();
@@ -74,7 +75,7 @@ const DatePicker: FC<IDatePickerProps> = ({
           onOpenChange={handleOpenChange}
           value={value}
           disabled={readOnly}
-          style={datePickerFieldStyle}
+          style={datePickerInputStyle}
           showTime={showTime}
           {...rest}
         />

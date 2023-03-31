@@ -10,7 +10,9 @@ type TOmitDatePickerProps = "onChange" | "onBlur" | "onFocus" | "format" | "valu
 
 export interface IDatePickerProps
   extends IDatePickerOwnProps,
-    FieldRenderProps<TDatePickerFieldValue> {}
+    FieldRenderProps<TDatePickerFieldValue> {
+  datePickerInputStyle?: React.CSSProperties;
+}
 
 export interface IDatePickerOwnProps extends Omit<DatePickerProps, TOmitDatePickerProps> {
   // Почему-то DatePickerProps не содержит данный тип
