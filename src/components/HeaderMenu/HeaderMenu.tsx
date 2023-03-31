@@ -28,7 +28,7 @@ import { Settings } from "../Settings/Settings";
 const { Header } = Layout;
 
 const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
-  ({ renderSettingsFooterDrawer, userId, userName, onLogout }, ref) => {
+  ({ renderSettingsFooterDrawer, userId, userName, onLogout, className }, ref) => {
     const theme = useTheme();
     const [showSettingsDrawer, setShowSettingsDrawer] = useState<boolean>(false);
     const routes = useContext(RoutesContext);
@@ -111,7 +111,7 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
     );
 
     return (
-      <Header css={headerStyle} test-id={headerMenuTestId}>
+      <Header css={headerStyle} test-id={headerMenuTestId} className={className}>
         <Row align="middle" css={headerRowStyle}>
           <Col
             flex="auto"
