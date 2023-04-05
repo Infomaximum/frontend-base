@@ -53,3 +53,8 @@ export const getCurrentHostWithoutProtocol = () => `${window.location.host}${get
  */
 export const getCurrentHost = () =>
   `${window.location.protocol}//${getCurrentHostWithoutProtocol()}`;
+
+/**
+ * Проверка на https
+ */
+export const isHttps = () => window.location.protocol === "https:";
