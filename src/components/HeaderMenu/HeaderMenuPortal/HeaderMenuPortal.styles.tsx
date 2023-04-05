@@ -1,4 +1,10 @@
-import { wrapMenuStyle, iconsHoverStyle, HEADER_MENU_ICONS_WIDTH } from "../HeaderMenu.styles";
+import {
+  wrapMenuStyle,
+  iconsHoverStyle,
+  HEADER_MENU_ICONS_WIDTH,
+  MARGIN_LEFT as HEADER_MENU_ICONS_MARGIN_LEFT,
+} from "../HeaderMenu.styles";
+import type { THeaderMenuColumnConfig } from "./HeaderMenuPortal.types";
 
 const HEADER_LEFT_ICON_WIDTH = 50;
 
@@ -47,25 +53,41 @@ export const spinnerStyle = (theme: TTheme) => ({
   },
 });
 
-export const getHeaderTitleStyle = (sideColumnWidth: number) => ({
-  flex: "none",
-  width: `${sideColumnWidth}px`,
+export const getHeaderTitleStyle = (leftWidth: number) => ({
+  flex: "unset",
+  width: `${leftWidth}px`,
 });
 
-export const getHeaderBodyCenterStyle = (sideColumnWidth: number, isSettingsIcon: boolean) => ({
-  flex: "none",
-  width: `calc(100% - ${sideColumnWidth * 2}px + ${
-    HEADER_MENU_ICONS_WIDTH * (isSettingsIcon ? 2 : 1)
-  }px)`,
-  padding: "0 16px",
-});
+const getSettingsMenuWidth = (isSettingsIcon: boolean) =>
+  HEADER_MENU_ICONS_WIDTH * (isSettingsIcon ? 2 : 1) + HEADER_MENU_ICONS_MARGIN_LEFT;
+
+export const getHeaderBodyCenterStyle = (
+  columnsConfig: THeaderMenuColumnConfig,
+  isSettingsIcon: boolean
+) => {
+  const defaultPaddings = 32;
+  const settingsMenuWidth = getSettingsMenuWidth(isSettingsIcon);
+  const occupiedWidth =
+    columnsConfig.leftColWidth + columnsConfig.rightColWidth + defaultPaddings - settingsMenuWidth;
+  return {
+    flex: "none",
+    width: `${
+      columnsConfig.centerColWidth
+        ? `${columnsConfig.centerColWidth}px`
+        : `calc(100% - ${occupiedWidth}px)`
+    }`,
+    position: "absolute" as const,
+    left: `${columnsConfig.centerColPosition ? `${columnsConfig.centerColPosition}%` : "50%"}`,
+    transform: `translateX(calc(-50% + ${settingsMenuWidth / 2}px))`,
+  };
+};
 
 export const getHeaderBodyRightWithCenterStyle = (
   sideColumnWidth: number,
   isSettingsIcon: boolean
 ) =>
   ({
-    width: `${sideColumnWidth - HEADER_MENU_ICONS_WIDTH * (isSettingsIcon ? 2 : 1)}px`,
+    width: `${sideColumnWidth - getSettingsMenuWidth(isSettingsIcon)}px`,
     flex: "auto",
     justifyContent: "flex-end",
     position: "absolute",
@@ -77,6 +99,6 @@ export const getHeaderBodyRightWithCenterStyle = (
 export const headerBodyRightWithLeftWithoutCenterStyle = { flex: "0 0 auto" };
 
 export const headerBodyRightWithoutLeftAndCenterStyle = {
-  flex: "auto",
+  flex: "0 0 auto",
   justifyContent: "flex-end",
 };

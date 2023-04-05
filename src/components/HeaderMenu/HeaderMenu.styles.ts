@@ -1,6 +1,6 @@
 export const HEADER_MENU_ICONS_WIDTH = 40;
 
-const MARGIN_LEFT = 8;
+export const MARGIN_LEFT = 8;
 
 export const headerStyle = (theme: TTheme) =>
   ({
@@ -54,6 +54,7 @@ export const linkSettingsStyle = (theme: TTheme) => ({
 export const headerRowStyle = {
   display: "flex",
   flexWrap: "nowrap" as const,
+  justifyContent: "space-between",
 };
 
 export const drawerBodyStyle = { padding: "0px" };

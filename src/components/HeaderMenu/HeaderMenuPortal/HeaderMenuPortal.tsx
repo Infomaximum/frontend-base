@@ -18,6 +18,7 @@ import type {
   IHeaderMenuPortalProps,
   IHeaderMenuPortalBodyProps,
   IHeaderMenuPortalTitleProps,
+  THeaderMenuColumnConfig,
 } from "./HeaderMenuPortal.types";
 import { mapValues, keyBy, isUndefined, isNull } from "lodash";
 import {
@@ -26,9 +27,9 @@ import {
   headerMenuTitleTestId,
   headerMenuBodyLeftTestId,
   headerMenuBodyRightTestId,
-  navigationTabsTestId,
   headerMenuSettingsTestId,
   headerMenuBodyCenterTestId,
+  navigationTabsTestId,
 } from "../../../utils/TestIds";
 import ReactDOM from "react-dom";
 import { wrapMenuStyle } from "../HeaderMenu.styles";
@@ -55,32 +56,32 @@ class Body extends React.PureComponent<IHeaderMenuPortalBodyProps> {
   }
 }
 
-const calculateValues = (wrapperWidth: number) => {
-  if (wrapperWidth > 1920) {
-    return 474;
-  } else if (wrapperWidth > 1680) {
-    return 414;
-  } else if (wrapperWidth > 1440) {
-    return 356;
-  } else if (wrapperWidth > 1280) {
-    return 316;
-  } else if (wrapperWidth > 1024) {
-    return 254;
-  } else if (wrapperWidth > 600) {
-    return 200;
+const defaultCalculateColumnConfig = (wrapperWidth: number): THeaderMenuColumnConfig => {
+  if (wrapperWidth >= 1920) {
+    return { rightColWidth: 474, leftColWidth: 474 };
+  } else if (wrapperWidth >= 1680) {
+    return { rightColWidth: 414, leftColWidth: 414 };
+  } else if (wrapperWidth >= 1440) {
+    return { rightColWidth: 356, leftColWidth: 356 };
+  } else if (wrapperWidth >= 1280) {
+    return { rightColWidth: 316, leftColWidth: 316 };
+  } else if (wrapperWidth >= 1024) {
+    return { rightColWidth: 254, leftColWidth: 254 };
+  } else if (wrapperWidth >= 600) {
+    return { rightColWidth: 200, leftColWidth: 200 };
   } else {
-    return 168;
+    return { rightColWidth: 168, leftColWidth: 168 };
   }
 };
 
 const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
   Title: typeof Title;
   Body: typeof Body;
-} = ({ children }) => {
+} = ({ calculateColumnConfig = defaultCalculateColumnConfig, children }) => {
   const headerContainer = useContext(HeaderMenuContext);
   const mainSystemPagePath = useContext(MainSystemPagePathContext);
   const [currentWrapperWidth, setCurrentWrapperWidth] = useState(window.innerWidth);
-  const [sideColumnWidth, setSideColumnWidth] = useState(calculateValues(currentWrapperWidth));
+  const [columnConfig, setColumnConfig] = useState(calculateColumnConfig(currentWrapperWidth));
   const { isFeatureEnabled } = useFeature();
 
   const getVisibleSettingsIcon = useCallback(
@@ -123,13 +124,16 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
   }, [children]);
 
   const { headerTitle, headerBodyLeft, headerBodyRight, headerBodyCenter } = mappedChildren;
+  const headerBodyLeftChildren = headerBodyLeft?.children;
+  const headerBodyRightChildren = headerBodyRight?.children;
+  const headerBodyCenterChildren = headerBodyCenter?.children;
 
   useEffect(() => {
     const handleWindowResize = () => {
       const wrapperWidth = window.innerWidth;
       if (Math.abs(wrapperWidth - currentWrapperWidth) > 5) {
         setCurrentWrapperWidth(wrapperWidth);
-        setSideColumnWidth(calculateValues(wrapperWidth));
+        setColumnConfig(() => calculateColumnConfig(wrapperWidth));
       }
     };
 
@@ -140,25 +144,20 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
     };
   });
 
-  const getHeaderTitle = (
-    headerTitle: IHeaderMenuPortalTitleProps,
-    headerBodyLeftChildren: React.ReactNode
-  ) => {
-    if (!headerTitle) {
+  const getHeaderBodyLeft = () => {
+    if (!headerTitle && !headerBodyLeftChildren) {
       return null;
     }
 
     const { backUrl, children, loading, customTitleStyle } = headerTitle;
-    const flexValue = !headerBodyLeftChildren ? "auto" : undefined;
     return (
       <Col
         key="header-menu-title-wrap"
-        flex={flexValue}
         css={wrapMenuTitleStyle}
         style={
           headerBodyLeftChildren || customTitleStyle
             ? undefined
-            : getHeaderTitleStyle(sideColumnWidth)
+            : getHeaderTitleStyle(columnConfig.leftColWidth)
         }
       >
         {backUrl ? (
@@ -182,27 +181,16 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
         <div css={customTitleStyle ?? titleStyle} test-id={headerMenuTitleTestId}>
           {loading ? <Spinner wrapperStyle={spinnerStyle} size="small" /> : children}
         </div>
+        {headerBodyLeftChildren ? (
+          <div key="header-menu-left-wrap" css={wrapMenuStyle} test-id={headerMenuBodyLeftTestId}>
+            {headerBodyLeftChildren}
+          </div>
+        ) : null}
       </Col>
     );
   };
 
-  const getHeaderBodyLeft = (headerBodyLeftChildren: React.ReactNode) => {
-    if (headerBodyLeftChildren) {
-      return (
-        <Col
-          key="header-menu-left-wrap"
-          flex="auto"
-          css={wrapMenuStyle}
-          test-id={headerMenuBodyLeftTestId}
-        >
-          {headerBodyLeftChildren}
-        </Col>
-      );
-    }
-    return null;
-  };
-
-  const getHeaderBodyCenter = (headerBodyCenterChildren: React.ReactNode) => {
+  const getHeaderBodyCenter = () => {
     if (headerBodyCenterChildren) {
       return (
         <Col
@@ -210,7 +198,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
           flex="auto"
           css={wrapMenuStyle}
           test-id={headerMenuBodyCenterTestId}
-          style={getHeaderBodyCenterStyle(sideColumnWidth, isVisibleSettingsIcon)}
+          style={getHeaderBodyCenterStyle(columnConfig, isVisibleSettingsIcon)}
         >
           {headerBodyCenterChildren}
         </Col>
@@ -219,11 +207,8 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
     return null;
   };
 
-  const getHeaderBodyRight = (
-    headerBodyLeftChildren: React.ReactNode,
-    isHeaderBodyCenterChildren: boolean,
-    headerBodyRightChildren: React.ReactNode
-  ) => {
+  const getHeaderBodyRight = () => {
+    const navigationTabs = document.getElementById(navigationTabsTestId); // Не удается определить наличие средней колонки чтением headerBodyCenter.children
     if (headerBodyRightChildren) {
       return (
         <Col
@@ -231,8 +216,8 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
           css={headerBodyRightStyle}
           test-id={headerMenuBodyRightTestId}
           style={
-            isHeaderBodyCenterChildren
-              ? getHeaderBodyRightWithCenterStyle(sideColumnWidth, isVisibleSettingsIcon)
+            navigationTabs
+              ? getHeaderBodyRightWithCenterStyle(columnConfig.rightColWidth, isVisibleSettingsIcon)
               : !isUndefined(headerBodyLeftChildren)
               ? headerBodyRightWithLeftWithoutCenterStyle
               : headerBodyRightWithoutLeftAndCenterStyle
@@ -246,19 +231,12 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
     return null;
   };
 
-  const headerBodyCenterChildren = document.getElementById(navigationTabsTestId);
-
   return headerContainer
     ? ReactDOM.createPortal(
         <>
-          {getHeaderTitle(headerTitle, headerBodyLeft?.children)}
-          {getHeaderBodyLeft(headerBodyLeft?.children)}
-          {getHeaderBodyCenter(headerBodyCenter?.children)}
-          {getHeaderBodyRight(
-            headerBodyLeft?.children,
-            !!headerBodyCenterChildren,
-            headerBodyRight?.children
-          )}
+          {getHeaderBodyLeft()}
+          {getHeaderBodyCenter()}
+          {getHeaderBodyRight()}
         </>,
         headerContainer
       )
