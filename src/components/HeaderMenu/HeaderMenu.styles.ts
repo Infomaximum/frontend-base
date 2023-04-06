@@ -14,6 +14,7 @@ export const headerStyle = (theme: TTheme) =>
 
 export const wrapMenuStyle = (theme: TTheme) => ({
   height: `${theme.heightHeaderMenu}px`,
+  flex: "auto",
   lineHeight: `${theme.heightHeaderMenu}px`,
   "&:empty": {
     display: "none",
@@ -43,6 +44,7 @@ export const wrapStaticMenuStyle = (theme: TTheme) => ({
   ...wrapMenuStyle(theme),
   marginLeft: `${MARGIN_LEFT}px`,
   display: "flex",
+  flex: "0 0 auto",
   flexShrink: 0,
 });
 

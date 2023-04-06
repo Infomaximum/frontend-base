@@ -88,7 +88,6 @@ export const getHeaderBodyRightWithCenterStyle = (
 ) =>
   ({
     width: `${sideColumnWidth - getSettingsMenuWidth(isSettingsIcon)}px`,
-    flex: "auto",
     justifyContent: "flex-end",
     position: "absolute",
     right: "0",
