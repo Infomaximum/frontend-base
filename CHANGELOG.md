@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/Infomaximum/frontend-base/compare/v2.6.0...v2.7.0) (2023-04-06)
+
+
+### Features
+
+* Добавлена возможность задавать конфигурацию колонок Header'а через props ([cc43768](https://github.com/Infomaximum/frontend-base/commit/cc43768e8599d66f2803a498b7eca47d5ba8be2e))
+* реализован метод isHttps ([f40de5f](https://github.com/Infomaximum/frontend-base/commit/f40de5fbd9d65afdabe3de163f9567a440473065))
+
+
+### Bug Fixes
+
+* исправлено отображение фильтров ([4331645](https://github.com/Infomaximum/frontend-base/commit/433164566fb91dfb053a8c225830b8bfaa39d8cc))
+
 ## [2.6.0](https://github.com/Infomaximum/frontend-base/compare/v2.5.0...v2.6.0) (2023-03-31)
 
 
