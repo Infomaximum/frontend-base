@@ -28,9 +28,9 @@ export const INVALID_EMAIL_OR_PASS = {
   en: "Incorrect email address or password",
 };
 
-export const REQUIRE_ALL_EMPLOYEES_ACCESS = {
-  ru: "Требуется доступ ко всем сотрудникам",
-  en: "Requires access to all employees",
+export const REQUIRE_ALL_USERS_ACCESS = {
+  ru: "Требуется доступ ко всем пользователям",
+  en: "Requires access to all users",
 };
 
 export const INCORRECT_VALUE = {
@@ -108,29 +108,29 @@ export const CANNOT_DELETE_NON_EMPTY_DEPARTMENTS = {
   en: "Cannot delete non-empty departments",
 };
 
-export const DELETE_EMPLOYEES_FROM_DEPARTMENTS_AND_TRY_AGAIN = {
-  ru: "Удалите сотрудников из отделов и повторите попытку.",
-  en: "Delete employees from departments and try again.",
+export const DELETE_USERS_FROM_DEPARTMENTS_AND_TRY_AGAIN = {
+  ru: "Удалите пользователей из отделов и повторите попытку.",
+  en: "Delete users from departments and try again.",
 };
 
-export const CANNOT_DELETE_ACCESS_ROLES_ASSIGNED_TO_EMPLOYEES = {
-  ru: "Невозможно удалить роли доступа, которые назначены сотрудникам",
-  en: "Cannot delete access roles assigned to employees",
+export const CANNOT_DELETE_ACCESS_ROLES_ASSIGNED_TO_USERS = {
+  ru: "Невозможно удалить роли доступа, которые назначены пользователям",
+  en: "Cannot delete access roles assigned to users",
 };
 
-export const CHANGE_ACCESS_ROLES_IN_EMPLOYEE_PROFILES_AND_TRY_AGAIN = {
-  ru: "Измените в профилях сотрудников роли доступа и повторите попытку.",
-  en: "Change access roles in employee profiles and try again.",
+export const CHANGE_ACCESS_ROLES_IN_USER_PROFILES_AND_TRY_AGAIN = {
+  ru: "Измените в профилях пользователей роли доступа и повторите попытку.",
+  en: "Change access roles in user profiles and try again.",
 };
 
-export const CANNOT_DELETE_EMPLOYEES_WITH_ROLE_ADMIN = {
-  ru: "Невозможно удалить сотрудников с ролью «Администратор»",
-  en: 'Cannot delete employees with role "Administrator"',
+export const CANNOT_DELETE_USERS_WITH_ROLE_ADMIN = {
+  ru: "Невозможно удалить пользователей с ролью «Администратор»",
+  en: 'Cannot delete users with role "Administrator"',
 };
 
-export const CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN = {
-  ru: "Измените роли доступа у сотрудников и повторите попытку.",
-  en: "Change employee access roles and try again.",
+export const CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN = {
+  ru: "Измените роли доступа у пользователей и повторите попытку.",
+  en: "Change user access roles and try again.",
 };
 
 export const CANNOT_DELETE_YOUR_PROFILE = {
@@ -138,9 +138,9 @@ export const CANNOT_DELETE_YOUR_PROFILE = {
   en: "Cannot delete your profile",
 };
 
-export const CANNOT_DELETE_YOUR_PROFILE_AND_EMPLOYEES_WITH_ROLE_ADMIN = {
-  ru: "Невозможно удалить свой профиль и сотрудников с ролью «Администратор»",
-  en: 'Cannot delete your profile and employees with role "Administrator"',
+export const CANNOT_DELETE_YOUR_PROFILE_AND_USERS_WITH_ROLE_ADMIN = {
+  ru: "Невозможно удалить свой профиль и пользователей с ролью «Администратор»",
+  en: 'Cannot delete your profile and users with role "Administrator"',
 };
 
 export const YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES = {
@@ -148,9 +148,9 @@ export const YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES = {
   en: 'Cannot delete non-empty departments and "Administrators"',
 };
 
-export const YOU_CANNOT_DELETE_ADMIN_AND_DEPARTMENTS_THAT_HAS_EMPLOYEES = {
-  ru: "Удалите сотрудников из отделов, измените роли доступа и повторите попытку.",
-  en: "Delete employees from departments, change employee access roles and try again.",
+export const YOU_CANNOT_DELETE_ADMIN_AND_DEPARTMENTS_THAT_HAS_USERS = {
+  ru: "Удалите пользователей из отделов, измените роли доступа и повторите попытку.",
+  en: "Delete users from departments, change user access roles and try again.",
 };
 
 export const CANNOT_DELETE_YOUR_PROFILE_AND_NON_EMPTY_DEPARTMENTS = {
@@ -163,9 +163,9 @@ export const CANNOT_DELETE_YOUR_PROFILE_ADMINISTRATORS_AND_NON_EMPTY_DEPARTMENTS
   en: 'Cannot delete your profile, "Administrators" and non-empty departments',
 };
 
-export const DELETE_EMPLOYEES_FROM_DEPARTMENTS_CHANGE_EMPLOYEE_ACCESS_ROLES_AND_TRY_AGAIN = {
-  ru: "Удалите сотрудников из отделов, измените роли доступа у сотрудников и повторите попытку.",
-  en: "Delete employees from departments, change employee access roles and try again.",
+export const DELETE_USERS_FROM_DEPARTMENTS_CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN = {
+  ru: "Удалите пользователей из отделов, измените роли доступа у пользователей и повторите попытку.",
+  en: "Delete users from departments, change user access roles and try again.",
 };
 
 export const NEW_PASSWORD_EQUALS_CURRENT_PASSWORD = {

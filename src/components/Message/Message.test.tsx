@@ -39,21 +39,21 @@ const DEPARTMENT_DECLENSION = {
   },
 };
 
-const EMPLOYEE = {
-  ru: "Сотрудник",
-  en: "Employee",
+const USER = {
+  ru: "Пользователь",
+  en: "User",
 };
 
-const EMPLOYEE_DECLENSION = {
+const USER_DECLENSION = {
   ru: {
-    s: "сотруднику",
-    p1: "сотрудникам",
-    p2: "сотрудникам",
+    s: "пользователю",
+    p1: "пользователям",
+    p2: "пользователям",
   },
   en: {
-    s: "employee",
-    p1: "employees",
-    p2: "employees",
+    s: "user",
+    p1: "users",
+    p2: "users",
   },
 };
 
@@ -110,7 +110,7 @@ describe("Тесты методов класса 'Message'", () => {
   });
 
   it("Тест метода 'getMoveMessage'", () => {
-    const entityLoc = EMPLOYEE;
+    const entityLoc = USER;
     const entityPlaceLoc = DEPARTMENT;
     const entityInstancePlace = "Руководители";
     const linkCaption = "admin admin";
@@ -126,7 +126,7 @@ describe("Тесты методов класса 'Message'", () => {
     const component = !!message && shallow(message);
     component && component.find("a").simulate("click", { preventDefault });
     expect(component && component.find("div").text()).toEqual(
-      `Сотрудник ${linkCaption} перемещен в отдел ${entityInstancePlace}`
+      `Пользователь ${linkCaption} перемещен в отдел ${entityInstancePlace}`
     );
     expect(navigate).toHaveBeenLastCalledWith(path, {
       state: { displayName: linkCaption },
@@ -136,7 +136,7 @@ describe("Тесты методов класса 'Message'", () => {
   describe("Тесты метода 'getMassAssignMessage'", () => {
     const targetObjectEmployee = {
       count: 1,
-      loc: EMPLOYEE_DECLENSION,
+      loc: USER_DECLENSION,
     };
 
     const targetObjectDepartment = {
@@ -159,17 +159,17 @@ describe("Тесты методов класса 'Message'", () => {
     const component = (params: TGetMassAssignMessageParams) =>
       shallow(Message.getMassAssignMessage(params));
 
-    it("Если выбран 1 отдел и 1 сотрудник", () => {
+    it("Если выбран 1 отдел и 1 пользователь", () => {
       expect(component(params).find("div").text()).toEqual(
-        "Массовое действие Роль доступа – Сотрудник применено к 1 сотруднику, 1 отделу"
+        "Массовое действие Роль доступа – Сотрудник применено к 1 пользователю, 1 отделу"
       );
     });
 
-    it("Если выбран 1 сотрудник и 0 отлелов", () => {
+    it("Если выбран 1 пользователь и 0 отделов", () => {
       params.targetObjectList = [targetObjectEmployee, nullTargetObjectDepartment];
 
       expect(component(params).find("div").text()).toEqual(
-        "Массовое действие Роль доступа – Сотрудник применено к 1 сотруднику"
+        "Массовое действие Роль доступа – Сотрудник применено к 1 пользователю"
       );
     });
 
@@ -182,7 +182,7 @@ describe("Тесты методов класса 'Message'", () => {
       };
 
       expect(component(params).find("div").text()).toEqual(
-        `Массовое действие ${AUTHENTICATION.ru} – Вкл применено к 1 сотруднику`
+        `Массовое действие ${AUTHENTICATION.ru} – Вкл применено к 1 пользователю`
       );
     });
 
@@ -195,7 +195,7 @@ describe("Тесты методов класса 'Message'", () => {
       };
 
       expect(component(params).find("div").text()).toEqual(
-        `Массовое действие ${AUTHENTICATION.ru} – Откл применено к 1 сотруднику`
+        `Массовое действие ${AUTHENTICATION.ru} – Откл применено к 1 пользователю`
       );
     });
 
@@ -213,7 +213,7 @@ describe("Тесты методов класса 'Message'", () => {
       };
 
       expect(component(params).find("div").text()).toEqual(
-        "Массовое действие Мониторинг – Откл применено к 1 сотруднику"
+        "Массовое действие Мониторинг – Откл применено к 1 пользователю"
       );
     });
   });
@@ -278,7 +278,7 @@ describe("Тесты методов класса 'Message'", () => {
       messageOptions: {
         navigate,
         nameFieldKeyList: [EFieldName.Name],
-        entityLoc: EMPLOYEE,
+        entityLoc: USER,
       },
     };
 
@@ -292,7 +292,9 @@ describe("Тесты методов класса 'Message'", () => {
       const component = !!message && shallow(message);
 
       expect(component && component.find("div").text()).toEqual(
-        `Сотрудник ${initialValues[EFieldName.Name]} переименован: ${formValues[EFieldName.Name]}`
+        `Пользователь ${initialValues[EFieldName.Name]} переименован: ${
+          formValues[EFieldName.Name]
+        }`
       );
 
       component && component.find("a").simulate("click", { preventDefault });
@@ -311,7 +313,7 @@ describe("Тесты методов класса 'Message'", () => {
       const component = !!message && shallow(message);
 
       expect(component && component.find("div").text()).toEqual(
-        `Сотрудник ${initialValues[EFieldName.Name]}: изменения сохранены`
+        `Пользователь ${initialValues[EFieldName.Name]}: изменения сохранены`
       );
 
       component && component.find("a").simulate("click", { preventDefault });
@@ -330,7 +332,7 @@ describe("Тесты методов класса 'Message'", () => {
       const component = !!message && shallow(message);
 
       expect(component && component.find("div").text()).toEqual(
-        `Сотрудник ${formValues[EFieldName.Name]}: изменения сохранены`
+        `Пользователь ${formValues[EFieldName.Name]}: изменения сохранены`
       );
 
       component && component.find("a").simulate("click", { preventDefault });
