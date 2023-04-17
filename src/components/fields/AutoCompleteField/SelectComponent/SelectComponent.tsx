@@ -470,7 +470,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     return (
       <>
         <Select<LabeledValue | LabeledValue[] | undefined>
-          open={autocompleteStore.isDataLoaded && isFocused ? undefined : false}
+          open={isFocused ? undefined : false}
           key="ant-select"
           mode={mode}
           dropdownStyle={dropdownStyle}
@@ -486,12 +486,14 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           showArrow={showArrow}
           disabled={disabled}
           notFoundContent={
-            <DropdownPendingPlaceholder
-              isDataLoaded={autocompleteStore.isDataLoaded}
-              loading={autocompleteStore.isLoading}
-              hasAccess={isHasAccess}
-              searchText={searchText}
-            />
+            autocompleteStore.isDataLoaded ? (
+              <DropdownPendingPlaceholder
+                isDataLoaded={autocompleteStore.isDataLoaded}
+                loading={autocompleteStore.isLoading}
+                hasAccess={isHasAccess}
+                searchText={searchText}
+              />
+            ) : null
           }
           suffixIcon={!disabled ? this.getSuffixIcon(!!disabled) : null}
           clearIcon={_Select.clearIcon}

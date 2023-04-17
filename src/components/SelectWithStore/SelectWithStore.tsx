@@ -141,7 +141,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     <Select
       {...rest}
       key="ant-select"
-      open={store.data && isFocused ? undefined : false}
+      open={isFocused ? undefined : false}
       onFocus={handleFocus}
       onBlur={handleBlur}
       onDropdownVisibleChange={handleVisibleChange}
@@ -151,7 +151,11 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
       onSearch={setSearchText}
       searchValue={searchText}
       optionFilterProp={optionFilterProp}
-      notFoundContent={<DropdownPlaceholder hasAccess={isHasAccess} searchText={searchText} />}
+      notFoundContent={
+        store.isDataLoaded ? (
+          <DropdownPlaceholder hasAccess={isHasAccess} searchText={searchText} />
+        ) : null
+      }
     />
   );
 };
