@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/Infomaximum/frontend-base/compare/v2.7.0...v2.8.0) (2023-04-17)
+
+
+### Features
+
+* В локализации изменен термин 'Сотрудник' на термин 'Пользователь' ([175fb77](https://github.com/Infomaximum/frontend-base/commit/175fb77d764425ebc796cf2e7936d15a2cdf8057))
+* заменена иконка импорта ([d30c54d](https://github.com/Infomaximum/frontend-base/commit/d30c54de65c621278bdd25511a8d2216ff393685))
+
+
+### Bug Fixes
+
+* исправлена невозможность вводить текст поиска сразу в селектах ([f6103dc](https://github.com/Infomaximum/frontend-base/commit/f6103dc83653768609a502e4b31deac0a4aa30bb))
+* сделана очистка строки поиска после выбора ([7d11a09](https://github.com/Infomaximum/frontend-base/commit/7d11a09c8a4418f50ad160707513bdb6acf908d5))
+* сделано закрытие модального окна с ошибкой после перехода назад по клику по кнопке браузера. ([5b5e831](https://github.com/Infomaximum/frontend-base/commit/5b5e831ca4268fadac85df55b959264a929afdbb))
+
 ## [2.7.0](https://github.com/Infomaximum/frontend-base/compare/v2.6.0...v2.7.0) (2023-04-06)
 
 
