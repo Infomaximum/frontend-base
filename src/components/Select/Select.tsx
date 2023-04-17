@@ -206,8 +206,9 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 
       setValueState(value);
       onChange?.(value, option);
+      handleSearch("");
     },
-    [onChange, computeDropdownPosition, getPopupContainer]
+    [onChange, handleSearch, computeDropdownPosition, getPopupContainer]
   );
 
   const handleDropdownVisibleChange = useCallback(
