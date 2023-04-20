@@ -6,7 +6,6 @@ import {
   fieldComponentStyle,
   commonEditableCellStyle,
   ellipsisEditableCellStyle,
-  editableCellWrapperStyle,
 } from "./TableCellField.styles";
 import type { FieldMetaState, FieldRenderProps } from "react-final-form";
 import { hasAutoFocus } from "./TableCellField.utils";
@@ -49,7 +48,7 @@ const TableCellFieldComponent = <V, P extends FieldRenderProps<V> = FieldRenderP
   const { isEditing } = useContext(EditableRowContext);
   const { focusedFieldNameRef } = useContext(EditableTableContext);
 
-  const wrapperStyle = useMemo(() => [editableCellWrapperStyle, { maxWidth: width }], [width]);
+  const wrapperStyle = useMemo(() => [{ maxWidth: width }], [width]);
 
   const editableCellStyle = useMemo(() => {
     if (isNeedEllipsis) {
