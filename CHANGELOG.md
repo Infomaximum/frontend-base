@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/Infomaximum/frontend-base/compare/v2.8.0...v2.9.0) (2023-04-20)
+
+
+### Features
+
+* реализована функция, возвращающая нужный стиль для тега Select, в зависимости от параметра closable [PT-13186] ([92e600e](https://github.com/Infomaximum/frontend-base/commit/92e600ed85c07543aa9ec6559c7f7b8fb30b36d4))
+
+
+### Bug Fixes
+
+* добавлена верхняя правая кнопка закрытия модального окна ошибки ([47a8157](https://github.com/Infomaximum/frontend-base/commit/47a81574c45d742e6c0a798658e69299f0d4fe3e))
+* добавлена верхняя правая кнопка закрытия модальных окон подтверждения ([4eecfb1](https://github.com/Infomaximum/frontend-base/commit/4eecfb12458193c57042a605a4a6430aa629a157))
+* исправлено некорректное отображение инпута в состоянии focused (обрезалась тень слева) [PT-13188] ([736a26c](https://github.com/Infomaximum/frontend-base/commit/736a26c5bb5608e48b77b091e22c56af41e2e97e))
+
 ## [2.8.0](https://github.com/Infomaximum/frontend-base/compare/v2.7.0...v2.8.0) (2023-04-17)
 
 
