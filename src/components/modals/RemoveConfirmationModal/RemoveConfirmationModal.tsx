@@ -1,5 +1,5 @@
 import { PureComponent } from "react";
-import { CloseCircleFilled } from "../../Icons/Icons";
+import { CloseCircleFilled, CloseOutlined } from "../../Icons/Icons";
 import { Button } from "../../Button/Button";
 import { Modal } from "../../modals/Modal/Modal";
 import {
@@ -123,13 +123,14 @@ class RemoveConfirmationModalComponent extends PureComponent<
     return (
       <Modal
         open={this.state.open}
-        closable={false}
+        closable={true}
         centered={true}
         bodyStyle={bodyStyle}
         footer={this.getFooterModal()}
         destroyOnClose={true}
         zIndex={5000}
         onCancel={this.handleCancel}
+        closeIcon={<CloseOutlined />}
       >
         {this.getContentBodyModal()}
       </Modal>
