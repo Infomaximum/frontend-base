@@ -124,6 +124,9 @@ export const commonTagStyle = (theme: TTheme) => ({
   },
 });
 
+export const getSelectTagStyle = (closable: boolean) =>
+  closable ? commonTagStyle : disableTagStyle;
+
 export const disableTagStyle = (theme: TTheme) => ({
   ...commonTagStyle(theme),
   background: theme.grey3Color,
