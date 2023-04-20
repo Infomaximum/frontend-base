@@ -66,12 +66,13 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
         width={modalWidth}
         open={showModal}
         centered={true}
-        closable={false}
+        closable={true}
         zIndex={1050}
         css={modalStyle(theme)}
         bodyStyle={bodyModalStyle}
         footer={footer}
         closeIcon={<CloseOutlined />}
+        onCancel={onCloseModal}
       >
         <div key="modal-icon-wrap" css={iconWrapStyle}>
           {isInfo ? (
