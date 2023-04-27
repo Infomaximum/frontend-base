@@ -19,7 +19,7 @@ import {
   confirmationModalCancelButtonTestId,
   confirmationModalConfirmButtonTestId,
 } from "../../../utils/TestIds";
-import { WarningOutlined, CloseOutlined } from "../../Icons/Icons";
+import { WarningOutlined } from "../../Icons/Icons";
 import type { IConfirmationModalProps } from "./ConfirmationModal.types";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useTheme } from "../../../decorators/hooks/useTheme";
@@ -145,14 +145,12 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
   return (
     <Modal
       open={isShowModal}
-      closable={true}
+      closable={false}
       centered={true}
       bodyStyle={bodyStyle}
       footer={footerModal}
       destroyOnClose={true}
       zIndex={zIndex}
-      closeIcon={<CloseOutlined />}
-      onCancel={handleCancel}
     >
       {getContentBodyModal()}
     </Modal>
