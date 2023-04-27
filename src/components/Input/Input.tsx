@@ -29,7 +29,7 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
       <AntInput
         {...props}
         ref={ref}
-        css={props.disabled ? disabledInputStyle : defaultInputStyle(theme)}
+        css={props.disabled ? disabledInputStyle(theme) : defaultInputStyle(theme)}
       />
     );
   }

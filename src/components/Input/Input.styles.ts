@@ -1,8 +1,9 @@
-export const disabledInputStyle = {
+export const disabledInputStyle = (theme: TTheme) => ({
   border: "none",
   textOverflow: "ellipsis",
   overflow: "hidden",
-};
+  "-webkit-text-fill-color": theme.grey7Color, // Safari fix
+});
 
 export const disabledTextAreaStyle = (theme: TTheme) => ({
   borderColor: theme.grey3Color,
