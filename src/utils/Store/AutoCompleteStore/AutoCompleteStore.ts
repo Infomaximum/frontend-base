@@ -49,18 +49,18 @@ export class AutoCompleteStore<
     makeObservable<this, TPrivateAutoCompleteStoreField>(this, {
       receiveData: override,
       searchValueChange: override,
-      list: computed,
+      map: computed,
     });
   }
 
   //----------------------------------------COMPUTED------------------------------------//
 
-  public get list() {
+  public get map() {
     if (this._model) {
-      const list: TDictionary<IModel> = {};
+      const list: Map<string | number, IModel> = new Map<string | number, IModel>();
 
       forEach(this._model.getItems(), (item) => {
-        list[item.getInnerName()] = item;
+        list.set(item.getInnerName(), item);
       });
 
       return list;

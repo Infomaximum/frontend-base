@@ -144,11 +144,11 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
   private handleSelect = (value: string, option: DefaultOptionType): void => {
     const { onChange, autocompleteStore, onSelectCallback } = this.props;
 
-    const modelsList = autocompleteStore.list;
+    const modelsMap = autocompleteStore.map;
 
-    const selectedModel = modelsList?.[option.key];
+    const selectedModel = modelsMap?.get(option.key);
 
-    if (modelsList && option.key && selectedModel) {
+    if (modelsMap && option.key && selectedModel) {
       isFunction(onChange) && onChange(selectedModel);
 
       isFunction(onSelectCallback) && onSelectCallback(selectedModel);
@@ -158,14 +158,14 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
   private handleChange = (value: string, opt: any): void => {
     const { onChange, autocompleteStore } = this.props;
 
-    const modelsList = autocompleteStore.list;
+    const modelsMap = autocompleteStore.map;
 
     const option: TAutoFillOption = opt;
 
     if (isUndefined(value)) {
       isFunction(onChange) && onChange();
-    } else if (modelsList && option.key && modelsList[option.key]) {
-      isFunction(onChange) && onChange(modelsList[option.key]);
+    } else if (modelsMap && option.key && modelsMap.get(option.key)) {
+      isFunction(onChange) && onChange(modelsMap.get(option.key));
     }
   };
 
@@ -216,9 +216,9 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
       suffixIcon,
     } = this.props;
 
-    const modelsList = autocompleteStore.list;
+    const modelsMap = autocompleteStore.map;
 
-    const items = modelsList ?? {};
+    const items = (modelsMap && Array.from(modelsMap, ([, model]) => model)) ?? [];
 
     const value = this.getSelectValue(localization, fieldValue);
 

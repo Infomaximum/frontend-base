@@ -132,10 +132,13 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   public override componentDidUpdate(prevProps: Readonly<ISelectComponentProps>): void {
     const { autocompleteStore } = this.props;
 
-    const modelsList = autocompleteStore.list;
+    const modelsMap = autocompleteStore.map;
 
-    if (!isNil(modelsList) && isFunction(this.props.groupBy)) {
-      this.modelListByGroups = groupBy(modelsList, this.props.groupBy);
+    if (!isNil(modelsMap) && isFunction(this.props.groupBy)) {
+      this.modelListByGroups = groupBy(
+        Array.from(modelsMap, ([, model]) => model),
+        this.props.groupBy
+      );
     } else {
       this.modelListByGroups = undefined;
     }
@@ -209,7 +212,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
 
   private mapSelectValueToModel(value: RawValueType) {
     const { autocompleteStore, value: fieldValue } = this.props;
-    return autocompleteStore.list?.[value] ?? this.getFieldValueCollection(fieldValue)[value];
+    return autocompleteStore.map?.get(value) ?? this.getFieldValueCollection(fieldValue)[value];
   }
 
   private getHintText(currentCount: number, nextCount: number, isSearch: boolean) {
@@ -411,9 +414,9 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   private renderStandardOptions(): React.ReactNode[] {
     const { autocompleteStore, loading } = this.props;
 
-    const modelsList = autocompleteStore.list;
+    const modelsMap = autocompleteStore.map;
 
-    const items = modelsList && !loading ? modelsList : {};
+    const items = modelsMap && !loading ? Array.from(modelsMap, ([, model]) => model) : [];
 
     return this.renderOptions(items);
   }
