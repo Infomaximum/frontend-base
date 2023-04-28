@@ -53,8 +53,7 @@ const getTextClampStyle = (numberOfLines: number) =>
 
 export const titleStyle = (theme: TTheme) =>
   ({
-    width: "calc(100% - 32px)",
-    color: theme.grey9Color,
+    color: theme.grey10Color,
     fontWeight: 400,
     fontSize: theme.h4FontSize,
     lineHeight: "18px",
