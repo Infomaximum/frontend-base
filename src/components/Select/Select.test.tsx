@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, getByText } from "@testing-library/react";
+import { render, screen, getByText, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Select } from "./Select";
 import "@testing-library/jest-dom";
@@ -151,9 +151,18 @@ describe("Тест компонента Select", () => {
         onSearch: handleSearchFn,
       })
     );
+
+    const searchText = "search-text";
+
     await userEvent.click(getByRole("combobox"));
-    await userEvent.keyboard("search-text");
-    expect(handleSearchFn).toBeCalledWith("search-text");
+
+    await userEvent.keyboard(searchText);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(handleSearchFn).toBeCalledWith(searchText);
   });
 
   it("Рендер пустого", async () => {
