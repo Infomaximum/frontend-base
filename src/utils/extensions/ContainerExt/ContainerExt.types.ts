@@ -36,3 +36,7 @@ export type TMutationConfigGetter<P = unknown> = {
   variableNames?: (params: P) => string;
   modifyVariablesValues?: TVariablesValuesModifier<P>;
 };
+
+export type TLoadingGetter = () => boolean;
+
+export type TMountHandler = () => void;

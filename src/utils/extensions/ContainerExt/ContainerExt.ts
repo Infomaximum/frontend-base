@@ -8,8 +8,10 @@ import type {
   TQueryBuilderModifier,
   TMutationConfig,
   TMutationConfigGetter,
+  TLoadingGetter,
+  TMountHandler,
 } from "./ContainerExt.types";
-import { forEach } from "lodash";
+import { every, forEach } from "lodash";
 import type { GraphQlQuery } from "@infomaximum/utility";
 import type { NStore } from "../../Store/Store/Store.types";
 
@@ -18,6 +20,8 @@ export class ContainerExt<P = unknown> {
   private initialValuesModifierList: TInitialValuesModifierList<P> = [];
   private queryBuilderModifierList: TQueryBuilderModifierList = [];
   private mutationConfigCallbackList: TMutationConfigGetter[] = [];
+  private loadingGetterList: TLoadingGetter[] = [];
+  private mountHandlerList: TMountHandler[] = [];
 
   constructor() {
     this.modifyVariablesValues = this.modifyVariablesValues.bind(this);
@@ -125,5 +129,21 @@ export class ContainerExt<P = unknown> {
 
   public pushMutationConfigGetter(mutationConfigGetter: TMutationConfigGetter<P>) {
     this.mutationConfigCallbackList.push(mutationConfigGetter);
+  }
+
+  public pushLoadingGetter(loadingGetter: TLoadingGetter): void {
+    this.loadingGetterList.push(loadingGetter);
+  }
+
+  public get isLoading() {
+    return every(this.loadingGetterList, (loadingGetter) => loadingGetter());
+  }
+
+  public pushMountHandler(mountHandler: TMountHandler): void {
+    this.mountHandlerList.push(mountHandler);
+  }
+
+  public runMountHandlers(): void {
+    forEach(this.mountHandlerList, (mountHandler) => mountHandler());
   }
 }
