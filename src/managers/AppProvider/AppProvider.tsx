@@ -4,7 +4,7 @@ import moment from "moment";
 import { type FC, useEffect, useMemo } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
-import { FeatureContext } from "../../decorators/contexts/FeatureContext";
+import { FeatureContext, defaultFeatureChecker } from "../../decorators/contexts/FeatureContext";
 import { LocalizationContext } from "../../decorators/contexts/LocalizationContext";
 import { MainSystemPagePathContext } from "../../decorators/contexts/MainSystemPagePathContext";
 import { ThemeProvider } from "../../decorators/contexts/ThemeContext";
@@ -33,13 +33,11 @@ export interface IAppProviderProps extends IRouterProviderProps {
   children?: (children: React.ReactNode) => React.ReactNode;
 }
 
-const defaultChecker = () => true;
-
 const AppProvider: FC<IAppProviderProps> = (props) => {
   const {
     baseName,
     language,
-    featureChecker,
+    featureChecker = defaultFeatureChecker,
     isAuthorizedUser,
     isSystemInitialized,
     layout,
@@ -90,7 +88,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
           <BrowserRouter basename={baseName ?? historyStore.basename}>
             <ThemeProvider theme={_theme}>
               <LocalizationContext.Provider value={localizationInstance}>
-                <FeatureContext.Provider value={featureChecker ?? defaultChecker}>
+                <FeatureContext.Provider value={featureChecker}>
                   <ErrorModalProvider isDebugMode={!!isDebugMode}>
                     <ConfigProvider locale={locale}>
                       <DataInitializer>
