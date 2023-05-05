@@ -136,7 +136,10 @@ export class ContainerExt<P = unknown> {
   }
 
   public get isLoading() {
-    return every(this.loadingGetterList, (loadingGetter) => loadingGetter());
+    return (
+      !!this.loadingGetterList.length &&
+      every(this.loadingGetterList, (loadingGetter) => loadingGetter())
+    );
   }
 
   public pushMountHandler(mountHandler: TMountHandler): void {
