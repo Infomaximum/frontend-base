@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/Infomaximum/frontend-base/compare/v2.9.0...v3.0.0) (2023-05-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* поле list заменено на map
+[PT-13435]
+
+### Features
+
+* реализована возможность управления загрузкой контейнера ([e37f5b9](https://github.com/Infomaximum/frontend-base/commit/e37f5b90c8151386fd9cc4784021845aa8bb43c6))
+
+
+### Bug Fixes
+
+* исправлен порядок элементов с числовыми индексами в AutoCompleteStore ([f48768a](https://github.com/Infomaximum/frontend-base/commit/f48768a52afd29fd191ba650e171951db0fd2d08))
+* исправлен стиль текста недоступных полей для Safari ([9617610](https://github.com/Infomaximum/frontend-base/commit/9617610c95d381dff6cd832308470c45fd400c1e))
+* исправлена контрастность текста карточки пространства ([5df8194](https://github.com/Infomaximum/frontend-base/commit/5df8194d74f3dc071086f33014d4b68090ccafc1))
+* исправлена отрисовка профиля сотрудника если не задано расширение loadingGetter ([fcf8eac](https://github.com/Infomaximum/frontend-base/commit/fcf8eace78e054c60c25ba733a6ba9aee5b5ef64))
+* **test:** исправлен тест ([680e533](https://github.com/Infomaximum/frontend-base/commit/680e53324208330da52846265524799d391fedee))
+
 ## [2.9.0](https://github.com/Infomaximum/frontend-base/compare/v2.8.0...v2.9.0) (2023-04-20)
 
 
