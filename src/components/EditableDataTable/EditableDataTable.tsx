@@ -86,12 +86,10 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
   public override readonly state: IEditableDataTableState<T> = {};
 
   public override componentDidMount() {
-    const { providerRef, isFeatureEnabled } = this.props;
+    const { providerRef } = this.props;
     const { handleAddRow } = this;
 
-    if (isFeatureEnabled) {
-      this.updateAccess();
-    }
+    this.updateAccess();
 
     if (providerRef) {
       providerRef.current = {

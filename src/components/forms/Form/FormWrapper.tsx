@@ -154,6 +154,7 @@ const FormWrapper: FC<IFormWrapperProps> = ({
           initialValues={params.initialValues}
           component={component}
           formName={formName}
+          isFeatureEnabled={isFeatureEnabled}
         >
           {children}
         </FormComponent>

@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from "react";
 import { Menu } from "antd";
 import { Dropdown } from "../Dropdown/Dropdown";
 import type { MenuProps, SubMenuProps } from "antd/lib/menu";
-import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import {
   wrapperContextMenuStyle,
   threeDotsButtonStyle,
@@ -217,4 +216,4 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   );
 };
 
-export const ContextMenu = withFeature(withTheme(ContextMenuComponent));
+export const ContextMenu = withTheme(ContextMenuComponent);
