@@ -6,5 +6,5 @@ export interface ICheckboxProps extends CheckboxProps {
 }
 
 export interface ICheckboxStaticComponent {
-  Group?: typeof Checkbox.Group;
+  Group: typeof Checkbox.Group;
 }
