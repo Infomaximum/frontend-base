@@ -23,8 +23,8 @@ export const rootDomNodeName = "root";
 export const PARAMETERS_FIELD_NAME = "parameters";
 
 export enum EErrorCode {
+  GRAPHQL_VALIDATION_ERROR = "graphql_validation_error",
   INVALID_CREDENTIALS = "invalid_credentials",
-
   EXPIRED_PASSWORD = "expired_password",
   INVALID_LOGON = "INVALID_LOGON",
   NO_PRIVILEGES = "NO_PRIVILEGES",

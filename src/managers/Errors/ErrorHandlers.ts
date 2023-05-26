@@ -196,7 +196,7 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
     title: NOT_FOUND_DOMAIN_OBJECT,
   },
   {
-    code: "graphql_validation_error",
+    code: EErrorCode.GRAPHQL_VALIDATION_ERROR,
     description: GRAPHQL_VALIDATION_ERROR,
   },
   {
