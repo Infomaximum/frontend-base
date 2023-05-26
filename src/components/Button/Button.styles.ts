@@ -119,7 +119,7 @@ const getOutlineButtonStyle = (color: string) => ({
   backgroundColor: "transparent",
 });
 
-export const ghostButtonStyle = (theme: TTheme) => {
+export const ghostButtonStyle = (theme: TTheme, danger?: boolean) => {
   const disabledStyle = {
     color: theme.grey7Color,
     backgroundColor: theme.grey4Color,
@@ -129,9 +129,9 @@ export const ghostButtonStyle = (theme: TTheme) => {
   return {
     ...getOutlineButtonStyle(theme.grey8Color),
     borderColor: theme.grey5Color,
-    ":hover": getOutlineButtonStyle(theme.thrust2Color),
-    ":focus": getOutlineButtonStyle(theme.thrust2Color),
-    ":active": getOutlineButtonStyle(theme.thrust4Color),
+    ":hover": danger ? undefined : getOutlineButtonStyle(theme.thrust2Color),
+    ":focus": danger ? undefined : getOutlineButtonStyle(theme.thrust2Color),
+    ":active": danger ? undefined : getOutlineButtonStyle(theme.thrust4Color),
     "&:disabled": {
       ...disabledStyle,
       ":hover": disabledStyle,

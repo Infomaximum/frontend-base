@@ -38,7 +38,7 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
           styles.push(primaryNotificationButtonStyle(theme));
           break;
         case "ghost":
-          styles.push(ghostButtonStyle(theme));
+          styles.push(ghostButtonStyle(theme, rest.danger));
           break;
         case "ghost-dark":
           styles.push(ghostDarkButtonStyle(theme));
@@ -57,7 +57,7 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
       }
 
       return styles;
-    }, [typeProps, rest.size, onlyIcon, theme]);
+    }, [theme, typeProps, rest.size, rest.danger, onlyIcon]);
 
     const getType = () => {
       switch (typeProps) {

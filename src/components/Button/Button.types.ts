@@ -5,6 +5,7 @@ export type TButtonType =
   | "primary-dark"
   | "primary-notification"
   | "ghost-dark";
+
 export type TButtonSize = ButtonProps["size"];
 
 type TButtonProps = Omit<ButtonProps, "type">;
