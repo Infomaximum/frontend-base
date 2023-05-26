@@ -1195,6 +1195,11 @@
   resolved "https://registry.yarnpkg.com/@infomaximum/config/-/config-2.3.0.tgz#ffee49c4347b2e18e8aefe8ee916302c0b4adf3e"
   integrity sha512-G5Dcvpp0MXe4PEPSommsI4qYxsjyKhaDp4NRATRPbNtf8GdZS7oN9wYSoAJcwQo74WFcQZngO6IlE5pdHOlhiw==
 
+"@infomaximum/global-types@1.1.2", "@infomaximum/global-types@^1.0.0":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@infomaximum/global-types/-/global-types-1.1.2.tgz#592ba0bccf973e3026d2ae3419590e1e5c0c1d92"
+  integrity sha512-y0xiOhWbuEgfbxdy7Ytol/v6E/dpwVD1QiFIhymBboQ+o3lb6hLHe7ygxOvlJ2EgYYBrN2rtsBa6RSw90E2Kmw==
+
 "@infomaximum/graphql-model@^1.2.0":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@infomaximum/graphql-model/-/graphql-model-1.4.2.tgz#72558c185bb04336f8a2a2c2ce9c254cd8adb053"
@@ -1210,18 +1215,18 @@
   dependencies:
     "@infomaximum/assert" "^1.0.0"
 
-"@infomaximum/module-expander@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@infomaximum/module-expander/-/module-expander-1.0.0.tgz#b5473bcfd98f6dbf68da68aeaf95d7f771a5012e"
-  integrity sha512-+Q4hLxaAi2cfY/tNyRW1XvcxFOSnI9CCYEU7PbjWn0rSBzbIobJPa5YVgpWsA9BoSKzWFVSVF8ZM6OheWeR52Q==
+"@infomaximum/module-expander@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@infomaximum/module-expander/-/module-expander-2.0.1.tgz#96a7932061b0c44babf647dd20e7d0aebcbd8bef"
+  integrity sha512-Vcqn9339riTbUpK1ZHHuzCAmNnllHmp3Br8Iqj6zNpm+utAd/bfQQ/BgHwJo0D/5Ugent3KlPPXKUGbbSTNZ4Q==
   dependencies:
     "@infomaximum/assert" "^1.0.3"
+    "@infomaximum/global-types" "^1.0.0"
     "@infomaximum/localization" "^1.0.3"
     "@infomaximum/utility" "^7.0.0"
     lodash "^4.17.21"
     react-router "6.3.0"
     reflect-metadata "0.1.13"
-    uuid "9.0.0"
 
 "@infomaximum/utility@^7.0.0":
   version "7.0.0"
