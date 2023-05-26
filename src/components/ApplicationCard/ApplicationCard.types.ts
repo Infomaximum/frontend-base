@@ -2,7 +2,7 @@ import type { IContextMenuParam } from "../ContextMenu/ContextMenu.types";
 import type { ITagProps } from "./InlineTags/InlineTags.types";
 
 export interface ICardEntity {
-  getId(): number;
+  getId(): number | string;
   getName(): string | undefined;
   contentTypename: string | undefined;
   tags: ITagProps[];
