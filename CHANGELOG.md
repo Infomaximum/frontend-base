@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/Infomaximum/frontend-base/compare/v3.0.0...v3.1.0) (2023-05-26)
+
+
+### Features
+
+* добавлен тип кнопки ghost-danger ([c8efcc5](https://github.com/Infomaximum/frontend-base/commit/c8efcc59ef7e3cdca2d0fa9d7623a9d304f0aad2))
+* добавлен onClick для checkbox ([28b502f](https://github.com/Infomaximum/frontend-base/commit/28b502f1de9dce7a199b425f59d2dd06e53977bf))
+* добавлен yarn.lock ([fdc252e](https://github.com/Infomaximum/frontend-base/commit/fdc252e76d4617d6b2adc38dd19d6cbce42a310a))
+* использованы новые переменный из window ([98603b0](https://github.com/Infomaximum/frontend-base/commit/98603b0e3e5162544700587e1cd4f3a3f00687d4))
+* новый тип id сущности ([645387f](https://github.com/Infomaximum/frontend-base/commit/645387f712855e9aa8a7cfe2ee2b3af82a5f4ee0))
+
+
+### Bug Fixes
+
+* исправлен тип, который подчеркивал использование CheckboxGroup ([a20db51](https://github.com/Infomaximum/frontend-base/commit/a20db51d941fcf7b82b62884100a68db6aa43fb7))
+
 ## [3.0.0](https://github.com/Infomaximum/frontend-base/compare/v2.9.0...v3.0.0) (2023-05-10)
 
 
