@@ -25,6 +25,7 @@ class CheckboxComponent extends React.PureComponent<ICheckboxComponentProps> {
       readOnly,
       input: { value },
       children,
+      onClick,
     } = this.props;
 
     return (
@@ -32,6 +33,7 @@ class CheckboxComponent extends React.PureComponent<ICheckboxComponentProps> {
         onChange={this.handleChange}
         checked={Boolean(value)}
         disabled={readOnly || disabled}
+        onClick={onClick}
       >
         {children}
       </Checkbox>
