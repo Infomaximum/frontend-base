@@ -11,9 +11,10 @@
   },
   "dependencies": {
     "@infomaximum/assert": "^1.1.2",
-    "@infomaximum/module-expander": "^1.0.0",
+    "@infomaximum/module-expander": "^2.0.0",
     "@infomaximum/localization": "^1.0.3",
     "@infomaximum/graphql-model": "^1.2.0",
+    "@infomaximum/global-types": "1.1.2",
     "@infomaximum/utility": "^7.0.0",
     "moment": "^2.29.2",
     "@apollo/client": "3.7.10",

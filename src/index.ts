@@ -20,6 +20,9 @@ configure({
   disableErrorBoundaries: true,
 });
 
+// Определение пути, по которому лежат chunks динамических импортов
+__webpack_public_path__ = `${window.im.system.apiPrefix ?? ""}/`;
+
 export * from "./decorators";
 export * from "./managers";
 export * from "./resources";

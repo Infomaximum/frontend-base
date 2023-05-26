@@ -1,6 +1,6 @@
 import { includes, replace } from "lodash";
 
-export const getBasePrefix = () => window.imFrontEndSystem.basePrefix;
+export const getBasePrefix = () => window.im.system.basePrefix;
 
 /** Сохраняет текущий путь если выкидывает на страницу с логином */
 export const savePathToLocalStorage = (): void => {
@@ -38,7 +38,7 @@ export function contains(rootURI: string, childURI: string): boolean {
 }
 
 /** Путь для выполнения запросов, учитывает saas */
-export const getApiPrefix = () => window.imFrontEndSystem.apiPrefix;
+export const getApiPrefix = () => window.im.system.apiPrefix;
 
 /** Путь для graphql запросов, учитывает saas */
 export const getGraphqlURL = () => `${getApiPrefix()}/graphql`;

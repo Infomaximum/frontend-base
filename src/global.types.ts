@@ -1,4 +1,5 @@
 /// <reference types="@emotion/react/types/css-prop" />
+/// <reference types="@infomaximum/global-types" />
 
 import type { Model } from "@infomaximum/graphql-model";
 import type { theme } from "./styles/theme";
@@ -47,13 +48,9 @@ declare global {
     activeRequests: number;
     isRejectionRequired: boolean;
 
-    imFrontEndSystem: {
+    frontEndSystem: {
       /** Версии внутренних модулей */
       versions: TDictionary<string>;
-      /** Префикс пути для загрузки ресурсов */
-      apiPrefix: string;
-      /** Префикс для разделения пути для загрузки данных */
-      basePrefix: string;
       /** Подключаемые ресурсы */
       sources: {
         stylesheets: string[];
