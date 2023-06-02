@@ -1,5 +1,5 @@
 import { isFunction, forEach } from "lodash";
-import { assertSimple } from "@infomaximum/base/src";
+import { assertSimple } from "@infomaximum/assert";
 import type { NFiltersStore } from "./FiltersStore.types";
 
 class FilterStorage {

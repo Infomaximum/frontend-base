@@ -3,7 +3,7 @@ import CryptoJsCore from "crypto-js/core";
 import { reaction } from "mobx";
 import { Expander } from "@infomaximum/base/src/libs/core";
 import { isEmpty, isString } from "lodash";
-import type { BaseStore } from "@infomaximum/base/src";
+import type { BaseStore } from "./BaseStore";
 
 class StorePersist {
   private static secretKey: string | null = null;
