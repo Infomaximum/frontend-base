@@ -1,7 +1,7 @@
 import Aes from "crypto-js/aes";
 import CryptoJsCore from "crypto-js/core";
 import { reaction } from "mobx";
-import { Expander } from "@infomaximum/base/src/libs/core";
+import { Expander } from "@infomaximum/module-expander";
 import { isEmpty, isString } from "lodash";
 import type { BaseStore } from "./BaseStore";
 

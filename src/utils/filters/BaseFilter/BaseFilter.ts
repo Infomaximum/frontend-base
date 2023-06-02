@@ -1,4 +1,3 @@
-import type { Localization } from "@infomaximum/base/src";
 import type React from "react";
 import type { NFiltersStore } from "../../Store/FiltersStore/FiltersStore.types";
 import type {
@@ -6,6 +5,7 @@ import type {
   IFilterAddDrawerProps,
   IFilterEditDrawerProps,
 } from "./BaseFilter.types";
+import type { Localization } from "@infomaximum/localization";
 
 abstract class BaseFilter implements IBaseFilter {
   /**

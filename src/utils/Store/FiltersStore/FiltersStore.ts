@@ -9,7 +9,6 @@ import {
 } from "mobx";
 import { find, forEach, isEmpty, isFunction, isNull, isUndefined } from "lodash";
 import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
-import { boundMethod } from "autobind-decorator";
 import { FilterStorage } from "./FiltersStorage";
 import { StorePersist } from "../StorePersist";
 import { BaseStore } from "../BaseStore";
@@ -98,6 +97,8 @@ class FiltersStore extends BaseStore {
     });
 
     this.filterDescriptionGetter = filterDescriptionGetter;
+
+    this.toJSON = this.toJSON.bind(this);
 
     if (autoSave) {
       StorePersist.autoSave(this, name);
@@ -287,7 +288,6 @@ class FiltersStore extends BaseStore {
     return persistFilters;
   }
 
-  @boundMethod
   public override toJSON(): string {
     const persistStruct: NFiltersStore.TRestoreStruct = this.getPersistStruct();
 

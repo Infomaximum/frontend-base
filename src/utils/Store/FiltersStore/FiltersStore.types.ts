@@ -1,6 +1,6 @@
-import type { NBaseStore } from "@infomaximum/base/src/utils/Store/BaseStore/BaseStore.types";
 import type { ObservableMap } from "mobx";
 import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
+import type { NBaseStore } from "../BaseStore/BaseStore.types";
 
 // todo: описать типы через дженерики
 /** Пространство для типов стора фильтров */
