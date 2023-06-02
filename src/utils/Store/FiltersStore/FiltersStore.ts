@@ -12,7 +12,8 @@ import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
 import { boundMethod } from "autobind-decorator";
 import { FilterStorage } from "./FiltersStorage";
 import { StorePersist } from "../StorePersist";
-import { BaseStore, assertSimple } from "@infomaximum/base/src";
+import { BaseStore } from "../BaseStore";
+import { assertSimple } from "@infomaximum/assert";
 
 type TPrivateFiltersStoreField = "_filters" | "_lastFilterId" | "_filterDescriptions";
 
