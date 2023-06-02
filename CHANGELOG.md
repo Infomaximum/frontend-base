@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/Infomaximum/frontend-base/compare/v3.1.0...v3.2.0) (2023-06-02)
+
+
+### Features
+
+* добавлен yarn.lock ([3e91cd5](https://github.com/Infomaximum/frontend-base/commit/3e91cd56480c09a441309f7d732899bdc6bae24b))
+* добавлены фильтры ([5161dba](https://github.com/Infomaximum/frontend-base/commit/5161dba1141bc5d9275fb9b6d46308dd22dfaa36))
+
+
+### Bug Fixes
+
+* исправлен баг с не реагированием меню переключения страниц ([5797865](https://github.com/Infomaximum/frontend-base/commit/57978652e9ea6db13eb4af7b2078013b37c87942))
+* исправлен циклический импорт ([4e8d758](https://github.com/Infomaximum/frontend-base/commit/4e8d758a7f711be849c827d5a19a022d2ac070b5))
+* исправлены циклические импорты ([a4ef2ce](https://github.com/Infomaximum/frontend-base/commit/a4ef2ce5eaeeb5e31437985af8c566260731f100))
+* убран boundMethod, исправлены импорты ([a206dce](https://github.com/Infomaximum/frontend-base/commit/a206dceec441d088660bd70694970cdea650aff8))
+
 ## [3.1.0](https://github.com/Infomaximum/frontend-base/compare/v3.0.0...v3.1.0) (2023-05-26)
 
 
