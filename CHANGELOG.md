@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/Infomaximum/frontend-base/compare/v3.2.0...v3.3.0) (2023-06-05)
+
+
+### Features
+
+* добавлен экспорт BaseFilter ([210b929](https://github.com/Infomaximum/frontend-base/commit/210b929e45fdf4b501fb4febbb1e8f6729bbd02c))
+
 ## [3.2.0](https://github.com/Infomaximum/frontend-base/compare/v3.1.0...v3.2.0) (2023-06-02)
 
 
