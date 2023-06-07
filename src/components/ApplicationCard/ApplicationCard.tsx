@@ -16,7 +16,7 @@ import { isEmpty, isFunction } from "lodash";
 import { applicationCardTestId } from "../../utils/TestIds";
 import { DELETE } from "../../utils/Localization/Localization";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { Interpolation } from "@emotion/react";
 import { useTheme } from "../../decorators";
 import type { TOnItemClickParam } from "../ContextMenu/ContextMenu.types";
@@ -42,13 +42,18 @@ const ApplicationCardComponent = forwardRef<
     ref
   ) => {
     const localization = useLocalization();
+    const navigate = useNavigate();
     const theme = useTheme();
     const [contextMenuInFocus, setContextMenuInFocus] = useState(false);
     const handleClick = useCallback(() => {
+      if (pathname) {
+        navigate(pathname);
+      }
+
       if (isFunction(onClick)) {
         onClick(entity);
       }
-    }, [onClick, entity]);
+    }, [pathname, onClick, navigate, entity]);
 
     const contextMenuItems = useMemo(() => {
       const menuItems = contextMenuGetter?.(entity) ?? [];
@@ -92,31 +97,17 @@ const ApplicationCardComponent = forwardRef<
         </div>
       );
 
-      if (pathname) {
-        return (
-          <Link
-            to={pathname}
-            css={cardStyles}
-            onClick={onClick && handleClick}
-            ref={ref as ForwardedRef<HTMLAnchorElement>}
-            test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
-          >
-            {content}
-          </Link>
-        );
-      } else {
-        return (
-          <div
-            css={cardStyles}
-            onClick={onClick && handleClick}
-            ref={ref as ForwardedRef<HTMLDivElement>}
-            test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
-          >
-            {content}
-          </div>
-        );
-      }
-    }, [cardStyles, entity, handleClick, onClick, pathname, ref, tagsMeasuredWidth, theme]);
+      return (
+        <div
+          css={cardStyles}
+          onClick={handleClick}
+          ref={ref as ForwardedRef<HTMLDivElement>}
+          test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
+        >
+          {content}
+        </div>
+      );
+    }, [cardStyles, entity, handleClick, ref, tagsMeasuredWidth, theme]);
 
     const handleOpenChange = useCallback((isOpen: boolean) => {
       setContextMenuInFocus(isOpen);
