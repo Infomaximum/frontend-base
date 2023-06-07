@@ -38,8 +38,8 @@ abstract class BaseFilter implements IBaseFilter {
    */
   public abstract get isSingle(): boolean;
 
-  public abstract getAddModalComponent(): React.ComponentType<IFilterAddDrawerProps> | undefined;
-  public abstract getEditModalComponent(
+  public abstract getAddFilterComponent(): React.ComponentType<IFilterAddDrawerProps> | undefined;
+  public abstract getEditFilterComponent(
     filterValues: NFiltersStore.TFilterValues
   ): React.ComponentType<IFilterEditDrawerProps> | undefined;
   public abstract prepareValuesForServer(
