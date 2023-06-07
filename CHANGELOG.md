@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/Infomaximum/frontend-base/compare/v3.3.0...v4.0.0) (2023-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* переименованы методы
+
+### Features
+
+* Разрешено выделение текста в header ([b90b4cf](https://github.com/Infomaximum/frontend-base/commit/b90b4cfa7828e460ed88bc243dac1bb128713fe0))
+
+
+### Bug Fixes
+
+* исправлены именования методов фильтрации getAddModalComponent -> getAddFilterComponent, getEditModalComponent -> getEditFilterComponent ([beaa0f2](https://github.com/Infomaximum/frontend-base/commit/beaa0f2770f9df3b1a07ece79ff8234c1743f765))
+
 ## [3.3.0](https://github.com/Infomaximum/frontend-base/compare/v3.2.0...v3.3.0) (2023-06-05)
 
 
