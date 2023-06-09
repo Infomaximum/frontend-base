@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/Infomaximum/frontend-base/compare/v4.0.0...v4.1.0) (2023-06-09)
+
+
+### Features
+
+* переименованы интерфейсы ([772ca7b](https://github.com/Infomaximum/frontend-base/commit/772ca7b65006514f5db024872e4a7a2a7eac74b0))
+
 ## [4.0.0](https://github.com/Infomaximum/frontend-base/compare/v3.3.0...v4.0.0) (2023-06-07)
 
 
