@@ -4,7 +4,7 @@ import { type BaseFilter } from "./BaseFilter";
 
 export interface IBaseFilter {}
 
-interface ICommonFilterDrawerProps {
+interface ICommonFilterComponentProps {
   filtersStore: FiltersStore;
   onCancel: () => void;
   filterDescription: BaseFilter;
@@ -12,11 +12,11 @@ interface ICommonFilterDrawerProps {
   filterStorePath?: NFiltersStore.TFilterStorePath;
 }
 
-export interface IFilterAddDrawerProps extends ICommonFilterDrawerProps {
+export interface IFilterAddComponentProps extends ICommonFilterComponentProps {
   filterValues?: NFiltersStore.TFilterValues;
   onSaveSuccess: () => void;
 }
 
-export interface IFilterEditDrawerProps extends ICommonFilterDrawerProps {
+export interface IFilterEditComponentProps extends ICommonFilterComponentProps {
   filterName: string;
 }

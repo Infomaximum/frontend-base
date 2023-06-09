@@ -2,8 +2,8 @@ import type React from "react";
 import type { NFiltersStore } from "../../Store/FiltersStore/FiltersStore.types";
 import type {
   IBaseFilter,
-  IFilterAddDrawerProps,
-  IFilterEditDrawerProps,
+  IFilterAddComponentProps,
+  IFilterEditComponentProps,
 } from "./BaseFilter.types";
 import type { Localization } from "@infomaximum/localization";
 
@@ -38,10 +38,12 @@ abstract class BaseFilter implements IBaseFilter {
    */
   public abstract get isSingle(): boolean;
 
-  public abstract getAddFilterComponent(): React.ComponentType<IFilterAddDrawerProps> | undefined;
+  public abstract getAddFilterComponent():
+    | React.ComponentType<IFilterAddComponentProps>
+    | undefined;
   public abstract getEditFilterComponent(
     filterValues: NFiltersStore.TFilterValues
-  ): React.ComponentType<IFilterEditDrawerProps> | undefined;
+  ): React.ComponentType<IFilterEditComponentProps> | undefined;
   public abstract prepareValuesForServer(
     filterValues: NFiltersStore.TFilterValues
   ): NFiltersStore.TPreparedFilterValue;
