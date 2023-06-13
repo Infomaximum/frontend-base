@@ -17,25 +17,6 @@ export class HistoryStore {
 
   constructor() {
     this._basename = HistoryStore.getBasename();
-    const basePrefix = getBasePrefix();
-    const pathname = window.location.pathname;
-
-    /**
-     * Чтобы работали пути в saas
-     * редирект на /saasPath -> /saasPath/im
-     */
-    if (
-      process.env.NODE_ENV !== "test" &&
-      !pathname.includes(basePrefix.at(-1) === "/" ? `${basePrefix}/` : basePrefix)
-    ) {
-      window.history.replaceState(
-        "",
-        "",
-        `${
-          pathname.at(-1) !== "/" ? pathname : pathname.substring(0, pathname.length - 1)
-        }${basePrefix}`
-      );
-    }
   }
 
   public get location() {
