@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/Infomaximum/frontend-base/compare/v4.1.0...v4.1.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* исправлена проблема вызова history.replaceState при использовании библиотеки ([15bcfec](https://github.com/Infomaximum/frontend-base/commit/15bcfec58d5ce6bdeba9f6bc048b0c9e2e13263d))
+
 ## [4.1.0](https://github.com/Infomaximum/frontend-base/compare/v4.0.0...v4.1.0) (2023-06-09)
 
 
