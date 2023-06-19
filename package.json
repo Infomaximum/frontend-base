@@ -113,7 +113,7 @@
     ]
   },
   "jira-prepare-commit-msg": {
-    "messagePattern": "$M\n[$J]"
+    "messagePattern": "$M [$J]"
   },
   "repository": {
     "type": "git",
