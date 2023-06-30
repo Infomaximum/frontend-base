@@ -9,6 +9,8 @@ import {
   useMemo,
   forwardRef,
   type ReactElement,
+  type FocusEventHandler,
+  useCallback,
 } from "react";
 import {
   defaultInputStyle,
@@ -36,6 +38,22 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
     const hasSuffix = !!props.allowClear || !!props.suffix;
     const suffix = props?.suffix as ReactElement;
 
+    const handleFocus: FocusEventHandler<HTMLInputElement> = useCallback(
+      (event) => {
+        props.onFocus?.(event);
+        onFocus();
+      },
+      [onFocus, props]
+    );
+
+    const handleBlur: FocusEventHandler<HTMLInputElement> = useCallback(
+      (event) => {
+        props.onBlur?.(event);
+        onBlur();
+      },
+      [onBlur, props]
+    );
+
     const isSuffixArray = useMemo(() => {
       if (isArray(suffix?.props?.children)) {
         const filteredSuffix = suffix.props.children.filter((item: ReactElement) => item !== null);
@@ -59,15 +77,12 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
           ref={ref}
           css={[
             props.disabled ? disabledInputStyle(theme) : defaultInputStyle(theme),
-            props.autoComplete === "on" && !props.disabled && resetAutocompleteChromeStyle]}
-          onFocus={onFocus}
-          onBlur={onBlur}
+            props.autoComplete === "on" && !props.disabled && resetAutocompleteChromeStyle,
+          ]}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
-        {!isFocus  && (
-          <div
-            css={[inputOverlayStyle(theme, props?.disabled, rightOverlayOffset)]}
-          />
-        )}
+        {!isFocus && <div css={[inputOverlayStyle(theme, props?.disabled, rightOverlayOffset)]} />}
       </div>
     );
   }
@@ -78,14 +93,30 @@ const InputPassword: ForwardRefExoticComponent<PasswordProps & RefAttributes<any
     const theme = useTheme();
     const { isFocus, onFocus, onBlur } = useFocus();
 
+    const handleFocus: FocusEventHandler<HTMLInputElement> = useCallback(
+      (event) => {
+        props.onFocus?.(event);
+        onFocus();
+      },
+      [onFocus, props]
+    );
+
+    const handleBlur: FocusEventHandler<HTMLInputElement> = useCallback(
+      (event) => {
+        props.onBlur?.(event);
+        onBlur();
+      },
+      [onBlur, props]
+    );
+
     return (
       <div css={inputWrapperStyle}>
         <AntInput.Password
           {...props}
           ref={ref}
           css={props.disabled ? disabledPasswordInputStyle : defaultPasswordInputStyle(theme)}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
         {!isFocus && (
           <div css={[inputOverlayStyle(theme, props?.disabled), passwordOverlayStyle]} />
