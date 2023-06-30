@@ -1,6 +1,6 @@
 {
   "name": "@infomaximum/base",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "license": "Apache-2.0",
   "author": "IM FrontEnd Team",
   "main": "src/index.ts",
