@@ -7,7 +7,9 @@
     "declaration": true,
     "incremental": true,
     "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
-    "declarationDir": "dist"
+    "declarationDir": "dist",
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false
   },
   "exclude": ["/node_modules/", "**/node_modules", "**/.*/", "./dist"],
   "include": ["src"]

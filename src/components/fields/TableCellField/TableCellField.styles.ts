@@ -2,6 +2,11 @@ export const formItemStyle = {
   margin: 0,
 };
 
+export const editableCellWrapperStyle = (theme: TTheme) => ({
+  marginLeft: `${theme.editableTableMarginLeft - theme.tableCellHorizontalPadding}px`,
+  marginRight: `${theme.editableTableMarginRight - theme.tableCellHorizontalPadding}px`,
+});
+
 export const commonEditableCellStyle = (theme: TTheme) => ({
   minHeight: `${theme.editableTableFieldHeight}px`,
   height: `${theme.editableTableFieldHeight}px`,

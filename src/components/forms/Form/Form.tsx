@@ -115,13 +115,20 @@ class FormComponent extends Component<IFormProps, IFormState> {
       onSubmitSuccessed,
       submitSucceeded,
       submitting,
+      hasSubmitErrors,
       form: { initialize },
       setFormData,
     } = this.props;
     const prevAccess = prevState.contextData.access;
     const access = this.state.contextData.access;
 
-    if (onSubmitSuccessed && prevProps.submitting && !submitting && submitSucceeded) {
+    if (
+      onSubmitSuccessed &&
+      prevProps.submitting &&
+      !submitting &&
+      !hasSubmitErrors &&
+      submitSucceeded
+    ) {
       onSubmitSuccessed(this.getFormProvider());
     }
 
