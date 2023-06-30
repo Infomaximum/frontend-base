@@ -1,19 +1,17 @@
 import type { FiltersStore } from "../../Store/FiltersStore/FiltersStore";
 import type { NFiltersStore } from "../../Store/FiltersStore/FiltersStore.types";
-import { type BaseFilter } from "./BaseFilter";
-
-export interface IBaseFilter {}
+import type { EFilteringMethods, IBaseFilter } from "@infomaximum/base-filter";
 
 interface ICommonFilterComponentProps {
+  mode: EFilteringMethods;
   filtersStore: FiltersStore;
   onCancel: () => void;
-  filterDescription: BaseFilter;
+  filterDescription: IBaseFilter<IFilterAddComponentProps, IFilterEditComponentProps>;
   open: boolean;
-  filterStorePath?: NFiltersStore.TFilterStorePath;
 }
 
 export interface IFilterAddComponentProps extends ICommonFilterComponentProps {
-  filterValues?: NFiltersStore.TFilterValues;
+  filterValue?: NFiltersStore.TFilterValue;
   onSaveSuccess: () => void;
 }
 

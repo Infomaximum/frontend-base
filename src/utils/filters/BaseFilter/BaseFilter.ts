@@ -1,13 +1,12 @@
 import type React from "react";
 import type { NFiltersStore } from "../../Store/FiltersStore/FiltersStore.types";
-import type {
-  IBaseFilter,
-  IFilterAddComponentProps,
-  IFilterEditComponentProps,
-} from "./BaseFilter.types";
+import type { IFilterAddComponentProps, IFilterEditComponentProps } from "./BaseFilter.types";
 import type { Localization } from "@infomaximum/localization";
+import type { IBaseFilter } from "@infomaximum/base-filter";
 
-abstract class BaseFilter implements IBaseFilter {
+abstract class BaseFilter
+  implements IBaseFilter<IFilterAddComponentProps, IFilterEditComponentProps>
+{
   /**
    * Получить имя фильтра. По умолчанию возвращает typename.
    * @param typename - typename фильтра
@@ -20,15 +19,15 @@ abstract class BaseFilter implements IBaseFilter {
     typename: NFiltersStore.TFilterTypename,
     isSingle: boolean,
     lastFilterId: number,
-    _: NFiltersStore.TFilterValues
+    _: NFiltersStore.TFilterValue
   ) {
     return isSingle ? typename : `${lastFilterId}_${typename}`;
   }
 
   public abstract getTypename(): string;
   public abstract getCaption(
-    localization?: Localization,
-    filterValue?: NFiltersStore.TFilterValues
+    localization: Localization,
+    filterValue?: NFiltersStore.TFilterValue
   ): string;
 
   /**
@@ -42,19 +41,19 @@ abstract class BaseFilter implements IBaseFilter {
     | React.ComponentType<IFilterAddComponentProps>
     | undefined;
   public abstract getEditFilterComponent(
-    filterValues: NFiltersStore.TFilterValues
+    filterValue: NFiltersStore.TFilterValue
   ): React.ComponentType<IFilterEditComponentProps> | undefined;
-  public abstract prepareValuesForServer(
-    filterValues: NFiltersStore.TFilterValues
+  public abstract prepareValueForServer(
+    filterValue: NFiltersStore.TFilterValue
   ): NFiltersStore.TPreparedFilterValue;
-  public abstract getQueryParamName(filterValues: NFiltersStore.TFilterValues): string;
+  public abstract getQueryParamName(filterValue: NFiltersStore.TFilterValue): string;
 
   public abstract getFilterForPersist(
     state: NFiltersStore.TFilter
   ): NFiltersStore.TFilterPersistValue;
 
   public abstract getFilterSpoilerContent(
-    filterValues: NFiltersStore.TFilterValues,
+    filterValue: NFiltersStore.TFilterValue,
     localization: Localization
   ): React.ReactNode;
 

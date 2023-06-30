@@ -16,6 +16,7 @@
     "@infomaximum/graphql-model": "^1.2.0",
     "@infomaximum/global-types": "1.1.2",
     "@infomaximum/utility": "^7.0.0",
+    "@infomaximum/base-filter": "^1.0.0",
     "moment": "^2.29.2",
     "@apollo/client": "3.7.10",
     "@ant-design/icons": "4.7.0",

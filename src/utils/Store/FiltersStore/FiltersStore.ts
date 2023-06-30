@@ -1,13 +1,6 @@
 import type { NFiltersStore } from "./FiltersStore.types";
-import {
-  action,
-  makeObservable,
-  observable,
-  computed,
-  isObservableArray,
-  ObservableMap,
-} from "mobx";
-import { find, forEach, isEmpty, isFunction, isNull, isUndefined } from "lodash";
+import { action, makeObservable, observable, computed, ObservableMap, toJS } from "mobx";
+import { find, forEach, isEmpty, isFunction, isNil } from "lodash";
 import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
 import { FilterStorage } from "./FiltersStorage";
 import { StorePersist } from "../StorePersist";
@@ -33,21 +26,21 @@ class FiltersStore extends BaseStore {
    * @param typename - typename фильтра
    * @param isSingle - может ли быть несколько значений фильтра
    * @param lastFilterId - id добавляемого фильтра
-   * @param filterValues - значения фильтра
+   * @param filterValue - значение фильтра
    * @returns string
    */
   public static getFilterNameByTypename(
     typename: NFiltersStore.TFilterTypename,
     isSingle: boolean,
     lastFilterId: number,
-    filterValues: NFiltersStore.TFilterValues
+    filterValue: NFiltersStore.TFilterValue
   ): NFiltersStore.TFilterName {
     const filterSet = FilterStorage.getFilterSet();
 
-    const FilterDescriptionClass = filterSet[typename] as TNullable<typeof BaseFilter>;
+    const FilterDescriptionClass = filterSet[typename];
 
-    if (FilterDescriptionClass) {
-      return FilterDescriptionClass.getFilterName(typename, isSingle, lastFilterId, filterValues);
+    if (typeof FilterDescriptionClass?.getFilterName === "function") {
+      return FilterDescriptionClass.getFilterName(typename, isSingle, lastFilterId, filterValue);
     }
 
     return isSingle ? typename : `${lastFilterId}_${typename}`;
@@ -115,57 +108,42 @@ class FiltersStore extends BaseStore {
     return this._filterDescriptions;
   }
 
-  public getFilterValuesByName(filterName: NFiltersStore.TFilterName | undefined) {
-    return filterName ? this.filters.get(filterName)?.values : undefined;
+  public getFilterValueByName(filterName: NFiltersStore.TFilterName | undefined) {
+    return filterName ? this.filters.get(filterName)?.value : undefined;
   }
 
-  public getFilterValuesByTypename(typename: NFiltersStore.TFilterTypename) {
-    const values: NFiltersStore.TFilterValues = [];
+  public getFilterValueByTypename(typename: NFiltersStore.TFilterTypename) {
+    const filter = this.filters.get(typename);
 
-    this.filters.forEach((filter) => {
-      if (filter.typename === typename && isObservableArray(filter.values)) {
-        values.push(filter.values);
-      }
-    });
-
-    return values;
+    return filter?.value || null;
   }
 
   public get preparedFiltersForServer() {
     const preparedFilters: NFiltersStore.TPreparedFilters = {};
 
     forEach(this.filterDescriptions, (filterDescription: NFiltersStore.TFilterDescription) => {
-      const filterValues = this.getFilterValuesByTypename(filterDescription.getTypename());
+      const filterValue = this.getFilterValueByTypename(filterDescription.getTypename());
 
-      const { prepareValuesForServer } = filterDescription;
-      if (!isFunction(prepareValuesForServer)) {
+      assertSimple(
+        isFunction(filterDescription.prepareValueForServer),
+        `В описании фильтра "${filterDescription.getTypename()}" не задана функция prepareValueForServer для формирования данных запроса!`
+      );
+
+      const preparedValues = filterDescription.prepareValueForServer(filterValue);
+
+      if (!isNil(preparedValues)) {
         assertSimple(
-          false,
-          `В описании фильтра "${filterDescription.getTypename()}" не задана функция prepareValuesForServer для формирования данных запроса!`
+          isFunction(filterDescription.getQueryParamName),
+          `В описании фильтра "${filterDescription.getTypename()}" не задана функция getQueryParamName для получения имени параметра запроса!`
         );
-      }
 
-      forEach(filterValues, (filterValue) => {
-        const preparedValues = filterDescription.prepareValuesForServer(filterValue);
-
-        if (!isUndefined(preparedValues) && !isNull(preparedValues)) {
-          const { getQueryParamName } = filterDescription;
-
-          if (!getQueryParamName || !isFunction(getQueryParamName)) {
-            assertSimple(
-              false,
-              `В описании фильтра "${filterDescription.getTypename()}" не задана функция getQueryParamName для получения имени параметра запроса!`
-            );
-          }
-
-          const queryParamName = getQueryParamName(filterValue);
-          if (preparedFilters[queryParamName]) {
-            preparedFilters[queryParamName].push(...preparedValues);
-          } else {
-            preparedFilters[queryParamName] = preparedValues;
-          }
+        const queryParamName = filterDescription.getQueryParamName(filterValue);
+        if (preparedFilters[queryParamName]) {
+          preparedFilters[queryParamName].push(...preparedValues);
+        } else {
+          preparedFilters[queryParamName] = preparedValues;
         }
-      });
+      }
     });
 
     return preparedFilters;
@@ -194,14 +172,11 @@ class FiltersStore extends BaseStore {
   /**
    * Установить значение фильтра по имени
    */
-  public setFilterByName(
-    filterName: NFiltersStore.TFilterName,
-    values: NFiltersStore.TFilterValues
-  ) {
+  public setFilterByName(filterName: NFiltersStore.TFilterName, value: NFiltersStore.TFilterValue) {
     const oldFilter = this.filters.get(filterName);
 
     if (oldFilter) {
-      const newFilterState = { ...oldFilter, values };
+      const newFilterState = { ...oldFilter, value };
 
       this._filters.set(filterName, newFilterState);
     }
@@ -212,7 +187,7 @@ class FiltersStore extends BaseStore {
    */
   public addFilter(
     filterTypename: NFiltersStore.TFilterTypename,
-    values: NFiltersStore.TFilterValues,
+    value: NFiltersStore.TFilterValue,
     isSingle: boolean = true
   ) {
     if (!isSingle) {
@@ -223,12 +198,12 @@ class FiltersStore extends BaseStore {
       filterTypename,
       isSingle,
       this._lastFilterId,
-      values
+      value
     );
 
     const filterState = {
       [FiltersStore.typenameFilterFieldName]: filterTypename,
-      values: values,
+      value,
     };
 
     this._filters.set(filterName, filterState);
@@ -274,7 +249,7 @@ class FiltersStore extends BaseStore {
         }
 
         if (filterDescriptionCache) {
-          const persistStruct = filterDescriptionCache.getFilterForPersist(filter);
+          const persistStruct = filterDescriptionCache.getFilterForPersist(toJS(filter));
 
           if (persistStruct) {
             persistFilters.push(
@@ -318,7 +293,7 @@ class FiltersStore extends BaseStore {
           filter.type,
           isSingle,
           this._lastFilterId,
-          restoredFilter?.values
+          restoredFilter?.value
         );
 
         this._filters.set(filterName, restoredFilter);

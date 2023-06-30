@@ -1,6 +1,13 @@
 import type { ObservableMap } from "mobx";
 import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
 import type { NBaseStore } from "../BaseStore/BaseStore.types";
+import type {
+  TFilterState,
+  TFilterValue as TBaseFilterValue,
+  TFilterPersistValue as TBaseFilterPersistValue,
+  TFilterTypename as TBaseFilterTypename,
+  TPreparedFilterValue as TBasePreparedFilterValue,
+} from "@infomaximum/base-filter";
 
 // todo: описать типы через дженерики
 /** Пространство для типов стора фильтров */
@@ -24,7 +31,7 @@ export declare namespace NFiltersStore {
   /**
    * Тип имени типа фильтра
    */
-  type TFilterTypename = string;
+  type TFilterTypename = TBaseFilterTypename;
 
   /**
    * Тип описания фильтра
@@ -39,32 +46,17 @@ export declare namespace NFiltersStore {
   /**
    * Тип одного значения фильтра
    */
-  type TFilterValue = any;
-
-  /**
-   * Тип значений одного фильтра
-   */
-  type TFilterValues = TFilterValue[];
+  type TFilterValue = TBaseFilterValue;
 
   /**
    * Тип структуры фильтра
    */
-  type TFilter = {
-    typename: TFilterTypename;
-    values: TFilterValues;
-  };
+  type TFilter = TFilterState;
 
   /**
    * Тип структуры фильтра для сохранения в localStorage или url
    */
-  type TFilterPersistValue = {
-    type: TFilterTypename;
-  };
-
-  /**
-   * Путь для хранения фильтров по сущностям
-   */
-  type TFilterStorePath = string;
+  type TFilterPersistValue = TBaseFilterPersistValue;
 
   /**
    * Тип набора фильтров
@@ -74,7 +66,7 @@ export declare namespace NFiltersStore {
   /**
    * Тип одного значения фильтра подготовленного, для отправки на сервер
    */
-  type TPreparedFilterValue = any;
+  type TPreparedFilterValue = TBasePreparedFilterValue;
 
   /**
    * Тип значений фильтров подготовленных, для отправки на сервер
@@ -89,11 +81,23 @@ export declare namespace NFiltersStore {
   /**
    * Геттер для получения filterDescription по правилам модуля
    */
-  type TFilterDescriptionGetter = (filter: TFilterPersistValue) => typeof BaseFilter;
+  type TFilterDescriptionGetter = (
+    filter: TFilterPersistValue
+  ) => IFilterDescriptionStaticStruct | undefined;
 
-  export interface IFilterDescriptionClass {
-    new (...args: any[]): BaseFilter;
+  export interface IFilterDescriptionStaticStruct {
+    getFilterName?(
+      typename: NFiltersStore.TFilterTypename,
+      isSingle: boolean,
+      lastFilterId: number,
+      filterValue: NFiltersStore.TFilterValue
+    ): NFiltersStore.TFilterName;
 
-    restoreFilterByStruct(state: Record<string, any>): void;
+    restoreFilterByStruct(state: Record<string, any>): TFilter;
   }
+
+  export type TFilterDescriptionStruct = {
+    typename: string;
+    FilterClass: IFilterDescriptionStaticStruct;
+  };
 }
