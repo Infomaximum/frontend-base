@@ -316,7 +316,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                   columns={columns}
                   showSorterTooltip={false}
                   expandable={
-                    expandable ?? this.state.isExpandableTable ? this.expandable : undefined
+                    expandable ?? (this.state.isExpandableTable ? this.expandable : undefined)
                   }
                   components={this.getTableComponents(components)}
                   rowSelection={this.getRowSelectionConfig(rowSelection)}
