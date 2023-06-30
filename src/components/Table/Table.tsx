@@ -271,6 +271,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
       isShowDividers,
       isStretchByParent,
       isStretchToBottom,
+      expandable,
       ...rest
     } = this.props;
 
@@ -314,7 +315,9 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                   loading={loading}
                   columns={columns}
                   showSorterTooltip={false}
-                  expandable={this.state.isExpandableTable ? this.expandable : undefined}
+                  expandable={
+                    expandable ?? this.state.isExpandableTable ? this.expandable : undefined
+                  }
                   components={this.getTableComponents(components)}
                   rowSelection={this.getRowSelectionConfig(rowSelection)}
                   scroll={scroll}
