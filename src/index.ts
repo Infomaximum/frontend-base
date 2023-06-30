@@ -12,7 +12,6 @@
 import { configure } from "mobx";
 
 configure({
-  useProxies: "never",
   enforceActions: "always",
   computedRequiresReaction: false,
   reactionRequiresObservable: false,
