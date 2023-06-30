@@ -162,6 +162,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   const handleSearch = useCallback(
     (text: string) => {
       if (!isSearchHandlerEnabled.current) {
+        setSearchValueState(undefined);
         return;
       }
 

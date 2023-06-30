@@ -347,6 +347,13 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
 
   private handleChange = (selectStruct: LabeledValue | LabeledValue[] | undefined): void => {
     const { onChange } = this.props;
+
+    // сделано для зануления стейта поиска после перехода на другую вкладку браузера и обратно
+    const { searchText } = this.state;
+    if (searchText) {
+      this.handleSearchChange("");
+    }
+
     selectStruct = isArray(selectStruct) ? selectStruct : selectStruct ? [selectStruct] : [];
     onChange(compact(map(selectStruct, ({ value }) => this.mapSelectValueToModel(value))));
   };
