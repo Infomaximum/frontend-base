@@ -60,7 +60,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
     children,
     "test-id": testId,
     onItemClick,
-    renderChildIfItemsEmpty = false,
+    isRenderChildIfItemsEmpty = false,
     ...rest
   } = props;
   const { isFeatureEnabled } = useFeature();
@@ -202,7 +202,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   }, [menuItems]);
 
   if (filteredItems.length === 0) {
-    if (renderChildIfItemsEmpty) {
+    if (isRenderChildIfItemsEmpty) {
       return <>{dropDownContent}</>;
     }
 

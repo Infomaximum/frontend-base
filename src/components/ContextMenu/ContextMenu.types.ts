@@ -59,7 +59,7 @@ export interface IContextMenuProps extends Omit<IDropdownProps, "overlay" | "ove
   /** Определяет метод сортировки пунктов контекстного меню. */
   sortBy?: keyof typeof ESortingMethodsNames;
   /** Отображать ли внутренний контент вместо null, если элементов контекстного меню нет ([]) */
-  renderChildIfItemsEmpty?: boolean;
+  isRenderChildIfItemsEmpty?: boolean;
 }
 
 export type TSortingMethodsList = {
