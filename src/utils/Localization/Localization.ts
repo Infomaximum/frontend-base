@@ -8,11 +8,6 @@ export const CONTINUE = {
   en: "Continue",
 };
 
-export const ERROR_MESSAGE = {
-  ru: "Необратимое действие/Ошибка",
-  en: "Irreversible action/Error",
-};
-
 export const ERROR = {
   ru: "Ошибка",
   en: "Error",

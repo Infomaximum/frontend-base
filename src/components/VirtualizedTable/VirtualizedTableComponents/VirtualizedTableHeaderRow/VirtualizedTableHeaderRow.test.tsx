@@ -2,7 +2,7 @@ import enzyme from "enzyme";
 import { Localization } from "@infomaximum/localization";
 import { VirtualizedTableHeaderRow } from "./VirtualizedTableHeaderRow";
 import type { ColumnType, SortOrder } from "antd/lib/table/interface";
-import { ERROR_MESSAGE } from "../../../../utils/Localization/Localization";
+import { ERROR } from "../../../../utils/Localization/Localization";
 import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";
 
 const localization = new Localization({ language: Localization.Language.ru });
@@ -11,7 +11,7 @@ const selectChange = jest.fn();
 
 const renderComponent = (isLoading: boolean) => {
   const columns: ColumnType<Partial<TExtendColumns<TBaseRow>>>[] = [
-    { title: localization.getLocalized(ERROR_MESSAGE), sorter: true },
+    { title: localization.getLocalized(ERROR), sorter: true },
   ];
   const columnsOrders: TDictionary<SortOrder[]> = {};
 
@@ -41,7 +41,7 @@ describe("Тест компонента VirtualizedTableHeaderRow", () => {
   });
   it("Проверка title columns у компонента VirtualizedTableHeaderRow", () => {
     expect(renderComponent(false).find("div[test-id='virtualized-table_div']").text()).toEqual(
-      localization.getLocalized(ERROR_MESSAGE)
+      localization.getLocalized(ERROR)
     );
   });
   it("Проверка onSelectChange у компонента VirtualizedTableHeaderRow", () => {

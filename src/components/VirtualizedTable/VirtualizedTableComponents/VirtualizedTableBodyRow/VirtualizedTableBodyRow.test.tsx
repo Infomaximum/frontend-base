@@ -2,7 +2,7 @@ import enzyme from "enzyme";
 import { Localization } from "@infomaximum/localization";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableBodyRow";
 import type { ColumnType } from "antd/lib/table";
-import { ERROR_MESSAGE } from "../../../../utils/Localization/Localization";
+import { ERROR } from "../../../../utils/Localization/Localization";
 import { tableExpanderTestId } from "../../../../utils/TestIds";
 import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";
 
@@ -15,7 +15,7 @@ const columns: ColumnType<Partial<TExtendColumns<TBaseRow>>>[] = [
     render: () => {
       return (
         <div>
-          <h6>{localization.getLocalized(ERROR_MESSAGE)}</h6>
+          <h6>{localization.getLocalized(ERROR)}</h6>
         </div>
       );
     },
@@ -77,8 +77,6 @@ describe("Тест компонента VirtualizedTableBodyRow", () => {
   });
 
   it("Проверка отрисовки передаваемых компонентов", () => {
-    expect(renderComponent(false).find("h6").text()).toEqual(
-      localization.getLocalized(ERROR_MESSAGE)
-    );
+    expect(renderComponent(false).find("h6").text()).toEqual(localization.getLocalized(ERROR));
   });
 });
