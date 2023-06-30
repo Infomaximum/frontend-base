@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import type { ITableOwnProps, ITableProps, ITableState } from "./Table.types";
+import type { ITableOwnProps, ITableProps, ITableState, TTableOpacity } from "./Table.types";
 import type { RenderExpandIconProps } from "rc-table/lib/interface";
 import { Table as AntTable, ConfigProvider } from "antd";
 import { VirtualizedTable } from "../VirtualizedTable/VirtualizedTable";
@@ -14,7 +14,12 @@ import {
   filter,
   isFunction,
 } from "lodash";
-import { emptyTableStyle, borderTopStyle, transparentBordersStyle } from "./Table.styles";
+import {
+  emptyTableStyle,
+  borderTopStyle,
+  transparentBordersStyle,
+  tableStyle,
+} from "./Table.styles";
 import { type Interpolation, withTheme } from "@emotion/react";
 import { Empty } from "../Empty/Empty";
 import { observer } from "mobx-react";
@@ -63,6 +68,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
 
   public override state: ITableState = {
     isExpandableTable: undefined,
+    tableOpacity: 0,
   };
 
   public override componentDidMount() {
@@ -73,6 +79,12 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
         window.addEventListener("resize", this.updateOnResize);
       }
     }
+
+    /**
+     * TODO: этот костыль решает проблему появления head таблицы позже body,
+     * что в свою очередь связано с работой ant design
+     */
+    queueMicrotask(() => this.setState({ tableOpacity: 1 }));
   }
 
   public override componentDidUpdate(prevProps: ITableProps<T>) {
@@ -210,10 +222,10 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
     return newRowProps;
   };
 
-  private getStyleTable = (): Interpolation<TTheme> => {
+  private getStyleTable = (opacity: TTableOpacity): Interpolation<TTheme> => {
     const { dataSource, customStyle, isShowDividers, theme } = this.props;
 
-    const styles: Interpolation<TTheme>[] = [];
+    const styles: Interpolation<TTheme>[] = [tableStyle(opacity)];
 
     if (!dataSource || isEmpty(dataSource)) {
       styles.push(emptyTableStyle);
@@ -298,7 +310,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                 <AntTable<T>
                   pagination={false}
                   {...rest}
-                  css={this.getStyleTable()}
+                  css={this.getStyleTable(this.state.tableOpacity)}
                   loading={loading}
                   columns={columns}
                   showSorterTooltip={false}

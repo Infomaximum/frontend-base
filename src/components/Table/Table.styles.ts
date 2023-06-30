@@ -1,4 +1,5 @@
 import { ellipsisStyle } from "../../styles/common.styles";
+import type { TTableOpacity } from "./Table.types";
 
 export const borderTopStyle = (theme: TTheme) =>
   ({
@@ -22,3 +23,5 @@ export const transparentBordersStyle = {
     ...ellipsisStyle,
   } as const,
 };
+
+export const tableStyle = (opacity: TTableOpacity) => ({ opacity });

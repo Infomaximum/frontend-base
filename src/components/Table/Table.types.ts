@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { ColumnProps, TableProps } from "antd/lib/table";
 import type { Localization } from "@infomaximum/localization";
 import type { Interpolation } from "@emotion/react";
@@ -37,6 +38,9 @@ export interface ITableOwnProps<T> extends TTableProps<T> {
 
 export interface ITableProps<T> extends IWithThemeProps<TTheme>, ITableOwnProps<T> {}
 
+export type TTableOpacity = CSSProperties["opacity"];
+
 export interface ITableState {
   isExpandableTable: boolean | undefined;
+  tableOpacity: TTableOpacity;
 }
