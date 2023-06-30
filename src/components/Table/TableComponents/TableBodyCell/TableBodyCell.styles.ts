@@ -7,12 +7,11 @@ export const tableBodyCellStyle = (theme: TTheme) => ({
   maxHeight: `${theme.commonTableRowHeight}px`,
   lineHeight: `${theme.tableRowLineHeight}px`,
   padding: `
-    ${theme.tableCellVerticalPadding}px 
-    ${theme.tableCellHorizontalPadding}px 
-    ${theme.tableCellVerticalPadding - theme.tableRowBorderSize}px 
+    ${theme.tableCellVerticalPadding}px
+    ${theme.tableCellHorizontalPadding}px
+    ${theme.tableCellVerticalPadding - theme.tableRowBorderSize}px
     !important`,
   overflow: "hidden",
-  textOverflow: "ellipsis",
   "&.ant-table-selection-column": {
     overflow: "hidden", // fix для IE
   },

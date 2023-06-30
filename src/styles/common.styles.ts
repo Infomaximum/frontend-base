@@ -34,7 +34,7 @@ export const closeModalIconStyle = (theme: TTheme) => ({
   },
 });
 
-//для дальнейшей кастомизации стилей всех лаяутов
+// для дальнейшей кастомизации стилей всех лаяутов
 export const commonLayoutStyle = () =>
   ({
     height: "100%",
@@ -56,4 +56,36 @@ export const commonContentListStyle = () =>
     ...commonContentStyle(),
     padding: `16px 24px 0 24px`,
     overflow: "hidden",
+  } as const);
+
+/** Cтили для забледнения текста при переполнении [PT-12198] */
+/** Общий стиль забледнения */
+export const textOverflowOverlayStyle = (props: { [key: string]: string | number }) => {
+  const { backgroundColor, zIndex = 9, top = 0, right = 0, bottom = 0, width = "24px" } = props;
+
+  return {
+    position: "absolute",
+    top: top,
+    right: right,
+    bottom: bottom,
+    width: width,
+    // rgba(255, 255, 255, 0) необходимо для корректного отображения градиента в Safari
+    backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0), ${backgroundColor})`,
+    pointerEvents: "none",
+    zIndex: zIndex,
+  } as const;
+};
+
+/** Cтиль наложения обёртки:
+ * multiply - для светлых цветов
+ * screen - для тёмных цветов
+ */
+export type TTextOverflowMode = "multiply" | "screen";
+
+/** Cтиль для обёртки элемента, где возможно переполнение текста */
+export const textOverflowWrapperStyle = (mode: TTextOverflowMode = "multiply") =>
+  ({
+    position: "relative",
+    overflow: "hidden",
+    mixBlendMode: mode,
   } as const);

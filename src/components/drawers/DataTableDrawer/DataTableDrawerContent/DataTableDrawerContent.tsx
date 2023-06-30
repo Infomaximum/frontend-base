@@ -6,10 +6,11 @@ import { tableStyle } from "./DataTableDrawerContent.styles";
 import { observer } from "mobx-react";
 import { renderErrorAlert } from "./DataTableDrawerContent.utils";
 import type { IModel } from "@infomaximum/graphql-model";
-import { EllipsisTooltip } from "../../../EllipsisTooltip/EllipsisTooltip";
 import { useLocalization } from "../../../../decorators/hooks/useLocalization";
 import { DataTable } from "../../../DataTable/DataTable";
 import { ELimitsStateNames } from "../../../../utils/const";
+import { Tooltip } from "../../../Tooltip";
+import { TextOverflow } from "../../../TextOverflow";
 
 const DataTableDrawerContentComponent: React.FC<IDataTableDrawerContentProps> = ({
   handlerTableDisplayValues,
@@ -31,7 +32,11 @@ const DataTableDrawerContentComponent: React.FC<IDataTableDrawerContentProps> = 
           dataIndex: "name",
           title: localization.getLocalized(ALL),
           ellipsis: true,
-          render: (text) => <EllipsisTooltip title={text}>{text}</EllipsisTooltip>,
+          render: (text) => (
+            <TextOverflow isRelative={false}>
+              <Tooltip title={text}>{text}</Tooltip>
+            </TextOverflow>
+          ),
         },
       ],
     [localization, columns]

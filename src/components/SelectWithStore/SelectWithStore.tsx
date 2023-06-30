@@ -3,7 +3,6 @@ import type { ISelectWithStoreProps, THandlerDisplayValues } from "./SelectWithS
 import { compact, every, isArray, isFunction, isNull, isString, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";
 import type { Model } from "@infomaximum/graphql-model";
-import { EllipsisTooltip } from "../EllipsisTooltip";
 import { useFeature } from "../../decorators/hooks/useFeature";
 import { useStore } from "../../decorators/hooks/useStore";
 import type { ISelectProps } from "../Select/Select.types";
@@ -24,7 +23,7 @@ const mapModelToSelectOption = (model: Model, handlerDisplayValues?: THandlerDis
   }
 
   return {
-    label: <EllipsisTooltip>{label}</EllipsisTooltip>,
+    label: label,
     value: model.getInnerName(),
     [optionFilterProp]: model.getDisplayName(),
   };

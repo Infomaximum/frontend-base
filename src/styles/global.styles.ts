@@ -1,5 +1,6 @@
 import type { Interpolation } from "@emotion/react";
 import { userAgent, EUserAgents } from "@infomaximum/utility";
+import { textOverflowOverlayStyle } from "./common.styles";
 
 export const SCROLLBAR_WIDTH = 6;
 export const SCROLLBAR_HEIGHT = 6;
@@ -207,6 +208,9 @@ const antGlobalStyle = (theme: TTheme) => ({
   ".ant-select-disabled .ant-select-selection-placeholder": {
     color: theme.grey7Color,
   },
+  ".ant-select-item-option-content": {
+    textOverflow: "unset",
+  },
   ".ant-select-item": {
     color: theme.grey9Color,
     "&.ant-select-item-option-selected": {
@@ -227,7 +231,33 @@ const antGlobalStyle = (theme: TTheme) => ({
       color: theme.thrust5Color,
     },
   },
-
+  // Стили для забледнения текста [PT-12198]
+  ".ant-select-item-option": {
+    position: "relative",
+    "::after": {
+      ...textOverflowOverlayStyle({
+        width: "56px",
+        backgroundColor: theme.grey1Color,
+      }),
+      content: "''",
+      boxSizing: "content-box",
+      height: "100%",
+      pointerEvents: "none",
+    },
+  },
+  ".ant-select-item-option.ant-select-item-option-disabled": {
+    "::after": {
+      content: "none",
+    },
+  },
+  ".ant-select-item-option.ant-select-item-option-active": {
+    "::after": {
+      backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0), ${theme.grey3Color})`,
+    },
+  },
+  ".ant-select-item-option-state": {
+    zIndex: 10,
+  },
   ".ant-select-dropdown, .ant-dropdown-menu": {
     "&:not(.ant-dropdown-menu-submenu-popup)": {
       boxShadow: "0 2px 8px 0 rgba(71, 71, 71, 0.2)",
@@ -289,6 +319,32 @@ const antGlobalStyle = (theme: TTheme) => ({
   ".ant-picker-suffix": {
     pointerEvents: "unset",
     cursor: "pointer",
+  },
+
+  // Стили для забледнения текста при переполнении в компоненте выбора дат [PT-12198]
+  ".ant-picker-input": {
+    position: "relative",
+    "::after": {
+      ...textOverflowOverlayStyle({
+        backgroundColor: theme.grey1Color,
+        width: "24px",
+      }),
+      content: "''",
+      height: "100%",
+      pointerEvents: "none",
+    },
+  },
+
+  // Сброс стилей по умолчанию у полей в Chrome
+  ".ant-input::placeholder": {
+    color: theme.grey7Color,
+  },
+  ".ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused": {
+    borderColor: theme.blue4Color,
+    boxShadow: `0px 0px 4px 0px ${theme.blue4Color}`,
+  },
+  ".ant-input[disabled]": {
+    boxShadow: `inset 0 0 0 1px ${theme.grey3Color}, inset 0 0 0 100px ${theme.grey3Color} !important`,
   },
 });
 

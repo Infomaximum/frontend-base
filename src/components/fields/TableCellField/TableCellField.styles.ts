@@ -11,7 +11,6 @@ export const commonEditableCellStyle = (theme: TTheme) => ({
 export const ellipsisEditableCellStyle = {
   whiteSpace: "nowrap",
   overflow: "hidden",
-  textOverflow: "ellipsis",
 } as const;
 
 export const fieldComponentStyle = {

@@ -24,7 +24,6 @@ export const closeCircleStyle = (theme: TTheme) => ({
 
 export const inputSelectedContentStyle = {
   overflow: "hidden",
-  textOverflow: "ellipsis",
 };
 
 export const hintOptionStyle = {

@@ -1,0 +1,1 @@
+export { TextOverflow } from "./TextOverflow";

@@ -27,7 +27,6 @@ import {
   hintContainerStyle,
   suffixIconStyle,
   closeCircleStyle,
-  inputSelectedContentStyle,
   hintOptionStyle,
 } from "./SelectComponent.styles";
 import {
@@ -177,7 +176,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
             return {
               value: model?.getInnerName(),
               label: (
-                <div css={inputSelectedContentStyle} {...labelProps}>
+                <div {...labelProps}>
                   <Tooltip title={title}>
                     {displayValue || localization.getLocalized(NOT_SELECTED)}
                   </Tooltip>

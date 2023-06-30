@@ -16,8 +16,8 @@ export const withModalError: TPropInjector<IWithModalErrorProps, IWithModalAddit
         showModalError(props.error);
       }
       return () => {
-        showModalError(undefined)
-      }
+        showModalError(undefined);
+      };
     }, [props.error, showModalError]);
 
     return <Component {...props} showModalError={showModalError} />;

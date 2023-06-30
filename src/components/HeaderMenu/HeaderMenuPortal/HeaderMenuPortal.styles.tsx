@@ -1,3 +1,4 @@
+import { textOverflowOverlayStyle } from "../../../styles";
 import {
   wrapMenuStyle,
   iconsHoverStyle,
@@ -14,7 +15,6 @@ export const titleStyle = (theme: TTheme) =>
     fontWeight: 500,
     color: `${theme.headerPanel.textColor}`,
     overflow: "hidden",
-    textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     paddingLeft: "8px",
     paddingRight: "12px",
@@ -100,3 +100,15 @@ export const headerBodyRightWithoutLeftAndCenterStyle = {
   flex: "0 0 auto",
   justifyContent: "flex-end",
 };
+
+export const titleOverlayStyle = (theme: TTheme) =>
+  ({
+    "::after": {
+      content: "''",
+      ...textOverflowOverlayStyle({
+        backgroundColor: theme.headerPanel.backgroundColor,
+      }),
+      pointerEvents: "none",
+      height: "100%",
+    },
+  } as const);

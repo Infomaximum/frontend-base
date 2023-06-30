@@ -8,6 +8,7 @@ import {
   type RefAttributes,
   useMemo,
   forwardRef,
+  type ReactElement,
 } from "react";
 import {
   defaultInputStyle,
@@ -15,22 +16,59 @@ import {
   disabledTextAreaStyle,
   disabledPasswordInputStyle,
   defaultPasswordInputStyle,
+  inputWrapperStyle,
+  inputOverlayStyle,
+  passwordOverlayStyle,
+  resetAutocompleteChromeStyle,
 } from "./Input.styles";
 import type { IInputProps, IInputStaticComponents, ITextAreaProps } from "./Input.types";
 import type { AutoSizeType } from "rc-textarea";
 import type { InputRef, PasswordProps } from "antd/lib/input";
 import { useTheme } from "../../decorators/hooks/useTheme";
+import { useFocus } from "../../decorators";
+import { isArray } from "lodash";
 
 const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
   (props, ref: Ref<InputRef>) => {
     const theme = useTheme();
+    const { isFocus, onFocus, onBlur } = useFocus();
+
+    const hasSuffix = !!props.allowClear || !!props.suffix;
+    const suffix = props?.suffix as ReactElement;
+
+    const isSuffixArray = useMemo(() => {
+      if (isArray(suffix?.props?.children)) {
+        const filteredSuffix = suffix.props.children.filter((item: ReactElement) => item !== null);
+
+        return filteredSuffix.length > 1;
+      }
+    }, [suffix?.props.children]);
+
+    const rightOverlayOffset = hasSuffix
+      ? isSuffixArray
+        ? "52px" // отступ забледнения если справа у поля две иконки
+        : props.disabled
+        ? "27px" // отступ забледнения если справа одна иконка и нет рамки у поля
+        : "28px" // отступ забледнения если справа одна иконка и есть рамка у поля
+      : "8px";
 
     return (
-      <AntInput
-        {...props}
-        ref={ref}
-        css={props.disabled ? disabledInputStyle(theme) : defaultInputStyle(theme)}
-      />
+      <div css={inputWrapperStyle}>
+        <AntInput
+          {...props}
+          ref={ref}
+          css={[
+            props.disabled ? disabledInputStyle(theme) : defaultInputStyle(theme),
+            props.autoComplete === "on" && !props.disabled && resetAutocompleteChromeStyle]}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+        {!isFocus  && (
+          <div
+            css={[inputOverlayStyle(theme, props?.disabled, rightOverlayOffset)]}
+          />
+        )}
+      </div>
     );
   }
 );
@@ -38,12 +76,21 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
 const InputPassword: ForwardRefExoticComponent<PasswordProps & RefAttributes<any>> = forwardRef(
   (props, ref: Ref<InputRef>) => {
     const theme = useTheme();
+    const { isFocus, onFocus, onBlur } = useFocus();
+
     return (
-      <AntInput.Password
-        {...props}
-        ref={ref}
-        css={props.disabled ? disabledPasswordInputStyle : defaultPasswordInputStyle(theme)}
-      />
+      <div css={inputWrapperStyle}>
+        <AntInput.Password
+          {...props}
+          ref={ref}
+          css={props.disabled ? disabledPasswordInputStyle : defaultPasswordInputStyle(theme)}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+        {!isFocus && (
+          <div css={[inputOverlayStyle(theme, props?.disabled), passwordOverlayStyle]} />
+        )}
+      </div>
     );
   }
 );

@@ -20,6 +20,5 @@ export const tableLinkStyle = (theme: TTheme) =>
 
 export const ellipsisStyle = {
   overflow: "hidden",
-  textOverflow: "ellipsis",
   whiteSpace: "nowrap",
 } as const;

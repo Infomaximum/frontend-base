@@ -1,4 +1,5 @@
 import { first, last, sum, takeRight, tail } from "lodash";
+import { textOverflowOverlayStyle, textOverflowWrapperStyle } from "../../styles";
 
 export const disableSelectStyle = (theme: TTheme) => ({
   backgroundColor: theme.grey3Color,
@@ -10,7 +11,6 @@ export const multipleSelectStyle = {
   ".ant-select-selection-search": {
     marginInlineStart: "3px",
     height: "22px",
-    textOverflow: "ellipsis",
   },
   ".ant-select-selection-overflow-item+.ant-select-selection-overflow-item .ant-select-selection-search":
     {
@@ -31,10 +31,6 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
 
     ".ant-select-selector": {
       paddingRight: `${suffixWidth}px !important`,
-
-      ".ant-select-selection-search-input": {
-        textOverflow: "ellipsis",
-      },
 
       ".ant-select-selection-overflow": {
         paddingRight: `${inputRightPadding}px`,
@@ -58,6 +54,7 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
 
       ".ant-select-selection-placeholder": {
         width: `calc(100% - ${suffixWidth}px)`,
+        textOverflow: "unset",
       },
     },
     ".ant-select-selection-item": {
@@ -74,6 +71,7 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
       top: 0,
       marginTop: 0,
       height: `${iconHeight}px`,
+      zIndex: "100",
     },
     ".ant-select-clear": {
       width: `${first(iconWidths)}px`,
@@ -176,7 +174,6 @@ export const suffixIconSpinnerStyle = {
 
 export const textWrapperStyle = {
   whiteSpace: "nowrap",
-  textOverflow: "ellipsis",
   overflow: "hidden",
 } as const;
 
@@ -184,3 +181,18 @@ export const arrowSuffixIconStyle = (theme: TTheme) => ({
   ...suffixIconStyle(theme),
   pointerEvents: "none" as const,
 });
+
+export const selectWrapperStyle = {
+  ...textOverflowWrapperStyle,
+} as const;
+
+export const selectOverlayStyle = (theme: TTheme, isDisabled: boolean = false) =>
+  ({
+    ...textOverflowOverlayStyle({
+      top: "1px",
+      right: isDisabled ? 0 : "28px",
+      bottom: "1px",
+      backgroundColor: isDisabled ? theme.grey3Color : theme.grey1Color,
+    }),
+    pointerEvents: "none",
+  } as const);

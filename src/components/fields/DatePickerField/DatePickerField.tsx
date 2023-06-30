@@ -5,7 +5,7 @@ import type {
   IDatePickerFormFieldProps,
   IDatePickerProps,
 } from "./DatePickerField.types";
-import { datePickerFieldStyle } from "./DatePickerField.styles";
+import { datePickerFieldStyle, datePickerOverlayStyle } from "./DatePickerField.styles";
 import moment, { type Moment } from "moment";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useClearElementFromAttribute } from "../../../decorators/hooks/useClearElementFromAttribute";
@@ -65,7 +65,7 @@ const DatePicker: FC<IDatePickerProps> = ({
   }
 
   return (
-    <div ref={ref}>
+    <div ref={ref} css={datePickerOverlayStyle}>
       <Tooltip title={value?.format?.(momentFormat as string) || null}>
         <AntDatePicker
           key="ant-date-picker"

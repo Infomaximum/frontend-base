@@ -33,16 +33,17 @@ const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
 
   if (headerMode === headerModes.SIMPLE_INPUT) {
     return (
-      <Search
-        key="input-search"
-        placeholder={searchPlaceholder || localization.getLocalized(SEARCH)}
-        onChange={onSearchChange}
-        test-id={dataTableHeaderInputSearchTestId}
-        value={searchValue}
-        css={headerMarginStyle}
-        autoFocus={true}
-        allowClear={allowClear}
-      />
+      <div css={headerMarginStyle}>
+        <Search
+          key="input-search"
+          placeholder={searchPlaceholder || localization.getLocalized(SEARCH)}
+          onChange={onSearchChange}
+          test-id={dataTableHeaderInputSearchTestId}
+          value={searchValue}
+          autoFocus={true}
+          allowClear={allowClear}
+        />
+      </div>
     );
   }
 

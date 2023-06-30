@@ -12,6 +12,8 @@ import {
   multipleSelectStyle,
   suffixIconSpinnerStyle,
   tagStyle,
+  selectWrapperStyle,
+  selectOverlayStyle,
 } from "./Select.styles";
 import type { ISelectProps } from "./Select.types";
 import { Tag } from "../Tag/Tag";
@@ -323,7 +325,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   };
 
   return (
-    <div ref={fieldWrapperRef}>
+    <div ref={fieldWrapperRef} css={selectWrapperStyle}>
       <AntSelect<T>
         {...rest}
         ref={selectRef}
@@ -358,6 +360,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         options={options}
         filterOption={filterOption}
       />
+      <div css={selectOverlayStyle(theme, disabled)} />
     </div>
   );
 };

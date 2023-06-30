@@ -47,3 +47,4 @@ export * from "./Tooltip";
 export * from "./Tree";
 export * from "./VirtualizedTable";
 export * from "./WrapperContainer";
+export * from "./TextOverflow";

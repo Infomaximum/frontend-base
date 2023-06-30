@@ -1,6 +1,5 @@
 import type { Interpolation } from "@emotion/react";
 import { get, isString } from "lodash";
-import { EllipsisTooltip } from "../../../EllipsisTooltip/EllipsisTooltip";
 import { useCallback } from "react";
 import {
   virtualizedTableCellExpandedTextStyle,
@@ -14,6 +13,7 @@ import { TableExpandIcon } from "../../../Table/TableComponents/TableExpandIcon/
 import { contextMenuColumnKey } from "../../../../utils/const";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 import { cssStyleConversion } from "../../../../styles";
+import { Tooltip } from "../../../Tooltip";
 
 const VirtualizedTableBodyCellComponent = <T extends TRow>(
   props: IVirtualizedTableBodyCellProps<T | null>
@@ -69,8 +69,8 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
     return <div css={getVirtualizedTableCellIndentBlockStyle(indentLeft)} />;
   };
 
-  const wrapInEllipsis = (node: React.ReactNode) => {
-    return isString(node) ? <EllipsisTooltip>{node}</EllipsisTooltip> : node;
+  const wrapInTooltip = (node: React.ReactNode) => {
+    return isString(node) ? <Tooltip title={node}>{node}</Tooltip> : node;
   };
 
   // Увеличиваем высоту контента первой ячейки, если включен клик по всей строке
@@ -79,10 +79,10 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
     (hasExpander && enableRowClick && key !== contextMenuColumnKey) ||
     (hasExpander && enableCellClick) ? (
       <span css={virtualizedTableCellExpandedTextStyle(theme)} onClick={handleRowContentClick}>
-        {wrapInEllipsis(node)}
+        {wrapInTooltip(node)}
       </span>
     ) : (
-      wrapInEllipsis(node)
+      wrapInTooltip(node)
     );
 
   const cellCustomStyle = column?.onCell?.(record)?.style as Interpolation<TTheme> | undefined;
