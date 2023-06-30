@@ -60,6 +60,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
     children,
     "test-id": testId,
     onItemClick,
+    renderChildIfItemsEmpty = false,
     ...rest
   } = props;
   const { isFeatureEnabled } = useFeature();
@@ -94,6 +95,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
           key="context-menu_dropdown-content"
           onClick={handleClickContextMenu}
           css={wrapperContextMenuStyle}
+          className={rest?.className}
           test-id={testId ? testId : contextMenuTestId}
         >
           {theeDotsBtn}
@@ -102,7 +104,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
     } else {
       return theeDotsBtn;
     }
-  }, [handleClickContextMenu, testId, theeDotsBtn, withoutChildWrapper]);
+  }, [handleClickContextMenu, rest?.className, testId, theeDotsBtn, withoutChildWrapper]);
 
   const filteredItems = useMemo(() => {
     const getFilteredItems = (items: TContextMenuParamItem[]) => {
@@ -200,6 +202,10 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   }, [menuItems]);
 
   if (filteredItems.length === 0) {
+    if (renderChildIfItemsEmpty) {
+      return <>{dropDownContent}</>;
+    }
+
     return null;
   }
 
