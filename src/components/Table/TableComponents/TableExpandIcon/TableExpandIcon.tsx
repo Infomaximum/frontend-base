@@ -14,7 +14,7 @@ import { useTheme } from "../../../../decorators/hooks/useTheme";
 const TableExpandIconComponent = <T extends TDictionary>(
   props: ITableExpandIconProps<T | null>
 ) => {
-  const { onExpand, record, expanded, expandable } = props;
+  const { onExpand, record, expanded, expandable, expandIconStyle } = props;
 
   const theme = useTheme();
 
@@ -30,7 +30,11 @@ const TableExpandIconComponent = <T extends TDictionary>(
     <button
       type="button"
       onClick={handleClick}
-      css={[tableExpandIconStyle(theme), !expandable ? tableExpandIconHiddenStyle : null]}
+      css={[
+        tableExpandIconStyle(theme),
+        expandIconStyle,
+        !expandable ? tableExpandIconHiddenStyle : null,
+      ]}
       test-id={tableExpanderTestId}
     >
       {expanded ? (
