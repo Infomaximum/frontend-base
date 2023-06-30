@@ -230,7 +230,8 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       onChange: handleChange,
       onClear: onClear ?? noop,
     },
-    !!mode
+    !!mode,
+    allowClear
   );
 
   const handleMouseDown = useCallback((e: MouseEvent) => {

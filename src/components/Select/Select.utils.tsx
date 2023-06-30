@@ -228,7 +228,8 @@ export const useBlurOnResize = (element: BaseSelectRef | null) => {
 export const useCustomClearing = (
   selectWrapper: HTMLDivElement | null,
   callbacks: Pick<Required<ISelectProps>, "onDropdownVisibleChange" | "onChange" | "onClear">,
-  isMultipleMode: boolean
+  isMultipleMode: boolean,
+  allowClear: boolean
 ) => {
   const { onDropdownVisibleChange, onClear, onChange } = callbacks;
 
@@ -259,13 +260,13 @@ export const useCustomClearing = (
 
       const hasSearchValue = selectWrapper.querySelector("input")?.value;
 
-      if (isEventOnClearArea && hasSearchValue) {
+      if (isEventOnClearArea && hasSearchValue && allowClear) {
         e.stopPropagation();
         e.preventDefault();
         onDropdownVisibleChange(false);
       }
     },
-    [onChange, onDropdownVisibleChange, onClear, selectWrapper, isMultipleMode]
+    [onChange, onDropdownVisibleChange, onClear, selectWrapper, isMultipleMode, allowClear]
   );
 
   useEffect(() => {
