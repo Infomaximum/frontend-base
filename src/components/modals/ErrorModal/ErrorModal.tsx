@@ -19,7 +19,7 @@ import {
   modalErrorTitleErrorTestId,
   modalErrorContentErrorTestId,
 } from "../../../utils/TestIds";
-import { CLOSE, CONTINUE, ERROR_MESSAGE } from "../../../utils/Localization/Localization";
+import { CLOSE, CONTINUE, ERROR } from "../../../utils/Localization/Localization";
 import { kebabCase } from "lodash";
 import { CloseCircleFilled, CloseOutlined, InfoCircleOutlined } from "../../Icons/Icons";
 import { observer } from "mobx-react";
@@ -87,7 +87,7 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
             css={titleStyle(theme)}
             ref={titleCBRef}
           >
-            {error.title || localization.getLocalized(ERROR_MESSAGE)}
+            {error.title || localization.getLocalized(ERROR)}
           </span>
           {error.message ? (
             <p key="content-error-modal" test-id={contentModalTestId} css={textStyle(theme)}>
