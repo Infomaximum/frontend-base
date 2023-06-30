@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/Infomaximum/frontend-base/compare/v4.1.1...v5.0.0) (2023-06-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* изменены типы фильтрации
+
+### Features
+
+* добавлен пропс в ContextMenu, который позволяет выводить контент без обертки, если элементов контекстного меню нет, например отсеяны привилегиями ([7771263](https://github.com/Infomaximum/frontend-base/commit/77712634c2ec50af99126a8ca7bd2a6931f7eefe))
+* добавлена возможность внешнего управления expandable в Table ([9506d24](https://github.com/Infomaximum/frontend-base/commit/9506d249591aac1b837a0141a171d96b3120f480))
+* добавлено забледнение текста, при переполнении ([23b618d](https://github.com/Infomaximum/frontend-base/commit/23b618dcf43b8e619acbccbfd06c9fd0ac2c717d))
+* добавлены возможность задавать стили в TableExpandIcon ([819ce99](https://github.com/Infomaximum/frontend-base/commit/819ce9944f29beac6f33b96db301267c003b01b0))
+* исправлено именование пропса ContextMenu, добавлена приписка is ([f18a111](https://github.com/Infomaximum/frontend-base/commit/f18a111f3a03500eef88be5cbe1e4bf05abc3d82))
+* перенесен TableStore из ветки с новым списком сотрудников для реализации подгрузки данных при скролле. Добавлен пропс для скрола в форму ([0f1c7a0](https://github.com/Infomaximum/frontend-base/commit/0f1c7a0a755a5aae0e0a3121276181e0c3082848))
+
+
+### Bug Fixes
+
+* Исправлен баг задержки появления head в таблицах ([2d44344](https://github.com/Infomaximum/frontend-base/commit/2d4434458c03d7bbae9a85e5e35b1879b074379e))
+* исправлен импорт локализации ([a9503fc](https://github.com/Infomaximum/frontend-base/commit/a9503fcb2f360b153a69174d79f701898f5b52c4))
+* исправлен фокус на поле пароля ([0a49244](https://github.com/Infomaximum/frontend-base/commit/0a492449bfed8490fa4761e744fdfbb3177bb1d4))
+* Исправлен import assertSimple в boundMethod ([2411a16](https://github.com/Infomaximum/frontend-base/commit/2411a16d5be6a1987dce1341ac7b16db2739b007))
+* исправлен messagePattern ([d8c3111](https://github.com/Infomaximum/frontend-base/commit/d8c31113ce3cd5ea0ffa2aba6375509d26278106))
+* исправлена функция удаления сотрудника в селекте, после перехода на другую вкладку браузера и обратно ([22bd596](https://github.com/Infomaximum/frontend-base/commit/22bd596ae55afed26d3cf257711a0d970e4b33eb))
+* исправлено раскрытие селекта после перехода по вкладкам браузера ([786dfeb](https://github.com/Infomaximum/frontend-base/commit/786dfebd3b37d60b37da33da27141a79435b6215))
+
+
+* рефакторинг типов фильтров [PT-13538] ([fac65f2](https://github.com/Infomaximum/frontend-base/commit/fac65f21a206ea71dbbf2dedde83fd2c984d0185))
+
 ### [4.1.1](https://github.com/Infomaximum/frontend-base/compare/v4.1.0...v4.1.1) (2023-06-13)
 
 
