@@ -9,7 +9,9 @@ type TPrivateTableStoreField =
   | "_expandedState"
   | "receiveData"
   | "_topRowsModels"
-  | "_showMore";
+  | "_showMore"
+  | "_scrollTop"
+  | "_isPageLoading";
 
 /**
  * Стор используемый в таблицах
@@ -33,6 +35,8 @@ export class TableStore<M extends Model = never> extends Store<M> {
   protected _expandedState: string[] = [];
   private _showMore: NTableStore.TShowMore = {};
   private _topRowsModels: IModel[] = [];
+  private _isPageLoading: boolean = false;
+  private _scrollTop: number = 0;
 
   private _isTree: boolean;
 
@@ -44,14 +48,19 @@ export class TableStore<M extends Model = never> extends Store<M> {
       _expandedState: observable.ref,
       _showMore: observable.ref,
       _topRowsModels: observable.ref,
+      _scrollTop: observable.ref,
+      _isPageLoading: observable,
       setCheckState: action.bound,
       expandRows: action.bound,
       setShowMore: action.bound,
       setTopRowsModels: action.bound,
+      setScrollTop: action.bound,
       checkedState: computed,
       expandedState: computed,
       showMore: computed,
       topRowsModels: computed,
+      isPageLoading: computed,
+      scrollTop: computed,
       clearData: override,
       searchValueChange: override,
       receiveData: override,
@@ -78,6 +87,14 @@ export class TableStore<M extends Model = never> extends Store<M> {
     return this._topRowsModels;
   }
 
+  public get scrollTop() {
+    return this._scrollTop;
+  }
+
+  public get isPageLoading() {
+    return this._isPageLoading;
+  }
+
   //----------------------------------------ACTIONS------------------------------------//
 
   public setCheckState(checkedRows: NTableStore.TCheckedRows) {
@@ -88,7 +105,11 @@ export class TableStore<M extends Model = never> extends Store<M> {
     this._expandedState = keys;
   }
 
-  public setShowMore(showMoreParams: NTableStore.TActionShowMoreParams) {
+  public setScrollTop(scrollTop: number) {
+    this._scrollTop = scrollTop;
+  }
+
+  public async setShowMore(showMoreParams: NTableStore.TActionShowMoreParams) {
     const currentLimits = this.showMore?.[showMoreParams.limitsName];
     const nodeLimit = isNumber(showMoreParams.nodeId)
       ? currentLimits?.[showMoreParams.nodeId] || 0
@@ -102,13 +123,19 @@ export class TableStore<M extends Model = never> extends Store<M> {
       Object
     );
 
-    this.requestData({ variables: showMoreParams.variables });
+    this._isPageLoading = true;
+    await this.requestData({ variables: showMoreParams.variables });
+    this._isPageLoading = false;
   }
 
   public setTopRowsModels(models: IModel[], variables?: TDictionary) {
     this._topRowsModels = models;
 
     this.requestData({ variables });
+  }
+
+  public setSearchValue(value: string | undefined) {
+    super.searchValueChange(value);
   }
 
   // Override

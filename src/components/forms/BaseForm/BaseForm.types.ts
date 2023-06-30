@@ -3,6 +3,7 @@ import type { FormProps } from "antd/lib/form/Form";
 import type { ColProps } from "antd/lib/grid";
 import type { TestIdAttr } from "@infomaximum/utility";
 import type { NCore } from "@infomaximum/module-expander";
+import type { UIEventHandler } from "react";
 
 /**
  * Типы размеров сеток
@@ -58,4 +59,5 @@ export interface IBaseFormProps extends TAntFormProps {
   "test-id"?: string;
   error?: NCore.TError;
   submitError?: NCore.TError;
+  handleScrollContent?: UIEventHandler<HTMLDivElement>;
 }

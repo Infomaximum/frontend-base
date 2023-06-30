@@ -31,6 +31,7 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
     formStyles,
     showNotification = true,
     layoutType = EFormLayoutType.TypeS,
+    handleScrollContent,
   } = props;
 
   const formData = useContext(FormContext);
@@ -111,6 +112,7 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
             ? [formContentWithFooterStyle, formStyles]
             : [formContentWithoutFooterStyle, formStyles]
         }
+        onScroll={handleScrollContent}
       >
         <div {...props.attributes}>
           {notification}
