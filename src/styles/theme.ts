@@ -297,6 +297,11 @@ export const theme = {
       borderColor: "#F0F0F0",
       textColor: "#595959",
     },
+    darkGrey: {
+      backgroundColor: "#F0F0F0",
+      borderColor: "#E6E6E6",
+      textColor: "#595959",
+    },
     blueInv: {
       backgroundColor: "#2667D1",
       borderColor: "none",

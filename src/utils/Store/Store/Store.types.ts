@@ -49,6 +49,8 @@ export declare namespace NStore {
         dataPath: string;
         /** Инстанс класса для отправки запросов/мутаций на сервер */
         requestInstance?: NRequests.IRequest;
+        /** Инстанс класса-кэша серверных данных */
+        dataCacheInstance?: NStore.IDataCache;
         /** Обработчики данных которые пришли с сервера перед записью их в стор */
         prepareData?: TPrepareData<S, M>;
         /** конфиг для подписок */
@@ -100,4 +102,15 @@ export declare namespace NStore {
   export type TQueryGetterParams<S extends Store<Model> = Store<Model>> = {
     store: S;
   };
+
+  export interface IDataCache {
+    getData: (params: {
+      /** Запрос */
+      query?: DocumentNode;
+      /** Переменные запроса */
+      variables?: TDictionary;
+      /** Путь до данных в запросе */
+      dataPath?: string;
+    }) => TModelStruct | null;
+  }
 }

@@ -33,6 +33,7 @@ const onRowExpanderChange = jest.fn();
 const renderComponent = (loading: boolean) => {
   return enzyme.mount(
     <VirtualizedTableBodyRow
+      index={0}
       columns={columns}
       record={record}
       loading={loading}

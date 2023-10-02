@@ -21,6 +21,7 @@ import type { Interpolation } from "@emotion/react";
 import { useTheme } from "../../decorators";
 import type { TOnItemClickParam } from "../ContextMenu/ContextMenu.types";
 import type { DropdownProps } from "antd/lib/dropdown";
+import { useCardLinesOverlay } from "../../decorators/hooks/useCardLinesOverlay";
 
 const trigger: DropdownProps["trigger"] = ["contextMenu"];
 
@@ -45,6 +46,8 @@ const ApplicationCardComponent = forwardRef<
     const navigate = useNavigate();
     const theme = useTheme();
     const [contextMenuInFocus, setContextMenuInFocus] = useState(false);
+    const { overlayedLines } = useCardLinesOverlay(entity.getName(), 18, 2, measuredWidth);
+
     const handleClick = useCallback(() => {
       if (pathname) {
         navigate(pathname);
@@ -92,7 +95,7 @@ const ApplicationCardComponent = forwardRef<
     const cardWrapper = useMemo(() => {
       const content = (
         <div css={contentStyle}>
-          <div css={titleStyle(theme)}>{entity.getName()}</div>
+          <div css={titleStyle(theme)}>{overlayedLines}</div>
           <InlineTags tags={entity.tags} measuredWidth={tagsMeasuredWidth} />
         </div>
       );
@@ -107,7 +110,7 @@ const ApplicationCardComponent = forwardRef<
           {content}
         </div>
       );
-    }, [cardStyles, entity, handleClick, ref, tagsMeasuredWidth, theme]);
+    }, [cardStyles, entity, handleClick, overlayedLines, ref, tagsMeasuredWidth, theme]);
 
     const handleOpenChange = useCallback((isOpen: boolean) => {
       setContextMenuInFocus(isOpen);

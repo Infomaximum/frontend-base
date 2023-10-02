@@ -115,21 +115,11 @@ export const getRoutes = (items: NCore.IRoutes[] | undefined): NCore.IRoutes[] =
 };
 
 export function sortByPriority<T extends { priority?: number }[]>(objects: T): T {
-  if (!isArray(objects) || !some(objects, (obj) => Boolean(obj?.priority))) {
+  if (!isArray(objects)) {
     return objects;
   }
 
-  return [...objects].sort(({ priority: a = 0 }, { priority: b = 0 }) => {
-    if (a > b) {
-      return -1;
-    }
-
-    if (b > a) {
-      return 1;
-    }
-
-    return 0;
-  }) as T;
+  return objects.toSorted(({ priority: a = 0 }, { priority: b = 0 }) => b - a) as T;
 }
 
 /**
@@ -215,8 +205,8 @@ export function removeModulesLayer(routes: NCore.IRoutes[]): NCore.IRoutes[] {
 
 /**
  * Генерация "хлебных крошек"
- * @param fullPath - Путь, по которому необходимо построить "хлебные крошки"
  * @param routes - Массив иерархических роутов, по которым строить
+ * @param fullPath - Путь, по которому необходимо построить "хлебные крошки"
  * @param locKey - Ключ к локализации
  * @param isHideLevel - Необходимо ли исключить уровень роутинга из "хлебных крошек"
  * @returns Плоский упорядоченный массив роутов, входящих в "хлебные крошки"

@@ -52,3 +52,4 @@ export { default as FolderFilled } from "@ant-design/icons/FolderFilled";
 export { default as SyncOutlined } from "@ant-design/icons/SyncOutlined";
 export { default as HomeOutlined } from "@ant-design/icons/HomeOutlined";
 export { default as EllipsisOutlined } from "@ant-design/icons/EllipsisOutlined";
+export { default as ApiOutlined } from "@ant-design/icons/ApiOutlined";

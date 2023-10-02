@@ -1,5 +1,4 @@
 export const containerStyle = {
-  height: "38px",
   width: "100%",
   display: "flex",
   alignItems: "center",

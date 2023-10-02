@@ -44,12 +44,12 @@ const InlineTagsComponent: React.FC<IInlineTagsProps> = ({ tags, measuredWidth }
     }
   }, [outsideTags, theme]);
 
-  return (
+  return renderedTags.length ? (
     <div style={containerStyle}>
       {renderedTags}
       {outerEllipsis}
     </div>
-  );
+  ) : null;
 };
 
 export const InlineTags = memo(InlineTagsComponent);

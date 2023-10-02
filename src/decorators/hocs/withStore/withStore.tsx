@@ -114,6 +114,7 @@ export const withStore =
         store,
         query,
         model: store.model,
+        cachedModel: store.cachedModel,
         mutate,
         formMutate,
         subscribe,

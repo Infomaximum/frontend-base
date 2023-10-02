@@ -128,10 +128,8 @@ export class TableStore<M extends Model = never> extends Store<M> {
     this._isPageLoading = false;
   }
 
-  public setTopRowsModels(models: IModel[], variables?: TDictionary) {
+  public setTopRowsModels(models: IModel[]) {
     this._topRowsModels = models;
-
-    this.requestData({ variables });
   }
 
   public setSearchValue(value: string | undefined) {

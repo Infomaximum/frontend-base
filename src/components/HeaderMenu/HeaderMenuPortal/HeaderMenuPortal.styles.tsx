@@ -19,6 +19,7 @@ export const titleStyle = (theme: TTheme) =>
     paddingLeft: "8px",
     paddingRight: "12px",
     background: theme.headerPanel.backgroundColor,
+    position: "relative",
   } as const);
 
 export const wrapMenuTitleStyle = (theme: TTheme) => ({
@@ -78,6 +79,7 @@ export const getHeaderBodyCenterStyle = (
     position: "absolute" as const,
     left: `${columnsConfig.centerColPosition ? `${columnsConfig.centerColPosition}%` : "50%"}`,
     transform: `translateX(calc(-50% + ${settingsMenuWidth / 2}px))`,
+    zIndex: 10, // перекрытие забледнения заголовка
   };
 };
 
@@ -92,6 +94,7 @@ export const getHeaderBodyRightWithCenterStyle = (
     right: "0",
     bottom: "50%",
     transform: "translateY(50%)",
+    zIndex: 10, // перекрытие забледнения заголовка
   } as const);
 
 export const headerBodyRightWithLeftWithoutCenterStyle = { flex: "0 0 auto" };

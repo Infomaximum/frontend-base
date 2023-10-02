@@ -49,7 +49,9 @@ export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
           preparedError = { code: EErrorCode.GATEWAY_TIMEOUT };
           break;
         default:
-          preparedError = get(graphqlError, "networkError.result.error");
+          preparedError = get(graphqlError, "networkError.result.error") ?? {
+            code: EErrorCode.NETWORK_FAILURE_OCCURRED,
+          };
       }
     }
 
@@ -89,8 +91,6 @@ export class BaseErrorHandler implements NErrorHandlers.IErrorHandler {
     graphqlError: NCore.TGraphqlError,
     parameters?: NCore.TErrorHandlerParams
   ): NCore.TError => {
-    assertSimple(!!graphqlError, "Ошибка должна быть задана");
-
     const code = get(graphqlError, "code");
     const message = get(graphqlError, "message");
     const params = get(graphqlError, PARAMETERS_FIELD_NAME);

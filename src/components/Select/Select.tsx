@@ -12,8 +12,6 @@ import {
   multipleSelectStyle,
   suffixIconSpinnerStyle,
   tagStyle,
-  selectWrapperStyle,
-  selectOverlayStyle,
 } from "./Select.styles";
 import type { ISelectProps } from "./Select.types";
 import { Tag } from "../Tag/Tag";
@@ -49,6 +47,7 @@ const { OptGroup, Option } = AntSelect;
 
 const SelectComponent = <T extends SelectValue = SelectValue>({
   dropdownPlacement = "left",
+  visibleMaxCount,
   suffixIcon: suffixIconProps,
   disabled,
   children,
@@ -119,7 +118,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 
   const dropdownPosition = useSelectDropdownPosition(
     fieldWrapperRef,
-    { itemHeight: listItemHeight },
+    { itemHeight: listItemHeight, visibleMaxCount },
     dropdownPlacement
   );
 
@@ -194,13 +193,6 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       onSearch?.(searchText);
     },
     [value, options, selectTextOnFocus, prepareOptionForSearch, onFocus, onSearch]
-  );
-
-  const handleBlur = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      onBlur?.(e);
-    },
-    [onBlur]
   );
 
   const handleChange = useCallback<NonNullable<typeof onChange>>(
@@ -289,7 +281,8 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       : localization.getLocalized(SELECT_FROM_LIST);
   };
 
-  const isShowIconClear = allowClear && ((isOpen && !!searchValue) || !isEmpty(value));
+  const isShowIconClear =
+    allowClear && ((isOpen && !!searchValue) || !isEmpty(isArray(value) ? value : [value]));
 
   const style = useMemo(() => {
     // `arrow` всегда занимает место, а `clear` только когда не отображается поверх `arrow` или когда нет `arrow`
@@ -300,7 +293,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 
     const selectStyles: ArrayInterpolation<TTheme> = [displaySelectStyle(iconSlotCount)(theme)];
     if (disabled) {
-      selectStyles.push(disableSelectStyle(theme));
+      selectStyles.push(disableSelectStyle(bordered)(theme));
     }
 
     if (mode === "multiple") {
@@ -308,7 +301,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     }
 
     return selectStyles;
-  }, [disabled, isClearIconOverSuffix, isShowIconClear, mode, showArrow, theme]);
+  }, [bordered, disabled, isClearIconOverSuffix, isShowIconClear, mode, showArrow, theme]);
 
   const getOptionLabelProp = () => {
     if (optionLabelProp) {
@@ -325,7 +318,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   };
 
   return (
-    <div ref={fieldWrapperRef} css={selectWrapperStyle}>
+    <div ref={fieldWrapperRef}>
       <AntSelect<T>
         {...rest}
         ref={selectRef}
@@ -336,7 +329,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         bordered={bordered ?? !disabled} // системное поведение
         searchValue={searchValue}
         onFocus={handleFocus}
-        onBlur={handleBlur}
+        onBlur={onBlur}
         onSearch={showSearch ? handleSearch : undefined}
         onChange={handleChange}
         onClear={onClear}
@@ -360,7 +353,6 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         options={options}
         filterOption={filterOption}
       />
-      <div css={selectOverlayStyle(theme, disabled)} />
     </div>
   );
 };

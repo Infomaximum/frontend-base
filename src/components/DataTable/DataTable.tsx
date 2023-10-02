@@ -2,7 +2,12 @@ import React from "react";
 import { isFunction, filter, drop, isEmpty, isUndefined, some, compact, uniq } from "lodash";
 import { InvalidIndex } from "@infomaximum/utility";
 import { hiddenCheckbox, weightLabelStyle, spinnerWrapperStyle } from "./DataTable.style";
-import type { IDataTableProps, IDataTableState, IDataTableOwnProps } from "./DataTable.types";
+import type {
+  IDataTableProps,
+  IDataTableState,
+  IDataTableOwnProps,
+  ILoadingOnScrollDataTableOwnProps,
+} from "./DataTable.types";
 import { DataTableHeader, headerModes } from "./DataTableHeader/DataTableHeader";
 import { getColumnsWithShowMore } from "./DataTableUtils";
 import type { TableRowSelection } from "antd/lib/table/interface";
@@ -24,7 +29,8 @@ import { Table } from "../Table/Table";
 import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import { withLoc } from "../../decorators/hocs/withLoc";
 import { withTheme } from "../../decorators/hocs/withTheme";
-import { withLocation } from "../../decorators";
+import { useLoadingOnScroll, withLocation } from "../../decorators";
+import { useNodeShowMoreParams } from "../../decorators/hooks/useLoadingOnScroll";
 
 const emptyColumnKey = "empty-column";
 
@@ -116,7 +122,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     }
 
     if (!isUndefined(defaultCheckedModels) && !isEmpty(defaultCheckedModels)) {
-      tableStore.setTopRowsModels(defaultCheckedModels, this.props.queryVariables);
+      tableStore.setTopRowsModels(defaultCheckedModels);
     }
 
     if (tableStore.model) {
@@ -541,6 +547,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       isShowDividers,
       searchPlaceholder,
       customDataSource,
+      isExpandedTopPanel,
       ...restProps
     } = this.props;
 
@@ -567,6 +574,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           searchValue={tableStore.searchValue}
           searchPlaceholder={searchPlaceholder}
           allowClear={allowClear}
+          isExpandedTopPanel={isExpandedTopPanel}
         />
         <Table<TExtendColumns<T>>
           {...restProps}
@@ -599,4 +607,15 @@ const DataTable = <T extends TBaseRow = TBaseRow>(props: IDataTableOwnProps<T>) 
   <_DataTableComponent {...props} />
 );
 
-export { DataTable, emptyColumnKey };
+const LoadingOnScrollDataTable = <T extends TBaseRow = TBaseRow>(
+  props: ILoadingOnScrollDataTableOwnProps<T>
+) => {
+  const showMoreParams = useNodeShowMoreParams(props?.queryVariables || {});
+  const handleLoadingOnScroll = useLoadingOnScroll(props?.tableStore, showMoreParams);
+
+  return (
+    <_DataTableComponent {...props} onScroll={handleLoadingOnScroll} showMoreMode="scrolling" />
+  );
+};
+
+export { DataTable, emptyColumnKey, LoadingOnScrollDataTable };

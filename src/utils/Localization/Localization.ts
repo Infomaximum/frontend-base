@@ -14,8 +14,8 @@ export const ERROR = {
 };
 
 export const COPY_TO_CLIPBOARD = {
-  ru: "Копировать в буфер обмена",
-  en: "Copy to clipboard",
+  ru: "Копировать",
+  en: "Copy",
 };
 
 export const DELETION = {

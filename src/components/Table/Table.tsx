@@ -36,6 +36,7 @@ import { createSelector } from "reselect";
 import { TABLE_HEADER_ID, loaderDelay } from "../../utils/const";
 import { AutoSizer } from "react-virtualized";
 import { cssStyleConversion } from "../../styles";
+import { AntTableScrollListener } from "./Table.utils";
 
 class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, ITableState> {
   public static defaultProps = {
@@ -47,6 +48,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
 
   private wrapperRef = React.createRef<HTMLDivElement>();
   private headerHtml: HTMLElement | null = null;
+  private antTableScrollListener: AntTableScrollListener | null = null;
 
   private expandable: ITableProps<T>["expandable"] = {
     expandIcon: (props: RenderExpandIconProps<T>) => <TableExpandIcon {...props} />,
@@ -74,6 +76,12 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
   public override componentDidMount() {
     if (this.wrapperRef.current) {
       this.headerHtml = this.wrapperRef.current.querySelector(`[id=${TABLE_HEADER_ID}]`);
+
+      const { isVirtualized, onScroll } = this.props;
+      if (!isVirtualized && onScroll) {
+        this.antTableScrollListener = new AntTableScrollListener(this.wrapperRef.current, onScroll);
+        this.antTableScrollListener.listen();
+      }
 
       if (this.props.isStretchToBottom) {
         window.addEventListener("resize", this.updateOnResize);
@@ -103,6 +111,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
   }
 
   public override componentWillUnmount() {
+    this.antTableScrollListener?.dispose();
     window.removeEventListener("resize", this.updateOnResize);
   }
 
@@ -271,6 +280,9 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
       isShowDividers,
       isStretchByParent,
       isStretchToBottom,
+      onScroll,
+      rowHeight,
+      scrollTop,
       expandable,
       ...rest
     } = this.props;
@@ -295,6 +307,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
             return isVirtualized ? (
               <VirtualizedTable
                 {...rest}
+                rowHeight={rowHeight}
                 isShowDividers={isShowDividers ?? true}
                 columns={columns}
                 localization={localization}
@@ -302,6 +315,8 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                 rowSelection={rowSelection}
                 scrollAreaHeight={scroll?.y as number}
                 empty={this.getEmpty()}
+                onScroll={onScroll}
+                scrollTop={scrollTop}
               />
             ) : (
               <ConfigProvider renderEmpty={this.getEmpty}>

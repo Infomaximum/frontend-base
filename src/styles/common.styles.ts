@@ -61,7 +61,7 @@ export const commonContentListStyle = () =>
 /** Cтили для забледнения текста при переполнении [PT-12198] */
 /** Общий стиль забледнения */
 export const textOverflowOverlayStyle = (props: { [key: string]: string | number }) => {
-  const { backgroundColor, zIndex = 9, top = 0, right = 0, bottom = 0, width = "24px" } = props;
+  const { backgroundColor, zIndex = 9, top = 0, right = 0, bottom = 0, width = "8px" } = props;
 
   return {
     position: "absolute",
@@ -89,3 +89,35 @@ export const textOverflowWrapperStyle = (mode: TTextOverflowMode = "multiply") =
     overflow: "hidden",
     mixBlendMode: mode,
   } as const);
+
+export const dropDownHeaderPanelButtonStyle = (theme: TTheme) => ({
+  minWidth: "28px",
+  borderRadius: "0 2px 2px 0",
+  borderLeftColor: theme.thrust1Color,
+  padding: "0px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  //Фикс для Safari
+  "& > .anticon.anticon-down": {
+    fontSize: "14px",
+    height: "14px",
+    width: "14px",
+  },
+
+  "&:hover, &:focus": {
+    borderLeftColor: theme.thrust1Color,
+  },
+  "&:active": {
+    borderLeftColor: theme.thrust5Color,
+  },
+  svg: {
+    marginRight: 0,
+  },
+});
+
+export const changeHeaderPanelButtonStyle = (theme: TTheme) => ({
+  marginLeft: "8px",
+  color: theme.headerPanel.textColor,
+  borderRadius: "2px 0 0 2px",
+});

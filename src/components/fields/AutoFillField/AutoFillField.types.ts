@@ -44,6 +44,11 @@ export interface IAutoFillOwnProps
    * Ключи доступа к данным
    */
   dataAccessKeys?: string[];
+
+  /**
+   * Показывать ли хинт для автокомплита
+   */
+  isOptionHintDisplayed?: boolean;
 }
 
 export interface IAutoFillFieldProps

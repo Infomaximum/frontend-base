@@ -23,6 +23,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
   props: IVirtualizedTableBodyRowProps<T | null>
 ) => {
   const {
+    index: rowIndex,
     loading,
     isChecked,
     record,
@@ -38,6 +39,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     isExpanded,
     onExpanderChange,
     isShowDivider,
+    onRow,
   } = props;
   const theme = useTheme();
   const isRowDisable = checkboxProps ? checkboxProps.disabled : false;
@@ -72,6 +74,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
   return (
     <>
       <div
+        {...onRow?.(record, rowIndex)}
         css={[
           isChecked
             ? checkedVirtualizedTableBodyRowStyle(theme)
@@ -82,13 +85,13 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
         onClick={!isRowDisable && enableRowClick ? selectChange : undefined}
       >
         {isCheckable && getCheckbox()}
-        {map(columns, (column, index) => {
+        {map(columns, (column, columnIndex) => {
           return (
             <VirtualizedTableBodyCell<T>
               key={column.key}
               column={column}
               isTree={isTree}
-              index={index}
+              index={columnIndex}
               indentLeft={indentLeft}
               record={record}
               hasExpander={hasExpander}

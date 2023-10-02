@@ -294,8 +294,9 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
 
   // debounce для игнорирования мгновенного focus-blur, возникающего при клике на область поля
   // за пределами input. Должно исправиться в antd v5 [PT-12981]
-  private setFocusState = debounce((isFocus: boolean) =>
-    this.setState({ newPasswordFieldFocus: isFocus })
+  private setFocusState = debounce(
+    (isFocus: boolean) => this.setState({ newPasswordFieldFocus: isFocus }),
+    100
   );
 
   public handleFocusNewPasswordField = () => {
@@ -380,6 +381,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
       newPasswordInputType: newPasswordInputTypeProps,
       autoFocusFieldName,
       complexPasswordStore,
+      formItemStyle,
     } = this.props;
     const {
       repeatPasswordValue,
@@ -454,6 +456,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
           autoComplete="off"
           css={inputFieldStyle}
           autoFocus={autoFocusFieldName === currentPasswordFieldName}
+          formItemStyle={formItemStyle}
         />
       ) : null,
       <InputFormField
@@ -466,6 +469,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
         onBlurCapture={this.handleBlurNewPasswordField}
         readOnly={readOnly}
         disabled={disabled}
+        formItemStyle={formItemStyle}
         suffix={
           <>
             {newPasswordIcon ?? (
@@ -514,6 +518,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
           parse={convertToNotWhitespace}
           readOnly={readOnly}
           disabled={disabled}
+          formItemStyle={formItemStyle}
           suffix={
             <>
               <RepeatNewPassIcon

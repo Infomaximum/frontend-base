@@ -17,6 +17,10 @@ export const expandModelsStoreExt =
       return data;
     }
 
+    // todo: рассмотреть возможность полного клонирования, для корректной работы c ApolloCache
+    // для случаев с itemsPath 2-го и более порядка
+    const clonedData = { ...data };
+
     const items = map(sourceItems, (sourceItem) => {
       const nestedData = get(sourceItem, itemWrapperField);
 
@@ -30,7 +34,7 @@ export const expandModelsStoreExt =
       return { ...nearbyData, ...nestedData };
     });
 
-    set(data, `${itemsPath}`, items);
+    set(clonedData, `${itemsPath}`, items);
 
-    return data;
+    return clonedData;
   };

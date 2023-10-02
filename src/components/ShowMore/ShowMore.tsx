@@ -8,6 +8,8 @@ import { tableShowMoreButtonTestId } from "../../utils/TestIds";
 import { buttonStyle, ghostButtonStyle } from "./ShowMore.styles";
 import { observer } from "mobx-react";
 import { withTheme } from "../../decorators/hocs/withTheme/withTheme";
+import { RestLoadingIndicator } from "../RestLoadingIndicator";
+import { isNumber } from "lodash";
 
 class ShowMoreComponent extends React.PureComponent<IShowMoreProps> {
   public static defaultProps = {
@@ -27,8 +29,21 @@ class ShowMoreComponent extends React.PureComponent<IShowMoreProps> {
 
   public override render(): React.ReactNode {
     const { model, localization, mode, theme } = this.props;
-
+    const count = this.props.tableStore.model?.getItems().length;
     const nextCountValue = model.getNextCount();
+
+    if (mode === "scrolling" && isNumber(count)) {
+      // минусуем RestModel
+      const currentCount = count - 1;
+
+      return (
+        <RestLoadingIndicator
+          currentCount={currentCount}
+          totalCount={currentCount + nextCountValue}
+        />
+      );
+    }
+
     const showMoreCaption = nextCountValue
       ? `${localization.getLocalized(SHOW_MORE)} (${nextCountValue})`
       : localization.getLocalized(SHOW_MORE);

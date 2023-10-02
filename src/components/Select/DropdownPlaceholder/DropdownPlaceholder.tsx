@@ -1,4 +1,3 @@
-import type React from "react";
 import { Empty } from "antd";
 import type { IDropdownPlaceholderProps } from "./DropdownPlaceholder.types";
 import { emptyStyle, emptyImageStyle, hintStyle } from "./DropdownPlaceholder.styles";

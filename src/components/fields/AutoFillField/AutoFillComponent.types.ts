@@ -26,6 +26,7 @@ interface IAutoFillComponentOwnProps extends TAutoCompleteProps {
   isHasAccess?: boolean;
   autoFillComponentStyle?: Interpolation<TTheme>;
   getPrepareDisplayValue?: (value: string | undefined) => string;
+  isOptionHintDisplayed?: boolean;
 }
 
 export interface IAutoFillComponentProps extends IAutoFillComponentOwnProps, IWithLocProps {}

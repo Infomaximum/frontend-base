@@ -5,14 +5,11 @@ export const cardWrapperDefault = (theme: TTheme) => ({
 
 export const cardHeaderDefault = (theme: TTheme) => ({
   borderBottom: `1px solid ${theme.grey45Color}`,
-  padding: "16px",
   fontSize: "16px",
-  fontWeight: "bold",
+  fontWeight: "500",
+  fontStyle: "normal",
+  lineHeight: "24px",
 });
-
-export const cardBodyDefault = {
-  padding: "32px 24px",
-};
 
 export const wrapperMenuStyle = {
   float: "right",

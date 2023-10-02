@@ -18,6 +18,7 @@ export interface IHeaderMenuPortalTitleProps {
   loading?: boolean;
   children?: React.ReactNode;
   customTitleStyle?: Interpolation<TTheme>;
+  hasCenterTabs?: boolean;
 }
 
 export interface IHeaderMenuPortalBodyProps {

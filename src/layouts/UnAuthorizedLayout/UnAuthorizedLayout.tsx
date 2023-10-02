@@ -10,6 +10,7 @@ import {
   backLink,
   formBodyDefaultStyle,
   companyNameStyle,
+  formBodyCutStyle,
 } from "./UnAuthorizedLayout.styles";
 import { NavLink } from "react-router-dom";
 import { unAuthorizedLayoutBackNavLinkTestId } from "../../utils/TestIds";
@@ -123,7 +124,7 @@ class UnAuthorized extends PureComponent<IUnAuthorizedLayoutProps, IUnAuthorized
             <BaseCard
               styleWrapper={[wrapperContentStyles, wrapperStyle]}
               headStyle={headStyle}
-              bodyStyle={bodyStyle}
+              bodyStyle={this.getHeaderTitle() ? formBodyCutStyle : bodyStyle}
               title={this.getHeaderTitle()}
               onAnimationEnd={this.handleAnimationComplete}
             >

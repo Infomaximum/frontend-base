@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { Select } from "./Select";
-import { Tooltip } from "../Tooltip/Tooltip";
+import { AutoTooltip } from "../AutoTooltip";
 import { find, has, isArray, isEmpty, isNil, isNumber, isString, map } from "lodash";
 import { textWrapperStyle } from "./Select.styles";
 import { useDropdownPosition } from "../Dropdown/Dropdown.utils";
@@ -34,11 +34,11 @@ export const replaceBrowserTooltip = (children: React.ReactNode) =>
         return React.cloneElement(group, {
           title: null,
           children: isString(groupContent) ? (
-            <Tooltip title={groupContent}>
+            <AutoTooltip>
               <span style={textWrapperStyle} test-id={element.props["test-id"]}>
                 {groupContent}
               </span>
-            </Tooltip>
+            </AutoTooltip>
           ) : (
             <span test-id={element.props["test-id"]}>{groupContent}</span>
           ),
@@ -57,11 +57,11 @@ export const replaceBrowserTooltip = (children: React.ReactNode) =>
       {
         title: null,
         children: isString(optionContent) ? (
-          <Tooltip title={optionContent}>
+          <AutoTooltip>
             <span style={textWrapperStyle} test-id={element.props["test-id"]}>
               {optionContent}
             </span>
-          </Tooltip>
+          </AutoTooltip>
         ) : (
           <span test-id={element.props["test-id"]}>{optionContent}</span>
         ),
@@ -130,7 +130,8 @@ const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
   );
 
   if (isString(children)) {
-    label = <Tooltip title={children}>{label}</Tooltip>;
+    // Фрагмент необходим для отключения title по-умолчанию
+    label = <>{label}</>;
   }
 
   return { value, label, key: element.key, ...rest } as DefaultOptionType;

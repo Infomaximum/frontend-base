@@ -4,7 +4,7 @@ import { AutoSizer, List as VList } from "react-virtualized";
 import { ScrollBehavior } from "../../../../utils/ScrollBehavior/ScrollBehavior";
 import { observer } from "mobx-react";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { virtualizedTableBodyListStyle } from "./VirtualizedTableBody.styles";
+import { bugsFixStyle, virtualizedTableBodyListStyle } from "./VirtualizedTableBody.styles";
 import type { IVirtualizedTableBodyProps } from "./VirtualizedTableBody.types";
 
 const VirtualizedTableBodyComponent: FC<IVirtualizedTableBodyProps> = ({
@@ -14,6 +14,8 @@ const VirtualizedTableBodyComponent: FC<IVirtualizedTableBodyProps> = ({
   scrollAreaHeight,
   addScrollOffset,
   onScroll,
+  rowHeight,
+  scrollTop,
 }) => {
   const theme = useTheme();
   useEffect(() => {
@@ -35,11 +37,13 @@ const VirtualizedTableBodyComponent: FC<IVirtualizedTableBodyProps> = ({
           width={width}
           height={scrollAreaHeight}
           css={virtualizedTableBodyListStyle}
+          style={bugsFixStyle}
           ref={vListRef}
-          rowHeight={theme.commonTableRowHeight}
+          rowHeight={rowHeight ?? theme.commonTableRowHeight}
           rowRenderer={rowRenderer}
           rowCount={itemsCount}
           overscanRowCount={10}
+          scrollTop={scrollTop}
           id={VIRTUALIZED_TABLE_BODY_ID}
           onScroll={onScroll}
         />

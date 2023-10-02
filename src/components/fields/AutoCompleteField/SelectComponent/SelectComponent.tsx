@@ -41,7 +41,7 @@ import type { RawValueType } from "rc-tree-select/lib/TreeSelect";
 import { Group, type IModel } from "@infomaximum/graphql-model";
 import { CloseCircleFilled } from "../../../Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
-import { Tooltip } from "../../../Tooltip/Tooltip";
+import { Tooltip } from "../../../Tooltip";
 import { DropdownAnimationInterval, KeyupRequestInterval } from "../../../../utils/const";
 import { Select } from "../../../Select/Select";
 import { BarsSVG } from "../../../../resources/icons";
@@ -358,13 +358,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   };
 
   private renderOptions(modelList: TDictionary<IModel> | IModel[]): React.ReactNode[] {
-    const {
-      handlerDisplayValues,
-      handlerTitleValues,
-      rowDisable,
-      localization,
-      isVisibleOptionsTooltip,
-    } = this.props;
+    const { handlerDisplayValues, handlerTitleValues, rowDisable, localization } = this.props;
 
     return map(modelList, (item: IModel) => {
       let displayName: React.ReactNode = item?.getDisplayName();
@@ -390,7 +384,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           test-id={autocompleteSelectOptionTestId}
           disabled={rowDisable ? rowDisable(item) : undefined}
         >
-          <Tooltip title={title} visible={isVisibleOptionsTooltip}>
+          <Tooltip title={title}>
             {!isUndefined(displayName) && !isNull(displayName) && displayName !== ""
               ? displayName
               : localization.getLocalized(NOT_SELECTED)}

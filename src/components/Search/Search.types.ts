@@ -13,6 +13,7 @@ export interface ISearchProps
   value?: string | null;
   /** middle для дроверов (по умолчанию), small для вкладок списков */
   size: "middle" | "small";
+  isSecond?: boolean;
 }
 
 export interface ISearchState {

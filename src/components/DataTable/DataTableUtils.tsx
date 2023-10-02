@@ -103,6 +103,17 @@ const getColumnsWithShowMore = (
 
       return text;
     },
+    // объединяет пустые колонки в строке ShowMore AntTable для центрирования при подгрузке по скроллу
+    onCell:
+      props.mode === "scrolling"
+        ? (record: TBaseRow) => {
+            if (record?.model instanceof RestModel && index === 0) {
+              return { colSpan: columns?.length };
+            }
+
+            return {};
+          }
+        : rest?.onCell || undefined,
   }));
 
 export { getTableTopButtonDisabledStatus, getSelectedEntitiesIds, getColumnsWithShowMore };

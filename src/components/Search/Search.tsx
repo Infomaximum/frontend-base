@@ -4,14 +4,21 @@ import { Input } from "../Input/Input";
 import { isString, isFunction } from "lodash";
 import { KeyupRequestInterval } from "../../utils/const";
 import { SearchOutlined } from "../Icons/Icons";
-import { iconStyle, searchMiddleInputStyle, searchSmallInputStyle } from "./Search.style";
+import {
+  iconStyle,
+  searchMiddleInputStyle,
+  searchSecondInputStyle,
+  searchSmallInputStyle,
+} from "./Search.style";
 import type { Interpolation } from "@emotion/react";
 import { withTheme } from "../../decorators";
+import { CloseSVG } from "../../resources";
 
 class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   public static defaultProps = {
     allowClear: true,
     size: "middle" as const,
+    isSecond: false,
   };
 
   private static getPrefixIcon = (theme: TTheme) => (
@@ -63,26 +70,37 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   };
 
   public override render() {
-    const { onChange, value, size, theme, ...rest } = this.props;
+    const { onChange, value, size, theme, isSecond, ...rest } = this.props;
+    const clearIcon = isSecond ? <CloseSVG /> : null;
 
-    let inputStyle: Interpolation<TTheme>;
+    const getInputStyle = (): Interpolation<TTheme> => {
+      if (isSecond) {
+        return searchSecondInputStyle;
+      }
 
-    switch (size) {
-      case "middle":
-        inputStyle = searchMiddleInputStyle;
-        break;
-      case "small":
-        inputStyle = searchSmallInputStyle(theme);
-        break;
-      default:
-        break;
-    }
+      let inputStyle: Interpolation<TTheme>;
+
+      switch (size) {
+        case "middle":
+          inputStyle = searchMiddleInputStyle;
+          break;
+        case "small":
+          inputStyle = searchSmallInputStyle(theme);
+          break;
+        default:
+          break;
+      }
+
+      return inputStyle;
+    };
 
     return (
       <Input
-        css={inputStyle}
+        css={getInputStyle()}
         key="search"
         prefix={SearchComponent.getPrefixIcon(theme)}
+        clearIcon={clearIcon}
+        isSecond={isSecond}
         {...rest}
         value={this.state.searchText}
         onChange={this.handleChangeState}

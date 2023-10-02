@@ -10,6 +10,8 @@ export interface IFieldEntityComponentProps<FV = any, T extends HTMLElement = HT
   onRemoveFieldEntity: (index: number) => void;
   fieldEntityPath: string;
   fieldEntityIndex: number;
+  removeIcon?: JSX.Element;
+  customRemoveIconStyle?: Interpolation<TTheme>;
   readOnly?: boolean;
   fields?: FieldArrayRenderProps<FV, T>["fields"];
   writeAccess?: boolean;

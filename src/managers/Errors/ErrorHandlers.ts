@@ -39,6 +39,7 @@ import {
   UNABLE_TO_CONNECT_TO_THE_SERVER,
   YOU_CANNOT_DELETE_ADMIN_AND_DEPARTMENTS_THAT_HAS_USERS,
   YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES,
+  NETWORK_FAILURE_OCCURRED,
 } from "../../utils/Localization/ErrorLocalization";
 
 export const baseErrorHandlers: NCore.TErrorPreparer[] = [
@@ -198,6 +199,10 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
   {
     code: EErrorCode.GRAPHQL_VALIDATION_ERROR,
     description: GRAPHQL_VALIDATION_ERROR,
+  },
+  {
+    code: EErrorCode.NETWORK_FAILURE_OCCURRED,
+    title: NETWORK_FAILURE_OCCURRED,
   },
   {
     code: "graphql_invalid_syntax",

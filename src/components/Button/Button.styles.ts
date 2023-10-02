@@ -112,6 +112,29 @@ export const primaryNotificationButtonStyle = (theme: TTheme) => {
   } as const;
 };
 
+export const primaryOutlinedButtonStyle = (theme: TTheme) => {
+  const commonStyle = {
+    borderColor: theme.thrust2Color,
+    color: theme.thrust2Color,
+    backgroundColor: "transparent",
+  };
+
+  return {
+    ...getOutlineButtonStyle(theme.thrust4Color),
+    ":hover": {
+      ...commonStyle,
+    },
+    ":focus": {
+      ...commonStyle,
+    },
+    ":active": {
+      borderColor: theme.thrust5Color,
+      color: theme.thrust5Color,
+      backgroundColor: "transparent",
+    },
+  };
+};
+
 const getOutlineButtonStyle = (color: string) => ({
   color,
   fill: color,

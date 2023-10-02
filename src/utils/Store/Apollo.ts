@@ -4,11 +4,16 @@ import type { OperationDefinitionNode } from "graphql";
 import type { TApolloLinks } from "./apollo.types";
 import { createUploadLink } from "./createUploadLink";
 import { createWebSocketLink } from "./createWebSocketLink";
+import { isNil } from "lodash";
 
 class Apollo {
   public apolloClient!: ApolloClient<NormalizedCacheObject>;
   public apolloLinks: TApolloLinks | undefined = undefined;
   private sessionHash!: string;
+
+  public getCacheKey(typename: string, id: unknown) {
+    return `${typename}:${id}`;
+  }
 
   private getAfterwareLink(graphqlURL: string) {
     return new ApolloLink((operation: Operation, forward?: NextLink) => {
@@ -65,14 +70,22 @@ class Apollo {
   private createApolloClient(link: ApolloLink) {
     this.apolloClient = new ApolloClient({
       link,
-      cache: new InMemoryCache(),
+      cache: new InMemoryCache({
+        dataIdFromObject: (res) => {
+          const id = res.id || res.guid;
+          // Сохраняем в кэш только те сущности, которые имеют id или guid
+          if (res.__typename && !isNil(id)) {
+            return this.getCacheKey(res.__typename, id);
+          }
+        },
+      }),
       defaultOptions: {
         watchQuery: {
           fetchPolicy: "no-cache",
           errorPolicy: "ignore",
         },
         query: {
-          fetchPolicy: "no-cache",
+          fetchPolicy: "network-only",
           errorPolicy: "all",
         },
       },

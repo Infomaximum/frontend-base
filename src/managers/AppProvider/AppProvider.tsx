@@ -1,5 +1,5 @@
 import { Global } from "@emotion/react";
-import { ELanguages, Localization } from "@infomaximum/localization";
+import { type ELanguages, Localization } from "@infomaximum/localization";
 import moment from "moment";
 import { type FC, useEffect, useMemo } from "react";
 import { BrowserRouter } from "react-router-dom";

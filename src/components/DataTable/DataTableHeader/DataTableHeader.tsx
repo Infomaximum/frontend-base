@@ -12,6 +12,7 @@ const headerModes = {
   SIMPLE_INPUT: "simple-input",
   LIST: "list",
   WITHOUT_SEARCH: "withoutsearch",
+  REVERSE_SEARCH: "reverse-search",
 } as const;
 
 const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
@@ -25,6 +26,7 @@ const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
     searchValue,
     allowClear,
     searchPlaceholder,
+    isExpandedTopPanel,
   } = props;
 
   const localization = useLocalization();
@@ -72,6 +74,24 @@ const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
         headerMode={headerModes.WITHOUT_SEARCH}
         headerButtonsObjects={headerButtonsObjects}
         allowClear={allowClear}
+        isExpandedTopPanel={isExpandedTopPanel}
+      />
+    );
+  }
+
+  if (headerMode === headerModes.REVERSE_SEARCH) {
+    return (
+      <TopPanel
+        key="top-panel"
+        onInputChange={onSearchChange}
+        selectedItemsCount={treeCounter ? treeCounter.totalCheckedCount : 0}
+        onSelectedItemsClear={clearCheck}
+        headerMode={headerModes.REVERSE_SEARCH}
+        headerButtonsObjects={headerButtonsObjects}
+        searchValue={searchValue}
+        allowClear={allowClear}
+        searchPlaceholder={searchPlaceholder}
+        isExpandedTopPanel={isExpandedTopPanel}
       />
     );
   }

@@ -1,6 +1,5 @@
 import React, { memo, useContext, useMemo } from "react";
-import type { IBaseFormProps } from "./BaseForm.types";
-import { EFormLayoutType } from "./BaseForm.types";
+import { EFormLayoutType, type IBaseFormProps } from "./BaseForm.types";
 import {
   formContentWithFooterStyle,
   formContentWithoutFooterStyle,

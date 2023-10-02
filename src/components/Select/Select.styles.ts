@@ -1,10 +1,11 @@
 import { first, last, sum, takeRight, tail } from "lodash";
-import { textOverflowOverlayStyle, textOverflowWrapperStyle } from "../../styles";
 
-export const disableSelectStyle = (theme: TTheme) => ({
-  backgroundColor: theme.grey3Color,
-  borderRadius: "4px",
-});
+export const disableSelectStyle =
+  (bordered = true) =>
+  (theme: TTheme) => ({
+    backgroundColor: bordered ? theme.grey3Color : theme.grey1Color,
+    borderRadius: "4px",
+  });
 
 //todo: разобраться почему стили не попадают из less antd
 export const multipleSelectStyle = {
@@ -181,18 +182,3 @@ export const arrowSuffixIconStyle = (theme: TTheme) => ({
   ...suffixIconStyle(theme),
   pointerEvents: "none" as const,
 });
-
-export const selectWrapperStyle = {
-  ...textOverflowWrapperStyle,
-} as const;
-
-export const selectOverlayStyle = (theme: TTheme, isDisabled: boolean = false) =>
-  ({
-    ...textOverflowOverlayStyle({
-      top: "1px",
-      right: isDisabled ? 0 : "28px",
-      bottom: "1px",
-      backgroundColor: isDisabled ? theme.grey3Color : theme.grey1Color,
-    }),
-    pointerEvents: "none",
-  } as const);

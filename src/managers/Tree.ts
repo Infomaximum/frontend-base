@@ -3,7 +3,7 @@ import { runDfs } from "@infomaximum/utility";
 import { TreeCounter } from "./TreeCounter";
 import type { NTableStore } from "../utils/Store/TableStore/TableStore.types";
 import { RestModel } from "../models/RestModel";
-import { Group, type IModel, Model } from "@infomaximum/graphql-model";
+import { Group, type IModel, type Model } from "@infomaximum/graphql-model";
 import { assertSimple } from "@infomaximum/assert";
 
 export type TBaseRow = {

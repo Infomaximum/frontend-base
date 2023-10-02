@@ -12,6 +12,7 @@ import {
   primaryDarkButtonStyle,
   ghostDarkButtonStyle,
   primaryNotificationButtonStyle,
+  primaryOutlinedButtonStyle,
 } from "./Button.styles";
 import type { Interpolation } from "@emotion/react";
 import { Tooltip } from "../../components/Tooltip/Tooltip";
@@ -36,6 +37,9 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
           break;
         case "primary-notification":
           styles.push(primaryNotificationButtonStyle(theme));
+          break;
+        case "primary-outlined":
+          styles.push(primaryOutlinedButtonStyle(theme));
           break;
         case "ghost":
           styles.push(ghostButtonStyle(theme, rest.danger));
@@ -63,6 +67,7 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
       switch (typeProps) {
         case "primary-dark":
         case "primary-notification":
+        case "primary-outlined":
         case "ghost-dark":
           // primary - используется потому что хорошо кастомизируются стили
           return "primary";

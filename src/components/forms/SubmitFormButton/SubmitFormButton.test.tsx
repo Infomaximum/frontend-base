@@ -1,5 +1,5 @@
 import { waitForComponentToPaint } from "../../../utils/tests/utils";
-import { mount, ReactWrapper } from "enzyme";
+import { mount, type ReactWrapper } from "enzyme";
 import { createForm } from "final-form";
 import { SubmitFormButton } from "./SubmitFormButton";
 import type { ISubmitFormButtonProps } from "./SubmitFormButton.types";

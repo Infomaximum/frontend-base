@@ -27,6 +27,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
     requestOnMount: false,
     showArrow: true,
     isHasAccess: true,
+    isOptionHintDisplayed: true,
   };
 
   public static clearIcon = (<CloseCircleFilled css={closeCircleStyle} />);
@@ -214,6 +215,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
       dropdownStyle,
       getPrepareDisplayValue,
       suffixIcon,
+      isOptionHintDisplayed,
     } = this.props;
 
     const modelsMap = autocompleteStore.map;
@@ -273,7 +275,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
                 key={item.getInnerName()}
                 value={displayValue}
                 test-id={autocompleteSelectOptionTestId}
-                title={displayValue}
+                title={isOptionHintDisplayed ? displayValue : ""}
                 disabled={rowDisable ? rowDisable(item) : undefined}
               >
                 {displayValue}

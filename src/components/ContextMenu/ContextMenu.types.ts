@@ -1,8 +1,8 @@
 import type { IDropdownProps } from "../../components/Dropdown/Dropdown.types";
-import type { EOperationType } from "@infomaximum/utility";
 import type { Interpolation } from "@emotion/react";
 import type { SubMenuProps } from "antd/lib/menu/SubMenu";
 import type { MenuProps } from "antd";
+import type { TAccessRules } from "../../utils/access";
 
 export enum ESortingMethodsNames {
   priority = "priority",
@@ -33,7 +33,7 @@ export interface IContextMenuParam {
    * указанным в этом списке. Если, после фильтрации пунктов контекстного меню не осталось ни одного пункта, то
    * контекстное меню не будет отображаться вовсе.
    */
-  accessRules?: { [key: string]: EOperationType[] };
+  accessRules?: TAccessRules | TAccessRules[];
   "test-id"?: string;
   priority?: number;
 }

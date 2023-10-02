@@ -15,6 +15,7 @@ import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
 import type { IWithFeatureProps } from "../../decorators/hocs/withFeature/withFeature.types";
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 import type { IWithLocationProps } from "../../decorators/hocs/withLocation/withLocation.types";
+import type { ScrollParams } from "react-virtualized";
 
 export type TRowDisable = (model: IModel) => boolean;
 
@@ -27,6 +28,10 @@ export type THeaderButtonObject = {
 };
 
 type TTableProps<T> = Omit<ITableOwnProps<T>, "localization" | "isSearchEmpty">;
+
+export interface ILoadingOnScrollDataTableOwnProps<T> extends IDataTableOwnProps<T> {
+  tableStore: TableStore<IPagingModel>;
+}
 
 export interface IDataTableOwnProps<T> extends TTableProps<T> {
   customDataSource?: TExtendColumns<T>[];
@@ -126,6 +131,13 @@ export interface IDataTableOwnProps<T> extends TTableProps<T> {
    * @default true
    */
   isExpandRowsAfterModelChange?: boolean;
+
+  /** Увеличить ли высоту верхней панели */
+  isExpandedTopPanel?: boolean;
+}
+
+export interface IPagingModel extends Group {
+  nextCount: number;
 }
 
 export interface IDataTableProps<T>
@@ -135,6 +147,7 @@ export interface IDataTableProps<T>
     IWithThemeProps<TTheme>,
     IWithLocationProps {
   allowClear?: boolean;
+  onScroll?(params: ScrollParams): void;
 }
 
 export interface IDataTableState<T> {

@@ -92,7 +92,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
   }
 
   public override componentDidUpdate(prevProps: IVirtualizedTableProps<T | null>) {
-    const { rowSelection, dataSource, expandedRowKeys, loading, columns } = this.props;
+    const { rowSelection, dataSource, expandedRowKeys, loading, columns, rowHeight } = this.props;
 
     if (prevProps.rowSelection !== rowSelection) {
       this.setState(
@@ -107,6 +107,10 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
 
     if (prevProps.loading !== loading) {
       this.vListRef.current?.forceUpdateGrid();
+    }
+
+    if (prevProps.rowHeight !== rowHeight) {
+      this.vListRef.current?.recomputeGridSize();
     }
 
     if (prevProps.dataSource !== dataSource || prevProps.expandedRowKeys !== expandedRowKeys) {
@@ -300,7 +304,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
    * Отрисовывает каждую строку, попадающую во Viewport
    */
   private rowRenderer = ({ index, key, style }: ListRowProps) => {
-    const { rowSelection, loading, indentSize, enableRowClick, isShowDividers } = this.props;
+    const { rowSelection, loading, indentSize, enableRowClick, isShowDividers, onRow } = this.props;
     const { surfaceNodes, columnConfig, selectedRowKeysSet } = this.state;
 
     const record = surfaceNodes[index] ?? null;
@@ -322,6 +326,8 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
     return (
       <div key={key} style={style} test-id={virtualizedTableRowTestId}>
         <VirtualizedTableBodyRow
+          index={index}
+          onRow={onRow}
           columns={columns}
           record={record}
           loading={Boolean(loading)}
@@ -366,6 +372,8 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
       empty,
       onScroll,
       theme,
+      rowHeight,
+      scrollTop,
     } = this.props;
 
     const itemsCount = this.state.surfaceNodes.length;
@@ -375,6 +383,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
         {showHeader && (
           <VirtualizedTableHeaderRow<T>
             key="header"
+            checkableColumnTitle={rowSelection?.columnTitle}
             isTableEmpty={!itemsCount}
             isCheckable={Boolean(rowSelection)}
             isSelectionEmpty={isEmpty(rowSelection?.selectedRowKeys)}
@@ -399,6 +408,8 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
             scrollAreaHeight={scrollAreaHeight}
             addScrollOffset={this.addScrollOffset}
             onScroll={onScroll}
+            rowHeight={rowHeight}
+            scrollTop={scrollTop}
           />
         ) : (
           <div key="empty" css={getEmptyContentStyle(scrollAreaHeight)}>

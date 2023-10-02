@@ -4,8 +4,8 @@ export const ACCESS_DENIED = {
 };
 
 export const ACCOUNT_IS_LOCKED = {
-  ru: "Ваш аккаунт заблокирован, для разблокировки аккаунта обратитесь к администратору",
-  en: "Your account has been locked. Please contact the administrator to unlock your account",
+  ru: "Аккаунт заблокирован, для разблокировки обратитесь к администратору",
+  en: "Account is locked. Contact the administrator to unlock it",
 };
 
 export const UNABLE_TO_DELETE = {
@@ -39,8 +39,8 @@ export const INCORRECT_VALUE = {
 };
 
 export const SERVER_OVERLOADED = {
-  ru: "Сервер перегружен запросами",
-  en: "The server is overloaded with requests",
+  ru: "Сервер перегружен",
+  en: "The server is overloaded",
 };
 
 export const GRAPHQL_VALIDATION_ERROR = {
@@ -48,14 +48,19 @@ export const GRAPHQL_VALIDATION_ERROR = {
   en: "Graphql validation error",
 };
 
+export const NETWORK_FAILURE_OCCURRED = {
+  ru: "Произошёл сетевой сбой",
+  en: "Network failure occurred",
+};
+
 export const GRAPHQL_INVALID_SYNTAX = {
-  ru: "Некорректный синтаксис Graphql",
-  en: "Graphql invalid syntax",
+  ru: "Некорректный синтаксис",
+  en: "Invalid syntax",
 };
 
 export const SERVER_TIMEOUT = {
-  ru: "Сервер перегружен запросами. Повторите попытку",
-  en: "The server is overloaded with requests. Try again",
+  ru: "Сервер перегружен. Повторите попытку",
+  en: "The server is overloaded. Try again",
 };
 
 export const NOT_FOUND_DOMAIN_OBJECT = {
@@ -89,8 +94,8 @@ export const CONNECTION_ERROR = {
 };
 
 export const SERVER_OVERLOADED_DESCRIPTION = {
-  ru: "Ваши данные сохранены. Дождитесь ответа сервера или перезагрузите страницу",
-  en: "Your data is saved. Please wait for the server response or refresh the page",
+  ru: "Данные сохранены. Дождитесь ответа сервера или перезагрузите страницу",
+  en: "Data is saved. Wait for the server response or refresh the page",
 };
 
 export const CONTACT_ADMINISTRATOR_OR_TRY_AGAIN_LATER = {
@@ -114,7 +119,7 @@ export const DELETE_USERS_FROM_DEPARTMENTS_AND_TRY_AGAIN = {
 };
 
 export const CANNOT_DELETE_ACCESS_ROLES_ASSIGNED_TO_USERS = {
-  ru: "Невозможно удалить роли доступа, которые назначены пользователям",
+  ru: "Невозможно удалить роли доступа, назначеные пользователям",
   en: "Cannot delete access roles assigned to users",
 };
 
@@ -169,8 +174,8 @@ export const DELETE_USERS_FROM_DEPARTMENTS_CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAI
 };
 
 export const NEW_PASSWORD_EQUALS_CURRENT_PASSWORD = {
-  ru: "Вы уже вводили такой пароль",
-  en: "You have already entered this password",
+  ru: "Пароль вводился ранее",
+  en: "Password entered earlier",
 };
 
 export const EXPIRED_PASSWORD = {
@@ -179,13 +184,13 @@ export const EXPIRED_PASSWORD = {
 };
 
 export const INTEGRATED_AUTHENTICATION_NOT_FOUND = {
-  ru: "Ваш аккаунт заблокирован. Чтобы восстановить доступ, обратитесь к администратору.",
-  en: "Your account is locked. For access recovery, contact your administrator",
+  ru: "Аккаунт заблокирован. Чтобы восстановить, обратитесь к администратору",
+  en: "Account is locked. For recovery, contact administrator",
 };
 
 export const PASSWORD_RECOVERY_LINK_EXPIRED = {
-  ru: "Ссылка недействительна. Повторите процедуру восстановления пароля ещё раз",
-  en: "The link is invalid. Go through the password recovery procedure once again",
+  ru: "Ссылка недействительна. Повторите восстановление пароля",
+  en: "The link is invalid. Repeat password recovery procedure",
 };
 
 export const NO_PRIVILEGES = {

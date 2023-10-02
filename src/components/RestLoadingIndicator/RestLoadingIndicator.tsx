@@ -14,7 +14,7 @@ const RestLoadingIndicatorComponent: React.FC<IRestLoadingIndicatorProps> = ({
 
   return (
     <div css={containerStyle}>
-      <Space size={16}>
+      <Space size={8}>
         <div css={labelStyle(theme)}>
           {localization.getLocalized(SHOWING_OF, {
             templateData: {

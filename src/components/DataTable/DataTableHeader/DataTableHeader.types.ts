@@ -9,4 +9,5 @@ export interface IDataTableHeaderProps<T>
   treeCounter: TreeCounter;
   allowClear?: boolean;
   searchPlaceholder?: string;
+  isExpandedTopPanel?: boolean;
 }

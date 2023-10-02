@@ -32,6 +32,7 @@ export interface IUploadComponentOwnProps extends Omit<UploadProps, "onChange"> 
   multiList?: boolean;
   readOnly?: boolean;
   mode?: keyof typeof UploadFormField.AVAILABLE_MODE_LIST;
+  fileFormatPlaceholder?: string;
 }
 
 export interface IUploadProps

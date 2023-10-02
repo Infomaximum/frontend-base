@@ -13,7 +13,7 @@ import { TableExpandIcon } from "../../../Table/TableComponents/TableExpandIcon/
 import { contextMenuColumnKey } from "../../../../utils/const";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 import { cssStyleConversion } from "../../../../styles";
-import { Tooltip } from "../../../Tooltip";
+import { AutoTooltip } from "../../../AutoTooltip";
 
 const VirtualizedTableBodyCellComponent = <T extends TRow>(
   props: IVirtualizedTableBodyCellProps<T | null>
@@ -70,7 +70,7 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   };
 
   const wrapInTooltip = (node: React.ReactNode) => {
-    return isString(node) ? <Tooltip title={node}>{node}</Tooltip> : node;
+    return isString(node) ? <AutoTooltip>{node}</AutoTooltip> : node;
   };
 
   // Увеличиваем высоту контента первой ячейки, если включен клик по всей строке

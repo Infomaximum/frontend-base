@@ -60,6 +60,8 @@ export interface IWithStoreProps<S extends Store<Model>> {
   store: S;
   /** Модель */
   model: S["model"];
+  /** Модель из кэша */
+  cachedModel: S["cachedModel"];
 }
 
 export type TWithStoreParams = {

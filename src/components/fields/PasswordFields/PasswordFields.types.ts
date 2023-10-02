@@ -4,6 +4,7 @@ import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
 import type { IWithFormProviderProps } from "../../../decorators/hocs/withFormProvider/withFormProvider";
 import type { Store } from "../../../utils";
 import type { Model } from "@infomaximum/graphql-model";
+import type { Interpolation } from "@emotion/react";
 
 export interface IComplexPasswordModel extends Model {
   getMinPasswordLength(): number | undefined;
@@ -37,7 +38,7 @@ export declare interface IPasswordFieldsProps extends IWithLocProps, IWithFormPr
   newPasswordIcon?: ReactNode;
   newPasswordInputType?: "text" | "password";
   autoFocusFieldName?: string;
-
+  formItemStyle?: Interpolation<TTheme>;
   complexPasswordStore: IComplexPasswordStore;
 }
 

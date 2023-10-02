@@ -18,7 +18,7 @@ import { observer } from "mobx-react";
 import { CloseCircleFilled } from "../../../Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
 import type { IModel } from "@infomaximum/graphql-model";
-import { Tooltip } from "../../../Tooltip/Tooltip";
+import { Tooltip } from "../../../Tooltip";
 import { NOT_SELECTED } from "../../../../utils/Localization/Localization";
 import { BarsSVG } from "../../../../resources/icons";
 import { Select } from "../../../Select/Select";

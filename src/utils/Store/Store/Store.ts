@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import type { NCore } from "@infomaximum/module-expander";
-import { get, isArray, isNil, reduce } from "lodash";
+import { cloneDeep, get, isArray, isNil, reduce } from "lodash";
 import { action, computed, makeObservable, observable } from "mobx";
 import { typenameToModel } from "../../../models/typenameToModel";
-import type { TInferredVariables } from "@infomaximum/utility";
+import { type TInferredVariables } from "@infomaximum/utility";
 import { BaseRequest } from "../../Requests/BaseRequest/BaseRequest";
 import { BaseErrorHandler } from "../../ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
 import type { NStore } from "./Store.types";
@@ -12,12 +12,14 @@ import { BaseStore } from "../BaseStore/BaseStore";
 import type { NRequests } from "../../Requests/Requests.types";
 import type { Model, TModelStruct } from "@infomaximum/graphql-model";
 import { assertSimple } from "@infomaximum/assert";
+import { ApolloDataCache } from "../ApolloDataCache";
 
 type TPrivateStoreField =
   | "_data"
   | "_isDataLoaded"
   | "_loading"
   | "_model"
+  | "_cachedModel"
   | "_error"
   | "_searchValue"
   | "_submitting"
@@ -53,11 +55,13 @@ export class Store<M extends Model = never> extends BaseStore {
   private _submitting = false;
   private _error: NCore.TError | undefined = undefined;
   protected _model: M | null = null;
+  protected _cachedModel: M | null = null;
   protected _searchValue: string | null = null;
   private _isSubscribed: boolean = false;
 
   private dataPath: string;
   private requestInstance: NRequests.IRequest;
+  private dataCacheInstance: NStore.IDataCache;
   private getQueryParams: NStore.TQueryParamsGetter<Store<M>>;
   private prepareData: NStore.TPrepareData<Store<M>> | undefined;
   private subscriptionConfig: NStore.TStoreSubscriptionConfig | undefined;
@@ -72,6 +76,7 @@ export class Store<M extends Model = never> extends BaseStore {
       _loading: observable,
       _submitting: observable,
       _model: observable.ref,
+      _cachedModel: observable.ref,
       _error: observable.ref,
       _searchValue: observable,
       _isSubscribed: observable,
@@ -94,6 +99,7 @@ export class Store<M extends Model = never> extends BaseStore {
       isLoading: computed,
       isSubmitting: computed,
       model: computed,
+      cachedModel: computed,
       error: computed,
       searchValue: computed,
       isSubscribed: computed,
@@ -104,6 +110,7 @@ export class Store<M extends Model = never> extends BaseStore {
     this.prepareData = params.prepareData;
     this.requestInstance =
       params.requestInstance ?? new BaseRequest({ errorHandlerInstance: new BaseErrorHandler() });
+    this.dataCacheInstance = params.dataCacheInstance ?? new ApolloDataCache();
     this.subscriptionConfig = params.subscriptionConfig;
     this.isHasSubscription = Boolean(params.subscriptionConfig);
   }
@@ -126,6 +133,11 @@ export class Store<M extends Model = never> extends BaseStore {
   /** Возвращает модель */
   public get model(): M | null {
     return this._model;
+  }
+
+  /** Возвращает кэшированную модель */
+  public get cachedModel(): M | null {
+    return this._cachedModel;
   }
 
   /** Возвращает ошибку */
@@ -179,6 +191,7 @@ export class Store<M extends Model = never> extends BaseStore {
   public receiveData(data: TModelStruct | null) {
     this._data = data;
     this._model = this.getModel(this._data);
+    this._cachedModel = this._model;
   }
 
   /** Записывает ошибку в стор */
@@ -196,6 +209,7 @@ export class Store<M extends Model = never> extends BaseStore {
     this._data = undefined;
     this._isDataLoaded = false;
     this._model = null;
+    this._cachedModel = null;
     this._error = undefined;
     this._searchValue = null;
     this._submitting = false;
@@ -212,6 +226,15 @@ export class Store<M extends Model = never> extends BaseStore {
     params?: NStore.IActionRequestDataParams
   ): Promise<Data | null> {
     this.setLoading(true);
+
+    if (!this._cachedModel) {
+      try {
+        this._cachedModel = this.getCachedModel(params);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      }
+    }
 
     const { query, variables, ...rest } = params?.query
       ? params
@@ -244,6 +267,24 @@ export class Store<M extends Model = never> extends BaseStore {
     }
 
     return data;
+  }
+
+  /** Возвращает модель по данным из кэша */
+  public getCachedModel(params?: NStore.IActionRequestDataParams): M | null {
+    const { query, variables } = params?.query
+      ? params
+      : this.getQueryParams({
+          variables: params?.variables ?? {},
+          store: this,
+        });
+
+    const cachedData = this.dataCacheInstance.getData({
+      query,
+      variables,
+      dataPath: this.dataPath,
+    });
+
+    return this.getModel(cachedData);
   }
 
   /** Подготавливает данные для мутации на сервер и обрабатывает ответ */
@@ -341,12 +382,18 @@ export class Store<M extends Model = never> extends BaseStore {
     const prepareDataGetters =
       this.prepareData && (isArray(this.prepareData) ? this.prepareData : [this.prepareData]);
 
+    data = get(data, dataPath);
+    if (!prepareDataGetters?.length) {
+      return data as TModelStruct | null;
+    }
+
+    data = cloneDeep(data);
+
     return reduce(
       prepareDataGetters,
       (acc, func) =>
         typeof func === "function" ? func({ data: acc, store: this, variables }) : acc,
-
-      get(data, dataPath) as TModelStruct | null
+      data as TModelStruct | null
     );
   }
 

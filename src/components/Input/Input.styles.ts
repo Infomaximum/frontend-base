@@ -1,11 +1,10 @@
-import { textOverflowOverlayStyle, textOverflowWrapperStyle } from "../../styles";
-
 export const disabledInputStyle = (theme: TTheme) => ({
   border: "none",
   overflow: "hidden",
   WebkitTextFillColor: theme.grey7Color, // Safari fix
   backgroundColor: theme.grey3Color,
   color: theme.grey7Color,
+  padding: "3px 8px",
 });
 
 export const disabledTextAreaStyle = (theme: TTheme) => ({
@@ -18,14 +17,10 @@ export const disabledTextAreaStyle = (theme: TTheme) => ({
   },
 });
 
-export const resetAutocompleteChromeStyle = {
-  boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0), inset 0 0 0 100px rgba(255, 255, 255,1) !important"
-};
-
-export const defaultInputStyle = (theme: TTheme) => ({
+export const defaultInputStyle = (theme: TTheme, bordered = true) => ({
   color: theme.grey9Color,
   height: "28px",
-  padding: "2px 7px",
+  padding: bordered ? "2px 7px" : "3px 8px",
   ".ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused": {
     borderColor: theme.blue4Color,
     boxShadow: `0px 0px 4px 0px ${theme.blue4Color}`,
@@ -34,17 +29,30 @@ export const defaultInputStyle = (theme: TTheme) => ({
     "::placeholder": {
       textOverflow: "unset",
     },
-    // сброс стилей автозаполненных полей в Chrome
-    ":-internal-autofill-previewed": {
-      ...resetAutocompleteChromeStyle,
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: theme.grey9Color,
+  },
+});
+
+// Стиль для поля ввода с рамками по бокам
+export const secondInputStyle = (theme: TTheme) => ({
+  height: "28px",
+  padding: "0 16px",
+  border: 0,
+  borderRight: `1px solid ${theme.grey45Color}`,
+  borderLeft: `1px solid ${theme.grey45Color}`,
+  borderRadius: 0,
+  color: theme.grey9Color,
+  boxShadow: "none !important",
+  input: {
+    "::placeholder": {
+      color: theme.grey6Color,
+      opacity: 1,
     },
-    ":-internal-autofill-selected": {
-      ...resetAutocompleteChromeStyle,
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: theme.grey9Color,
+    ":focus": {
+      boxShadow: "none !important",
     },
+  },
+  ":hover": {
+    borderColor: `${theme.grey45Color} !important`,
   },
 });
 
@@ -74,24 +82,4 @@ export const disabledPasswordInputStyle = {
   ".ant-input-password-icon.anticon": {
     display: "none",
   },
-};
-
-export const inputWrapperStyle = {
-  ...textOverflowWrapperStyle
-} as const;
-
-export const inputOverlayStyle = (theme: TTheme, isDisabled: boolean = false, right: string = "8px") =>
-  ({
-    ...textOverflowOverlayStyle({
-      backgroundColor: isDisabled ? theme.grey3Color : theme.grey1Color,
-      top: "1px",
-      right: right,
-      bottom: "1px",
-      width: "24px",
-      zIndex: 9
-    })
-  } as const);
-
-export const passwordOverlayStyle = {
-  right: "28px",
 };

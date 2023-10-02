@@ -13,6 +13,8 @@ const InputFieldArrayItem: React.FC<InputFieldArrayItemProps> = (props) => {
     fields,
     fieldEntityIndex,
     onRemoveFieldEntity,
+    removeIcon: RemoveIcon,
+    customRemoveIconStyle,
     writeAccess,
     removeAccess,
     readOnly,
@@ -40,10 +42,10 @@ const InputFieldArrayItem: React.FC<InputFieldArrayItemProps> = (props) => {
             size="small"
             test-id={`${removeInputFieldButtonTestId}_${fieldEntityIndex}`}
             value={fieldEntityIndex}
-            css={removeButtonStyle}
+            css={customRemoveIconStyle ?? removeButtonStyle}
             onClick={removeField}
           >
-            <CloseOutlined />
+            {RemoveIcon ?? <CloseOutlined />}
           </Button>
         ) : null
       }

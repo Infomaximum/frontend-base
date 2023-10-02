@@ -158,6 +158,8 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
       disableSubmitFormButton,
       setFormData,
       isHasAccess,
+      footer,
+      open,
       ...rest
     } = this.props;
 
@@ -165,10 +167,10 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
       <Drawer
         {...rest}
         key="drawer-form"
-        footer={!isHasAccess ? null : this.renderFooter()}
+        footer={!isHasAccess ? null : footer ?? this.renderFooter()}
         destroyOnClose={true}
         keyboard={true}
-        open={this.state.open}
+        open={open ?? this.state.open}
         closable={true}
         onClose={this.handleCloseDrawer}
         title={title}

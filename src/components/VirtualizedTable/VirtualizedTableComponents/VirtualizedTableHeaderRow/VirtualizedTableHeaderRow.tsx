@@ -40,7 +40,8 @@ export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends P
   ];
 
   private get checkbox() {
-    const { targetAll, isCheckable, isSelectionEmpty, isTableEmpty, theme } = this.props;
+    const { targetAll, isCheckable, isSelectionEmpty, isTableEmpty, theme, checkableColumnTitle } =
+      this.props;
 
     if (isCheckable) {
       assertSimple(
@@ -53,14 +54,16 @@ export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends P
       return (
         <div css={virtualizedTableCheckboxCellStyle(theme)} key="wrapper-checkbox">
           <TableCheckboxCell>
-            <Checkbox
-              key="checkbox"
-              checked={targetAll}
-              disabled={isTableEmpty}
-              indeterminate={isIndeterminate}
-              onChange={this.handleHeaderCheckboxChange}
-              test-id={virtualizedTableCheckboxTestId}
-            />
+            {checkableColumnTitle ?? (
+              <Checkbox
+                key="checkbox"
+                checked={targetAll}
+                disabled={isTableEmpty}
+                indeterminate={isIndeterminate}
+                onChange={this.handleHeaderCheckboxChange}
+                test-id={virtualizedTableCheckboxTestId}
+              />
+            )}
           </TableCheckboxCell>
         </div>
       );

@@ -1,4 +1,4 @@
-import type { Interpolation } from "@emotion/react";
+import { css, type Interpolation } from "@emotion/react";
 import { userAgent, EUserAgents } from "@infomaximum/utility";
 import { textOverflowOverlayStyle } from "./common.styles";
 
@@ -80,10 +80,10 @@ export const scrollDefaultStyle = (theme: TTheme) => {
 };
 
 const rootStyle = () => ({
-  "#root": {
-    minHeight: "100vh",
-    height: "100%",
-  },
+  "#root": css`
+    height: 100vh;
+    height: 100dvh;
+  `,
 });
 
 const allStyle = (theme: TTheme) => ({
@@ -94,13 +94,17 @@ const allStyle = (theme: TTheme) => ({
 });
 
 const htmlAndBodyStyle = () => ({
-  "html,body": {
-    height: "100%",
-    minHeight: "100%",
-    margin: 0,
-    fontFamily: "Roboto",
-    overflow: "hidden",
-  },
+  "html,body": [
+    css`
+      height: 100vh;
+      height: 100dvh;
+    `,
+    {
+      margin: 0,
+      fontFamily: "Roboto",
+      overflow: "hidden",
+    },
+  ],
 });
 
 const fixIEBugs = () => {
@@ -236,7 +240,6 @@ const antGlobalStyle = (theme: TTheme) => ({
     position: "relative",
     "::after": {
       ...textOverflowOverlayStyle({
-        width: "56px",
         backgroundColor: theme.grey1Color,
       }),
       content: "''",
@@ -321,30 +324,12 @@ const antGlobalStyle = (theme: TTheme) => ({
     cursor: "pointer",
   },
 
-  // Стили для забледнения текста при переполнении в компоненте выбора дат [PT-12198]
   ".ant-picker-input": {
-    position: "relative",
-    "::after": {
-      ...textOverflowOverlayStyle({
-        backgroundColor: theme.grey1Color,
-        width: "24px",
-      }),
-      content: "''",
-      height: "100%",
-      pointerEvents: "none",
+    input: {
+      "::placeholder": {
+        textOverflow: "unset",
+      },
     },
-  },
-
-  // Сброс стилей по умолчанию у полей в Chrome
-  ".ant-input::placeholder": {
-    color: theme.grey7Color,
-  },
-  ".ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused": {
-    borderColor: theme.blue4Color,
-    boxShadow: `0px 0px 4px 0px ${theme.blue4Color}`,
-  },
-  ".ant-input[disabled]": {
-    boxShadow: `inset 0 0 0 1px ${theme.grey3Color}, inset 0 0 0 100px ${theme.grey3Color} !important`,
   },
 });
 

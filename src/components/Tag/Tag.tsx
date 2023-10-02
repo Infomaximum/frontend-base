@@ -5,7 +5,7 @@ import { Tag as AntTag } from "antd";
 import { getTagStyle, notClosableTagStyle, tagContentStyle, tagOverlayStyle } from "./Tag.styles";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { get } from "lodash";
-import { Tooltip } from "../Tooltip/Tooltip";
+import { Tooltip } from "../Tooltip";
 import { useOverflow } from "../../decorators/hooks/useOverflow";
 
 const TagComponent: FC<ITagProps> = (props) => {
@@ -39,12 +39,17 @@ const TagComponent: FC<ITagProps> = (props) => {
   }, [tagStyle, closable]);
 
   return (
-    <Tooltip title={title}>
+    <Tooltip title={title ?? (isOverflow && children)}>
       <AntTag key={colorProps} {...props} css={tagCssRule} color={colorProps} title={undefined}>
         <div css={tagContentStyle} ref={ref}>
           {children}
           {isOverflow && (
-            <div css={tagOverlayStyle(backgroundColor, closable ? "20px" : style?.paddingRight || "7px" )} />
+            <div
+              css={tagOverlayStyle(
+                backgroundColor,
+                closable ? "20px" : style?.paddingRight || "7px"
+              )}
+            />
           )}
         </div>
       </AntTag>

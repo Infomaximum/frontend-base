@@ -3,7 +3,8 @@ import type { IVirtualizedTableProps } from "../../../VirtualizedTable/Virtualiz
 import type { IVirtualizedTableBodyCellProps } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell.types";
 
 export interface IVirtualizedTableBodyRowProps<T>
-  extends Pick<IVirtualizedTableProps<T>, "columns"> {
+  extends Pick<IVirtualizedTableProps<T>, "columns" | "onRow"> {
+  index: number;
   record: T;
   loading: boolean;
   isChecked: boolean;

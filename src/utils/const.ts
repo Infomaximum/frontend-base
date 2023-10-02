@@ -30,6 +30,7 @@ export enum EErrorCode {
   NO_PRIVILEGES = "NO_PRIVILEGES",
   DISABLED_LOGON = "disabled_logon",
   INVALID_LOGON_AND_MAX_LOGON_ATTEMPTS_EXCEED = "INVALID_LOGON_AND_MAX_LOGON_ATTEMPTS_EXCEED",
+  NETWORK_FAILURE_OCCURRED = "NETWORK_FAILURE_OCCURRED",
 
   /** =========================== HTTP [START] =========================== */
   CONNECTION_ERROR = "connection_error",
@@ -96,6 +97,11 @@ export const ERROR_FIELD_VALUE = "field_value";
  * Количество отображаемых элементов в списках или таблицах по-умолчанию
  */
 export const LimitCount = 20;
+
+/**
+ * Количество данных при подгрузке по скроллу
+ */
+export const loadingOnScrollLimitCount = 100;
 
 /** z-index модального окна подтверждения изменений формы при переходе на другую страницу */
 export const Z_INDEX_FORM_CONFIRMATION_MODAL = 5000;

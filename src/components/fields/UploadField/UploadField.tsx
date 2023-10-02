@@ -187,8 +187,18 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
   }
 
   private renderDragAndDropMode(): React.ReactNode {
-    const { caption, fieldStyle, readOnly, meta, multiList, input, accept, localization, ...rest } =
-      this.props;
+    const {
+      caption,
+      fieldStyle,
+      readOnly,
+      meta,
+      multiList,
+      input,
+      accept,
+      localization,
+      fileFormatPlaceholder,
+      ...rest
+    } = this.props;
 
     //TODO: Написать свой плейсхолдер
     return (
@@ -211,7 +221,8 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
           <p className="ant-upload-hint">
             {localization.getLocalized(FILE_FORMAT, {
               templateData: {
-                fileFormat: accept.substring(1, accept.length).toUpperCase(),
+                fileFormat:
+                  fileFormatPlaceholder ?? accept.substring(1, accept.length).toUpperCase(),
               },
             })}
           </p>

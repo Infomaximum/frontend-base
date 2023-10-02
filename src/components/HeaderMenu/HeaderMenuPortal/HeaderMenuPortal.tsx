@@ -153,16 +153,12 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
       return null;
     }
 
-    const { backUrl, children, loading, customTitleStyle } = headerTitle;
+    const { backUrl, children, loading, customTitleStyle, hasCenterTabs } = headerTitle;
     return (
       <Col
         key="header-menu-title-wrap"
         css={wrapMenuTitleStyle}
-        style={
-          headerBodyLeftChildren || customTitleStyle
-            ? undefined
-            : getHeaderTitleStyle(columnConfig.leftColWidth)
-        }
+        style={hasCenterTabs ? getHeaderTitleStyle(columnConfig.leftColWidth) : undefined}
       >
         {backUrl ? (
           <Link

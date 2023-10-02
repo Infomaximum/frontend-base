@@ -1,4 +1,4 @@
-export { DataTable, emptyColumnKey } from "./DataTable";
+export { DataTable, emptyColumnKey, LoadingOnScrollDataTable } from "./DataTable";
 export { hiddenCheckbox } from "./DataTable.style";
 export {
   getTableTopButtonDisabledStatus,

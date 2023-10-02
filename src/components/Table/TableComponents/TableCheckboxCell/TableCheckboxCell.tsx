@@ -1,4 +1,3 @@
-import type React from "react";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 import { tableCheckboxCellStyle } from "./TableCheckboxCell.styles";
 import type { ITableCheckboxCellProps } from "./TableCheckboxCell.types";

@@ -2,12 +2,15 @@ import { type FC, memo, useRef } from "react";
 import type { ITextOverflowProps } from "./TextOverflow.types";
 import { textOverflowStyle, textOverflowOverlayStyle } from "./TextOverflow.styles";
 import { useTheme, useOverflow } from "../../decorators";
+import { AutoTooltip } from "../AutoTooltip";
 
 const TextOverflowComponent: FC<ITextOverflowProps> = ({
   children,
   customStyle,
   isRelative = true,
   isDark = false,
+  title,
+  className,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { isOverflow } = useOverflow(ref, children);
@@ -24,7 +27,9 @@ const TextOverflowComponent: FC<ITextOverflowProps> = ({
         mixBlendMode: isDark ? "screen" : "multiply",
       }}
     >
-      {children}
+      <AutoTooltip title={title} className={className}>
+        {children}
+      </AutoTooltip>
       {isOverflow && <div css={textOverflowOverlayStyle(overlayColor)} />}
     </div>
   );

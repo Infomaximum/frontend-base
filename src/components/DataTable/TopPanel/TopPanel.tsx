@@ -29,14 +29,18 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
     customHeaderStyle,
     buttonsRowStyle,
     searchPlaceholder,
+    isExpandedTopPanel,
   } = props;
 
   const localization = useLocalization();
   const { isFeatureEnabled } = useFeature();
 
   const resultHeaderStyle = useMemo(
-    () => (customHeaderStyle ? [headerStyle, customHeaderStyle] : headerStyle),
-    [customHeaderStyle]
+    () =>
+      customHeaderStyle
+        ? [headerStyle(isExpandedTopPanel), customHeaderStyle]
+        : headerStyle(isExpandedTopPanel),
+    [customHeaderStyle, isExpandedTopPanel]
   );
 
   const sortedButtons = useMemo(() => {
@@ -75,8 +79,13 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
   const isShowButtons = !!leftButtons?.length || !!rightButtons?.length;
 
   const buttonsBreakpoints = useMemo(
-    () => (isShowSearch ? mapValues(searchBreakpoints, (span) => 24 - span) : { span: 24 }),
-    [isShowSearch]
+    () =>
+      isShowSearch
+        ? headerMode === headerModes.REVERSE_SEARCH
+          ? {}
+          : mapValues(searchBreakpoints, (span) => 24 - span)
+        : { span: 24 },
+    [isShowSearch, headerMode]
   );
 
   if (!isShowSearch && !isShowButtons) {
@@ -97,17 +106,38 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
 
   return (
     <Header css={resultHeaderStyle}>
-      <Row align="middle" justify="space-between" gutter={8}>
+      <Row
+        align="middle"
+        justify="space-between"
+        gutter={headerMode === headerModes.REVERSE_SEARCH ? 0 : 8}
+      >
+        {headerMode === headerModes.REVERSE_SEARCH && isShowSearch && (
+          <Col {...searchBreakpoints}>
+            <Row gutter={rightButtons?.length ? 16 : 0} wrap={false}>
+              {rightButtons?.length ? <Col>{getButtonsRow(rightButtons)}</Col> : null}
+              <Search
+                key="input-search"
+                placeholder={searchPlaceholder || localization.getLocalized(SEARCH)}
+                onChange={onInputChange}
+                test-id={topPanelSearchInputTestId}
+                value={searchValue}
+                allowClear={allowClear}
+                size="small"
+                isSecond={true}
+              />
+            </Row>
+          </Col>
+        )}
         <Col {...buttonsBreakpoints}>
-          <Row align="middle" gutter={24}>
+          <Row align="middle" gutter={headerMode === headerModes.REVERSE_SEARCH ? 0 : 24}>
             {leftButtons?.length ? <Col>{getButtonsRow(leftButtons)}</Col> : null}
             <Col>{selectionTag}</Col>
-            {rightButtons?.length ? (
+            {headerMode !== headerModes.REVERSE_SEARCH && rightButtons?.length ? (
               <Col css={rightButtonsColStyle}>{getButtonsRow(rightButtons)}</Col>
             ) : null}
           </Row>
         </Col>
-        {isShowSearch ? (
+        {headerMode !== headerModes.REVERSE_SEARCH && isShowSearch ? (
           <Col {...searchBreakpoints}>
             <Search
               key="input-search"

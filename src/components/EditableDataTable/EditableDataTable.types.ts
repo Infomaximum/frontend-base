@@ -1,4 +1,8 @@
-import type { IDataTableOwnProps, IDataTableProps } from "../DataTable/DataTable.types";
+import type {
+  IDataTableOwnProps,
+  IDataTableProps,
+  IPagingModel,
+} from "../DataTable/DataTable.types";
 import type { TAccess } from "@infomaximum/utility";
 import type { MutableRefObject } from "react";
 import type { EditableDataTableKeys } from "./EditableDataTable";
@@ -7,6 +11,7 @@ import type { IFormWrapperProps } from "../forms/Form/FormWrapper.types";
 import type { IWithModalErrorProps } from "../../decorators/hocs/withModalError/withModalError.types";
 import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
 import type { IWithFeatureProps } from "../../decorators/hocs/withFeature/withFeature.types";
+import type { TableStore } from "../../utils";
 
 export interface IEditableRow extends TBaseRow {
   [EditableDataTableKeys.isRowEditDenied]?: boolean;
@@ -101,6 +106,11 @@ export interface IEditableDataTableProps<T>
     IWithModalErrorProps,
     IWithLocProps,
     IWithFeatureProps {}
+
+export interface IEditableLoadingOnScrollDataTableOwnProps<T>
+  extends IEditableDataTableOwnProps<T> {
+  tableStore: TableStore<IPagingModel>;
+}
 
 export interface IEditableDataTableState<T> {
   /** Начальные данные для добавленной строки*/

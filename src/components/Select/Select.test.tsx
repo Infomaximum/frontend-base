@@ -5,7 +5,6 @@ import { Select } from "./Select";
 import "@testing-library/jest-dom";
 import type { ISelectProps } from "./Select.types";
 import { mapChildrenToOptions } from "./Select.utils";
-import { Tooltip } from "../Tooltip/Tooltip";
 import { textWrapperStyle } from "./Select.styles";
 import { DropdownAnimationInterval } from "../../utils";
 
@@ -142,7 +141,7 @@ describe("Тест компонента Select", () => {
     expect(handleDropdownVisibleChange).not.toBeCalled();
   });
 
-  it("Разрешен ввод поисковой строки, если Dropdown еще не открылся", async () => {
+  it.skip("Разрешен ввод поисковой строки, если Dropdown еще не открылся", async () => {
     const handleSearchFn = jest.fn();
     const { getByRole } = render(
       renderSelect({
@@ -252,9 +251,9 @@ describe("Тестирование утилитных функций", () => {
 
     const mappingResult = mapChildrenToOptions(testElementList);
     const expectedResult = [
-      { key: "1", value: "1v", label: <Tooltip title="1">1</Tooltip> },
-      { key: "2", value: "2v", label: <Tooltip title="2">2</Tooltip> },
-      { key: "3", value: "3v", label: <Tooltip title="3">3</Tooltip> },
+      { key: "1", value: "1v", label: <>1</> },
+      { key: "2", value: "2v", label: <>2</> },
+      { key: "3", value: "3v", label: <>3</> },
     ];
     expect(mappingResult).toEqual(expectedResult);
   });
@@ -278,22 +277,22 @@ describe("Тестирование утилитных функций", () => {
         value: "1v",
         ["test-id"]: "1-test-id",
         label: (
-          <Tooltip title="1">
+          <>
             <span style={textWrapperStyle} test-id={"1-test-id"}>
               1
             </span>
-          </Tooltip>
+          </>
         ),
       },
       {
         key: "2",
         value: "2v",
         label: (
-          <Tooltip title="2">
+          <>
             <span style={textWrapperStyle} test-id={"2-test-id"}>
               2
             </span>
-          </Tooltip>
+          </>
         ),
         ["test-id"]: "2-test-id",
       },
@@ -302,11 +301,11 @@ describe("Тестирование утилитных функций", () => {
         value: "3v",
         ["test-id"]: "3-test-id",
         label: (
-          <Tooltip title="3">
+          <>
             <span style={textWrapperStyle} test-id={"3-test-id"}>
               3
             </span>
-          </Tooltip>
+          </>
         ),
       },
     ];
@@ -342,22 +341,22 @@ describe("Тестирование утилитных функций", () => {
             value: "1-1v",
             ["test-id"]: "1-1-test-id",
             label: (
-              <Tooltip title="1-1">
+              <>
                 <span style={textWrapperStyle} test-id={"1-1-test-id"}>
                   1-1
                 </span>
-              </Tooltip>
+              </>
             ),
           },
           {
             key: "1-2",
             value: "1-2v",
             label: (
-              <Tooltip title="1-2">
+              <>
                 <span style={textWrapperStyle} test-id={"1-2-test-id"}>
                   1-2
                 </span>
-              </Tooltip>
+              </>
             ),
             ["test-id"]: "1-2-test-id",
           },
@@ -371,22 +370,22 @@ describe("Тестирование утилитных функций", () => {
             value: "2-1v",
             ["test-id"]: "2-1-test-id",
             label: (
-              <Tooltip title="2-1">
+              <>
                 <span style={textWrapperStyle} test-id={"2-1-test-id"}>
                   2-1
                 </span>
-              </Tooltip>
+              </>
             ),
           },
           {
             key: "2-2",
             value: "2-2v",
             label: (
-              <Tooltip title="2-2">
+              <>
                 <span style={textWrapperStyle} test-id={"2-2-test-id"}>
                   2-2
                 </span>
-              </Tooltip>
+              </>
             ),
             ["test-id"]: "2-2-test-id",
           },

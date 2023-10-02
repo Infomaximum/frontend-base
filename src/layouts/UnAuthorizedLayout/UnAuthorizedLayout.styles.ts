@@ -1,9 +1,12 @@
-import { keyframes } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import AuthorizationBackground from "../../resources/icons/AuthorizationBackground.svg?url";
 
-export const layoutStyle = (theme: TTheme) =>
-  ({
-    height: "100vh",
+export const layoutStyle = (theme: TTheme) => [
+  css`
+    height: 100vh;
+    height: 100dvh;
+  `,
+  {
     overflowY: "auto",
     backgroundColor: theme.brandDefaultColor,
     backgroundImage: `url(${AuthorizationBackground})`,
@@ -11,7 +14,8 @@ export const layoutStyle = (theme: TTheme) =>
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundAttachment: "fixed",
-  } as const);
+  } as const,
+];
 
 export const unAuthorizedContentStyle = () =>
   ({
@@ -27,7 +31,6 @@ export const unAuthorizedContentStyle = () =>
 export const iconBack = (theme: TTheme) => ({
   color: theme.grey9Color,
   paddingRight: "7px",
-  borderRight: `1px solid ${theme.grey4Color}`,
 });
 
 export const backLink = {
@@ -50,7 +53,7 @@ export const shakeAndDanceKeyframe = {
 };
 
 export const wrapperContentLoginStyle = {
-  width: "440px",
+  width: "472px",
   flex: "none", // fix для IE
 };
 
@@ -59,15 +62,15 @@ export const animationContentLoginStyle = {
 };
 
 export const formBodyCutStyle = {
-  padding: "24px 32px 48px",
+  padding: "32px 48px 48px",
 };
 
 export const headStyle = {
-  padding: "16px 48px 15px 24px",
+  padding: "16px 48px",
 };
 
 export const formBodyDefaultStyle = {
-  padding: "32px 32px 48px",
+  padding: "56px 48px 48px",
 };
 
 export const companyNameStyle = (theme: TTheme) => ({

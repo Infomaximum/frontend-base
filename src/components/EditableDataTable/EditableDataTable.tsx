@@ -3,6 +3,7 @@ import type {
   IEditableDataTableOwnProps,
   IEditableDataTableProps,
   IEditableDataTableState,
+  IEditableLoadingOnScrollDataTableOwnProps,
   IEditableRow,
 } from "./EditableDataTable.types";
 import type { IDataTableProps, THeaderButtonObject } from "../DataTable/DataTable.types";
@@ -34,6 +35,10 @@ import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
 import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import { withModalError } from "../../decorators/hocs/withModalError/withModalError";
 import type { IFormData, IFormProvider } from "../../decorators/contexts/FormContext";
+import {
+  useLoadingOnScroll,
+  useNodeShowMoreParams,
+} from "../../decorators/hooks/useLoadingOnScroll";
 
 const EditableDataTableKeys = {
   // Ключ для кастомной колонки с кнопками (добавить в columns)
@@ -427,4 +432,13 @@ const EditableDataTable = withLoc(
   withFeature(withModalError(observer(EditableDataTableComponent)))
 );
 
-export { EditableDataTable, EditableDataTableKeys };
+const LoadingOnScrollEditableDataTable = <T extends IEditableRow = IEditableRow>(
+  props: IEditableLoadingOnScrollDataTableOwnProps<T>
+) => {
+  const showMoreParams = useNodeShowMoreParams(props?.queryVariables || {});
+  const handleLoadingOnScroll = useLoadingOnScroll(props?.tableStore, showMoreParams);
+
+  return <EditableDataTable {...props} onScroll={handleLoadingOnScroll} showMoreMode="scrolling" />;
+};
+
+export { EditableDataTable, EditableDataTableKeys, LoadingOnScrollEditableDataTable };

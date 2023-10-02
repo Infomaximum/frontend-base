@@ -29,3 +29,4 @@ export { default as SettingsSVG } from "./Settings.svg";
 export { default as SumSVG } from "./Sum.svg";
 export { default as ThreeDotsSVG } from "./ThreeDots.svg";
 export { default as UserSVG } from "./User.svg";
+export { default as CloseSVG } from "./Close.svg";

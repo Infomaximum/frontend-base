@@ -18,6 +18,7 @@ export interface ITopPanelProps {
   customHeaderStyle?: Interpolation<TTheme>;
   buttonsRowStyle?: RowProps;
   searchPlaceholder?: string;
+  isExpandedTopPanel?: boolean;
 }
 
 export interface ITableTopButtonDisabledProps {

@@ -1,6 +1,5 @@
 import type { TableProps } from "antd";
 import { isBoolean } from "lodash";
-import type React from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { TPropInjector } from "@infomaximum/utility";
 import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";

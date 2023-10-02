@@ -25,3 +25,4 @@ export { useUnmountEffect } from "./useUnmountEffect";
 export { useWillMountEffect } from "./useWillMountEffect";
 export { useForm } from "./useForm";
 export { useOverflow } from "./useOverflow";
+export { useLoadingOnScroll } from "./useLoadingOnScroll";

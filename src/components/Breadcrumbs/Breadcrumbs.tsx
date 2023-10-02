@@ -1,5 +1,4 @@
 import { compact, dropRight, last, size, takeRight } from "lodash";
-import type React from "react";
 import { useContainerWidth } from "../../decorators/hooks/useContainerWidth";
 import { HomeOutlined } from "../Icons/Icons";
 import {
@@ -17,11 +16,11 @@ import { calcShrinkMask, getTextWidth, interleaveWith } from "./Breadcrumbs.util
 import { Menu } from "antd";
 import { Dropdown } from "../Dropdown/Dropdown";
 import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
-import { EllipsisTooltip } from "../EllipsisTooltip/EllipsisTooltip";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { useNavigate } from "react-router";
 import { ellipsisStyle } from "../../styles/common.styles";
 import { useTheme } from "../../decorators";
+import { AutoTooltip } from "../AutoTooltip";
 
 // "Хлебные крошки" для нового списка сотрудников, который еще не реализован
 const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
@@ -64,9 +63,9 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
     const menuItems = hiddenItems.map(({ key, name, path }) => ({
       key,
       label: (
-        <Tooltip title={name} placement="right">
+        <AutoTooltip placement="right">
           <div css={ellipsisStyle}>{name}</div>
-        </Tooltip>
+        </AutoTooltip>
       ),
       onClick: createCrumbHandler(path),
     }));
@@ -111,9 +110,9 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
 
       return (
         <div key={item.key} css={style} onClick={createCrumbHandler(item.path)}>
-          <EllipsisTooltip css={{ fontSize: crumbFontSize }} placement="bottomLeft">
+          <AutoTooltip css={{ fontSize: crumbFontSize }} placement="bottomLeft">
             {item.name}
-          </EllipsisTooltip>
+          </AutoTooltip>
         </div>
       );
     });

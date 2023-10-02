@@ -5,7 +5,6 @@ import {
   tableArrowRightTestId,
   tableExpanderTestId,
 } from "../../../../utils/TestIds";
-import type React from "react";
 import { memo, useCallback } from "react";
 import { tableExpandIconHiddenStyle, tableExpandIconStyle } from "./TableExpandIcon.styles";
 import type { ITableExpandIconProps } from "./TableExpandIcon.types";

@@ -16,6 +16,8 @@ const InputNumberFieldArrayItem: React.FC<InputNumberFieldArrayItemProps> = (pro
     fields,
     fieldEntityIndex,
     onRemoveFieldEntity,
+    removeIcon: RemoveIcon,
+    customRemoveIconStyle,
     writeAccess,
     removeAccess,
     readOnly,
@@ -37,13 +39,13 @@ const InputNumberFieldArrayItem: React.FC<InputNumberFieldArrayItemProps> = (pro
         size="small"
         test-id={`${removeInputNumberFieldButtonTestId}_${fieldEntityIndex}`}
         value={fieldEntityIndex}
-        css={removeButtonStyle}
+        css={customRemoveIconStyle ?? removeButtonStyle}
         onClick={removeField}
       >
-        <CloseOutlined />
+        {RemoveIcon ?? <CloseOutlined />}
       </Button>
     ) : null;
-  }, [fieldEntityIndex, fieldsLength, readOnly, removeField]);
+  }, [RemoveIcon, fieldEntityIndex, fieldsLength, readOnly, removeField, customRemoveIconStyle]);
 
   return (
     <InputNumberFormField

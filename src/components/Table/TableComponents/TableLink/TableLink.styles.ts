@@ -5,7 +5,7 @@ const isSafari = userAgent() === EUserAgents.Safari;
 export const tableLinkStyle = (theme: TTheme) =>
   ({
     // todo: разобраться почему не работает line-height в обычных таблицах
-    display: "inline", // необходимо для работы ellipsis: true
+    display: "inline",
     padding: `${theme.tableCellVerticalPadding}px ${theme.tableCellHorizontalPadding / 2}px`,
     margin: `-${theme.tableCellVerticalPadding}px -${theme.tableCellHorizontalPadding / 2}px`,
     height: `${theme.commonTableRowHeight}px`,

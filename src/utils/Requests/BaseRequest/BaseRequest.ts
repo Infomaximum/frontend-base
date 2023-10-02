@@ -10,6 +10,7 @@ import type { NErrorHandlers } from "../../ErrorHandlers/ErrorHandlers.types";
 import type { Subscription } from "zen-observable-ts";
 import type { NCore } from "@infomaximum/module-expander";
 import { v4 as uuid4 } from "uuid";
+import type { QueryOptions } from "@apollo/client";
 
 type TRequestParams = {
   /** Инстанс обработчика ошибок */
@@ -87,7 +88,12 @@ export class BaseRequest implements NRequests.IRequest {
   }
 
   /** Выполняет запросы на сервер */
-  public async requestData({ query, variables, cancelable }: NRequests.TRequestDataParams) {
+  public async requestData({
+    query,
+    variables,
+    cancelable,
+    additionalParams,
+  }: NRequests.TRequestDataParams) {
     const apolloClient = apolloInstance.apolloClient;
 
     const { cancelToken, cancelCallback } = this.getCancelToken();
@@ -99,9 +105,10 @@ export class BaseRequest implements NRequests.IRequest {
       cancelCallbackPrev: this.cancelCallbackRequest,
     });
 
-    const config = {
+    const config: QueryOptions = {
       query,
       variables,
+      ...additionalParams,
       context: {
         imRequestData: {
           cancelToken,

@@ -11,6 +11,7 @@ export interface IVirtualizedTableHeaderRowOwnProps<T>
     Pick<IVirtualizedTableHeaderCellProps<T>, "onSorterChange" | "columnsOrders"> {
   isTableEmpty: boolean;
   isCheckable: boolean;
+  checkableColumnTitle?: React.ReactNode;
   isSelectionEmpty: boolean;
   onSelectChange(record: T | null, isChecking: boolean): void;
   /** Отступ справа, если в таблице есть скролл */

@@ -4,7 +4,7 @@ import type { SortOrder } from "antd/lib/table/interface";
 import type { DataIndex } from "rc-table/lib/interface";
 import type { IWithSpinPropsReplacer } from "./VirtualizedTable.utils";
 import type React from "react";
-import type { ScrollParams } from "react-virtualized";
+import type { Index, ScrollParams } from "react-virtualized";
 import type { TBaseRow, TExtendColumns } from "../../managers/Tree";
 import type { IBaseColumnConfig } from "../Table/Table.types";
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
@@ -30,6 +30,7 @@ export interface IVirtualizedTableProps<T>
       | "showHeader"
       | "indentSize"
       | "onChange"
+      | "onRow"
     >,
     IWithLocProps,
     IWithThemeProps<TTheme>,
@@ -42,6 +43,8 @@ export interface IVirtualizedTableProps<T>
   scrollAreaHeight: number;
   empty: React.ReactNode;
   onScroll?(params: ScrollParams): void;
+  scrollTop?: number;
+  rowHeight?: number | ((index: Index) => number);
 }
 
 export interface IVirtualizedTableState<T> {

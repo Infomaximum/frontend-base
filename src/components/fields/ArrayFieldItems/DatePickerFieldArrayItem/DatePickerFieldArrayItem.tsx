@@ -16,6 +16,8 @@ const DatePickerFieldArrayItem: React.FC<IDatePickerFieldArrayItemProps> = (prop
     fields,
     fieldEntityIndex,
     onRemoveFieldEntity,
+    removeIcon: RemoveIcon,
+    customRemoveIconStyle,
     writeAccess,
     removeAccess,
     readOnly,
@@ -41,13 +43,21 @@ const DatePickerFieldArrayItem: React.FC<IDatePickerFieldArrayItemProps> = (prop
             : `${removeDatePickerFieldButtonTestId}_${fieldEntityIndex}`
         }
         value={fieldEntityIndex}
-        css={removeButtonStyle}
+        css={customRemoveIconStyle ?? removeButtonStyle}
         onClick={removeField}
       >
-        <CloseOutlined />
+        {RemoveIcon ?? <CloseOutlined />}
       </Button>
     ) : null;
-  }, [fieldEntityIndex, fieldsLength, props?.showTime, readOnly, removeField]);
+  }, [
+    RemoveIcon,
+    fieldEntityIndex,
+    fieldsLength,
+    props?.showTime,
+    readOnly,
+    removeField,
+    customRemoveIconStyle,
+  ]);
 
   return (
     <DatePickerFormField

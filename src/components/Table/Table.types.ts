@@ -3,6 +3,8 @@ import type { ColumnProps, TableProps } from "antd/lib/table";
 import type { Localization } from "@infomaximum/localization";
 import type { Interpolation } from "@emotion/react";
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
+import type { ScrollParams } from "react-virtualized";
+import type { IVirtualizedTableProps } from "../VirtualizedTable/VirtualizedTable.types";
 
 export interface IBaseColumnConfig<T> extends Omit<ColumnProps<T>, "children"> {
   children?: IBaseColumnConfig<T>[] | null;
@@ -10,9 +12,12 @@ export interface IBaseColumnConfig<T> extends Omit<ColumnProps<T>, "children"> {
 
 type TTableProps<T> = Omit<TableProps<T>, "columns">;
 
-export interface ITableOwnProps<T> extends TTableProps<T> {
+export interface ITableOwnProps<T>
+  extends TTableProps<T>,
+    Pick<IVirtualizedTableProps<T>, "targetAll" | "rowHeight"> {
   localization: Localization;
-  targetAll?: boolean;
+  onScroll?(params: ScrollParams): void;
+  scrollTop?: number;
   isVirtualized?: boolean;
   isSearchEmpty?: boolean;
   isFiltersEmpty?: boolean;

@@ -1,6 +1,7 @@
 export const cardWidth = 264;
 export const cardLeftPadding = 7;
 export const getCardRightPadding = (hasContextMenu: boolean) => (hasContextMenu ? 40 : 16);
+const lineHeight = 18;
 
 export const cardStyle = (theme: TTheme) =>
   ({
@@ -40,22 +41,14 @@ export const focusStyle = (theme: TTheme) => ({
   border: `1px solid ${theme.thrust2Color}`,
 });
 
-/* Ограничивает абзац заданным количеством строк, добавляя многоточие при необходимости */
-const getTextClampStyle = (numberOfLines: number) =>
-  ({
-    WebkitLineClamp: numberOfLines,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
-    WebkitBoxOrient: "vertical",
-    wordBreak: "break-word",
-  } as const);
-
 export const titleStyle = (theme: TTheme) =>
   ({
     color: theme.grey10Color,
     fontWeight: 400,
     fontSize: theme.h4FontSize,
-    lineHeight: "18px",
-    ...getTextClampStyle(2),
+    lineHeight: `${lineHeight}px`,
+    maxHeight: `${lineHeight * 2}px`,
+    position: "relative",
+    overflow: "hidden",
+    wordBreak: "break-word",
   } as const);

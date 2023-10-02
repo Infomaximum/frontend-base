@@ -1,9 +1,9 @@
-import { useState, useEffect, type RefObject, type DependencyList } from "react";
+import { useState, useEffect, type RefObject, type DependencyList, useLayoutEffect } from "react";
 
 export const useOverflow = (ref: RefObject<HTMLElement>, ...rest: DependencyList) => {
   const [isOverflow, setIsOverflow] = useState<boolean>(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (ref.current) {
       setIsOverflow(ref.current.offsetWidth < ref.current.scrollWidth);
     }
@@ -11,9 +11,13 @@ export const useOverflow = (ref: RefObject<HTMLElement>, ...rest: DependencyList
 
   useEffect(() => {
     const handleWindowResize = () => {
-      if (ref.current) {
-        setIsOverflow(ref.current.offsetWidth < ref.current.scrollWidth);
-      }
+      // без setTimeout isOverflow передаётся в компоненты некорректно,
+      // т.к. высчитывается от предыдущих значений до увеличения масштаба
+      setTimeout(() => {
+        if (ref.current) {
+          setIsOverflow(ref.current.offsetWidth < ref.current.scrollWidth);
+        }
+      }, 10);
     };
 
     window.addEventListener("resize", handleWindowResize);

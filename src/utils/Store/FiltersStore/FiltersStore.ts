@@ -1,5 +1,5 @@
 import type { NFiltersStore } from "./FiltersStore.types";
-import { action, makeObservable, observable, computed, ObservableMap, toJS } from "mobx";
+import { action, makeObservable, observable, computed, ObservableMap } from "mobx";
 import { find, forEach, isEmpty, isFunction, isNil } from "lodash";
 import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
 import { FilterStorage } from "./FiltersStorage";
@@ -249,7 +249,7 @@ class FiltersStore extends BaseStore {
         }
 
         if (filterDescriptionCache) {
-          const persistStruct = filterDescriptionCache.getFilterForPersist(toJS(filter));
+          const persistStruct = filterDescriptionCache.getFilterForPersist(filter);
 
           if (persistStruct) {
             persistFilters.push(

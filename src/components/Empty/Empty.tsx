@@ -1,4 +1,3 @@
-import type React from "react";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import {
   NOTHING_FOUND,

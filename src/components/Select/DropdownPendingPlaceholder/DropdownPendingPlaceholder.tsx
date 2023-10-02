@@ -1,4 +1,3 @@
-import type React from "react";
 import type { IDropdownPendingPlaceholderProps } from "./DropdownPendingPlaceholder.types";
 import { useLastLoaded } from "./DropdownPendingPlaceholder.utils";
 import { DropdownPlaceholder } from "../DropdownPlaceholder/DropdownPlaceholder";
