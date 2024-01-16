@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/Infomaximum/frontend-base/compare/v6.0.1...v6.1.0) (2024-01-16)
+
+
+### Features
+
+* добавлен атрибут lang у html ([393de89](https://github.com/Infomaximum/frontend-base/commit/393de8964bc8179b83984553aa4e0356ad13e13f))
+
 ### [6.0.1](https://github.com/Infomaximum/frontend-base/compare/v5.0.2...v6.0.1) (2023-10-02)
 
 ### [5.0.2](https://github.com/Infomaximum/frontend-base/compare/v5.0.1...v5.0.2) (2023-06-30)
