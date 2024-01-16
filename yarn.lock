@@ -1288,10 +1288,10 @@
   resolved "https://registry.yarnpkg.com/@infomaximum/assert/-/assert-1.1.2.tgz#2474b2003f12243b0041e52557a76422767ebd5c"
   integrity sha512-yjG8I2T71JCRWCXMWb+W6u2tSSy6MREoEeRt4MKEb4Vgc3ukQUK6Ol93NbkJFPezWox+ZURaaxcVt2U9NQQ8Bg==
 
-"@infomaximum/base-filter@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@infomaximum/base-filter/-/base-filter-1.0.0.tgz#21317e0ae4818a06ecc92b18388c982bad6ce04d"
-  integrity sha512-tKVI9E05KnmzvKfgkZGqMQb+edpnhiYA9FMu6k7/+LzM5d3sKfdQycRM62SFzlv1HvGT9LvVcJ9bqmGGM9RPlQ==
+"@infomaximum/base-filter@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@infomaximum/base-filter/-/base-filter-1.1.0.tgz#b00a1c7125c7c4a2608faf2988366389cf721c86"
+  integrity sha512-hLAePIeFHEFDcf9kP/hvpYw0SDTep9ejdwpC/XGqh2YuvnpPSLtef3KrUIn5BGu+N0xi4EXnOuhyt5RsHppdyA==
   dependencies:
     "@infomaximum/localization" "^1.0.4"
     "@types/react" "^18.0.0"
@@ -1321,10 +1321,10 @@
   dependencies:
     "@infomaximum/assert" "^1.0.0"
 
-"@infomaximum/module-expander@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@infomaximum/module-expander/-/module-expander-2.0.1.tgz#96a7932061b0c44babf647dd20e7d0aebcbd8bef"
-  integrity sha512-Vcqn9339riTbUpK1ZHHuzCAmNnllHmp3Br8Iqj6zNpm+utAd/bfQQ/BgHwJo0D/5Ugent3KlPPXKUGbbSTNZ4Q==
+"@infomaximum/module-expander@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@infomaximum/module-expander/-/module-expander-2.1.0.tgz#e63726b9f96252426b17fdc8075296079f0d990b"
+  integrity sha512-8xcnBbvWPCpk6fKd3rMeY9pWjNOvAkBcCzltrIea8M92O8m6vhL3zLQN9bANpCvcXw7ItNBfL37tMBPz4/7F9A==
   dependencies:
     "@infomaximum/assert" "^1.0.3"
     "@infomaximum/global-types" "^1.0.0"
@@ -6217,10 +6217,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript@5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.2.2.tgz#5ebb5e5a5b75f085f22bc3f8460fba308310fa78"
-  integrity sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==
+typescript@5.3.2:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.2.tgz#00d1c7c1c46928c5845c1ee8d0cc2791031d4c43"
+  integrity sha512-6l+RyNy7oAHDfxC4FzSJcz9vnjTKxrLpDG5M2Vu4SHRVNg6xzqZp6LYSR9zjqQTu8DU/f5xwxUdADOkbrIX2gQ==
 
 uglify-js@^3.1.4:
   version "3.17.4"
