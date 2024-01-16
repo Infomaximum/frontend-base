@@ -115,7 +115,7 @@ export class Store<M extends Model = never> extends BaseStore {
     this.isHasSubscription = Boolean(params.subscriptionConfig);
   }
 
-  //----------------------------------------COMPUTED------------------------------------//
+  // ----------------------------------------COMPUTED------------------------------------//
   /** Возвращает данные полученные с сервера (после применения `prepareData`) */
   public get data() {
     return this._data;
@@ -165,7 +165,7 @@ export class Store<M extends Model = never> extends BaseStore {
     return this._isSubscribed;
   }
 
-  //----------------------------------------ACTIONS------------------------------------//
+  // ----------------------------------------ACTIONS------------------------------------//
 
   /** Управление флагом выполняющегося запроса */
   protected setLoading(isLoading: boolean) {
@@ -364,7 +364,7 @@ export class Store<M extends Model = never> extends BaseStore {
     });
   }
 
-  //--------------------------------------HELPERS------------------------------------//
+  // --------------------------------------HELPERS------------------------------------//
 
   /** Отменяет запросы и мутации которые не успели завершиться */
   public cancelRequest() {

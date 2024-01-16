@@ -1,17 +1,21 @@
+import { getGradientColorsFromTransparent } from "../../utils/colors";
+
 export const textOverflowStyle = {
   width: "100%",
   overflow: "hidden",
   whiteSpace: "nowrap",
 } as const;
 
-export const textOverflowOverlayStyle = (overlay: string) =>
-  ({
+export const textOverflowOverlayStyle = (overlay: string) => (theme: TTheme) => {
+  const { minOpacity, maxOpacity } = getGradientColorsFromTransparent(theme, overlay);
+
+  return {
     position: "absolute",
     top: 0,
     right: 0,
     bottom: 0,
     width: "8px",
-    // rgba(255, 255, 255, 0) необходимо для корректного отображения градиента в Safari
-    backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0), ${overlay})`,
+    backgroundImage: `linear-gradient(to right, ${minOpacity}, ${maxOpacity})`,
     pointerEvents: "none",
-  } as const);
+  } as const;
+};

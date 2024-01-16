@@ -42,7 +42,7 @@ export interface ISelectComponentProps
     value: IModel
   ) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
   "test-id"?: string;
-  /** Есть ли доступ к данным селекта*/
+  /** Есть ли доступ к данным селекта */
   isHasAccess?: boolean;
   /**
    * Нужна ли группировка

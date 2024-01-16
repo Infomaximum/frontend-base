@@ -46,10 +46,11 @@ export const routesMap = (
       routes.push(...routesMap(item.routes));
     }
 
-    const route = { ...item, exact: !!item.exact, originalPath: item.path };
+    const path = item.path ?? "/";
+    const route = { ...item, exact: !!item.exact, originalPath: path };
 
     if (!item.exact) {
-      route.path = item.path && item.path !== "*" ? `${item.path}/*` : "*";
+      route.path = path && path !== "*" ? `${path}/*` : "*";
     }
 
     if (item.component) {

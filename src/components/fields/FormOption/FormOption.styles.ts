@@ -28,3 +28,10 @@ export const labelWrapperStyle = {
 export const spaceFormOptionStyle = (spaceSize: ESpaceSize) => (theme: TTheme) => ({
   marginBottom: `${spaceSize === ESpaceSize.small ? theme.smallSpace : theme.defaultSpace}px`,
 });
+
+export const fieldDescriptionStyle = (theme: TTheme) => ({
+  marginTop: 3,
+  fontSize: theme.h4FontSize,
+  lineHeight: "16px",
+  color: theme.grey7Color,
+});

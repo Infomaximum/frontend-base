@@ -2,7 +2,7 @@ import { type FC, type FocusEvent, useCallback, useMemo, useState } from "react"
 import type { ISelectWithStoreProps, THandlerDisplayValues } from "./SelectWithStore.types";
 import { compact, every, isArray, isFunction, isNull, isString, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";
-import type { Model } from "@infomaximum/graphql-model";
+import type { IModel, Model } from "@infomaximum/graphql-model";
 import { useFeature } from "../../decorators/hooks/useFeature";
 import { useStore } from "../../decorators/hooks/useStore";
 import type { ISelectProps } from "../Select/Select.types";
@@ -62,14 +62,6 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
 
   const model = store.model;
 
-  const optionItems = useMemo(() => {
-    if (model) {
-      return map(model.getItems(), (item) => mapModelToSelectOption(item, handlerDisplayValues));
-    } else {
-      return [];
-    }
-  }, [model, handlerDisplayValues]);
-
   const modelsCollection = useMemo(
     () =>
       model?.getItems().reduce<TDictionary<Model>>((obj, item) => {
@@ -121,9 +113,11 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
       if (isFunction(onDropdownVisibleChange)) {
         onDropdownVisibleChange(isOpened);
       }
+
       if (isOpened && (isUndefined(store.data) || isNull(store.data))) {
         fetchData();
       }
+
       if (clearDataOnClose && !isOpened) {
         store.clearData();
       }
@@ -136,6 +130,26 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     [valueProps, handlerDisplaySelectedValues]
   );
 
+  const renderOptions = (modelList: IModel[]): React.ReactNode[] => {
+    return map(modelList, (model: IModel) => {
+      let displayName: React.ReactNode = model?.getDisplayName();
+
+      if (isFunction(handlerDisplayValues)) {
+        displayName = handlerDisplayValues(model);
+      }
+
+      return (
+        <Select.Option
+          key={model.getInnerName()}
+          value={model.getInnerName()}
+          filterProp={displayName}
+        >
+          {displayName}
+        </Select.Option>
+      );
+    });
+  };
+
   return (
     <Select
       {...rest}
@@ -145,7 +159,6 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
       onBlur={handleBlur}
       onDropdownVisibleChange={handleVisibleChange}
       onChange={handleChange}
-      options={optionItems}
       value={value}
       onSearch={setSearchText}
       searchValue={searchText}
@@ -155,7 +168,9 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
           <DropdownPlaceholder hasAccess={isHasAccess} searchText={searchText} />
         ) : null
       }
-    />
+    >
+      {model ? renderOptions(model.getItems()) : []}
+    </Select>
   );
 };
 

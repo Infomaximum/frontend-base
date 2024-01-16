@@ -20,7 +20,7 @@ export interface ITreeModel extends IModel {
   getParents(): ITreeModel[];
 }
 
-/** Методы добавления новой строки в таблицу*/
+/** Методы добавления новой строки в таблицу */
 export enum EAddingRowMethod {
   /** добавление строки в начало таблицы */
   UNSHIFT = "UNSHIFT",

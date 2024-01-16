@@ -69,7 +69,7 @@ export class TableStore<M extends Model = never> extends Store<M> {
     this._isTree = params.isTree;
   }
 
-  //----------------------------------------COMPUTED------------------------------------//
+  // ----------------------------------------COMPUTED------------------------------------//
 
   public get checkedState() {
     return this._checkedState;
@@ -95,7 +95,7 @@ export class TableStore<M extends Model = never> extends Store<M> {
     return this._isPageLoading;
   }
 
-  //----------------------------------------ACTIONS------------------------------------//
+  // ----------------------------------------ACTIONS------------------------------------//
 
   public setCheckState(checkedRows: NTableStore.TCheckedRows) {
     this._checkedState = checkedRows;
@@ -169,7 +169,7 @@ export class TableStore<M extends Model = never> extends Store<M> {
     this.requestData({ variables });
   }
 
-  //----------------------------------------HELPERS------------------------------------//
+  // ----------------------------------------HELPERS------------------------------------//
 
   /** Дерево? */
   public get isTree() {

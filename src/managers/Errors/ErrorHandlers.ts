@@ -110,22 +110,22 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
     title: CANNOT_DELETE_NON_EMPTY_DEPARTMENTS,
     description: DELETE_USERS_FROM_DEPARTMENTS_AND_TRY_AGAIN,
   },
-  /*** =========================== константы для страницы AccessRoles [START]  =========================== ***/
+  /** =========================== константы для страницы AccessRoles [START]  =========================== */
   {
     code: EErrorCode.ASSIGNED_TO_EMPLOYEES_ACCESS_ROLE,
     title: CANNOT_DELETE_ACCESS_ROLES_ASSIGNED_TO_USERS,
     description: CHANGE_ACCESS_ROLES_IN_USER_PROFILES_AND_TRY_AGAIN,
   },
-  /*** ============================ errorHandlers для страницы AccessRoles [END]  ============================ ***/
+  /** ============================ errorHandlers для страницы AccessRoles [END]  ============================ */
 
-  /*** =========================== errorHandlers для страницы employee [START]  =========================== ***/
-  /** --------------------------------- Departments -------------------------------- **/
+  /** =========================== errorHandlers для страницы employee [START]  =========================== */
+  /** --------------------------------- Departments -------------------------------- */
   {
     code: EErrorCode.NOT_EMPTY_DOMAIN_OBJECT,
     title: CANNOT_DELETE_NON_EMPTY_DEPARTMENTS,
     description: DELETE_USERS_FROM_DEPARTMENTS_AND_TRY_AGAIN,
   },
-  /** ---------------------------------- Employees --------------------------------- **/
+  /** ---------------------------------- Employees --------------------------------- */
   {
     code: EErrorCode.ADMINISTRATOR_EMPLOYEE,
     title: CANNOT_DELETE_USERS_WITH_ROLE_ADMIN,
@@ -140,7 +140,7 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
     title: CANNOT_DELETE_YOUR_PROFILE_AND_USERS_WITH_ROLE_ADMIN,
     description: CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN,
   },
-  /** ---------------------------------- Combined ---------------------------------- **/
+  /** ---------------------------------- Combined ---------------------------------- */
   {
     code: EErrorCode.ADMIN_EMPLOYEE_NON_EMPTY_DEPARTMENT,
     title: YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES,
@@ -156,7 +156,7 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
     title: CANNOT_DELETE_YOUR_PROFILE_ADMINISTRATORS_AND_NON_EMPTY_DEPARTMENTS,
     description: DELETE_USERS_FROM_DEPARTMENTS_CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN,
   },
-  /*** ============================ errorHandlers для страницы employee [END]  ============================ ***/
+  /** ============================ errorHandlers для страницы employee [END]  ============================ */
   {
     code: "new_password_equals_current_password",
     description: NEW_PASSWORD_EQUALS_CURRENT_PASSWORD,

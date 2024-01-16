@@ -32,8 +32,8 @@ export const primaryButtonStyle = (theme: TTheme) => {
 
   const disabledStyle = {
     color: theme.grey7Color,
-    background: theme.grey4Color,
-    borderColor: theme.grey4Color,
+    background: theme.grey3Color,
+    borderColor: theme.grey3Color,
   };
 
   return {
@@ -119,6 +119,12 @@ export const primaryOutlinedButtonStyle = (theme: TTheme) => {
     backgroundColor: "transparent",
   };
 
+  const disabledStyle = {
+    color: theme.grey7Color,
+    background: theme.grey4Color,
+    borderColor: theme.grey4Color,
+  };
+
   return {
     ...getOutlineButtonStyle(theme.thrust4Color),
     ":hover": {
@@ -131,6 +137,11 @@ export const primaryOutlinedButtonStyle = (theme: TTheme) => {
       borderColor: theme.thrust5Color,
       color: theme.thrust5Color,
       backgroundColor: "transparent",
+    },
+    "&[disabled]": {
+      ...disabledStyle,
+      ":hover": disabledStyle,
+      ":focus": disabledStyle,
     },
   };
 };

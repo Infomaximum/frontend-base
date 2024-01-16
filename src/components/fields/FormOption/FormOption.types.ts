@@ -67,6 +67,11 @@ export interface IFormOptionProps {
   promptWrapperStyle?: Interpolation<TTheme>;
 
   /**
+   * Контейнер для всплывающей подсказки
+   */
+  getPromptPopupContainer?: (element: HTMLElement) => HTMLElement;
+
+  /**
    * Подпись справа от field
    */
   rightLabel?: ReactNode;
@@ -95,6 +100,11 @@ export interface IFormOptionProps {
    * Состояние "валидности" поля
    */
   invalid?: boolean;
+
+  /**
+   * Описание, находится под полем
+   */
+  description?: string;
 
   /**
    * Приоритет расположения элемента в форме, чем выше приоритет, тем выше элемент в форме

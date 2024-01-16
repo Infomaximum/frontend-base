@@ -39,6 +39,8 @@ import {
   useLoadingOnScroll,
   useNodeShowMoreParams,
 } from "../../decorators/hooks/useLoadingOnScroll";
+import { DELETE } from "../../utils";
+import { Tooltip } from "../Tooltip";
 
 const EditableDataTableKeys = {
   // Ключ для кастомной колонки с кнопками (добавить в columns)
@@ -332,7 +334,7 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
       render: (_: any, record: T) => {
         const { key, [EditableDataTableKeys.isRowRemoveDenied]: isRowRemoveDenied } = record;
         const { removingRowKey, isSubmitting } = this.state;
-        const { onRemoveRow } = this.props;
+        const { onRemoveRow, localization } = this.props;
 
         const isShowButtonRemove =
           this.state.access?.hasDeleteAccess && Boolean(onRemoveRow) && !isRowRemoveDenied;
@@ -345,7 +347,13 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
             type={EditableRowButton.types.REMOVE}
             test-id={`${key}_${controlCellRemoveTestId}`}
           >
-            {removingRowKey === key ? <LoadingOutlined /> : <DeleteOutlined />}
+            {removingRowKey === key ? (
+              <LoadingOutlined />
+            ) : (
+              <Tooltip title={localization.getLocalized(DELETE)} placement={"top"}>
+                <DeleteOutlined />
+              </Tooltip>
+            )}
           </EditableRowButton>
         ) : null;
 
@@ -432,13 +440,23 @@ const EditableDataTable = withLoc(
   withFeature(withModalError(observer(EditableDataTableComponent)))
 );
 
-const LoadingOnScrollEditableDataTable = <T extends IEditableRow = IEditableRow>(
-  props: IEditableLoadingOnScrollDataTableOwnProps<T>
-) => {
-  const showMoreParams = useNodeShowMoreParams(props?.queryVariables || {});
-  const handleLoadingOnScroll = useLoadingOnScroll(props?.tableStore, showMoreParams);
+const LoadingOnScrollEditableDataTable = observer(
+  <T extends IEditableRow = IEditableRow>({
+    loading,
+    ...restProps
+  }: IEditableLoadingOnScrollDataTableOwnProps<T>) => {
+    const showMoreParams = useNodeShowMoreParams(restProps?.queryVariables || {});
+    const handleLoadingOnScroll = useLoadingOnScroll(restProps?.tableStore, showMoreParams);
 
-  return <EditableDataTable {...props} onScroll={handleLoadingOnScroll} showMoreMode="scrolling" />;
-};
+    return (
+      <EditableDataTable
+        {...restProps}
+        onScroll={handleLoadingOnScroll}
+        showMoreMode="scrolling"
+        loading={!restProps.tableStore?.model}
+      />
+    );
+  }
+);
 
 export { EditableDataTable, EditableDataTableKeys, LoadingOnScrollEditableDataTable };

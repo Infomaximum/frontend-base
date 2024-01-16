@@ -87,3 +87,5 @@ export const alertBannerStyle = (theme: TTheme) =>
       marginTop: "3px",
     },
   } as const);
+
+export const alertIconStyle = { svg: { overflow: "visible" } };

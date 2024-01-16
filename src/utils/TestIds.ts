@@ -140,11 +140,11 @@ export const fieldTooltipPromptButtonTestId = "prompt-button";
 // PasswordWithButtonFormField
 export const changePasswordButtonTestId = "change-password-button";
 
-//DatePickerFieldArray
+// DatePickerFieldArray
 export const removeDatePickerFieldButtonTestId = "remove-date_picker-field-button";
 export const removeDateTimePickerFieldButtonTestId = "remove-date_time_picker-field-button";
 
-//InputFieldArray
+// InputFieldArray
 export const removeInputFieldButtonTestId = "remove-input-field-button";
 export const removeInputNumberFieldButtonTestId = "remove-input_number-field-button";
 

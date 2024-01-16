@@ -19,6 +19,7 @@ import {
   borderTopStyle,
   transparentBordersStyle,
   tableStyle,
+  antTableSpinStyle,
 } from "./Table.styles";
 import { type Interpolation, withTheme } from "@emotion/react";
 import { Empty } from "../Empty/Empty";
@@ -44,6 +45,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
     showHeader: true,
     isStretchByParent: true,
     isStretchToBottom: false,
+    isShowTopBorder: true,
   };
 
   private wrapperRef = React.createRef<HTMLDivElement>();
@@ -135,7 +137,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
   private getSpinProps = createSelector(
     ({ loading }: ITableProps<T>) => loading,
     (loading) => {
-      if (isBoolean(loading)) {
+      if (isBoolean(loading) && loading) {
         return { spinning: loading, delay: loaderDelay };
       }
 
@@ -151,6 +153,15 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
     (y) => y,
     (y: number, scroll: ITableOwnProps<T>["scroll"]) => scroll,
     (y: number, scroll: ITableOwnProps<T>["scroll"]) => ({ ...scroll, y } as const)
+  );
+
+  private getAntSpinProps = createSelector(
+    (headerHeight) => headerHeight,
+    (headerHeight: number, loading: ITableOwnProps<T>["loading"]) => loading,
+    (headerHeight: number, loading: ITableOwnProps<T>["loading"]) => ({
+      style: antTableSpinStyle(headerHeight),
+      ...(isBoolean(loading) ? { spinning: loading } : loading),
+    })
   );
 
   private get headerHeight() {
@@ -219,6 +230,15 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
 
       newRowProps.onClick = (e) => {
         e.preventDefault();
+
+        if (window.getSelection()?.toString()) {
+          setTimeout(() => {
+            rowSelection?.onSelect?.(record, !isSelected, selectedRows, e.nativeEvent);
+          }, 0);
+
+          return;
+        }
+
         rowSelection?.onSelect?.(record, !isSelected, selectedRows, e.nativeEvent);
       };
 
@@ -288,6 +308,10 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
     } = this.props;
 
     const loading = this.getSpinProps(this.props);
+    const antTableSpinProps = this.getAntSpinProps(
+      this.wrapperRef.current?.getBoundingClientRect()?.top || 0,
+      loading
+    );
 
     /** Передана ли явно высота области прокрутки */
     const isExplicitHeight = has(this.props.scroll, "y");
@@ -320,14 +344,14 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
               />
             ) : (
               <ConfigProvider renderEmpty={this.getEmpty}>
-                {rest.showHeader !== undefined && !rest.showHeader ? (
+                {rest.showHeader !== undefined && !rest.showHeader && rest.isShowTopBorder ? (
                   <div css={borderTopStyle(this.props.theme)} />
                 ) : null}
                 <AntTable<T>
                   pagination={false}
                   {...rest}
                   css={this.getStyleTable(this.state.tableOpacity)}
-                  loading={loading}
+                  loading={antTableSpinProps}
                   columns={columns}
                   showSorterTooltip={false}
                   expandable={

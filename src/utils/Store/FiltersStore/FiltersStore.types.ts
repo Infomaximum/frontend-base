@@ -19,7 +19,7 @@ export declare namespace NFiltersStore {
     /** Запускать ли автосохранение в localStorage (по-умолчанию true) */
     autoSave?: boolean;
 
-    /** геттер для получения filterDescription*/
+    /** геттер для получения filterDescription */
     filterDescriptionGetter?: TFilterDescriptionGetter;
   } & NBaseStore.IBaseStoreParams;
 

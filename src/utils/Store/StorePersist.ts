@@ -44,7 +44,7 @@ class StorePersist {
 
           if (decrypt && !isEmpty(restoreStruct)) {
             localStorage.setItem(name, saveJsonCandidate);
-            //сбрасываем все состояние фильтров, чтобы создать новое
+            // сбрасываем все состояние фильтров, чтобы создать новое
             store.reset();
             store.restoreByStruct(restoreStruct);
           }

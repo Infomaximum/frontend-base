@@ -31,4 +31,4 @@ export * from "./utils";
 export * from "@infomaximum/localization";
 export * from "@infomaximum/assert";
 
-export { EFilteringMethods } from "@infomaximum/base-filter";
+export { EFilteringMethods, EFilteringMethodValues } from "@infomaximum/base-filter";

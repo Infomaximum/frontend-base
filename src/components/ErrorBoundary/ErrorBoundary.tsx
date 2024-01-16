@@ -30,7 +30,9 @@ class ErrorBoundaryComponent extends Component<IErrorBoundaryProps, IErrorBounda
   }
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    const { code, showModalError, extraParams } = this.props;
+    const { code, showModalError, extraParams, onError } = this.props;
+
+    onError?.(error);
 
     if (process.env.NODE_ENV === "production") {
       const preparedError = {

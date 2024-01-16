@@ -25,3 +25,8 @@ export const transparentBordersStyle = {
 };
 
 export const tableStyle = (opacity: TTableOpacity) => ({ opacity });
+
+export const antTableSpinStyle = (headerHeight: number) => ({
+  height: `calc(100vh - ${headerHeight}px)`,
+  minHeight: "150px",
+});

@@ -29,8 +29,10 @@ const populateWithRest = (
 
   for (let groupIndex = 0; groupIndex < groupFieldNames.length; groupIndex += 1) {
     groupFieldName = groupFieldNames[groupIndex] ?? null;
+
     if (groupFieldName && data[groupFieldName]) {
       newData = { ...data };
+
       if (isArray(newData[groupFieldName])) {
         items = newData[groupFieldName] = [...newData[groupFieldName]];
         // нашли поле со списком

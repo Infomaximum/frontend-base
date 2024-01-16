@@ -35,6 +35,7 @@ export const contentStyle = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  overflow: "hidden",
 } as const;
 
 export const focusStyle = (theme: TTheme) => ({

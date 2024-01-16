@@ -38,23 +38,23 @@ export enum EErrorCode {
   GATEWAY_TIMEOUT = "gateway_timeout",
   /** =========================== HTTP [END]=========================== */
 
-  /*** =========================== Для страницы AccessRoles [START]  =========================== ***/
+  /** =========================== Для страницы AccessRoles [START]  =========================== */
   ASSIGNED_TO_EMPLOYEES_ACCESS_ROLE = "assigned_to_employees_access_role",
-  /*** ============================ Для страницы AccessRoles [END]  ============================ ***/
+  /** ============================ Для страницы AccessRoles [END]  ============================ */
 
-  /*** =========================== Для страницы employee [START]  =========================== ***/
-  /** --------------------------------- Departments -------------------------------- **/
+  /** =========================== Для страницы employee [START]  =========================== */
+  /** --------------------------------- Departments -------------------------------- */
   NOT_EMPTY_DOMAIN_OBJECT = "not_empty_domain_object",
-  /** ---------------------------------- Employees --------------------------------- **/
+  /** ---------------------------------- Employees --------------------------------- */
   EMPLOYEE_SELF_REMOVE = "employee_self_remove",
   ADMINISTRATOR_EMPLOYEE = "administrator_employee",
   EMPLOYEE_SELF_REMOVE_ROLE_ADMIN = "employee_self_remove_role_admin",
-  /** ---------------------------------- Combined ---------------------------------- **/
+  /** ---------------------------------- Combined ---------------------------------- */
   EMPLOYEE_SELF_REMOVE_NOT_EMPTY_DEPARTMENT = "employee_self_remove_not_empty_department",
   EMPLOYEE_SELF_REMOVE_ADMIN_NOT_EMPTY_DEPARTMENT = "employee_self_remove_admin_not_empty_department",
   ADMIN_EMPLOYEE_NON_EMPTY_DEPARTMENT = "admin_employee_non_empty_department",
 
-  /*** ============================ Для страницы employee [END]  ============================ ***/
+  /** ============================ Для страницы employee [END]  ============================ */
 }
 
 export const KeyupRequestInterval = 1500;
@@ -121,12 +121,16 @@ export const contextMenuColumnKey = "context_menu";
 
 /** Для измерения высоты шапки */
 export const TABLE_HEADER_ID = "table-header-id";
-/** Для работы со скоролом в теле виртуализированной таблицы*/
+/** Для работы со скоролом в теле виртуализированной таблицы */
 export const VIRTUALIZED_TABLE_BODY_ID = "virtualized-table-body-id";
-/** Для работы со скоролом в контейнере с контентом*/
+/** Для работы со скоролом в контейнере с контентом */
 export const MAIN_LAYOUT_CONTENT_ID = "main-layout-content-id";
 
 export enum EErrorBoundaryCodesBase {
   app = "app",
   unAuthorizedLayout = "unAuthorizedLayout",
 }
+
+// триггер остаточной высоты запускающей подгрузку по скроллу, 800 равносильно
+// 20 стандартным записям по 38px с блоком счетчиком остатка и спинером
+export const defaultRestScrollTriggerHeight = 800;

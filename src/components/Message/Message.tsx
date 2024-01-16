@@ -49,7 +49,7 @@ import type { NCore } from "@infomaximum/module-expander";
 import { theme } from "../../styles/theme";
 import { Localization, type TLocalizationDescription } from "@infomaximum/localization";
 
-const duration = 4000;
+const duration = 3000;
 
 function showMessageGrid(props: IMessageProps, notification: ReactNode) {
   const messageDuration = props.messageDuration ? props.messageDuration * 1000 : duration;
@@ -255,7 +255,7 @@ class MessageComponent {
     }
   }
 
-  /**k
+  /**
    * Метод возвращает имя сущности по значениям полей формы и ключам полей имени
    * @param nameFieldKeyList - массив ключей имени
    * @param values - объект значений полей формы
@@ -475,6 +475,10 @@ class MessageComponent {
     } else {
       showMessageGrid(props, notifications);
     }
+  }
+
+  public static hideMessage() {
+    message.destroy();
   }
 }
 

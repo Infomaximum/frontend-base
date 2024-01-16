@@ -22,7 +22,7 @@ interface IAutoFillComponentOwnProps extends TAutoCompleteProps {
   onChange?(value?: IModel): void;
   rowDisable?: (model: IModel) => boolean;
   "test-id"?: string;
-  /** Есть ли доступ к данным автокомплита*/
+  /** Есть ли доступ к данным автокомплита */
   isHasAccess?: boolean;
   autoFillComponentStyle?: Interpolation<TTheme>;
   getPrepareDisplayValue?: (value: string | undefined) => string;

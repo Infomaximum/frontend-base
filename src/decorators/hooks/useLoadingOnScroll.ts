@@ -1,13 +1,9 @@
 import { useCallback, useMemo } from "react";
 import type { ScrollParams } from "react-virtualized";
-import type { Group } from "../../models";
 import { InvalidIndex } from "../../libs/utils";
 import type { NTableStore } from "../../utils/Store/TableStore/TableStore.types";
-import { ELimitsStateNames, type TableStore } from "../../utils";
-
-interface IPagingModel extends Group {
-  nextCount: number;
-}
+import { ELimitsStateNames, defaultRestScrollTriggerHeight, type TableStore } from "../../utils";
+import type { IPagingModel } from "../../components/DataTable/DataTable.types";
 
 export function useNodeShowMoreParams(
   variables: TDictionary<any>,
@@ -21,19 +17,19 @@ export function useNodeShowMoreParams(
 
 export function useLoadingOnScroll(
   store: TableStore<IPagingModel>,
-  showMoreParams: NTableStore.TActionShowMoreParams
+  showMoreParams: NTableStore.TActionShowMoreParams,
+  recordsRestHeight: number = defaultRestScrollTriggerHeight
 ) {
   return useCallback(
     ({ scrollHeight, scrollTop, clientHeight }: ScrollParams) => {
-      store.setScrollTop(scrollTop);
       if (store.isLoading || !store.model || store.model.nextCount === 0) {
         return;
       }
-      // подгрузка при прокручивании до 50%
-      if (clientHeight + scrollTop >= scrollHeight / 2) {
+
+      if (scrollHeight - (scrollTop + clientHeight) < recordsRestHeight) {
         store.setShowMore(showMoreParams);
       }
     },
-    [store, showMoreParams]
+    [store, recordsRestHeight, showMoreParams]
   );
 }

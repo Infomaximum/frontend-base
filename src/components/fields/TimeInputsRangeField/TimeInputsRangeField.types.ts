@@ -4,6 +4,8 @@ import type { FieldRenderProps } from "react-final-form";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 
+export type TDuration = Duration | null | undefined;
+
 export type TTimeInputsRangeValue = [Duration, Duration];
 
 type TOmitTimeInputsRangeProps =
@@ -20,8 +22,9 @@ export interface ITimeInputsRangeProps
   extends ITimeInputsRangeOwnProps,
     FieldRenderProps<TTimeInputsRangeValue> {
   withSeconds?: boolean;
-  //** Исключать значения от 1 до 9 миллисекунд? По умолчанию true */
+  /** Исключать значения от 1 до 9 миллисекунд? По умолчанию true */
   isExcludeLowValues?: boolean;
+  fixMidnightTime?: boolean;
 }
 
 export interface ITimeInputsRangeOwnProps extends Omit<InputProps, TOmitTimeInputsRangeProps> {}

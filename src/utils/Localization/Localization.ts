@@ -53,14 +53,29 @@ export const SAVE = {
   en: "Save",
 };
 
-export const UNSAVED_CHANGES = {
-  ru: "У вас есть несохраненные изменения",
-  en: "You have unsaved changes",
+export const EXIT = {
+  ru: "Выйти",
+  en: "Exit",
+};
+
+export const SAVE_CHANGES = {
+  ru: "Сохранить изменения?",
+  en: "Do you want to save changes?",
 };
 
 export const UNABLE_TO_SAVE_CHANGE = {
-  ru: "У вас есть изменения, которые нельзя сохранить из-за ошибок на форме",
-  en: "You have changes that cannot be saved due to errors on the form",
+  ru: "Невозможно сохранить изменения",
+  en: "Changes cannot be saved",
+};
+
+export const MAKE_SURE_FIELDS_FILLED_CORRECTLY = {
+  ru: "Убедитесь, что поля заполнены корректно.",
+  en: "Make sure that the fields are filled in correctly.",
+};
+
+export const CONTINUE_EDITING = {
+  ru: "Продолжить редактирование",
+  en: "Continue editing",
 };
 
 export const ADD = {
@@ -363,6 +378,11 @@ export const FILE_FORMAT = {
 export const UPLOAD_THE_FILE_IN_THE_FORMAT = (accept: string) => ({
   ru: `Загрузите файл в формате ${accept}`,
   en: `Upload the file in the format ${accept}`,
+});
+
+export const MAX_SIZE_OF_THE_FILE = (maxSize: number) => ({
+  ru: `Максимальный размер файла: ${maxSize}MB`,
+  en: `Maximum file size: ${maxSize}MB`,
 });
 
 export const SEARCH = {

@@ -1,4 +1,4 @@
-import { memo, useMemo, useCallback, forwardRef, type ForwardedRef, useState } from "react";
+import { useMemo, useCallback, forwardRef, type ForwardedRef, useState, useEffect } from "react";
 import type { IApplicationCardProps } from "./ApplicationCard.types";
 import {
   titleStyle,
@@ -22,6 +22,8 @@ import { useTheme } from "../../decorators";
 import type { TOnItemClickParam } from "../ContextMenu/ContextMenu.types";
 import type { DropdownProps } from "antd/lib/dropdown";
 import { useCardLinesOverlay } from "../../decorators/hooks/useCardLinesOverlay";
+import { Tooltip } from "../Tooltip";
+import { observer } from "mobx-react";
 
 const trigger: DropdownProps["trigger"] = ["contextMenu"];
 
@@ -39,6 +41,7 @@ const ApplicationCardComponent = forwardRef<
       onRemove,
       isReadOnly,
       hasDeleteAccess,
+      mainPageContentRef,
     },
     ref
   ) => {
@@ -46,7 +49,14 @@ const ApplicationCardComponent = forwardRef<
     const navigate = useNavigate();
     const theme = useTheme();
     const [contextMenuInFocus, setContextMenuInFocus] = useState(false);
-    const { overlayedLines } = useCardLinesOverlay(entity.getName(), 18, 2, measuredWidth);
+    const applicationName = entity.getName();
+    const { overlayedLines, hasOverflow } = useCardLinesOverlay(
+      applicationName,
+      18,
+      2,
+      14,
+      measuredWidth
+    );
 
     const handleClick = useCallback(() => {
       if (pathname) {
@@ -95,7 +105,9 @@ const ApplicationCardComponent = forwardRef<
     const cardWrapper = useMemo(() => {
       const content = (
         <div css={contentStyle}>
-          <div css={titleStyle(theme)}>{overlayedLines}</div>
+          <div css={titleStyle(theme)}>
+            <Tooltip title={hasOverflow ? applicationName : undefined}>{overlayedLines}</Tooltip>
+          </div>
           <InlineTags tags={entity.tags} measuredWidth={tagsMeasuredWidth} />
         </div>
       );
@@ -110,11 +122,36 @@ const ApplicationCardComponent = forwardRef<
           {content}
         </div>
       );
-    }, [cardStyles, entity, handleClick, overlayedLines, ref, tagsMeasuredWidth, theme]);
+    }, [
+      cardStyles,
+      entity,
+      handleClick,
+      hasOverflow,
+      overlayedLines,
+      ref,
+      tagsMeasuredWidth,
+      theme,
+      applicationName,
+    ]);
 
     const handleOpenChange = useCallback((isOpen: boolean) => {
       setContextMenuInFocus(isOpen);
     }, []);
+
+    useEffect(() => {
+      const mainPageContent = mainPageContentRef?.current;
+
+      const scrollHandler = () => {
+        setContextMenuInFocus(false);
+        mainPageContent?.removeEventListener("scroll", scrollHandler);
+      };
+
+      if (contextMenuInFocus) {
+        mainPageContent?.addEventListener("scroll", scrollHandler);
+      } else {
+        mainPageContent?.removeEventListener("scroll", scrollHandler);
+      }
+    }, [contextMenuInFocus, mainPageContentRef]);
 
     const onItemClick = useCallback(({ item, param }: TOnItemClickParam) => {
       setContextMenuInFocus(false);
@@ -130,6 +167,7 @@ const ApplicationCardComponent = forwardRef<
           content={contextMenuItems}
           onItemClick={onItemClick}
           css={contextMenuStyle}
+          open={contextMenuInFocus}
         >
           {cardWrapper}
         </ContextMenu>
@@ -140,4 +178,4 @@ const ApplicationCardComponent = forwardRef<
   }
 );
 
-export const ApplicationCard = memo(ApplicationCardComponent);
+export const ApplicationCard = observer(ApplicationCardComponent);

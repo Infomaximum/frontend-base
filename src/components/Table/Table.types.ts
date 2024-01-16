@@ -39,6 +39,8 @@ export interface ITableOwnProps<T>
   isStretchByParent?: boolean;
   /** Включить высоту области прокрутки до нижнего края экрана */
   isStretchToBottom?: boolean;
+  /** Показывать полосу сверху между шапкой и содержимым таблицы */
+  isShowTopBorder?: boolean;
 }
 
 export interface ITableProps<T> extends IWithThemeProps<TTheme>, ITableOwnProps<T> {}

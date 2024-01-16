@@ -6,4 +6,11 @@ export const threeDotsStyle = (theme: TTheme) =>
     "[ant-click-animating-without-extra-node]:after": {
       animation: "none !important",
     },
+    ":hover": {
+      background: theme.grey45Color,
+    },
+    ":focus": {
+      background: theme.grey45Color,
+      outline: "none",
+    },
   } as const);

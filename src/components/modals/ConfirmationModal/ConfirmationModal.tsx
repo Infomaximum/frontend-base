@@ -1,7 +1,13 @@
 import { useState, type FC, useMemo, useCallback, useRef, useEffect } from "react";
 import { Button } from "../../Button/Button";
 import { Modal } from "../../modals/Modal/Modal";
-import { APPLY, CANCEL, DO_NOT_SAVE } from "../../../utils/Localization/Localization";
+import {
+  APPLY,
+  CANCEL,
+  CONTINUE_EDITING,
+  DO_NOT_SAVE,
+  EXIT,
+} from "../../../utils/Localization/Localization";
 import type { TLocalizationDescription } from "@infomaximum/localization";
 import {
   bodyModalStyle,
@@ -35,6 +41,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     zIndex,
     title,
     iconStyle,
+    isWithoutSaveMode,
     children,
     onAdditionalButtonClick,
     onAfterCancel,
@@ -103,6 +110,42 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
   };
 
   const footerModal = useMemo(() => {
+    const getCancelAndOkButtons = () => {
+      return (
+        <>
+          <Button type="ghost" onClick={handleCancel} test-id={confirmationModalCancelButtonTestId}>
+            {localization.getLocalized(CANCEL)}
+          </Button>
+          <Button
+            onClick={handleConfirm}
+            type={buttonOkType}
+            loading={isLoading}
+            test-id={confirmationModalConfirmButtonTestId}
+            disabled={disabledConfirmButton}
+          >
+            {localization.getLocalized(buttonOkText as TLocalizationDescription)}
+          </Button>
+        </>
+      );
+    };
+
+    const getContinueAndExitButtons = () => {
+      return (
+        <>
+          <Button type="ghost" onClick={handleCancel} test-id={confirmationModalCancelButtonTestId}>
+            {localization.getLocalized(CONTINUE_EDITING)}
+          </Button>
+          <Button
+            onClick={onAdditionalButtonClick}
+            type="ghost"
+            test-id={confirmationModalAdditionalButtonTestId}
+          >
+            {localization.getLocalized(EXIT)}
+          </Button>
+        </>
+      );
+    };
+
     return (
       <div>
         {withAdditionalButton ? (
@@ -115,18 +158,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
             {localization.getLocalized(additionalButtonCaption)}
           </Button>
         ) : null}
-        <Button type="ghost" onClick={handleCancel} test-id={confirmationModalCancelButtonTestId}>
-          {localization.getLocalized(CANCEL)}
-        </Button>
-        <Button
-          onClick={handleConfirm}
-          type={buttonOkType}
-          loading={isLoading}
-          test-id={confirmationModalConfirmButtonTestId}
-          disabled={disabledConfirmButton}
-        >
-          {localization.getLocalized(buttonOkText as TLocalizationDescription)}
-        </Button>
+        {isWithoutSaveMode ? getContinueAndExitButtons() : getCancelAndOkButtons()}
       </div>
     );
   }, [
@@ -140,6 +172,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     localization,
     onAdditionalButtonClick,
     withAdditionalButton,
+    isWithoutSaveMode,
   ]);
 
   return (

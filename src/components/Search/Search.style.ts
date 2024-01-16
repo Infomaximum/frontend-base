@@ -48,7 +48,6 @@ export const searchMiddleInputStyle = {
 
 export const searchSecondInputStyle = {
   minWidth: "218px",
-  width: "326px",
   svg: {
     overflow: "visible",
   },
@@ -56,6 +55,6 @@ export const searchSecondInputStyle = {
 };
 
 export const iconStyle = (theme: TTheme) => ({
-  color: theme.grey6Color,
+  color: theme.grey7Color,
   fontSize: `${theme.h4FontSize}px`,
 });

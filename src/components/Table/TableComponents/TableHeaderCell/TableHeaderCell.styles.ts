@@ -24,6 +24,7 @@ const tableHeaderSortersCellStyle = (theme: TTheme) =>
         maxWidth: `calc(100% - ${theme.tableSorterSize}px)`,
       },
       ".ant-table-column-sorter": {
+        marginLeft: 0,
         lineHeight: "0px",
       },
     },

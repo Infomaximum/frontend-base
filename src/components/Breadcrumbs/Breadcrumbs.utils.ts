@@ -1,16 +1,5 @@
 import { last, range, sum } from "lodash";
 
-// todo: вынести в утилиты платформы
-export const getTextWidth = (() => {
-  const context = document.createElement("canvas").getContext("2d") as CanvasRenderingContext2D;
-
-  return (text: string, fontSize: number) => {
-    context.font = `${fontSize}px 'Roboto'`;
-
-    return context.measureText(text).width;
-  };
-})();
-
 /** interleaveWith(() => 0, [1,1,1]) == [1,0,1,0,1] */
 export function interleaveWith<T>(createPlaceholder: (i: number) => T, items: T[]) {
   return items.flatMap((item, i) => (item === last(items) ? [item] : [item, createPlaceholder(i)]));

@@ -8,3 +8,12 @@ export const searchBreakpoints = {
   xl: 6,
   xxl: 4,
 } as const;
+
+export const reverseSearchBreakpoints = {
+  xs: 14,
+  sm: 9,
+  md: 7,
+  lg: 6,
+  xl: 6,
+  xxl: 4,
+} as const;

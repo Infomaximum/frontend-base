@@ -1,10 +1,14 @@
 import { VIRTUALIZED_TABLE_BODY_ID } from "../../../../utils/const";
 import React, { type FC, useEffect } from "react";
-import { AutoSizer, List as VList } from "react-virtualized";
+import { List as VList } from "react-virtualized";
 import { ScrollBehavior } from "../../../../utils/ScrollBehavior/ScrollBehavior";
 import { observer } from "mobx-react";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { bugsFixStyle, virtualizedTableBodyListStyle } from "./VirtualizedTableBody.styles";
+import {
+  bugsFixStyle,
+  vListContainerStyle,
+  virtualizedTableBodyListStyle,
+} from "./VirtualizedTableBody.styles";
 import type { IVirtualizedTableBodyProps } from "./VirtualizedTableBody.types";
 
 const VirtualizedTableBodyComponent: FC<IVirtualizedTableBodyProps> = ({
@@ -31,24 +35,22 @@ const VirtualizedTableBodyComponent: FC<IVirtualizedTableBodyProps> = ({
   }, [itemsCount, addScrollOffset]);
 
   return (
-    <AutoSizer disableHeight={true}>
-      {({ width }) => (
-        <VList
-          width={width}
-          height={scrollAreaHeight}
-          css={virtualizedTableBodyListStyle}
-          style={bugsFixStyle}
-          ref={vListRef}
-          rowHeight={rowHeight ?? theme.commonTableRowHeight}
-          rowRenderer={rowRenderer}
-          rowCount={itemsCount}
-          overscanRowCount={10}
-          scrollTop={scrollTop}
-          id={VIRTUALIZED_TABLE_BODY_ID}
-          onScroll={onScroll}
-        />
-      )}
-    </AutoSizer>
+    <VList
+      // width={1} вместе с containerStyle и style = width: 100% заменяют AutoSizer для width
+      width={1}
+      height={scrollAreaHeight}
+      css={virtualizedTableBodyListStyle}
+      style={bugsFixStyle}
+      ref={vListRef}
+      rowHeight={rowHeight ?? theme.commonTableRowHeight}
+      rowRenderer={rowRenderer}
+      rowCount={itemsCount}
+      overscanRowCount={10}
+      scrollTop={scrollTop}
+      id={VIRTUALIZED_TABLE_BODY_ID}
+      onScroll={onScroll}
+      containerStyle={vListContainerStyle}
+    />
   );
 };
 

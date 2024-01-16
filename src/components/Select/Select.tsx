@@ -1,7 +1,7 @@
 // eslint-disable-next-line im/ban-import-entity
 import { Select as AntSelect, Spin } from "antd";
 import type { SelectValue } from "antd/lib/select";
-import { CheckOutlined, CloseCircleOutlined, CloseOutlined } from "../Icons/Icons";
+import { CheckOutlined, CloseCircleFilled, CloseOutlined } from "../Icons/Icons";
 import React, { type MouseEvent, useState, useCallback, useMemo, useRef, useEffect } from "react";
 import {
   closeIconStyle,
@@ -42,6 +42,8 @@ import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
 import { suffixLoaderDelay, DropdownAnimationInterval } from "../../utils/const";
 import type { BaseSelectRef } from "rc-select";
 import { useTheme } from "../../decorators/hooks/useTheme";
+import { useMountEffect } from "../../decorators";
+import { removeElementsAttribute } from "../../utils";
 
 const { OptGroup, Option } = AntSelect;
 
@@ -112,8 +114,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   const filterOption = isFilterable ? filterOptionProps : false;
 
   const selectTextOnFocus = showSearch && !mode;
-
-  const fieldWrapperRef = useRef<HTMLDivElement>(null);
+  const fieldWrapperRef = useRef<HTMLDivElement | null>(null);
   const selectRef = useRef<BaseSelectRef>(null);
 
   const dropdownPosition = useSelectDropdownPosition(
@@ -127,6 +128,26 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   useBlurOnResize(selectRef.current);
   useGlobalScrollBehavior(isOpen);
   useRemoveFocusedClass(isOpen, fieldWrapperRef.current);
+
+  useMountEffect(() => {
+    const targetNode = fieldWrapperRef.current;
+
+    if (targetNode) {
+      removeElementsAttribute(targetNode);
+    }
+
+    const mutationObserver = new MutationObserver(() => {
+      targetNode && removeElementsAttribute(targetNode);
+    });
+
+    targetNode &&
+      mutationObserver.observe(targetNode, {
+        childList: true,
+        subtree: true,
+      });
+
+    return () => mutationObserver.disconnect();
+  });
 
   useEffect(() => {
     if (!isOpen) {
@@ -337,7 +358,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         showSearch={showSearch}
         allowClear={isShowIconClear}
         placeholder={placeholder || getPlaceholder()}
-        clearIcon={<CloseCircleOutlined />}
+        clearIcon={<CloseCircleFilled />}
         suffixIcon={suffixIcon}
         disabled={disabled}
         showArrow={showArrow}

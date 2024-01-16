@@ -6,6 +6,8 @@ import { InputFormField } from "../../InputField";
 import { Button } from "../../../Button/Button";
 import { removeInputFieldButtonTestId } from "../../../../utils/TestIds";
 import { CloseOutlined } from "../../../Icons/Icons";
+import { DELETE } from "../../../../utils";
+import { useLocalization } from "../../../../decorators";
 
 const InputFieldArrayItem: React.FC<InputFieldArrayItemProps> = (props) => {
   const {
@@ -21,6 +23,7 @@ const InputFieldArrayItem: React.FC<InputFieldArrayItemProps> = (props) => {
     ...rest
   } = props;
 
+  const localization = useLocalization();
   const fieldsLength = fields?.length;
 
   const removeField = useCallback(() => {
@@ -44,6 +47,8 @@ const InputFieldArrayItem: React.FC<InputFieldArrayItemProps> = (props) => {
             value={fieldEntityIndex}
             css={customRemoveIconStyle ?? removeButtonStyle}
             onClick={removeField}
+            title={localization.getLocalized(DELETE)}
+            tooltipPlacement={"top"}
           >
             {RemoveIcon ?? <CloseOutlined />}
           </Button>

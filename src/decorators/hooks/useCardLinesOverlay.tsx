@@ -1,14 +1,16 @@
 import type { Interpolation } from "@emotion/react";
 import { useContainerWidth } from "./useContainerWidth";
 import { forEach, isEmpty, map } from "lodash";
+import { getGradientColorsFromTransparent } from "../../utils/colors";
 
 const context = document.createElement("canvas").getContext("2d") as CanvasRenderingContext2D;
 const getTextWidth = (() => {
-  return (text: string) => {
+  return (text: string, fontSize: number) => {
     if (!context) {
       return 0;
     }
-    context.font = "14px 'Roboto'";
+
+    context.font = `${fontSize}px 'Roboto'`;
 
     return context.measureText(text).width;
   };
@@ -21,13 +23,13 @@ const getTextWidth = (() => {
  * @param widthLimit - ширина, более которой не может быть подстрока
  * @returns string[] - массив подстрок
  */
-const getHyphenatedTextByChar = (text: string, widthLimit: number): string[] => {
+const getHyphenatedTextByChar = (text: string, widthLimit: number, fontSize: number): string[] => {
   const result: string[] = [];
   const textLength = text.length;
 
   let accumulatedLine = "";
   forEach(text, (char, index) => {
-    const lineWidth = getTextWidth(`${accumulatedLine}${char}`);
+    const lineWidth = getTextWidth(`${accumulatedLine}${char}`, fontSize);
 
     if (lineWidth > widthLimit) {
       result.push(accumulatedLine);
@@ -54,13 +56,14 @@ const getHyphenatedTextByChar = (text: string, widthLimit: number): string[] => 
  * @param visibleLinesCount - количество видимых строк
  * @returns string[] - массив подстрок
  */
-export const getHyphenatedText = (
+const getHyphenatedText = (
   text: string,
   widthLimit: number,
-  visibleLinesCount: number
+  visibleLinesCount: number,
+  fontSize: number
 ): string[] => {
   const result: string[] = [];
-  const fullWidth = getTextWidth(text);
+  const fullWidth = getTextWidth(text, fontSize);
 
   if (fullWidth <= widthLimit) {
     // если текст поместился полностью
@@ -86,26 +89,31 @@ export const getHyphenatedText = (
       const tempLine = `${
         !isEmpty(accumulatedLine) && hyphenIndex === 0 ? " " : ""
       }${dashSplittedWord}${postfix}`;
-      const lineWidth = getTextWidth(`${accumulatedLine}${tempLine}`);
+      const lineWidth = getTextWidth(`${accumulatedLine}${tempLine}`, fontSize);
 
       if (lineWidth > widthLimit) {
         if (!isEmpty(accumulatedLine)) {
           // аккумулированная строка не пустая, нужно её добавить в отдельную строку
           result.push(accumulatedLine);
+
           if (result.length === visibleLinesCount + 1) {
             return result;
           }
+
           accumulatedLine = tempLine;
         } else {
           // строка пустая, значит наша темповая строка аккумулируется и позже перенесется по буквам
           accumulatedLine = tempLine;
         }
+
         // переносим по буквам то что теперь аккумулировано
-        const hyphenatedByCharList = getHyphenatedTextByChar(accumulatedLine, widthLimit);
+        const hyphenatedByCharList = getHyphenatedTextByChar(accumulatedLine, widthLimit, fontSize);
         const charListItem = hyphenatedByCharList.pop();
+
         if (charListItem) {
           accumulatedLine = charListItem;
           result.push(...hyphenatedByCharList);
+
           if (result.length === visibleLinesCount + 1) {
             return result;
           }
@@ -127,21 +135,27 @@ export const getHyphenatedText = (
   return result;
 };
 
-const getOverlayAfterStyle = (isLastLineInArray: boolean): Interpolation<TTheme> => ({
-  position: "relative",
-  width: "fit-content",
-  "&:after": !isLastLineInArray
-    ? {
-        content: '""',
-        position: "absolute",
-        top: 0,
-        right: -4,
-        width: "8px",
-        height: "100%",
-        backgroundImage: "linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff)",
-      }
-    : undefined,
-});
+const getOverlayAfterStyle =
+  (isLastLineInArray: boolean): Interpolation<TTheme> =>
+  (theme: TTheme) => {
+    const { minOpacity, maxOpacity } = getGradientColorsFromTransparent(theme);
+
+    return {
+      position: "relative",
+      width: "fit-content",
+      "&:after": !isLastLineInArray
+        ? {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: "8px",
+            height: "100%",
+            backgroundImage: `linear-gradient(to right, ${minOpacity}, ${maxOpacity})`,
+          }
+        : undefined,
+    };
+  };
 
 /**
  * Получить первые N строк текста, последняя строка которого будет забледнена в конце, если есть непоместившиеся строкию
@@ -149,12 +163,14 @@ const getOverlayAfterStyle = (isLastLineInArray: boolean): Interpolation<TTheme>
  * @param text - текст, который нужно перенести
  * @param paddings - отступы, уменьшающие ширину контейнера
  * @param maxLinesCount - количество видимых строк
+ * @param fontSize - размер шрифта для расчетов
  * @returns string[] - массив подстрок
  */
 export const useCardLinesOverlay = (
   text: string | undefined,
   paddings: number,
   maxLinesCount: number,
+  fontSize: number,
   outerContainerWidth?: number
 ) => {
   const [containerWidth, setContainerRef] = useContainerWidth();
@@ -166,10 +182,18 @@ export const useCardLinesOverlay = (
       return [];
     }
 
-    return getHyphenatedText(text.replace(/\s{2,}/g, " "), usedWidth - paddings, maxLinesCount);
+    return getHyphenatedText(
+      text.replace(/\s{2,}/g, " "),
+      usedWidth - paddings,
+      maxLinesCount,
+      fontSize
+    );
   };
 
   const lines = text ? getLines(text) : [];
+
+  // добавлено ли забледнение, т.е. true если текст не поместился в условия
+  const hasOverflow = lines.length > maxLinesCount;
 
   const overlayedLines = lines.length ? (
     <>
@@ -192,5 +216,5 @@ export const useCardLinesOverlay = (
     </>
   ) : null;
 
-  return { usedWidth, setContainerRef, overlayedLines };
+  return { usedWidth, setContainerRef, overlayedLines, hasOverflow };
 };

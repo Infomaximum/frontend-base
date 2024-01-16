@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type MouseEvent } from "react";
 import {
   map,
   forEach,
@@ -39,7 +39,7 @@ import { observer } from "mobx-react";
 import { reaction } from "mobx";
 import type { RawValueType } from "rc-tree-select/lib/TreeSelect";
 import { Group, type IModel } from "@infomaximum/graphql-model";
-import { CloseCircleFilled } from "../../../Icons/Icons";
+import { CloseCircleFilled, CloseOutlined } from "../../../Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
 import { Tooltip } from "../../../Tooltip";
 import { DropdownAnimationInterval, KeyupRequestInterval } from "../../../../utils/const";
@@ -47,6 +47,10 @@ import { Select } from "../../../Select/Select";
 import { BarsSVG } from "../../../../resources/icons";
 import { DropdownPendingPlaceholder } from "../../../Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
 import { withLoc } from "../../../../decorators/hocs/withLoc/withLoc";
+import type { CustomTagProps } from "rc-select/lib/BaseSelect";
+import { Tag } from "../../../Tag";
+import { boundMethod } from "../../../../decorators";
+import { closeIconStyle, disableTagStyle, tagStyle } from "../../../Select/Select.styles";
 
 /** Используется, если нужен одинаковый title для выбранного и выбираемых значений
  * По умолчанию, если есть handlerDisplayValues, то title для выбранного и выбираемых значений разный
@@ -171,7 +175,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
 
             const labelProps = labelPropsGetter ? labelPropsGetter(model) : null;
 
-            const title = handlerTitleValues ? handlerTitleValues(model) : model?.getDisplayName();
+            const title = handlerTitleValues ? handlerTitleValues(model) : null;
 
             return {
               value: model?.getInnerName(),
@@ -362,15 +366,10 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
 
     return map(modelList, (item: IModel) => {
       let displayName: React.ReactNode = item?.getDisplayName();
-      let title: string | undefined = String(displayName);
+      let title: string | undefined;
 
       if (isFunction(handlerDisplayValues)) {
-        if (isString(handlerDisplayValues(item))) {
-          displayName = handlerDisplayValues(item);
-          title = String(displayName);
-        } else {
-          displayName = handlerDisplayValues(item);
-        }
+        displayName = handlerDisplayValues(item);
       }
 
       if (handlerTitleValues) {
@@ -427,6 +426,30 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     }
 
     return this.renderStandardOptions();
+  }
+
+  @boundMethod
+  private tagRender({ label, closable, onClose }: CustomTagProps): React.ReactElement {
+    const { handlerTitleValues } = this.props;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+    };
+
+    const closeIcon = <CloseOutlined onMouseDown={handleMouseDown} css={closeIconStyle} />;
+
+    return (
+      <Tag
+        closable={closable}
+        onClose={onClose}
+        css={!closable ? disableTagStyle : tagStyle}
+        closeIcon={closeIcon}
+        title={handlerTitleValues ? "" : undefined}
+      >
+        {label}
+      </Tag>
+    );
   }
 
   public override render(): React.ReactNode {
@@ -506,7 +529,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           autoFocus={autoFocus}
           test-id={this.props["test-id"] ?? autocompleteSelectTestId}
           style={style}
-          tagRender={tagRender}
+          tagRender={tagRender ?? this.tagRender}
           getPopupContainer={getPopupContainer}
           virtual={false}
           maxTagCount={maxTagCount}

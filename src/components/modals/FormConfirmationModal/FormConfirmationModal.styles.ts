@@ -5,7 +5,7 @@ export const iconStyle = (theme: TTheme) => ({
   position: "absolute" as const,
 });
 
-export const titleStyle = {
+export const titleAndInfoStyle = {
   paddingLeft: "38px",
   display: "inline-block",
 };

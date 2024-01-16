@@ -10,6 +10,7 @@ import {
   alertDescriptionStyle,
   alertStyle,
   alertBannerStyle,
+  alertIconStyle,
 } from "./Alert.styles";
 import type { Interpolation } from "@emotion/react";
 import {
@@ -17,6 +18,7 @@ import {
   CloseCircleFilled,
   CheckCircleFilled,
   ExclamationCircleFilled,
+  InfoCircleFilled,
 } from "../../components/Icons/Icons";
 import { useTheme } from "../../decorators";
 
@@ -32,12 +34,15 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
       case "warning":
         iconComponent = ExclamationCircleFilled;
         break;
-      case "error":
       case "info":
+        iconComponent = InfoCircleFilled;
+        break;
+      case "error":
       default:
         iconComponent = CloseCircleFilled;
     }
-    return <Icon component={iconComponent} />;
+
+    return <Icon component={iconComponent} css={alertIconStyle} />;
   }, [props.type]);
 
   const customStyle = useMemo(() => {

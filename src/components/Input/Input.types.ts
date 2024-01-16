@@ -1,5 +1,6 @@
 // eslint-disable-next-line im/ban-import-entity
 import type { Input } from "antd";
+import type { TooltipPlacement } from "antd/es/tooltip";
 import type { InputProps, TextAreaProps } from "antd/lib/input";
 import type { ReactNode } from "react";
 
@@ -7,6 +8,7 @@ export interface IInputProps extends InputProps {
   overlayOffset?: number;
   clearIcon?: ReactNode;
   isSecond?: boolean;
+  tooltipPlacement?: TooltipPlacement;
 }
 
 export interface ITextAreaProps extends TextAreaProps {}

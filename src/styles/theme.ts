@@ -1,7 +1,7 @@
 const colors = {
-  /*** =========================== Colors [START]  =========================== ***/
+  /** =========================== Colors [START]  =========================== */
   transparentColor: "rgba(0, 0, 0, 0)",
-  /** --------------------------------- Blue -------------------------------- **/
+  /** --------------------------------- Blue -------------------------------- */
   blue1Color: "#F0F8FF",
   blue2Color: "#D1E9FF",
   blue3Color: "#A3CCF7",
@@ -12,12 +12,12 @@ const colors = {
   blue8Color: "#0B3185",
   blue9Color: "#031D5E",
   blue10Color: "#010F38",
-  /** --------------------------------- Azure -------------------------------- **/
+  /** --------------------------------- Azure -------------------------------- */
   azure1Color: "#4087F2",
   azure2Color: "#1C84FF",
   azure3Color: "#2248D9",
 
-  /** --------------------------------- Grey -------------------------------- **/
+  /** --------------------------------- Grey -------------------------------- */
   grey1Color: "#FFFFFF",
   grey2Color: "#FAFAFA",
   grey3Color: "#F5F5F5",
@@ -35,7 +35,7 @@ const colors = {
   grey12Color: "#141414",
   grey13Color: "#000000",
   grey14Color: "#5F6E78",
-  /** --------------------------------- Red -------------------------------- **/
+  /** --------------------------------- Red -------------------------------- */
   red1Color: "#FFF3F0",
   red2Color: "#FFE7E3",
   red3Color: "#FFC2BA",
@@ -46,7 +46,7 @@ const colors = {
   red8Color: "#8C151B",
   red9Color: "#660A12",
   red10Color: "#40060D",
-  /** --------------------------------- Volcano -------------------------------- **/
+  /** --------------------------------- Volcano -------------------------------- */
   volcano1Color: "#FFF2E8",
   volcano2Color: "#FFD8BF",
   volcano3Color: "#FFBB96",
@@ -56,7 +56,7 @@ const colors = {
   volcano7Color: "#D4380D",
   volcano8Color: "#AD2102",
   volcano9Color: "#871400",
-  /** --------------------------------- Yellow -------------------------------- **/
+  /** --------------------------------- Yellow -------------------------------- */
   yellow1Color: "#FEFFE6",
   yellow2Color: "#FFFFB8",
   yellow3Color: "#FFFB8F",
@@ -67,7 +67,7 @@ const colors = {
   yellow8Color: "#AD8B00",
   yellow9Color: "#876800",
   yellow10Color: "#614700",
-  /** --------------------------------- Orange -------------------------------- **/
+  /** --------------------------------- Orange -------------------------------- */
   orange1Color: "#FFF7E6",
   orange2Color: "#FFE7BA",
   orange3Color: "#FFD591",
@@ -79,7 +79,7 @@ const colors = {
   orange9Color: "#873800",
   orange10Color: "#612500",
   orange11Color: "#FAF0D9",
-  /** --------------------------------- Gold -------------------------------- **/
+  /** --------------------------------- Gold -------------------------------- */
   gold1Color: "#FFFBE6",
   gold2Color: "#FFF1B8",
   gold3Color: "#FFE58F",
@@ -90,7 +90,7 @@ const colors = {
   gold8Color: "#AD6800",
   gold9Color: "#874D00",
   gold10Color: "#613400",
-  /** --------------------------------- Green -------------------------------- **/
+  /** --------------------------------- Green -------------------------------- */
   green1Color: "#E8F5E9",
   green2Color: "#C8E6C9",
   green3Color: "#A5D6A7",
@@ -102,7 +102,7 @@ const colors = {
   green8Color: "#327334",
   green9Color: "#255426",
   green10Color: "#183618",
-  /** --------------------------------- Cyan -------------------------------- **/
+  /** --------------------------------- Cyan -------------------------------- */
   cyan1Color: "#E6FFFB",
   cyan2Color: "#B5F5EC",
   cyan3Color: "#87E8DE",
@@ -113,7 +113,7 @@ const colors = {
   cyan8Color: "#006D75",
   cyan9Color: "#00474F",
   cyan10Color: "#002329",
-  /** --------------------------------- GeekBlue -------------------------------- **/
+  /** --------------------------------- GeekBlue -------------------------------- */
   geekBlue1Color: "#F0F5FF",
   geekBlue2Color: "#D6E4FF",
   geekBlue4Color: "#85A5FF",
@@ -123,7 +123,7 @@ const colors = {
   geekBlue8Color: "#10239E",
   geekBlue9Color: "#061178",
   geekBlue10Color: "#030852",
-  /** --------------------------------- Lime -------------------------------- **/
+  /** --------------------------------- Lime -------------------------------- */
   lime1Color: "#FCFFE6",
   lime2Color: "#F4FFB8",
   lime3Color: "#EAFF8F",
@@ -133,7 +133,7 @@ const colors = {
   lime8Color: "#5B8C00",
   lime9Color: "#3F6600",
   lime10Color: "#254000",
-  /** --------------------------------- Purple -------------------------------- **/
+  /** --------------------------------- Purple -------------------------------- */
   purple1Color: "#F9F0FF",
   purple2Color: "#EFDBFF",
   purple3Color: "#D3ADF7",
@@ -144,7 +144,7 @@ const colors = {
   purple8Color: "#391085",
   purple9Color: "#22075E",
   purple10Color: "#120338",
-  /** --------------------------------- Magenta -------------------------------- **/
+  /** --------------------------------- Magenta -------------------------------- */
   magenta1Color: "#FFF0F6",
   magenta2Color: "#FFD6E7",
   magenta3Color: "#FFADD2",
@@ -155,17 +155,17 @@ const colors = {
   magenta8Color: "#9E1068",
   magenta9Color: "#780650",
   magenta10Color: "#520339",
-  /** --------------------------------- Graphite -------------------------------- **/
+  /** --------------------------------- Graphite -------------------------------- */
   graphite1Color: "#2C2C2C",
   graphite2Color: "#232323",
-  /** --------------------------------- Thrust -------------------------------- **/
+  /** --------------------------------- Thrust -------------------------------- */
   thrust0Color: "#E1FAF6",
   thrust1Color: "#92DBD6",
   thrust2Color: "#50CCC4",
   thrust3Color: "#00E2D5",
   thrust4Color: "#0CB3B3",
   thrust5Color: "#089494",
-  /*** =========================== Colors [END]  =========================== ***/
+  /** =========================== Colors [END]  =========================== */
 };
 
 export const theme = {
@@ -235,132 +235,157 @@ export const theme = {
   largeLineHeight: 40,
   // ----- lineHeight [END] -----//
 
-  /*** =========================== Colors Tags [START]  =========================== ***/
+  /** =========================== Colors Tags [START]  =========================== */
   tagsStyles: {
     blue: {
       backgroundColor: "#F0F8FF",
       borderColor: "#E6F1FA",
       textColor: "#2667D1",
+      closeIconColor: "#8C8C8C",
     },
     geekblue: {
       backgroundColor: "#F0F5FF",
       borderColor: "#E6EDFA",
       textColor: "#1D39C4",
+      closeIconColor: "#8C8C8C",
     },
     red: {
       backgroundColor: "#FFF3F0",
       borderColor: "#FAEAE6",
       textColor: "#D93A36",
+      closeIconColor: "#8C8C8C",
     },
     volcano: {
       backgroundColor: "#FFF2E8",
       borderColor: "#FAE9DC",
       textColor: "#FA541C",
+      closeIconColor: "#8C8C8C",
     },
     orange: {
       backgroundColor: "#FFF7E6",
       borderColor: "#FAF0D9",
       textColor: "#FA8C16",
+      closeIconColor: "#8C8C8C",
     },
     yellow: {
       backgroundColor: "#FEFFE6",
       borderColor: "#F9FAD2",
       textColor: "#D4B106",
+      closeIconColor: "#8C8C8C",
     },
     lime: {
       backgroundColor: "#FCFFE6",
       borderColor: "#F1F5D3",
       textColor: "#7CB305",
+      closeIconColor: "#8C8C8C",
     },
     green: {
       backgroundColor: "#E8F5E9",
       borderColor: "#DDF0DE",
       textColor: "#4CAF50",
+      closeIconColor: "#8C8C8C",
     },
     cyan: {
       backgroundColor: "#E6FFFB",
       borderColor: "#D7FAF4",
       textColor: "#13C2C2",
+      closeIconColor: "#8C8C8C",
     },
     pink: {
       backgroundColor: "#FFF0F6",
       borderColor: "#FAE6EE",
       textColor: "#F759AB",
+      closeIconColor: "#8C8C8C",
     },
     purple: {
       backgroundColor: "#F9F0FF",
       borderColor: "#F2E6FA",
       textColor: "#531DAB",
+      closeIconColor: "#8C8C8C",
     },
     grey: {
       backgroundColor: "#F5F5F5",
       borderColor: "#F0F0F0",
       textColor: "#595959",
+      closeIconColor: "#8C8C8C",
     },
     darkGrey: {
       backgroundColor: "#F0F0F0",
       borderColor: "#E6E6E6",
       textColor: "#595959",
+      closeIconColor: "#FFFFFF",
     },
     blueInv: {
       backgroundColor: "#2667D1",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     geekblueInv: {
       backgroundColor: "#1D39C4",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     redInv: {
       backgroundColor: "#D93A36",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     volcanoInv: {
       backgroundColor: "#FA541C",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     orangeInv: {
       backgroundColor: "#FA8C16",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     yellowInv: {
       backgroundColor: "#F6C33E",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     limeInv: {
       backgroundColor: "#A0D911",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     greenInv: {
       backgroundColor: "#4CAF50",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     cyanInv: {
       backgroundColor: "#13C2C2",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     pinkInv: {
       backgroundColor: "#F759AB",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     purpleInv: {
       backgroundColor: "#722ED1",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
     greyInv: {
       backgroundColor: "#8C8C8C",
       borderColor: "none",
       textColor: "#FFFFFF",
+      closeIconColor: "#FFFFFF",
     },
   },
   /** Header Menu */
@@ -378,22 +403,22 @@ export const theme = {
     dropdownItemColorHover: colors.graphite1Color,
   },
 
-  /*** =========================== Colors Tags [END]  =========================== ***/
+  /** =========================== Colors Tags [END]  =========================== */
 
-  /*** =========================== Link Colors [START]  =========================== ***/
+  /** =========================== Link Colors [START]  =========================== */
 
   linkHoverColor: "#498af2",
 
-  /*** =========================== Link Colors [END]  =========================== ***/
+  /** =========================== Link Colors [END]  =========================== */
 
-  /*** =========================== Brand Colors [START]  =========================== ***/
+  /** =========================== Brand Colors [START]  =========================== */
 
   brandDefaultColor: "#1E3799",
   brandDarkColor: "#05218C",
 
-  /*** =========================== Brand Colors [END]  =========================== ***/
+  /** =========================== Brand Colors [END]  =========================== */
 
-  /*** =========================== Colors [END]  =========================== ***/
+  /** =========================== Colors [END]  =========================== */
 
   // ----- height [START] -----//
   // Высота меню сверху

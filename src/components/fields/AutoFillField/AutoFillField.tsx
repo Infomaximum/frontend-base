@@ -1,6 +1,6 @@
-import { every, isEqual } from "lodash";
+import { every } from "lodash";
 import { wrapperAutoFillStyle } from "./AutoFillField.styles";
-import type { FC } from "react";
+import { type FC } from "react";
 import { AutoFillComponent } from "./AutoFillComponent";
 import type {
   IAutoFillFieldProps,
@@ -12,6 +12,7 @@ import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
 import { TableCellField } from "../TableCellField/TableCellField";
+import type { IModel } from "@infomaximum/graphql-model";
 
 const WrapperAutoFillComponent: FC<IAutoFillProps> = ({ input, meta, dataAccessKeys, ...rest }) => {
   const { isFeatureEnabled } = useFeature();
@@ -22,9 +23,12 @@ const WrapperAutoFillComponent: FC<IAutoFillProps> = ({ input, meta, dataAccessK
   return <AutoFillComponent isHasAccess={isHasAccess} {...rest} {...input} />;
 };
 
-const AutoFillField: React.FC<IAutoFillFieldProps> = (props) => (
-  <Field component={WrapperAutoFillComponent} isEqual={isEqual} {...props} />
-);
+const isValuesEqual = (a: TNullable<IModel>, b: TNullable<IModel>) =>
+  a?.getInnerName() === b?.getInnerName();
+
+const AutoFillField: React.FC<IAutoFillFieldProps> = (props) => {
+  return <Field component={WrapperAutoFillComponent} isEqual={isValuesEqual} {...props} />;
+};
 
 const AutoFillFormField: React.FC<IAutoFillFormFieldProps> = (props) => (
   <FormField component={AutoFillField} wrapperComponentStyle={wrapperAutoFillStyle} {...props} />

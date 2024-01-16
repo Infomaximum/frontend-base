@@ -57,7 +57,7 @@ class FiltersStore extends BaseStore {
   /**
    * Набор данных для фильтров
    */
-  private _filters: NFiltersStore.TFilters = new ObservableMap();
+  private _filters = new ObservableMap<string, NFiltersStore.TFilter & { id: number }>();
 
   /**
    * Идентификатор последнего созданного фильтра, должен инкрементироваться
@@ -98,7 +98,7 @@ class FiltersStore extends BaseStore {
     }
   }
 
-  //----------------------------------------COMPUTED------------------------------------//
+  // ----------------------------------------COMPUTED------------------------------------//
 
   public get filters() {
     return this._filters;
@@ -153,7 +153,7 @@ class FiltersStore extends BaseStore {
     return isEmpty(this.filters);
   }
 
-  //----------------------------------------ACTIONS-------------------------------------//
+  // ----------------------------------------ACTIONS-------------------------------------//
 
   /**
    * Сбросить все значения фильтров
@@ -204,6 +204,7 @@ class FiltersStore extends BaseStore {
     const filterState = {
       [FiltersStore.typenameFilterFieldName]: filterTypename,
       value,
+      id: this._lastFilterId,
     };
 
     this._filters.set(filterName, filterState);
@@ -216,7 +217,7 @@ class FiltersStore extends BaseStore {
     this._filterDescriptions = filterDescriptions;
   }
 
-  //----------------------------------------HELPERS-------------------------------------//
+  // ----------------------------------------HELPERS-------------------------------------//
 
   public reset() {
     this._filterDescriptions = [];
@@ -296,7 +297,7 @@ class FiltersStore extends BaseStore {
           restoredFilter?.value
         );
 
-        this._filters.set(filterName, restoredFilter);
+        this._filters.set(filterName, { ...restoredFilter, id: this._lastFilterId });
       }
     });
   }

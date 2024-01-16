@@ -4,7 +4,7 @@ export const tableStyle = {
 };
 
 export const drawerBodyStyle = {
-  display: "flex" /* Fix для IE, нужен, чтобы у дочерних элементов работал maxHeight*/,
+  display: "flex" /* Fix для IE, нужен, чтобы у дочерних элементов работал maxHeight */,
   flexDirection: "row",
   padding: "16px 24px 0",
   overflow: "hidden",

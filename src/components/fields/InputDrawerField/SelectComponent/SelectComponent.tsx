@@ -81,7 +81,7 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
     const { firstLoading } = this.state;
 
     if (firstLoading || !onSuffixClick) {
-      //отобразится стандартная иконка
+      // отобразится стандартная иконка
       return;
     }
 

@@ -4,5 +4,4 @@ export interface IFormConfirmationModalProps {
   formProvider: IFormProvider;
   when: boolean;
   blockUri: string;
-  disabledConfirmButton?: boolean;
 }

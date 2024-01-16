@@ -55,6 +55,8 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
   useEffect(() => {
     const currentLanguage = localizationInstance.getLanguage();
 
+    document.documentElement.setAttribute("lang", currentLanguage);
+
     moment.locale(currentLanguage);
   }, [localizationInstance]);
 

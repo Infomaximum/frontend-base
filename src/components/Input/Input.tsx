@@ -8,6 +8,9 @@ import {
   type RefAttributes,
   useMemo,
   forwardRef,
+  useEffect,
+  useState,
+  useRef,
 } from "react";
 import {
   defaultInputStyle,
@@ -21,26 +24,50 @@ import type { IInputProps, IInputStaticComponents, ITextAreaProps } from "./Inpu
 import type { AutoSizeType } from "rc-textarea";
 import type { InputRef, PasswordProps } from "antd/lib/input";
 import { useTheme } from "../../decorators/hooks/useTheme";
+import { isString } from "lodash";
+import { Tooltip } from "../Tooltip";
+import { getTextWidth } from "../../utils/textWidth";
 
 const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
   (props, ref: Ref<InputRef>) => {
     const theme = useTheme();
-    const { clearIcon, isSecond, allowClear: allowClearProp, ...rest } = props;
+    const {
+      clearIcon,
+      isSecond,
+      value,
+      tooltipPlacement,
+      allowClear: allowClearProp,
+      ...rest
+    } = props;
     const allowClear = clearIcon && allowClearProp ? { clearIcon } : allowClearProp;
+    const [isOverflow, setIsOverflow] = useState(false);
+    const inputWrapperRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (tooltipPlacement && inputWrapperRef.current) {
+        const textWidth = isString(value) ? getTextWidth(value, theme.h4FontSize) : 0;
+        setIsOverflow(textWidth > inputWrapperRef.current.clientWidth);
+      }
+    }, [tooltipPlacement, theme, value]);
 
     return (
-      <AntInput
-        {...rest}
-        ref={ref}
-        css={[
-          props.disabled
-            ? disabledInputStyle(theme)
-            : isSecond
-            ? secondInputStyle
-            : defaultInputStyle(theme, props.bordered),
-        ]}
-        allowClear={allowClear}
-      />
+      <Tooltip title={isOverflow && tooltipPlacement && value} placement={tooltipPlacement}>
+        <div ref={inputWrapperRef}>
+          <AntInput
+            {...rest}
+            ref={ref}
+            css={[
+              props.disabled
+                ? disabledInputStyle(theme)
+                : isSecond
+                ? secondInputStyle
+                : defaultInputStyle(theme, props.bordered),
+            ]}
+            value={value}
+            allowClear={allowClear}
+          />
+        </div>
+      </Tooltip>
     );
   }
 );

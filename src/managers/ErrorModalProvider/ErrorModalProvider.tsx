@@ -12,6 +12,8 @@ import type {
   IErrorModalProviderConfigState,
   IErrorModalProviderProps,
 } from "./ErrorModalProvider.types";
+import { useLocation } from "react-router";
+import { usePrevious } from "../../decorators";
 
 export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isDebugMode }) => {
   const [showModal, setShowModal] = useState(false);
@@ -19,6 +21,14 @@ export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isD
     undefined
   );
   const localization = useLocalization();
+  const { pathname } = useLocation();
+  const prevPathname = usePrevious(pathname);
+
+  useEffect(() => {
+    if (errorConfig && prevPathname !== pathname) {
+      setErrorConfig(undefined);
+    }
+  }, [prevPathname, pathname, errorConfig]);
 
   useEffect(() => {
     setErrorConfig((prevErrorConfig) =>

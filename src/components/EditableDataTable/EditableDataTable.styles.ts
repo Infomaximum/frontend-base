@@ -17,7 +17,7 @@ export const clickableRowStyle = (theme: TTheme) =>
     cursor: "pointer",
   } as const);
 
-//todo: проверить правильность использования данного стиля
+// todo: проверить правильность использования данного стиля
 export const sortingRowStyle = {
   userSelect: "none" as const,
   msUserSelect: "none" as const,
@@ -36,5 +36,6 @@ export const editableDataTableCellStyle = (theme: TTheme) => {
       ${theme.tableCellHorizontalPadding}px 
       ${verticalPadding - theme.tableRowBorderSize}px 
       ${theme.tableCellHorizontalPadding}px !important`,
+    overflow: "visible",
   };
 };

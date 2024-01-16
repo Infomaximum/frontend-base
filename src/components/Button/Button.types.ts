@@ -1,4 +1,5 @@
 import type { ButtonProps } from "antd/lib/button";
+import type { TooltipPlacement } from "antd/lib/tooltip";
 
 export type TButtonType =
   | ButtonProps["type"]
@@ -13,4 +14,5 @@ type TButtonProps = Omit<ButtonProps, "type">;
 
 export interface IButtonProps extends TButtonProps, React.RefAttributes<HTMLElement> {
   type?: TButtonType;
+  tooltipPlacement?: TooltipPlacement;
 }

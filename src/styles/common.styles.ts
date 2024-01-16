@@ -98,7 +98,7 @@ export const dropDownHeaderPanelButtonStyle = (theme: TTheme) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  //Фикс для Safari
+  // Фикс для Safari
   "& > .anticon.anticon-down": {
     fontSize: "14px",
     height: "14px",
@@ -121,3 +121,13 @@ export const changeHeaderPanelButtonStyle = (theme: TTheme) => ({
   color: theme.headerPanel.textColor,
   borderRadius: "2px 0 0 2px",
 });
+
+export const getTextClampStyle = (numberOfLines: number) =>
+  ({
+    WebkitLineClamp: numberOfLines,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    WebkitBoxOrient: "vertical",
+    wordBreak: "break-word",
+  } as const);

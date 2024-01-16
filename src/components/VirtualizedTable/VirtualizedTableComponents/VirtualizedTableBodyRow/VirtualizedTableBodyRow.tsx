@@ -49,16 +49,31 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
       if (enableRowClick) {
         event.preventDefault();
       }
+
+      if (window.getSelection()?.toString()) {
+        setTimeout(() => {
+          onSelectChange(record, !isChecked);
+        }, 0);
+
+        return;
+      }
+
       onSelectChange(record, !isChecked);
     },
     [enableRowClick, isChecked, onSelectChange, record]
   );
 
+  const clearTextSelection = () => {
+    if (window.getSelection()?.toString()) {
+      window.getSelection()?.removeAllRanges();
+    }
+  };
+
   const getCheckbox = () => {
     const Component = selectionType === "radio" ? Radio : Checkbox;
 
     return (
-      <div css={virtualizedTableCheckboxCellStyle(theme)}>
+      <div css={virtualizedTableCheckboxCellStyle(theme)} onClick={clearTextSelection}>
         <TableCheckboxCell>
           <Component
             checked={isChecked}

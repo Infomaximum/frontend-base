@@ -50,9 +50,11 @@ export class ApolloDataCache implements NStore.IDataCache {
           } else {
             selections.push(s);
           }
+
           break;
         case Kind.FRAGMENT_SPREAD:
           const fragment = queryFragmentDefinitions?.get(s.name.value) as FragmentDefinitionNode;
+
           if (!fragment) {
             assertSimple(false, `Фрагмент "${s.name.value}" не найден`);
           }

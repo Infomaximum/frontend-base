@@ -1,4 +1,4 @@
-import type { FieldArrayRenderProps } from "react-final-form-arrays";
+import type { FieldArrayProps, FieldArrayRenderProps } from "react-final-form-arrays";
 import type { FormItemProps } from "antd/lib/form/FormItem";
 import type { EAddEntityButtonPositions } from "./ArrayField";
 import type { TFeatureEnabledChecker } from "@infomaximum/utility";
@@ -102,7 +102,7 @@ export interface IWrappedArrayFieldProps<FV = any, T extends HTMLElement = HTMLE
 
 export interface IWrappedArrayFieldState {}
 
-export interface IArrayFieldProps
+export interface IArrayFieldProps<FV = any, T extends HTMLElement = HTMLElement>
   extends Partial<FormItemProps>,
     ICommonArrayFieldProps,
     IWithFeatureProps {
@@ -112,4 +112,5 @@ export interface IArrayFieldProps
   formItemStyle?: Interpolation<TTheme>;
   children?: React.ReactNode;
   additionalButtonContent?: (formProvider: IFormProvider) => React.ReactElement;
+  isEqual?: FieldArrayProps<FV, T>["isEqual"];
 }

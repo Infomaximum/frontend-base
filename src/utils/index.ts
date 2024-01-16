@@ -14,3 +14,4 @@ export * from "./features";
 export * from "./sortings";
 export * from "./tests";
 export * from "./filters";
+export * from "./removeElementsAttribute";

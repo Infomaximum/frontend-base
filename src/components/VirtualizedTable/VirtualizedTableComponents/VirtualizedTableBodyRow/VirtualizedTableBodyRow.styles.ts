@@ -39,7 +39,7 @@ export const usualVirtualizedTableBodyRowStyle = (theme: TTheme) =>
   ({
     ...virtualizedTableBodyRowStyle(theme),
     ":hover": {
-      background: theme.grey2Color,
+      background: theme.grey4Color,
     },
   } as const);
 

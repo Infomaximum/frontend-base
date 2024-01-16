@@ -37,7 +37,7 @@ export class AutoCompleteStore<
             paging: queryParams?.variables?.paging || {
               limit: 20,
             },
-            textFilter: {
+            text_filter: {
               text: this.searchValue || null,
             },
             ...queryParams?.variables,
@@ -53,7 +53,7 @@ export class AutoCompleteStore<
     });
   }
 
-  //----------------------------------------COMPUTED------------------------------------//
+  // ----------------------------------------COMPUTED------------------------------------//
 
   public get map() {
     if (this._model) {
@@ -69,7 +69,7 @@ export class AutoCompleteStore<
     return null;
   }
 
-  //----------------------------------------ACTIONS------------------------------------//
+  // ----------------------------------------ACTIONS------------------------------------//
   public override receiveData(struct: { id: number; __typename: string }) {
     this._data = struct;
 

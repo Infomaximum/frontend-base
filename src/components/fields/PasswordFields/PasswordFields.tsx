@@ -30,7 +30,7 @@ import {
   grayCheckIconStyle,
   greenCheckIconStyle,
   redCloseIconStyle,
-  notificationFieldStyle,
+  commonNotificationFieldStyle,
   notificationTextStyle,
   questionIconShowPopoverStyle,
   questionIconStyle,
@@ -341,7 +341,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
             }
             css={
               index === passwordValidators.length - 1 || !hardPassword
-                ? notificationFieldStyle
+                ? commonNotificationFieldStyle
                 : notificationFieldStyleWithPadding
             }
           >

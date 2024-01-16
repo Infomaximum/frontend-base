@@ -1,7 +1,7 @@
 import type { TAvatarColorConfig } from "./HeaderAvatar.types";
 
 export const getColorConfigList = (theme: TTheme): TAvatarColorConfig[] => [
-  /** --------------------------------- Оттенки 1 уровня -------------------------------- **/
+  /** --------------------------------- Оттенки 1 уровня -------------------------------- */
   {
     letterColor: theme.grey1Color,
     backgroundColor: theme.azure2Color,

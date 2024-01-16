@@ -1,12 +1,17 @@
 import React, { type FC, useCallback, useMemo } from "react";
 import { Layout, Row, Col } from "antd";
 import { SEARCH, SELECTED } from "../../../utils/Localization/Localization";
-import { headerStyle, rightButtonsColStyle } from "./TopPanel.styles";
+import {
+  clearButtonStyle,
+  customizeButtonStyle,
+  headerStyle,
+  rightButtonsColStyle,
+} from "./TopPanel.styles";
 import { headerModes } from "../DataTableHeader/DataTableHeader";
-import { forEach, map, mapValues } from "lodash";
+import { forEach, map, mapValues, remove } from "lodash";
 import { topPanelTagCounterTestId, topPanelSearchInputTestId } from "../../../utils/TestIds";
 import type { ITopPanelProps } from "./TopPanel.types";
-import { searchBreakpoints } from "../../../styles/searchLayout";
+import { reverseSearchBreakpoints, searchBreakpoints } from "../../../styles/searchLayout";
 import { observer } from "mobx-react";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useFeature } from "../../../decorators/hooks/useFeature";
@@ -14,8 +19,13 @@ import { sortByPriority } from "../../../utils/Routes/routes";
 import { isShowElement } from "../../../utils/access";
 import { Tag } from "../../Tag";
 import { Search } from "../../Search";
+import { Button } from "../../Button";
+import { CloseOutlined } from "../../Icons";
 
 const { Header } = Layout;
+
+export const MASS_ASSIGN_KEY = "mass-assign-key";
+export const CONTEXT_MENU_FILTER = "context-menu-filter";
 
 const TopPanelComponent: FC<ITopPanelProps> = (props) => {
   const {
@@ -62,18 +72,40 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
     return [leftButtons, rightButtons];
   }, [headerButtonsObjects, isFeatureEnabled]);
 
+  const getCustomizeButton = useCallback(
+    (button: React.ReactElement) => (
+      <div css={customizeButtonStyle}>
+        {button}
+        <Button
+          icon={<CloseOutlined />}
+          size="small"
+          onClick={onSelectedItemsClear}
+          css={clearButtonStyle}
+        />
+      </div>
+    ),
+    [onSelectedItemsClear]
+  );
+
   const getButtonsRow = useCallback(
     (buttons: React.ReactElement[]) => (
       <Row align="middle" gutter={8} {...buttonsRowStyle}>
         {map(buttons, (button) => (
-          <Col key={button.key}>{button}</Col>
+          <Col key={button.key}>
+            {button.key === MASS_ASSIGN_KEY ? getCustomizeButton(button) : button}
+          </Col>
         ))}
       </Row>
     ),
-    [buttonsRowStyle]
+    [buttonsRowStyle, getCustomizeButton]
   );
 
   const [leftButtons, rightButtons] = sortedButtons;
+
+  const filterButton =
+    headerMode === headerModes.REVERSE_SEARCH &&
+    rightButtons?.find((button) => button.key === CONTEXT_MENU_FILTER);
+  filterButton && rightButtons && remove(rightButtons, filterButton);
 
   const isShowSearch = Boolean(onInputChange) && headerMode !== headerModes.WITHOUT_SEARCH;
   const isShowButtons = !!leftButtons?.length || !!rightButtons?.length;
@@ -93,7 +125,7 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
   }
 
   const selectionTag =
-    selectedItemsCount > 0 ? (
+    selectedItemsCount > 0 && headerMode !== headerModes.REVERSE_SEARCH ? (
       <Tag
         key="tag-counter"
         closable={true}
@@ -112,19 +144,22 @@ const TopPanelComponent: FC<ITopPanelProps> = (props) => {
         gutter={headerMode === headerModes.REVERSE_SEARCH ? 0 : 8}
       >
         {headerMode === headerModes.REVERSE_SEARCH && isShowSearch && (
-          <Col {...searchBreakpoints}>
-            <Row gutter={rightButtons?.length ? 16 : 0} wrap={false}>
-              {rightButtons?.length ? <Col>{getButtonsRow(rightButtons)}</Col> : null}
-              <Search
-                key="input-search"
-                placeholder={searchPlaceholder || localization.getLocalized(SEARCH)}
-                onChange={onInputChange}
-                test-id={topPanelSearchInputTestId}
-                value={searchValue}
-                allowClear={allowClear}
-                size="small"
-                isSecond={true}
-              />
+          <Col flex="auto">
+            <Row gutter={8}>
+              <Col>{filterButton}</Col>
+              <Col {...reverseSearchBreakpoints}>
+                <Search
+                  key="input-search"
+                  placeholder={searchPlaceholder || localization.getLocalized(SEARCH)}
+                  onChange={onInputChange}
+                  test-id={topPanelSearchInputTestId}
+                  value={searchValue}
+                  allowClear={allowClear}
+                  size="small"
+                  isSecond={true}
+                />
+              </Col>
+              {rightButtons && <Col>{getButtonsRow(rightButtons)}</Col>}
             </Row>
           </Col>
         )}

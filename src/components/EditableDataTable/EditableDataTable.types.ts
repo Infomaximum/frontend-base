@@ -97,7 +97,7 @@ export interface IEditableDataTableOwnProps<T> extends Omit<IDataTableOwnProps<T
   /**
    * Метод добавления новой строки в таблицу
    * @see подробнее => {@link EAddingRowMethod }
-   * */
+   */
   addingRowMethod?: EAddingRowMethod;
 }
 
@@ -113,7 +113,7 @@ export interface IEditableLoadingOnScrollDataTableOwnProps<T>
 }
 
 export interface IEditableDataTableState<T> {
-  /** Начальные данные для добавленной строки*/
+  /** Начальные данные для добавленной строки */
   addedRow?: T;
 
   editingRowKey?: string;
@@ -127,6 +127,6 @@ export interface IEditableDataTableState<T> {
   /**
    * Метод добавления новой строки в таблицу
    * @see подробнее => {@link EAddingRowMethod }
-   * */
+   */
   addingRowMethod?: EAddingRowMethod;
 }

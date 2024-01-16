@@ -7,7 +7,7 @@ export const disableSelectStyle =
     borderRadius: "4px",
   });
 
-//todo: разобраться почему стили не попадают из less antd
+// todo: разобраться почему стили не попадают из less antd
 export const multipleSelectStyle = {
   ".ant-select-selection-search": {
     marginInlineStart: "3px",
@@ -85,7 +85,7 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
       fontSize: "14px",
       paddingLeft: "5px",
       ":hover": {
-        color: theme.grey9Color,
+        color: theme.grey7Color,
       },
       ".anticon-close-circle": {
         background: theme.grey1Color, // для перекрытия иконки стрелки

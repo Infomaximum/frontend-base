@@ -8,7 +8,7 @@ import type {
 } from "./SelectField.types";
 import { defaultWrapperComponentStyle, defaultSelectFieldStyle } from "./SelectField.styles";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
-import { isNil } from "lodash";
+import { isNil, isNull } from "lodash";
 import { Select } from "../../Select/Select";
 import { Input } from "../../Input/Input";
 import { NOT_SELECTED } from "../../../utils/Localization/Localization";
@@ -60,9 +60,8 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
       key="ant-select"
       {...rest}
       {...restInput}
-      // Т.к. final-form не может различать в качестве значения "" и undefined,
-      // то для корректной работы применяется такое преобразование
-      value={value === "" ? undefined : value}
+      // Т.к. из final-form приходит "" при передаче undefined или null
+      value={value === "" ? null : value}
       onChange={handleChange}
       onSearch={onSearch}
       disabled={isDisabled}
@@ -73,7 +72,13 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
 });
 
 export const SelectFieldComponent: React.FC<ISelectFieldProps> = (props) => {
-  const { searchValue: searchValueProps, onSearch, showSearch = false, ...rest } = props;
+  const {
+    searchValue: searchValueProps,
+    onSearch,
+    showSearch = false,
+    notFoundContent,
+    ...rest
+  } = props;
 
   const [searchValueState, setSearchValueState] = useState("");
 
@@ -94,7 +99,9 @@ export const SelectFieldComponent: React.FC<ISelectFieldProps> = (props) => {
       searchValue={searchValue}
       onSearch={showSearch ? handleSearch : undefined}
       showSearch={showSearch}
-      notFoundContent={<DropdownPlaceholder searchText={searchValue} />}
+      notFoundContent={
+        isNull(notFoundContent) ? null : <DropdownPlaceholder searchText={searchValue} />
+      }
     />
   );
 };

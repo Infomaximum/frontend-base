@@ -23,4 +23,5 @@ export const closeIconBannerAlertStyle = {
 
 export const wrapperContentBannerAlertStyle = {
   display: "flex",
+  width: "100%",
 };

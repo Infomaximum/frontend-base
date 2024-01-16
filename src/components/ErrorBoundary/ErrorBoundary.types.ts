@@ -10,6 +10,8 @@ export interface IAppErrorBoundaryProps extends IWithModalErrorProps {
    * Код, который говорит какой ErrorBoundary перехватил ошибку
    */
   code: string;
+  /** Обработчик, вызываемый при возникновении ошибки */
+  onError?(error: Error): void;
 
   children: React.ReactNode;
 }

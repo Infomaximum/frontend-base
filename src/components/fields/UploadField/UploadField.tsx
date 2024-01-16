@@ -1,6 +1,6 @@
 import React, { createRef, type HTMLAttributes, type FC } from "react";
 import { Upload } from "antd";
-import type { UploadChangeParam } from "antd/lib/upload";
+import type { RcFile, UploadChangeParam } from "antd/lib/upload";
 import type {
   IUploadComponentProps,
   IUploadProps,
@@ -11,6 +11,7 @@ import { isFunction, isEqual, forEach, isEmpty, isString, get } from "lodash";
 import {
   CLICK_OR_DRAG_FILE,
   FILE_FORMAT,
+  MAX_SIZE_OF_THE_FILE,
   UPLOAD_THE_FILE_IN_THE_FORMAT,
 } from "../../../utils/Localization/Localization";
 import { draggerStyle, uploadIconStyle } from "./UploadField.styles";
@@ -47,6 +48,8 @@ const removeElementsAttribute = (
     }
   });
 };
+
+const validateFileSize = (file: RcFile, maxSize: number) => file?.size / 1024 / 1024 < maxSize;
 
 const { Dragger } = Upload;
 
@@ -107,8 +110,12 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
     }
   }
 
-  private handleInputChange(fileList: TUploadFieldValue) {
-    const { chooseFile, chooseFiles, multiList, input } = this.props;
+  private handleInputChange(fileListProps: TUploadFieldValue) {
+    const { chooseFile, chooseFiles, multiList, input, maxFileSize } = this.props;
+
+    const fileList = maxFileSize
+      ? fileListProps.filter((file: RcFile) => validateFileSize(file, maxFileSize))
+      : fileListProps;
 
     if (multiList) {
       if (isFunction(chooseFiles)) {
@@ -153,7 +160,16 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
     }
   };
 
-  public beforeUpload = () => {
+  public beforeUpload = (file: RcFile) => {
+    const { localization, maxFileSize } = this.props;
+
+    if (maxFileSize && !validateFileSize(file, maxFileSize)) {
+      Message.showMessage({
+        notification: localization.getLocalized(MAX_SIZE_OF_THE_FILE(maxFileSize)),
+        type: "error",
+      });
+    }
+
     return false;
   };
 
@@ -197,10 +213,11 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
       accept,
       localization,
       fileFormatPlaceholder,
+      maxFileSize,
       ...rest
     } = this.props;
 
-    //TODO: Написать свой плейсхолдер
+    // TODO: Написать свой плейсхолдер
     return (
       <Dragger
         {...rest}
@@ -225,6 +242,11 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
                   fileFormatPlaceholder ?? accept.substring(1, accept.length).toUpperCase(),
               },
             })}
+          </p>
+        )}
+        {!maxFileSize ? null : (
+          <p className="ant-upload-hint">
+            {localization.getLocalized(MAX_SIZE_OF_THE_FILE(maxFileSize))}
           </p>
         )}
       </Dragger>

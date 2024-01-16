@@ -6,6 +6,7 @@ import {
   formOptionTooltipContainerStyle,
   labelWrapperStyle,
   spaceFormOptionStyle,
+  fieldDescriptionStyle,
 } from "./FormOption.styles";
 import { Form } from "antd";
 import type { ColProps } from "antd/lib/col";
@@ -30,6 +31,7 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
     highlightFieldWithError,
     promptText,
     promptWrapperStyle,
+    getPromptPopupContainer,
     rightLabel,
     promptTestId,
     wrapperComponentStyle,
@@ -37,6 +39,7 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
     submitError,
     touched,
     invalid,
+    description,
   } = props;
   const spaceSize = useContext(SpaceSizeContext);
   const error = errorProp || submitError;
@@ -114,13 +117,16 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
       >
         {props.children}
       </div>
+
+      {description && <div css={fieldDescriptionStyle}>{description}</div>}
+
       {promptText || rightLabel ? (
         <div css={[formOptionTooltipContainerStyle, promptWrapperStyle]}>
           <FieldTooltip
             promptText={promptText}
             caption={rightLabel}
             promptTestId={promptTestId}
-            getPopupContainer={getPopupContainer}
+            getPopupContainer={getPromptPopupContainer ?? getPopupContainer}
           />
         </div>
       ) : null}

@@ -78,7 +78,6 @@ const OptionalDrawerFormComponent: React.FC<IOptionalDrawerFormProps> = ({
         defaultValue={defaultOption}
         key={optionalDrawerFormSelect}
         name={optionalDrawerFormSelect}
-        autoFocus={true}
         css={stretchStyle}
         localization={localization}
         test-id={optionalDrawerFormSelectTestId}

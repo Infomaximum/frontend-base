@@ -11,7 +11,7 @@ import {
   searchSmallInputStyle,
 } from "./Search.style";
 import type { Interpolation } from "@emotion/react";
-import { withTheme } from "../../decorators";
+import { boundMethod, withTheme } from "../../decorators";
 import { CloseSVG } from "../../resources";
 
 class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
@@ -26,14 +26,16 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   );
 
   private timer: NodeJS.Timer | undefined;
+  private lastRequestSearchText: string | undefined;
 
   constructor(props: ISearchProps) {
     super(props);
 
     this.timer = undefined;
+    this.lastRequestSearchText = props.value ?? "";
 
     this.state = {
-      searchText: props.value ?? undefined,
+      searchText: props.value ?? "",
     };
   }
 
@@ -56,18 +58,29 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
     });
   };
 
-  private handleChange = () => {
+  @boundMethod
+  private handleChangeSearchValue() {
     const { searchText } = this.state;
     const { onChange } = this.props;
 
+    if (isString(searchText) && isFunction(onChange) && searchText !== this.lastRequestSearchText) {
+      this.lastRequestSearchText = searchText;
+      onChange?.(searchText);
+    }
+  }
+
+  private handleChange = () => {
     this.timer && clearTimeout(this.timer);
 
-    this.timer = setTimeout(() => {
-      if (isString(searchText) && isFunction(onChange)) {
-        onChange?.(searchText);
-      }
-    }, KeyupRequestInterval);
+    this.timer = setTimeout(this.handleChangeSearchValue, KeyupRequestInterval);
   };
+
+  @boundMethod
+  private handlePressEnter() {
+    this.timer && clearTimeout(this.timer);
+
+    this.handleChangeSearchValue();
+  }
 
   public override render() {
     const { onChange, value, size, theme, isSecond, ...rest } = this.props;
@@ -104,6 +117,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
         {...rest}
         value={this.state.searchText}
         onChange={this.handleChangeState}
+        onPressEnter={this.handlePressEnter}
       />
     );
   }

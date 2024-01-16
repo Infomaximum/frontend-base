@@ -6,7 +6,7 @@ export const convertToNumber = (formValue: string) => {
 /** Разрешает вводить только числа, если значение больше чем 2^53 - 1,
  *  то возвращает Number.MAX_SAFE_INTEGER если меньше чем -(2^53 - 1), то
  *  Number.MIN_SAFE_INTEGER
- **/
+ */
 export const convertToSaveNumber = (formValue: string) => {
   const isIntegerValue = /^-?\d*$/.test(formValue);
   const parseValue = parseInt(formValue, 10);

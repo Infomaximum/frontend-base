@@ -12,22 +12,30 @@ const TagComponent: FC<ITagProps> = (props) => {
   const theme = useTheme();
 
   const { tagsStyles } = theme;
-  const { closable, color: colorProps = "default", children, title, style } = props;
+  const { closable, color: colorProps = "default", children, title } = props;
 
   const ref = useRef<HTMLDivElement>(null);
   const { isOverflow } = useOverflow(ref, children, title);
 
-  const { backgroundColor, borderColor, textColor } = (get(tagsStyles, colorProps) as
-    | valueof<typeof tagsStyles>
-    | undefined) ?? {
+  const { backgroundColor, borderColor, textColor, closeIconColor } = (get(
+    tagsStyles,
+    colorProps
+  ) as valueof<typeof tagsStyles> | undefined) ?? {
     backgroundColor: theme.grey3Color,
     borderColor: theme.grey4Color,
     textColor: theme.grey8Color,
+    closeIconColor: theme.grey8Color,
   };
 
   const tagStyle = useMemo(
-    () => getTagStyle(String(borderColor), String(textColor), String(backgroundColor)),
-    [backgroundColor, borderColor, textColor]
+    () =>
+      getTagStyle(
+        String(borderColor),
+        String(textColor),
+        String(backgroundColor),
+        String(closeIconColor)
+      ),
+    [backgroundColor, borderColor, textColor, closeIconColor]
   );
 
   const tagCssRule = useMemo(() => {
@@ -43,14 +51,7 @@ const TagComponent: FC<ITagProps> = (props) => {
       <AntTag key={colorProps} {...props} css={tagCssRule} color={colorProps} title={undefined}>
         <div css={tagContentStyle} ref={ref}>
           {children}
-          {isOverflow && (
-            <div
-              css={tagOverlayStyle(
-                backgroundColor,
-                closable ? "20px" : style?.paddingRight || "7px"
-              )}
-            />
-          )}
+          {isOverflow && <div css={tagOverlayStyle(backgroundColor)} />}
         </div>
       </AntTag>
     </Tooltip>

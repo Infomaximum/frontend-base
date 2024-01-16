@@ -1,3 +1,4 @@
+import type { RefObject } from "react";
 import type { IContextMenuParam } from "../ContextMenu/ContextMenu.types";
 import type { ITagProps } from "./InlineTags/InlineTags.types";
 
@@ -17,4 +18,5 @@ export interface IApplicationCardProps {
   pathname?: string;
   isReadOnly?: boolean;
   hasDeleteAccess?: boolean;
+  mainPageContentRef?: RefObject<HTMLDivElement>;
 }

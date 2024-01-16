@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FieldArray } from "react-final-form-arrays";
-import { isFunction, map, isNil, isUndefined, isNumber } from "lodash";
+import { isFunction, map, isNil, isUndefined, isNumber, isEqual } from "lodash";
 import {
   addButtonStyle,
   addButtonWrapperStyle,
@@ -165,8 +165,8 @@ class WrappedArrayField extends React.PureComponent<
             fieldEntityIndex={index}
             readOnly={readOnly}
             fields={this.props.fields}
-            writeAccess={true}
-            removeAccess={true}
+            writeAccess={this.writeAccess}
+            removeAccess={this.deleteAccess}
             autoFocus={this.getAutoFocusStatusByIndex(index)}
             {...fieldEntityComponentProps}
           />
@@ -255,13 +255,14 @@ const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
     <div data-name={props.name}>
       <FieldArray
         key="field"
-        {...rest}
+        isEqual={isEqual}
         component={WrappedArrayField}
         accessKey={accessKey}
         arrayFieldName={props.name}
         readOnly={readOnly}
         formProvider={formProvider}
         spaceSize={spaceSize}
+        {...rest}
       />
     </div>
   );

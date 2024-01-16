@@ -58,7 +58,9 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
     const titleModalTestId = `${modalErrorTitleErrorTestId}_${kebabCase(error.code)}`;
     const contentModalTestId = `${modalErrorContentErrorTestId}_${kebabCase(error.code)}`;
 
-    const modalWidth = !!error.message ? 480 : 416;
+    const errorMessage = error.messageContent ?? error.message;
+
+    const modalWidth = !!errorMessage ? 480 : 416;
 
     return (
       <Modal
@@ -89,9 +91,9 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
           >
             {error.title || localization.getLocalized(ERROR)}
           </span>
-          {error.message ? (
+          {errorMessage ? (
             <p key="content-error-modal" test-id={contentModalTestId} css={textStyle(theme)}>
-              {error.message} {isDebugMode && error.traceId && `[${error.traceId}]`}
+              {errorMessage} {isDebugMode && error.traceId && `[${error.traceId}]`}
             </p>
           ) : null}
         </div>

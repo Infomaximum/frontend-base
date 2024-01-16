@@ -39,7 +39,9 @@ const ContextMenuTableComponent: React.FC<IContextMenuTableProps> = ({ onSelect,
     }
   }
 
-  return <ContextMenu content={content} placement="bottomRight" css={threeDotsStyle(theme)} />;
+  return (
+    <ContextMenu content={content} placement="bottomRight" buttonStyle={threeDotsStyle(theme)} />
+  );
 };
 
 export const ContextMenuTable = React.memo(ContextMenuTableComponent);

@@ -137,12 +137,12 @@ describe("Тест на SubmitFormButton", () => {
 
     expect(isDisabled()).toEqual(true);
 
-    //дожидаемся окончания сабмита
+    // дожидаемся окончания сабмита
     await waitForComponentToPaint(component, 105);
 
     expect(isDisabled()).toEqual(false);
 
-    //кликаем повторно, чтобы проверить что сабмит сработает
+    // кликаем повторно, чтобы проверить что сабмит сработает
     component.find(Button).simulate("click");
 
     await waitForComponentToPaint(component);

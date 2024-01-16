@@ -73,8 +73,14 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
   };
 
   private renderFooter(): React.ReactNode {
-    const { okText, cancelText, form, disableSubmitOnPristine, disableSubmitOnInvalid } =
-      this.props;
+    const {
+      okText,
+      cancelText,
+      form,
+      disableSubmitOnPristine,
+      disableSubmitOnInvalid,
+      okButtonProps,
+    } = this.props;
 
     return (
       this.state.formProvider && (
@@ -96,6 +102,8 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
             disableOnInvalid={disableSubmitOnInvalid}
             test-id={form}
             type="primary"
+            loading={okButtonProps?.loading}
+            disabled={okButtonProps?.disabled}
           />
         </div>
       )

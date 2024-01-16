@@ -38,6 +38,6 @@ const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
   }
 );
 
-TableBodyCellComponent.defaultProps = { showTooltip: true };
+TableBodyCellComponent.defaultProps = { showTooltip: false };
 
 export const TableBodyCell = TableBodyCellComponent;

@@ -61,6 +61,10 @@ export interface IConfirmationModalProps {
    * Иконка
    */
   icon?: React.ComponentType<AntdIconProps>;
+  /**
+   * Режим без кнопки сохранения
+   */
+  isWithoutSaveMode?: boolean;
 
   children?: React.ReactNode;
 }

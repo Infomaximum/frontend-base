@@ -50,7 +50,7 @@ export const handleErrorInternal = function (
       /**
        * если нет description и title но есть handle, то эту ошибку отображать не нужно,
        * выполнится handle и ошибка будет обработана
-       * */
+       */
       return undefined;
     } else {
       preparedError = {

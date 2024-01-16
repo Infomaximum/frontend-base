@@ -38,7 +38,7 @@ export const redButtonStyle = (theme: TTheme) =>
     hoverColor: theme.red6Color,
   });
 
-/** Функция для генерирования кастомных стилей **/
+/** Функция для генерирования кастомных стилей */
 export const customContextIconButtonStyle: TCustomContextIconButtonFuncStyle =
   ({ color, hoverColor, hoverBackgroundColor, additionalStyles }) =>
   (size) =>

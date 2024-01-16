@@ -46,12 +46,14 @@ export const redCloseCircleIconStyle = (theme: TTheme) => ({
   fontSize: `${theme.h4FontSize}px`,
 });
 
-export const notificationFieldStyle = (theme: TTheme) => ({
+export const commonNotificationFieldStyle = (theme: TTheme) => ({
   lineHeight: `${theme.verySmallLineHeight}px`,
+  display: "flex",
+  alignItems: "center",
 });
 
 export const notificationFieldStyleWithPadding = (theme: TTheme) => ({
-  lineHeight: `${theme.verySmallLineHeight}px`,
+  ...commonNotificationFieldStyle(theme),
   paddingBottom: "8px",
 });
 

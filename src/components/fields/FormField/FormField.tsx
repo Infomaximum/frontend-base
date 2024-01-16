@@ -22,12 +22,14 @@ function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
     highlightFieldWithError,
     promptText,
     promptWrapperStyle,
+    getPromptPopupContainer,
     rightLabel,
     wrapperComponentStyle,
     labelStyle,
     disabled,
     validate,
     isClearSubmitErrorsOnValueChange = true,
+    description,
     ...restProps
   } = props;
 
@@ -52,7 +54,7 @@ function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
   const { hasReadAccess } = getAccessParameters(isFeatureEnabled, restProps.accessKeys);
 
   useEffect(() => {
-    //очищаем ошибку как только вносим изменение в форму, чтобы ошибка не висела
+    // очищаем ошибку как только вносим изменение в форму, чтобы ошибка не висела
     if (
       isClearSubmitErrorsOnValueChange &&
       formProvider &&
@@ -88,8 +90,10 @@ function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
       highlightFieldWithError={highlightFieldWithError}
       promptText={promptText}
       promptWrapperStyle={promptWrapperStyle}
+      getPromptPopupContainer={getPromptPopupContainer}
       rightLabel={rightLabel}
       wrapperComponentStyle={wrapperComponentStyle}
+      description={description}
       {...meta}
     >
       <FieldComponent

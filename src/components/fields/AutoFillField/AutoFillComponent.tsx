@@ -176,6 +176,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
     isFunction(onChange) && onChange(value);
 
     isFunction(onBlur) && onBlur();
+    this.setState({ searchText: undefined });
   };
 
   private getPrepareDisplayValue(value: string | undefined) {
@@ -222,8 +223,6 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
 
     const items = (modelsMap && Array.from(modelsMap, ([, model]) => model)) ?? [];
 
-    const value = this.getSelectValue(localization, fieldValue);
-
     return (
       <>
         <AutoComplete
@@ -233,7 +232,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
           backfill={true}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
-          defaultValue={value}
+          value={this.state.searchText ?? this.getSelectValue(localization, fieldValue)}
           allowClear={allowClear}
           onFocus={onFocus}
           showSearch={true}

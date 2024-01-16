@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ConfirmationModal } from "../ConfirmationModal/ConfirmationModal";
-import { titleStyle, iconStyle } from "./FormConfirmationModal.styles";
+import { titleAndInfoStyle, iconStyle } from "./FormConfirmationModal.styles";
 import type { IFormConfirmationModalProps } from "./FormConfirmationModal.types";
 import type { Transition } from "history";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
@@ -11,11 +11,11 @@ import { ModalAnimationInterval, Z_INDEX_FORM_CONFIRMATION_MODAL } from "../../.
 import {
   SAVE,
   UNABLE_TO_SAVE_CHANGE,
-  UNSAVED_CHANGES,
+  SAVE_CHANGES,
+  MAKE_SURE_FIELDS_FILLED_CORRECTLY,
 } from "../../../utils/Localization/Localization";
 
 const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
-  disabledConfirmButton,
   formProvider,
   when,
   blockUri,
@@ -107,10 +107,10 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
 
   const title = useMemo(
     () => (
-      <span css={titleStyle}>
+      <span css={titleAndInfoStyle}>
         {invalid || hasSubmitErrors
           ? localization.getLocalized(UNABLE_TO_SAVE_CHANGE)
-          : localization.getLocalized(UNSAVED_CHANGES)}
+          : localization.getLocalized(SAVE_CHANGES)}
       </span>
     ),
     [invalid, hasSubmitErrors, localization]
@@ -118,17 +118,23 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
 
   return open ? (
     <ConfirmationModal
+      isWithoutSaveMode={invalid || hasSubmitErrors}
       onConfirm={handleSaveButtonClick}
       onAfterCancel={handleHide}
-      withAdditionalButton={true}
+      withAdditionalButton={!(invalid || hasSubmitErrors)}
       onAdditionalButtonClick={handleResumeButtonClick}
       iconStyle={iconStyle}
       buttonOkText={SAVE}
       onAfterConfirm={handleSuccess}
-      disabledConfirmButton={invalid || hasSubmitErrors || !!disabledConfirmButton}
       title={title}
       zIndex={Z_INDEX_FORM_CONFIRMATION_MODAL}
-    />
+    >
+      {(invalid || hasSubmitErrors) && (
+        <span css={titleAndInfoStyle}>
+          {localization.getLocalized(MAKE_SURE_FIELDS_FILLED_CORRECTLY)}
+        </span>
+      )}
+    </ConfirmationModal>
   ) : null;
 };
 

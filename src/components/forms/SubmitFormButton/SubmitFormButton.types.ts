@@ -19,7 +19,7 @@ export interface ISubmitFormButtonProps extends Pick<IButtonProps, "size" | "typ
   /**
    * Состояние loading для кнопки (имеет высший приоритет над submitting формы)
    */
-  loading?: boolean;
+  loading?: IButtonProps["loading"];
   /**
    * Дизейблить кнопку (имеет высший приоритет над disableOnInvalid)
    */

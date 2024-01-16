@@ -31,7 +31,7 @@ export declare namespace NRequests {
     /** Переменные запроса */
     variables?: TDictionary | undefined;
     cancelable?: TCancelable;
-    /** дополнительный список параметров. Необходимо для различных реализаций Request*/
+    /** дополнительный список параметров. Необходимо для различных реализаций Request */
     additionalParams?: T;
   };
 

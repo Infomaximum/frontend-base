@@ -17,9 +17,9 @@
     "@infomaximum/global-types": "1.1.2",
     "@infomaximum/graphql-model": "^1.2.0",
     "@infomaximum/localization": "^1.0.3",
-    "@infomaximum/module-expander": "^2.0.0",
+    "@infomaximum/module-expander": "^2.1.0",
     "@infomaximum/utility": "^7.0.0",
-    "@infomaximum/base-filter": "^1.0.0",
+    "@infomaximum/base-filter": "^1.1.0",
     "antd": "4.24.8",
     "crypto-js": "4.1.1",
     "final-form": "^4.20.9",
@@ -90,7 +90,7 @@
     "semver": "7.3.8",
     "standard-version": "9.5.0",
     "tslib": "^2.5.0",
-    "typescript": "5.2.2"
+    "typescript": "5.3.2"
   },
   "scripts": {
     "release": "tsc --noEmit && standard-version && rollup -c",

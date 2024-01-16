@@ -12,7 +12,7 @@ import {
   threeDotsIconStyle,
 } from "./Breadcrumbs.styles";
 import type { IBreadcrumbsProps } from "./Breadcrumbs.types";
-import { calcShrinkMask, getTextWidth, interleaveWith } from "./Breadcrumbs.utils";
+import { calcShrinkMask, interleaveWith } from "./Breadcrumbs.utils";
 import { Menu } from "antd";
 import { Dropdown } from "../Dropdown/Dropdown";
 import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
@@ -21,6 +21,7 @@ import { useNavigate } from "react-router";
 import { ellipsisStyle } from "../../styles/common.styles";
 import { useTheme } from "../../decorators";
 import { AutoTooltip } from "../AutoTooltip";
+import { getTextWidth } from "../../utils/textWidth";
 
 // "Хлебные крошки" для нового списка сотрудников, который еще не реализован
 const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({

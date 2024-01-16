@@ -41,6 +41,15 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   const handleRowContentClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
+
+      if (window.getSelection()?.toString()) {
+        setTimeout(() => {
+          !!record?.key && onExpanderChange(record.key, !isExpanded);
+        }, 0);
+
+        return;
+      }
+
       !!record?.key && onExpanderChange(record.key, !isExpanded);
     },
     [isExpanded, onExpanderChange, record?.key]
@@ -87,7 +96,7 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
 
   const cellCustomStyle = column?.onCell?.(record)?.style as Interpolation<TTheme> | undefined;
 
-  /* Учет isTree нужен для того, чтобы не оставлять промежутков в плоских списках*/
+  /* Учет isTree нужен для того, чтобы не оставлять промежутков в плоских списках */
   return (
     <div
       key={key}

@@ -1,4 +1,4 @@
-export const closeBannerAnimationDuration = 0.5; //секунды
+export const closeBannerAnimationDuration = 0.5; // секунды
 
 export const bannerStyle = {
   flexShrink: 0,

@@ -1,6 +1,7 @@
 import { css, type Interpolation } from "@emotion/react";
 import { userAgent, EUserAgents } from "@infomaximum/utility";
 import { textOverflowOverlayStyle } from "./common.styles";
+import { getGradientColorsFromTransparent } from "../utils/colors";
 
 export const SCROLLBAR_WIDTH = 6;
 export const SCROLLBAR_HEIGHT = 6;
@@ -117,7 +118,7 @@ const fixIEBugs = () => {
   return {
     "@media only screen and (-ms-high-contrast: active), (-ms-high-contrast: none)": {
       /* Фикс для IE, чтобы теги внутри Select'а c mode = "tags" не растягивали контейнер вправо,
-     а переходили на новую строку*/
+     а переходили на новую строку */
       ".ant-form-item-control-input": {
         position: "relative",
         display: "block", // flex у анта
@@ -196,149 +197,160 @@ const fixSafariBugs = () => {
   };
 };
 
-const antGlobalStyle = (theme: TTheme) => ({
-  ".ant-tooltip .ant-tooltip-arrow": {
-    height: "16px",
-    // Для корректной работы при разных масштабах окна браузера
-    bottom: "1px",
-    ".ant-tooltip-arrow-content": {
-      // Фикс цвета в IE
-      background: theme.grey9Color,
-      // Фикс обводки в Mozilla Firefox
-      overflow: "hidden",
-    },
-  },
+const antGlobalStyle = (theme: TTheme) => {
+  const { minOpacity, maxOpacity } = getGradientColorsFromTransparent(theme, theme.grey3Color);
 
-  ".ant-select-disabled .ant-select-selection-placeholder": {
-    color: theme.grey7Color,
-  },
-  ".ant-select-item-option-content": {
-    textOverflow: "unset",
-  },
-  ".ant-select-item": {
-    color: theme.grey9Color,
-    "&.ant-select-item-option-selected": {
-      color: theme.thrust5Color,
-      background: "none",
-      fontWeight: 400,
-    },
-    "&.ant-select-item-option-active": {
-      background: theme.grey3Color,
-    },
-    "&.ant-select-item-option-disabled": {
-      color: theme.grey7Color,
-      background: "none",
-    },
-    ".anticon": {
-      paddingLeft: "2px",
-      fontSize: "14px",
-      color: theme.thrust5Color,
-    },
-  },
-  // Стили для забледнения текста [PT-12198]
-  ".ant-select-item-option": {
-    position: "relative",
-    "::after": {
-      ...textOverflowOverlayStyle({
-        backgroundColor: theme.grey1Color,
-      }),
-      content: "''",
-      boxSizing: "content-box",
-      height: "100%",
-      pointerEvents: "none",
-    },
-  },
-  ".ant-select-item-option.ant-select-item-option-disabled": {
-    "::after": {
-      content: "none",
-    },
-  },
-  ".ant-select-item-option.ant-select-item-option-active": {
-    "::after": {
-      backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0), ${theme.grey3Color})`,
-    },
-  },
-  ".ant-select-item-option-state": {
-    zIndex: 10,
-  },
-  ".ant-select-dropdown, .ant-dropdown-menu": {
-    "&:not(.ant-dropdown-menu-submenu-popup)": {
-      boxShadow: "0 2px 8px 0 rgba(71, 71, 71, 0.2)",
-      border: `1px solid ${theme.grey4Color}`,
-    },
-    ".ant-dropdown-menu-item-divider": {
-      background: theme.grey4Color,
-    },
-  },
-  ".ant-dropdown-menu-submenu-title": {
-    paddingRight: "25px",
-  },
-
-  ".ant-tabs-nav": {
-    ":before": {
-      borderBottom: "none !important",
-    },
-  },
-
-  ".ant-tabs-tab + .ant-tabs-tab": {
-    margin: 0,
-  },
-
-  ".ant-select-item-option-grouped": {
-    paddingLeft: "24px",
-  },
-
-  ".ant-select-item-group": {
-    cursor: "default",
-    fontSize: "12px",
-    color: theme.grey7Color,
-  },
-  // для фикса съезжания кнопки Ок на строку ниже
-  ".ant-picker-ok": {
-    marginLeft: "6px !important",
-  },
-
-  ".ant-table-fixed-header .ant-table-container .ant-table-body": {
-    overflowY: "auto !important",
-  },
-
-  // Важно, чтобы стиль был глобальным, т.к. строка рендерится в body
-  ".row-dragging": {
-    backgroundColor: "none", //@table-body-sort-bg
-    border: `1px solid ${theme.grey5Color}`,
-    zIndex: `${theme.drawerZIndex + 1} !important`, // Фикс для дроверов
-  },
-
-  ".ant-message": {
-    top: "inherit",
-    bottom: 0,
-    zIndex: 2000,
-
-    "& .ant-message-custom-content": {
-      display: "flex",
-    },
-  },
-
-  ".ant-picker-suffix": {
-    pointerEvents: "unset",
-    cursor: "pointer",
-  },
-
-  ".ant-picker-input": {
-    input: {
-      "::placeholder": {
-        textOverflow: "unset",
+  return {
+    ".ant-tooltip .ant-tooltip-arrow": {
+      height: "16px",
+      // Для корректной работы при разных масштабах окна браузера
+      bottom: "1px",
+      ".ant-tooltip-arrow-content": {
+        // Фикс цвета в IE
+        background: theme.grey9Color,
+        // Фикс обводки в Mozilla Firefox
+        overflow: "hidden",
       },
     },
-  },
-});
+
+    ".ant-select-disabled .ant-select-selection-placeholder": {
+      color: theme.grey7Color,
+    },
+    ".ant-select-item-option-content": {
+      textOverflow: "unset",
+    },
+    ".ant-select-item": {
+      color: theme.grey9Color,
+      "&.ant-select-item-option-selected": {
+        background: "none",
+        fontWeight: 400,
+      },
+      "&.ant-select-item-option-active": {
+        background: theme.grey3Color,
+      },
+      "&.ant-select-item-option-disabled": {
+        color: theme.grey7Color,
+        background: "none",
+      },
+      ".anticon": {
+        paddingLeft: "2px",
+        fontSize: "14px",
+        color: theme.thrust5Color,
+      },
+    },
+    // Стили для забледнения текста [PT-12198]
+    ".ant-select-item-option": {
+      position: "relative",
+      "::after": {
+        ...textOverflowOverlayStyle({
+          backgroundColor: theme.grey1Color,
+        }),
+        content: "''",
+        boxSizing: "content-box",
+        height: "100%",
+        pointerEvents: "none",
+      },
+    },
+    ".ant-select-item-option.ant-select-item-option-disabled": {
+      "::after": {
+        content: "none",
+      },
+    },
+    ".ant-select-item-option.ant-select-item-option-active": {
+      "::after": {
+        backgroundImage: `linear-gradient(to right, ${minOpacity}, ${maxOpacity})`,
+      },
+    },
+    ".ant-select-item-option-state": {
+      zIndex: 10,
+    },
+    ".ant-select-dropdown, .ant-dropdown-menu": {
+      "&:not(.ant-dropdown-menu-submenu-popup)": {
+        boxShadow: "0 2px 8px 0 rgba(71, 71, 71, 0.2)",
+        border: `1px solid ${theme.grey4Color}`,
+      },
+      ".ant-dropdown-menu-item-divider": {
+        background: theme.grey4Color,
+      },
+    },
+    ".ant-dropdown-menu-submenu-title": {
+      paddingRight: "25px",
+    },
+
+    ".ant-tabs-nav": {
+      ":before": {
+        borderBottom: "none !important",
+      },
+    },
+
+    ".ant-tabs-tab + .ant-tabs-tab": {
+      margin: 0,
+    },
+
+    ".ant-select-item-option-grouped": {
+      paddingLeft: "24px",
+    },
+
+    ".ant-select-item-group": {
+      cursor: "default",
+      fontSize: "12px",
+      color: theme.grey7Color,
+    },
+    // для фикса съезжания кнопки Ок на строку ниже
+    ".ant-picker-ok": {
+      marginLeft: "6px !important",
+    },
+
+    ".ant-table-fixed-header .ant-table-container .ant-table-body": {
+      overflowY: "auto !important",
+    },
+
+    // Важно, чтобы стиль был глобальным, т.к. строка рендерится в body
+    ".row-dragging": {
+      backgroundColor: "none", // @table-body-sort-bg
+      border: `1px solid ${theme.grey5Color}`,
+      zIndex: `${theme.drawerZIndex + 1} !important`, // Фикс для дроверов
+    },
+
+    ".ant-message": {
+      top: "inherit",
+      bottom: 0,
+      zIndex: 2000,
+
+      "& .ant-message-custom-content": {
+        display: "flex",
+      },
+    },
+
+    ".ant-picker-suffix": {
+      pointerEvents: "unset",
+      cursor: "pointer",
+    },
+
+    ".ant-picker-input": {
+      input: {
+        "::placeholder": {
+          textOverflow: "unset",
+        },
+      },
+    },
+
+    ".ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title": {
+      color: theme.grey9Color,
+
+      svg: {
+        color: theme.grey7Color,
+      },
+    },
+  };
+};
 
 export const forceDisabledAnimationClassName = "force-disabled-animation";
 
 /**
  * не нужно использовать `!important` это ломает поведение некоторых компонентов
  * (например, список страниц отчета).
- * */
+ */
 const forceDisabledAnimationStyle = {
   [`.${forceDisabledAnimationClassName}`]: {
     animationDuration: "0.00001s",

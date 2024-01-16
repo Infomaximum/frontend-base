@@ -30,6 +30,12 @@ export const defaultInputStyle = (theme: TTheme, bordered = true) => ({
       textOverflow: "unset",
     },
   },
+  ".ant-input-clear-icon": {
+    color: theme.grey6Color,
+    ":hover": {
+      color: theme.grey7Color,
+    },
+  },
 });
 
 // Стиль для поля ввода с рамками по бокам
@@ -76,10 +82,15 @@ export const defaultPasswordInputStyle = (theme: TTheme) => ({
   },
 });
 
-export const disabledPasswordInputStyle = {
+export const disabledPasswordInputStyle = (theme: TTheme) => ({
   ...disabledInputStyle,
   border: "none",
   ".ant-input-password-icon.anticon": {
     display: "none",
   },
-};
+  input: {
+    "::placeholder": {
+      color: theme.grey7Color,
+    },
+  },
+});

@@ -197,21 +197,21 @@ class FormComponent extends Component<IFormProps, IFormState> {
       if (hasValidationErrors && mutators?.touch && errors) {
         mutators.touch(Object.keys(errors));
       }
+
       return formName;
     }
+
     return true;
   };
 
   private getFormConfirmationModal() {
     const { blockUri, dirty } = this.props;
-    const { contextData } = this.state;
 
     return blockUri ? (
       <FormConfirmationModal
         key="form-confirmation-modal"
         formProvider={this.getFormProvider()}
         when={dirty}
-        disabledConfirmButton={!contextData.access.hasWriteAccess}
         blockUri={blockUri}
       />
     ) : null;

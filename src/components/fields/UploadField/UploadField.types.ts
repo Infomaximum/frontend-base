@@ -31,6 +31,7 @@ export interface IUploadComponentOwnProps extends Omit<UploadProps, "onChange"> 
   /** лист загруженных файлов может содержать >1 элемента */
   multiList?: boolean;
   readOnly?: boolean;
+  maxFileSize?: number;
   mode?: keyof typeof UploadFormField.AVAILABLE_MODE_LIST;
   fileFormatPlaceholder?: string;
 }

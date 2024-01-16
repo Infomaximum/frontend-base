@@ -352,7 +352,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
   };
 
   private onSelect = (record: TExtendColumns<T> | undefined, selected: boolean) => {
-    if (this.isRestModel(record?.model)) {
+    if (window.getSelection()?.toString() || this.isRestModel(record?.model)) {
       return;
     }
 
@@ -421,6 +421,10 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
 
   private handleExpandChange = (expandedRows: string[]) => {
     const { tableStore } = this.props;
+
+    if (window.getSelection()?.toString()) {
+      return;
+    }
 
     if (!tableStore.searchValue) {
       this.sourceTreeExpandedKeys = expandedRows;
@@ -579,7 +583,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
         <Table<TExtendColumns<T>>
           {...restProps}
           isShowDividers={isShowDividers}
-          loading={loading || tableStore?.isLoading}
+          loading={loading ?? tableStore?.isLoading}
           localization={localization}
           expandedRowKeys={tableStore?.expandedState}
           onExpandedRowsChange={this.handleExpandChange}
@@ -607,15 +611,23 @@ const DataTable = <T extends TBaseRow = TBaseRow>(props: IDataTableOwnProps<T>) 
   <_DataTableComponent {...props} />
 );
 
-const LoadingOnScrollDataTable = <T extends TBaseRow = TBaseRow>(
-  props: ILoadingOnScrollDataTableOwnProps<T>
-) => {
-  const showMoreParams = useNodeShowMoreParams(props?.queryVariables || {});
-  const handleLoadingOnScroll = useLoadingOnScroll(props?.tableStore, showMoreParams);
+const LoadingOnScrollDataTable = observer(
+  <T extends TBaseRow = TBaseRow>({
+    loading,
+    ...restProps
+  }: ILoadingOnScrollDataTableOwnProps<T>) => {
+    const showMoreParams = useNodeShowMoreParams(restProps?.queryVariables || {});
+    const handleLoadingOnScroll = useLoadingOnScroll(restProps?.tableStore, showMoreParams);
 
-  return (
-    <_DataTableComponent {...props} onScroll={handleLoadingOnScroll} showMoreMode="scrolling" />
-  );
-};
+    return (
+      <_DataTableComponent
+        {...restProps}
+        onScroll={handleLoadingOnScroll}
+        showMoreMode="scrolling"
+        loading={!restProps.tableStore?.model}
+      />
+    );
+  }
+);
 
 export { DataTable, emptyColumnKey, LoadingOnScrollDataTable };

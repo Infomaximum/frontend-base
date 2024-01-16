@@ -4,8 +4,9 @@ import type {
   ITimeInputsRangeFieldProps,
   ITimeInputsRangeFormFieldProps,
   ITimeInputsRangeProps,
+  TDuration,
 } from "./TimeInputsRangeField.types";
-import { eq, isNil, map } from "lodash";
+import { eq, isEmpty, isNil, map, xorBy } from "lodash";
 import moment, { type Duration, isDuration } from "moment";
 import {
   dashStyle,
@@ -13,7 +14,11 @@ import {
   timeInputWithSecondsStyle,
 } from "./TimeInputsRangeField.styles";
 import { timeInputsRangeTestId } from "../../../utils/TestIds";
-import { formatEnteredTime, type TDurationDescription } from "@infomaximum/utility";
+import {
+  formatEnteredTime,
+  MillisecondsPerDay,
+  type TDurationDescription,
+} from "@infomaximum/utility";
 import { Input } from "../../Input";
 import { Field, FormField } from "../FormField";
 
@@ -28,7 +33,14 @@ enum ECountOfDigits {
 }
 
 const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
-  const { input, readOnly, withSeconds, isExcludeLowValues = true, disabled } = props;
+  const {
+    input,
+    readOnly,
+    withSeconds,
+    fixMidnightTime,
+    isExcludeLowValues = true,
+    disabled,
+  } = props;
 
   const FIELD_CONST = useMemo(
     () => ({
@@ -86,12 +98,7 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
     ({ target: { value, name } }: ChangeEvent<HTMLInputElement>) => {
       const { inputNames, format } = FIELD_CONST;
       const [begin, end] = inputValues;
-
-      const nextValues = eq(name, inputNames.BEGIN)
-        ? ([formatEnteredTime(value), end] as [string, string])
-        : ([begin, formatEnteredTime(value)] as [string, string]);
-
-      setInputValues(nextValues);
+      let formattedEnteredTime = formatEnteredTime(value);
 
       const parseFormValue = (str: string) => {
         if (!moment(str, format).isValid()) {
@@ -111,9 +118,29 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
         return duration;
       };
 
+      if (fixMidnightTime) {
+        const formatMidnightTime = (formattedEnteredTime: string) => {
+          const duration = parseFormValue(formattedEnteredTime);
+
+          if (duration && duration.asMilliseconds() === MillisecondsPerDay) {
+            return moment.utc(MillisecondsPerDay).format(FIELD_CONST.format);
+          }
+
+          return formattedEnteredTime;
+        };
+
+        formattedEnteredTime = formatMidnightTime(formattedEnteredTime);
+      }
+
+      const nextValues = eq(name, inputNames.BEGIN)
+        ? ([formattedEnteredTime, end] as [string, string])
+        : ([begin, formattedEnteredTime] as [string, string]);
+
+      setInputValues(nextValues);
+
       input.onChange(map(nextValues, parseFormValue));
     },
-    [input, inputValues, FIELD_CONST, isExcludeLowValues]
+    [fixMidnightTime, FIELD_CONST, inputValues, input, isExcludeLowValues]
   );
 
   const placeholder = useMemo(
@@ -160,8 +187,11 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
   );
 };
 
+const isEqual = (time?: [TDuration, TDuration], previousTime?: [TDuration, TDuration]) =>
+  isEmpty(xorBy(time, previousTime, (item) => item?.asMilliseconds()));
+
 const TimeInputsRangeField: FC<ITimeInputsRangeFieldProps> = (props) => {
-  return <Field component={TimeInputsRange} {...props} />;
+  return <Field component={TimeInputsRange} {...props} isEqual={isEqual} />;
 };
 
 const TimeInputsRangeFormField: FC<ITimeInputsRangeFormFieldProps> = (props) => {

@@ -20,7 +20,7 @@ import { useTheme } from "../../decorators/hooks/useTheme";
 
 const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
   (props, ref: React.Ref<HTMLButtonElement>) => {
-    const { type: typeProps, ...rest } = props;
+    const { type: typeProps, tooltipPlacement, ...rest } = props;
     const onlyIcon = !props.children;
 
     const theme = useTheme();
@@ -77,7 +77,7 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
     };
 
     return (
-      <Tooltip title={props.title}>
+      <Tooltip title={props.title} placement={tooltipPlacement}>
         <AntButton {...rest} css={buttonStyles} ref={ref} title={undefined} type={getType()} />
       </Tooltip>
     );

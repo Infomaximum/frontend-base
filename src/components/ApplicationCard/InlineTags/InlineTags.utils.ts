@@ -1,3 +1,4 @@
+import { getTextWidth } from "../../../utils/textWidth";
 import {
   tagSidePadding,
   tagsGutter,
@@ -7,16 +8,6 @@ import {
   tagBorderWidth,
 } from "./InlineTags.styles";
 import type { ITagProps } from "./InlineTags.types";
-
-const getTextWidth = (() => {
-  const context = document.createElement("canvas").getContext("2d") as CanvasRenderingContext2D;
-
-  return (text: string, fontSize: number) => {
-    context.font = `${fontSize}px 'Roboto'`;
-
-    return context.measureText(text).width;
-  };
-})();
 
 const getTagWidth = (text: string) =>
   getTextWidth(text, tagFontSize) + (tagSidePadding + tagBorderWidth) * 2;
