@@ -27,6 +27,7 @@ const EditableRowButtonComponent: React.FC<IEditableRowButtonProps> & {
   );
 
   let buttonStyle;
+
   if (disabled) {
     buttonStyle = disabledButtonStyle;
   } else {

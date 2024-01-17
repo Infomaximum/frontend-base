@@ -27,6 +27,7 @@ export class ApolloDataCache implements NStore.IDataCache {
 
       if (!levelNode) {
         assertSilent(false, "Некорректный dataPath запроса");
+
         return true;
       }
 
@@ -104,16 +105,19 @@ export class ApolloDataCache implements NStore.IDataCache {
     });
 
     const entitySelectionNode = this.getSelectionNodeByPath(queryDefinition, dataPath);
+
     if (!entitySelectionNode) {
       return null;
     }
 
     const fragmentTypename = this.getFragmentTypename(entitySelectionNode, fragmentMap);
+
     if (!fragmentTypename) {
       return null;
     }
 
     const fragmentNode = this.getExpandedNode(entitySelectionNode, fragmentMap);
+
     if (!fragmentNode) {
       return null;
     }
@@ -155,6 +159,7 @@ export class ApolloDataCache implements NStore.IDataCache {
     dataPath?: string;
   }): TModelStruct | null {
     const id = variables?.id || variables?.guid;
+
     if (isNil(id)) {
       return null;
     }

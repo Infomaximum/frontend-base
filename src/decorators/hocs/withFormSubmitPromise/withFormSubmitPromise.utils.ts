@@ -140,5 +140,6 @@ export const excludeArrayFieldWrapperNames = (fieldNames: string[]) => {
   const arrayFieldNames = filter(fieldNames, (field) => regExp.test(field)).map(
     (item) => item.match(regExp)?.[1]
   );
+
   return difference(fieldNames, compact(arrayFieldNames));
 };

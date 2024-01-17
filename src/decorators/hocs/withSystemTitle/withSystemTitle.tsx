@@ -36,6 +36,7 @@ export const withSystemTitle = (
           const crumbs = getBreadcrumbs(props.location.pathname, "systemTitleLoc");
 
           const locationRouteElement = crumbs?.[crumbs.length - 1];
+
           if (locationRouteElement?.isLayoutRoute) {
             return state;
           }
@@ -97,6 +98,7 @@ export const withSystemTitle = (
 
           if (compactSystemTitleElements.length >= titleElementsCount) {
             const newTitle = compactSystemTitleElements.join(" - ");
+
             if (newTitle && newTitle !== document.title) {
               document.title = newTitle;
             }

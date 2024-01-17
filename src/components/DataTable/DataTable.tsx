@@ -163,6 +163,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     if (tableStore.model && prevProps.editingState !== editingState) {
       this.onModelUpdate(this.state.isInitiation);
     }
+
     // проверка на queryVariables, чтобы обновить их в "Показать еще" при обновлении columnConfig
     if (
       columns !== prevProps.columns ||
@@ -398,6 +399,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
 
     if (record.model && isFunction(rowDisable) && !isRestModel && rowDisable(record.model)) {
       this.blockedRowKeys?.push(record.model.getInnerName());
+
       return DataTableComponent.checkBoxProps.disabled;
     }
 

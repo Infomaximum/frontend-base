@@ -69,6 +69,7 @@ export const getHeaderBodyCenterStyle = (
   const settingsMenuWidth = getSettingsMenuWidth(isSettingsIcon);
   const occupiedWidth =
     columnsConfig.leftColWidth + columnsConfig.rightColWidth + defaultPaddings - settingsMenuWidth;
+
   return {
     flex: "none",
     width: `${

@@ -138,6 +138,7 @@ class FiltersStore extends BaseStore {
         );
 
         const queryParamName = filterDescription.getQueryParamName(filterValue);
+
         if (preparedFilters[queryParamName]) {
           preparedFilters[queryParamName].push(...preparedValues);
         } else {

@@ -117,6 +117,7 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
         </div>
       );
     }
+
     const { input, meta, inputComponent, trimValue, ...props } = rest;
 
     const isReadOnlyIE = userAgent() === EUserAgents.MSIE && !this.props.autoFocus;

@@ -272,6 +272,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
       const selectedRows = filter(dataSource, (item) =>
         includes(rowSelection?.selectedRowKeys, item?.key)
       );
+
       if (isChecking) {
         selectedRows.push(record);
       }

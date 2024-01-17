@@ -44,6 +44,7 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
       if (onChange) {
         onChange(value);
       }
+
       if (onChangeCallback) {
         onChangeCallback(value, option);
       }

@@ -35,12 +35,14 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
       const pathname = tx.location.pathname;
       const { hasValidationErrors, errors } = formProvider.getState();
       const mutators = formProvider.mutators;
+
       // Если пытаемся перейти по пути, который не соответствует blockUri
       // и не является его дочерней страницей, то блокируем переход
       if (blockUri !== pathname || !contains(pathname, blockUri as string)) {
         if (hasValidationErrors && mutators?.touch && errors) {
           mutators.touch(Object.keys(errors));
         }
+
         setOpen(true);
         retryRef.current = tx.retry;
       }

@@ -105,6 +105,7 @@ export const textContent = (node: ReactNode): string => {
   if (!node) {
     return "";
   }
+
   if (isString(node)) {
     return node;
   }
@@ -215,6 +216,7 @@ export const useBlurOnResize = (element: BaseSelectRef | null) => {
     if (element) {
       const handleResize = () => element.blur();
       window.addEventListener("resize", handleResize);
+
       return () => window.removeEventListener("resize", handleResize);
     }
   }, [element]);
@@ -251,6 +253,7 @@ export const useCustomClearing = (
         onClear();
         // В соответствии с тем, какие аргументы при очистке передает AntSelect, несмотря на типизацию
         isMultipleMode ? onChange([], []) : onChange(undefined, undefined!);
+
         return;
       }
 
@@ -273,6 +276,7 @@ export const useCustomClearing = (
   useEffect(() => {
     if (selectWrapper) {
       selectWrapper.addEventListener("mousedown", handleMouseDown);
+
       return () => selectWrapper.removeEventListener("mousedown", handleMouseDown);
     }
   }, [handleMouseDown, selectWrapper]);

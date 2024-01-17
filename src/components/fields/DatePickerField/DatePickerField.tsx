@@ -89,6 +89,7 @@ const DatePickerFieldComponent: React.FC<IDatePickerFieldProps> = (props) => {
     if (!date1 && !date2) {
       return true;
     }
+
     return date1?.isSame(date2);
   }, []);
 

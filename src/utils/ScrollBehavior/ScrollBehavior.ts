@@ -13,6 +13,7 @@ export class ScrollBehavior implements IScrollBehavior {
 
   public get scrollWidth() {
     this.calculateScrollWidth();
+
     return this._scrollWidth;
   }
 

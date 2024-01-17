@@ -40,6 +40,7 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
   private setFormData = (formData: IFormData) => {
     if (formData) {
       const { setFormData } = this.props;
+
       if (isFunction(setFormData)) {
         setFormData(formData);
       }

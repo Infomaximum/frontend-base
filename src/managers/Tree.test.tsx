@@ -68,6 +68,7 @@ const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] =
   const checkIsGroup = (data: TNestedData): data is TNestedGroup => {
     return (data as TNestedGroup).items !== undefined;
   };
+
   const checkIsRest = (data: TNestedData): data is TNestedRest => {
     return (data as TNestedRest).next_count !== undefined;
   };
@@ -111,6 +112,7 @@ const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] =
 
 function buildModel(nestedData: TNestedData): TreeGroupModel {
   const treeData = generateRawData(nestedData, []);
+
   return new TreeGroupModel({
     struct: {
       id: InvalidIndex,

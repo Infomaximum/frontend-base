@@ -60,6 +60,7 @@ const touch: Mutator<unknown, Partial<Record<string, any>> | undefined> = (
 ) => {
   forEach(fieldNames, (fieldName) => {
     const field = state.fields[fieldName];
+
     if (field) {
       field.touched = true;
     }
@@ -77,6 +78,7 @@ const clearFields: Mutator<unknown, Partial<Record<string, any>> | undefined> = 
 ) => {
   forEach(fieldNames, (fieldName) => {
     const field = state.fields[fieldName];
+
     if (field) {
       changeValue(state, fieldName, () => undefined);
     }

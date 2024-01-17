@@ -33,6 +33,7 @@ const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
   const handleClick: React.MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       event.stopPropagation();
+
       if (typeof onClick === "function") {
         onClick(clickHandlerData);
       }

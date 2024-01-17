@@ -17,6 +17,7 @@ class StorePersist {
   public static autoSave(store: BaseStore, name: string) {
     Expander.getInstance().runWhenAppReady(() => {
       const localStorageValue = localStorage.getItem(name);
+
       if (localStorageValue) {
         const restoreStruct = JSON.parse(this.decrypt(localStorageValue));
         store.restoreByStruct(restoreStruct);

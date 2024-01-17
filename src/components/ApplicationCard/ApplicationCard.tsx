@@ -92,6 +92,7 @@ const ApplicationCardComponent = forwardRef<
       if (onClick || pathname) {
         styles.push(pointerCardStyle);
       }
+
       if (contextMenuInFocus) {
         styles.push(focusStyle(theme));
       }

@@ -34,6 +34,7 @@ const getHyphenatedTextByChar = (text: string, widthLimit: number, fontSize: num
     if (lineWidth > widthLimit) {
       result.push(accumulatedLine);
       accumulatedLine = char;
+
       return;
     }
 
@@ -68,6 +69,7 @@ const getHyphenatedText = (
   if (fullWidth <= widthLimit) {
     // если текст поместился полностью
     result.push(text);
+
     return result;
   }
 
@@ -125,6 +127,7 @@ const getHyphenatedText = (
 
       if (isLastWord && isLastDashWord && !isEmpty(accumulatedLine)) {
         result.push(accumulatedLine);
+
         if (result.length === visibleLinesCount + 1) {
           return result;
         }

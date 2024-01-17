@@ -47,6 +47,7 @@ const assertSimpleText = "Дочерний компонент не должен 
 class Title extends React.PureComponent<IHeaderMenuPortalTitleProps> {
   public override render(): React.ReactNode {
     assertSimple(false, assertSimpleText);
+
     return null;
   }
 }
@@ -54,6 +55,7 @@ class Title extends React.PureComponent<IHeaderMenuPortalTitleProps> {
 class Body extends React.PureComponent<IHeaderMenuPortalBodyProps> {
   public override render(): React.ReactNode {
     assertSimple(false, assertSimpleText);
+
     return null;
   }
 }
@@ -103,11 +105,13 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
 
   const mappedChildren = useMemo(() => {
     const childrenArray: any[] = React.Children.toArray(children);
+
     return mapValues(
       keyBy(childrenArray, (child) => {
         switch (child.type) {
           case HeaderMenuPortalComponent.Title:
             return "headerTitle";
+
           case HeaderMenuPortalComponent.Body:
             switch (child.props.align) {
               case "left":
@@ -119,6 +123,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
               default:
                 return "headerBodyLeft";
             }
+
           default:
             return;
         }
@@ -135,6 +140,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
   useEffect(() => {
     const handleWindowResize = () => {
       const wrapperWidth = window.innerWidth;
+
       if (Math.abs(wrapperWidth - currentWrapperWidth) > 5) {
         setCurrentWrapperWidth(wrapperWidth);
         setColumnConfig(() => calculateColumnConfig(wrapperWidth));
@@ -154,6 +160,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
     }
 
     const { backUrl, children, loading, customTitleStyle, hasCenterTabs } = headerTitle;
+
     return (
       <Col
         key="header-menu-title-wrap"
@@ -208,11 +215,13 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
         </Col>
       );
     }
+
     return null;
   };
 
   const getHeaderBodyRight = () => {
     const navigationTabs = document.getElementById(navigationTabsTestId); // Не удается определить наличие средней колонки чтением headerBodyCenter.children
+
     if (headerBodyRightChildren) {
       return (
         <Col

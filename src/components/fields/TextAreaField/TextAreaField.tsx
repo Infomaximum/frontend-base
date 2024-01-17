@@ -24,6 +24,7 @@ class TextAreaWrapper extends React.PureComponent<ITextAreaProps> {
 
   public override componentDidUpdate(prevProps: ITextAreaProps) {
     const { meta } = this.props;
+
     if (this.textAreaRef.current && meta) {
       if ((!prevProps.meta || !prevProps.meta.active) && meta.active) {
         this.isFirst = false;

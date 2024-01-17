@@ -19,6 +19,7 @@ class Switcher extends React.PureComponent<ISwitcherProps, ISwitcherState> {
     if (onChange) {
       onChange(checked);
     }
+
     if (onChangeCallback) {
       onChangeCallback(checked);
     }

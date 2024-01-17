@@ -71,6 +71,7 @@ class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBas
 
     if (this.buttonRef.current?.contains(e.target as HTMLElement)) {
       bodyNode.removeEventListener("click", this.handleClickBody);
+
       return;
     }
 
@@ -113,6 +114,7 @@ class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBas
   public override render(): React.ReactNode {
     const { placement, button, overlayStyle, ...rest } = this.props;
     const { isShowMenu } = this.state;
+
     return (
       <BaseDropdownContext.Provider value={isShowMenu}>
         <Dropdown

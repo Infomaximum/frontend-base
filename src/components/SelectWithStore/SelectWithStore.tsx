@@ -17,6 +17,7 @@ const mapModelToSelectOption = (model: Model, handlerDisplayValues?: THandlerDis
 
   if (isFunction(handlerDisplayValues)) {
     const newLabel = handlerDisplayValues(model);
+
     if (isString(newLabel)) {
       label = newLabel;
     }
@@ -66,6 +67,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     () =>
       model?.getItems().reduce<TDictionary<Model>>((obj, item) => {
         obj[item.getInnerName()] = item;
+
         return obj;
       }, {}),
     [model]

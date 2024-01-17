@@ -173,6 +173,7 @@ export const passwordHasValidLength = (
   ) {
     return value && value.length >= (complexPassword.getMinPasswordLength() || MIN_PASSWORD_LENGTH);
   }
+
   return value && value.length >= MIN_PASSWORD_LENGTH;
 };
 

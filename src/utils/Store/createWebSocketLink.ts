@@ -5,6 +5,7 @@ import { getCurrentHostWithoutProtocol, isHttps } from "../URI/URI";
 
 export function createWebSocketLink() {
   let wsProtocol = "ws:";
+
   if (isHttps()) {
     wsProtocol = "wss:";
   }

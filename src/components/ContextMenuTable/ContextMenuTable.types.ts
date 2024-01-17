@@ -15,6 +15,7 @@ export type TContextMenuItem = {
   /** Иконка, которая будет отображена вместо контекстного меню, если в контекстном меню останется только один пункт */
   icon?: JSX.Element;
 };
+
 export interface IContextMenuTableProps {
   items: TContextMenuItem[];
   data: TDictionary;

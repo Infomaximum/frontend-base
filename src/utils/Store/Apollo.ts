@@ -73,6 +73,7 @@ class Apollo {
       cache: new InMemoryCache({
         dataIdFromObject: (res) => {
           const id = res.id || res.guid;
+
           // Сохраняем в кэш только те сущности, которые имеют id или guid
           if (res.__typename && !isNil(id)) {
             return this.getCacheKey(res.__typename, id);

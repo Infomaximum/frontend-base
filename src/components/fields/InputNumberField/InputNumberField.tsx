@@ -27,6 +27,7 @@ const roundToPrecision = (value?: number | string | null, precision?: number): s
 
   if (isInteger(value)) {
     const tail: string = Array(precision).fill("0").join("");
+
     return `${value}.${tail}`;
   }
 
@@ -44,11 +45,13 @@ const InputNumber: React.FC<IInputNumberProps> = (props) => {
 
       if (isFloat(nextValue)) {
         onChange(nextValue);
+
         return;
       }
 
       if (isNull(nextValue)) {
         onChange(null);
+
         return;
       }
 

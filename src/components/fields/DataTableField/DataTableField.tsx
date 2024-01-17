@@ -20,6 +20,7 @@ class DataTableComponent<T extends TBaseRow> extends PureComponent<IDataTableCom
 
   public override render() {
     const { input, meta, ...rest } = this.props;
+
     return <DataTable {...input} {...rest} onCheckChange={this.handleCheckChange} />;
   }
 }

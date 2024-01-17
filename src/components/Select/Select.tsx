@@ -84,6 +84,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 }: ISelectProps<T>) => {
   const localization = useLocalization();
   const theme = useTheme();
+
   showSearch = showSearch ?? (mode ? true : false); // значение по умолчанию в соответствии с antd
   showArrow = !disabled && showArrow; // системное поведение
 
@@ -155,6 +156,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
         setSearchValueState(undefined);
         onSearch?.("");
       }, DropdownAnimationInterval);
+
       return () => clearTimeout(timer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -185,6 +187,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     (text: string) => {
       if (!isSearchHandlerEnabled.current) {
         setSearchValueState(undefined);
+
         return;
       }
 
@@ -313,6 +316,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     ]).length;
 
     const selectStyles: ArrayInterpolation<TTheme> = [displaySelectStyle(iconSlotCount)(theme)];
+
     if (disabled) {
       selectStyles.push(disableSelectStyle(bordered)(theme));
     }

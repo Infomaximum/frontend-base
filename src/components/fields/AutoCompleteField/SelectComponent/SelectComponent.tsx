@@ -210,11 +210,13 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     forEach(models, (item) => {
       collection[item.getInnerName()] = item;
     });
+
     return collection;
   });
 
   private mapSelectValueToModel(value: RawValueType) {
     const { autocompleteStore, value: fieldValue } = this.props;
+
     return autocompleteStore.map?.get(value) ?? this.getFieldValueCollection(fieldValue)[value];
   }
 
@@ -353,6 +355,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
 
     // сделано для зануления стейта поиска после перехода на другую вкладку браузера и обратно
     const { searchText } = this.state;
+
     if (searchText) {
       this.handleSearchChange("");
     }
@@ -395,6 +398,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
 
   private renderGroupedOptions(): React.ReactNode[] {
     const { loading } = this.props;
+
     if (!this.modelListByGroups) {
       return [];
     }

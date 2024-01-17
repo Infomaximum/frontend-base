@@ -126,6 +126,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
         chooseFile(fileList?.[0] ?? undefined);
       }
     }
+
     input.onChange(fileList);
   }
 
@@ -175,6 +176,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
 
   private handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     const { localization, accept } = this.props;
+
     // Для невалидных файлов ant не генерирует uid
     if (!isString(get(e.dataTransfer, "files[0].uid")) && accept) {
       Message.showMessage({

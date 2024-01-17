@@ -27,6 +27,7 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
 
   const icon = useMemo(() => {
     let iconComponent: React.FC;
+
     switch (props.type) {
       case "success":
         iconComponent = CheckCircleFilled;
@@ -47,6 +48,7 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
 
   const customStyle = useMemo(() => {
     const style: Interpolation<TTheme> = [alertStyle(theme)];
+
     switch (props.type) {
       case "success":
         style.push(successAlertStyle(theme));

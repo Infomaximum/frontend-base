@@ -252,6 +252,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
         forEach(this.accumulatedCheckedKeys, (checkedKey) => {
           if (!this.currentDataKeysSet.has(checkedKey) && !this.restKeysSet.has(checkedKey)) {
             removableKeys.push(checkedKey);
+
             // обязательно нужно проверить, был ли ключ уже удален на предыдущем шаге,
             // т.к. предыдущий шаг не должен влиять на hasLostChecks
             if (!hasLostChecks && !includes(removableRestKeys, checkedKey)) {
@@ -370,6 +371,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
 
     if (selectionType === "radio") {
       targetTreeNode && this.updateCheckedState(new Set([targetTreeNode.key]));
+
       return;
     }
 
@@ -487,6 +489,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
           removableKeys = [...this.accumulatedCheckedKeys];
         } else {
           addedKeys = [...this.treeNodesMap.keys()];
+
           if (!this.isGroupSelection) {
             removableKeys = [...this.restKeysSet.values()];
           }
@@ -514,6 +517,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
         });
       }
     });
+
     return Array.from(parentsNames.values());
   }
 
@@ -608,6 +612,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
       (accum: IModel[], key) => {
         const model = this.modelsMap.get(key);
         model && accum.push(model);
+
         return accum;
       },
       []
@@ -635,6 +640,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
       if (this.isFilteredTree && this.isGroupWithChild(child.model)) {
         return false;
       }
+
       return !(child.model instanceof RestModel);
     });
 
@@ -673,6 +679,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
           isParentIndeterminate = true;
           indeterminateGroupsKeys.push(...parentsKeys);
         }
+
         // не имеет смысла проверять состояние "indeterminate" у детей выделенных родителей
         if (model instanceof Group && !isSelected) {
           pushIndeterminateGroups(model.getItems(), [...parentsKeys, key]);
@@ -786,6 +793,7 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
 
     forEach(models, (model) => {
       currentModels.push(model);
+
       if (model instanceof Group) {
         currentModels.push(...this.getNestedModels(model.getItems()));
       }

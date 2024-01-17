@@ -71,6 +71,7 @@ export class BaseRequest implements NRequests.IRequest {
   }: NBaseRequest.TControlCancelableRequestsParams) {
     if (!cancelable) {
       cancelCallbackPrev.callback = cancelCallbackCurrent;
+
       return;
     }
 

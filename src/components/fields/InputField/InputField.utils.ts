@@ -1,5 +1,6 @@
 export const convertToNumber = (formValue: string) => {
   const value = formValue.replace(/\D/g, "");
+
   return value === "" ? undefined : Number(value);
 };
 
@@ -31,6 +32,7 @@ export const convertToSaveNumber = (formValue: string) => {
 
 export const convertToVersion = (formValue: string) => {
   const value = formValue.replace(/[^\d.]/gi, "");
+
   return value;
 };
 
@@ -40,6 +42,7 @@ export const convertToFloat = (formValue: string) => {
   const splittedValue = value.split(".");
 
   let convertedValue = splittedValue[0] ? splittedValue[0] : "";
+
   if (splittedValue[1] || splittedValue[1] === "") {
     convertedValue = convertedValue.concat(".", splittedValue[1]);
   }
@@ -49,6 +52,7 @@ export const convertToFloat = (formValue: string) => {
 
 export const convertToMinutes = (formValue: string) => {
   const value = formValue.replace(/\D/g, "");
+
   return value === "" ? undefined : Number(value) > 59 ? 59 : Number(value);
 };
 

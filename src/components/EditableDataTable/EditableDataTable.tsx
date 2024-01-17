@@ -268,6 +268,7 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
 
   private setActiveFormData = (formData: IFormData) => {
     const { setActiveFormData } = this.props;
+
     if (formData && setActiveFormData) {
       setActiveFormData(formData);
     }

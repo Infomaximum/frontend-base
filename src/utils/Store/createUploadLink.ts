@@ -29,10 +29,12 @@ import axiosRetry from "axios-retry";
 axios.interceptors.request.use(
   (config) => {
     window.activeRequests += 1;
+
     return config;
   },
   (error) => {
     window.activeRequests -= 1;
+
     return Promise.reject(error);
   }
 );
@@ -40,10 +42,12 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     window.activeRequests -= 1;
+
     return response;
   },
   (error) => {
     window.activeRequests -= 1;
+
     return Promise.reject(error);
   }
 );
@@ -55,6 +59,7 @@ axiosRetry(axios, {
   },
   retryCondition: (error) => {
     const errorStatusCode = error.response?.status;
+
     // Повторно отправляем запрос только в том случае, если пришла ошибка без
     // статус-кода (нет соединения) или со статус-кодом 502 или 504
     return (
@@ -88,6 +93,7 @@ function proxyResponseAxiosFetch(response: AxiosResponse & { message?: string })
 
     return Promise.reject(new Response(body, options));
   }
+
   const xhr = response.request;
 
   options = {
@@ -131,6 +137,7 @@ export function createUploadLink(graphqlURL: string) {
      * данные должны отправляться как поля формы
      */
     let customBody: FormData;
+
     if (files && files.length) {
       options?.headers && delete options.headers["content-type"];
       customBody = new FormData();
@@ -168,6 +175,7 @@ export function createUploadLink(graphqlURL: string) {
           operation.setContext({
             response,
           });
+
           return response;
         })
         .then(parseAndCheckHttpResponse(operation))

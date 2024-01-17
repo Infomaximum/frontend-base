@@ -223,12 +223,14 @@ class MessageComponent {
         changes.push(key);
       }
     });
+
     return changes;
   }
 
   public static getRenameMessage(formValues: TDictionary, props: IMessageMethodProps) {
     const { initialValues, localization, blockUri } = props;
     const changes: string[] = this.getKeysOfChangedFormFieldList(formValues, initialValues);
+
     if (props.messageOptions) {
       const { nameFieldKeyList, entityLoc, navigate } = props.messageOptions;
       const feminineGenus = props.messageOptions?.feminineGenus;
@@ -266,6 +268,7 @@ class MessageComponent {
         return values[fieldKey];
       }
     });
+
     // имя после изменений по значениям формы
     return nameArray.join(" ");
   }
@@ -320,6 +323,7 @@ class MessageComponent {
       messageLocStartEnd,
       messageLocTemplateDataBold,
     } = props;
+
     if (entityLoc) {
       return (
         <div css={messageStyle} key="remove-message" test-id={removeMessageTestId}>

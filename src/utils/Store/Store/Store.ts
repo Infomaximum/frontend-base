@@ -383,6 +383,7 @@ export class Store<M extends Model = never> extends BaseStore {
       this.prepareData && (isArray(this.prepareData) ? this.prepareData : [this.prepareData]);
 
     data = get(data, dataPath);
+
     if (!prepareDataGetters?.length) {
       return data as TModelStruct | null;
     }

@@ -46,6 +46,7 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
 
     const handleClick = useCallback(async () => {
       setIsSubmitting(true);
+
       try {
         await formProvider.submit();
       } finally {

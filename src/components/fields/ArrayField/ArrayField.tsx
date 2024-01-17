@@ -106,6 +106,7 @@ class WrappedArrayField extends React.PureComponent<
 
   public onBatchRemoveFieldEntities = (indexes: number[]) => {
     const { fields } = this.props;
+
     for (let i = 0; i < indexes.length; i += 1) {
       const index = indexes[i];
 
@@ -223,6 +224,7 @@ class WrappedArrayField extends React.PureComponent<
   public override render() {
     const { label, wrapperCol, addEntityButtonPosition, formItemStyle } = this.props;
     const { spaceSize } = this.props;
+
     return (
       <FormOption
         label={label}
@@ -251,6 +253,7 @@ const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
   if (!hasReadAccess) {
     return null;
   }
+
   return (
     <div data-name={props.name}>
       <FieldArray

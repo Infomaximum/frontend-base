@@ -25,6 +25,7 @@ const SettingsComponent: FC<ISettingsProps> = ({ routes: settingRoutes, onItemCl
 
     forEach(settingRoutes, (route) => {
       const routeSize = calculateSize(route);
+
       if (leftColumnSize <= rightColumnSize) {
         leftColumn.push(route);
         leftColumnSize += routeSize;

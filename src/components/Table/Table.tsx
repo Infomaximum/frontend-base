@@ -80,6 +80,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
       this.headerHtml = this.wrapperRef.current.querySelector(`[id=${TABLE_HEADER_ID}]`);
 
       const { isVirtualized, onScroll } = this.props;
+
       if (!isVirtualized && onScroll) {
         this.antTableScrollListener = new AntTableScrollListener(this.wrapperRef.current, onScroll);
         this.antTableScrollListener.listen();

@@ -29,6 +29,7 @@ export const useLogger = ({ componentName, logLevel = "warn", ...rest }: TLogger
         return console.log;
       default:
         assertSilent(false, "не обработанный тип логирования");
+
         return console.log;
     }
   }, [logLevel]);

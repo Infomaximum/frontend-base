@@ -33,6 +33,7 @@ export const withPseudoClasses: TPropInjector<IWithPseudoClassesProps> = (Compon
       if (this.props.onMouseEnter) {
         this.props.onMouseEnter(...args);
       }
+
       this.setState({ hover: true });
     }
 
@@ -40,6 +41,7 @@ export const withPseudoClasses: TPropInjector<IWithPseudoClassesProps> = (Compon
       if (this.props.onMouseLeave) {
         this.props.onMouseLeave(...args);
       }
+
       this.setState({ hover: false });
     }
 
@@ -47,6 +49,7 @@ export const withPseudoClasses: TPropInjector<IWithPseudoClassesProps> = (Compon
       if (this.props.onMouseOver) {
         this.props.onMouseOver(...args);
       }
+
       this.setState({ hover: true });
     }
 

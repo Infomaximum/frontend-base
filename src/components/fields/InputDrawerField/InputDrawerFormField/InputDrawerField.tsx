@@ -81,6 +81,7 @@ class InputDrawer extends React.PureComponent<IInputDrawerProps, IInputDrawerSta
     // Если хотя бы один родитель элемента есть в списке, удаляем элемент из списка
     forEach(models, (model) => {
       const parents = (model as IModel & { getParents?(): TNullable<IModel[]> }).getParents?.();
+
       if (some(parents, (parent) => modelsMap.has(parent.getInnerName()))) {
         modelsMap.delete(model.getInnerName());
       }

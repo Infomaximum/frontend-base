@@ -176,6 +176,7 @@ export const resolveConstraintsInRoutes = (
     ) {
       if (!sourceRoute.routes) {
         outputRoutes.push({ ...sourceRoute });
+
         return;
       }
 

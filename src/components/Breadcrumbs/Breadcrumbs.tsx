@@ -96,6 +96,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
     /** Доступная ширина под текст крошек */
     const excessTextWidth =
       labeledCrumbsWidth - size(widths) * (crumbXPadding * 2 + separatorWidth);
+
     return calcShrinkMask(widths, excessTextWidth, minWidth).map(Number);
   }
 

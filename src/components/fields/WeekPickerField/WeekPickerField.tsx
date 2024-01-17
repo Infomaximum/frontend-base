@@ -52,6 +52,7 @@ const WeekPickerField: React.FC<IWeekPickerFieldProps> = (props) => {
 
 const WeekPickerFormField: React.FC<IWeekPickerFormFieldProps> = (props) => {
   const localization = useLocalization();
+
   return <FormField component={WeekPickerField} {...props} localization={localization} />;
 };
 

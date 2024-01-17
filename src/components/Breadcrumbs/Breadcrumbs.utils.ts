@@ -15,6 +15,7 @@ export function calcShrinkMask(widths: number[], maxTotalWidth: number, minWidth
   for (let shrinkCount = 1; shrinkCount <= widths.length; shrinkCount++) {
     const foundComb = findComb(indexes, shrinkCount, (comb) => {
       const compressedWidths = widths.map((width, i) => (comb.includes(i) ? minWidth : width));
+
       return sum(compressedWidths) <= maxTotalWidth;
     });
 
@@ -39,6 +40,7 @@ function findComb<T>(items: T[], combSize: number, predicate: (comb: T[]) => boo
 function* generateCombs<T>(items: T[], combSize: number): Iterable<T[]> {
   if (combSize < 1) {
     yield [];
+
     return;
   }
 

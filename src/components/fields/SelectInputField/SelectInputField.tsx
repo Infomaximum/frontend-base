@@ -17,6 +17,7 @@ import { Field, FormField } from "../FormField";
 
 const InputContainer: React.FC<IInputContainerProps> = (props) => {
   const { input, meta, readOnly, disabled, ...rest } = props;
+
   return <Input {...input} {...rest} disabled={readOnly || disabled} />;
 };
 
@@ -86,6 +87,7 @@ class SelectInputField extends React.PureComponent<ISelectInputProps> {
 
   public override render() {
     const { name, ...rest } = this.props;
+
     return <Field name={name} component={SelectInputFieldComponent} {...rest} />;
   }
 }

@@ -20,6 +20,7 @@ import type { IModel } from "@infomaximum/graphql-model";
 const isSameValue = (currentValue: IModel[], initialValue: IModel[]) => {
   const initialInnerNames = map(initialValue, (item) => item.getInnerName());
   const currentInnerNames = map(currentValue, (item) => item.getInnerName());
+
   return isEmpty(xor(initialInnerNames, currentInnerNames));
 };
 
@@ -41,6 +42,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
       if (isFunction(onChange)) {
         onChange(value);
       }
+
       if (isFunction(onChangeCallback)) {
         onChangeCallback(value);
       }

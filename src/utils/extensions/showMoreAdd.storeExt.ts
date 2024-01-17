@@ -38,6 +38,7 @@ const populateWithRest = (
         // нашли поле со списком
         break;
       }
+
       newData[groupFieldName] = { ...newData[groupFieldName] };
 
       newData[groupFieldName] = populateWithRest(
@@ -48,6 +49,7 @@ const populateWithRest = (
 
       return newData;
     }
+
     groupFieldName = null;
   }
 
@@ -66,6 +68,7 @@ const populateWithRest = (
       // нашли поле, где хранится количество элементов для "показать еще"
       break;
     }
+
     nextCountFieldName = null;
   }
 

@@ -65,6 +65,7 @@ const RangePickerField: React.FC<IRangePickerFieldProps> = (props) => {
     if (!date1 && !date2) {
       return true;
     }
+
     return date1?.[0].isSame(date2?.[0]) && date1?.[1].isSame(date2?.[1]);
   }, []);
 

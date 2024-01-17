@@ -191,6 +191,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
       form: { mutators },
       errors,
     } = this.props;
+
     // Если пытаемся перейти по пути, который не соответствует blockUri
     // и не является его дочерней страницей, то блокируем переход
     if (blockUri !== pathname || !contains(pathname, blockUri as string)) {
