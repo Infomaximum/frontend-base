@@ -1,1 +1,0 @@
-export { EllipsisTooltip } from "./EllipsisTooltip";
