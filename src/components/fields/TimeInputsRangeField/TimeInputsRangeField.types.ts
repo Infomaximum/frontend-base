@@ -1,12 +1,11 @@
 import type { InputProps } from "antd/lib/input";
-import type { Duration } from "moment";
 import type { FieldRenderProps } from "react-final-form";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 
-export type TDuration = Duration | null | undefined;
+export type TDuration = plugin.Duration | null | undefined;
 
-export type TTimeInputsRangeValue = [Duration, Duration];
+export type TTimeInputsRangeValue = [plugin.Duration, plugin.Duration];
 
 type TOmitTimeInputsRangeProps =
   | "onChange"

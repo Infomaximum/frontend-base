@@ -1,46 +1,46 @@
 import {
-  savePathToLocalStorage,
-  setPathToLocalStorage,
-  getPathToLocalStorage,
-  removePathToLocalStorage,
+  savePathToSessionStorage,
+  setPathToSessionStorage,
+  getPathToSessionStorage,
+  removePathToSessionStorage,
   contains,
   getBasePrefix,
 } from "./URI";
 
 describe("Тест файла URI", () => {
-  it("Тестирование функции savePathToLocalStorage", () => {
+  it("Тестирование функции savePathToSessionStorage", () => {
     const key = "currentPath";
 
-    savePathToLocalStorage();
-    expect(localStorage.getItem(key)).toBe("/");
-    localStorage.removeItem(key);
+    savePathToSessionStorage();
+    expect(sessionStorage.getItem(key)).toBe("/");
+    sessionStorage.removeItem(key);
   });
 
-  it("Тестирование функции setPathToLocalStorage", () => {
+  it("Тестирование функции setPathToSessionStorage", () => {
     const key = "currentPath";
 
-    setPathToLocalStorage(getBasePrefix());
-    expect(localStorage.getItem(key)).toBe(getBasePrefix());
-    localStorage.removeItem(key);
+    setPathToSessionStorage(getBasePrefix());
+    expect(sessionStorage.getItem(key)).toBe(getBasePrefix());
+    sessionStorage.removeItem(key);
   });
 
-  it("Тестирование функции getPathToLocalStorage", () => {
+  it("Тестирование функции getPathToSessionStorage", () => {
     const path = "/apps";
     const key = "currentPath";
 
-    localStorage.setItem(key, path);
-    expect(getPathToLocalStorage()).toBe(path);
-    localStorage.removeItem(key);
+    sessionStorage.setItem(key, path);
+    expect(getPathToSessionStorage()).toBe(path);
+    sessionStorage.removeItem(key);
   });
 
-  it("Тестирование функции removePathToLocalStorage", () => {
+  it("Тестирование функции removePathToSessionStorage", () => {
     const path = "/apps";
     const key = "currentPath";
 
-    localStorage.setItem(key, path);
-    removePathToLocalStorage();
+    sessionStorage.setItem(key, path);
+    removePathToSessionStorage();
 
-    expect(localStorage.getItem(key)).toBe(null);
+    expect(sessionStorage.getItem(key)).toBe(null);
   });
 
   it("Тестирование функции contains", () => {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="./global.types.ts" />
-/// <reference path="./svg.types.ts" />
+/// <reference path="./module.types.ts" />
 
 /// <reference path="components/index.ts" />
 /// <reference path="layouts/index.ts" />
@@ -26,6 +26,7 @@ export * from "./decorators";
 export * from "./managers";
 export * from "./resources";
 export * from "./styles";
+export * from "./services";
 export * from "./utils";
 
 export * from "@infomaximum/localization";

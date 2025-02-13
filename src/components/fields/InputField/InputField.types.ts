@@ -15,6 +15,7 @@ export interface IInputComponentOwnProps extends Omit<InputProps, "name">, Parti
   readOnly?: boolean;
   value?: TInputFieldValue;
   trimValue?: boolean;
+  emptyOnDisabled?: boolean;
   inputComponent?:
     | ComponentType<InputProps>
     | (typeof Input)["Password"]

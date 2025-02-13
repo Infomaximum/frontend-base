@@ -4,11 +4,12 @@ import type {
   IRangePickerFieldProps,
   IRangePickerProps,
   IRangePickerFormFieldProps,
+  TRangeValueType,
 } from "./RangePickerField.types";
 import { getPlaceholder } from "./RangePickerField.utils";
 import { defaultRangePickerFieldTestId } from "../../../utils/TestIds";
 import { defaultRangePickerFieldStyle } from "./RangePickerField.styles";
-import type { Moment } from "moment";
+import type { Dayjs } from "dayjs";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { Field, FormField } from "../FormField";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
@@ -21,7 +22,7 @@ const RangePicker: React.FC<IRangePickerProps> = ({
   meta,
   readOnly,
   placeholder: propsPlaceholder,
-  momentFormat,
+  displayFormat,
   picker,
   disabled,
   testId,
@@ -39,7 +40,13 @@ const RangePicker: React.FC<IRangePickerProps> = ({
   const localization = useLocalization();
   const placeholder = useMemo(() => getPlaceholder(localization), [localization]);
 
-  const format = momentFormat || "DD.MM.YYYY";
+  const format = displayFormat || "DD.MM.YYYY";
+
+  const handleCalendarChange = (dates: TRangeValueType<Dayjs>) => {
+    if (dates.every((item: Dayjs) => item !== null)) {
+      onChange(dates);
+    }
+  };
 
   return (
     <div test-id={testId || defaultRangePickerFieldTestId}>
@@ -53,6 +60,7 @@ const RangePicker: React.FC<IRangePickerProps> = ({
         value={value}
         placeholder={propsPlaceholder ?? placeholder}
         style={defaultRangePickerFieldStyle}
+        onCalendarChange={handleCalendarChange}
         {...rest}
         disabled={readOnly || disabled}
       />
@@ -61,7 +69,7 @@ const RangePicker: React.FC<IRangePickerProps> = ({
 };
 
 const RangePickerField: React.FC<IRangePickerFieldProps> = (props) => {
-  const isEqual = useCallback((date1: [Moment, Moment], date2: [Moment, Moment]) => {
+  const isEqual = useCallback((date1: [Dayjs, Dayjs], date2: [Dayjs, Dayjs]) => {
     if (!date1 && !date2) {
       return true;
     }

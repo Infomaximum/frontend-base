@@ -1,12 +1,17 @@
-import { Tooltip } from "../../../Tooltip/Tooltip";
 import { isArray, isString, last } from "lodash";
 import React, { forwardRef } from "react";
 import { tableBodyCellStyle } from "./TableBodyCell.styles";
 import type { ITableBodyCellProps } from "./TableBodyCell.types";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { AlignedTooltip } from "../../../AlignedTooltip/AlignedTooltip";
+import { getCssConversionStyle } from "../../../../styles";
+import type { Interpolation } from "@emotion/react";
 
 const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
-  ({ children, showTooltip, ...restProps }, ref: React.Ref<HTMLTableCellElement>) => {
+  (
+    { children, showTooltip = false, style: cellCustomStyle, ...restProps },
+    ref: React.Ref<HTMLTableCellElement>
+  ) => {
     const theme = useTheme();
 
     const getTitle = () => {
@@ -31,13 +36,19 @@ const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(
     };
 
     return (
-      <td {...restProps} css={tableBodyCellStyle(theme)} ref={ref} title={undefined}>
-        {showTooltip ? <Tooltip title={getTitle()}>{children}</Tooltip> : children}
+      <td
+        {...restProps}
+        css={getCssConversionStyle(theme, [
+          tableBodyCellStyle,
+          cellCustomStyle as Interpolation<TTheme> | undefined,
+        ])}
+        ref={ref}
+        title={undefined}
+      >
+        {showTooltip ? <AlignedTooltip title={getTitle()}>{children}</AlignedTooltip> : children}
       </td>
     );
   }
 );
-
-TableBodyCellComponent.defaultProps = { showTooltip: false };
 
 export const TableBodyCell = TableBodyCellComponent;

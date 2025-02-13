@@ -21,9 +21,8 @@ import type { Interpolation } from "@emotion/react";
 import { useTheme } from "../../decorators";
 import type { TOnItemClickParam } from "../ContextMenu/ContextMenu.types";
 import type { DropdownProps } from "antd/lib/dropdown";
-import { useCardLinesOverlay } from "../../decorators/hooks/useCardLinesOverlay";
-import { Tooltip } from "../Tooltip";
 import { observer } from "mobx-react";
+import { AlignedTooltip } from "../AlignedTooltip";
 
 const trigger: DropdownProps["trigger"] = ["contextMenu"];
 
@@ -42,6 +41,7 @@ const ApplicationCardComponent = forwardRef<
       isReadOnly,
       hasDeleteAccess,
       mainPageContentRef,
+      isDeleteDisabled,
     },
     ref
   ) => {
@@ -50,15 +50,12 @@ const ApplicationCardComponent = forwardRef<
     const theme = useTheme();
     const [contextMenuInFocus, setContextMenuInFocus] = useState(false);
     const applicationName = entity.getName();
-    const { overlayedLines, hasOverflow } = useCardLinesOverlay(
-      applicationName,
-      18,
-      2,
-      14,
-      measuredWidth
-    );
 
     const handleClick = useCallback(() => {
+      if (!!document.getSelection()?.toString().trim()) {
+        return;
+      }
+
       if (pathname) {
         navigate(pathname);
       }
@@ -74,6 +71,7 @@ const ApplicationCardComponent = forwardRef<
       if (!isReadOnly && hasDeleteAccess) {
         menuItems.push({
           title: localization.getLocalized(DELETE),
+          disabled: isDeleteDisabled,
           action: "delete",
           clickHandler() {
             onRemove?.(entity);
@@ -82,12 +80,20 @@ const ApplicationCardComponent = forwardRef<
       }
 
       return menuItems;
-    }, [contextMenuGetter, entity, isReadOnly, hasDeleteAccess, localization, onRemove]);
+    }, [
+      contextMenuGetter,
+      entity,
+      isReadOnly,
+      hasDeleteAccess,
+      localization,
+      isDeleteDisabled,
+      onRemove,
+    ]);
 
     const hasContextMenu = !isEmpty(contextMenuItems);
 
     const cardStyles = useMemo(() => {
-      const styles: Interpolation<TTheme> = [cardStyle(theme)];
+      const styles = [cardStyle(theme) as Interpolation<TTheme>];
 
       if (onClick || pathname) {
         styles.push(pointerCardStyle);
@@ -107,7 +113,9 @@ const ApplicationCardComponent = forwardRef<
       const content = (
         <div css={contentStyle}>
           <div css={titleStyle(theme)}>
-            <Tooltip title={hasOverflow ? applicationName : undefined}>{overlayedLines}</Tooltip>
+            <AlignedTooltip offsetY={-6} title={applicationName} numberOfLines={2}>
+              {applicationName}
+            </AlignedTooltip>
           </div>
           <InlineTags tags={entity.tags} measuredWidth={tagsMeasuredWidth} />
         </div>
@@ -123,17 +131,7 @@ const ApplicationCardComponent = forwardRef<
           {content}
         </div>
       );
-    }, [
-      cardStyles,
-      entity,
-      handleClick,
-      hasOverflow,
-      overlayedLines,
-      ref,
-      tagsMeasuredWidth,
-      theme,
-      applicationName,
-    ]);
+    }, [theme, applicationName, entity, tagsMeasuredWidth, cardStyles, handleClick, ref]);
 
     const handleOpenChange = useCallback((isOpen: boolean) => {
       setContextMenuInFocus(isOpen);

@@ -21,7 +21,7 @@ export const tableExpandIconStyle = (theme: TTheme) =>
     ":hover": {
       color: theme.linkHoverColor,
     },
-  } as const);
+  }) as const;
 
 export const tableExpandIconHiddenStyle = {
   visibility: "hidden",

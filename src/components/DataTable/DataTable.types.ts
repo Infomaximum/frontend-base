@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { headerModes } from "./DataTableHeader/DataTableHeader";
 import type { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
 import type { IEditableDataTableState } from "../EditableDataTable/EditableDataTable.types";
@@ -16,29 +17,23 @@ import type { IWithFeatureProps } from "../../decorators/hocs/withFeature/withFe
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 import type { IWithLocationProps } from "../../decorators/hocs/withLocation/withLocation.types";
 import type { ScrollParams } from "react-virtualized";
+import type { PagingGroup } from "../../models";
+import type { TTopPanelButtonObject } from "../TopPanel/TopPanel.types";
 
 export type TRowDisable = (model: IModel) => boolean;
 
-export type THeaderButtonObject = {
-  component: React.ReactElement;
-  accessRules?: TAccessRules | TAccessRules[];
-  float?: "left" | "right";
-  priority?: number;
-  key?: string;
-};
-
-type TTableProps<T> = Omit<ITableOwnProps<T>, "localization" | "isSearchEmpty">;
+type TTableProps<T> = Omit<ITableOwnProps<T>, "localization" | "isSearchEmpty" | "columns">;
 
 export interface ILoadingOnScrollDataTableOwnProps<T> extends IDataTableOwnProps<T> {
-  tableStore: TableStore<IPagingModel>;
+  tableStore: TableStore<PagingGroup>;
 }
 
 export interface IDataTableOwnProps<T> extends TTableProps<T> {
   customDataSource?: TExtendColumns<T>[];
-  columns: IColumnProps<TExtendColumns<T>>[] | undefined;
+  columns: IColumnProps<T>[] | undefined;
   contextMenuGetter?(model?: IModel): TContextMenuItem[] | undefined;
   onContextMenuSelect?(action: string, record: TExtendColumns<T>): void;
-  tableStore: TableStore<Group>;
+  tableStore: TableStore<Group | PagingGroup>;
   limitStateName: ELimitsStateNames;
   selectionType?: RowSelectionType;
   headerMode?: valueof<typeof headerModes>;
@@ -46,7 +41,7 @@ export interface IDataTableOwnProps<T> extends TTableProps<T> {
   headerButtonsGetter?(
     treeCounter?: TreeCounter,
     editingState?: IEditableDataTableState<T>
-  ): THeaderButtonObject[];
+  ): TTopPanelButtonObject[];
   defaultCheckedModels?: IModel[];
   showMoreMode?: IShowMoreProps["mode"];
   searchPlaceholder?: string;
@@ -132,12 +127,14 @@ export interface IDataTableOwnProps<T> extends TTableProps<T> {
    */
   isExpandRowsAfterModelChange?: boolean;
 
-  /** Увеличить ли высоту верхней панели */
-  isExpandedTopPanel?: boolean;
-}
+  /** Задержка отображения спиннера */
+  spinnerDelay?: number;
 
-export interface IPagingModel extends Group {
-  nextCount: number;
+  /** Контент между верхней панелью и самой таблицей */
+  subTopPanel?: ReactNode;
+  /** Сброс выделенных строк при включенном отображении чекбоксов */
+  resetRowSelection?: boolean;
+  callbackResetRowSelection?: () => void;
 }
 
 export interface IDataTableProps<T>
@@ -152,8 +149,62 @@ export interface IDataTableProps<T>
 
 export interface IDataTableState<T> {
   extendedColumns?: IColumnProps<any>[];
-  contextMenuColumn?: IColumnProps<T>;
+  contextMenuColumn?: IColumnProps<any>;
   rowSelectionConfig: TableRowSelection<any> | undefined;
   dataSource: TExtendColumns<T>[] | undefined;
   isInitiation: boolean;
+}
+
+export interface ITableTopButtonDisabledProps {
+  treeCounter: TreeCounter | null;
+
+  /**
+   * Активация при пустом выборе
+   */
+  empty?: boolean;
+
+  /**
+   * Активация при выборе только одной группы
+   */
+  singleGroup?: boolean;
+
+  /**
+   * Активация при выборе только одной группы, без учёта количества вложенных групп
+   */
+  shallowSingleGroup?: boolean;
+
+  /**
+   * Активация при выборе одной или нескольких групп
+   */
+  onlyGroup?: boolean;
+
+  /**
+   * Активация при выборе одной не группы
+   */
+  singleItem?: boolean;
+
+  /**
+   * Активация при выборе одной или нескольких не групп
+   */
+  onlyItem?: boolean;
+
+  /**
+   * Активация при выборе одного элемента любого типа
+   */
+  singleAnything?: boolean;
+
+  /**
+   * Активация при выборе одного элемента любого типа, без учёта количества вложенных групп
+   */
+  shallowSingleAnything?: boolean;
+
+  /**
+   * Активация при выборе одного или нескольких элементов любого типа
+   */
+  anything?: boolean;
+
+  /**
+   * Активация при выборе всех элементов
+   */
+  full?: boolean;
 }

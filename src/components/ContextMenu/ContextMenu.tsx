@@ -1,12 +1,11 @@
-import React, { useCallback, useMemo } from "react";
-import { Menu } from "antd";
+import React, { memo, useCallback, useMemo } from "react";
 import { Dropdown } from "../Dropdown/Dropdown";
 import type { MenuProps, SubMenuProps } from "antd/lib/menu";
 import {
   wrapperContextMenuStyle,
   threeDotsButtonStyle,
   wrapperMenuDropdownStyle,
-  itemStyle,
+  getItemStyle,
 } from "./ContextMenu.styles";
 import {
   ESortingMethodsNames,
@@ -16,7 +15,7 @@ import {
   type IContextMenuProps,
   type TSortingMethodsList,
 } from "./ContextMenu.types";
-import { map, isEmpty, forEach, isFunction } from "lodash";
+import { map, isEmpty, forEach, isFunction, last, dropRight } from "lodash";
 import {
   contextMenuTestId,
   contextMenuItemTestId,
@@ -25,13 +24,14 @@ import {
 } from "../../utils/TestIds";
 import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
 import { Button } from "../Button/Button";
-import type { ItemType } from "antd/lib/menu/hooks/useItems";
+import type { ItemType } from "antd/lib/menu/interface";
 import { useFeature } from "../../decorators/hooks/useFeature";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { sortByPriority } from "../../utils/Routes/routes";
 import { isShowElement } from "../../utils/access";
 import { sortByTitle } from "../../utils/sortings";
 import { withTheme } from "../../decorators/hocs/withTheme/withTheme";
+import { removeDuplicateDividers } from "./ContextMenu.utils";
 
 const dropdownTrigger: ["click"] = ["click"];
 
@@ -55,6 +55,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
     trigger,
     dropdownStyle,
     buttonStyle,
+    dividerStyle,
     withoutChildWrapper,
     sortBy = ESortingMethodsNames.priority,
     children,
@@ -132,8 +133,12 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
       return filteredItems;
     };
 
-    return getFilteredItems(content);
-  }, [content, isFeatureEnabled]);
+    const result = removeDuplicateDividers(getFilteredItems(sortingMethodsList[sortBy](content)));
+
+    const lastElement = last(result);
+
+    return lastElement && !isDivider(lastElement) ? result : dropRight(result);
+  }, [content, isFeatureEnabled, sortBy]);
 
   const getMenuItems = useCallback(
     (content: TContextMenuParamItem[], prevLevelKey?: string): ItemType[] =>
@@ -144,6 +149,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
           return {
             key: thisKey,
             type: "divider",
+            style: dividerStyle,
           };
         }
 
@@ -164,7 +170,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
           };
         }
 
-        const style = itemStyle(item.disabled, item.action);
+        const style = getItemStyle(item.disabled);
 
         const wrappedClickFunction: MenuProps["onClick"] = (param) => {
           if (isFunction(onItemClick)) {
@@ -184,21 +190,19 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
           "test-id": testId,
         };
       }),
-    [onItemClick, sortBy, theme]
+    [dividerStyle, onItemClick, sortBy, theme]
   );
 
   const menuItems = useMemo(() => getMenuItems(filteredItems), [filteredItems, getMenuItems]);
 
-  const renderContextMenuItems = useCallback(() => {
-    return (
-      <Menu
-        css={wrapperMenuDropdownStyle}
-        test-id={contextMenuDropDownTestId}
-        items={menuItems}
-        subMenuOpenDelay={0}
-        subMenuCloseDelay={0.3}
-      />
-    );
+  const menu = useMemo(() => {
+    return {
+      style: wrapperMenuDropdownStyle,
+      "test-id": contextMenuDropDownTestId,
+      items: menuItems,
+      subMenuOpenDelay: 0,
+      subMenuCloseDelay: 0.3,
+    };
   }, [menuItems]);
 
   if (filteredItems.length === 0) {
@@ -212,7 +216,7 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   return (
     <Dropdown
       {...rest}
-      overlay={renderContextMenuItems}
+      menu={menu}
       trigger={trigger ? trigger : dropdownTrigger}
       placement={placement ? placement : "bottomLeft"}
       overlayStyle={dropdownStyle}
@@ -222,4 +226,4 @@ const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   );
 };
 
-export const ContextMenu = withTheme(ContextMenuComponent);
+export const ContextMenu = memo(withTheme(ContextMenuComponent));

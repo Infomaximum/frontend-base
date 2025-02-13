@@ -1,11 +1,10 @@
 import type { IFormFieldProps } from "../FormField/FormField.types";
 import type { IFieldProps } from "../FormField/Field/Field.types";
-import type { WeekPickerProps } from "antd/lib/date-picker";
 import type { FieldRenderProps } from "react-final-form";
-import type { Moment } from "moment";
+import type { Dayjs } from "dayjs";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
-
-export type TWeekPickerFieldValue = Moment;
+import type { WeekPickerProps } from "antd/lib/date-picker";
+export type TWeekPickerFieldValue = Dayjs;
 
 type TOmitWeekPickerProps =
   | "onChange"
@@ -18,12 +17,12 @@ type TOmitWeekPickerProps =
 
 export interface IWeekPickerProps
   extends IWeekPickerOwnProps,
-    FieldRenderProps<TWeekPickerFieldValue> {}
+    TRemoveIndex<FieldRenderProps<TWeekPickerFieldValue>> {}
 
 export interface IWeekPickerOwnProps
   extends Omit<WeekPickerProps, TOmitWeekPickerProps>,
     IWithLocProps {
-  momentFormat?: string;
+  displayFormat?: string;
 }
 
 export interface IWeekPickerFieldProps

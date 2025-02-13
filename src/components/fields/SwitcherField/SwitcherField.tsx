@@ -31,6 +31,7 @@ class Switcher extends React.PureComponent<ISwitcherProps, ISwitcherState> {
       readOnly,
       size,
       input: { value },
+      additionalStyle,
     } = this.props;
 
     return (
@@ -39,7 +40,7 @@ class Switcher extends React.PureComponent<ISwitcherProps, ISwitcherState> {
         checked={Boolean(value)}
         disabled={readOnly || disabled}
         size={size ? size : "small"}
-        css={switchStyle}
+        css={[switchStyle, additionalStyle]}
       />
     );
   }

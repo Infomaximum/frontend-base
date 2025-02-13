@@ -1,6 +1,6 @@
 const hoverThreeDotsStyle = (theme: TTheme) => ({
-  backgroundColor: theme.grey4Color,
-  color: theme.grey8Color,
+  backgroundColor: `${theme.grey45Color} !important`,
+  color: `${theme.grey10Color} !important`,
 });
 
 export const wrapperContextMenuStyle = {
@@ -30,18 +30,11 @@ export const threeDotsButtonStyle = (theme: TTheme) => ({
 export const wrapperMenuDropdownStyle = {
   overflow: "auto",
   userSelect: "none" as const,
+  padding: "4px 0",
 };
 
-export const itemDeleteStyle = (theme: TTheme) => ({
-  color: theme.red6Color,
-  ".ant-dropdown-menu-submenu-title": {
-    color: theme.grey9Color,
-  },
+export const getItemStyle = (disabled: boolean | undefined) => (theme: TTheme) => ({
+  padding: "3px 12px 3px 8px",
+  color: !disabled ? theme.grey10Color : undefined,
+  userSelect: "none" as const,
 });
-
-export const itemStyle =
-  (disabled: boolean | undefined, action: string | undefined) => (theme: TTheme) => ({
-    padding: "3px 12px 3px 8px",
-    color: !disabled ? (action === "delete" ? theme.red6Color : theme.grey9Color) : undefined,
-    userSelect: "none" as const,
-  });

@@ -50,8 +50,6 @@ export class TreeCounter {
     forEach(checkedModels, (checkedModel) => {
       if (checkedModel instanceof Group) {
         this.groupsCheckedCount += 1;
-      } else if (checkedModel instanceof RestModel) {
-        this.itemsCheckedCount += checkedModel.getNextCount();
       } else {
         this.itemsCheckedCount += 1;
       }

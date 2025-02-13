@@ -5,24 +5,24 @@ import type { ITooltipProps } from "./Tooltip.types";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { tooltipOverlayStyle, tooltipOverlayInnerStyle } from "./Tooltip.styles";
 
-const tooltipOffset = [0, 2];
-const align = { offset: tooltipOffset };
+const alignDefault = { targetOffset: [0, -2] };
 
 const TooltipComponent: FC<ITooltipProps> = ({
   placement,
   overlayInnerStyle: overlayInnerStyleProp,
   overlayStyle: overlayStyleProp,
   title,
+  align = alignDefault,
   ...rest
 }) => {
   const theme = useTheme();
 
   const overlayStyle = useMemo(
     () => ({
-      ...tooltipOverlayStyle,
+      ...tooltipOverlayStyle(theme),
       ...overlayStyleProp,
     }),
-    [overlayStyleProp]
+    [overlayStyleProp, theme]
   );
 
   const overlayInnerStyle = useMemo(

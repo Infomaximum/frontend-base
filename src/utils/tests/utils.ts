@@ -1,5 +1,5 @@
 import type { ReactWrapper, ShallowWrapper } from "enzyme";
-import { act } from "react-dom/test-utils";
+import { act } from "react";
 
 /**
  * Ожидает отрисовки компонента с определенным таймаутом, полезно когда внутри компонента испольхуется

@@ -1,10 +1,18 @@
 import { css, type Interpolation } from "@emotion/react";
 import { userAgent, EUserAgents } from "@infomaximum/utility";
-import { textOverflowOverlayStyle } from "./common.styles";
-import { getGradientColorsFromTransparent } from "../utils/colors";
+import { SYSTEM_FONT } from "../utils";
 
 export const SCROLLBAR_WIDTH = 6;
 export const SCROLLBAR_HEIGHT = 6;
+
+const fireFoxScrollbarStyle = (theme: TTheme) => ({
+  "@supports not selector(::-webkit-scrollbar)": {
+    // Стили для Mozilla FireFox. scrollbarWidth: "auto" слишком широкий в Windows, "thin" слишком узкий в Linux и MacOS,
+    // а в пикселях ширину скролла для мозиллы задать нельзя. В приоритете OS Windows
+    scrollbarWidth: "thin",
+    scrollbarColor: `${theme.grey5Color} ${theme.grey1Color}`,
+  },
+});
 
 const scrollStyle = (theme: TTheme) => {
   const scrollbarWidthHover = "10px";
@@ -35,10 +43,8 @@ const scrollStyle = (theme: TTheme) => {
       height: "0px",
       width: "0px",
     },
-    // Стили для Mozilla. scrollbarWidth: "auto" слишком широкий в Windows, "thin" слишком узкий в Linux и MacOS,
-    // а в пикселях ширину скролла для мозиллы задать нельзя. В приоритете OS Windows
-    scrollbarWidth: "thin",
-    scrollbarColor: `${theme.grey5Color} ${theme.grey1Color}`,
+
+    ...fireFoxScrollbarStyle(theme),
 
     ".rc-virtual-list-scrollbar": {
       width: `${SCROLLBAR_WIDTH}px !important`,
@@ -47,6 +53,7 @@ const scrollStyle = (theme: TTheme) => {
 
     ".CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scroll, .rc-virtual-list-holder": {
       ...scrollDefaultStyle(theme),
+      ...fireFoxScrollbarStyle(theme),
     },
 
     ".ant-dropdown *": {
@@ -89,7 +96,7 @@ const rootStyle = () => ({
 
 const allStyle = (theme: TTheme) => ({
   "*": {
-    fontFamily: "Roboto",
+    fontFamily: SYSTEM_FONT,
     ...scrollStyle(theme),
   },
 });
@@ -102,88 +109,13 @@ const htmlAndBodyStyle = () => ({
     `,
     {
       margin: 0,
-      fontFamily: "Roboto",
+      fontFamily: SYSTEM_FONT,
       overflow: "hidden",
     },
   ],
 });
 
-const fixIEBugs = () => {
-  const isIE = userAgent() === EUserAgents.MSIE;
-
-  if (!isIE) {
-    return {};
-  }
-
-  return {
-    "@media only screen and (-ms-high-contrast: active), (-ms-high-contrast: none)": {
-      /* Фикс для IE, чтобы теги внутри Select'а c mode = "tags" не растягивали контейнер вправо,
-     а переходили на новую строку */
-      ".ant-form-item-control-input": {
-        position: "relative",
-        display: "block", // flex у анта
-        alignItems: "center",
-        minHeight: "28px",
-      },
-
-      // Фикс для IE, чтобы при открытии дропдауна не мерцал дропдаун
-      ".ant-select-dropdown": {
-        ".ant-select-item": {
-          ":after": {
-            content: "''",
-            position: "fixed",
-            display: "block",
-          },
-        },
-      },
-
-      // Фикс для IE, чтобы при открытии дропдауна не мерцала страница
-      ".ant-layout": {
-        ":after": {
-          content: "''",
-          position: "fixed",
-          display: "block",
-        },
-      },
-    },
-
-    // Фикс высоты Picker'ов IE
-    ".ant-picker-input > input": {
-      minHeight: "22px",
-      cursor: "text",
-    },
-
-    /** Фикс мерцания окна IE */
-    ".ant-picker:after": {
-      content: "''",
-      position: "fixed",
-      display: "block",
-    },
-
-    ".ant-input": {
-      cursor: "text",
-    },
-
-    // Меню в хедере
-    ".ant-layout-header ": {
-      // чтобы элементы меню и кнопка выбора вкладок не сжимались
-      ".ant-tabs-tab, .ant-tabs-nav-operations": {
-        flexShrink: 0,
-      },
-      // чтобы кнопки справа не уходили за пределы окна
-      ".ant-row-middle > .ant-col": {
-        flexShrink: 1,
-      },
-    },
-
-    // Фикс обрезания скролла при маленьком размере окна
-    ".ant-layout-content": {
-      height: "100%",
-    },
-  };
-};
-
-const fixSafariBugs = () => {
+const fixSafariBugsStyle = () => {
   const isSafari = userAgent() === EUserAgents.Safari;
 
   if (!isSafari) {
@@ -194,42 +126,69 @@ const fixSafariBugs = () => {
     ".ant-layout-content": {
       height: "100%",
     },
+    "*::-webkit-contacts-auto-fill-button": {
+      width: 0,
+      height: 0,
+      margin: 0,
+    },
   };
 };
 
 const antGlobalStyle = (theme: TTheme) => {
-  const { minOpacity, maxOpacity } = getGradientColorsFromTransparent(theme, theme.grey3Color);
-
   return {
+    ".ant-popover .ant-popover-inner": {
+      padding: "12px 16px",
+    },
     ".ant-tooltip .ant-tooltip-arrow": {
       height: "16px",
       // Для корректной работы при разных масштабах окна браузера
       bottom: "1px",
       ".ant-tooltip-arrow-content": {
-        // Фикс цвета в IE
-        background: theme.grey9Color,
         // Фикс обводки в Mozilla Firefox
         overflow: "hidden",
       },
+      "::before": {
+        height: "5px",
+      },
     },
-
+    ".ant-upload-wrapper .ant-upload-list::before": {
+      content: "none",
+    },
+    ".ant-upload-wrapper .ant-upload-list::after": {
+      content: "none",
+    },
+    ".ant-upload-wrapper .ant-upload-list .ant-upload-list-item-container::before": {
+      content: "none",
+    },
+    ".ant-upload-wrapper .ant-upload-list .ant-upload-list-item-container": {
+      transition: "opacity 0.1s, height 0.1s",
+    },
     ".ant-select-disabled .ant-select-selection-placeholder": {
       color: theme.grey7Color,
     },
     ".ant-select-item-option-content": {
       textOverflow: "unset",
     },
-    ".ant-select-item": {
-      color: theme.grey9Color,
-      "&.ant-select-item-option-selected": {
-        background: "none",
-        fontWeight: 400,
+    ".ant-select-selector": {
+      color: theme.grey10Color,
+      "& .ant-select-selection-item": {
+        color: theme.grey10Color,
       },
+    },
+    ".ant-dropdown-menu-inline-collapsed-tooltip": { display: "none" },
+    ".ant-select-item": {
+      color: theme.grey10Color,
+      padding: "3px 8px !important",
       "&.ant-select-item-option-active": {
         background: theme.grey3Color,
+        "&.ant-select-item-option-selected": {
+          "&:hover": {
+            background: theme.grey3Color,
+          },
+        },
       },
       "&.ant-select-item-option-disabled": {
-        color: theme.grey7Color,
+        color: theme.grey6Color,
         background: "none",
       },
       ".anticon": {
@@ -238,19 +197,15 @@ const antGlobalStyle = (theme: TTheme) => {
         color: theme.thrust5Color,
       },
     },
-    // Стили для забледнения текста [PT-12198]
-    ".ant-select-item-option": {
-      position: "relative",
-      "::after": {
-        ...textOverflowOverlayStyle({
-          backgroundColor: theme.grey1Color,
-        }),
-        content: "''",
-        boxSizing: "content-box",
-        height: "100%",
-        pointerEvents: "none",
+    // При layout = vertical у формы создаётся этот selector, который имеет большую специфичность,
+    // по сравнению с обычными селекторами label. Приходится перезаписывать некоторые свойства.
+    ".ant-form-vertical .ant-form-item:not(.ant-form-item-horizontal) .ant-form-item-label": {
+      paddingBottom: 0,
+      "&>label": {
+        height: "28px",
       },
     },
+
     ".ant-select-item-option.ant-select-item-option-disabled": {
       "::after": {
         content: "none",
@@ -258,7 +213,7 @@ const antGlobalStyle = (theme: TTheme) => {
     },
     ".ant-select-item-option.ant-select-item-option-active": {
       "::after": {
-        backgroundImage: `linear-gradient(to right, ${minOpacity}, ${maxOpacity})`,
+        background: "none",
       },
     },
     ".ant-select-item-option-state": {
@@ -266,15 +221,19 @@ const antGlobalStyle = (theme: TTheme) => {
     },
     ".ant-select-dropdown, .ant-dropdown-menu": {
       "&:not(.ant-dropdown-menu-submenu-popup)": {
-        boxShadow: "0 2px 8px 0 rgba(71, 71, 71, 0.2)",
+        boxShadow: "0px 2px 8px 0px rgba(113, 113, 113, 0.2)",
         border: `1px solid ${theme.grey4Color}`,
+        padding: "4px 0",
       },
       ".ant-dropdown-menu-item-divider": {
         background: theme.grey4Color,
       },
+      ".ant-select-item-empty": {
+        padding: "3px 7px",
+      },
     },
     ".ant-dropdown-menu-submenu-title": {
-      paddingRight: "25px",
+      paddingRight: "28px !important",
     },
 
     ".ant-tabs-nav": {
@@ -284,27 +243,34 @@ const antGlobalStyle = (theme: TTheme) => {
     },
 
     ".ant-tabs-tab + .ant-tabs-tab": {
-      margin: 0,
+      margin: "0 !important",
     },
 
     ".ant-select-item-option-grouped": {
-      paddingLeft: "24px",
+      paddingLeft: "16px !important",
     },
 
-    ".ant-select-item-group": {
+    ".ant-select-dropdown .ant-select-item-group": {
       cursor: "default",
       fontSize: "12px",
-      color: theme.grey7Color,
-    },
-    // для фикса съезжания кнопки Ок на строку ниже
-    ".ant-picker-ok": {
-      marginLeft: "6px !important",
+      color: `${theme.grey7Color} !important`,
+      lineHeight: "22px",
     },
 
     ".ant-table-fixed-header .ant-table-container .ant-table-body": {
       overflowY: "auto !important",
     },
 
+    ".ant-table-wrapper ": {
+      ".ant-table": { scrollbarColor: "unset" },
+      ".ant-table-column-sorter-up, .ant-table-column-sorter-down": {
+        fontSize: "11px",
+        color: theme.grey6Color,
+      },
+    },
+    ".ant-empty .ant-empty-description": {
+      color: theme.grey6Color,
+    },
     // Важно, чтобы стиль был глобальным, т.к. строка рендерится в body
     ".row-dragging": {
       backgroundColor: "none", // @table-body-sort-bg
@@ -313,12 +279,20 @@ const antGlobalStyle = (theme: TTheme) => {
     },
 
     ".ant-message": {
-      top: "inherit",
+      top: "inherit !important",
+      padding: "0px 16px 16px 0px",
       bottom: 0,
       zIndex: 2000,
 
       "& .ant-message-custom-content": {
         display: "flex",
+        alignItems: "flex-start",
+        "& > .anticon": {
+          paddingTop: "2px",
+        },
+      },
+      " .ant-message-notice-wrapper .ant-message-notice-content": {
+        borderRadius: "4px",
       },
     },
 
@@ -335,12 +309,47 @@ const antGlobalStyle = (theme: TTheme) => {
       },
     },
 
+    ".ant-select-focused.ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-select-status-error) .ant-select-selector":
+      {
+        boxShadow: "0px 0px 4px 0px rgba(117, 170, 235, 0.5) !important",
+        borderRadius: "2px",
+      },
+
     ".ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title": {
-      color: theme.grey9Color,
+      color: `${theme.grey10Color}`,
 
       svg: {
-        color: theme.grey7Color,
+        color: `${theme.grey7Color} !important`,
       },
+    },
+
+    ".ant-dropdown-menu-submenu-arrow-icon": {
+      fontSize: "10px !important",
+    },
+
+    ".ant-drawer": {
+      ":focus-visible": {
+        outline: "none",
+      },
+    },
+
+    ".ant-checkbox": {
+      ".ant-checkbox-input, .ant-checkbox-inner": {
+        width: "16px",
+        height: "16px",
+      },
+    },
+    ".ant-checkbox-checked .ant-checkbox-inner:after": {
+      width: "6px",
+      height: "10px",
+    },
+    ".ant-switch:focus-visible, .ant-btn:not(:disabled):focus-visible": {
+      outline: "none",
+    },
+    ".ant-picker-dropdown .ant-picker-time-panel-column": {
+      scrollbarWidth: "unset",
+      scrollbarColor: "unset",
+      ...scrollStyle(theme),
     },
   };
 };
@@ -362,8 +371,7 @@ export const globalStyles = (theme: TTheme) => {
     ...allStyle(theme),
     ...htmlAndBodyStyle(),
     ...rootStyle(),
-    ...fixIEBugs(),
-    ...fixSafariBugs(),
+    ...fixSafariBugsStyle(),
     ...antGlobalStyle(theme),
     ...forceDisabledAnimationStyle,
   } as unknown as Interpolation<TTheme>;

@@ -5,7 +5,12 @@ import { getColorConfigList, getIconAvatarStyle } from "./HeaderAvatar.styles";
 import { observer } from "mobx-react";
 import { useTheme } from "../../../decorators/hooks/useTheme";
 
-const HeaderAvatarComponent: React.FC<IHeaderAvatarProps> = ({ userName, userId }) => {
+const HeaderAvatarComponent: React.FC<IHeaderAvatarProps> = ({
+  userName,
+  userId,
+  size = 20,
+  fontSize,
+}) => {
   const theme = useTheme();
 
   const iconAvatarStyle = useMemo(() => {
@@ -14,11 +19,11 @@ const HeaderAvatarComponent: React.FC<IHeaderAvatarProps> = ({ userName, userId 
       Number(userId) % colorConfig.length
     ] as TAvatarColorConfig;
 
-    return getIconAvatarStyle(theme, avatarColorConfig);
-  }, [userId, theme]);
+    return getIconAvatarStyle(theme, avatarColorConfig, fontSize);
+  }, [userId, theme, fontSize]);
 
   return (
-    <Avatar key="header-avatar" style={iconAvatarStyle} size={20}>
+    <Avatar key="header-avatar" style={iconAvatarStyle} size={size}>
       {userName?.substring(0, 1).toUpperCase() ?? ""}
     </Avatar>
   );

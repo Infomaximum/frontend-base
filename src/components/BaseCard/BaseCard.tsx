@@ -1,5 +1,9 @@
 import React from "react";
-import { cardHeaderDefault, cardWrapperDefault, wrapperMenuStyle } from "./BaseCard.styles";
+import {
+  cardHeaderDefaultStyle,
+  cardWrapperDefaultStyle,
+  wrapperMenuStyle,
+} from "./BaseCard.styles";
 import type { Interpolation } from "@emotion/react";
 import { isFunction } from "lodash";
 import type { IBaseCardProps } from "./BaseCard.types";
@@ -11,7 +15,7 @@ const BaseCardComponent: React.FC<IBaseCardProps> = (props) => {
 
   const containerDefaultStyle = React.useMemo(
     () => [
-      cardWrapperDefault(theme),
+      cardWrapperDefaultStyle(theme),
       isFunction(styleWrapper) ? styleWrapper(theme) : styleWrapper,
     ],
     [styleWrapper, theme]
@@ -20,7 +24,7 @@ const BaseCardComponent: React.FC<IBaseCardProps> = (props) => {
   const headerDefaultStyle = React.useMemo(
     () =>
       [
-        cardHeaderDefault(theme),
+        cardHeaderDefaultStyle(theme),
         isFunction(headStyle) ? headStyle(theme) : headStyle,
       ] as Interpolation<unknown>,
     [headStyle, theme]

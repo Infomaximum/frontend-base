@@ -3,8 +3,8 @@ import { Dropdown } from "../Dropdown";
 import type { IBaseDropdownProps, IBaseDropdownState } from "./BaseDropdown.types";
 import { menuStyle, mainBaseDropdownOverlayStyle } from "./BaseDropdown.styles";
 import { DropdownAnimationInterval } from "../../../utils/const";
-import { withTheme } from "../../../decorators";
-import { cssStyleConversion } from "../../../styles";
+import { boundMethod, withTheme } from "../../../decorators";
+import { getCssConversionStyle } from "../../../styles";
 
 export enum EBaseDropdownPlacement {
   bottomLeft = "bottomLeft",
@@ -98,21 +98,27 @@ class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBas
     this.setState({ isShowMenu: open });
   };
 
-  private get menu() {
+  @boundMethod
+  private dropdownRender() {
     const { isShowMenu, isShowChildren } = this.state;
     const { theme, menuStyle: menuStyleProps } = this.props;
 
     return (
-      <>
-        <div key="wrapper-menu" css={cssStyleConversion(theme, [menuStyle, menuStyleProps])}>
-          {isShowMenu || (!isShowMenu && isShowChildren) ? this.props.children : null}
-        </div>
-      </>
+      <div key="wrapper-menu" css={getCssConversionStyle(theme, [menuStyle, menuStyleProps])}>
+        {isShowMenu || (!isShowMenu && isShowChildren) ? this.props.children : null}
+      </div>
     );
   }
 
   public override render(): React.ReactNode {
-    const { placement, button, overlayStyle, ...rest } = this.props;
+    const {
+      placement,
+      button,
+      overlayStyle,
+      theme,
+      menuStyle: menuStyleProps,
+      ...rest
+    } = this.props;
     const { isShowMenu } = this.state;
 
     return (
@@ -120,7 +126,7 @@ class BaseDropdownComponent extends React.PureComponent<IBaseDropdownProps, IBas
         <Dropdown
           {...rest}
           open={isShowMenu}
-          overlay={this.menu}
+          dropdownRender={this.dropdownRender}
           trigger={["click"]}
           placement={placement}
           overlayStyle={overlayStyle}

@@ -1,23 +1,28 @@
-import type { DatePickerProps } from "antd/lib/date-picker";
-import type { PickerDateProps } from "antd/lib/date-picker/generatePicker";
-import type { Moment } from "moment";
+import type { Dayjs } from "dayjs";
 import type { FieldRenderProps } from "react-final-form";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
+import type { DatePickerProps } from "antd";
 
-type TDatePickerFieldValue = NonNullable<DatePickerProps["value"]>;
+type TDatePickerProps = DatePickerProps<Dayjs>;
+
+type TDatePickerFieldValue = NonNullable<TDatePickerProps["value"]>;
 type TOmitDatePickerProps = "onChange" | "onBlur" | "onFocus" | "format" | "value" | "name";
 
 export interface IDatePickerProps
   extends IDatePickerOwnProps,
-    FieldRenderProps<TDatePickerFieldValue> {
+    TRemoveIndex<FieldRenderProps<TDatePickerFieldValue>> {
   datePickerInputStyle?: React.CSSProperties;
+  /** Из-за особенностей кнопок Сейчас или Сегодня, устанавливаемая дата не учитывает displayFormat.
+   * Из-за этого проблемы с isEqual
+   */
+  shouldModifyDateBasedOnDisplayFormat?: boolean;
 }
 
-export interface IDatePickerOwnProps extends Omit<DatePickerProps, TOmitDatePickerProps> {
+export interface IDatePickerOwnProps extends Omit<TDatePickerProps, TOmitDatePickerProps> {
   // Почему-то DatePickerProps не содержит данный тип
-  showTime?: PickerDateProps<Moment>["showTime"];
-  momentFormat?: DatePickerProps["format"];
+  showTime?: DatePickerProps<Dayjs>["showTime"];
+  displayFormat?: TDatePickerProps["format"];
   readOnly?: boolean;
 }
 

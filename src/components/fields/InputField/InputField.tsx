@@ -7,9 +7,8 @@ import type {
   IInputFormFieldProps,
   TInputFieldValue,
 } from "./InputField.types";
-import { trim, isString, isFunction } from "lodash";
+import { isString, isFunction } from "lodash";
 import type { InputProps } from "antd/lib/input/Input";
-import { EUserAgents, userAgent } from "@infomaximum/utility";
 import { NOT_SET } from "../../../utils/Localization/Localization";
 import { Input } from "../../Input/Input";
 import { withLoc } from "../../../decorators";
@@ -17,6 +16,8 @@ import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 import { TableCellField } from "../TableCellField/TableCellField";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
+import { trimAndCompressWhitespace } from "./InputField.utils";
+import { useField } from "react-final-form";
 
 class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
   public static defaultProps = {
@@ -35,7 +36,10 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
 
   public override componentDidUpdate() {
     if (isString(this.state.value) && isString(this.props.input?.value)) {
-      if (trim(this.state.value) !== trim(this.props.input?.value)) {
+      if (
+        trimAndCompressWhitespace(this.state.value) !==
+        trimAndCompressWhitespace(this.props.input?.value)
+      ) {
         this.setState({ value: this.props.input?.value });
       }
     }
@@ -55,18 +59,8 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
     event.target.removeAttribute("readonly");
   }
 
-  // text-overflow: "ellipsis" не работает для инпутов в IE, если не установлен атрибут "readonly"
-  // https://stackoverflow.com/questions/9771795/how-to-use-text-overflow-ellipsis-in-an-html-input-field
-  private handleSetReadOnlyAttribute(event: React.FocusEvent<HTMLInputElement>) {
-    (event.target as any).createTextRange()?.scrollIntoView(); // метод из IE - возврат каретки в начало строки
-
-    event.target.setAttribute("readonly", "");
-  }
-
   private handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     const { disableBrowserAutocomplete } = this.props;
-
-    const isIE = userAgent() === EUserAgents.MSIE;
 
     if (this.props.onFocus) {
       this.props.onFocus(event);
@@ -76,14 +70,12 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
       this.props.input.onFocus(event);
     }
 
-    if (isIE || disableBrowserAutocomplete) {
+    if (disableBrowserAutocomplete) {
       this.handleDisableBrowserAutocomplete(event);
     }
   };
 
   private handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const isIE = userAgent() === EUserAgents.MSIE;
-
     if (this.props.onBlur) {
       this.props.onBlur(event);
     }
@@ -95,20 +87,17 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
     if (this.props.trimValue) {
       this.setState({ value: this.props.input?.value });
     }
-
-    if (isIE) {
-      this.handleSetReadOnlyAttribute(event);
-    }
   };
 
   public override render() {
-    const { readOnly, localization, disableBrowserAutocomplete, ...rest } = this.props;
+    const { readOnly, localization, disableBrowserAutocomplete, emptyOnDisabled, ...rest } =
+      this.props;
 
     if (readOnly) {
       let value = this.props.input?.value;
 
       if (localization && (value === "" || value === undefined || value === null)) {
-        value = localization.getLocalized(NOT_SET);
+        value = emptyOnDisabled ? "" : localization.getLocalized(NOT_SET);
       }
 
       return (
@@ -120,8 +109,6 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
 
     const { input, meta, inputComponent, trimValue, ...props } = rest;
 
-    const isReadOnlyIE = userAgent() === EUserAgents.MSIE && !this.props.autoFocus;
-
     const _Input = inputComponent as React.ComponentType<InputProps>;
 
     return (
@@ -129,7 +116,7 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
         key="ant-input"
         {...props}
         {...input}
-        readOnly={isReadOnlyIE || disableBrowserAutocomplete}
+        readOnly={disableBrowserAutocomplete}
         onChange={this.handleChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
@@ -147,21 +134,28 @@ const InputFieldComponent: FC<IInputFieldProps> = ({
   trimValue = true,
   ...rest
 }) => {
+  const field = useField(rest.name);
+
   const parseMethod = useCallback(
     (value: string) => {
       let parsedValue: TInputFieldValue = value;
 
       if (trimValue) {
-        parsedValue = parsedValue.trim();
+        parsedValue = trimAndCompressWhitespace(parsedValue);
       }
 
-      if (parse && isFunction(parse)) {
-        parsedValue = parse(parsedValue, rest.name);
+      try {
+        if (isFunction(parse)) {
+          parsedValue = parse(parsedValue, rest.name);
+        }
+      } catch {
+        // Вернуть предыдущее значение при неудачной попытке выполнения parse
+        return field.input.value;
       }
 
       return parsedValue;
     },
-    [parse, trimValue, rest.name]
+    [field, parse, trimValue, rest.name]
   );
 
   return (

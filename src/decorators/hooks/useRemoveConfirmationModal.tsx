@@ -10,6 +10,7 @@ type TRemoveConfirmationParams<T> = {
   /** Локализация которая будет отображаться в модальном окне */
   titleLoc: TLocalizationDescription | ((data: T | null) => React.ReactNode);
   bodyLoc?: TLocalizationDescription | ((data: T | null) => React.ReactNode);
+  maskTransitionName?: string;
 };
 
 /** Отображает модальное окно подтверждения удаления данных  */
@@ -54,7 +55,7 @@ export const useRemoveConfirmationModal = <T,>(params: TRemoveConfirmationParams
 
   const renderRemoveModal = useMemo(() => {
     if (isShowRemoveModal && data) {
-      const { titleLoc, bodyLoc } = params;
+      const { titleLoc, bodyLoc, maskTransitionName } = params;
 
       return (
         <RemoveConfirmationModal
@@ -63,12 +64,13 @@ export const useRemoveConfirmationModal = <T,>(params: TRemoveConfirmationParams
           title={
             typeof titleLoc === "function" ? titleLoc(data) : localization.getLocalized(titleLoc)
           }
+          maskTransitionName={maskTransitionName}
         >
           {typeof bodyLoc === "function"
             ? bodyLoc(data)
             : bodyLoc
-            ? localization.getLocalized(bodyLoc)
-            : null}
+              ? localization.getLocalized(bodyLoc)
+              : null}
         </RemoveConfirmationModal>
       );
     }

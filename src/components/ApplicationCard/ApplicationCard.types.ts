@@ -18,5 +18,6 @@ export interface IApplicationCardProps {
   pathname?: string;
   isReadOnly?: boolean;
   hasDeleteAccess?: boolean;
+  isDeleteDisabled?: boolean;
   mainPageContentRef?: RefObject<HTMLDivElement>;
 }

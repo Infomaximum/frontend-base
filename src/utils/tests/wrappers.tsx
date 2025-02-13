@@ -4,7 +4,12 @@ import { theme } from "../../styles/theme";
 import { Localization } from "@infomaximum/localization";
 import { reduce } from "lodash";
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromChildren,
+} from "react-router-dom";
 import { LocalizationContext } from "../../decorators/contexts/LocalizationContext";
 
 export const testLocalization = new Localization({
@@ -24,12 +29,14 @@ export const getLocalizationWrapper = (element: JSX.Element) => {
 };
 
 export const getRouterWrapper = (element: JSX.Element) => {
+  const future = { v7_startTransition: true };
+  const getBrowserRouter = (props: any) =>
+    createBrowserRouter(
+      createRoutesFromChildren(<Route path="*" element={React.cloneElement(element, props)} />)
+    );
+
   return React.createElement((props: typeof element.props) => (
-    <BrowserRouter>
-      <Routes>
-        <Route path="*" element={React.cloneElement(element, props)} />
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={getBrowserRouter(props)} future={future} />
   ));
 };
 

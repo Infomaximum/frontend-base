@@ -3,9 +3,9 @@ import { Layout } from "antd";
 import type { IWrapperContainerProps } from "./WrapperContainer.types";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { assertSimple } from "@infomaximum/assert";
-import { commonContentStyle, commonLayoutStyle } from "../../styles/common.styles";
-import { HeaderMenuPortal } from "../HeaderMenu/HeaderMenuPortal/HeaderMenuPortal";
-import { MAIN_LAYOUT_CONTENT_ID } from "../../utils/const";
+import { commonLayoutStyle } from "../../styles/common.styles";
+import { MAIN_LAYOUT_CONTENT_ID, MAIN_LAYOUT_SCROLL_CONTAINER_ID } from "../../utils/const";
+import { contentStyle, scrollContainerStyle, titleStyle } from "./WrapperContainer.styles";
 
 const WrapperContainerComponent: React.FC<IWrapperContainerProps> = ({
   route,
@@ -18,13 +18,12 @@ const WrapperContainerComponent: React.FC<IWrapperContainerProps> = ({
 
   return (
     <Layout css={commonLayoutStyle}>
-      <HeaderMenuPortal key="header-menu">
-        <HeaderMenuPortal.Title key="header-menu-title">
-          {localization.getLocalized(route.loc)}
-        </HeaderMenuPortal.Title>
-      </HeaderMenuPortal>
-      <Layout.Content css={commonContentStyle} id={MAIN_LAYOUT_CONTENT_ID}>
-        <Component route={route} {...rest} />
+      <Layout.Content css={contentStyle} id={MAIN_LAYOUT_CONTENT_ID}>
+        <div css={titleStyle}>{localization.getLocalized(route.loc)}</div>
+
+        <Layout.Content css={scrollContainerStyle} id={MAIN_LAYOUT_SCROLL_CONTAINER_ID}>
+          <Component route={route} {...rest} />
+        </Layout.Content>
       </Layout.Content>
     </Layout>
   );

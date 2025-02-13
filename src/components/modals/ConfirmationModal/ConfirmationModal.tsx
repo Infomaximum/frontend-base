@@ -8,14 +8,14 @@ import {
   DO_NOT_SAVE,
   EXIT,
 } from "../../../utils/Localization/Localization";
-import type { TLocalizationDescription } from "@infomaximum/localization";
 import {
   bodyModalStyle,
-  bodyStyle,
   iconModalStyle,
   titleModalStyle,
   additionalButtonStyle,
   confirmationModalStyle,
+  modalStyle,
+  rightFooterButtonStyle,
 } from "./ConfirmationModal.styles";
 import type { Interpolation } from "@emotion/react";
 import { isFunction } from "lodash";
@@ -36,12 +36,14 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     disabledConfirmButton = false,
     withAdditionalButton = false,
     icon: Icon = WarningOutlined,
+    buttonCancelText = CANCEL,
     buttonOkText = APPLY,
     additionalButtonCaption = DO_NOT_SAVE,
     zIndex,
     title,
     iconStyle,
     isWithoutSaveMode,
+    withoutCancelButton,
     children,
     onAdditionalButtonClick,
     onAfterCancel,
@@ -101,7 +103,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
 
     return (
       <div css={confirmationModalStyle}>
-        {Icon ? <Icon css={styleIcon} /> : null}
+        <Icon css={styleIcon} />
         <div>
           <div css={titleModalStyle(theme)}>{title}</div>
           {children && <span css={bodyModalStyle(theme)}>{children}</span>}
@@ -114,17 +116,24 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     const getCancelAndOkButtons = () => {
       return (
         <>
-          <Button type="ghost" onClick={handleCancel} test-id={confirmationModalCancelButtonTestId}>
-            {localization.getLocalized(CANCEL)}
-          </Button>
+          {!withoutCancelButton && (
+            <Button
+              type="common"
+              onClick={handleCancel}
+              test-id={confirmationModalCancelButtonTestId}
+            >
+              {localization.getLocalized(buttonCancelText)}
+            </Button>
+          )}
           <Button
             onClick={handleConfirm}
             type={buttonOkType}
             loading={isLoading}
             test-id={confirmationModalConfirmButtonTestId}
             disabled={disabledConfirmButton}
+            css={rightFooterButtonStyle}
           >
-            {localization.getLocalized(buttonOkText as TLocalizationDescription)}
+            {localization.getLocalized(buttonOkText)}
           </Button>
         </>
       );
@@ -133,13 +142,20 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     const getContinueAndExitButtons = () => {
       return (
         <>
-          <Button type="ghost" onClick={handleCancel} test-id={confirmationModalCancelButtonTestId}>
+          <Button
+            type="common"
+            ghost={true}
+            onClick={handleCancel}
+            test-id={confirmationModalCancelButtonTestId}
+          >
             {localization.getLocalized(CONTINUE_EDITING)}
           </Button>
           <Button
             onClick={onAdditionalButtonClick}
-            type="ghost"
+            type="common"
+            ghost={true}
             test-id={confirmationModalAdditionalButtonTestId}
+            css={rightFooterButtonStyle}
           >
             {localization.getLocalized(EXIT)}
           </Button>
@@ -151,7 +167,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
       <div>
         {withAdditionalButton ? (
           <Button
-            type="ghost"
+            type="common"
             onClick={onAdditionalButtonClick}
             css={additionalButtonStyle}
             test-id={confirmationModalAdditionalButtonTestId}
@@ -165,6 +181,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
   }, [
     additionalButtonCaption,
     buttonOkText,
+    buttonCancelText,
     buttonOkType,
     disabledConfirmButton,
     handleCancel,
@@ -174,14 +191,14 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     onAdditionalButtonClick,
     withAdditionalButton,
     isWithoutSaveMode,
+    withoutCancelButton,
   ]);
 
   return (
     <Modal
       open={isShowModal}
       closable={false}
-      centered={true}
-      bodyStyle={bodyStyle}
+      styles={modalStyle}
       footer={footerModal}
       destroyOnClose={true}
       zIndex={zIndex}

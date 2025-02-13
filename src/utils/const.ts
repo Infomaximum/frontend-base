@@ -1,5 +1,7 @@
 import { MillisecondsPerSecond } from "@infomaximum/utility";
 
+export const SYSTEM_FONT = "Roboto";
+
 /**
  * минимальная длина пароля
  */
@@ -27,10 +29,12 @@ export enum EErrorCode {
   INVALID_CREDENTIALS = "invalid_credentials",
   EXPIRED_PASSWORD = "expired_password",
   INVALID_LOGON = "INVALID_LOGON",
-  NO_PRIVILEGES = "NO_PRIVILEGES",
+  NO_ACCESS_ROLES = "NO_ACCESS_ROLES",
   DISABLED_LOGON = "disabled_logon",
   INVALID_LOGON_AND_MAX_LOGON_ATTEMPTS_EXCEED = "INVALID_LOGON_AND_MAX_LOGON_ATTEMPTS_EXCEED",
   NETWORK_FAILURE_OCCURRED = "NETWORK_FAILURE_OCCURRED",
+  INVALID_VALUE = "invalid_value",
+  CHUNK_LOAD_ERROR = "chunk_load_error",
 
   /** =========================== HTTP [START] =========================== */
   CONNECTION_ERROR = "connection_error",
@@ -67,6 +71,7 @@ export const HoverAnimationInterval = 300;
 export const MaxDataReloadInterval = 30 * MillisecondsPerSecond;
 export const StepDataReloadInterval = 2 * MillisecondsPerSecond;
 export const WebSocketPingPongInterval = 20 * MillisecondsPerSecond;
+export const WebSocketConnectionRetryInterval = 5 * MillisecondsPerSecond;
 
 /** Имя токена авторизации которых хранится в cookie */
 export const TOKEN_NAME_COOKIE = "session";
@@ -121,10 +126,14 @@ export const contextMenuColumnKey = "context_menu";
 
 /** Для измерения высоты шапки */
 export const TABLE_HEADER_ID = "table-header-id";
-/** Для работы со скоролом в теле виртуализированной таблицы */
+/** Для работы со скроллом в теле виртуализированной таблицы */
 export const VIRTUALIZED_TABLE_BODY_ID = "virtualized-table-body-id";
-/** Для работы со скоролом в контейнере с контентом */
+/** Для работы со скроллом в контейнере с контентом */
 export const MAIN_LAYOUT_CONTENT_ID = "main-layout-content-id";
+/** Для работы со скроллом контейнера вложенного в основной контейнер (новая навигация) */
+export const MAIN_LAYOUT_SCROLL_CONTAINER_ID = "main-layout-scroll-container-id";
+/** Для работы со спиннером динамической подгрузки */
+export const LOADING_ON_SCROLL_SPINNER_ID = "loading-on-scroll-spinner-id";
 
 export enum EErrorBoundaryCodesBase {
   app = "app",
@@ -134,3 +143,11 @@ export enum EErrorBoundaryCodesBase {
 // триггер остаточной высоты запускающей подгрузку по скроллу, 800 равносильно
 // 20 стандартным записям по 38px с блоком счетчиком остатка и спинером
 export const defaultRestScrollTriggerHeight = 800;
+
+/** Код левой кнопки мыши */
+export const leftMouseBtnCode = 0;
+
+/**
+ * Количество отображаемых фильтров
+ */
+export const FILTERS_LIMIT = 8;

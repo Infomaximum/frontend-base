@@ -1,11 +1,11 @@
 import type { Interpolation } from "@emotion/react";
 
-export const cssStyleConversion = <T extends TDictionary>(
+export const getCssConversionStyle = <T extends TDictionary>(
   theme: T,
   styles: Interpolation<T>
 ): Interpolation<T> => {
   if (Array.isArray(styles)) {
-    return styles.map((s) => cssStyleConversion(theme, s));
+    return styles.map((s) => getCssConversionStyle(theme, s));
   }
 
   if (typeof styles === "function") {
@@ -39,7 +39,8 @@ export const commonLayoutStyle = () =>
   ({
     height: "100%",
     position: "relative",
-  } as const);
+    background: "inherit",
+  }) as const;
 
 export const commonContentStyle = () =>
   ({
@@ -49,32 +50,29 @@ export const commonContentStyle = () =>
     overflowY: "auto",
     padding: "0px",
     position: "relative",
-  } as const);
+  }) as const;
 
+// стили с отступами для списков
 export const commonContentListStyle = () =>
   ({
     ...commonContentStyle(),
-    padding: `16px 24px 0 24px`,
+    padding: `12px 16px 0px 16px`,
     overflow: "hidden",
-  } as const);
+  }) as const;
 
-/** Cтили для забледнения текста при переполнении [PT-12198] */
-/** Общий стиль забледнения */
-export const textOverflowOverlayStyle = (props: { [key: string]: string | number }) => {
-  const { backgroundColor, zIndex = 9, top = 0, right = 0, bottom = 0, width = "8px" } = props;
+// стили для вложенных списков
+export const commonContentListInsideStyle = () =>
+  ({
+    ...commonContentStyle(),
+    backgroundColor: "inherit",
+    overflow: "hidden",
+  }) as const;
 
-  return {
-    position: "absolute",
-    top: top,
-    right: right,
-    bottom: bottom,
-    width: width,
-    // rgba(255, 255, 255, 0) необходимо для корректного отображения градиента в Safari
-    backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0), ${backgroundColor})`,
-    pointerEvents: "none",
-    zIndex: zIndex,
-  } as const;
-};
+export const commonContentListDefaultStyle = (theme: TTheme) =>
+  ({
+    ...commonContentListStyle(),
+    background: theme.grey4Color,
+  }) as const;
 
 /** Cтиль наложения обёртки:
  * multiply - для светлых цветов
@@ -83,12 +81,12 @@ export const textOverflowOverlayStyle = (props: { [key: string]: string | number
 export type TTextOverflowMode = "multiply" | "screen";
 
 /** Cтиль для обёртки элемента, где возможно переполнение текста */
-export const textOverflowWrapperStyle = (mode: TTextOverflowMode = "multiply") =>
+export const getTextOverflowWrapperStyle = (mode: TTextOverflowMode = "multiply") =>
   ({
     position: "relative",
     overflow: "hidden",
     mixBlendMode: mode,
-  } as const);
+  }) as const;
 
 export const dropDownHeaderPanelButtonStyle = (theme: TTheme) => ({
   minWidth: "28px",
@@ -130,4 +128,15 @@ export const getTextClampStyle = (numberOfLines: number) =>
     display: "-webkit-box",
     WebkitBoxOrient: "vertical",
     wordBreak: "break-word",
-  } as const);
+  }) as const;
+
+/** Cтилb фона обычного контейнера c формой новой навигации */
+export const commonProfileFormLayoutStyle = {
+  overflow: "hidden",
+};
+
+export const commonProfileFormScrollContainerStyle = (theme: TTheme) => ({
+  padding: "12px 6px 0px 16px",
+  background: theme.grey4Color,
+  overflowY: "scroll" as const,
+});

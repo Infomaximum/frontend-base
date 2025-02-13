@@ -3,6 +3,7 @@ import type { IModel, Model } from "@infomaximum/graphql-model";
 import { Store } from "../Store/Store";
 import type { NTableStore } from "./TableStore.types";
 import { isNumber, setWith } from "lodash";
+import { InvalidIndex } from "@infomaximum/utility";
 
 type TPrivateTableStoreField =
   | "_checkedState"
@@ -36,7 +37,9 @@ export class TableStore<M extends Model = never> extends Store<M> {
   private _showMore: NTableStore.TShowMore = {};
   private _topRowsModels: IModel[] = [];
   private _isPageLoading: boolean = false;
-  private _scrollTop: number = 0;
+  private _scrollTop: {
+    [x: number]: number;
+  } = {};
 
   private _isTree: boolean;
 
@@ -48,13 +51,14 @@ export class TableStore<M extends Model = never> extends Store<M> {
       _expandedState: observable.ref,
       _showMore: observable.ref,
       _topRowsModels: observable.ref,
-      _scrollTop: observable.ref,
+      _scrollTop: observable,
       _isPageLoading: observable,
       setCheckState: action.bound,
       expandRows: action.bound,
       setShowMore: action.bound,
       setTopRowsModels: action.bound,
       setScrollTop: action.bound,
+      setSearchValue: action.bound,
       checkedState: computed,
       expandedState: computed,
       showMore: computed,
@@ -64,6 +68,7 @@ export class TableStore<M extends Model = never> extends Store<M> {
       clearData: override,
       searchValueChange: override,
       receiveData: override,
+      setIsPageLoading: action.bound,
     });
 
     this._isTree = params.isTree;
@@ -95,6 +100,10 @@ export class TableStore<M extends Model = never> extends Store<M> {
     return this._isPageLoading;
   }
 
+  public setIsPageLoading(isLoading: boolean) {
+    this._isPageLoading = isLoading;
+  }
+
   // ----------------------------------------ACTIONS------------------------------------//
 
   public setCheckState(checkedRows: NTableStore.TCheckedRows) {
@@ -105,12 +114,12 @@ export class TableStore<M extends Model = never> extends Store<M> {
     this._expandedState = keys;
   }
 
-  public setScrollTop(scrollTop: number) {
-    this._scrollTop = scrollTop;
+  public setScrollTop(scrollTop: number, nodeId?: number) {
+    setWith(this._scrollTop, nodeId || InvalidIndex, scrollTop, Object);
   }
 
   public async setShowMore(showMoreParams: NTableStore.TActionShowMoreParams) {
-    const currentLimits = this.showMore?.[showMoreParams.limitsName];
+    const currentLimits = this._showMore?.[showMoreParams.limitsName];
     const nodeLimit = isNumber(showMoreParams.nodeId)
       ? currentLimits?.[showMoreParams.nodeId] || 0
       : 0;
@@ -123,9 +132,9 @@ export class TableStore<M extends Model = never> extends Store<M> {
       Object
     );
 
-    this._isPageLoading = true;
+    this.setIsPageLoading(true);
     await this.requestData({ variables: showMoreParams.variables });
-    this._isPageLoading = false;
+    this.setIsPageLoading(false);
   }
 
   public setTopRowsModels(models: IModel[]) {
@@ -142,7 +151,6 @@ export class TableStore<M extends Model = never> extends Store<M> {
 
     super.clearData();
 
-    this._showMore = {};
     this._topRowsModels = [];
 
     if (excludedKeys) {
@@ -160,6 +168,8 @@ export class TableStore<M extends Model = never> extends Store<M> {
     } else {
       this._checkedState = {};
       this._expandedState = [];
+      this._showMore = {};
+      this._scrollTop = {};
     }
   }
 

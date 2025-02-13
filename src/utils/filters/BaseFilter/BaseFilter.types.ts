@@ -10,9 +10,20 @@ interface ICommonFilterComponentProps {
   open: boolean;
 }
 
+export interface IClickPosition {
+  x: number;
+  y: number;
+  elementWidth: number;
+  elementHeight: number;
+}
+export interface IPositionConfig extends IClickPosition {
+  type: string;
+}
+
 export interface IFilterAddComponentProps extends ICommonFilterComponentProps {
   filterValue?: NFiltersStore.TFilterValue;
   onSaveSuccess: () => void;
+  positionConfig?: TNullable<IPositionConfig>;
 }
 
 export interface IFilterEditComponentProps extends ICommonFilterComponentProps {

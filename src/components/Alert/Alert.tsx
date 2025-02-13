@@ -6,7 +6,6 @@ import {
   warningAlertStyle,
   errorAlertStyle,
   successAlertStyle,
-  boldTitleStyle,
   alertDescriptionStyle,
   alertStyle,
   alertBannerStyle,
@@ -47,7 +46,7 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
   }, [props.type]);
 
   const customStyle = useMemo(() => {
-    const style: Interpolation<TTheme> = [alertStyle(theme)];
+    const style = [alertStyle(theme) as Interpolation<TTheme>];
 
     switch (props.type) {
       case "success":
@@ -73,12 +72,9 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
     return style;
   }, [props.type, props.banner, theme]);
 
-  const hasDescription = !!props.description;
-
   const memoizedMessage = useMemo(
-    () =>
-      props.message ? <span css={hasDescription && boldTitleStyle}>{props.message}</span> : null,
-    [hasDescription, props.message]
+    () => (props.message ? <span>{props.message}</span> : null),
+    [props.message]
   );
 
   const memoizedDescription = useMemo(

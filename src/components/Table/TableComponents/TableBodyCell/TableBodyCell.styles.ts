@@ -12,9 +12,6 @@ export const tableBodyCellStyle = (theme: TTheme) => ({
     ${theme.tableCellVerticalPadding - theme.tableRowBorderSize}px
     !important`,
   overflow: "hidden",
-  "&.ant-table-selection-column": {
-    overflow: "hidden", // fix для IE
-  },
   // fix для Safari (чтобы убрать браузерный тултип)
   ":after": isSafari
     ? {

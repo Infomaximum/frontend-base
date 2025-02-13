@@ -1,10 +1,11 @@
-export const disabledInputStyle = (theme: TTheme) => ({
-  border: "none",
+export const getDisabledInputStyle = (theme: TTheme, bordered = true) => ({
+  height: "28px",
+  border: "1px solid transparent !important",
   overflow: "hidden",
   WebkitTextFillColor: theme.grey7Color, // Safari fix
   backgroundColor: theme.grey3Color,
   color: theme.grey7Color,
-  padding: "3px 8px",
+  padding: bordered ? "2px 7px" : "3px 8px",
 });
 
 export const disabledTextAreaStyle = (theme: TTheme) => ({
@@ -17,8 +18,8 @@ export const disabledTextAreaStyle = (theme: TTheme) => ({
   },
 });
 
-export const defaultInputStyle = (theme: TTheme, bordered = true) => ({
-  color: theme.grey9Color,
+export const getDefaultInputStyle = (theme: TTheme, bordered = true) => ({
+  color: theme.grey10Color,
   height: "28px",
   padding: bordered ? "2px 7px" : "3px 8px",
   ".ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused": {
@@ -43,10 +44,10 @@ export const secondInputStyle = (theme: TTheme) => ({
   height: "28px",
   padding: "0 16px",
   border: 0,
-  borderRight: `1px solid ${theme.grey45Color}`,
-  borderLeft: `1px solid ${theme.grey45Color}`,
+  borderRight: `1px solid ${theme.grey45Color} !important`,
+  borderLeft: `1px solid ${theme.grey45Color} !important`,
   borderRadius: 0,
-  color: theme.grey9Color,
+  color: theme.grey10Color,
   boxShadow: "none !important",
   input: {
     "::placeholder": {
@@ -63,7 +64,7 @@ export const secondInputStyle = (theme: TTheme) => ({
 });
 
 export const defaultPasswordInputStyle = (theme: TTheme) => ({
-  ...defaultInputStyle(theme),
+  ...getDefaultInputStyle(theme),
   ".ant-input-suffix": {
     marginRight: "-8px",
     marginLeft: 0,
@@ -83,7 +84,7 @@ export const defaultPasswordInputStyle = (theme: TTheme) => ({
 });
 
 export const disabledPasswordInputStyle = (theme: TTheme) => ({
-  ...disabledInputStyle,
+  ...getDisabledInputStyle,
   border: "none",
   ".ant-input-password-icon.anticon": {
     display: "none",

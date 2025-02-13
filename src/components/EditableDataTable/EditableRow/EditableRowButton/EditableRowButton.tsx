@@ -17,7 +17,14 @@ enum EEditableRowButtonTypes {
 
 const EditableRowButtonComponent: React.FC<IEditableRowButtonProps> & {
   types: typeof EEditableRowButtonTypes;
-} = ({ type, children, onClick, disabled, clickHandlerData, ...rest }) => {
+} = ({
+  type = EEditableRowButtonTypes.DEFAULT,
+  children,
+  onClick,
+  disabled,
+  clickHandlerData,
+  ...rest
+}) => {
   const handleClick: typeof onClick = useCallback(
     (event) => {
       event.stopPropagation();
@@ -51,10 +58,6 @@ const EditableRowButtonComponent: React.FC<IEditableRowButtonProps> & {
       {children}
     </div>
   );
-};
-
-EditableRowButtonComponent.defaultProps = {
-  type: EEditableRowButtonTypes.DEFAULT,
 };
 
 EditableRowButtonComponent.types = EEditableRowButtonTypes;

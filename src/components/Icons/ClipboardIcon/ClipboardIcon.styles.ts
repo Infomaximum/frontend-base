@@ -4,7 +4,3 @@ export const iconStyle = (theme: TTheme) => ({
     color: theme.blue5Color,
   },
 });
-
-export const tooltipStyle = {
-  display: "flex",
-} as const;

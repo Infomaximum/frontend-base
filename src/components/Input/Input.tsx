@@ -13,8 +13,8 @@ import {
   useRef,
 } from "react";
 import {
-  defaultInputStyle,
-  disabledInputStyle,
+  getDefaultInputStyle,
+  getDisabledInputStyle,
   disabledTextAreaStyle,
   disabledPasswordInputStyle,
   defaultPasswordInputStyle,
@@ -25,8 +25,8 @@ import type { AutoSizeType } from "rc-textarea";
 import type { InputRef, PasswordProps } from "antd/lib/input";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { isString } from "lodash";
-import { Tooltip } from "../Tooltip";
 import { getTextWidth } from "../../utils/textWidth";
+import { AlignedTooltip } from "../AlignedTooltip";
 
 const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
   (props, ref: Ref<InputRef>) => {
@@ -35,8 +35,9 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
       clearIcon,
       isSecond,
       value,
-      tooltipPlacement,
       allowClear: allowClearProp,
+      wrapperStyle,
+      hideTooltip,
       ...rest
     } = props;
     const allowClear = clearIcon && allowClearProp ? { clearIcon } : allowClearProp;
@@ -44,30 +45,30 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
     const inputWrapperRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      if (tooltipPlacement && inputWrapperRef.current) {
-        const textWidth = isString(value) ? getTextWidth(value, theme.h4FontSize) : 0;
+      if (inputWrapperRef.current) {
+        const textWidth = isString(value) ? getTextWidth(value, { size: theme.h4FontSize }) : 0;
         setIsOverflow(textWidth > inputWrapperRef.current.clientWidth);
       }
-    }, [tooltipPlacement, theme, value]);
+    }, [theme, value]);
 
     return (
-      <Tooltip title={isOverflow && tooltipPlacement && value} placement={tooltipPlacement}>
-        <div ref={inputWrapperRef}>
+      <div ref={inputWrapperRef} css={wrapperStyle}>
+        <AlignedTooltip offsetY={-1} title={(!hideTooltip && isOverflow && String(value)) || null}>
           <AntInput
             {...rest}
             ref={ref}
             css={[
               props.disabled
-                ? disabledInputStyle(theme)
+                ? getDisabledInputStyle(theme, props.bordered)
                 : isSecond
-                ? secondInputStyle
-                : defaultInputStyle(theme, props.bordered),
+                  ? secondInputStyle
+                  : getDefaultInputStyle(theme, props.bordered),
             ]}
             value={value}
             allowClear={allowClear}
           />
-        </div>
-      </Tooltip>
+        </AlignedTooltip>
+      </div>
     );
   }
 );
@@ -89,13 +90,14 @@ const InputPassword: ForwardRefExoticComponent<PasswordProps & RefAttributes<any
 const TextArea: ForwardRefExoticComponent<ITextAreaProps & RefAttributes<TextAreaRef>> = forwardRef(
   (props, ref: Ref<TextAreaRef>) => {
     const theme = useTheme();
+    const { minRows } = props;
 
     const autoSize = useMemo<AutoSizeType>(
       () => ({
-        minRows: 3,
+        minRows: minRows || 3,
         maxRows: 5,
       }),
-      []
+      [minRows]
     );
 
     return (

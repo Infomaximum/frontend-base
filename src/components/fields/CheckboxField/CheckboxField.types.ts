@@ -7,7 +7,9 @@ export type TCheckboxFieldValue = boolean;
 
 export interface ICheckboxComponentProps
   extends ICheckboxComponentOwnProps,
-    FieldRenderProps<TCheckboxFieldValue> {}
+    FieldRenderProps<TCheckboxFieldValue> {
+  name: string;
+}
 
 export interface ICheckboxComponentOwnProps
   extends Omit<CheckboxProps, "onBlur" | "value" | "indeterminate"> {

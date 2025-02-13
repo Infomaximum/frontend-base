@@ -64,6 +64,11 @@ abstract class BaseFilter
   public isShowInAddFilterList() {
     return true;
   }
+
+  /** Иконка перед названием фильтра */
+  public getIcon(): React.ReactElement | null {
+    return null;
+  }
 }
 
 export { BaseFilter };

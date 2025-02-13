@@ -2,23 +2,18 @@ import React, { useCallback } from "react";
 import { shallow } from "enzyme";
 import { Message } from "./Message";
 import { Localization } from "@infomaximum/localization";
-import { SWITCHED_ENABLED, SWITCHED_OFF } from "../../utils/Localization/Localization";
 import type { ReactElement } from "react";
 import type {
   IMessageProps,
   TRemoveMessageProps,
   TGetMassAssignMessageParams,
-} from "./Messsage.types";
+} from "./Message.types";
 import { waitForComponentToPaint } from "../../utils/tests/utils";
+import { getStyledAndLocalizedEntities } from "./Message.utils";
 
 const ACCESS_ROLE = {
   ru: "Роль доступа",
   en: "Access role",
-};
-
-const AUTHENTICATION = {
-  ru: "Аутентификация",
-  en: "Authentication",
 };
 
 const DEPARTMENT = {
@@ -26,35 +21,9 @@ const DEPARTMENT = {
   en: "Department",
 };
 
-const DEPARTMENT_DECLENSION = {
-  ru: {
-    s: "отделу",
-    p1: "отделам",
-    p2: "отделам",
-  },
-  en: {
-    s: "department",
-    p1: "departments",
-    p2: "departments",
-  },
-};
-
 const USER = {
   ru: "Пользователь",
   en: "User",
-};
-
-const USER_DECLENSION = {
-  ru: {
-    s: "пользователю",
-    p1: "пользователям",
-    p2: "пользователям",
-  },
-  en: {
-    s: "user",
-    p1: "users",
-    p2: "users",
-  },
 };
 
 const TestComponent: React.FC<IMessageProps> = (props) => {
@@ -134,87 +103,50 @@ describe("Тесты методов класса 'Message'", () => {
   });
 
   describe("Тесты метода 'getMassAssignMessage'", () => {
-    const targetObjectEmployee = {
-      count: 1,
-      loc: USER_DECLENSION,
-    };
-
-    const targetObjectDepartment = {
-      count: 1,
-      loc: DEPARTMENT_DECLENSION,
-    };
-
-    const nullTargetObjectDepartment = {
-      count: 0,
-      loc: DEPARTMENT_DECLENSION,
-    };
-
-    const params = {
+    const params: TGetMassAssignMessageParams = {
       localization,
       entityLoc: ACCESS_ROLE,
-      entities: "Сотрудник",
-      targetObjectList: [targetObjectEmployee, targetObjectDepartment],
+      entityValue: "Сотрудник",
+      genus: "female",
     };
 
     const component = (params: TGetMassAssignMessageParams) =>
       shallow(Message.getMassAssignMessage(params));
 
-    it("Если выбран 1 отдел и 1 пользователь", () => {
-      expect(component(params).find("div").text()).toEqual(
-        "Массовое действие Роль доступа – Сотрудник применено к 1 пользователю, 1 отделу"
-      );
+    it("Массовое назначение genus=female", () => {
+      expect(component(params).find("div").text()).toEqual("Роль доступа – Сотрудник применена");
     });
 
-    it("Если выбран 1 пользователь и 0 отделов", () => {
-      params.targetObjectList = [targetObjectEmployee, nullTargetObjectDepartment];
-
-      expect(component(params).find("div").text()).toEqual(
-        "Массовое действие Роль доступа – Сотрудник применено к 1 пользователю"
-      );
-    });
-
-    it("Если аутентификация в систему включена", () => {
-      const params = {
-        localization,
-        entityLoc: AUTHENTICATION,
-        entities: SWITCHED_ENABLED.ru,
-        targetObjectList: [targetObjectEmployee, nullTargetObjectDepartment],
-      };
-
-      expect(component(params).find("div").text()).toEqual(
-        `Массовое действие ${AUTHENTICATION.ru} – Вкл применено к 1 пользователю`
-      );
-    });
-
-    it("Если аутентификация отключена", () => {
-      const params = {
-        localization,
-        entityLoc: AUTHENTICATION,
-        entities: SWITCHED_OFF.ru,
-        targetObjectList: [targetObjectEmployee, nullTargetObjectDepartment],
-      };
-
-      expect(component(params).find("div").text()).toEqual(
-        `Массовое действие ${AUTHENTICATION.ru} – Откл применено к 1 пользователю`
-      );
-    });
-
-    it("Если доступ к мониторингу отключен", () => {
+    it("Массовое назначение genus=male", () => {
       const MONITORING = {
         ru: "Мониторинг",
         en: "Monitoring",
       };
 
-      const params = {
+      const params: TGetMassAssignMessageParams = {
         localization,
         entityLoc: MONITORING,
-        entities: SWITCHED_OFF.ru,
-        targetObjectList: [targetObjectEmployee, nullTargetObjectDepartment],
+        entityValue: "Откл",
       };
 
-      expect(component(params).find("div").text()).toEqual(
-        "Массовое действие Мониторинг – Откл применено к 1 пользователю"
-      );
+      expect(component(params).find("div").text()).toEqual("Мониторинг – Откл применен");
+    });
+    it("Массовое назначение genus=neuter", () => {
+      const DISTRIBUTION = {
+        ru: "Распределение",
+        en: "Allocation",
+      };
+
+      const entities = getStyledAndLocalizedEntities(true, localization);
+
+      const params: TGetMassAssignMessageParams = {
+        localization,
+        entityLoc: DISTRIBUTION,
+        entityValue: entities,
+        genus: "neuter",
+      };
+
+      expect(component(params).find("div").text()).toEqual("Распределение – Вкл применено");
     });
   });
 

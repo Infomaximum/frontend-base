@@ -1,4 +1,4 @@
-import type { IDrawerFormProps } from "../DrawerForm/DrawerForm.types";
+import type { IDrawerFormOwnProps } from "../DrawerForm/DrawerForm.types";
 
 export interface IOptionConfig {
   value: string;
@@ -15,7 +15,7 @@ export interface IContentConfig {
   matchOptions?: string[];
 }
 
-export interface IOptionalDrawerFormProps extends Omit<IDrawerFormProps, "onSubmit"> {
+export interface IOptionalDrawerFormProps extends Omit<IDrawerFormOwnProps, "onSubmit"> {
   /**
    * Список опций, отображаемых в селекте дровера.
    */

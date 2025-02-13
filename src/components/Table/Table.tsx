@@ -18,8 +18,9 @@ import {
   emptyTableStyle,
   borderTopStyle,
   transparentBordersStyle,
-  tableStyle,
-  antTableSpinStyle,
+  getTableStyle,
+  getAntTableSpinStyle,
+  tableWrapperStyle,
 } from "./Table.styles";
 import { type Interpolation, withTheme } from "@emotion/react";
 import { Empty } from "../Empty/Empty";
@@ -34,10 +35,12 @@ import { TableHeaderWrapper } from "./TableComponents/TableHeaderWrapper/TableHe
 import { TableExpandIcon } from "./TableComponents/TableExpandIcon/TableExpandIcon";
 import { TableCheckboxCell } from "./TableComponents/TableCheckboxCell/TableCheckboxCell";
 import { createSelector } from "reselect";
-import { TABLE_HEADER_ID, loaderDelay } from "../../utils/const";
+import { TABLE_HEADER_ID, leftMouseBtnCode, loaderDelay } from "../../utils/const";
 import { AutoSizer } from "react-virtualized";
-import { cssStyleConversion } from "../../styles";
+import { getCssConversionStyle } from "../../styles";
 import { AntTableScrollListener } from "./Table.utils";
+import type { IVirtualizedColumnConfig } from "../VirtualizedTable/VirtualizedTable.types";
+import type { ExpandableConfig } from "antd/es/table/interface";
 
 class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, ITableState> {
   public static defaultProps = {
@@ -130,6 +133,22 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
         ? {
             renderCell: this.renderCheckboxCell,
             columnWidth: this.props.theme.tableCheckboxColumnWidth,
+            onCell: () => {
+              return {
+                onClick(event: React.MouseEvent) {
+                  if (window.getSelection()?.toString()) {
+                    event.stopPropagation();
+
+                    return;
+                  }
+                },
+                onMouseDown(e: React.MouseEvent) {
+                  if (e.button === leftMouseBtnCode) {
+                    window.getSelection()?.removeAllRanges();
+                  }
+                },
+              };
+            },
             ...rowSelection,
           }
         : undefined
@@ -153,16 +172,35 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
   private replaceScrollAreaHeight = createSelector(
     (y) => y,
     (y: number, scroll: ITableOwnProps<T>["scroll"]) => scroll,
-    (y: number, scroll: ITableOwnProps<T>["scroll"]) => ({ ...scroll, y } as const)
+    (y: number, scroll: ITableOwnProps<T>["scroll"]) => ({ ...scroll, y }) as const
   );
 
   private getAntSpinProps = createSelector(
     (headerHeight) => headerHeight,
     (headerHeight: number, loading: ITableOwnProps<T>["loading"]) => loading,
     (headerHeight: number, loading: ITableOwnProps<T>["loading"]) => ({
-      style: antTableSpinStyle(headerHeight),
+      style: getAntTableSpinStyle(headerHeight),
       ...(isBoolean(loading) ? { spinning: loading } : loading),
     })
+  );
+
+  private getAntTableExpandable = createSelector(
+    (isExpandableTable) => isExpandableTable,
+    (_: boolean | undefined, expandable: ExpandableConfig<T> | undefined) => expandable,
+    (isExpandableTable, expandable) => {
+      if (isExpandableTable && expandable) {
+        return {
+          ...this.expandable,
+          ...expandable,
+        };
+      }
+
+      if (isExpandableTable) {
+        return this.expandable;
+      }
+
+      return expandable;
+    }
   );
 
   private get headerHeight() {
@@ -185,18 +223,14 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
       isSearchEmpty,
       emptyDescription,
       emptyHint,
-      loading,
       customEmptyTableStyle,
       customEmptyContent,
+      emptyImage,
+      loading,
+      isVirtualized,
     } = this.props;
 
-    let isLoading = false;
-
-    if (isBoolean(loading)) {
-      isLoading = loading;
-    } else {
-      isLoading = !!loading?.spinning;
-    }
+    const isLoading = isBoolean(loading) ? loading : !!loading?.spinning;
 
     return (
       <Empty
@@ -206,7 +240,10 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
         description={emptyDescription}
         hint={emptyHint}
         emptyContent={isLoading ? null : customEmptyContent}
+        isLoading={isLoading}
+        isVirtualized={isVirtualized}
         customEmptyTableStyle={customEmptyTableStyle}
+        emptyImage={emptyImage}
       />
     );
   };
@@ -253,14 +290,14 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
   };
 
   private getStyleTable = (opacity: TTableOpacity): Interpolation<TTheme> => {
-    const { dataSource, customStyle, isShowDividers, theme } = this.props;
+    const { dataSource, customStyle, isShowDividers, theme, isWithoutWrapperStyles } = this.props;
 
-    const styles: Interpolation<TTheme>[] = [tableStyle(opacity)];
+    const styles: Interpolation<TTheme>[] = [getTableStyle(opacity, isWithoutWrapperStyles)];
 
     if (!dataSource || isEmpty(dataSource)) {
       styles.push(emptyTableStyle);
     } else {
-      styles.push(cssStyleConversion(theme, customStyle));
+      styles.push(getCssConversionStyle(theme, customStyle));
     }
 
     if (!isShowDividers) {
@@ -274,8 +311,8 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
     return this.props.isStretchToBottom
       ? { height: this.defineDistanceToBottom() }
       : this.props.isStretchByParent
-      ? { flexGrow: 1 }
-      : undefined;
+        ? { flexGrow: 1 }
+        : undefined;
   }
 
   /** Определить расстояние от верхнего края таблицы до нижнего края страницы */
@@ -305,8 +342,10 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
       rowHeight,
       scrollTop,
       expandable,
+      isWithoutWrapperStyles: isWithoutWrapperStylesProp,
       ...rest
     } = this.props;
+    const { isExpandableTable } = this.state;
 
     const loading = this.getSpinProps(this.props);
     const antTableSpinProps = this.getAntSpinProps(
@@ -319,11 +358,13 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
     const isStretchedHeight = !isExplicitHeight && (isStretchByParent || isStretchToBottom);
 
     return (
-      <div style={this.wrapperStyle} ref={this.wrapperRef}>
+      <div style={this.wrapperStyle} ref={this.wrapperRef} css={tableWrapperStyle}>
         <AutoSizer disableWidth={true} disableHeight={!isStretchedHeight}>
           {({ height }) => {
             // Делаем запас в 1px для корректной работы при разных масштабах окна браузера
-            const scrollAreaHeight = height - this.headerHeight - 1;
+            // Если без isWithoutWrapperStylesProp, то учитываем высоту верхнего паддинга
+            const scrollAreaHeight =
+              height - this.headerHeight - (isWithoutWrapperStylesProp ? 1 : 13);
 
             const scroll = isStretchedHeight
               ? this.replaceScrollAreaHeight(scrollAreaHeight, this.props.scroll)
@@ -334,7 +375,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                 {...rest}
                 rowHeight={rowHeight}
                 isShowDividers={isShowDividers ?? true}
-                columns={columns}
+                columns={columns as IVirtualizedColumnConfig<any>[]}
                 localization={localization}
                 loading={loading}
                 rowSelection={rowSelection}
@@ -342,6 +383,8 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                 empty={this.getEmpty()}
                 onScroll={onScroll}
                 scrollTop={scrollTop}
+                expandable={expandable}
+                isWithoutWrapperStyles={isWithoutWrapperStylesProp}
               />
             ) : (
               <ConfigProvider renderEmpty={this.getEmpty}>
@@ -355,9 +398,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                   loading={antTableSpinProps}
                   columns={columns}
                   showSorterTooltip={false}
-                  expandable={
-                    expandable ?? (this.state.isExpandableTable ? this.expandable : undefined)
-                  }
+                  expandable={this.getAntTableExpandable(isExpandableTable, expandable)}
                   components={this.getTableComponents(components)}
                   rowSelection={this.getRowSelectionConfig(rowSelection)}
                   scroll={scroll}
@@ -372,8 +413,10 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
   }
 }
 
-const TableWithTheme = withTheme(observer(TableComponent));
+const TableWithTheme = withTheme(observer(TableComponent)) as <T>(
+  props: ITableOwnProps<T>
+) => JSX.Element;
 
 export const Table = <T extends TDictionary>(props: ITableOwnProps<T>) => (
-  <TableWithTheme {...props} />
+  <TableWithTheme<T> {...props} />
 );

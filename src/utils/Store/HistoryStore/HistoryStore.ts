@@ -2,9 +2,12 @@ import type { NavigateFunction, Location } from "react-router";
 import { assertSimple } from "@infomaximum/assert";
 import { getApiPrefix, getBasePrefix } from "../../URI/URI";
 
+type TLocationChangeListener = (location: Location) => void;
+
 export class HistoryStore {
   private _navigate?: NavigateFunction;
   private _location?: Location;
+  private _locationChangeListeners: TLocationChangeListener[] = [];
 
   private _basename: string;
 
@@ -26,6 +29,7 @@ export class HistoryStore {
   }
 
   public set location(location: Location) {
+    this._locationChangeListeners.forEach((listener) => listener(location));
     this._location = location;
   }
 
@@ -41,5 +45,13 @@ export class HistoryStore {
 
   public get basename() {
     return this._basename;
+  }
+
+  public listenLocationChange(listener: TLocationChangeListener) {
+    this._locationChangeListeners.push(listener);
+
+    return () => {
+      this._locationChangeListeners.filter((_listener) => _listener !== listener);
+    };
   }
 }

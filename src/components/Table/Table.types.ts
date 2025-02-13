@@ -6,24 +6,30 @@ import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme"
 import type { ScrollParams } from "react-virtualized";
 import type { IVirtualizedTableProps } from "../VirtualizedTable/VirtualizedTable.types";
 
-export interface IBaseColumnConfig<T> extends Omit<ColumnProps<T>, "children"> {
+export interface IBaseColumnConfig<T>
+  extends Omit<ColumnProps<T>, "children" | "key" | "dataIndex"> {
   children?: IBaseColumnConfig<T>[] | null;
+  dataIndex?: string;
+  priority?: number;
+  key?: string | number;
 }
 
-type TTableProps<T> = Omit<TableProps<T>, "columns">;
+type TTableProps<T> = Omit<TableProps<T>, "columns" | "onScroll" | "rowKey">;
 
 export interface ITableOwnProps<T>
   extends TTableProps<T>,
     Pick<IVirtualizedTableProps<T>, "targetAll" | "rowHeight"> {
+  rowKey?: string;
   localization: Localization;
   onScroll?(params: ScrollParams): void;
   scrollTop?: number;
   isVirtualized?: boolean;
   isSearchEmpty?: boolean;
   isFiltersEmpty?: boolean;
-  emptyDescription?: string;
+  emptyDescription?: string | JSX.Element;
+  emptyImage?: React.ReactNode;
   /** Подсказка пользователю, когда "нет данных" */
-  emptyHint?: string;
+  emptyHint?: string | JSX.Element;
   columns?: IBaseColumnConfig<T>[];
   customStyle?: Interpolation<TTheme>;
   customEmptyContent?: JSX.Element;
@@ -41,6 +47,8 @@ export interface ITableOwnProps<T>
   isStretchToBottom?: boolean;
   /** Показывать полосу сверху между шапкой и содержимым таблицы */
   isShowTopBorder?: boolean;
+  /** Отключить стили таблицы новой навигации */
+  isWithoutWrapperStyles?: boolean;
 }
 
 export interface ITableProps<T> extends IWithThemeProps<TTheme>, ITableOwnProps<T> {}

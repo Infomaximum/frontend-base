@@ -68,6 +68,7 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
       disabled={isDisabled}
       showArrow={readOnly ? false : showArrow}
       css={defaultSelectFieldStyle}
+      readOnly={readOnly}
     />
   );
 });

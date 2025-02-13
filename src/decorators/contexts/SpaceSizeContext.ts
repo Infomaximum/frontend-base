@@ -1,8 +1,10 @@
 import { createContext } from "react";
 
 export enum ESpaceSize {
-  small = "small",
+  default = "default",
   large = "large",
+  table = "table",
+  modal = "modal",
 }
 
 export const SpaceSizeContext = createContext<ESpaceSize>(ESpaceSize.large);

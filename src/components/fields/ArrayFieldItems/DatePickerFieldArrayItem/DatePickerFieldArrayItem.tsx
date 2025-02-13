@@ -1,75 +1,54 @@
 import type { IDatePickerFieldArrayItemProps } from "./DatePickerFieldArrayItem.types";
-import React, { useCallback, useMemo } from "react";
-import { isFunction } from "lodash";
-import { datePickerStyle, removeButtonStyle } from "./DatePickerFieldArrayItem.styles";
 import {
   removeDatePickerFieldButtonTestId,
   removeDateTimePickerFieldButtonTestId,
 } from "../../../../utils/TestIds";
-import { Button } from "../../../Button/Button";
-import { CloseOutlined } from "../../../Icons/Icons";
 import { DatePickerFormField } from "../../DatePickerField";
+import { RemoveButton } from "../components/RemoveButton/RemoveButton";
+import { wrapperFieldStyle, wrapperStyle } from "../ArrayFieldItems.styles";
+import { memo } from "react";
 
-const DatePickerFieldArrayItem: React.FC<IDatePickerFieldArrayItemProps> = (props) => {
+const DatePickerFieldArrayItemComponent: React.FC<IDatePickerFieldArrayItemProps> = (props) => {
   const {
     fieldEntityPath,
-    fields,
     fieldEntityIndex,
     onRemoveFieldEntity,
-    removeIcon: RemoveIcon,
+    removeIcon,
     customRemoveIconStyle,
     writeAccess,
     removeAccess,
     readOnly,
+    isRemoveItem,
     ...rest
   } = props;
 
-  const fieldsLength = fields?.length;
-
-  const removeField = useCallback(() => {
-    if (isFunction(onRemoveFieldEntity)) {
-      onRemoveFieldEntity(fieldEntityIndex);
-    }
-  }, [fieldEntityIndex, onRemoveFieldEntity]);
-
-  const removeButton = useMemo(() => {
-    return fieldsLength && fieldsLength > 1 && !readOnly ? (
-      <Button
-        type="link"
-        size="small"
-        test-id={
-          props?.showTime
-            ? `${removeDateTimePickerFieldButtonTestId}_${fieldEntityIndex}`
-            : `${removeDatePickerFieldButtonTestId}_${fieldEntityIndex}`
-        }
-        value={fieldEntityIndex}
-        css={customRemoveIconStyle ?? removeButtonStyle}
-        onClick={removeField}
-      >
-        {RemoveIcon ?? <CloseOutlined />}
-      </Button>
-    ) : null;
-  }, [
-    RemoveIcon,
-    fieldEntityIndex,
-    fieldsLength,
-    props?.showTime,
-    readOnly,
-    removeField,
-    customRemoveIconStyle,
-  ]);
-
   return (
-    <DatePickerFormField
-      key={fieldEntityPath}
-      name={fieldEntityPath}
-      css={datePickerStyle}
-      wrapperComponentStyle={datePickerStyle}
-      rightLabel={removeButton}
-      readOnly={readOnly}
-      {...rest}
-    />
+    <div css={wrapperStyle}>
+      <DatePickerFormField
+        key={fieldEntityPath}
+        name={fieldEntityPath}
+        css={wrapperFieldStyle}
+        formItemStyle={wrapperFieldStyle}
+        wrapperComponentStyle={wrapperFieldStyle}
+        readOnly={readOnly}
+        {...rest}
+      />
+
+      {isRemoveItem ? (
+        <RemoveButton
+          fieldEntityIndex={fieldEntityIndex}
+          onRemoveFieldEntity={onRemoveFieldEntity}
+          testId={
+            props?.showTime
+              ? `${removeDateTimePickerFieldButtonTestId}_${fieldEntityIndex}`
+              : `${removeDatePickerFieldButtonTestId}_${fieldEntityIndex}`
+          }
+          customRemoveIconStyle={customRemoveIconStyle}
+          removeIcon={removeIcon}
+        />
+      ) : null}
+    </div>
   );
 };
 
-export { DatePickerFieldArrayItem };
+export const DatePickerFieldArrayItem = memo(DatePickerFieldArrayItemComponent);

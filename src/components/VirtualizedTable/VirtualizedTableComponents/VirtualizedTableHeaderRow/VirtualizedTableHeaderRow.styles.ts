@@ -11,10 +11,9 @@ export const virtualizedTableHeaderRowStyle = (theme: TTheme) => {
     ...rest,
     height: `${theme.commonTableRowHeight - theme.tableRowBorderSize}px`,
     background: theme.grey1Color,
-    color: theme.grey9Color,
+    color: theme.grey10Color,
     borderBottom: `${theme.tableRowBorderSize}px solid ${theme.grey5Color}`,
     boxSizing: "content-box",
     position: "relative",
-    zIndex: 1,
   } as const;
 };

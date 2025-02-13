@@ -1,30 +1,38 @@
-import { type FC, useMemo, useRef } from "react";
+import { type FC, useMemo } from "react";
 import type { ITagProps } from "./Tag.types";
 // eslint-disable-next-line im/ban-import-entity
 import { Tag as AntTag } from "antd";
-import { getTagStyle, notClosableTagStyle, tagContentStyle, tagOverlayStyle } from "./Tag.styles";
+import {
+  getTagStyle,
+  notClosableTagStyle,
+  notColoredTagStyle,
+  tagContentStyle,
+} from "./Tag.styles";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { get } from "lodash";
-import { Tooltip } from "../Tooltip";
-import { useOverflow } from "../../decorators/hooks/useOverflow";
+import { AlignedTooltip } from "../AlignedTooltip";
 
 const TagComponent: FC<ITagProps> = (props) => {
   const theme = useTheme();
 
   const { tagsStyles } = theme;
-  const { closable, color: colorProps = "default", children, title } = props;
+  const {
+    closable,
+    color: colorProps = "default",
+    children,
+    title,
+    isWithoutTooltipWrapper,
+  } = props;
 
-  const ref = useRef<HTMLDivElement>(null);
-  const { isOverflow } = useOverflow(ref, children, title);
-
-  const { backgroundColor, borderColor, textColor, closeIconColor } = (get(
+  const { backgroundColor, borderColor, textColor, closeIconColor, closeIconColorHover } = (get(
     tagsStyles,
     colorProps
   ) as valueof<typeof tagsStyles> | undefined) ?? {
     backgroundColor: theme.grey3Color,
     borderColor: theme.grey4Color,
     textColor: theme.grey8Color,
-    closeIconColor: theme.grey8Color,
+    closeIconColor: theme.grey7Color,
+    closeIconColorHover: theme.grey8Color,
   };
 
   const tagStyle = useMemo(
@@ -33,28 +41,41 @@ const TagComponent: FC<ITagProps> = (props) => {
         String(borderColor),
         String(textColor),
         String(backgroundColor),
-        String(closeIconColor)
+        String(closeIconColor),
+        String(closeIconColorHover)
       ),
-    [backgroundColor, borderColor, textColor, closeIconColor]
+    [borderColor, textColor, backgroundColor, closeIconColor, closeIconColorHover]
   );
 
   const tagCssRule = useMemo(() => {
-    if (closable) {
-      return tagStyle;
+    const resultStyleArray = [];
+
+    if (colorProps === "default") {
+      resultStyleArray.push(notColoredTagStyle);
     }
 
-    return [tagStyle, notClosableTagStyle];
-  }, [tagStyle, closable]);
+    if (closable) {
+      resultStyleArray.push(tagStyle);
+    } else {
+      resultStyleArray.push(tagStyle, notClosableTagStyle);
+    }
 
-  return (
-    <Tooltip title={title ?? (isOverflow && children)}>
+    return resultStyleArray;
+  }, [colorProps, closable, tagStyle]);
+
+  const tagRenderComponent = useMemo(
+    () => (
       <AntTag key={colorProps} {...props} css={tagCssRule} color={colorProps} title={undefined}>
-        <div css={tagContentStyle} ref={ref}>
-          {children}
-          {isOverflow && <div css={tagOverlayStyle(backgroundColor)} />}
-        </div>
+        <div css={tagContentStyle}>{children}</div>
       </AntTag>
-    </Tooltip>
+    ),
+    [children, colorProps, props, tagCssRule]
+  );
+
+  return isWithoutTooltipWrapper ? (
+    tagRenderComponent
+  ) : (
+    <AlignedTooltip title={title ?? children}>{tagRenderComponent}</AlignedTooltip>
   );
 };
 

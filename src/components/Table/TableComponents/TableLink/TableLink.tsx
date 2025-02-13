@@ -1,23 +1,18 @@
 import { type FC, isValidElement, memo, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ellipsisStyle, tableLinkStyle } from "./TableLink.styles";
+import { tableLinkStyle } from "./TableLink.styles";
 import type { ITableLinkProps } from "./TableLink.types";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { TextOverflow } from "../../../TextOverflow";
+import { AlignedTooltip } from "../../../AlignedTooltip";
 import { Tag } from "../../../Tag";
 
 const TableLinkComponent: FC<ITableLinkProps> = ({
-  ellipsis = true,
   title,
   children,
+  customTooltipWrapperStyle,
   ...restProps
 }) => {
   const theme = useTheme();
-
-  const styles = useMemo(
-    () => [tableLinkStyle(theme), ellipsis ? ellipsisStyle : null],
-    [ellipsis, theme]
-  );
 
   const disableTextOverflow = useCallback(() => {
     // Если внутри компонент Tag, то забледнение не требуется (у Tag свои стили забледнения) [PT-12198]
@@ -26,18 +21,22 @@ const TableLinkComponent: FC<ITableLinkProps> = ({
 
   const component = useMemo(
     () => (
-      <Link css={styles} {...restProps}>
+      <Link css={tableLinkStyle(theme)} {...restProps}>
         {children}
       </Link>
     ),
-    [children, styles, restProps]
+    [theme, restProps, children]
   );
 
   if (disableTextOverflow()) {
     return component;
   }
 
-  return <TextOverflow title={title}>{component}</TextOverflow>;
+  return (
+    <AlignedTooltip title={title} customStyle={customTooltipWrapperStyle}>
+      {component}
+    </AlignedTooltip>
+  );
 };
 
 export const TableLink = memo(TableLinkComponent);

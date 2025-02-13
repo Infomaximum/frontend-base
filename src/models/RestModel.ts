@@ -25,10 +25,6 @@ export class RestModel extends Model {
     return this.parent?.getId() as number;
   }
 
-  public getNextCount(): number {
-    return this.getNumberField("next_count") || 0;
-  }
-
   /**
    * Возвращает typename RestModel модели.
    * @returns {string} typename
@@ -38,7 +34,7 @@ export class RestModel extends Model {
   }
 
   public override getInnerName(): string {
-    return `${this.getTypename()}_${this.getId()}_${this.getNextCount()}`;
+    return `${this.getTypename()}_${this.getId()}`;
   }
 }
 

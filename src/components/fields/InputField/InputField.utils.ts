@@ -72,3 +72,6 @@ export const convertToNotWhitespace = (formValue: string) => formValue.replace(/
 export const convertToMaxLengthValue = (maxLength: number) => (formValue: string) => {
   return formValue.length > maxLength ? formValue.slice(0, maxLength) : formValue;
 };
+
+/** Удаляет пробелы по краям строки и заменяет лишние пробелы внутри строки на один */
+export const trimAndCompressWhitespace = (value: string) => value.trim().replace(/\s+/g, " ");

@@ -1,6 +1,5 @@
 import type { Interpolation } from "@emotion/react";
 import { get, isString } from "lodash";
-import { useCallback } from "react";
 import {
   virtualizedTableCellExpandedTextStyle,
   getVirtualizedTableCellFlexStyle,
@@ -12,8 +11,8 @@ import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
 import { TableExpandIcon } from "../../../Table/TableComponents/TableExpandIcon/TableExpandIcon";
 import { contextMenuColumnKey } from "../../../../utils/const";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { cssStyleConversion } from "../../../../styles";
-import { AutoTooltip } from "../../../AutoTooltip";
+import { getCssConversionStyle } from "../../../../styles";
+import { AlignedTooltip } from "../../../AlignedTooltip";
 
 const VirtualizedTableBodyCellComponent = <T extends TRow>(
   props: IVirtualizedTableBodyCellProps<T | null>
@@ -38,29 +37,23 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   const content = get(record, dataIndex as string);
   const node = column.render ? column.render(dataIndex ? content : record, record, index) : content;
 
-  const handleRowContentClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      e.stopPropagation();
+  const handleRowContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
 
-      if (window.getSelection()?.toString()) {
-        setTimeout(() => {
-          !!record?.key && onExpanderChange(record.key, !isExpanded);
-        }, 0);
+    if (window.getSelection()?.toString()) {
+      setTimeout(() => {
+        !!record?.key && onExpanderChange(record.key, !isExpanded);
+      }, 0);
 
-        return;
-      }
+      return;
+    }
 
-      !!record?.key && onExpanderChange(record.key, !isExpanded);
-    },
-    [isExpanded, onExpanderChange, record?.key]
-  );
+    !!record?.key && onExpanderChange(record.key, !isExpanded);
+  };
 
-  const handleExpandIconClick = useCallback(
-    (record: T | null) => {
-      !!record?.key && onExpanderChange(record.key, !isExpanded);
-    },
-    [isExpanded, onExpanderChange]
-  );
+  const handleExpandIconClick = (record: T | null) => {
+    !!record?.key && onExpanderChange(record.key, !isExpanded);
+  };
 
   const getExpanderButton = () => {
     return (
@@ -79,7 +72,7 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   };
 
   const wrapInTooltip = (node: React.ReactNode) => {
-    return isString(node) ? <AutoTooltip>{node}</AutoTooltip> : node;
+    return isString(node) ? <AlignedTooltip>{node}</AlignedTooltip> : node;
   };
 
   // Увеличиваем высоту контента первой ячейки, если включен клик по всей строке
@@ -100,7 +93,8 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
   return (
     <div
       key={key}
-      css={cssStyleConversion(theme, [virtualizedTableCellStyle, cellCustomStyle])}
+      {...column?.onCell?.(record)}
+      css={getCssConversionStyle(theme, [virtualizedTableCellStyle, cellCustomStyle])}
       style={getVirtualizedTableCellFlexStyle(width, minWidth)}
     >
       {isTree && isFirstColumn && getIndentBlock()}

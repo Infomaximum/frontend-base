@@ -18,9 +18,8 @@ import {
 import { createSelector } from "reselect";
 import type { LabeledValue } from "antd/lib/select";
 import {
-  ENTER_QUERY_OR_CHOOSE,
+  ENTER_QUERY,
   REFINE_QUERY,
-  SHOWED_ALL_CHANGE_QUERY,
   NOT_SELECTED,
 } from "../../../../utils/Localization/Localization";
 import {
@@ -51,6 +50,7 @@ import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import { Tag } from "../../../Tag";
 import { boundMethod } from "../../../../decorators";
 import { closeIconStyle, disableTagStyle, tagStyle } from "../../../Select/Select.styles";
+import { AlignedTooltip } from "../../../AlignedTooltip";
 
 /** Используется, если нужен одинаковый title для выбранного и выбираемых значений
  * По умолчанию, если есть handlerDisplayValues, то title для выбранного и выбираемых значений разный
@@ -97,7 +97,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     isHasAccess: true,
   };
 
-  public static clearIcon = (<CloseCircleFilled css={closeCircleStyle} />);
+  public static clearIcon = { clearIcon: <CloseCircleFilled css={closeCircleStyle} /> };
 
   private disposer = this.getReaction();
   private modelListByGroups: TDictionary<IModel[]> | undefined;
@@ -106,7 +106,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     super(props);
 
     this.state = {
-      searchText: undefined,
+      searchText: this.props.searchValue,
       hasBeenOpenedDropdown: false,
       isDropdownOpened: false, // todo: не всегда соответствует фактическому состоянию открытости
       wasDataSearched: false,
@@ -133,7 +133,11 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   }
 
   public override componentDidUpdate(prevProps: Readonly<ISelectComponentProps>): void {
-    const { autocompleteStore } = this.props;
+    const { autocompleteStore, searchValue } = this.props;
+
+    if (!isUndefined(searchValue) && searchValue !== this.state.searchText) {
+      this.setState({ searchText: searchValue });
+    }
 
     const modelsMap = autocompleteStore.map;
 
@@ -181,9 +185,9 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
               value: model?.getInnerName(),
               label: (
                 <div {...labelProps}>
-                  <Tooltip title={title}>
+                  <AlignedTooltip offsetY={-2} title={title}>
                     {displayValue || localization.getLocalized(NOT_SELECTED)}
-                  </Tooltip>
+                  </AlignedTooltip>
                 </div>
               ),
             };
@@ -191,19 +195,6 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
         : [];
     }
   );
-
-  private onSearch = () => {
-    const { autocompleteStore, queryVariables, value } = this.props;
-    const { searchText, isDropdownOpened } = this.state;
-
-    const isSearchTextChanged = searchText !== autocompleteStore.searchValue;
-
-    if (isSearchTextChanged && isString(searchText) && isDropdownOpened) {
-      autocompleteStore.searchValueChange(searchText, mapExcludedData(value, queryVariables));
-    }
-  };
-
-  private onSearchDebounced = debounce(this.onSearch, KeyupRequestInterval);
 
   private getFieldValueCollection = createSelector(identity, (models: IModel[]) => {
     const collection: TDictionary<IModel> = {};
@@ -214,31 +205,35 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     return collection;
   });
 
+  // eslint-disable-next-line react/sort-comp
+  private onSearch = () => {
+    const { autocompleteStore, queryVariables, value } = this.props;
+    const { isDropdownOpened } = this.state;
+    const searchText = this.props.searchValue ?? this.state.searchText;
+
+    const isSearchTextChanged = searchText !== autocompleteStore.searchValue;
+
+    if (isSearchTextChanged && isString(searchText) && isDropdownOpened) {
+      autocompleteStore.searchValueChange(searchText, mapExcludedData(value, queryVariables));
+    }
+  };
+
+  private onSearchDebounced = debounce(this.onSearch, KeyupRequestInterval);
+
   private mapSelectValueToModel(value: RawValueType) {
     const { autocompleteStore, value: fieldValue } = this.props;
 
     return autocompleteStore.map?.get(value) ?? this.getFieldValueCollection(fieldValue)[value];
   }
 
-  private getHintText(currentCount: number, nextCount: number, isSearch: boolean) {
+  private getHintText(hasNext: boolean, isSearch: boolean) {
     const { localization } = this.props;
-    const generalCount = currentCount + nextCount;
 
-    return nextCount && !isSearch
-      ? localization.getLocalized(ENTER_QUERY_OR_CHOOSE, {
-          templateData: {
-            currentCount,
-            generalCount,
-          },
-        })
-      : nextCount
-      ? localization.getLocalized(REFINE_QUERY, {
-          templateData: {
-            currentCount,
-            generalCount,
-          },
-        })
-      : localization.getLocalized(SHOWED_ALL_CHANGE_QUERY);
+    if (hasNext && !isSearch) {
+      return localization.getLocalized(ENTER_QUERY);
+    } else {
+      return localization.getLocalized(REFINE_QUERY);
+    }
   }
 
   private getHintOption() {
@@ -251,17 +246,15 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     }
 
     const currentCount = model.getItems().length;
-    const nextCount = model.getNextCount();
+    const hasNext = model.hasNext();
 
-    if ((nextCount === 0 && !wasDataSearched) || !currentCount) {
+    if ((!hasNext && !wasDataSearched) || !currentCount) {
       return;
     }
 
     return (
       <Select.Option disabled={true}>
-        <span css={hintOptionStyle}>
-          {this.getHintText(currentCount, nextCount, wasDataSearched)}
-        </span>
+        <span css={hintOptionStyle}>{this.getHintText(hasNext, wasDataSearched)}</span>
       </Select.Option>
     );
   }
@@ -289,7 +282,9 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   }
 
   private getSuffixIcon(disabled: boolean) {
-    const { onSuffixClick } = this.props;
+    const { onSuffixClick, suffixButtonTestId } = this.props;
+
+    const suffixButtonTestIdValue = suffixButtonTestId ?? autocompleteSelectSuffixButtonTestId;
 
     const handleSuffixIconClick =
       !disabled && isFunction(onSuffixClick) ? onSuffixClick : undefined;
@@ -303,7 +298,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
         key="select-suffix"
         css={suffixIconStyle}
         onClick={handleSuffixIconClick}
-        test-id={autocompleteSelectSuffixButtonTestId}
+        test-id={suffixButtonTestIdValue}
       >
         <BarsSVG />
       </div>
@@ -311,7 +306,11 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   }
 
   private handleSearchChange = (searchText: string): void => {
+    const { onSearch } = this.props;
+
     this.setState({ searchText }, () => {
+      onSearch?.(searchText);
+
       if (this.props.isHasAccess) {
         this.props.autocompleteStore.isDataLoaded ? this.onSearchDebounced() : this.onSearch();
       }
@@ -387,9 +386,11 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           disabled={rowDisable ? rowDisable(item) : undefined}
         >
           <Tooltip title={title}>
-            {!isUndefined(displayName) && !isNull(displayName) && displayName !== ""
-              ? displayName
-              : localization.getLocalized(NOT_SELECTED)}
+            {!isUndefined(displayName) && !isNull(displayName) && displayName !== "" ? (
+              <AlignedTooltip>{displayName}</AlignedTooltip>
+            ) : (
+              localization.getLocalized(NOT_SELECTED)
+            )}
           </Tooltip>
         </Select.Option>
       );
@@ -450,10 +451,25 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
         css={!closable ? disableTagStyle : tagStyle}
         closeIcon={closeIcon}
         title={handlerTitleValues ? "" : undefined}
+        isWithoutTooltipWrapper={true}
       >
         {label}
       </Tag>
     );
+  }
+
+  private getAllowClear() {
+    const { allowClear } = this.props;
+
+    if (allowClear === true) {
+      return _Select.clearIcon;
+    }
+
+    if (typeof allowClear === "object" && !isNull(allowClear)) {
+      return allowClear;
+    }
+
+    return false;
   }
 
   public override render(): React.ReactNode {
@@ -465,9 +481,9 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
       disabled,
       hintContainer,
       localization,
-      allowClear,
       showArrow,
       autoFocus,
+      autoFocusWithPreventScroll,
       style,
       tagRender,
       getPopupContainer,
@@ -480,6 +496,10 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
       onClear,
       onClick,
       dropdownStyle,
+      label,
+      innerRef,
+      showSearch,
+      listHeight,
     } = this.props;
 
     const { searchText, isFocused } = this.state;
@@ -500,18 +520,21 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
     return (
       <>
         <Select<LabeledValue | LabeledValue[] | undefined>
+          innerRef={innerRef}
           open={isFocused ? undefined : false}
           key="ant-select"
           mode={mode}
+          aria-label={label}
+          searchValue={searchText}
           dropdownStyle={dropdownStyle}
           placeholder={placeholder}
           loading={this.isFirstLoading() && this.state.hasBeenOpenedDropdown}
           labelInValue={true}
           value={value}
           onBlur={this.handleBlur}
-          allowClear={allowClear}
+          allowClear={this.getAllowClear()}
           onFocus={this.handleFocus}
-          showSearch={true}
+          showSearch={showSearch ?? true}
           filterOption={false}
           showArrow={showArrow}
           disabled={disabled}
@@ -526,11 +549,12 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
             ) : null
           }
           suffixIcon={!disabled ? this.getSuffixIcon(!!disabled) : null}
-          clearIcon={_Select.clearIcon}
           onSearch={this.handleSearchChange}
           onChange={this.handleChange}
           onDropdownVisibleChange={this.handleDropdownVisibleChange}
           autoFocus={autoFocus}
+          autoFocusWithPreventScroll={autoFocusWithPreventScroll}
+          showAction={this.props.showAction}
           test-id={this.props["test-id"] ?? autocompleteSelectTestId}
           style={style}
           tagRender={tagRender ?? this.tagRender}
@@ -544,6 +568,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           onDeselect={onDeselect}
           onClear={onClear}
           onClick={onClick}
+          listHeight={listHeight}
         >
           {this.renderDropDownOptions()}
           {this.getHintOption()}

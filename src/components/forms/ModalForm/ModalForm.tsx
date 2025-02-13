@@ -1,30 +1,33 @@
+import type { FormApi } from "final-form";
+import { isFunction, has } from "lodash";
 import React from "react";
-import { has, isFunction } from "lodash";
-import { formStyle, modalBodyStyle } from "./ModalForm.styles";
-import { EFormLayoutType } from "../BaseForm/BaseForm.types";
+import { type IFormData, type IFormProvider } from "../../../decorators/contexts/FormContext";
+import { closeModalIconStyle } from "../../../styles";
 import {
+  ModalAnimationInterval,
   modalFormCancelButtonTestId,
   modalFormCloseIconTestId,
   modalFormTestId,
-} from "../../../utils/TestIds";
+} from "../../../utils";
+import { EFormLayoutType } from "../BaseForm";
+import { SubmitFormButton } from "../SubmitFormButton";
+import { modalComponentsStyle, formStyle, wrapperModalFormStyle } from "./ModalForm.styles";
 import type { IModalFormProps, IModalFormState } from "./ModalForm.types";
-import type { FormApi } from "final-form";
-import type { IFormData } from "../../../decorators/contexts/FormContext";
-import { ModalAnimationInterval } from "../../../utils/const";
-import { Button } from "../../Button/Button";
-import { SubmitFormButton } from "../SubmitFormButton/SubmitFormButton";
-import { CloseOutlined } from "../../Icons/Icons";
-import { Modal } from "../../modals/Modal/Modal";
+import { Space } from "antd";
+import { Button } from "../../Button";
+import { Modal } from "../../modals";
 import { Form } from "../Form";
-import { closeModalIconStyle } from "../../../styles/common.styles";
+import { CloseOutlined } from "../../Icons/Icons";
 
 class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalFormState> {
   public static defaultProps = {
-    bodyStyle: modalBodyStyle,
+    styles: modalComponentsStyle,
+    hasEnterHotkey: true,
   };
 
   public override readonly state: Readonly<IModalFormState> = {
     open: true,
+    submitFocus: false,
   };
 
   private setFormData = (formData: IFormData) => {
@@ -72,6 +75,48 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
     this.afterCloseModal(afterSubmit ?? onCancel, submitResult);
   };
 
+  private handleEnterKeyPress = (
+    event: KeyboardEvent,
+    formProvider: IFormProvider<TDictionary<any>>
+  ) => {
+    this.setState({ submitFocus: false });
+
+    const targetElem = event.target as HTMLElement;
+    const targetFieldType = targetElem?.getAttribute("type");
+    const validFieldType =
+      targetFieldType === "text" ||
+      targetFieldType === "password" ||
+      targetFieldType === "checkbox" ||
+      targetElem?.hasAttribute("step");
+    const isSearchTypeFieldExpanded = targetElem.getAttribute("aria-expanded") === "true";
+
+    if (this.props.hasEnterHotkey && event.key === "Enter") {
+      if (validFieldType) {
+        formProvider.submit();
+      }
+
+      if (isSearchTypeFieldExpanded && formProvider.getState().valid) {
+        setTimeout(() => {
+          this.setState({ submitFocus: true });
+        }, 0);
+      }
+    }
+  };
+
+  private handleModalKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const targetElem = event.target as HTMLElement;
+    const isModalContainer = targetElem.tabIndex === -1;
+
+    if (
+      this.props.hasEnterHotkey &&
+      event.key === "Enter" &&
+      isModalContainer &&
+      this.state.formProvider?.getState().valid
+    ) {
+      this.state.formProvider?.submit();
+    }
+  };
+
   private renderFooter(): React.ReactNode {
     const {
       okText,
@@ -84,9 +129,9 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
 
     return (
       this.state.formProvider && (
-        <div key="modal-footer">
+        <Space size={8} key="modal-footer">
           <Button
-            type="ghost"
+            type="common"
             key="button-cancel"
             onClick={this.handleCancel}
             test-id={modalFormCancelButtonTestId}
@@ -104,8 +149,10 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
             type="primary"
             loading={okButtonProps?.loading}
             disabled={okButtonProps?.disabled}
+            focusable={this.props.hasEnterHotkey}
+            focus={this.state.submitFocus}
           />
-        </div>
+        </Space>
       )
     );
   }
@@ -117,12 +164,13 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
       children,
       onSubmit,
       title,
-      bodyStyle,
+      styles,
       notification,
       afterSubmit,
       setFormData,
       footer,
       sortByPriority,
+      keepDirtyOnReinitialize,
       ...rest
     } = this.props;
 
@@ -130,19 +178,19 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
       <CloseOutlined test-id={modalFormCloseIconTestId} css={closeModalIconStyle} />
     );
 
-    return (
+    const ModalComponent = (
       <Modal
         open={this.state.open}
         {...rest}
         title={title}
         key="modal-form"
         footer={footer ?? this.renderFooter()}
-        bodyStyle={bodyStyle}
+        styles={styles}
         closeIcon={closeIcon}
-        centered={true}
         onCancel={this.handleCancel}
       >
         <Form
+          onKeyDown={this.handleEnterKeyPress}
           form={form}
           onSubmit={this.handleSubmit}
           initialValues={initialValues}
@@ -150,13 +198,22 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
           test-id={`${modalFormTestId}_${form}`}
           layoutType={EFormLayoutType.ModalType}
           notification={notification}
-          header={null}
+          formSubmitPanelConfig={null}
           setFormData={this.setFormData}
           sortByPriority={sortByPriority}
+          keepDirtyOnReinitialize={keepDirtyOnReinitialize ?? false}
         >
           {children}
         </Form>
       </Modal>
+    );
+
+    return this.props.hasEnterHotkey ? (
+      <div css={wrapperModalFormStyle} onKeyDown={this.handleModalKeyPress}>
+        {ModalComponent}
+      </div>
+    ) : (
+      ModalComponent
     );
   }
 }

@@ -1,12 +1,13 @@
-import { memo, useCallback, useContext, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useRef, useState } from "react";
 import type { SizeType } from "antd/lib/config-provider/SizeContext";
 import type { ISubmitFormButtonProps } from "./SubmitFormButton.types";
-import { FormContext } from "../../../decorators/contexts/FormContext";
+import { FormContext, useLocalization } from "../../../decorators";
 import type { TButtonType } from "../../Button/Button.types";
 import { assertSimple } from "@infomaximum/assert";
 import { Button } from "../../Button/Button";
 import { submitFormButtonTestId } from "../../../utils/TestIds";
-import { useFormButtonState } from "./hooks/useFormButtonState";
+import { useFormButtonState } from "../hooks/useFormButtonState";
+import { SAVE } from "../../../utils";
 
 /**
  * Кнопка, которая делает submit текущих значений формы
@@ -17,7 +18,9 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
     disableOnInvalid = false,
     size = "default" as SizeType,
     type = "primary-dark" as TButtonType,
+    key,
     styles,
+    className,
     formProvider: formProviderProp,
     formName: formNameProp,
     disabled,
@@ -25,8 +28,11 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
     ghost,
     icon: Icon,
     caption,
+    focusable,
+    focus,
   }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const localization = useLocalization();
     const formData = useContext(FormContext);
     const formProvider = formProviderProp ?? formData.formProvider;
     const formName = formNameProp ?? formData.formName;
@@ -56,10 +62,28 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
       }
     }, [formProvider]);
 
+    const validState = formProvider.getState().valid;
+    const buttonRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+      if (focusable) {
+        const activeElement = document.activeElement as HTMLElement;
+        const isValidElementType =
+          activeElement.getAttribute("type") !== "text" &&
+          activeElement.getAttribute("type") !== "password" &&
+          activeElement.getAttribute("type") !== "checkbox" &&
+          !activeElement.hasAttribute("step");
+
+        if ((!isDisabled && validState && isValidElementType) || focus) {
+          buttonRef?.current?.focus();
+        }
+      }
+    }, [focus, focusable, formProvider, isDisabled, isSubmitting, validState]);
+
     return (
       <Button
-        key="button"
-        css={styles}
+        key={key ?? "submit-form-button"}
+        className={className}
         onClick={handleClick}
         type={type}
         disabled={isDisabled || isSubmitting}
@@ -68,8 +92,10 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
         ghost={ghost}
         icon={Icon ? <Icon key={Icon?.name} /> : null}
         test-id={`${formName}_${submitFormButtonTestId}`}
+        styles={styles}
+        ref={buttonRef}
       >
-        {caption || ""}
+        {caption || localization.getLocalized(SAVE)}
       </Button>
     );
   }

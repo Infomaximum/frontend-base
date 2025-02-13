@@ -7,9 +7,9 @@ import type {
   IAutoCompleteFieldProps,
   TAutoCompleteFieldValue,
 } from "./AutoCompleteField.types";
-import { isFunction, map, forEach, some, every, isEmpty, xorBy } from "lodash";
+import { isFunction, map, forEach, some, every, isEmpty, xorBy, filter } from "lodash";
 import { wrapperAutocompleteStyle } from "./AutoCompleteField.styles";
-import type { IModel } from "@infomaximum/graphql-model";
+import { type IModel, Group } from "@infomaximum/graphql-model";
 import { withFeature } from "../../../../decorators/hocs/withFeature/withFeature";
 import { Field } from "../../FormField/Field/Field";
 import { FormField } from "../../FormField/FormField";
@@ -27,9 +27,17 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
     mode: undefined,
     isDrawerEnabled: true,
     removeContradictions: false,
+    isWithoutParentsGroupSelection: false,
     allowClear: false,
     headerMode: headerModes.SIMPLE_INPUT,
   };
+
+  private selectRef: React.MutableRefObject<HTMLElement | null>;
+
+  constructor(props: IAutoCompleteProps) {
+    super(props);
+    this.selectRef = React.createRef();
+  }
 
   public override readonly state = {
     showDrawer: false,
@@ -40,6 +48,11 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
   private showDrawer = (e: React.SyntheticEvent<HTMLElement>): void => {
     e.stopPropagation();
     this.setState({ showDrawer: true });
+    this.selectRef.current?.blur();
+
+    if (this.props.onDrawerOpen) {
+      this.props.onDrawerOpen();
+    }
   };
 
   private handleCloseDrawer = (): void => {
@@ -51,10 +64,15 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
       input: { onChange },
       onChangeCallback,
       removeContradictions,
+      isWithoutParentsGroupSelection,
     } = this.props;
 
     if (onChange) {
-      const newValue = removeContradictions ? this.removeContradictions(value) : value;
+      const newValue = removeContradictions
+        ? this.removeContradictions(value)
+        : isWithoutParentsGroupSelection
+          ? this.removeGroups(value)
+          : value;
 
       onChange(newValue ?? []);
 
@@ -72,11 +90,26 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
     }
   };
 
+  private handleSearch = (searchText: string): void => {
+    const { onSearch } = this.props;
+
+    if (isFunction(onSearch)) {
+      onSearch(searchText);
+    }
+  };
+
   private handleBlur = (): void => {
-    const onBlur = this.props.input?.onBlur;
+    const {
+      input: { onBlur },
+      onBlur: onBlurProps,
+    } = this.props;
 
     if (onBlur) {
       onBlur();
+    }
+
+    if (onBlurProps) {
+      onBlurProps();
     }
   };
 
@@ -95,6 +128,10 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
     return [...modelsMap.values()];
   }
 
+  private removeGroups(models: TAutoCompleteFieldValue): TAutoCompleteFieldValue {
+    return filter(models, (model) => !(model instanceof Group));
+  }
+
   private getDrawer(): React.ReactNode {
     if (this.state.showDrawer) {
       const {
@@ -106,6 +143,7 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
         tableSelectionType,
         isDrawerEnabled,
         removeContradictions,
+        isWithoutParentsGroupSelection,
         requestOnMount,
         rowDisable,
         queryVariables,
@@ -115,7 +153,20 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
         dataAccessKeys,
         isFeatureEnabled,
         columnConfig,
+        renderDrawer,
+        drawerAutoFocus,
+        rowSelection,
       } = this.props;
+
+      const selectedModels = value ? value : this.emptySelectedModels;
+
+      if (renderDrawer) {
+        return renderDrawer({
+          onClose: this.handleCloseDrawer,
+          onSubmit: this.handleChange,
+          selectedModels,
+        });
+      }
 
       if (isDrawerEnabled && tableStore) {
         return (
@@ -124,13 +175,13 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
             headerMode={headerMode}
             selectionType={tableSelectionType}
             title={drawerTitle}
-            selectedModels={value ? value : this.emptySelectedModels}
+            selectedModels={selectedModels}
             okText={okText}
             cancelText={cancelText}
             tableStore={tableStore}
             onClose={this.handleCloseDrawer}
             onSaveData={this.handleChange}
-            isGroupSelection={removeContradictions}
+            isGroupSelection={removeContradictions || isWithoutParentsGroupSelection}
             rowDisable={rowDisable}
             queryVariables={queryVariables}
             handlerTableDisplayValues={handlerTableDisplayValues}
@@ -142,6 +193,8 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
               every(dataAccessKeys, (accessKey) => isFeatureEnabled(accessKey))
             }
             columnConfig={columnConfig}
+            autoFocus={drawerAutoFocus}
+            rowSelection={rowSelection}
           />
         );
       }
@@ -169,13 +222,19 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
       rowDisable,
       showArrow,
       autoFocus,
+      autoFocusWithPreventScroll,
       style,
       tagRender,
       labelPropsGetter,
       dataAccessKeys,
       isFeatureEnabled,
       groupBy,
+      onSelect,
+      searchText,
       prepareOptionForSearch,
+      label,
+      showSearch,
+      suffixButtonTestId,
     } = this.props;
 
     const isDisabled = readOnly || disabled;
@@ -184,13 +243,18 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
     return (
       <>
         <SelectComponent
+          innerRef={this.selectRef}
+          label={label}
           key="select"
           mode={mode}
           style={style}
           value={value}
+          searchValue={searchText}
           disabled={isDisabled}
           onBlur={this.handleBlur}
           onFocus={this.handleFocus}
+          onSelect={onSelect}
+          onSearch={this.handleSearch}
           placeholder={placeholder}
           onChange={this.handleChange}
           onSuffixClick={showDrawerIcon ? this.showDrawer : undefined}
@@ -208,11 +272,14 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
           showArrow={readOnly ? false : showArrow}
           allowClear={allowClear}
           autoFocus={autoFocus}
+          autoFocusWithPreventScroll={autoFocusWithPreventScroll}
           tagRender={tagRender}
           labelPropsGetter={labelPropsGetter}
           groupBy={groupBy}
+          showSearch={showSearch}
           prepareOptionForSearch={prepareOptionForSearch}
           isClearIconOverSuffix={!showDrawerIcon}
+          suffixButtonTestId={suffixButtonTestId}
         />
         {this.getDrawer()}
       </>

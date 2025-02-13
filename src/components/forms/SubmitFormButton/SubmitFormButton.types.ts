@@ -1,13 +1,13 @@
-import type { Interpolation } from "@emotion/react";
 import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IButtonProps } from "../../Button/Button.types";
 import type { AntdIconProps } from "../../Icons/Icons";
 
-export interface ISubmitFormButtonProps extends Pick<IButtonProps, "size" | "type" | "ghost"> {
+export interface ISubmitFormButtonProps
+  extends Pick<IButtonProps, "size" | "type" | "ghost" | "styles" | "key"> {
   /**
    *  Надпись на кнопке, локализованная строка
    */
-  caption: string;
+  caption?: string;
   /**
    * Имя формы (нужно для формирования test-id) (обязательно, если кнопка находится вне формы)
    */
@@ -33,17 +33,17 @@ export interface ISubmitFormButtonProps extends Pick<IButtonProps, "size" | "typ
    */
   disableOnPristine?: boolean;
   /**
-   * Cтилизация через css
-   */
-  styles?: Interpolation<TTheme>;
-  /**
    * Иконка для кнопки
    */
   icon?: React.ComponentType<AntdIconProps>;
-}
+  /**
+   * Прямое изменение фокуса
+   */
+  focus?: boolean;
+  /**
+   * Доступ к кастомному фокусу
+   */
+  focusable?: boolean;
 
-export type TFormButtonState = {
-  submitting: boolean;
-  pristine: boolean;
-  hasValidationErrors: boolean;
-};
+  className?: string;
+}

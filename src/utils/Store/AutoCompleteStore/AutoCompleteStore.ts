@@ -23,7 +23,7 @@ type TPrivateAutoCompleteStoreField = "receiveData";
  *
  */
 export class AutoCompleteStore<
-  M extends AutoCompleteListModel = AutoCompleteListModel
+  M extends AutoCompleteListModel = AutoCompleteListModel,
 > extends Store<M> {
   constructor(params: NStore.TStoreParams<AutoCompleteStore<M>>) {
     super({

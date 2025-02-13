@@ -10,6 +10,7 @@ export interface IFieldTooltipProps extends TPopover {
   "test-id"?: string;
   iconStyle?: any;
   arrowPointAtCenter?: boolean;
+  isWithoutPadding?: boolean;
 }
 
 export interface IFieldTooltipState {

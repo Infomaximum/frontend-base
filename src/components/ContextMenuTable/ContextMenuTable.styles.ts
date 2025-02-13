@@ -13,4 +13,12 @@ export const threeDotsStyle = (theme: TTheme) =>
       background: theme.grey45Color,
       outline: "none",
     },
-  } as const);
+  }) as const;
+
+export const contextMenuContainerStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "38px",
+  height: "38px",
+};

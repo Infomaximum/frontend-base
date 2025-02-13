@@ -3,28 +3,28 @@ import { includes, replace } from "lodash";
 export const getBasePrefix = () => window.im.system.basePrefix;
 
 /** Сохраняет текущий путь если выкидывает на страницу с логином */
-export const savePathToLocalStorage = (): void => {
-  setPathToLocalStorage(
+export const savePathToSessionStorage = (): void => {
+  setPathToSessionStorage(
     replace(window.location.pathname, new RegExp(`(\/[\w \.-]*)*${getBasePrefix()}`), "")
   );
 };
 
 /** Изменяет путь для возврата на страницу с которой выкинуло */
-export const setPathToLocalStorage = (path: string): void => {
-  localStorage.setItem("currentPath", path);
+export const setPathToSessionStorage = (path: string): void => {
+  sessionStorage.setItem("currentPath", path);
 };
 
 /**
  * Получает текущий путь для возвращения на страницу с которой выкинуло
  * @returns {string}
  */
-export const getPathToLocalStorage = (): string | null => localStorage.getItem("currentPath");
+export const getPathToSessionStorage = (): string | null => sessionStorage.getItem("currentPath");
 
 /**
  * Удаляет путь для возвращения на страницу с которой выкинуло
  */
-export const removePathToLocalStorage = (): void => {
-  localStorage.removeItem("currentPath");
+export const removePathToSessionStorage = (): void => {
+  sessionStorage.removeItem("currentPath");
 };
 
 /**

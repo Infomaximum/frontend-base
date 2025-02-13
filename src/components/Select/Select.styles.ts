@@ -1,10 +1,13 @@
 import { first, last, sum, takeRight, tail } from "lodash";
 
-export const disableSelectStyle =
+export const getDisableSelectStyle =
   (bordered = true) =>
   (theme: TTheme) => ({
     backgroundColor: bordered ? theme.grey3Color : theme.grey1Color,
     borderRadius: "4px",
+    ".ant-select-selector .ant-select-selection-item": {
+      color: `${theme.grey7Color} !important`,
+    },
   });
 
 // todo: разобраться почему стили не попадают из less antd
@@ -17,9 +20,13 @@ export const multipleSelectStyle = {
     {
       marginInlineStart: 0,
     },
+  // фикс inline-block из antd 5 (длинный тег растягивался безгранично)
+  ".ant-select-selection-overflow-item": {
+    display: "block",
+  },
 };
 
-export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => {
+export const getDisplaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => {
   const iconWidths = takeRight([24, 28], iconSlotCount);
   const suffixWidth = sum(iconWidths);
   const iconHeight = 28;
@@ -27,10 +34,10 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
 
   return {
     display: "block",
-    color: theme.grey9Color,
+    color: theme.grey10Color,
     lineHeight: "22px",
-
     ".ant-select-selector": {
+      background: "transparent !important",
       paddingRight: `${suffixWidth}px !important`,
 
       ".ant-select-selection-overflow": {
@@ -54,7 +61,7 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
       },
 
       ".ant-select-selection-placeholder": {
-        width: `calc(100% - ${suffixWidth}px)`,
+        width: `calc(100% - ${suffixWidth + 7}px)`,
         textOverflow: "unset",
       },
     },
@@ -77,13 +84,13 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
     ".ant-select-clear": {
       width: `${first(iconWidths)}px`,
       right: `${sum(tail(iconWidths))}px`,
-      opacity: 1,
+      opacity: 0,
       color: `${theme.grey6Color}`,
       background: "transparent",
       display: "flex",
       alignItems: "center",
+      justifyContent: "center",
       fontSize: "14px",
-      paddingLeft: "5px",
       ":hover": {
         color: theme.grey7Color,
       },
@@ -92,8 +99,12 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
       },
     },
     ".ant-select-arrow": {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       width: `${last(iconWidths)}px`,
       right: 0,
+      opacity: `${1} !important`,
     },
     ".ant-select.ant-select-in-form-item": {
       display: "flex",
@@ -105,7 +116,7 @@ export const displaySelectStyle = (iconSlotCount: number) => (theme: TTheme) => 
 export const commonTagStyle = (theme: TTheme) => ({
   fontSize: `${theme.h5FontSize}px`,
   lineHeight: `${theme.verySmallLineHeight}px`,
-  margin: "2px 4px 2px 0",
+  margin: "1px 4px 1px 0",
   display: "flex",
   alignItems: "center",
   paddingRight: 0,
@@ -115,7 +126,7 @@ export const commonTagStyle = (theme: TTheme) => ({
     height: 22,
     display: "flex",
     alignItems: "center",
-    paddingLeft: "5px",
+    paddingLeft: "4px",
   },
 
   ".ant-tag-close-icon, .anticon-close": {
@@ -123,15 +134,27 @@ export const commonTagStyle = (theme: TTheme) => ({
   },
 });
 
-export const getSelectTagStyle = (closable: boolean) =>
-  closable ? commonTagStyle : disableTagStyle;
+export const getSelectTagStyle = (closable: boolean, color?: keyof TTheme["tagsStyles"]) => {
+  if (closable) {
+    return commonTagStyle;
+  }
+
+  if (color === "greyInv") {
+    return disableGreyInvTagStyle;
+  }
+
+  return disableTagStyle;
+};
 
 export const disableTagStyle = (theme: TTheme) => ({
   ...commonTagStyle(theme),
-  background: theme.grey3Color,
-  border: `1px solid ${theme.grey5Color}`,
-  color: theme.grey7Color,
+  cursor: "not-allowed",
   paddingRight: "7px",
+});
+
+const disableGreyInvTagStyle = (theme: TTheme) => ({
+  ...disableTagStyle(theme),
+  color: `${theme.tagsStyles.greyInv.textColor} !important`,
 });
 
 export const tagStyle = (theme: TTheme) => ({
@@ -149,34 +172,31 @@ export const closeIconStyle = (theme: TTheme) => ({
 });
 
 export const suffixIconStyle = (theme: TTheme) => ({
-  paddingLeft: "5px",
   display: "flex",
   width: "100%",
   height: "100%",
   alignItems: "center",
+  justifyContent: "center",
   pointerEvents: "auto" as const, // в antd по умолчанию none
   svg: {
     fill: theme.grey6Color,
   },
   ":hover": {
     svg: {
-      fill: theme.grey9Color,
+      fill: theme.grey10Color,
     },
   },
 });
 
 export const suffixIconSpinnerStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   height: "14px",
-  paddingLeft: "5px",
   ".ant-spin": {
     lineHeight: "unset",
   },
 };
-
-export const textWrapperStyle = {
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-} as const;
 
 export const arrowSuffixIconStyle = (theme: TTheme) => ({
   ...suffixIconStyle(theme),

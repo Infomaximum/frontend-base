@@ -1,7 +1,10 @@
 import type { IPasswordWithButtonFieldProps } from "./PasswordWithButtonField.types";
 import { PASSWORD, CHANGE_PASSWORD } from "../../../utils/Localization/Localization";
-import { useCallback, useContext, useEffect, useState } from "react";
-import { changePasswordButtonTestId } from "../../../utils/TestIds";
+import { useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import {
+  changePasswordButtonTestId,
+  passwordFieldsPasswordVisibilityIconTestId,
+} from "../../../utils/TestIds";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useForm } from "../../../decorators/hooks/useForm";
 import { FormContext } from "../../../decorators/contexts/FormContext";
@@ -10,6 +13,7 @@ import { Button } from "../../Button/Button";
 import { FormField } from "../FormField/FormField";
 import { InputFieldComponent } from "../InputField/InputField";
 import { Input } from "../../Input/Input";
+import { EyeInvisibleOutlined, EyeOutlined } from "../../Icons";
 
 /**
  * Компонент для ввода пароля с кнопкой
@@ -18,6 +22,8 @@ import { Input } from "../../Input/Input";
  */
 const PasswordWithButtonFormFieldComponent: React.FC<IPasswordWithButtonFieldProps> = ({
   hasPassword,
+  buttonLabel,
+  buttonCaption,
   priority,
   ...rest
 }) => {
@@ -48,6 +54,12 @@ const PasswordWithButtonFormFieldComponent: React.FC<IPasswordWithButtonFieldPro
     }
   }, [formData, setFormData]);
 
+  const renderVisibilityIcon = useCallback((visible: ReactNode) => {
+    const PasswordIcon = visible ? EyeOutlined : EyeInvisibleOutlined;
+
+    return <PasswordIcon test-id={passwordFieldsPasswordVisibilityIconTestId} />;
+  }, []);
+
   const handleClick = useCallback(() => {
     setEditablePasswordState(true);
   }, []);
@@ -57,14 +69,14 @@ const PasswordWithButtonFormFieldComponent: React.FC<IPasswordWithButtonFieldPro
       <FormOption
         key="set_password"
         priority={priority}
-        label={localization.getLocalized(PASSWORD)}
+        label={buttonLabel || localization.getLocalized(PASSWORD)}
       >
         <Button
           onClick={handleClick}
           test-id={changePasswordButtonTestId}
           disabled={rest?.disabled || rest?.readOnly}
         >
-          {localization.getLocalized(CHANGE_PASSWORD)}
+          {buttonCaption || localization.getLocalized(CHANGE_PASSWORD)}
         </Button>
       </FormOption>
     );
@@ -73,12 +85,13 @@ const PasswordWithButtonFormFieldComponent: React.FC<IPasswordWithButtonFieldPro
   return (
     <FormField
       component={InputFieldComponent}
-      label={localization.getLocalized(PASSWORD)}
+      label={buttonLabel || localization.getLocalized(PASSWORD)}
       colon={false}
       labelAlign="left"
       inputComponent={Input.Password}
       autoFocus={isEditablePassword}
       priority={priority}
+      iconRender={renderVisibilityIcon}
       {...rest}
     />
   );

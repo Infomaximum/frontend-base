@@ -4,7 +4,13 @@ export const stretchStyle = {
 
 export const headerStyle = {
   marginBottom: "12px",
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+  columnGap: "8px",
 };
+
+export const selectWrapperStyle = { width: "180px" };
 
 export const contentWrapperStyle = {
   display: "flex",

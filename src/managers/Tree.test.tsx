@@ -16,7 +16,7 @@ type TItems = TreeItemModel | TreeGroupModel | RestModel;
 
 type TNestedItem = { id: number };
 type TNestedGroup = { id: number; items: TNestedData[] };
-type TNestedRest = { next_count: number };
+type TNestedRest = { has_next: boolean };
 type TNestedData = TNestedItem | TNestedGroup | TNestedRest;
 
 type TExpectedState = {
@@ -70,7 +70,7 @@ const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] =
   };
 
   const checkIsRest = (data: TNestedData): data is TNestedRest => {
-    return (data as TNestedRest).next_count !== undefined;
+    return (data as TNestedRest).has_next !== undefined;
   };
 
   if (checkIsRest(data)) {
@@ -79,7 +79,7 @@ const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] =
         element: null,
         parents,
         hidden: false,
-        next_count: data.next_count,
+        has_next: data.has_next,
       } as unknown as TModelStruct,
     ];
   }
@@ -94,7 +94,7 @@ const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] =
         element: { id: data.id, __typename: typenameGroup },
         parents,
         hidden: false,
-        next_count: 0,
+        has_next: false,
       } as unknown as TModelStruct,
       ...children,
     ];
@@ -105,7 +105,7 @@ const generateRawData = (data: TNestedData, parents: number[]): TModelStruct[] =
       element: { id: data.id, __typename: typenameModel },
       hidden: false,
       parents,
-      next_count: 0,
+      has_next: false,
     } as unknown as TModelStruct,
   ];
 };
@@ -138,12 +138,12 @@ const nestedData: TNestedGroup = {
       items: [
         {
           id: 6,
-          items: [{ id: 16 }, { id: 21 }, { id: 22 }, { next_count: 2 }],
+          items: [{ id: 16 }, { id: 21 }, { id: 22 }, { has_next: true }],
         },
         { id: 7 },
         { id: 8 },
         { id: 17 },
-        { next_count: 2 },
+        { has_next: true },
       ],
     },
     {
@@ -165,7 +165,7 @@ set(nestedData2, "items[3].items[5]", { id: 19 });
 const rootModelExpandedGroup = buildModel(nestedData2);
 
 const nestedData3 = cloneDeep(nestedData);
-set(nestedData3, "items[9]", { next_count: 2 });
+set(nestedData3, "items[9]", { has_next: true });
 const rootModelWithShowMore = buildModel(nestedData3);
 
 const nestedData4 = cloneDeep(nestedData);
@@ -223,7 +223,7 @@ describe("Тесты методов класса 'TreeManager'", () => {
       "tree_component_model_16",
       "tree_component_model_21",
       "tree_component_model_22",
-      "tree_component_group_rest_6_2",
+      "tree_component_group_rest_6",
       "tree_component_group_6",
     ];
     tree.onModelChange(rootModel, {});
@@ -335,7 +335,7 @@ describe("Тесты методов класса 'TreeManager'", () => {
       "tree_component_model_16",
       "tree_component_model_21",
       "tree_component_model_22",
-      "tree_component_group_rest_6_2",
+      "tree_component_group_rest_6",
       "tree_component_group_6",
       "tree_component_model_7",
       "tree_component_model_8",
@@ -368,7 +368,7 @@ describe("Тесты методов класса 'TreeManager'", () => {
       "tree_component_model_16",
       "tree_component_model_21",
       "tree_component_model_22",
-      "tree_component_group_rest_6_2",
+      "tree_component_group_rest_6",
       "tree_component_group_6",
       "tree_component_model_7",
       "tree_component_model_8",
@@ -498,10 +498,10 @@ describe("Тесты методов класса 'TreeManager'", () => {
       "tree_component_model_16",
       "tree_component_model_21",
       "tree_component_model_22",
-      "tree_component_group_rest_6_2",
+      "tree_component_group_rest_6",
       "tree_component_group_6",
       "tree_component_model_17",
-      "tree_component_group_rest_5_2",
+      "tree_component_group_rest_5",
       "tree_component_group_5",
     ];
 
@@ -544,12 +544,12 @@ describe("Тесты методов класса 'TreeManager'", () => {
       "tree_component_model_16",
       "tree_component_model_21",
       "tree_component_model_22",
-      "tree_component_group_rest_6_2",
+      "tree_component_group_rest_6",
       "tree_component_group_6",
       "tree_component_model_7",
       "tree_component_model_8",
       "tree_component_model_17",
-      "tree_component_group_rest_5_2",
+      "tree_component_group_rest_5",
     ];
 
     testState(tree, {

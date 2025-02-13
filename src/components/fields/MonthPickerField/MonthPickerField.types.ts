@@ -1,10 +1,9 @@
-import type { MonthPickerProps } from "antd/lib/date-picker";
 import type { FieldRenderProps } from "react-final-form";
-import type { Moment } from "moment";
+import type { Dayjs } from "dayjs";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
-
-export type TMonthPickerFieldValue = Moment | undefined;
+import type { MonthPickerProps } from "antd/lib/date-picker";
+export type TMonthPickerFieldValue = Dayjs | undefined;
 
 type TOmitMonthPickerProps =
   | "onBlur"
@@ -21,7 +20,7 @@ export interface IMonthPickerProps
     FieldRenderProps<TMonthPickerFieldValue> {}
 
 export interface IMonthPickerOwnProps extends Omit<MonthPickerProps, TOmitMonthPickerProps> {
-  momentFormat?: string;
+  displayFormat?: string;
   readOnly?: boolean;
 }
 

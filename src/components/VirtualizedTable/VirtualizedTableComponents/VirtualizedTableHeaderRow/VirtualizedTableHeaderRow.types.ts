@@ -1,3 +1,4 @@
+import type { TableRowSelection } from "antd/es/table/interface";
 import type { IWithThemeProps } from "../../../../decorators/hocs/withTheme/withTheme";
 import type {
   IVirtualizedTableProps,
@@ -11,12 +12,14 @@ export interface IVirtualizedTableHeaderRowOwnProps<T>
     Pick<IVirtualizedTableHeaderCellProps<T>, "onSorterChange" | "columnsOrders"> {
   isTableEmpty: boolean;
   isCheckable: boolean;
-  checkableColumnTitle?: React.ReactNode;
+  checkableColumnTitle?: React.ReactNode | ((checkboxNode: React.ReactNode) => React.ReactNode);
   isSelectionEmpty: boolean;
-  onSelectChange(record: T | null, isChecking: boolean): void;
+  onSelectChange(record: T, isChecking: boolean): void;
   /** Отступ справа, если в таблице есть скролл */
   scrollOffset?: number;
   isShowDivider: boolean;
+  hideSelectAll: TableRowSelection<T>["hideSelectAll"];
+  isCheckableDisabled?: boolean;
 }
 
 export interface IVirtualizedTableHeaderRowProps<T>

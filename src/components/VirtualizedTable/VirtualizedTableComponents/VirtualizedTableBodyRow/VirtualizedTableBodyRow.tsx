@@ -6,9 +6,10 @@ import {
   checkedVirtualizedTableBodyRowStyle,
   clickableVirtualizedTableBodyRowStyle,
   virtualizedTableCheckboxCellStyle,
+  virtualizedTableWithPaddingBodyRowLoadingStyle,
 } from "./VirtualizedTableBodyRow.styles";
 import type { IVirtualizedTableBodyRowProps } from "./VirtualizedTableBodyRow.types";
-import { type MouseEvent, useCallback } from "react";
+import { type MouseEvent } from "react";
 import { Radio } from "../../../Radio/Radio";
 import { Checkbox } from "../../../Checkbox/Checkbox";
 import { map } from "lodash";
@@ -18,6 +19,9 @@ import { TableCheckboxCell } from "../../../Table/TableComponents/TableCheckboxC
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
+
+const emptyObj: ReturnType<NonNullable<IVirtualizedTableBodyRowProps<any>["getCheckboxProps"]>> =
+  {};
 
 export const VirtualizedTableBodyRowComponent = <T extends TRow>(
   props: IVirtualizedTableBodyRowProps<T | null>
@@ -29,7 +33,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     record,
     isCheckable,
     enableRowClick,
-    checkboxProps,
+    getCheckboxProps,
     onSelectChange,
     selectionType,
     columns,
@@ -40,28 +44,28 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     onExpanderChange,
     isShowDivider,
     onRow,
+    isWithoutWrapperStyles,
   } = props;
   const theme = useTheme();
+
+  const checkboxProps = getCheckboxProps?.(record) || emptyObj;
   const isRowDisable = checkboxProps ? checkboxProps.disabled : false;
 
-  const selectChange = useCallback(
-    (event: CheckboxChangeEvent | MouseEvent) => {
-      if (enableRowClick) {
-        event.preventDefault();
-      }
+  const selectChange = (event: CheckboxChangeEvent | MouseEvent) => {
+    if (enableRowClick) {
+      event.preventDefault();
+    }
 
-      if (window.getSelection()?.toString()) {
-        setTimeout(() => {
-          onSelectChange(record, !isChecked);
-        }, 0);
+    if (window.getSelection()?.toString()) {
+      setTimeout(() => {
+        onSelectChange(record, !isChecked);
+      }, 0);
 
-        return;
-      }
+      return;
+    }
 
-      onSelectChange(record, !isChecked);
-    },
-    [enableRowClick, isChecked, onSelectChange, record]
-  );
+    onSelectChange(record, !isChecked);
+  };
 
   const clearTextSelection = () => {
     if (window.getSelection()?.toString()) {
@@ -71,6 +75,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
 
   const getCheckbox = () => {
     const Component = selectionType === "radio" ? Radio : Checkbox;
+    const { indeterminate, ...generalProps } = checkboxProps;
 
     return (
       <div css={virtualizedTableCheckboxCellStyle(theme)} onClick={clearTextSelection}>
@@ -78,7 +83,8 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
           <Component
             checked={isChecked}
             onChange={!enableRowClick ? selectChange : undefined}
-            {...checkboxProps}
+            {...(selectionType === "radio" ? generalProps : checkboxProps)}
+            key={checkboxProps?.key}
             test-id={tableRowCheckboxTestId}
           />
         </TableCheckboxCell>
@@ -89,15 +95,16 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
   return (
     <>
       <div
-        {...onRow?.(record, rowIndex)}
         css={[
           isChecked
             ? checkedVirtualizedTableBodyRowStyle(theme)
             : usualVirtualizedTableBodyRowStyle(theme),
+          isWithoutWrapperStyles ? {} : virtualizedTableWithPaddingBodyRowLoadingStyle,
           enableRowClick && !isRowDisable && clickableVirtualizedTableBodyRowStyle,
           isShowDivider ? null : withoutDividerStyle,
         ]}
         onClick={!isRowDisable && enableRowClick ? selectChange : undefined}
+        {...onRow?.(record, rowIndex)}
       >
         {isCheckable && getCheckbox()}
         {map(columns, (column, columnIndex) => {

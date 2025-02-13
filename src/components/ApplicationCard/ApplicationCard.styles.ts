@@ -20,7 +20,7 @@ export const cardStyle = (theme: TTheme) =>
       boxSizing: "border-box",
       borderRadius: "2px",
     },
-  } as const);
+  }) as const;
 
 export const pointerCardStyle = {
   cursor: "pointer",
@@ -52,4 +52,4 @@ export const titleStyle = (theme: TTheme) =>
     position: "relative",
     overflow: "hidden",
     wordBreak: "break-word",
-  } as const);
+  }) as const;

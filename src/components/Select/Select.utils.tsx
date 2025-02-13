@@ -6,15 +6,15 @@ import React, {
   useEffect,
 } from "react";
 import { Select } from "./Select";
-import { AutoTooltip } from "../AutoTooltip";
+import { AlignedTooltip } from "../AlignedTooltip";
 import { find, has, isArray, isEmpty, isNil, isNumber, isString, map } from "lodash";
-import { textWrapperStyle } from "./Select.styles";
 import { useDropdownPosition } from "../Dropdown/Dropdown.utils";
 import type { DefaultOptionType, LabeledValue, SelectValue } from "antd/lib/select";
 import type { IDropdownParams, TXPlacement } from "../Dropdown/Dropdown.types";
 import { globalScrollBehavior } from "../../utils/ScrollBehavior/ScrollBehavior";
 import type { BaseSelectRef } from "rc-select";
 import type { ISelectProps } from "./Select.types";
+import { ellipsisStyle } from "../../styles";
 
 export const replaceBrowserTooltip = (children: React.ReactNode) =>
   React.Children.map(children, (element) => {
@@ -34,11 +34,11 @@ export const replaceBrowserTooltip = (children: React.ReactNode) =>
         return React.cloneElement(group, {
           title: null,
           children: isString(groupContent) ? (
-            <AutoTooltip>
-              <span style={textWrapperStyle} test-id={element.props["test-id"]}>
+            <AlignedTooltip>
+              <span style={ellipsisStyle} test-id={element.props["test-id"]}>
                 {groupContent}
               </span>
-            </AutoTooltip>
+            </AlignedTooltip>
           ) : (
             <span test-id={element.props["test-id"]}>{groupContent}</span>
           ),
@@ -57,11 +57,11 @@ export const replaceBrowserTooltip = (children: React.ReactNode) =>
       {
         title: null,
         children: isString(optionContent) ? (
-          <AutoTooltip>
-            <span style={textWrapperStyle} test-id={element.props["test-id"]}>
+          <AlignedTooltip>
+            <span style={ellipsisStyle} test-id={element.props["test-id"]}>
               {optionContent}
             </span>
-          </AutoTooltip>
+          </AlignedTooltip>
         ) : (
           <span test-id={element.props["test-id"]}>{optionContent}</span>
         ),
@@ -101,6 +101,20 @@ export const optionParsersForSearch = {
   },
 };
 
+export const mergeRefs = (
+  ...selectRefs: Array<React.MutableRefObject<HTMLElement | BaseSelectRef | null> | undefined>
+) => {
+  return (ref: HTMLElement | BaseSelectRef | null) => {
+    selectRefs.forEach((selectRef) => {
+      if (!selectRef) {
+        return;
+      }
+
+      selectRef.current = ref;
+    });
+  };
+};
+
 export const textContent = (node: ReactNode): string => {
   if (!node) {
     return "";
@@ -123,7 +137,7 @@ const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
   const { value, children, ...rest } = (element as ReactElement).props;
   const isHasTestId = has(rest, "test-id");
   let label = isHasTestId ? (
-    <span style={textWrapperStyle} test-id={rest["test-id"]}>
+    <span style={ellipsisStyle} test-id={rest["test-id"]}>
       {children}
     </span>
   ) : (

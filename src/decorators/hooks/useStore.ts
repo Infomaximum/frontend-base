@@ -7,7 +7,6 @@ import { useMountEffect } from "./useMountEffect";
 import { useUnmountEffect } from "./useUnmountEffect";
 import { useModalError } from "./useModalError";
 import { EErrorCode } from "../../utils/const";
-import type { NCore } from "@infomaximum/module-expander";
 
 export type TStoreParams = {
   /** Выполнять ли запрос при маунте компонента `(false)` */
@@ -47,7 +46,7 @@ export const useStore = <S extends Store<Model>>(store: S, params?: TStoreParams
   const mutate = useCallback(
     <
       T extends NStore.IActionSubmitDataParams,
-      Variables extends TDictionary = TInferredVariables<T, "mutation">
+      Variables extends TDictionary = TInferredVariables<T, "mutation">,
     >(
       params: IMutation<Variables>
     ) => store.submitData(params),
@@ -55,12 +54,12 @@ export const useStore = <S extends Store<Model>>(store: S, params?: TStoreParams
   );
 
   useEffect(() => {
-    const error = store.error as NCore.TError | EErrorCode | undefined;
+    const error = store.error;
 
     if (
-      (error === EErrorCode.CONNECTION_ERROR ||
-        error === EErrorCode.BAD_GATEWAY ||
-        error === EErrorCode.GATEWAY_TIMEOUT) &&
+      (error?.code === EErrorCode.CONNECTION_ERROR ||
+        error?.code === EErrorCode.BAD_GATEWAY ||
+        error?.code === EErrorCode.GATEWAY_TIMEOUT) &&
       showModalError &&
       isHandleError
     ) {

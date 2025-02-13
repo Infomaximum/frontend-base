@@ -9,7 +9,7 @@ const headerPanelCollapseStyle = {
 export const panelCollapseStyle = (theme: TTheme) => ({
   borderBottom: `1px solid ${theme.grey4Color} !important`,
   ".ant-collapse-header": {
-    color: `${theme.grey9Color} !important`,
+    color: `${theme.grey10Color} !important`,
     borderRadius: "0px !important",
     letterSpacing: "0.1em",
     fontWeight: 400,

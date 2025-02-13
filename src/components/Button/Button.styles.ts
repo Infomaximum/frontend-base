@@ -2,12 +2,45 @@ import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 
-export const defaultButtonStyle = (theme: TTheme) => ({
-  fontSize: `${theme.h5FontSize}px`,
-});
+const notDisabledBtnSelector = ":not(:disabled):not(.ant-btn-disabled)";
+const notDisabledDangerBtnSelector = "&.ant-btn-dangerous:not(:disabled):not(.ant-btn-disabled)";
+
+type TInactiveButtonConfig = {
+  transparent?: boolean;
+  isDark?: boolean;
+};
+
+const getInactiveButtonStyle = (theme: TTheme, config?: TInactiveButtonConfig) => {
+  const disabledStyle = {
+    borderColor: config?.transparent
+      ? theme.transparentColor
+      : config?.isDark
+        ? theme.grey8Color
+        : theme.grey5Color,
+    color: config?.transparent
+      ? config?.isDark
+        ? theme.grey7Color
+        : theme.grey6Color
+      : theme.grey7Color,
+    background: config?.transparent
+      ? theme.transparentColor
+      : config?.isDark
+        ? theme.grey9Color
+        : theme.grey4Color,
+  };
+
+  return {
+    "&&&&&.ant-btn-loading": {
+      opacity: 1,
+    },
+    "&:disabled, &.ant-btn-dangerous:disabled, &&&&&.ant-btn-loading": {
+      ...disabledStyle,
+      "&:hover, &:focus, &:active": disabledStyle,
+    },
+  };
+};
 
 export const smallButtonStyle = (theme: TTheme) => ({
-  padding: "3px 11px",
   svg: {
     fontSize: !isSafari ? `${theme.h4FontSize}px` : undefined,
     marginRight: "-4px",
@@ -23,181 +56,270 @@ export const smallOnlyIconStyle = () => ({
   alignItems: "center",
 });
 
-export const primaryButtonStyle = (theme: TTheme) => {
-  const commonStyle = {
-    color: theme.grey1Color,
-    fill: theme.grey1Color,
-    borderColor: theme.transparentColor,
-  };
+export const defaultButtonStyle = (theme: TTheme) => ({
+  fontSize: `${theme.h5FontSize}px`,
+  color: theme.grey10Color,
+});
 
-  const disabledStyle = {
-    color: theme.grey7Color,
-    background: theme.grey3Color,
-    borderColor: theme.grey3Color,
+export const dashedButtonStyle = {
+  borderStyle: "dashed",
+};
+
+export const uncertainButtonTypeDisabledStyle = {
+  "&:disabled": {
+    cursor: "not-allowed",
+  },
+};
+
+/* ------------------------------ Common Button Styles [START] ---------------------------- */
+
+export const outlinedButtonStyle = (theme: TTheme) => {
+  const commonStyle = {
+    borderColor: theme.grey5Color,
+    background: theme.grey1Color,
+  };
+  const commonDangerStyle = {
+    borderColor: commonStyle.borderColor,
+    color: theme.grey10Color,
+  };
+  const hoverStyle = {
+    borderColor: theme.thrust2Color,
+    color: theme.thrust2Color,
+  };
+  const hoverDangerStyle = {
+    color: theme.red5Color,
+    borderColor: theme.red5Color,
+  };
+  const activeStyle = {
+    borderColor: theme.thrust5Color,
+    color: theme.thrust5Color,
+  };
+  const activeDangerStyle = {
+    borderColor: theme.red7Color,
+    color: theme.red7Color,
   };
 
   return {
     ...commonStyle,
-    background: theme.thrust4Color,
-    ":hover": {
-      ...commonStyle,
-      background: theme.thrust2Color,
-    },
-    ":focus": {
-      ...commonStyle,
-      background: theme.thrust2Color,
-    },
-    ":active": {
-      ...commonStyle,
-      background: theme.thrust5Color,
-    },
-    "&[disabled]": {
-      ...disabledStyle,
-      ":hover": disabledStyle,
-      ":focus": disabledStyle,
-    },
-  } as const;
+    [`${notDisabledBtnSelector}:hover`]: hoverStyle,
+    [`${notDisabledBtnSelector}:focus`]: hoverStyle,
+    [`${notDisabledBtnSelector}:active`]: activeStyle,
+    [`${notDisabledDangerBtnSelector}`]: commonDangerStyle,
+    [`${notDisabledDangerBtnSelector}:hover`]: hoverDangerStyle,
+    [`${notDisabledDangerBtnSelector}:focus`]: hoverDangerStyle,
+    [`${notDisabledDangerBtnSelector}:active`]: activeDangerStyle,
+    ...getInactiveButtonStyle(theme),
+  };
 };
 
-export const primaryDarkButtonStyle = (theme: TTheme) => {
-  const disabledStyle = {
-    color: theme.grey7Color,
-    background: theme.grey8Color,
+export const outlinedDarkButtonStyle = (theme: TTheme) => {
+  const commonStyle = {
     borderColor: theme.grey8Color,
+    color: theme.grey3Color,
+    background: theme.graphite1Color,
+  };
+  const commonDangerStyle = {
+    color: commonStyle.color,
+    borderColor: commonStyle.borderColor,
+  };
+  const darkBackgroundStyle = {
+    background: commonStyle.background,
   };
 
   return {
-    ...primaryButtonStyle(theme),
-    "&[disabled]": {
-      ...disabledStyle,
-      ":hover": disabledStyle,
-      ":focus": disabledStyle,
-    },
-  } as const;
+    ...commonStyle,
+    [`${notDisabledDangerBtnSelector}`]: commonDangerStyle,
+    [`
+      ${notDisabledBtnSelector}:hover,
+      ${notDisabledBtnSelector}:focus,
+      ${notDisabledBtnSelector}:active,
+    `]: darkBackgroundStyle,
+    ...getInactiveButtonStyle(theme, { isDark: true }),
+  };
 };
+
+export const ghostButtonStyle = (theme: TTheme) => {
+  const commonStyle = {
+    background: theme.transparentColor,
+  };
+
+  return {
+    ...commonStyle,
+    [`
+      ${notDisabledBtnSelector}:hover,
+      ${notDisabledBtnSelector}:focus,
+      ${notDisabledBtnSelector}:active,
+    `]: commonStyle,
+  };
+};
+
+export const outlinedPrimaryButtonStyle = (theme: TTheme) => {
+  const commonStyle = {
+    borderColor: theme.thrust4Color,
+    color: theme.thrust4Color,
+  };
+
+  return {
+    ...commonStyle,
+    [`${notDisabledDangerBtnSelector}`]: commonStyle,
+  };
+};
+
+/* ------------------------------ Common Button Styles [END] ---------------------------- */
+
+/* ------------------------------ Primary Button Styles [START] ---------------------------- */
+
+export const primaryButtonStyle = (theme: TTheme) => {
+  const commonStyle = {
+    borderColor: theme.transparentColor,
+    color: theme.grey1Color,
+    background: theme.thrust4Color,
+  };
+  const hoverStyle = {
+    background: theme.thrust2Color,
+  };
+  const focusDangerStyle = {
+    background: theme.red5Color,
+  };
+  const activeStyle = {
+    background: theme.thrust5Color,
+  };
+  const activeDangerStyle = {
+    background: theme.red7Color,
+  };
+
+  return {
+    ...commonStyle,
+    [`${notDisabledBtnSelector}:hover`]: hoverStyle,
+    [`${notDisabledBtnSelector}:focus`]: hoverStyle,
+    [`${notDisabledBtnSelector}:active`]: activeStyle,
+    [`${notDisabledDangerBtnSelector}:focus`]: focusDangerStyle,
+    [`${notDisabledDangerBtnSelector}:active`]: activeDangerStyle,
+    ...getInactiveButtonStyle(theme),
+  };
+};
+
+export const primaryDarkButtonStyle = (theme: TTheme) => ({
+  ...getInactiveButtonStyle(theme, { isDark: true }),
+});
 
 export const primaryNotificationButtonStyle = (theme: TTheme) => {
   const commonStyle = {
-    color: theme.grey1Color,
-    fill: theme.grey1Color,
-    borderColor: theme.transparentColor,
+    background: theme.blue6Color,
   };
-
-  const disabledStyle = {
-    color: theme.grey7Color,
-    background: theme.grey4Color,
-    borderColor: theme.grey4Color,
+  const hoverStyle = {
+    background: theme.blue5Color,
+  };
+  const activeStyle = {
+    background: theme.blue7Color,
   };
 
   return {
     ...commonStyle,
-    background: theme.blue6Color,
-    ":hover": {
-      ...commonStyle,
-      background: theme.blue5Color,
-    },
-    ":focus": {
-      ...commonStyle,
-      background: theme.blue5Color,
-    },
-    ":active": {
-      ...commonStyle,
-      background: theme.blue7Color,
-    },
-    "&[disabled]": {
-      ...disabledStyle,
-      ":hover": disabledStyle,
-      ":focus": disabledStyle,
-    },
-  } as const;
+    [`${notDisabledBtnSelector}:hover`]: hoverStyle,
+    [`${notDisabledBtnSelector}:focus`]: hoverStyle,
+    [`${notDisabledBtnSelector}:active`]: activeStyle,
+  };
 };
 
-export const primaryOutlinedButtonStyle = (theme: TTheme) => {
+/* ------------------------------ Primary Button Styles [END] ---------------------------- */
+
+/* ------------------------------ Text Button Styles [START] ---------------------------- */
+
+export const textButtonStyle = (theme: TTheme) => {
+  const hoverStyle = {
+    color: theme.grey10Color,
+    background: theme.grey3Color,
+  };
+  const activeStyle = {
+    background: theme.grey5Color,
+  };
+  const hoverDangerStyle = {
+    color: theme.red6Color,
+  };
+  const activeDangerStyle = {
+    color: theme.red6Color,
+    background: theme.red2Color,
+  };
+
+  return {
+    [`${notDisabledBtnSelector}:hover`]: hoverStyle,
+    [`${notDisabledBtnSelector}:focus`]: hoverStyle,
+    [`${notDisabledBtnSelector}:active`]: activeStyle,
+    [`${notDisabledDangerBtnSelector}:hover`]: hoverDangerStyle,
+    [`${notDisabledDangerBtnSelector}:focus`]: hoverDangerStyle,
+    [`${notDisabledDangerBtnSelector}:active`]: activeDangerStyle,
+    ...getInactiveButtonStyle(theme, { transparent: true }),
+  };
+};
+
+export const textDarkButtonStyle = (theme: TTheme) => {
   const commonStyle = {
-    borderColor: theme.thrust2Color,
-    color: theme.thrust2Color,
-    backgroundColor: "transparent",
+    color: theme.grey3Color,
   };
-
-  const disabledStyle = {
-    color: theme.grey7Color,
-    background: theme.grey4Color,
-    borderColor: theme.grey4Color,
-  };
-
-  return {
-    ...getOutlineButtonStyle(theme.thrust4Color),
-    ":hover": {
-      ...commonStyle,
-    },
-    ":focus": {
-      ...commonStyle,
-    },
-    ":active": {
-      borderColor: theme.thrust5Color,
-      color: theme.thrust5Color,
-      backgroundColor: "transparent",
-    },
-    "&[disabled]": {
-      ...disabledStyle,
-      ":hover": disabledStyle,
-      ":focus": disabledStyle,
-    },
-  };
-};
-
-const getOutlineButtonStyle = (color: string) => ({
-  color,
-  fill: color,
-  borderColor: color,
-  backgroundColor: "transparent",
-});
-
-export const ghostButtonStyle = (theme: TTheme, danger?: boolean) => {
-  const disabledStyle = {
-    color: theme.grey7Color,
-    backgroundColor: theme.grey4Color,
-    borderColor: theme.grey4Color,
-  };
-
-  return {
-    ...getOutlineButtonStyle(theme.grey8Color),
-    borderColor: theme.grey5Color,
-    ":hover": danger ? undefined : getOutlineButtonStyle(theme.thrust2Color),
-    ":focus": danger ? undefined : getOutlineButtonStyle(theme.thrust2Color),
-    ":active": danger ? undefined : getOutlineButtonStyle(theme.thrust4Color),
-    "&:disabled": {
-      ...disabledStyle,
-      ":hover": disabledStyle,
-    },
-  };
-};
-
-export const ghostDarkButtonStyle = (theme: TTheme) => {
-  const disabledStyle = {
-    color: theme.grey7Color,
+  const hoverStyle = {
+    color: commonStyle.color,
     background: theme.grey8Color,
-    borderColor: theme.grey8Color,
+  };
+  const hoverDangerStyle = {
+    background: hoverStyle.background,
+  };
+  const activeStyle = {
+    color: commonStyle.color,
+    background: theme.grey7Color,
+  };
+  const activeDangerStyle = {
+    background: activeStyle.background,
   };
 
   return {
-    ...getOutlineButtonStyle(theme.grey3Color),
-    borderColor: theme.grey8Color,
-    ":hover": getOutlineButtonStyle(theme.thrust3Color),
-    ":focus": getOutlineButtonStyle(theme.thrust3Color),
-    ":active": getOutlineButtonStyle(theme.thrust4Color),
-    "&[disabled]": {
-      ...disabledStyle,
-      ":hover": disabledStyle,
-    },
+    ...commonStyle,
+    [`${notDisabledBtnSelector}:hover`]: hoverStyle,
+    [`${notDisabledBtnSelector}:focus`]: hoverStyle,
+    [`${notDisabledBtnSelector}:active`]: activeStyle,
+    [`${notDisabledDangerBtnSelector}:hover`]: hoverDangerStyle,
+    [`${notDisabledDangerBtnSelector}:focus`]: hoverDangerStyle,
+    [`${notDisabledDangerBtnSelector}:active`]: activeDangerStyle,
+    ...getInactiveButtonStyle(theme, { transparent: true, isDark: true }),
   };
 };
 
-export const textButtonStyle = (theme: TTheme) => ({
-  "&[disabled]": {
-    color: theme.grey7Color,
-    ":hover": {
-      color: theme.grey7Color,
-    },
-  },
-});
+/* ------------------------------ Text Button Styles [END] ---------------------------- */
+
+/* ------------------------------ Link Button Styles [START] ---------------------------- */
+
+export const linkButtonStyle = (theme: TTheme) => {
+  const commonStyle = {
+    color: theme.thrust4Color,
+  };
+  const hoverStyle = {
+    color: theme.thrust2Color,
+  };
+  const focusDangerStyle = {
+    color: theme.red5Color,
+  };
+  const activeStyle = {
+    color: theme.thrust5Color,
+  };
+  const activeDangerStyle = {
+    color: theme.red7Color,
+  };
+
+  return {
+    ...commonStyle,
+    [`${notDisabledBtnSelector}:hover`]: hoverStyle,
+    [`${notDisabledBtnSelector}:focus`]: hoverStyle,
+    [`${notDisabledBtnSelector}:active`]: activeStyle,
+    [`${notDisabledDangerBtnSelector}:focus`]: focusDangerStyle,
+    [`${notDisabledDangerBtnSelector}:active`]: activeDangerStyle,
+    ...getInactiveButtonStyle(theme, { transparent: true }),
+  };
+};
+
+export const linkDarkButtonStyle = (theme: TTheme) => {
+  return {
+    ...getInactiveButtonStyle(theme, { transparent: true, isDark: true }),
+  };
+};
+
+/* ------------------------------ Link Button Styles [END] ---------------------------- */

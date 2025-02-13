@@ -1,35 +1,38 @@
-import { textOverflowOverlayStyle } from "../../styles";
-
 export const getTagStyle =
-  (borderColor?: string, textColor?: string, bgColor?: string, closeIconColor?: string) =>
-  (theme: TTheme) =>
-    ({
+  (
+    borderColor?: string,
+    textColor?: string,
+    bgColor?: string,
+    closeIconColor?: string,
+    closeIconColorHover?: string
+  ) =>
+  (theme: TTheme) => {
+    return {
       position: "relative",
       backgroundColor: `${bgColor} !important`,
-      border: borderColor === "none" ? "none" : `1px solid ${borderColor}`,
-      color: `${textColor}`,
+      border: borderColor === "none" ? "none" : `1px solid ${borderColor} !important`,
+      color: `${textColor} !important`,
       maxWidth: "100%",
       display: "inline-flex",
       alignItems: "center",
-      borderRadius: "12px",
+      borderRadius: "4px",
       height: "22px",
       lineHeight: "22px",
-      // Чтобы убрать анимацию при клике по тегу [PT-13063], убрать при обновлении до Antd V5
-      ":after": {
-        animation: "none",
-      },
       overflow: "hidden",
       svg: {
         zIndex: 2,
       },
-      ".anticon-close": {
-        paddingRight: "8px",
+      "&& .anticon-close": {
+        display: "inline-flex",
+        justifyContent: "center",
+        paddingRight: "7px",
         color: closeIconColor,
         ":hover": {
-          color: theme.grey8Color,
+          color: closeIconColorHover ?? theme.grey8Color,
         },
       },
-    } as const);
+    } as const;
+  };
 
 export const notClosableTagStyle = {
   ":hover": {
@@ -37,17 +40,16 @@ export const notClosableTagStyle = {
   },
 };
 
+export const notColoredTagStyle = (theme: TTheme) => ({
+  "&:hover": {
+    color: `${theme.grey7Color} !important`,
+  },
+});
+
 export const tagContentStyle = {
   position: "relative",
   overflow: "hidden",
   whiteSpace: "nowrap",
   userSelect: "none",
+  textOverflow: "ellipsis",
 } as const;
-
-export const tagOverlayStyle = (backgroundColor: string) =>
-  ({
-    ...textOverflowOverlayStyle({
-      zIndex: 1,
-      backgroundColor: backgroundColor,
-    }),
-  } as const);

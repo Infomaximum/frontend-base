@@ -27,7 +27,7 @@ import { TABLE_HEADER_ID } from "../../../../utils/const";
 import { withTheme } from "../../../../decorators";
 
 export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends PureComponent<
-  IVirtualizedTableHeaderRowProps<T>
+  IVirtualizedTableHeaderRowProps<T | null>
 > {
   private getHeaderStyle = (
     scrollOffset: number | undefined,
@@ -39,31 +39,59 @@ export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends P
     isShowDivider ? null : withoutDividerStyle,
   ];
 
+  private handleCheckboxClick = () => {
+    if (window.getSelection()?.toString()) {
+      window.getSelection()?.removeAllRanges();
+    }
+  };
+
   private get checkbox() {
-    const { targetAll, isCheckable, isSelectionEmpty, isTableEmpty, theme, checkableColumnTitle } =
-      this.props;
+    const {
+      targetAll,
+      isCheckable,
+      isSelectionEmpty,
+      isTableEmpty,
+      theme,
+      checkableColumnTitle,
+      hideSelectAll,
+      isCheckableDisabled,
+    } = this.props;
 
     if (isCheckable) {
+      if (hideSelectAll) {
+        return <div css={virtualizedTableCheckboxCellStyle(theme)} key="wrapper-checkbox" />;
+      }
+
       assertSimple(
         !isUndefined(targetAll),
         "Для работы выделения по шапке необходимо передать флаг targetAll"
       );
 
       const isIndeterminate = !isTableEmpty && !targetAll && !isSelectionEmpty;
+      const isDisabled = isTableEmpty || isCheckableDisabled;
+      const isChecked = targetAll && !isDisabled;
+
+      const checkbox = (
+        <Checkbox
+          key="checkbox"
+          checked={isChecked}
+          disabled={isDisabled}
+          indeterminate={isIndeterminate}
+          onChange={this.handleHeaderCheckboxChange}
+          test-id={virtualizedTableCheckboxTestId}
+        />
+      );
 
       return (
-        <div css={virtualizedTableCheckboxCellStyle(theme)} key="wrapper-checkbox">
+        <div
+          css={virtualizedTableCheckboxCellStyle(theme)}
+          key="wrapper-checkbox"
+          onClick={this.handleCheckboxClick}
+        >
           <TableCheckboxCell>
-            {checkableColumnTitle ?? (
-              <Checkbox
-                key="checkbox"
-                checked={targetAll}
-                disabled={isTableEmpty}
-                indeterminate={isIndeterminate}
-                onChange={this.handleHeaderCheckboxChange}
-                test-id={virtualizedTableCheckboxTestId}
-              />
-            )}
+            {(typeof checkableColumnTitle === "function"
+              ? checkableColumnTitle(checkbox)
+              : checkableColumnTitle) ?? checkbox}
           </TableCheckboxCell>
         </div>
       );
@@ -79,7 +107,7 @@ export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends P
       const isSorted = sorter && sorter.field === column.key;
 
       return (
-        <VirtualizedTableHeaderCell<T>
+        <VirtualizedTableHeaderCell
           key={column.key || index}
           column={column}
           onSorterChange={onSorterChange}
@@ -116,7 +144,9 @@ export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends P
   }
 }
 
-const VirtualizedTableHeaderRowWithHOCs = withTheme(VirtualizedTableHeaderRowComponent);
+const VirtualizedTableHeaderRowWithHOCs = withTheme(VirtualizedTableHeaderRowComponent) as <T>(
+  props: IVirtualizedTableHeaderRowOwnProps<T>
+) => JSX.Element;
 
 export const VirtualizedTableHeaderRow = <T extends TRow>(
   props: IVirtualizedTableHeaderRowOwnProps<T>

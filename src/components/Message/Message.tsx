@@ -1,18 +1,19 @@
 import React, { type ReactNode } from "react";
 import { message } from "antd";
-import {
-  isString,
-  isFunction,
-  forEach,
-  isEqual,
-  map,
-  difference,
-  filter,
-  isUndefined,
-  uniqueId,
-} from "lodash";
+import { uniqueId } from "lodash";
+import { getMessageNoticeStyle } from "./Message.styles";
+import type {
+  IMessageMethodProps,
+  IMessageProps,
+  TRemoveMessageProps,
+  TGetMassAssignMessageParams,
+} from "./Message.types";
+import MessageBody from "./MessageBody";
+import { ThemeContext } from "@emotion/react";
+import { theme } from "../../styles/theme";
+import { isString, isFunction, forEach, isEqual, map, difference, isUndefined } from "lodash";
 import { generatePath } from "react-router";
-import { entityStyle, messageNoticeStyle, messageStyle, nameStyles } from "./Message.styles";
+import { entityStyle, messageStyle, nameStyle } from "./Message.styles";
 import {
   CHANGES_SAVED,
   RENAMED_MASCULINE,
@@ -21,18 +22,12 @@ import {
   DELETED_FEMININE,
   OBJECTS_DELETED,
   SAVED,
-  MASS_ACTION,
-  APPLIED_TO,
   CREATED_FEMININE,
   CREATED_MASCULINE,
   MOVED_TO,
+  DELETED_NEUTER,
+  DELETED_PLURAL,
 } from "../../utils/Localization/Localization";
-import type {
-  IMessageMethodProps,
-  IMessageProps,
-  TRemoveMessageProps,
-  TGetMassAssignMessageParams,
-} from "./Messsage.types";
 import {
   customMessageTestId,
   standardMessageTestId,
@@ -43,18 +38,18 @@ import {
   moveMessageTestId,
   massAssignMessageTestId,
 } from "../../utils/TestIds";
-import MessageBody from "./MessageBody";
-import { ThemeContext } from "@emotion/react";
 import type { NCore } from "@infomaximum/module-expander";
-import { theme } from "../../styles/theme";
 import { Localization, type TLocalizationDescription } from "@infomaximum/localization";
+import { getAppliedLocalized } from "./Message.utils";
 
 const duration = 3000;
 
 function showMessageGrid(props: IMessageProps, notification: ReactNode) {
   const messageDuration = props.messageDuration ? props.messageDuration * 1000 : duration;
+  const closable = props.closable;
+  const infinity = props.infinity;
 
-  const messageKey = uniqueId("message-key");
+  const messageKey = props.customKey ? props.customKey : uniqueId("message-key");
 
   const notificationData = {
     content: (
@@ -63,11 +58,13 @@ function showMessageGrid(props: IMessageProps, notification: ReactNode) {
           duration={messageDuration}
           messageKey={messageKey}
           messageBody={notification}
+          closable={closable}
+          infinity={infinity}
         />
       </ThemeContext.Provider>
     ),
     key: messageKey,
-    style: messageNoticeStyle,
+    style: getMessageNoticeStyle(props?.noticeStyle),
   };
 
   switch (props.type) {
@@ -100,7 +97,6 @@ class MessageComponent {
   ): React.ReactNode {
     return (
       <a
-        // eslint-disable-next-line react/jsx-no-bind
         onClick={(e) => {
           e.preventDefault();
           navigate(path, {
@@ -320,6 +316,8 @@ class MessageComponent {
       name,
       messageLoc,
       feminineGenus,
+      neuterGenus,
+      isPlural,
       messageLocStartEnd,
       messageLocTemplateDataBold,
     } = props;
@@ -328,8 +326,16 @@ class MessageComponent {
       return (
         <div css={messageStyle} key="remove-message" test-id={removeMessageTestId}>
           {`${localization.getLocalized(entityLoc)} `}
-          <b css={nameStyles}>{name}</b>
-          {` ${localization.getLocalized(feminineGenus ? DELETED_FEMININE : DELETED_MASCULINE)}`}
+          <b css={nameStyle}>{name}</b>
+          {` ${localization.getLocalized(
+            feminineGenus
+              ? DELETED_FEMININE
+              : neuterGenus
+                ? DELETED_NEUTER
+                : isPlural
+                  ? DELETED_PLURAL
+                  : DELETED_MASCULINE
+          )}`}
         </div>
       );
     }
@@ -351,7 +357,7 @@ class MessageComponent {
       return (
         <div css={messageStyle} key="remove-message" test-id={removeMessageTestId}>
           {`${localization.getLocalized(messageLocStartEnd.messageStart)} `}
-          <b css={nameStyles}>{` ${messageLocTemplateDataBold} `}</b>
+          <b css={nameStyle}>{` ${messageLocTemplateDataBold} `}</b>
           {` ${localization.getLocalized(messageLocStartEnd.messageEnd)}`}
         </div>
       );
@@ -402,7 +408,7 @@ class MessageComponent {
           {`${localization.getLocalized(entityLoc)} `}
           <b>{this.getProfileLink(navigate, entityInstancePath, entityInstanceLinkCaption)}</b>
           {` ${localization.getLocalized(MOVED_TO)} `}
-          {entityPlaceFirstSymbolLower} <b css={nameStyles}>{entityInstancePlace}</b>
+          {entityPlaceFirstSymbolLower} <b css={nameStyle}>{entityInstancePlace}</b>
         </div>
       );
     }
@@ -412,47 +418,20 @@ class MessageComponent {
    * Метод, возвращающий сообщение для массового назначения
    * @param params.localization - локализация
    * @param params.entityLoc - локализация сущности массового действия
-   * @param params.entities - объекты массового действия
-   * @param params.targetObjectList - массив объектов сущности к которым применяется массовое действие
-   * @param params.targetObject.count - кол-во объектов сущности к которым применяется массовое действие
-   * @param params.targetObject.loc - локализация объектов сущности массового назначения
+   * @param params.entityValue - значения массового действия
+   * @param params.genus - род для APPLIED (по умолчанию "male")
    */
   public static getMassAssignMessage(params: TGetMassAssignMessageParams) {
-    const { localization, entityLoc, entities, targetObjectList } = params;
-    const filerTargetObjectList = filter(targetObjectList, (target) => target.count >= 1);
-    let targetObjectsLoc: string = "";
-    forEach(filerTargetObjectList, (value, index) => {
-      const lastIndex = filerTargetObjectList.length - 1;
-      const targetEssence = `${value.count} ${localization.getLocalized(value.loc, {
-        count: value.count,
-      })}`;
+    const { localization, entityLoc, entityValue, genus = "male" } = params;
 
-      if (lastIndex > 0 && lastIndex !== index) {
-        targetObjectsLoc += `${targetEssence}, `;
-      } else {
-        targetObjectsLoc += targetEssence;
-      }
-    });
+    const localizedApplied = getAppliedLocalized(localization, genus);
 
-    const massActionFirstSymbolLower =
-      localization.getLocalized(MASS_ACTION).charAt(0).toLowerCase() +
-      localization.getLocalized(MASS_ACTION).substr(1);
-
-    return localization.getLanguage() === Localization.Language.ru ? (
-      <div css={messageStyle} key="mass-assign-message-content" test-id={massAssignMessageTestId}>
-        {`${localization.getLocalized(MASS_ACTION)} `}
-        <b css={entityStyle}>
-          {localization.getLocalized(entityLoc)} – {entities}
-        </b>
-        {` ${localization.getLocalized(APPLIED_TO)} ${targetObjectsLoc}`}
-      </div>
-    ) : (
+    return (
       <div css={messageStyle} key="mass-assign-message-content" test-id={massAssignMessageTestId}>
         <b css={entityStyle}>
-          {localization.getLocalized(entityLoc)} – {entities}
-        </b>
-        {` ${massActionFirstSymbolLower}`}
-        {` ${localization.getLocalized(APPLIED_TO)} ${targetObjectsLoc}`}
+          {localization.getLocalized(entityLoc)} – {entityValue}
+        </b>{" "}
+        {localizedApplied}
       </div>
     );
   }
@@ -481,8 +460,8 @@ class MessageComponent {
     }
   }
 
-  public static hideMessage() {
-    message.destroy();
+  public static hideMessage(key?: string) {
+    message.destroy(key);
   }
 }
 

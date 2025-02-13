@@ -2,19 +2,8 @@ import type { Interpolation } from "@emotion/react";
 import { useContainerWidth } from "./useContainerWidth";
 import { forEach, isEmpty, map } from "lodash";
 import { getGradientColorsFromTransparent } from "../../utils/colors";
-
-const context = document.createElement("canvas").getContext("2d") as CanvasRenderingContext2D;
-const getTextWidth = (() => {
-  return (text: string, fontSize: number) => {
-    if (!context) {
-      return 0;
-    }
-
-    context.font = `${fontSize}px 'Roboto'`;
-
-    return context.measureText(text).width;
-  };
-})();
+import { getTextWidth } from "../../utils/textWidth";
+import { useMemo } from "react";
 
 /**
  * Получить разбитый на строки текст, который поместится в указанную ширину
@@ -29,7 +18,9 @@ const getHyphenatedTextByChar = (text: string, widthLimit: number, fontSize: num
 
   let accumulatedLine = "";
   forEach(text, (char, index) => {
-    const lineWidth = getTextWidth(`${accumulatedLine}${char}`, fontSize);
+    const lineWidth = getTextWidth(`${accumulatedLine}${char}`, {
+      size: fontSize,
+    });
 
     if (lineWidth > widthLimit) {
       result.push(accumulatedLine);
@@ -57,14 +48,16 @@ const getHyphenatedTextByChar = (text: string, widthLimit: number, fontSize: num
  * @param visibleLinesCount - количество видимых строк
  * @returns string[] - массив подстрок
  */
-const getHyphenatedText = (
+export const getHyphenatedText = (
   text: string,
   widthLimit: number,
   visibleLinesCount: number,
   fontSize: number
 ): string[] => {
   const result: string[] = [];
-  const fullWidth = getTextWidth(text, fontSize);
+  const fullWidth = getTextWidth(text, {
+    size: fontSize,
+  });
 
   if (fullWidth <= widthLimit) {
     // если текст поместился полностью
@@ -91,12 +84,20 @@ const getHyphenatedText = (
       const tempLine = `${
         !isEmpty(accumulatedLine) && hyphenIndex === 0 ? " " : ""
       }${dashSplittedWord}${postfix}`;
-      const lineWidth = getTextWidth(`${accumulatedLine}${tempLine}`, fontSize);
+      const currentLine = `${accumulatedLine}${tempLine}`;
+      const lineWidth = getTextWidth(currentLine, {
+        size: fontSize,
+      });
 
       if (lineWidth > widthLimit) {
         if (!isEmpty(accumulatedLine)) {
           // аккумулированная строка не пустая, нужно её добавить в отдельную строку
-          result.push(accumulatedLine);
+          if (result.length + 1 === visibleLinesCount) {
+            const lastLine = getHyphenatedTextByChar(currentLine, widthLimit, fontSize)[0] || "";
+            result.push(lastLine);
+          } else {
+            result.push(accumulatedLine);
+          }
 
           if (result.length === visibleLinesCount + 1) {
             return result;
@@ -167,6 +168,7 @@ const getOverlayAfterStyle =
  * @param paddings - отступы, уменьшающие ширину контейнера
  * @param maxLinesCount - количество видимых строк
  * @param fontSize - размер шрифта для расчетов
+ * @param showEllipsis - флаг отображения троеточия в конце вместо забледнения, по умолчанию отображается забледнение
  * @returns string[] - массив подстрок
  */
 export const useCardLinesOverlay = (
@@ -174,14 +176,15 @@ export const useCardLinesOverlay = (
   paddings: number,
   maxLinesCount: number,
   fontSize: number,
-  outerContainerWidth?: number
+  outerContainerWidth?: number,
+  showEllipsis = false
 ) => {
   const [containerWidth, setContainerRef] = useContainerWidth();
 
   const usedWidth = outerContainerWidth ?? containerWidth;
 
-  const getLines = (text: string) => {
-    if (!usedWidth) {
+  const lines = useMemo(() => {
+    if (!usedWidth || !text) {
       return [];
     }
 
@@ -191,33 +194,38 @@ export const useCardLinesOverlay = (
       maxLinesCount,
       fontSize
     );
-  };
-
-  const lines = text ? getLines(text) : [];
+  }, [fontSize, maxLinesCount, paddings, text, usedWidth]);
 
   // добавлено ли забледнение, т.е. true если текст не поместился в условия
   const hasOverflow = lines.length > maxLinesCount;
 
-  const overlayedLines = lines.length ? (
-    <>
-      {map(lines, (line, index) => {
-        const isLastLineIntoView = index === maxLinesCount - 1;
-        const isLastLineInArray = index === lines.length - 1;
+  const overlayedLines = useMemo(() => {
+    if (!lines.length) {
+      return null;
+    }
 
-        if (index >= maxLinesCount) {
-          return null;
-        }
+    return (
+      <>
+        {map(lines, (line, index) => {
+          const isLastLineIntoView = index === maxLinesCount - 1;
+          const isLastLineInArray = index === lines.length - 1;
 
-        return isLastLineIntoView ? (
-          <div key={index} css={getOverlayAfterStyle(isLastLineInArray)}>
-            {line}
-          </div>
-        ) : (
-          <div key={index}>{line}</div>
-        );
-      })}
-    </>
-  ) : null;
+          if (index >= maxLinesCount) {
+            return null;
+          }
+
+          return isLastLineIntoView ? (
+            <div key={index} css={!showEllipsis && getOverlayAfterStyle(isLastLineInArray)}>
+              {line}
+              {showEllipsis && "..."}
+            </div>
+          ) : (
+            <div key={index}>{line}</div>
+          );
+        })}
+      </>
+    );
+  }, [lines, maxLinesCount, showEllipsis]);
 
   return { usedWidth, setContainerRef, overlayedLines, hasOverflow };
 };

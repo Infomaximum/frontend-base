@@ -1,7 +1,7 @@
 import { createRef, Children, Component } from "react";
 import { TestIdAttr, getAccessParameters } from "@infomaximum/utility";
 import type { IFormProps, IFormState } from "./Form.types";
-import { isFunction, omit } from "lodash";
+import { isFunction, isUndefined, omit } from "lodash";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
 import { omittedPropsConnectedForm, type TOmittedConnectedFormProps } from "./Form.utils";
 import type { Location } from "react-router";
@@ -20,7 +20,7 @@ class FormComponent extends Component<IFormProps, IFormState> {
     const { accessKeys, someAccessKeys, isFeatureEnabled, customAccess } = nextProps;
 
     if (
-      (accessKeys || someAccessKeys || customAccess) &&
+      (accessKeys || someAccessKeys || customAccess || isUndefined(customAccess)) &&
       isFeatureEnabled &&
       (prevState.accessKeys !== accessKeys ||
         prevState.someAccessKeys !== someAccessKeys ||

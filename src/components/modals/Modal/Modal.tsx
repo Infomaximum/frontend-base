@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React from "react";
 import type { IModalProps } from "./Modal.types";
 import { Modal as AntModal } from "antd";
 import { createSelector } from "reselect";
-import { boldTitleStyle, modalStyle, titleStyle } from "./Modal.styles";
+import { boldTitleStyle, modalStyle, getModalStyle, titleStyle } from "./Modal.styles";
 import { modalTitleTestId } from "../../../utils/TestIds";
 import { useTheme } from "../../../decorators/hooks/useTheme";
+import { merge } from "lodash";
 
 export const getBoldTitleModal = createSelector(
   (title: React.ReactNode) => title,
@@ -16,16 +17,13 @@ export const getBoldTitleModal = createSelector(
 );
 
 const ModalComponent: React.FC<IModalProps> = (props) => {
-  const { title, width, ...rest } = props;
+  const { title, width, styles: stylesProps, height, ...rest } = props;
   const theme = useTheme();
 
-  const boldTitle = useMemo(
-    () => (
-      <span test-id={modalTitleTestId} css={titleStyle(theme)}>
-        {title}
-      </span>
-    ),
-    [title, theme]
+  const boldTitle = (
+    <span test-id={modalTitleTestId} css={titleStyle(theme)}>
+      {title}
+    </span>
   );
 
   return (
@@ -36,6 +34,8 @@ const ModalComponent: React.FC<IModalProps> = (props) => {
       focusTriggerAfterClose={false}
       width={width ?? 480}
       css={modalStyle}
+      styles={merge({}, getModalStyle(height), stylesProps)}
+      centered={true}
       {...rest}
     />
   );

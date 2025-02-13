@@ -9,7 +9,7 @@ export const iconBarsDrawerStyle = (theme: TTheme) =>
   ({
     ...suffixIconStyle(theme),
     pointerEvents: "auto",
-  } as const);
+  }) as const;
 
 export const closeCircleStyle = (theme: TTheme) => ({
   fontSize: "14px",

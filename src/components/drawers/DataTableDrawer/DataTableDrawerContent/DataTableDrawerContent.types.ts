@@ -19,10 +19,14 @@ export interface IDataTableDrawerContentProps<T extends TBaseRow = TBaseRow>
       | "defaultCheckedModels"
       | "isVirtualized"
       | "onChange"
+      | "rowSelection"
     >,
     Pick<Partial<IDataTableOwnProps<T>>, "rowBuilder"> {
   // todo: Зачем нужен этот проп, если есть возможность передать rowBuilder?
   handlerTableDisplayValues?(value: IModel): string | undefined;
 
   treeCheckedStateCleanSetter?: (treeCheckedStateCleaner: () => void) => void;
+
+  // Принудительно включить (когда модель не наследник PagingGroup) или принудительно выключить (когда нет поддержки сервера или фронта)
+  isLoadingOnScroll?: boolean;
 }

@@ -24,36 +24,48 @@ import { getDisplayedSettingsRoutes } from "../../utils/Routes/routes";
 import { SettingsSVG } from "../../resources/icons";
 import { Drawer } from "../drawers/Drawer/Drawer";
 import { Settings } from "../Settings/Settings";
+import type { DrawerStyles } from "antd/lib/drawer/DrawerPanel";
+import { useFeature, useLocalization } from "../../decorators";
+import { ADMINISTRATION } from "../../utils";
+import { Tooltip } from "../Tooltip";
+import { useLocation } from "react-router";
+import { filterChildrenRouts } from "./HeaderMenu.utils";
 
 const { Header } = Layout;
+const tooltipAlign = { targetOffset: [0, 2] };
 
 const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
   ({ renderSettingsFooterDrawer, userId, userName, onLogout, className }, ref) => {
     const theme = useTheme();
+    const localization = useLocalization();
     const [showSettingsDrawer, setShowSettingsDrawer] = useState<boolean>(false);
     const routes = useContext(RoutesContext);
+    const { isFeatureEnabled } = useFeature();
+    const location = useLocation();
 
     const settingsRoutes = useMemo(() => {
       const settingsRoute = find(routes, (route) => route.key === settingsKey);
+      const settingsChildrenRoutes = filterChildrenRouts(settingsRoute, isFeatureEnabled, location);
 
-      return settingsRoute && getDisplayedSettingsRoutes(settingsRoute.routes);
-    }, [routes]);
+      return settingsRoute && getDisplayedSettingsRoutes(settingsChildrenRoutes);
+    }, [isFeatureEnabled, location, routes]);
 
     const isVisibleSettingsIcon = !isEmpty(settingsRoutes);
 
     const profileMenuItems = useMemo(() => {
       const profileRoute = find(routes, (route) => route.key === profileKey);
+      const profileChildrenRoutes = filterChildrenRouts(profileRoute, isFeatureEnabled, location);
 
       const items: IProfileMenuItem[] = [];
 
-      forEach(profileRoute?.routes, ({ isRedirectRoute, key, loc, path, icon }) => {
+      forEach(profileChildrenRoutes, ({ isRedirectRoute, key, loc, path, icon }) => {
         if (!isRedirectRoute && key && loc && path && icon) {
           items.push({ key, loc, path, icon });
         }
       });
 
       return items;
-    }, [routes]);
+    }, [isFeatureEnabled, location, routes]);
 
     const handleSettingsIconClick = useCallback(() => {
       setShowSettingsDrawer(true);
@@ -66,14 +78,20 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
     const headerNavigation = (
       <Col key="header-menu-settings-wrap" css={wrapStaticMenuStyle}>
         {isVisibleSettingsIcon ? (
-          <div
-            id={headerMenuSettingsTestId}
-            test-id={headerMenuSettingsTestId}
-            css={linkSettingsStyle}
-            onClick={handleSettingsIconClick}
+          <Tooltip
+            align={tooltipAlign}
+            title={localization.getLocalized(ADMINISTRATION)}
+            placement="bottom"
           >
-            <SettingsSVG />
-          </div>
+            <div
+              id={headerMenuSettingsTestId}
+              test-id={headerMenuSettingsTestId}
+              css={linkSettingsStyle}
+              onClick={handleSettingsIconClick}
+            >
+              <SettingsSVG />
+            </div>
+          </Tooltip>
         ) : null}
         <ProfileDropdown
           menuItems={profileMenuItems}
@@ -90,6 +108,16 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
       }
     }, [handleCloseDrawer, renderSettingsFooterDrawer]);
 
+    const drawerStyles = useMemo(
+      () =>
+        ({
+          header: headerSettingsDrawerStyle,
+          body: drawerBodyStyle,
+          footer: footerStyle,
+        }) satisfies DrawerStyles,
+      []
+    );
+
     const settingsDrawer = (
       <Drawer
         key="settings-drawer"
@@ -98,11 +126,9 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
         closable={true}
         onClose={handleCloseDrawer}
         open={showSettingsDrawer}
-        bodyStyle={drawerBodyStyle}
+        styles={drawerStyles}
         footer={footer}
-        footerStyle={footerStyle}
         destroyOnClose={true}
-        headerStyle={headerSettingsDrawerStyle}
       >
         {settingsRoutes && !isEmpty(settingsRoutes) ? (
           <Settings onItemClick={handleCloseDrawer} routes={settingsRoutes} />

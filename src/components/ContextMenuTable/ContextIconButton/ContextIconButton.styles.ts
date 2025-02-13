@@ -2,7 +2,7 @@ import { assignInWith, isNil } from "lodash";
 import { HoverAnimationInterval } from "../../../utils/const";
 import type { TCustomContextIconButtonFuncStyle } from "./ContextIconButton.types";
 
-export const defaultButtonStyle = (size: number) => (theme: TTheme) =>
+export const getDefaultButtonStyle = (size: number) => (theme: TTheme) =>
   ({
     margin: `-${theme.tableCellVerticalPadding}px -${theme.tableCellHorizontalPadding}px`,
     display: "flex",
@@ -12,16 +12,16 @@ export const defaultButtonStyle = (size: number) => (theme: TTheme) =>
     cursor: "pointer",
     fontSize: `${theme.subtitleFontSize}px`,
     ":hover": {
-      backgroundColor: theme.grey4Color,
-      color: theme.grey8Color,
+      backgroundColor: theme.grey45Color,
+      color: theme.grey7Color,
     },
     height: `${size}px`,
     width: `${size}px`,
     transition: `${HoverAnimationInterval}ms`,
-  } as const);
+  }) as const;
 
 export const disabledButtonStyle = (theme: TTheme) =>
-  customContextIconButtonStyle({
+  getCustomContextIconButtonStyle({
     color: theme.grey6Color,
     hoverBackgroundColor: null,
     hoverColor: null,
@@ -32,19 +32,19 @@ export const disabledButtonStyle = (theme: TTheme) =>
   });
 
 export const redButtonStyle = (theme: TTheme) =>
-  customContextIconButtonStyle({
+  getCustomContextIconButtonStyle({
     color: null,
     hoverBackgroundColor: theme.red2Color,
     hoverColor: theme.red6Color,
   });
 
 /** Функция для генерирования кастомных стилей */
-export const customContextIconButtonStyle: TCustomContextIconButtonFuncStyle =
+export const getCustomContextIconButtonStyle: TCustomContextIconButtonFuncStyle =
   ({ color, hoverColor, hoverBackgroundColor, additionalStyles }) =>
   (size) =>
   (theme) => {
     const defaultStyle = {
-      ...defaultButtonStyle(size)(theme),
+      ...getDefaultButtonStyle(size)(theme),
     };
 
     const paramsStyle = {
@@ -53,7 +53,7 @@ export const customContextIconButtonStyle: TCustomContextIconButtonFuncStyle =
         color: hoverColor,
         backgroundColor: hoverBackgroundColor,
       },
-      ...additionalStyles,
+      ...(additionalStyles as Record<string, any>),
     };
 
     return assignInWith(defaultStyle, paramsStyle, (objValue, srcValue) =>

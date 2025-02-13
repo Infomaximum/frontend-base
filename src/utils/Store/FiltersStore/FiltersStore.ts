@@ -29,13 +29,14 @@ class FiltersStore extends BaseStore {
    * @param filterValue - значение фильтра
    * @returns string
    */
-  public static getFilterNameByTypename(
-    typename: NFiltersStore.TFilterTypename,
-    isSingle: boolean,
-    lastFilterId: number,
-    filterValue: NFiltersStore.TFilterValue
-  ): NFiltersStore.TFilterName {
-    const filterSet = FilterStorage.getFilterSet();
+  public static getFilterNameByTypename({
+    typename,
+    isSingle,
+    lastFilterId,
+    filterValue,
+    store,
+  }: NFiltersStore.TFilterNameByTypenameParams): NFiltersStore.TFilterName {
+    const filterSet = FilterStorage.getFilterSet(store);
 
     const FilterDescriptionClass = filterSet[typename];
 
@@ -94,7 +95,11 @@ class FiltersStore extends BaseStore {
     this.toJSON = this.toJSON.bind(this);
 
     if (autoSave) {
-      StorePersist.autoSave(this, name);
+      // setTimeout нужен для того, чтобы классы описания фильтров могли быть
+      // ассоциированы с хранилищами и зарегистрированы после их создания.
+      setTimeout(() => {
+        StorePersist.autoSave(this, name);
+      }, 0);
     }
   }
 
@@ -195,12 +200,13 @@ class FiltersStore extends BaseStore {
       this._lastFilterId++;
     }
 
-    const filterName = FiltersStore.getFilterNameByTypename(
-      filterTypename,
+    const filterName = FiltersStore.getFilterNameByTypename({
+      typename: filterTypename,
       isSingle,
-      this._lastFilterId,
-      value
-    );
+      lastFilterId: this._lastFilterId,
+      filterValue: value,
+      store: this,
+    });
 
     const filterState = {
       [FiltersStore.typenameFilterFieldName]: filterTypename,
@@ -224,6 +230,7 @@ class FiltersStore extends BaseStore {
     this._filterDescriptions = [];
     this._filters = new ObservableMap();
     this._lastFilterId = 0;
+    localStorage.removeItem(this.name);
   }
 
   public getPersistStruct(): NFiltersStore.TRestoreStruct {
@@ -272,7 +279,7 @@ class FiltersStore extends BaseStore {
   }
 
   public override restoreByStruct(restoreStruct: NFiltersStore.TRestoreStruct) {
-    const filterSet = FilterStorage.getFilterSet();
+    const filterSet = FilterStorage.getFilterSet(this);
     this.resetAllFilters();
 
     forEach(restoreStruct, (filter) => {
@@ -291,20 +298,17 @@ class FiltersStore extends BaseStore {
 
         const restoredFilter = filterDescription.restoreFilterByStruct?.(filter);
 
-        const filterName = FiltersStore.getFilterNameByTypename(
-          filter.type,
+        const filterName = FiltersStore.getFilterNameByTypename({
+          typename: filter.type,
           isSingle,
-          this._lastFilterId,
-          restoredFilter?.value
-        );
+          lastFilterId: this._lastFilterId,
+          filterValue: restoredFilter?.value,
+          store: this,
+        });
 
         this._filters.set(filterName, { ...restoredFilter, id: this._lastFilterId });
       }
     });
-  }
-
-  public replaceSavedFilters(candidate: string | null) {
-    StorePersist.replaceSaved(this, this.name, candidate);
   }
 }
 

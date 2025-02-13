@@ -1,11 +1,11 @@
 import React, { memo, useMemo } from "react";
 import type { IInlineTagsProps } from "./InlineTags.types";
-import { Tooltip } from "../../../components/Tooltip/Tooltip";
 import { map, last, join, take, drop } from "lodash";
 import { containerStyle, ellipsisStyle, getTagContainerStyle, tagStyle } from "./InlineTags.styles";
 import { getNumberOfPlacedTags, outerEllipsisText, tooltipSeparator } from "./InlineTags.utils";
 import { Tag } from "../../../components/Tag/Tag";
 import { useTheme } from "../../../decorators";
+import { AlignedTooltip } from "../../AlignedTooltip";
 
 const InlineTagsComponent: React.FC<IInlineTagsProps> = ({ tags, measuredWidth }) => {
   const theme = useTheme();
@@ -37,9 +37,11 @@ const InlineTagsComponent: React.FC<IInlineTagsProps> = ({ tags, measuredWidth }
       const tagNames = map(outsideTags, (tag) => tag.getName());
 
       return (
-        <Tooltip placement="bottomLeft" title={join(tagNames, tooltipSeparator)}>
-          <div css={ellipsisStyle(theme)}>{outerEllipsisText}</div>
-        </Tooltip>
+        <div css={ellipsisStyle(theme)}>
+          <AlignedTooltip title={join(tagNames, tooltipSeparator)}>
+            {outerEllipsisText}
+          </AlignedTooltip>
+        </div>
       );
     }
   }, [outsideTags, theme]);

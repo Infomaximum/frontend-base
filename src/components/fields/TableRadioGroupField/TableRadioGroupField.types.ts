@@ -20,7 +20,7 @@ export interface ITableRadioGroupFieldContainerOwnProps<T>
 }
 
 export interface ITableRadioGroupFieldProps<
-  T extends Record<string, unknown> = Record<string, unknown>
+  T extends Record<string, unknown> = Record<string, unknown>,
 > extends Omit<
       IFieldProps<TTableRadioGroupFieldValue, ITableRadioGroupFieldContainerProps<T>>,
       "component"
@@ -30,7 +30,7 @@ export interface ITableRadioGroupFieldProps<
 }
 
 export interface ITableRadioGroupFormFieldProps<
-  T extends Record<string, unknown> = Record<string, unknown>
+  T extends Record<string, unknown> = Record<string, unknown>,
 > extends Omit<
       IFormFieldProps<TTableRadioGroupFieldValue, ITableRadioGroupFieldContainerProps<T>>,
       "component"

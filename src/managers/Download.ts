@@ -1,6 +1,6 @@
 import axios from "axios";
 import { get } from "lodash";
-import { BaseErrorHandler } from "../utils/ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
+import { BaseErrorHandlerService } from "../services";
 
 type TExportParams = {
   query: string;
@@ -8,6 +8,7 @@ type TExportParams = {
 
 /** Служит для скачивания файлов с сервера, с предварительной проверкой на ошибку */
 export class DownloadManager {
+  public static isDownload = false;
   private query: string;
 
   constructor(params: TExportParams) {
@@ -20,6 +21,7 @@ export class DownloadManager {
       axios
         .head(this.query)
         .then(() => {
+          DownloadManager.isDownload = true;
           window.location.assign(this.query);
           resolve();
         })
@@ -28,13 +30,16 @@ export class DownloadManager {
             const fetchedError = get(error, "response.data.error");
 
             if (fetchedError) {
-              const err = await new BaseErrorHandler().prepareError(fetchedError);
+              const err = await new BaseErrorHandlerService().prepareError(fetchedError);
 
               reject(err);
             }
 
             reject(error);
           });
+        })
+        .finally(() => {
+          DownloadManager.isDownload = false;
         });
     });
   }

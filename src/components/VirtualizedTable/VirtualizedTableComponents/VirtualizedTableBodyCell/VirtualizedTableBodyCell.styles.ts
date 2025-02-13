@@ -1,10 +1,12 @@
 import { tableBodyCellStyle } from "../../../Table/TableComponents/TableBodyCell/TableBodyCell.styles";
-import type { ReactText } from "react";
 import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 
-export const getVirtualizedTableCellFlexStyle = (width?: ReactText, minWidth?: ReactText) => {
+export const getVirtualizedTableCellFlexStyle = (
+  width?: string | number,
+  minWidth?: string | number
+) => {
   return { flexBasis: width ?? 0, flexGrow: width ? 0 : 1, minWidth };
 };
 
@@ -22,7 +24,7 @@ export const virtualizedTableCellStyle = (theme: TTheme) =>
     ...tableBodyCellStyle(theme),
     lineHeight: isSafari ? `${theme.tableRowLineHeight}px` : undefined,
     height: "100%",
-  } as const);
+  }) as const;
 
 // Увеличение зоны клика на заголовке, при hasExpander и enableRowClick
 export const virtualizedTableCellExpandedTextStyle = (theme: TTheme) => ({

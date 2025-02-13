@@ -319,19 +319,11 @@ export class TreeManager<T extends TBaseRow = TBaseRow> {
       ? this.removeContradictions(this.checkedModels)
       : this.checkedModels;
 
-    const sourceTreeRestModels = [...this.restByGroupMap.values()];
-
-    const restCount = reduce(
-      sourceTreeRestModels,
-      (sum, model) => {
-        return sum + (model?.getNextCount() ?? 0);
-      },
-      0
+    this.treeCounter = new TreeCounter(
+      this.checkedModels,
+      this.checkedShellModels,
+      this.sourceTreeNodesLength
     );
-
-    const totalCount = this.sourceTreeNodesLength - sourceTreeRestModels.length + restCount;
-
-    this.treeCounter = new TreeCounter(this.checkedModels, this.checkedShellModels, totalCount);
   }
 
   /**

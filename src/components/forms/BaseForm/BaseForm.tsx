@@ -1,54 +1,64 @@
-import React, { memo, useContext, useMemo } from "react";
+import React, { memo, useCallback, useContext, useMemo, type ReactNode } from "react";
 import { EFormLayoutType, type IBaseFormProps } from "./BaseForm.types";
 import {
   formContentWithFooterStyle,
-  formContentWithoutFooterStyle,
+  formContentWithButtonsPanelStyle,
   formFooterStyle,
-  baseFormStyle,
+  formContainerStyle,
+  formContentBackgroundStyle,
+  getFormDefaultStyle,
+  notificationFormItemStyle,
+  connectedFormContainerStyle,
 } from "./BaseForm.styles";
 import { Layout, Form as AntForm } from "antd";
-import { SubmitFormButton } from "../SubmitFormButton/SubmitFormButton";
-import { isUndefined, isNull } from "lodash";
 import { FormContext } from "../../../decorators/contexts/FormContext";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { HeaderMenuPortal } from "../../HeaderMenu/HeaderMenuPortal/HeaderMenuPortal";
-import { modalFormLayout, typeLLayout, typeMLayout, typeSLayout } from "../../../styles/formLayout";
-import { assertSimple } from "@infomaximum/assert";
 import { Notification } from "../../Notification";
-import { SAVE } from "../../../utils/Localization/Localization";
 import { ESpaceSize, SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
+import type { Interpolation } from "@emotion/react";
+import { FormButtonsPanel } from "./FormButtonsPanel/FormButtonsPanel";
+import { forEach, isArray, isNull, map } from "lodash";
+import { FormSubgroup } from "../FormSubgroup/FormSubgroup";
+import { FormSubmitPanel } from "./FormSubmitPanel/FormSubmitPanel";
+import { isValidReactNode } from "./BaseForm.utils";
 
 const { Footer, Content } = Layout;
 
+const getSpaceSizeContextValue = (layoutType?: EFormLayoutType) => {
+  switch (layoutType) {
+    case EFormLayoutType.LargeType:
+      return ESpaceSize.large;
+    case EFormLayoutType.TableType:
+      return ESpaceSize.table;
+    case EFormLayoutType.ModalType:
+      return ESpaceSize.modal;
+    case EFormLayoutType.ModalExtensiveType:
+      return ESpaceSize.modal;
+    default:
+      return ESpaceSize.default;
+  }
+};
+
 const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }> = (props) => {
   const {
+    component,
     error: errorProp,
     submitError,
-    layout = "horizontal",
+    layout = "vertical",
     labelAlign = "left",
     colon = false,
     formStyles,
     showNotification = true,
-    layoutType = EFormLayoutType.TypeS,
+    layoutType,
     handleScrollContent,
+    formSubmitPanelConfig,
+    formButtonsConfig,
+    connectedFormStyles,
   } = props;
 
   const formData = useContext(FormContext);
-  const localization = useLocalization();
   const error = errorProp || submitError;
 
-  const defaultHeader = useMemo(() => {
-    return (
-      <SubmitFormButton
-        key="submit-button"
-        type="primary-dark"
-        size="small"
-        caption={localization.getLocalized(SAVE)}
-      />
-    );
-  }, [localization]);
-
-  const footer = useMemo(() => {
+  const customFooter = useMemo(() => {
     if (!formData.access.hasWriteAccess) {
       return null;
     }
@@ -56,75 +66,138 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
     return <Footer css={props.customFooterStyle ?? formFooterStyle}>{props.footer}</Footer>;
   }, [formData.access.hasWriteAccess, props.customFooterStyle, props.footer]);
 
-  const header = useMemo(() => {
-    if (!formData.access.hasWriteAccess) {
-      return null;
-    }
-
-    if (isUndefined(props.header)) {
-      return <HeaderMenuPortal.Body align="right">{defaultHeader}</HeaderMenuPortal.Body>;
-    }
-
-    return <HeaderMenuPortal.Body align="right">{props.header}</HeaderMenuPortal.Body>;
-  }, [defaultHeader, formData.access.hasWriteAccess, props.header]);
-
-  const { labelCol, notificationCol, wrapperCol } = useMemo(() => {
-    switch (layoutType) {
-      case EFormLayoutType.TypeS:
-        return typeSLayout;
-      case EFormLayoutType.TypeM:
-        return typeMLayout;
-      case EFormLayoutType.TypeL:
-        return typeLLayout;
-      case EFormLayoutType.ModalType:
-        return modalFormLayout;
-      default:
-        const undefinedLayoutType: never = layoutType;
-        assertSimple(false, `Неизвестный тип layout ${undefinedLayoutType}`);
-    }
-  }, [layoutType]);
-
   const notification = useMemo(() => {
     if (error && (error.message || error.title)) {
       return showNotification ? (
-        <AntForm.Item wrapperCol={props.notificationCol || notificationCol}>
+        <AntForm.Item css={notificationFormItemStyle}>
           <Notification error={error} />
         </AntForm.Item>
       ) : null;
     }
 
     return null;
-  }, [error, notificationCol, props.notificationCol, showNotification]);
+  }, [error, showNotification]);
+
+  const formContentStyles = useMemo(() => {
+    const styles: Interpolation<TTheme>[] = [formContentBackgroundStyle];
+
+    props.footer
+      ? styles.push(formContentWithFooterStyle)
+      : styles.push(formContentWithButtonsPanelStyle);
+
+    styles.push(formStyles);
+
+    return styles;
+  }, [formStyles, props.footer]);
+
+  const getWrappedFormSubgroup = useCallback(
+    (element: ReactNode, key: number | string, subgroupFooter?: JSX.Element) =>
+      isValidReactNode(element) && (
+        <Content
+          key={`form-subgroup-${key}`}
+          css={formContentStyles}
+          onScroll={handleScrollContent}
+        >
+          <div>
+            <SpaceSizeContext.Provider value={getSpaceSizeContextValue(layoutType)}>
+              {element}
+            </SpaceSizeContext.Provider>
+          </div>
+          {subgroupFooter}
+        </Content>
+      ),
+    [formContentStyles, handleScrollContent, layoutType]
+  );
+
+  const gerWrappedMainSubgroup = useCallback(
+    (element: ReactNode) => {
+      if (!formButtonsConfig) {
+        return getWrappedFormSubgroup(element, "main");
+      }
+
+      const mainSubgroupFunctionButtonsFooter = (
+        <FormButtonsPanel formButtonsConfig={formButtonsConfig} />
+      );
+
+      return getWrappedFormSubgroup(element, "main", mainSubgroupFunctionButtonsFooter);
+    },
+    [formButtonsConfig, getWrappedFormSubgroup]
+  );
+
+  const formContent = useMemo(() => {
+    const childrenArray = React.Children.toArray(props.children);
+    const mainContentSubgroup: ReactNode[] = [];
+    const modalsSubgroup: ReactNode[] = [];
+    const contentSubgroups: ReactNode[] = [];
+
+    const distributeElements = (children: ReactNode) => {
+      if (React.isValidElement(children)) {
+        if (children.key?.includes("modal")) {
+          modalsSubgroup.push(children);
+        } else {
+          if (children.type === FormSubgroup) {
+            contentSubgroups.push(children);
+          } else if (children.type === React.Fragment) {
+            distributeElements(children.props?.children);
+          } else {
+            mainContentSubgroup.push(children);
+          }
+        }
+      } else {
+        if (isArray(children)) {
+          forEach(children, (node) => {
+            distributeElements(node);
+          });
+        } else {
+          mainContentSubgroup.push(children);
+        }
+      }
+    };
+
+    forEach(childrenArray, (node) => {
+      distributeElements(node);
+    });
+
+    const sortedContentSubgroups = contentSubgroups.sort((prev, curr) => {
+      if (React.isValidElement(prev) && React.isValidElement(curr)) {
+        return (prev.props.priority ?? 0) > (curr.props.priority ?? 0) ? -1 : 1;
+      }
+
+      return 0;
+    });
+
+    if (layoutType === EFormLayoutType.ModalType) {
+      mainContentSubgroup.unshift(notification);
+    } else {
+      mainContentSubgroup.push(notification);
+    }
+
+    return [
+      mainContentSubgroup.length > 0 ? [gerWrappedMainSubgroup(mainContentSubgroup)] : null,
+      map(sortedContentSubgroups, (item, index) => getWrappedFormSubgroup(item, index)),
+      modalsSubgroup,
+    ];
+  }, [props.children, layoutType, gerWrappedMainSubgroup, notification, getWrappedFormSubgroup]);
 
   return (
-    <AntForm
-      css={baseFormStyle}
-      layout={layout}
-      colon={colon}
-      labelAlign={labelAlign}
-      labelCol={props.labelCol || labelCol}
-      wrapperCol={props.wrapperCol || wrapperCol}
-    >
-      <Content
-        css={
-          props.footer
-            ? [formContentWithFooterStyle, formStyles]
-            : [formContentWithoutFooterStyle, formStyles]
-        }
-        onScroll={handleScrollContent}
+    <div css={formContainerStyle}>
+      <AntForm
+        component={component}
+        css={getFormDefaultStyle(layoutType)}
+        layout={layout}
+        colon={colon}
+        labelAlign={labelAlign}
       >
-        <div {...props.attributes}>
-          {notification}
-          <SpaceSizeContext.Provider
-            value={layoutType === EFormLayoutType.ModalType ? ESpaceSize.small : ESpaceSize.large}
-          >
-            {props.children}
-          </SpaceSizeContext.Provider>
+        <div {...props.attributes} css={[connectedFormContainerStyle, connectedFormStyles]}>
+          {formContent}
+          {props.footer ? (
+            customFooter
+          ) : !isNull(formSubmitPanelConfig) ? (
+            <FormSubmitPanel formSubmitPanelConfig={formSubmitPanelConfig} />
+          ) : null}
         </div>
-      </Content>
-      {!isNull(props.header) ? <HeaderMenuPortal>{header}</HeaderMenuPortal> : null}
-      {props.footer ? footer : null}
-    </AntForm>
+      </AntForm>
+    </div>
   );
 };
 

@@ -11,7 +11,12 @@ export interface IDataTableDrawerOwnProps<T extends IConvertedModel = IConverted
     Omit<IDataTableDrawerContentProps<T>, "columns">,
     Pick<
       IOptionalDrawerFormProps,
-      "optionsConfig" | "defaultOption" | "defaultContent" | "contents" | "setFormData"
+      | "optionsConfig"
+      | "defaultOption"
+      | "defaultContent"
+      | "contents"
+      | "setFormData"
+      | "onStartClosing"
     > {
   selectedModels?: IModel[];
   onSaveData(

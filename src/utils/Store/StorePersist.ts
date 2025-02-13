@@ -2,7 +2,6 @@ import Aes from "crypto-js/aes";
 import CryptoJsCore from "crypto-js/core";
 import { reaction } from "mobx";
 import { Expander } from "@infomaximum/module-expander";
-import { isEmpty, isString } from "lodash";
 import type { BaseStore } from "./BaseStore";
 
 class StorePersist {
@@ -25,36 +24,17 @@ class StorePersist {
 
       reaction(
         () => store.toJSON(),
-        (value) => {
-          if (value) {
-            localStorage.setItem(name, this.encrypt(value));
-          } else {
-            localStorage.removeItem(name);
-          }
-        }
+        (value) => this.save(name, value)
       );
     });
   }
 
-  public static replaceSaved(store: BaseStore, name: string, saveJsonCandidate: string | null) {
-    Expander.getInstance().runWhenAppReady(() => {
-      try {
-        if (isString(saveJsonCandidate)) {
-          const decrypt = this.decrypt(saveJsonCandidate);
-          const restoreStruct = JSON.parse(decrypt);
-
-          if (decrypt && !isEmpty(restoreStruct)) {
-            localStorage.setItem(name, saveJsonCandidate);
-            // сбрасываем все состояние фильтров, чтобы создать новое
-            store.reset();
-            store.restoreByStruct(restoreStruct);
-          }
-        }
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error("Неизвестный хэш фильтра.");
-      }
-    });
+  public static save(key: string, value: string | null) {
+    if (value) {
+      localStorage.setItem(key, this.encrypt(value));
+    } else {
+      localStorage.removeItem(key);
+    }
   }
 
   public static subscribeSaved(

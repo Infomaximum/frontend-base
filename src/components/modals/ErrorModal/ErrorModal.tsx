@@ -4,8 +4,7 @@ import { Modal } from "../../modals/Modal/Modal";
 import { Button } from "../../Button/Button";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import {
-  modalFooterStyle,
-  bodyModalStyle,
+  getModalFooterStyle,
   iconWrapStyle,
   modalContentStyle,
   errorIconStyle,
@@ -13,6 +12,8 @@ import {
   titleStyle,
   textStyle,
   modalStyle,
+  modalComponentsStyle,
+  additionalButtonsStyle,
 } from "./ErrorModal.styles";
 import {
   modalErrorCloseButtonTestId,
@@ -27,7 +28,7 @@ import { useFooterAndTitleHeight } from "./ErrorModal.utils";
 import { useTheme } from "../../../decorators/hooks/useTheme";
 
 const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
-  ({ error, showModal, onCloseModal, isDebugMode }) => {
+  ({ error, showModal, onCloseModal, maskTransitionName, footerButtons, isDebugMode }) => {
     const localization = useLocalization();
     const theme = useTheme();
 
@@ -37,18 +38,26 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
 
     const footer = useMemo(
       () => (
-        <div key="modal-error-footer" css={modalFooterStyle} ref={footerCBRef}>
+        <div
+          key="modal-error-footer"
+          css={getModalFooterStyle(!!footerButtons?.length)}
+          ref={footerCBRef}
+        >
+          <div css={additionalButtonsStyle}>
+            {footerButtons?.map((AddableButton) => AddableButton)}
+          </div>
           <Button
             key="modal-error-close-button"
             test-id={modalErrorCloseButtonTestId}
             onClick={onCloseModal}
-            type={isInfo ? "primary" : "ghost"}
+            type={isInfo ? "primary" : "common"}
+            autoFocus={!!footerButtons?.length ? undefined : true}
           >
             {localization.getLocalized(isInfo ? CONTINUE : CLOSE)}
           </Button>
         </div>
       ),
-      [footerCBRef, isInfo, localization, onCloseModal]
+      [footerButtons, footerCBRef, isInfo, localization, onCloseModal]
     );
 
     if (!error) {
@@ -67,13 +76,13 @@ const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
         key="modal-error"
         width={modalWidth}
         open={showModal}
-        centered={true}
         closable={false}
-        zIndex={1050}
+        zIndex={99999}
         css={modalStyle(theme)}
-        bodyStyle={bodyModalStyle}
+        styles={modalComponentsStyle}
         footer={footer}
         closeIcon={<CloseOutlined />}
+        maskTransitionName={maskTransitionName}
       >
         <div key="modal-icon-wrap" css={iconWrapStyle}>
           {isInfo ? (

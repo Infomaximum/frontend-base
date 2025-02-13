@@ -1,11 +1,11 @@
-export const wrapperBannerAlertStyle = (backgroundColor?: string) =>
+export const getWrapperBannerAlertStyle = (backgroundColor?: string) =>
   ({
     backgroundColor,
     display: "flex",
     flexDirection: "row",
     padding: "8px 15px",
     justifyContent: "space-between",
-  } as const);
+  }) as const;
 
 export const iconBannerAlertStyle = {
   display: "flex",

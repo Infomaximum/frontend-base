@@ -1,4 +1,3 @@
-import { textOverflowOverlayStyle } from "../../../styles";
 import {
   wrapMenuStyle,
   iconsHoverStyle,
@@ -20,7 +19,14 @@ export const titleStyle = (theme: TTheme) =>
     paddingRight: "12px",
     background: theme.headerPanel.backgroundColor,
     position: "relative",
-  } as const);
+  }) as const;
+
+export const titleTooltipStyle = {
+  display: "inline-flex",
+  width: "100%",
+  alignItems: "center",
+  gap: "8px",
+};
 
 export const wrapMenuTitleStyle = (theme: TTheme) => ({
   ...wrapMenuStyle(theme),
@@ -96,7 +102,7 @@ export const getHeaderBodyRightWithCenterStyle = (
     bottom: "50%",
     transform: "translateY(50%)",
     zIndex: 10, // перекрытие забледнения заголовка
-  } as const);
+  }) as const;
 
 export const headerBodyRightWithLeftWithoutCenterStyle = { flex: "0 0 auto" };
 
@@ -104,15 +110,3 @@ export const headerBodyRightWithoutLeftAndCenterStyle = {
   flex: "0 0 auto",
   justifyContent: "flex-end",
 };
-
-export const titleOverlayStyle = (theme: TTheme) =>
-  ({
-    "::after": {
-      content: "''",
-      ...textOverflowOverlayStyle({
-        backgroundColor: theme.headerPanel.backgroundColor,
-      }),
-      pointerEvents: "none",
-      height: "100%",
-    },
-  } as const);

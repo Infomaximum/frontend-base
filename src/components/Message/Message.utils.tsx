@@ -1,6 +1,13 @@
 import type { Localization, TLocalizationDescription } from "@infomaximum/localization";
-import { SWITCHED_OFF, SWITCHED_ENABLED } from "../../utils/Localization/Localization";
-import { switchedEnabledStyles, switchedOffStyles } from "./Message.styles";
+import {
+  SWITCHED_OFF,
+  SWITCHED_ENABLED,
+  APPLIED_MALE,
+  APPLIED_FEMALE,
+  APPLIED_NEUTER,
+} from "../../utils/Localization/Localization";
+import { switchedEnabledStyle, switchedOffStyle } from "./Message.styles";
+import type { TGenus } from "./Message.types";
 
 export const getStyledAndLocalizedEntities = (
   status: boolean,
@@ -15,11 +22,22 @@ export const getStyledAndLocalizedEntities = (
 
   if (status) {
     statusLoc = (
-      <span css={switchedEnabledStyles}>{localization.getLocalized(SWITCHED_ENABLED)}</span>
+      <span css={switchedEnabledStyle}>{localization.getLocalized(SWITCHED_ENABLED)}</span>
     );
   } else if (!locTerm) {
-    statusLoc = <span css={switchedOffStyles}>{localization.getLocalized(SWITCHED_OFF)}</span>;
+    statusLoc = <span css={switchedOffStyle}>{localization.getLocalized(SWITCHED_OFF)}</span>;
   }
 
   return statusLoc;
+};
+
+export const getAppliedLocalized = (localization: Localization, genus: TGenus) => {
+  switch (genus) {
+    case "male":
+      return localization.getLocalized(APPLIED_MALE);
+    case "female":
+      return localization.getLocalized(APPLIED_FEMALE);
+    case "neuter":
+      return localization.getLocalized(APPLIED_NEUTER);
+  }
 };

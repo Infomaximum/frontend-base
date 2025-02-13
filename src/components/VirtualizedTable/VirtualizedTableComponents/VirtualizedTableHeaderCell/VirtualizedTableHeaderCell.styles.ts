@@ -12,12 +12,12 @@ export const virtualizedTableHeaderSortedCellStyle = (theme: TTheme) =>
     ":hover": {
       color: theme.linkHoverColor,
     },
-  } as const);
+  }) as const;
 
 export const virtualizedTableHeaderSortedCellActiveStyle = (theme: TTheme) =>
   ({
     color: theme.blue6Color,
-  } as const);
+  }) as const;
 
 /**
  * Стили для сортера
@@ -25,6 +25,10 @@ export const virtualizedTableHeaderSortedCellActiveStyle = (theme: TTheme) =>
 export const sorterColumnStyle = {
   marginLeft: "8px",
   height: "18px",
+};
+
+export const sorterRowStyle = {
+  minWidth: "26px",
 };
 
 const sorterArrowStyle = (theme: TTheme) => ({
@@ -40,22 +44,22 @@ export const sorterArrowUpStyle = (theme: TTheme) =>
   ({
     ...sorterArrowStyle(theme),
     marginBottom: "-4px",
-  } as const);
+  }) as const;
 
 export const sorterArrowDownStyle = (theme: TTheme) =>
   ({
     ...sorterArrowStyle(theme),
     marginBottom: "-1px",
-  } as const);
+  }) as const;
 
 export const sorterArrowUpActiveStyle = (theme: TTheme) =>
   ({
     ...sorterArrowUpStyle(theme),
     ...sorterArrowActiveStyle(theme),
-  } as const);
+  }) as const;
 
 export const sorterArrowDownActiveStyle = (theme: TTheme) =>
   ({
     ...sorterArrowDownStyle(theme),
     ...sorterArrowActiveStyle(theme),
-  } as const);
+  }) as const;

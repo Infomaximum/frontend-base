@@ -3,7 +3,7 @@ import { CloseOutlined } from "../../../../components/Icons/Icons";
 import {
   closeIconBannerAlertStyle,
   iconBannerAlertStyle,
-  wrapperBannerAlertStyle,
+  getWrapperBannerAlertStyle,
   wrapperContentBannerAlertStyle,
 } from "./BannerAlert.styles";
 import type { IBannerAlertProps } from "./BannerAlert.types";
@@ -14,7 +14,7 @@ const BannerAlertComponent = forwardRef<HTMLDivElement, IBannerAlertProps>((prop
   const { children, icon, onClose, backgroundColor, closable, wrapperContentStyle } = props;
 
   return (
-    <div ref={ref} css={[wrapperBannerAlertStyle(backgroundColor), wrapperContentStyle]}>
+    <div ref={ref} css={[getWrapperBannerAlertStyle(backgroundColor), wrapperContentStyle]}>
       <div css={wrapperContentBannerAlertStyle}>
         {icon ? <div css={iconBannerAlertStyle}>{icon}</div> : null}
 

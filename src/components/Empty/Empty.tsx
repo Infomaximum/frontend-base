@@ -15,7 +15,7 @@ import {
   emptyHintStyle,
   emptyImageStyle,
   wrapperEmptyStyle,
-  wrapperEmptyTableStyle,
+  getWrapperEmptyTableStyle,
   wrapperNotTableEmptyStyle,
 } from "./Empty.styles";
 import type { IEmptyProps } from "./Empty.types";
@@ -30,7 +30,10 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
   hint,
   description,
   emptyContent,
+  emptyImage: emptyImageProps,
   customEmptyTableStyle,
+  isLoading,
+  isVirtualized,
 }) => {
   const localization = useLocalization();
   const theme = useTheme();
@@ -49,6 +52,9 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
       emptyImage = <NoAccessImage />;
       emptyCaption = localization.getLocalized(NO_ACCESS);
     }
+  } else if (isBoolean(isSearchEmpty) && !isSearchEmpty) {
+    emptyImage = <NothingFoundSVG />;
+    emptyCaption = description;
   } else {
     emptyCaption = description;
   }
@@ -59,7 +65,7 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
   const defaultEmptyContent = (
     <AntEmpty
       key="empty"
-      image={emptyImage}
+      image={emptyImageProps ?? emptyImage}
       imageStyle={emptyImageStyle}
       description={emptyDescription}
       css={!isTableComponent ? wrapperNotTableEmptyStyle : undefined}
@@ -70,7 +76,11 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
 
   return (
     <div
-      css={!!isTableComponent ? [wrapperEmptyTableStyle, customEmptyTableStyle] : wrapperEmptyStyle}
+      css={
+        !!isTableComponent
+          ? [getWrapperEmptyTableStyle(isLoading, isVirtualized), customEmptyTableStyle]
+          : wrapperEmptyStyle
+      }
     >
       {isUndefined(emptyContent) ? defaultEmptyContent : emptyContent}
     </div>

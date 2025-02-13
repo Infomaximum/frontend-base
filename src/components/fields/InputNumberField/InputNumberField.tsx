@@ -93,8 +93,8 @@ const InputNumber: React.FC<IInputNumberProps> = (props) => {
   const inputValue = input.value
     ? input.value
     : isNull(input.value)
-    ? null
-    : roundToPrecision(0, rest.precision);
+      ? null
+      : roundToPrecision(0, rest.precision);
 
   return (
     <AntInputNumber

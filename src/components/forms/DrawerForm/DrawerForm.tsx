@@ -3,11 +3,11 @@ import { isFunction } from "lodash";
 import type { Deferred } from "@infomaximum/utility";
 import { Form } from "../Form";
 import {
-  formStyles,
-  drawerBodyStyle,
+  formStyle,
   cancelButtonStyle,
   noAccessStyle,
   formContentStyle,
+  drawerFooterStyle,
 } from "./DrawerForm.styles";
 import { EFormLayoutType } from "../BaseForm/BaseForm.types";
 import type { NCore } from "@infomaximum/module-expander";
@@ -16,17 +16,17 @@ import type { IDrawerFormProps, IDrawerFormState } from "./DrawerForm.types";
 import type { FormApi } from "final-form";
 import type { IFormData } from "../../../decorators/contexts/FormContext";
 import { DrawerAnimationInterval } from "../../../utils/const";
-import { SubmitFormButton } from "../SubmitFormButton/SubmitFormButton";
+import { SubmitFormButton } from "../SubmitFormButton";
 import { Button } from "../../Button/Button";
 import { Drawer } from "../../drawers/Drawer/Drawer";
 import { Empty } from "../../Empty/Empty";
+import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
 
 class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerFormState> {
   public static defaultProps = {
-    bodyStyle: drawerBodyStyle,
     isHasAccess: true,
     placement: "right",
-  };
+  } as const;
 
   public override readonly state: Readonly<IDrawerFormState> = {
     open: false,
@@ -61,6 +61,9 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
   };
 
   private handleCloseDrawer = (e?: any) => {
+    const { onStartClosing } = this.props;
+    onStartClosing && onStartClosing();
+
     this.setState({ open: false }, () =>
       this.afterCloseDrawer(() => {
         if (isFunction(this.props.onClose)) {
@@ -92,6 +95,10 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
 
     return onSubmit(values, form)
       ?.then((submitResult: unknown) => {
+        if (!!form.getState().submitError) {
+          return;
+        }
+
         this.handleCloseDrawer();
         this.afterCloseDrawer(afterSubmit ?? onCancel, submitResult);
         Promise.resolve();
@@ -108,32 +115,38 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
       disableSubmitOnInvalid,
       cancelButtonProps,
       disableSubmitFormButton,
+      okButtonProps,
+      additionalFooterButtons,
     } = this.props;
 
     return (
       this.state.formProvider && (
-        <div key="drawer-footer">
-          <SubmitFormButton
-            key="button-submit"
-            type="primary"
-            formName={form}
-            formProvider={this.state.formProvider}
-            caption={okText}
-            disableOnPristine={disableSubmitOnPristine}
-            disableOnInvalid={disableSubmitOnInvalid}
-            test-id={form}
-            disabled={disableSubmitFormButton}
-          />
-          <Button
-            type="ghost"
-            key="button-cancel"
-            onClick={this.handleCancel}
-            test-id={drawerFormCancelButtonTestId}
-            css={cancelButtonStyle}
-            {...cancelButtonProps}
-          >
-            {cancelText}
-          </Button>
+        <div key="drawer-footer" css={drawerFooterStyle}>
+          <div>
+            <SubmitFormButton
+              key="button-submit"
+              type="primary"
+              formName={form}
+              formProvider={this.state.formProvider}
+              caption={okText}
+              disableOnPristine={disableSubmitOnPristine}
+              disableOnInvalid={disableSubmitOnInvalid}
+              test-id={form}
+              disabled={disableSubmitFormButton}
+              {...okButtonProps}
+            />
+            <Button
+              type="common"
+              key="button-cancel"
+              onClick={this.handleCancel}
+              test-id={drawerFormCancelButtonTestId}
+              css={cancelButtonStyle}
+              {...cancelButtonProps}
+            >
+              {cancelText}
+            </Button>
+          </div>
+          {additionalFooterButtons}
         </div>
       )
     );
@@ -147,7 +160,6 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
       onSubmit,
       onClose,
       title,
-      bodyStyle,
       notification,
       okText,
       cancelText,
@@ -161,6 +173,8 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
       isHasAccess,
       footer,
       open,
+      formLayoutType = EFormLayoutType.ModalType,
+      onStartClosing,
       ...rest
     } = this.props;
 
@@ -168,14 +182,13 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
       <Drawer
         {...rest}
         key="drawer-form"
-        footer={!isHasAccess ? null : footer ?? this.renderFooter()}
+        footer={!isHasAccess ? null : (footer ?? this.renderFooter())}
         destroyOnClose={true}
         keyboard={true}
         open={open ?? this.state.open}
         closable={true}
         onClose={this.handleCloseDrawer}
         title={title}
-        bodyStyle={bodyStyle}
         maskClosable={disableSubmitFormButton ?? this.state.formPristine}
       >
         {!isHasAccess ? (
@@ -187,13 +200,13 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
             form={form}
             onSubmit={this.handleSubmit}
             initialValues={initialValues}
-            formStyles={formStyles}
+            formStyles={formStyle}
             test-id={`${drawerFormTestId}_${form}`}
-            layoutType={EFormLayoutType.ModalType}
+            layoutType={formLayoutType}
             notification={notification}
-            header={null}
             setFormData={this.setFormData}
             connectedFormWrapperStyle={formContentStyle}
+            formSubmitPanelConfig={null}
           >
             {children}
           </Form>
@@ -203,4 +216,4 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
   }
 }
 
-export const DrawerForm = DrawerFormComponent;
+export const DrawerForm = withLoc(DrawerFormComponent);

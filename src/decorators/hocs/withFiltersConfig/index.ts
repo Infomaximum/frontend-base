@@ -1,0 +1,1 @@
+export { withFiltersConfig } from "./withFiltersConfig";

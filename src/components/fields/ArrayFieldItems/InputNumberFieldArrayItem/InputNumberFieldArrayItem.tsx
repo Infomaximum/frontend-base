@@ -1,62 +1,44 @@
 import type { InputNumberFieldArrayItemProps } from "./InputNumberFieldArrayItem.types";
-import React, { useCallback, useMemo } from "react";
-import { isFunction } from "lodash";
-import {
-  wrapperInputNumberFieldStyle,
-  removeButtonStyle,
-} from "./InputNumberFieldArrayItem.styles";
-import { Button } from "../../../Button/Button";
+import React, { memo } from "react";
+import { wrapperFieldStyle, wrapperStyle } from "../ArrayFieldItems.styles";
 import { removeInputNumberFieldButtonTestId } from "../../../../utils/TestIds";
-import { CloseOutlined } from "../../../Icons/Icons";
 import { InputNumberFormField } from "../../InputNumberField/InputNumberField";
+import { RemoveButton } from "../components/RemoveButton/RemoveButton";
 
-const InputNumberFieldArrayItem: React.FC<InputNumberFieldArrayItemProps> = (props) => {
+const InputNumberFieldArrayItemComponent: React.FC<InputNumberFieldArrayItemProps> = (props) => {
   const {
     fieldEntityPath,
-    fields,
     fieldEntityIndex,
     onRemoveFieldEntity,
-    removeIcon: RemoveIcon,
+    removeIcon,
     customRemoveIconStyle,
     writeAccess,
     removeAccess,
     readOnly,
+    isRemoveItem,
     ...rest
   } = props;
 
-  const fieldsLength = fields?.length;
-
-  const removeField = useCallback(() => {
-    if (isFunction(onRemoveFieldEntity)) {
-      onRemoveFieldEntity(fieldEntityIndex);
-    }
-  }, [fieldEntityIndex, onRemoveFieldEntity]);
-
-  const removeButton = useMemo(() => {
-    return fieldsLength && fieldsLength > 1 && !readOnly ? (
-      <Button
-        type="link"
-        size="small"
-        test-id={`${removeInputNumberFieldButtonTestId}_${fieldEntityIndex}`}
-        value={fieldEntityIndex}
-        css={customRemoveIconStyle ?? removeButtonStyle}
-        onClick={removeField}
-      >
-        {RemoveIcon ?? <CloseOutlined />}
-      </Button>
-    ) : null;
-  }, [RemoveIcon, fieldEntityIndex, fieldsLength, readOnly, removeField, customRemoveIconStyle]);
-
   return (
-    <InputNumberFormField
-      key={fieldEntityPath}
-      name={fieldEntityPath}
-      wrapperComponentStyle={wrapperInputNumberFieldStyle}
-      rightLabel={removeButton}
-      readOnly={readOnly}
-      {...rest}
-    />
+    <div css={wrapperStyle}>
+      <InputNumberFormField
+        key={fieldEntityPath}
+        name={fieldEntityPath}
+        wrapperComponentStyle={wrapperFieldStyle}
+        readOnly={readOnly}
+        {...rest}
+      />
+      {isRemoveItem && (
+        <RemoveButton
+          fieldEntityIndex={fieldEntityIndex}
+          onRemoveFieldEntity={onRemoveFieldEntity}
+          testId={`${removeInputNumberFieldButtonTestId}_${fieldEntityIndex}`}
+          customRemoveIconStyle={customRemoveIconStyle}
+          removeIcon={removeIcon}
+        />
+      )}
+    </div>
   );
 };
 
-export { InputNumberFieldArrayItem };
+export const InputNumberFieldArrayItem = memo(InputNumberFieldArrayItemComponent);

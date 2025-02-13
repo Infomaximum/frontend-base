@@ -1,16 +1,17 @@
 import enzyme from "enzyme";
 import { Localization } from "@infomaximum/localization";
 import { VirtualizedTableHeaderRow } from "./VirtualizedTableHeaderRow";
-import type { ColumnType, SortOrder } from "antd/lib/table/interface";
+import type { SortOrder } from "antd/lib/table/interface";
 import { ERROR } from "../../../../utils/Localization/Localization";
 import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";
+import type { IVirtualizedColumnConfig } from "../../VirtualizedTable.types";
 
 const localization = new Localization({ language: Localization.Language.ru });
 const sorterChange = jest.fn();
 const selectChange = jest.fn();
 
 const renderComponent = (isLoading: boolean) => {
-  const columns: ColumnType<Partial<TExtendColumns<TBaseRow>>>[] = [
+  const columns: IVirtualizedColumnConfig<Partial<TExtendColumns<TBaseRow>>>[] = [
     { title: localization.getLocalized(ERROR), sorter: true },
   ];
   const columnsOrders: TDictionary<SortOrder[]> = {};
@@ -28,6 +29,7 @@ const renderComponent = (isLoading: boolean) => {
       columnsOrders={columnsOrders}
       loading={isLoading}
       isShowDivider={true}
+      hideSelectAll={false}
     />
   );
 };

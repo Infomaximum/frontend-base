@@ -1,7 +1,7 @@
 import type { NCore } from "@infomaximum/module-expander";
 import type { IWithModalErrorProps } from "../../decorators/hocs/withModalError/withModalError.types";
 
-export interface IAppErrorBoundaryProps extends IWithModalErrorProps {
+export interface IAppErrorBoundaryProps {
   /**
    * Дополнительные параметры которые будут обработаны
    */
@@ -18,7 +18,8 @@ export interface IAppErrorBoundaryProps extends IWithModalErrorProps {
 
 export interface IErrorBoundaryProps
   extends Partial<NCore.TRouteComponentProps>,
-    IAppErrorBoundaryProps {}
+    IAppErrorBoundaryProps,
+    IWithModalErrorProps {}
 
 export interface IErrorBoundaryState {
   hasError?: boolean;

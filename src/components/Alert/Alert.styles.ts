@@ -1,3 +1,4 @@
+// eslint-disable-next-line im/style-names
 export const alertClassnames = {
   closeIcon: ".anticon-close",
   closeButton: ".ant-alert-close-icon",
@@ -14,7 +15,7 @@ export const alertStyle = (theme: TTheme) =>
     [`${alertClassnames.alertMessage}`]: {
       marginBottom: 0,
       fontSize: "14px",
-      color: theme.grey8Color,
+      color: theme.grey10Color,
     },
     padding: "9px 16px 9px 15px",
     display: "flex",
@@ -24,15 +25,12 @@ export const alertStyle = (theme: TTheme) =>
       top: "2px",
       fontSize: "14px",
       marginRight: "9px",
+      marginTop: "2px",
     },
-  } as const);
-
-export const boldTitleStyle = {
-  fontWeight: "bold",
-};
+  }) as const;
 
 export const alertDescriptionStyle = (theme: TTheme) => ({
-  color: theme.grey8Color,
+  color: theme.grey10Color,
 });
 
 export const infoAlertStyle = (theme: TTheme) => ({
@@ -86,6 +84,6 @@ export const alertBannerStyle = (theme: TTheme) =>
       height: "16px",
       marginTop: "3px",
     },
-  } as const);
+  }) as const;
 
 export const alertIconStyle = { svg: { overflow: "visible" } };

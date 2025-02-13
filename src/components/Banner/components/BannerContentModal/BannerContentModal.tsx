@@ -6,10 +6,7 @@ import { NOTIFICATION, CLOSE } from "../../../../utils/Localization/Localization
 import { memo, useMemo } from "react";
 import MarkdownView from "react-showdown";
 import { CloseOutlined } from "../../../Icons/Icons";
-import {
-  bannerContentModalBodyStyle,
-  bannerContentModalParagraphStyle,
-} from "./BannerContentModal.styles";
+import { bannerContentModalParagraphStyle, bannerModalStyle } from "./BannerContentModal.styles";
 import type { IBannerContentModalProps } from "./BannerContentModal.types";
 import { closeModalIconStyle } from "../../../../styles/common.styles";
 
@@ -49,9 +46,8 @@ const BannerContentModalComponent: React.FC<IBannerContentModalProps> = ({
       open={open}
       width={theme.modalLargeWidth}
       onCancel={onCancel}
-      bodyStyle={bannerContentModalBodyStyle}
+      styles={bannerModalStyle}
       footer={modalFooter}
-      centered={true}
       closeIcon={closeIcon}
     >
       <MarkdownView markdown={md} components={mdViewComponents} options={mdViewOptions} />

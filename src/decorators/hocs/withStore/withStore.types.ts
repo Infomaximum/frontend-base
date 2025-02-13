@@ -1,14 +1,14 @@
 import type { IDocumentNode, TInferredVariables } from "@infomaximum/utility";
 import type { Store } from "../../../utils/Store/Store/Store";
-import type { NRequests } from "../../../utils/Requests/Requests.types";
 import type { Model } from "@infomaximum/graphql-model";
+import type { TCancelableRequest } from "../../../services/Network/Requests.types";
 
 export type TQueryParams = {
   /** Запрос */
   query?: IDocumentNode<TDictionary>;
   /** Переменные запроса */
   variables?: TDictionary;
-  cancelable?: NRequests.TCancelable;
+  cancelable?: TCancelableRequest;
 };
 
 interface ICommonMutateParams<Variables extends TDictionary = never> {
@@ -16,7 +16,7 @@ interface ICommonMutateParams<Variables extends TDictionary = never> {
   mutation: IDocumentNode<Variables>;
   /** Переменные мутации */
   variables?: Variables extends never ? never : Variables;
-  cancelable?: NRequests.TCancelable;
+  cancelable?: TCancelableRequest;
   /** Загружаемые на сервер файлы */
   files?: unknown[];
   /** Сохранять ли ошибку в сторе
@@ -41,14 +41,14 @@ export interface IWithStoreProps<S extends Store<Model>> {
   /** Отправляет мутацию на сервер */
   mutate<
     T extends IMutateParams<TDictionary>,
-    Variable extends TDictionary = TInferredVariables<T, "mutation">
+    Variable extends TDictionary = TInferredVariables<T, "mutation">,
   >(
     params: IMutateParams<Variable>
   ): Promise<TDictionary | null>;
   /** Отправляет мутацию от формы на сервер */
   formMutate<
     T extends IFormMutateParams<TDictionary>,
-    Variable extends TDictionary = TInferredVariables<T, "mutation">
+    Variable extends TDictionary = TInferredVariables<T, "mutation">,
   >(
     params: IFormMutateParams<Variable>
   ): Promise<TDictionary | null>;

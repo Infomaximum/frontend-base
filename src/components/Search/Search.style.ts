@@ -51,10 +51,11 @@ export const searchSecondInputStyle = {
   svg: {
     overflow: "visible",
   },
+  backgroundColor: "inherit !important",
   ...commonSearchInputStyle,
 };
 
 export const iconStyle = (theme: TTheme) => ({
-  color: theme.grey7Color,
+  color: theme.grey6Color,
   fontSize: `${theme.h4FontSize}px`,
 });

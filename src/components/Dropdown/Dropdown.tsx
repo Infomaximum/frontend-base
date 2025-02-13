@@ -2,7 +2,7 @@ import { assertSimple } from "@infomaximum/assert";
 // eslint-disable-next-line im/ban-import-entity
 import { Dropdown as AntDropdown } from "antd";
 import { noop } from "lodash";
-import React, { isValidElement, useCallback, useRef, useMemo, memo, useEffect } from "react";
+import React, { isValidElement, useCallback, useRef, useMemo, useEffect } from "react";
 import type { IDropdownProps } from "./Dropdown.types";
 import {
   defaultTrigger,
@@ -17,7 +17,6 @@ import {
  */
 const DropdownComponent: React.FC<IDropdownProps> = ({
   children: button,
-  overlay,
   open,
   onOpenChange = noop,
   overlayStyle: propsOverlayStyle,
@@ -58,10 +57,8 @@ const DropdownComponent: React.FC<IDropdownProps> = ({
     () =>
       ({
         ...propsOverlayStyle,
-        display: "flex",
-        flexDirection: "column",
         maxHeight,
-      } as const),
+      }) as const,
     [propsOverlayStyle, maxHeight]
   );
 
@@ -75,7 +72,6 @@ const DropdownComponent: React.FC<IDropdownProps> = ({
       align={align}
       open={open}
       getPopupContainer={getPopupContainer}
-      overlay={overlay}
       onOpenChange={handleOpenChange}
       overlayStyle={overlayStyle}
       // Т.к. при скрытии вместо `display: none` продолжит применяться `flex`
@@ -87,4 +83,4 @@ const DropdownComponent: React.FC<IDropdownProps> = ({
   );
 };
 
-export const Dropdown = memo(DropdownComponent);
+export const Dropdown = DropdownComponent;

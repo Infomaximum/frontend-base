@@ -1,14 +1,14 @@
 import enzyme from "enzyme";
 import { Localization } from "@infomaximum/localization";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableBodyRow";
-import type { ColumnType } from "antd/lib/table";
 import { ERROR } from "../../../../utils/Localization/Localization";
 import { tableExpanderTestId } from "../../../../utils/TestIds";
 import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";
+import type { IVirtualizedColumnConfig } from "../../VirtualizedTable.types";
 
 const localization = new Localization({ language: Localization.Language.ru });
 
-const columns: ColumnType<Partial<TExtendColumns<TBaseRow>>>[] = [
+const columns: IVirtualizedColumnConfig<Partial<TExtendColumns<TBaseRow>>>[] = [
   {
     dataIndex: "first",
     width: 420,
@@ -48,6 +48,7 @@ const renderComponent = (loading: boolean) => {
       onExpanderChange={onRowExpanderChange}
       key={"test-key"}
       isShowDivider={true}
+      getCheckboxProps={() => ({})}
     />
   );
 };

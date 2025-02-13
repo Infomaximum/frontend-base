@@ -12,7 +12,6 @@ import {
   CANNOT_DELETE_YOUR_PROFILE_AND_NON_EMPTY_DEPARTMENTS,
   CHANGE_ACCESS_ROLES_IN_USER_PROFILES_AND_TRY_AGAIN,
   CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN,
-  CHECK_YOUR_CONNECTION,
   CONTACT_ADMINISTRATOR_OR_TRY_AGAIN_LATER,
   DELETE_USERS_FROM_DEPARTMENTS_AND_TRY_AGAIN,
   DELETE_USERS_FROM_DEPARTMENTS_CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN,
@@ -23,13 +22,12 @@ import {
   INCORRECT_VALUE,
   INTEGRATED_AUTHENTICATION_ALREADY_EXISTS,
   INTEGRATED_AUTHENTICATION_NOT_FOUND,
-  INTERNET_CONNECTION_ERROR,
+  FAILED_SERVER_CONNECTION,
   INVALID_EMAIL_OR_PASS,
   INVALID_LOGON,
   NEW_PASSWORD_EQUALS_CURRENT_PASSWORD,
   NOT_FOUND_DOMAIN_OBJECT,
   NOT_UNIQUE_VALUE,
-  NO_PRIVILEGES,
   PASSWORD_RECOVERY_LINK_EXPIRED,
   REQUIRE_ALL_USERS_ACCESS,
   RESTRICTED_ACCESS,
@@ -40,13 +38,20 @@ import {
   YOU_CANNOT_DELETE_ADMIN_AND_DEPARTMENTS_THAT_HAS_USERS,
   YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES,
   NETWORK_FAILURE_OCCURRED,
+  CHECK_YOUR_NETWORK_CONNECTION_AND_TRY_AGAIN,
+  NO_ACCESS_ROLES,
 } from "../../utils/Localization/ErrorLocalization";
 
 export const baseErrorHandlers: NCore.TErrorPreparer[] = [
   {
     code: EErrorCode.CONNECTION_ERROR,
-    title: INTERNET_CONNECTION_ERROR,
-    description: CHECK_YOUR_CONNECTION,
+    title: FAILED_SERVER_CONNECTION,
+    description: CHECK_YOUR_NETWORK_CONNECTION_AND_TRY_AGAIN,
+  },
+  {
+    code: EErrorCode.CHUNK_LOAD_ERROR,
+    title: FAILED_SERVER_CONNECTION,
+    description: CHECK_YOUR_NETWORK_CONNECTION_AND_TRY_AGAIN,
   },
   {
     code: EErrorCode.BAD_GATEWAY,
@@ -67,20 +72,20 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
     description: NOT_UNIQUE_VALUE,
   },
   {
-    code: "invalid_value",
+    code: EErrorCode.INVALID_VALUE,
     description: INCORRECT_VALUE,
   },
   {
-    code: "invalid_value",
+    code: EErrorCode.INVALID_VALUE,
     params: {
       [ERROR_FIELD_NAME]: "current_password_hash",
     },
     description: INCORRECT_CURRENT_PASSWORD,
   },
   {
-    code: "invalid_value",
+    code: EErrorCode.INVALID_VALUE,
     params: {
-      field_name: "phone_number",
+      [ERROR_FIELD_NAME]: "phone_number",
     },
     getError({ error }) {
       return {
@@ -185,8 +190,8 @@ export const baseErrorHandlers: NCore.TErrorPreparer[] = [
     description: PASSWORD_RECOVERY_LINK_EXPIRED,
   },
   {
-    code: EErrorCode.NO_PRIVILEGES,
-    description: NO_PRIVILEGES,
+    code: EErrorCode.NO_ACCESS_ROLES,
+    description: NO_ACCESS_ROLES,
   },
   {
     code: "access_denied",

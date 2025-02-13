@@ -26,7 +26,11 @@ export interface IConfirmationModalProps {
    */
   buttonOkType?: TButtonType;
   /**
-   * Текст кнопки (если нет то текст будет "ок")
+   * Текст кнопки отмены (если нет то текст будет "Отмена")
+   */
+  buttonCancelText?: TLocalizationDescription;
+  /**
+   * Текст кнопки подтверждения (если нет то текст будет "Применить")
    */
   buttonOkText?: TLocalizationDescription;
   /**
@@ -65,6 +69,10 @@ export interface IConfirmationModalProps {
    * Режим без кнопки сохранения
    */
   isWithoutSaveMode?: boolean;
+  /**
+   * Режим без кнопки отмена
+   */
+  withoutCancelButton?: boolean;
 
   children?: React.ReactNode;
 }

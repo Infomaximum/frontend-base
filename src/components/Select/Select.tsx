@@ -2,13 +2,21 @@
 import { Select as AntSelect, Spin } from "antd";
 import type { SelectValue } from "antd/lib/select";
 import { CheckOutlined, CloseCircleFilled, CloseOutlined } from "../Icons/Icons";
-import React, { type MouseEvent, useState, useCallback, useMemo, useRef, useEffect } from "react";
+import React, {
+  type MouseEvent,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+} from "react";
 import {
   closeIconStyle,
   arrowSuffixIconStyle,
-  disableSelectStyle,
+  getDisableSelectStyle,
   disableTagStyle,
-  displaySelectStyle,
+  getDisplaySelectStyle,
   multipleSelectStyle,
   suffixIconSpinnerStyle,
   tagStyle,
@@ -16,7 +24,7 @@ import {
 import type { ISelectProps } from "./Select.types";
 import { Tag } from "../Tag/Tag";
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
-import type { ArrayInterpolation } from "@emotion/react";
+import type { Interpolation } from "@emotion/react";
 import ArrowDownSVG from "../../resources/icons/ArrowDown.svg";
 import {
   findActiveOption,
@@ -30,6 +38,7 @@ import {
   useRemoveFocusedClass,
   useSelectDropdownPosition,
   useCustomClearing,
+  mergeRefs,
 } from "./Select.utils";
 import { filter, first, isArray, isEmpty, isFunction, isUndefined, noop } from "lodash";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
@@ -44,8 +53,11 @@ import type { BaseSelectRef } from "rc-select";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { useMountEffect } from "../../decorators";
 import { removeElementsAttribute } from "../../utils";
+import { ConfigProvider } from "antd";
 
 const { OptGroup, Option } = AntSelect;
+
+const clearIcon = { clearIcon: <CloseCircleFilled /> };
 
 const SelectComponent = <T extends SelectValue = SelectValue>({
   dropdownPlacement = "left",
@@ -56,6 +68,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   loading: loadingProps = false,
   dropdownRender,
   getPopupContainer,
+  listHeight,
   listItemHeight,
   onFocus,
   onBlur,
@@ -80,6 +93,10 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   prepareOptionForSearch = optionParsersForSearch.parseOptionText,
   isClearIconOverSuffix = true,
   optionLabelProp,
+  selectTextOnFocus: selectTextOnFocusProp = false,
+  innerRef,
+  autoFocus,
+  autoFocusWithPreventScroll,
   ...rest
 }: ISelectProps<T>) => {
   const localization = useLocalization();
@@ -99,22 +116,21 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     isValidValue(valueProps)
       ? valueProps
       : isValidValue(defaultValue)
-      ? defaultValue
-      : defaultActiveFirstOption
-      ? (optionToValue(first(options)) as T)
-      : null
+        ? defaultValue
+        : defaultActiveFirstOption
+          ? (optionToValue(first(options)) as T)
+          : null
   );
   const [searchValueState, setSearchValueState] = useState(searchValueProps);
   const loadingState = useDelayedTrue(loadingProps, suffixLoaderDelay);
   const [isFilterable, setIsFilterable] = useState(true);
   const isSearchHandlerEnabled = useRef(true);
-
   const isOpen = isOpenTest ?? isOpenProps ?? isOpenState;
   const value = isUndefined(valueProps) ? valueState : valueProps;
   const searchValue = searchValueProps ?? searchValueState;
   const filterOption = isFilterable ? filterOptionProps : false;
 
-  const selectTextOnFocus = showSearch && !mode;
+  const selectTextOnFocus = selectTextOnFocusProp && showSearch && !mode;
   const fieldWrapperRef = useRef<HTMLDivElement | null>(null);
   const selectRef = useRef<BaseSelectRef>(null);
 
@@ -131,6 +147,10 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   useRemoveFocusedClass(isOpen, fieldWrapperRef.current);
 
   useMountEffect(() => {
+    if (autoFocusWithPreventScroll) {
+      selectRef.current?.focus({ preventScroll: true });
+    }
+
     const targetNode = fieldWrapperRef.current;
 
     if (targetNode) {
@@ -162,7 +182,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     isOpen && computeDropdownPosition(getPopupContainer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
@@ -170,6 +190,12 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   useEffect(() => {
     isSearchHandlerEnabled.current = true;
   });
+
+  useEffect(() => {
+    if (searchValueProps === null) {
+      setSearchValueState(undefined);
+    }
+  }, [searchValueProps]);
 
   /** Сделан для тестирования, чтобы при открытии с нажатым Alt дропдаун не закрывался */
   const handleClick = useCallback(
@@ -192,6 +218,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       }
 
       setIsFilterable(true);
+
       setSearchValueState(text);
       onSearch?.(text);
     },
@@ -249,7 +276,7 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       onClear: onClear ?? noop,
     },
     !!mode,
-    allowClear
+    !!allowClear
   );
 
   const handleMouseDown = useCallback((e: MouseEvent) => {
@@ -290,35 +317,41 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
       return suffixIconProps;
     }
 
+    if (!showArrow) {
+      return null;
+    }
+
     return (
       <div key="select-icon-suffix-down" css={arrowSuffixIconStyle(theme)}>
         <ArrowDownSVG />
       </div>
     );
-  }, [loadingState, suffixIconProps, theme]);
+  }, [loadingState, showArrow, suffixIconProps, theme]);
 
   const getPlaceholder = () => {
     return disabled
       ? localization.getLocalized(NOT_SELECTED)
       : showSearch
-      ? localization.getLocalized(ENTER_OR_SELECT_FROM_THE_LIST)
-      : localization.getLocalized(SELECT_FROM_LIST);
+        ? localization.getLocalized(ENTER_OR_SELECT_FROM_THE_LIST)
+        : localization.getLocalized(SELECT_FROM_LIST);
   };
 
   const isShowIconClear =
-    allowClear && ((isOpen && !!searchValue) || !isEmpty(isArray(value) ? value : [value]));
+    allowClear &&
+    (showArrow ? true : !loadingState) &&
+    ((isOpen && !!searchValue) || !isEmpty(isArray(value) ? value : [value]));
 
   const style = useMemo(() => {
     // `arrow` всегда занимает место, а `clear` только когда не отображается поверх `arrow` или когда нет `arrow`
     const iconSlotCount = filter([
-      showArrow,
+      showArrow || (!showArrow && loadingState),
       isShowIconClear && (!isClearIconOverSuffix || !showArrow),
     ]).length;
 
-    const selectStyles: ArrayInterpolation<TTheme> = [displaySelectStyle(iconSlotCount)(theme)];
+    const selectStyles = [getDisplaySelectStyle(iconSlotCount)(theme) as Interpolation<TTheme>];
 
     if (disabled) {
-      selectStyles.push(disableSelectStyle(bordered)(theme));
+      selectStyles.push(getDisableSelectStyle(bordered)(theme));
     }
 
     if (mode === "multiple") {
@@ -326,7 +359,16 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
     }
 
     return selectStyles;
-  }, [bordered, disabled, isClearIconOverSuffix, isShowIconClear, mode, showArrow, theme]);
+  }, [
+    bordered,
+    disabled,
+    isClearIconOverSuffix,
+    isShowIconClear,
+    loadingState,
+    mode,
+    showArrow,
+    theme,
+  ]);
 
   const getOptionLabelProp = () => {
     if (optionLabelProp) {
@@ -344,40 +386,47 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
 
   return (
     <div ref={fieldWrapperRef}>
-      <AntSelect<T>
-        {...rest}
-        ref={selectRef}
-        mode={mode}
-        onClick={handleClick}
-        open={isOpen}
-        dropdownAlign={dropdownPosition.align}
-        bordered={bordered ?? !disabled} // системное поведение
-        searchValue={searchValue}
-        onFocus={handleFocus}
-        onBlur={onBlur}
-        onSearch={showSearch ? handleSearch : undefined}
-        onChange={handleChange}
-        onClear={onClear}
-        value={value}
-        showSearch={showSearch}
-        allowClear={isShowIconClear}
-        placeholder={placeholder || getPlaceholder()}
-        clearIcon={<CloseCircleFilled />}
-        suffixIcon={suffixIcon}
-        disabled={disabled}
-        showArrow={showArrow}
-        css={style}
-        tagRender={rest.tagRender ?? tagRender}
-        menuItemSelectedIcon={<CheckOutlined />}
-        onDropdownVisibleChange={handleDropdownVisibleChange}
-        listHeight={dropdownPosition.listHeight}
-        dropdownRender={dropdownRender}
-        getPopupContainer={getPopupContainer}
-        listItemHeight={listItemHeight}
-        optionLabelProp={getOptionLabelProp()}
-        options={options}
-        filterOption={filterOption}
-      />
+      <ConfigProvider
+        theme={{
+          token: {
+            paddingSM: 8,
+          },
+        }}
+      >
+        <AntSelect<T>
+          {...rest}
+          ref={mergeRefs(selectRef, innerRef)}
+          mode={mode}
+          onClick={handleClick}
+          open={isOpen}
+          dropdownAlign={dropdownPosition.align}
+          variant={(bordered ?? (!disabled || rest.readOnly)) ? "outlined" : "borderless"}
+          searchValue={searchValue}
+          onFocus={handleFocus}
+          onBlur={onBlur}
+          onSearch={showSearch ? handleSearch : undefined}
+          onChange={handleChange}
+          onClear={onClear}
+          value={value}
+          showSearch={showSearch}
+          allowClear={isShowIconClear ? clearIcon : false}
+          placeholder={placeholder || getPlaceholder()}
+          suffixIcon={suffixIcon}
+          disabled={disabled}
+          css={style}
+          tagRender={rest.tagRender ?? tagRender}
+          menuItemSelectedIcon={<CheckOutlined />}
+          onDropdownVisibleChange={handleDropdownVisibleChange}
+          listHeight={listHeight ?? dropdownPosition.listHeight}
+          dropdownRender={dropdownRender}
+          getPopupContainer={getPopupContainer}
+          listItemHeight={listItemHeight}
+          optionLabelProp={getOptionLabelProp()}
+          options={options}
+          filterOption={filterOption}
+          autoFocus={autoFocus}
+        />
+      </ConfigProvider>
     </div>
   );
 };

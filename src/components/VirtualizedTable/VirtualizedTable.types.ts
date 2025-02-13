@@ -15,29 +15,26 @@ export interface IColumnProps<T = any> extends IBaseColumnConfig<T> {
   priority?: number;
 }
 
-export type TRow = Partial<TExtendColumns<TBaseRow>>;
+export type TRow<T extends TBaseRow = TBaseRow> = Partial<TExtendColumns<T>>;
 export interface IVirtualizedColumnConfig<T> extends IColumnProps<T> {
-  minWidth?: React.ReactText;
+  minWidth?: string | number;
 }
 
-export interface IVirtualizedTableProps<T>
+export interface IVirtualizedTableOwnProps<T>
   extends Pick<
-      TableProps<T | null>,
-      | "expandedRowKeys"
-      | "onExpandedRowsChange"
-      | "rowSelection"
-      | "dataSource"
-      | "showHeader"
-      | "indentSize"
-      | "onChange"
-      | "onRow"
-    >,
-    IWithLocProps,
-    IWithThemeProps<TTheme>,
-    IWithSpinPropsReplacer {
-  loading: boolean;
+    TableProps<T>,
+    | "expandedRowKeys"
+    | "expandable"
+    | "onExpandedRowsChange"
+    | "rowSelection"
+    | "dataSource"
+    | "showHeader"
+    | "indentSize"
+    | "onChange"
+    | "onRow"
+  > {
   targetAll?: boolean;
-  columns: IVirtualizedColumnConfig<T>[] | undefined;
+  columns: IVirtualizedColumnConfig<T | null>[] | undefined;
   enableRowClick?: boolean;
   isShowDividers: boolean;
   scrollAreaHeight: number;
@@ -45,7 +42,14 @@ export interface IVirtualizedTableProps<T>
   onScroll?(params: ScrollParams): void;
   scrollTop?: number;
   rowHeight?: number | ((index: Index) => number);
+  localization: IWithLocProps["localization"];
+  loading?: IWithSpinPropsReplacer["loading"];
+  isWithoutWrapperStyles?: boolean;
 }
+
+export interface IVirtualizedTableProps<T>
+  extends IVirtualizedTableOwnProps<T>,
+    IWithThemeProps<TTheme> {}
 
 export interface IVirtualizedTableState<T> {
   surfaceNodes: T[];
@@ -55,4 +59,9 @@ export interface IVirtualizedTableState<T> {
   scrollOffset: number;
   /** Коллекция для быстрого определения состояния выбранности строки */
   selectedRowKeysSet: Set<string> | null;
+  /** Флаг инициализации таблицы */
+  loading: boolean;
+  isCheckableDisabled: boolean;
+  /** scrollTop сначала из пропсов для восстановления позиции скролла, затем undefined, чтобы не мешать работать  */
+  initialScrollTop: number | undefined;
 }

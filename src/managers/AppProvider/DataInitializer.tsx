@@ -18,6 +18,10 @@ const DataInitializer: FC<IDataInitializerProps> = ({ children }) => {
   });
 
   useEffect(() => {
+    historyStore.navigate = navigate;
+  }, [navigate]);
+
+  useEffect(() => {
     historyStore.location = location;
   }, [location]);
 

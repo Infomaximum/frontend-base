@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import { map, isUndefined, isFunction, isString, isNull } from "lodash";
 import { autocompleteSelectTestId, autocompleteSelectOptionTestId } from "../../../utils/TestIds";
 import { observer } from "mobx-react";
@@ -8,10 +8,13 @@ import type {
   IAutoFillComponentState,
   TAutoFillOption,
 } from "./AutoFillComponent.types";
-import { autoFillComponentArrowIconStyle } from "./AutoFillField.styles";
+import {
+  autoFillComponentArrowIconStyle,
+  autocompletePaddingLeft,
+  autocompletePaddingRight,
+} from "./AutoFillField.styles";
 import type { DefaultOptionType } from "antd/lib/select";
 import { CloseCircleFilled, SearchOutlined } from "../../Icons/Icons";
-import type { Localization } from "@infomaximum/localization";
 import type { IModel } from "@infomaximum/graphql-model";
 import {
   ENTER_OR_SELECT_FROM_THE_LIST,
@@ -21,6 +24,8 @@ import { KeyupRequestInterval } from "../../../utils/const";
 import { AutoComplete } from "../../AutoComplete/AutoComplete";
 import { DropdownPendingPlaceholder } from "../../Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
+import { getTextWidth } from "../../../utils/textWidth";
+import { AlignedTooltip } from "../../AlignedTooltip";
 
 class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillComponentState> {
   public static defaultProps = {
@@ -31,7 +36,9 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
   };
 
   public static clearIcon = (<CloseCircleFilled css={closeCircleStyle} />);
-  private searchTimer: NodeJS.Timer | undefined;
+  private searchTimer: NodeJS.Timeout | undefined;
+
+  private wrapperRef = createRef<HTMLDivElement>();
 
   constructor(props: IAutoFillComponentProps) {
     super(props);
@@ -42,6 +49,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
       searchText: undefined,
       isOpenedDropdown: props.defaultOpen ?? false,
       hasBeenOpenedDropdown: false,
+      isOverflow: false,
     };
   }
 
@@ -60,6 +68,8 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
         variables,
       });
     }
+
+    this.setOverFlow();
   }
 
   public override componentDidUpdate(
@@ -75,6 +85,8 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
 
       autocompleteStore.clearData();
     }
+
+    this.setOverFlow();
   }
 
   public override componentWillUnmount(): void {
@@ -89,8 +101,23 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
     return autocompleteStore.isLoading && !autocompleteStore.isDataLoaded;
   }
 
-  private getSelectValue(localization: Localization, fieldValue: IModel) {
-    const { disabled } = this.props;
+  private setOverFlow() {
+    const value = this.getSelectValue(this.props.value);
+
+    if (
+      value &&
+      this.wrapperRef?.current &&
+      getTextWidth(value, { size: 14 }) >
+        this.wrapperRef.current?.clientWidth - autocompletePaddingLeft - autocompletePaddingRight
+    ) {
+      this.setState({ isOverflow: true });
+    } else {
+      this.setState({ isOverflow: false });
+    }
+  }
+
+  private getSelectValue(fieldValue: IModel) {
+    const { disabled, localization } = this.props;
 
     const displayValue = fieldValue?.getDisplayName?.();
 
@@ -153,6 +180,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
       isFunction(onChange) && onChange(selectedModel);
 
       isFunction(onSelectCallback) && onSelectCallback(selectedModel);
+      this.setState({ searchText: undefined });
     }
   };
 
@@ -224,65 +252,71 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
     const items = (modelsMap && Array.from(modelsMap, ([, model]) => model)) ?? [];
 
     return (
-      <>
-        <AutoComplete
-          key="ant-autocomplete"
-          placeholder={placeholder || localization.getLocalized(ENTER_OR_SELECT_FROM_THE_LIST)}
-          loading={this.isFirstLoading() && this.state.hasBeenOpenedDropdown}
-          backfill={true}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          value={this.state.searchText ?? this.getSelectValue(localization, fieldValue)}
-          allowClear={allowClear}
-          onFocus={onFocus}
-          showSearch={true}
-          filterOption={false}
-          showArrow={showArrow}
-          disabled={disabled}
-          notFoundContent={
-            <DropdownPendingPlaceholder
-              isDataLoaded={autocompleteStore.isDataLoaded}
-              loading={autocompleteStore.isLoading}
-              hasAccess={isHasAccess}
-              searchText={this.state.searchText}
-            />
+      <div ref={this.wrapperRef}>
+        <AlignedTooltip
+          title={
+            this.state.isOverflow && !this.isOpenedDropdown() && this.getSelectValue(fieldValue)
           }
-          clearIcon={AutoFill.clearIcon}
-          suffixIcon={suffixIcon ? suffixIcon : !disabled ? this.getSuffixIcon() : undefined}
-          onSearch={this.handleSearchChange}
-          onSelect={this.handleSelect}
-          onDropdownVisibleChange={this.handleDropdownVisibleChange}
-          autoFocus={autoFocus}
-          test-id={this.props["test-id"] ?? autocompleteSelectTestId}
-          css={autoFillComponentStyle ? autoFillComponentStyle : autoFillComponentArrowIconStyle}
-          style={style}
-          defaultOpen={defaultOpen}
-          open={this.isOpenedDropdown()}
-          dropdownStyle={dropdownStyle}
         >
-          {map(items, (item) => {
-            let displayValue: string;
-
-            if (isFunction(getPrepareDisplayValue)) {
-              displayValue = getPrepareDisplayValue(item?.getDisplayName());
-            } else {
-              displayValue = this.getPrepareDisplayValue(item?.getDisplayName());
+          <AutoComplete
+            key="ant-autocomplete"
+            placeholder={placeholder || localization.getLocalized(ENTER_OR_SELECT_FROM_THE_LIST)}
+            loading={this.isFirstLoading() && this.state.hasBeenOpenedDropdown}
+            backfill={true}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            value={this.state.searchText ?? this.getSelectValue(fieldValue)}
+            allowClear={allowClear}
+            onFocus={onFocus}
+            showSearch={true}
+            filterOption={false}
+            showArrow={showArrow}
+            disabled={disabled}
+            notFoundContent={
+              <DropdownPendingPlaceholder
+                isDataLoaded={autocompleteStore.isDataLoaded}
+                loading={autocompleteStore.isLoading}
+                hasAccess={isHasAccess}
+                searchText={this.state.searchText}
+              />
             }
+            clearIcon={AutoFill.clearIcon}
+            suffixIcon={suffixIcon ? suffixIcon : !disabled ? this.getSuffixIcon() : undefined}
+            onSearch={this.handleSearchChange}
+            onSelect={this.handleSelect}
+            onDropdownVisibleChange={this.handleDropdownVisibleChange}
+            autoFocus={autoFocus}
+            test-id={this.props["test-id"] ?? autocompleteSelectTestId}
+            css={autoFillComponentStyle ? autoFillComponentStyle : autoFillComponentArrowIconStyle}
+            style={style}
+            defaultOpen={defaultOpen}
+            open={this.isOpenedDropdown()}
+            dropdownStyle={dropdownStyle}
+          >
+            {map(items, (item) => {
+              let displayValue: string;
 
-            return (
-              <AutoComplete.Option
-                key={item.getInnerName()}
-                value={displayValue}
-                test-id={autocompleteSelectOptionTestId}
-                title={isOptionHintDisplayed ? displayValue : ""}
-                disabled={rowDisable ? rowDisable(item) : undefined}
-              >
-                {displayValue}
-              </AutoComplete.Option>
-            );
-          })}
-        </AutoComplete>
-      </>
+              if (isFunction(getPrepareDisplayValue)) {
+                displayValue = getPrepareDisplayValue(item?.getDisplayName());
+              } else {
+                displayValue = this.getPrepareDisplayValue(item?.getDisplayName());
+              }
+
+              return (
+                <AutoComplete.Option
+                  key={item.getInnerName()}
+                  value={displayValue}
+                  test-id={autocompleteSelectOptionTestId}
+                  title={isOptionHintDisplayed ? displayValue : ""}
+                  disabled={rowDisable ? rowDisable(item) : undefined}
+                >
+                  <AlignedTooltip>{displayValue}</AlignedTooltip>
+                </AutoComplete.Option>
+              );
+            })}
+          </AutoComplete>
+        </AlignedTooltip>
+      </div>
     );
   }
 }

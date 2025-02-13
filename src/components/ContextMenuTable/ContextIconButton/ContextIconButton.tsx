@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import type { IEditableRowButtonProps } from "./ContextIconButton.types";
 import {
-  defaultButtonStyle,
+  getDefaultButtonStyle,
   redButtonStyle,
   disabledButtonStyle,
 } from "./ContextIconButton.styles";
@@ -17,7 +17,7 @@ export enum EContextIconButtonColors {
 const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
   colors: typeof EContextIconButtonColors;
 } = ({
-  color,
+  color = EContextIconButtonColors.DEFAULT,
   icon,
   onClick,
   disabled,
@@ -50,7 +50,7 @@ const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
 
     const styleFromColor = {
       [RED]: redButtonStyle(theme)(size),
-      [DEFAULT]: defaultButtonStyle(size)(theme),
+      [DEFAULT]: getDefaultButtonStyle(size)(theme),
     };
 
     return (
@@ -61,7 +61,7 @@ const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
   }, [disabled, size, customStyle, theme, color]);
 
   return (
-    <Tooltip title={!disabled ? title : undefined}>
+    <Tooltip placement="top" title={!disabled ? title : undefined}>
       <div css={buttonStyle} onClick={!disabled ? handleClick : undefined} {...rest}>
         {icon}
       </div>
@@ -70,9 +70,5 @@ const ContextIconButtonComponent: React.FC<IEditableRowButtonProps> & {
 };
 
 ContextIconButtonComponent.colors = EContextIconButtonColors;
-
-ContextIconButtonComponent.defaultProps = {
-  color: ContextIconButtonComponent.colors.DEFAULT,
-};
 
 export const ContextIconButton = ContextIconButtonComponent;

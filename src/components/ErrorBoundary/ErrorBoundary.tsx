@@ -7,6 +7,8 @@ import type {
   IErrorBoundaryProps,
   IErrorBoundaryState,
 } from "./ErrorBoundary.types";
+import { EErrorCode } from "../../utils/const";
+import { historyStore } from "../../store/historyStore";
 
 const AppErrorHandlingService = new ErrorHandling();
 
@@ -15,9 +17,20 @@ class ErrorBoundaryComponent extends Component<IErrorBoundaryProps, IErrorBounda
     return { hasError: true };
   }
 
+  private disposer: (() => void) | null = null;
+
   public override readonly state = {
     hasError: false,
   };
+
+  public override componentDidMount(): void {
+    this.disposer = historyStore.listenLocationChange(() => {
+      this.state.hasError &&
+        this.setState({
+          hasError: false,
+        });
+    });
+  }
 
   public override componentDidUpdate(prevProps: IErrorBoundaryProps) {
     const { location } = this.props;
@@ -30,29 +43,47 @@ class ErrorBoundaryComponent extends Component<IErrorBoundaryProps, IErrorBounda
   }
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    const { code, showModalError, extraParams, onError } = this.props;
+    const { showModalError, onError } = this.props;
 
     onError?.(error);
 
-    if (process.env.NODE_ENV === "production") {
-      const preparedError = {
-        code,
-        name: error.name,
-        message: error.message,
-        path: this.getPathName(),
-        ...extraParams,
-      };
+    showModalError(this.getPreparedError(error, errorInfo));
 
-      AppErrorHandlingService.registerError({ ...preparedError, errorInfo });
-
-      showModalError({
-        message: JSON.stringify(preparedError),
-      });
-    } else {
+    if (process.env.NODE_ENV === "development") {
       // eslint-disable-next-line no-console
       console.error(
-        `ошибка произошла по пути ${this.getPathName()} ошибка ${error} код: ${this.props.code}`
+        `Ошибка произошла по пути ${this.getPathName()} ошибка ${error} код: ${this.props.code}`
       );
+    }
+  }
+
+  public override componentWillUnmount(): void {
+    this.disposer?.();
+  }
+
+  private getPreparedError(error: Error, errorInfo: ErrorInfo) {
+    const { extraParams, code } = this.props;
+
+    const preparedError = {
+      code,
+      name: error.name,
+      message: error.message,
+      path: this.getPathName(),
+      ...extraParams,
+    };
+
+    AppErrorHandlingService.registerError({ ...preparedError, errorInfo });
+
+    switch (error.name) {
+      case "ChunkLoadError":
+        return {
+          ...preparedError,
+          code: EErrorCode.CONNECTION_ERROR,
+        };
+      default:
+        return {
+          message: JSON.stringify(preparedError),
+        };
     }
   }
 
@@ -70,8 +101,8 @@ class ErrorBoundaryComponent extends Component<IErrorBoundaryProps, IErrorBounda
   }
 }
 
-export const AppErrorBoundary = withModalError(ErrorBoundaryComponent) as unknown as ComponentType<
-  Omit<IAppErrorBoundaryProps, "showModalError">
->;
+export const AppErrorBoundary = withModalError(
+  ErrorBoundaryComponent
+) as unknown as ComponentType<IAppErrorBoundaryProps>;
 
 export const ErrorBoundary = withModalError(ErrorBoundaryComponent);

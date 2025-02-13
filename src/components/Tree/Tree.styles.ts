@@ -10,13 +10,13 @@ export const treeSwitcherIconContainerStyle = (theme: TTheme) =>
     "&:hover": {
       background: theme.grey3Color,
     },
-  } as const);
+  }) as const;
 
 export const treeSwitcherIconStyle = (theme: TTheme) =>
   ({
     fontSize: `${theme.h5FontSize}px !important`,
     color: theme.grey7Color,
-  } as const);
+  }) as const;
 
 export const treeStyle = (theme: TTheme) => ({
   padding: 0,

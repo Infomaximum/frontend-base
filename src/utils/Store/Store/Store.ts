@@ -4,15 +4,17 @@ import { cloneDeep, get, isArray, isNil, reduce } from "lodash";
 import { action, computed, makeObservable, observable } from "mobx";
 import { typenameToModel } from "../../../models/typenameToModel";
 import { type TInferredVariables } from "@infomaximum/utility";
-import { BaseRequest } from "../../Requests/BaseRequest/BaseRequest";
-import { BaseErrorHandler } from "../../ErrorHandlers/BaseErrorHandler/BaseErrorHandler";
 import type { NStore } from "./Store.types";
 import type { DocumentNode } from "graphql";
 import { BaseStore } from "../BaseStore/BaseStore";
-import type { NRequests } from "../../Requests/Requests.types";
 import type { Model, TModelStruct } from "@infomaximum/graphql-model";
 import { assertSimple } from "@infomaximum/assert";
 import { ApolloDataCache } from "../ApolloDataCache";
+import { boundMethod } from "../../../decorators/decorators/boundMethod/boundMethod";
+import type { IRequestService } from "../../../services/Network/Requests.types";
+import type { ISubscriptionService } from "../../../services/Network/Subscriptions.types";
+import { BaseRequestService } from "../../../services/Network/BaseRequestService";
+import { BaseSubscriptionService } from "../../../services/Network/BaseSubscriptionService";
 
 type TPrivateStoreField =
   | "_data"
@@ -53,14 +55,15 @@ export class Store<M extends Model = never> extends BaseStore {
   private _isDataLoaded = false;
   private _loading = false;
   private _submitting = false;
-  private _error: NCore.TError | undefined = undefined;
+  private _error: NCore.TGraphqlError | undefined = undefined;
   protected _model: M | null = null;
   protected _cachedModel: M | null = null;
   protected _searchValue: string | null = null;
   private _isSubscribed: boolean = false;
 
   private dataPath: string;
-  private requestInstance: NRequests.IRequest;
+  private requestService: IRequestService;
+  private subscriptionService: ISubscriptionService;
   private dataCacheInstance: NStore.IDataCache;
   private getQueryParams: NStore.TQueryParamsGetter<Store<M>>;
   private prepareData: NStore.TPrepareData<Store<M>> | undefined;
@@ -108,8 +111,8 @@ export class Store<M extends Model = never> extends BaseStore {
     this.getQueryParams = params.getQueryParams;
     this.dataPath = params.dataPath;
     this.prepareData = params.prepareData;
-    this.requestInstance =
-      params.requestInstance ?? new BaseRequest({ errorHandlerInstance: new BaseErrorHandler() });
+    this.requestService = params.requestService ?? new BaseRequestService();
+    this.subscriptionService = params?.subscriptionService ?? new BaseSubscriptionService();
     this.dataCacheInstance = params.dataCacheInstance ?? new ApolloDataCache();
     this.subscriptionConfig = params.subscriptionConfig;
     this.isHasSubscription = Boolean(params.subscriptionConfig);
@@ -246,7 +249,7 @@ export class Store<M extends Model = never> extends BaseStore {
     let data: Data | null;
 
     try {
-      data = await this.requestInstance.requestData<Data>({
+      data = await this.requestService.requestData<Data>({
         query: query as DocumentNode,
         variables,
         cancelable: params?.cancelable ?? "prev",
@@ -290,7 +293,7 @@ export class Store<M extends Model = never> extends BaseStore {
   /** Подготавливает данные для мутации на сервер и обрабатывает ответ */
   public async submitData<
     T extends NStore.IActionSubmitDataParams<TDictionary>,
-    Variables extends TDictionary = TInferredVariables<T, "mutation">
+    Variables extends TDictionary = TInferredVariables<T, "mutation">,
   >({
     mutation,
     variables,
@@ -305,7 +308,7 @@ export class Store<M extends Model = never> extends BaseStore {
     let data: TDictionary | null;
 
     try {
-      data = await this.requestInstance.submitData({
+      data = await this.requestService.submitData({
         mutation,
         variables,
         cancelable: cancelable ?? false,
@@ -344,7 +347,7 @@ export class Store<M extends Model = never> extends BaseStore {
 
     this._isSubscribed = true;
 
-    this.requestInstance.subscribe({
+    this.subscriptionService.subscribe({
       onMessage: ({ first, response }) => {
         const onMessage = params?.onMessage || self.subscriptionConfig?.onMessage;
 
@@ -366,15 +369,21 @@ export class Store<M extends Model = never> extends BaseStore {
 
   // --------------------------------------HELPERS------------------------------------//
 
+  /** Устанавливает в сторе флаг loading = false при отмене запроса */
+  @boundMethod
+  protected stopCancelRequestLoading() {
+    this.setLoading(false);
+  }
+
   /** Отменяет запросы и мутации которые не успели завершиться */
   public cancelRequest() {
-    this.requestInstance.cancelRequests();
+    this.requestService.cancelRequests(this.stopCancelRequestLoading);
   }
 
   /** Отменяет запросы и мутации которые не успели завершиться */
   public unsubscribe() {
     this._isSubscribed = false;
-    this.requestInstance.unsubscribe();
+    this.subscriptionService.unsubscribe();
   }
 
   /** Подготавливает данные для сохранения */
@@ -382,7 +391,7 @@ export class Store<M extends Model = never> extends BaseStore {
     const prepareDataGetters =
       this.prepareData && (isArray(this.prepareData) ? this.prepareData : [this.prepareData]);
 
-    data = get(data, dataPath);
+    data = dataPath ? get(data, dataPath) : data;
 
     if (!prepareDataGetters?.length) {
       return data as TModelStruct | null;

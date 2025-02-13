@@ -6,13 +6,14 @@ import type {
   IEditableLoadingOnScrollDataTableOwnProps,
   IEditableRow,
 } from "./EditableDataTable.types";
-import type { IDataTableProps, THeaderButtonObject } from "../DataTable/DataTable.types";
+import type { IDataTableProps } from "../DataTable/DataTable.types";
 import type { NCore } from "@infomaximum/module-expander";
 import { createSelector } from "reselect";
 import { some, find, without, isFunction, merge, compact } from "lodash";
 import {
   clickableRowStyle,
   editableDataTableCellStyle,
+  emptyEditableTableStyle,
   sortingRowStyle,
 } from "./EditableDataTable.styles";
 import { getAccessParameters } from "@infomaximum/utility";
@@ -41,6 +42,7 @@ import {
 } from "../../decorators/hooks/useLoadingOnScroll";
 import { DELETE } from "../../utils";
 import { Tooltip } from "../Tooltip";
+import type { TTopPanelButtonObject } from "../TopPanel/TopPanel.types";
 
 const EditableDataTableKeys = {
   // Ключ для кастомной колонки с кнопками (добавить в columns)
@@ -372,7 +374,7 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
   private getHeaderButtons = (
     treeCounter: TreeCounter,
     editingState: IEditableDataTableState<T>
-  ): THeaderButtonObject[] => {
+  ): TTopPanelButtonObject[] => {
     const { headerButtonsGetter, tableKey } = this.props;
     const propsButtons = headerButtonsGetter?.(treeCounter, editingState) ?? [];
 
@@ -427,6 +429,7 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
             columns={this.getExtendedColumnConfig(columns)}
             headerButtonsGetter={this.getHeaderButtons}
             customStyle={customStyle}
+            customEmptyTableStyle={emptyEditableTableStyle}
             {...rest}
           />
         </EditableTableContext.Provider>
@@ -439,14 +442,16 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
 
 const EditableDataTable = withLoc(
   withFeature(withModalError(observer(EditableDataTableComponent)))
-);
+) as (<T>(props: IEditableDataTableOwnProps<T>) => JSX.Element) & {
+  [K in keyof typeof EditableDataTableComponent]: (typeof EditableDataTableComponent)[K];
+};
 
 const LoadingOnScrollEditableDataTable = observer(
   <T extends IEditableRow = IEditableRow>({
     loading,
     ...restProps
   }: IEditableLoadingOnScrollDataTableOwnProps<T>) => {
-    const showMoreParams = useNodeShowMoreParams(restProps?.queryVariables || {});
+    const showMoreParams = useNodeShowMoreParams(restProps?.queryVariables);
     const handleLoadingOnScroll = useLoadingOnScroll(restProps?.tableStore, showMoreParams);
 
     return (

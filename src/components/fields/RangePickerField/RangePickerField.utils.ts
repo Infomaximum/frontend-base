@@ -1,6 +1,5 @@
 import { map } from "lodash";
-import type { Moment } from "moment";
-import moment from "moment";
+import dayjs, { type Dayjs } from "dayjs";
 import {
   START_DATE,
   END_DATE,
@@ -12,10 +11,10 @@ import type { Localization } from "@infomaximum/localization";
 
 const getPreparedValue = (timestampRange: [number, number]) =>
   timestampRange
-    ? (map(timestampRange, (timestamp) => moment.unix(timestamp)) as [Moment, Moment])
+    ? (map(timestampRange, (timestamp) => dayjs.unix(timestamp)) as [Dayjs, Dayjs])
     : null;
 
-const getRangePickerReadOnlyValue = (range: [Moment, Moment], format: string) => {
+const getRangePickerReadOnlyValue = (range: [Dayjs, Dayjs], format: string) => {
   return range ? map(range, (value) => value.format(format)).join(" — ") : null;
 };
 

@@ -76,9 +76,9 @@ export interface IFormOwnProps<T extends IBaseFormProps = IBaseFormProps> extend
 export interface IFormProps
   extends IFormOwnProps,
     Omit<FormRenderProps, "error" | "submitError" | "component" | "active">,
-    IWithFormSubmitPromiseProps,
-    IWithFeatureProps {
+    IWithFormSubmitPromiseProps {
   children: React.ReactNode;
+  isFeatureEnabled: IWithFeatureProps["isFeatureEnabled"];
 }
 
 export interface IFormState {

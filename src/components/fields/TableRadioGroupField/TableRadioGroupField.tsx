@@ -78,7 +78,7 @@ const TableRadioGroupField: React.FC<ITableRadioGroupFieldProps> = <T extends Re
 ) => <Field component={TableRadioGroupContainer} {...props} />;
 
 const TableRadioGroupFormField: React.FC<ITableRadioGroupFormFieldProps> = <
-  T extends Record<string, unknown> = Record<string, unknown>
+  T extends Record<string, unknown> = Record<string, unknown>,
 >(
   props: ITableRadioGroupFormFieldProps<T>
 ) => <FormField component={TableRadioGroupField} {...props} />;

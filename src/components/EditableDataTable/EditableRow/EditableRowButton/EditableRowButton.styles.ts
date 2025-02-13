@@ -8,7 +8,7 @@ export const defaultButtonStyle = (theme: TTheme) => ({
   fontSize: `${theme.subtitleFontSize}px`,
   ":hover": {
     backgroundColor: theme.blue2Color,
-    color: theme.blue7Color,
+    color: theme.blue10Color,
   },
   height: "42px",
   width: "42px",

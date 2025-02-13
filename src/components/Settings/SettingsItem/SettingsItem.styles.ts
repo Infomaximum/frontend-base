@@ -24,6 +24,12 @@ export const linkStyle: Interpolation<TTheme> = (theme) => ({
   paddingTop: "8px",
 });
 
+export const customLinkStyle = {
+  display: "flex",
+  alignItems: "center",
+  columnGap: 8,
+};
+
 export function calculateSize(route: NCore.IRoutes): number {
   const linkStylePaddingTop = 8;
   const wrapperStyleMarginTop = 16;

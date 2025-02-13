@@ -15,6 +15,7 @@ export interface ISelectComponentProps
   onSuffixClick?(e?: React.SyntheticEvent<Element>): void;
   onBlur?(): void;
   onFocus?(): void;
+  label?: string;
   onChange(value?: IModel[]): void;
   hintContainer?: React.ReactNode;
   queryVariables?: TDictionary;
@@ -42,6 +43,7 @@ export interface ISelectComponentProps
     value: IModel
   ) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
   "test-id"?: string;
+  suffixButtonTestId?: string;
   /** Есть ли доступ к данным селекта */
   isHasAccess?: boolean;
   /**
@@ -54,6 +56,14 @@ export interface ISelectComponentProps
    * Нужен ли тултип в значениях селекта
    */
   isVisibleOptionsTooltip?: boolean;
+  /**
+   * Значение в поле ввода
+   */
+  searchValue?: string;
+  /**
+   * Ref для ситуаций, когда нужен доступ к элементу из родительских компонентов
+   */
+  innerRef?: React.MutableRefObject<HTMLElement | null>;
 }
 
 export interface ISelectState {

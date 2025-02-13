@@ -5,6 +5,7 @@ import type { IWithFormProviderProps } from "../../../decorators/hocs/withFormPr
 import type { Store } from "../../../utils";
 import type { Model } from "@infomaximum/graphql-model";
 import type { Interpolation } from "@emotion/react";
+import type { TooltipPlacement } from "antd/lib/tooltip";
 
 export interface IComplexPasswordModel extends Model {
   getMinPasswordLength(): number | undefined;
@@ -53,4 +54,5 @@ export declare interface IPasswordFieldsState {
   showPopover: boolean;
   newPasswordFieldFocus: boolean;
   repeatNewPasswordFocus: boolean;
+  passwordPopoverDirection: TooltipPlacement;
 }

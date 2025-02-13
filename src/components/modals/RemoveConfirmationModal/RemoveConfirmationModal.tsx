@@ -3,9 +3,9 @@ import { CloseCircleFilled } from "../../Icons/Icons";
 import { Button } from "../../Button/Button";
 import { Modal } from "../../modals/Modal/Modal";
 import {
-  bodyStyle,
+  modalStyle,
   titleModalStyle,
-  iconStyle,
+  iconDefaultStyle,
   bodyModalStyle,
   modalContentStyle,
 } from "./RemoveConfirmationModal.styles";
@@ -22,6 +22,8 @@ import type {
   IRemoveConfirmationModalState,
 } from "./RemoveConfirmationModal.types";
 import { withTheme } from "../../../decorators/hocs/withTheme";
+import { Space } from "antd";
+import type { Interpolation } from "@emotion/react";
 
 class RemoveConfirmationModalComponent extends PureComponent<
   IRemoveConfirmationModalProps,
@@ -37,12 +39,16 @@ class RemoveConfirmationModalComponent extends PureComponent<
   } as const;
 
   private getContentBodyModal = () => {
-    const { localization, title, theme } = this.props;
+    const { localization, title, theme, icon: Icon = CloseCircleFilled, iconStyle } = this.props;
+    const styleIcon = [
+      iconDefaultStyle(theme),
+      isFunction(iconStyle) ? iconStyle(theme) : iconStyle,
+    ] as Interpolation<TTheme>;
 
     return (
       <div css={modalContentStyle}>
         <div>
-          <CloseCircleFilled css={iconStyle(theme)} />
+          <Icon css={styleIcon} />
         </div>
         <div>
           <div css={titleModalStyle(theme)}>
@@ -96,9 +102,9 @@ class RemoveConfirmationModalComponent extends PureComponent<
     const { isLoading } = this.state;
 
     return (
-      <div key="footer-remove-confirmation-modal">
+      <Space size={8} key="footer-remove-confirmation-modal">
         <Button
-          type="ghost"
+          type="common"
           key="remove-confirmation-modal_cancel-button"
           onClick={this.handleCancel}
           test-id={removeConfirmationModalCancelButtonTestId}
@@ -115,20 +121,23 @@ class RemoveConfirmationModalComponent extends PureComponent<
         >
           {localization.getLocalized(buttonRemoveText)}
         </Button>
-      </div>
+      </Space>
     );
   };
 
   public override render() {
+    const { maskTransitionName, className } = this.props;
+
     return (
       <Modal
         open={this.state.open}
         closable={false}
-        centered={true}
-        bodyStyle={bodyStyle}
+        styles={modalStyle}
         footer={this.getFooterModal()}
         destroyOnClose={true}
         zIndex={5000}
+        maskTransitionName={maskTransitionName}
+        className={className}
       >
         {this.getContentBodyModal()}
       </Modal>

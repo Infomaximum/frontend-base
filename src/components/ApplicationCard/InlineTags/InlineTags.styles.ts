@@ -11,7 +11,7 @@ export const getTagContainerStyle = (flexShrink: number) =>
     flexShrink,
     overflow: "hidden",
     marginRight: `${tagsGutter}px`,
-  } as const);
+  }) as const;
 
 export const tagStyle = {
   borderWidth: `${tagBorderWidth}px`,
@@ -32,4 +32,4 @@ export const ellipsisStyle = (theme: TTheme) =>
     paddingLeft: `${outerEllipsisPaddingLeft}px`,
     color: theme.grey8Color,
     lineHeight: "22px",
-  } as const);
+  }) as const;

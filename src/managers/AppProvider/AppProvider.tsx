@@ -1,8 +1,8 @@
+import "dayjs/locale/ru";
+import "dayjs/locale/en";
 import { Global } from "@emotion/react";
 import { type ELanguages, Localization } from "@infomaximum/localization";
-import moment from "moment";
-import { type FC, useEffect, useMemo } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { type FC, memo, useEffect, useMemo } from "react";
 import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
 import { FeatureContext, defaultFeatureChecker } from "../../decorators/contexts/FeatureContext";
 import { LocalizationContext } from "../../decorators/contexts/LocalizationContext";
@@ -16,16 +16,23 @@ import type { IRouterProviderProps } from "../RouterProvider/RouterProvider.type
 import { DataInitializer } from "./DataInitializer";
 import enUS from "antd/es/locale/en_US";
 import ruRu from "antd/es/locale/ru_RU";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, type ThemeConfig } from "antd";
 import { AppErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
 import { historyStore } from "../../store/historyStore";
-import type { TFeatureEnabledChecker } from "@infomaximum/utility";
+import { EDays, localeUpdate, type TFeatureEnabledChecker } from "@infomaximum/utility";
+import { BrowserRouter } from "./BrowserRouter";
+import { getThemeConfig } from "./antdTheme";
+import {
+  LicenseFeatureContext,
+  defaultLicenseFeatureChecker,
+} from "../../decorators/contexts/LicenseFeatureContext";
+import { StyleProvider } from "@ant-design/cssinjs";
 
 export interface IAppProviderProps extends IRouterProviderProps {
   baseName?: string;
   language: ELanguages;
   featureChecker?: TFeatureEnabledChecker;
-
+  licenseFeatureChecker?: TFeatureEnabledChecker;
   isDebugMode?: boolean;
   mainSystemPagePath?: string;
   theme?: TTheme;
@@ -33,11 +40,12 @@ export interface IAppProviderProps extends IRouterProviderProps {
   children?: (children: React.ReactNode) => React.ReactNode;
 }
 
-const AppProvider: FC<IAppProviderProps> = (props) => {
+const AppProviderContainer: FC<IAppProviderProps> = (props) => {
   const {
     baseName,
     language,
     featureChecker = defaultFeatureChecker,
+    licenseFeatureChecker = defaultLicenseFeatureChecker,
     isAuthorizedUser,
     isSystemInitialized,
     layout,
@@ -47,7 +55,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
     isDebugMode,
     mainSystemPagePath,
     theme: themeProps,
-    children,
+    children: childrenProp,
   } = props;
 
   const localizationInstance = useMemo(() => new Localization({ language }), [language]);
@@ -57,7 +65,7 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
 
     document.documentElement.setAttribute("lang", currentLanguage);
 
-    moment.locale(currentLanguage);
+    localeUpdate(currentLanguage, EDays.MONDAY);
   }, [localizationInstance]);
 
   const locale = useMemo(() => {
@@ -72,42 +80,67 @@ const AppProvider: FC<IAppProviderProps> = (props) => {
 
   const _theme = themeProps ?? theme;
 
-  const routerProvider = (
-    <RouterProvider
-      layout={layout}
-      isAuthorizedUser={isAuthorizedUser}
-      isSystemInitialized={isSystemInitialized}
-      unInitializeRoutes={unInitializeRoutes}
-      routesConfig={routesConfig}
-      unAuthorizedRoutes={unAuthorizedRoutes}
-    />
+  const routerProvider = useMemo(
+    () => (
+      <RouterProvider
+        layout={layout}
+        isAuthorizedUser={isAuthorizedUser}
+        isSystemInitialized={isSystemInitialized}
+        unInitializeRoutes={unInitializeRoutes}
+        routesConfig={routesConfig}
+        unAuthorizedRoutes={unAuthorizedRoutes}
+      />
+    ),
+    [
+      isAuthorizedUser,
+      isSystemInitialized,
+      layout,
+      routesConfig,
+      unAuthorizedRoutes,
+      unInitializeRoutes,
+    ]
+  );
+
+  const children = useMemo(
+    () => (
+      <ErrorModalProvider isDebugMode={!!isDebugMode}>
+        <DataInitializer>
+          {typeof childrenProp === "function" ? childrenProp(routerProvider) : routerProvider}
+        </DataInitializer>
+      </ErrorModalProvider>
+    ),
+    [childrenProp, isDebugMode, routerProvider]
+  );
+
+  const antdTheme = useMemo(
+    () => ({ ...getThemeConfig(), hashed: false }) satisfies ThemeConfig,
+    []
   );
 
   return (
     <AppErrorBoundary code={EErrorBoundaryCodesBase.app}>
       <MainSystemPagePathContext.Provider value={mainSystemPagePath ?? rootPath}>
         <DebugModeContext.Provider value={!!isDebugMode}>
-          <BrowserRouter basename={baseName ?? historyStore.basename}>
-            <ThemeProvider theme={_theme}>
-              <LocalizationContext.Provider value={localizationInstance}>
-                <FeatureContext.Provider value={featureChecker}>
-                  <ErrorModalProvider isDebugMode={!!isDebugMode}>
-                    <ConfigProvider locale={locale}>
-                      <DataInitializer>
-                        <Global styles={globalStyles(_theme)} />
-
-                        {typeof children === "function" ? children(routerProvider) : routerProvider}
-                      </DataInitializer>
-                    </ConfigProvider>
-                  </ErrorModalProvider>
-                </FeatureContext.Provider>
-              </LocalizationContext.Provider>
-            </ThemeProvider>
-          </BrowserRouter>
+          <LocalizationContext.Provider value={localizationInstance}>
+            <StyleProvider autoClear={true}>
+              <ConfigProvider locale={locale} theme={antdTheme}>
+                <ThemeProvider theme={_theme}>
+                  <FeatureContext.Provider value={featureChecker}>
+                    <LicenseFeatureContext.Provider value={licenseFeatureChecker}>
+                      <Global styles={globalStyles(_theme)} />
+                      <BrowserRouter basename={baseName ?? historyStore.basename}>
+                        {children}
+                      </BrowserRouter>
+                    </LicenseFeatureContext.Provider>
+                  </FeatureContext.Provider>
+                </ThemeProvider>
+              </ConfigProvider>
+            </StyleProvider>
+          </LocalizationContext.Provider>
         </DebugModeContext.Provider>
       </MainSystemPagePathContext.Provider>
     </AppErrorBoundary>
   );
 };
 
-export { AppProvider };
+export const AppProvider = memo(AppProviderContainer);

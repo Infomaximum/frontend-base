@@ -1,5 +1,5 @@
 import { Col } from "antd";
-import React, { useCallback, useContext, useEffect, useMemo, useState, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { generatePath, Link, useParams } from "react-router-dom";
 import {
   titleStyle,
@@ -13,7 +13,6 @@ import {
   getHeaderBodyRightWithCenterStyle,
   headerBodyRightWithLeftWithoutCenterStyle,
   headerBodyRightWithoutLeftAndCenterStyle,
-  titleOverlayStyle,
 } from "./HeaderMenuPortal.styles";
 import type {
   IHeaderMenuPortalProps,
@@ -30,7 +29,7 @@ import {
   headerMenuBodyRightTestId,
   headerMenuSettingsTestId,
   headerMenuBodyCenterTestId,
-  navigationTabsTestId,
+  navigationTabsHeaderTestId,
 } from "../../../utils/TestIds";
 import ReactDOM from "react-dom";
 import { wrapMenuStyle } from "../HeaderMenu.styles";
@@ -40,7 +39,7 @@ import { useFeature } from "../../../decorators/hooks/useFeature";
 import { ArrowBackSVG, HeaderAppsIconSVG } from "../../../resources/icons";
 import { Spinner } from "../../Spinner/Spinner";
 import { assertSimple } from "@infomaximum/assert";
-import { useOverflow } from "../../../decorators/hooks/useOverflow";
+import { AlignedTooltip } from "../../AlignedTooltip";
 
 const assertSimpleText = "Дочерний компонент не должен помещаться в DOM";
 
@@ -87,8 +86,6 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
   const [currentWrapperWidth, setCurrentWrapperWidth] = useState(window.innerWidth);
   const [columnConfig, setColumnConfig] = useState(calculateColumnConfig(currentWrapperWidth));
   const { isFeatureEnabled } = useFeature();
-  const ref = useRef<HTMLDivElement>(null);
-  const { isOverflow } = useOverflow(ref, children);
 
   const getVisibleSettingsIcon = useCallback(
     () => !isNull(document.getElementById(headerMenuSettingsTestId)),
@@ -170,7 +167,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
         {backUrl ? (
           <Link
             test-id={headerMenuBackUrlTestId}
-            to={generatePath(backUrl, params)}
+            to={generatePath(backUrl, params as Parameters<typeof generatePath>[1])}
             css={linkBackStyle}
           >
             <ArrowBackSVG />
@@ -185,12 +182,12 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
             <HeaderAppsIconSVG />
           </Link>
         )}
-        <div
-          css={[customTitleStyle ?? titleStyle, isOverflow && titleOverlayStyle]}
-          test-id={headerMenuTitleTestId}
-          ref={ref}
-        >
-          {loading ? <Spinner wrapperStyle={spinnerStyle} size="small" /> : children}
+        <div css={customTitleStyle ?? titleStyle} test-id={headerMenuTitleTestId}>
+          {loading ? (
+            <Spinner wrapperStyle={spinnerStyle} size="small" />
+          ) : (
+            <AlignedTooltip offsetY={8}>{children}</AlignedTooltip>
+          )}
         </div>
         {headerBodyLeftChildren ? (
           <div key="header-menu-left-wrap" css={wrapMenuStyle} test-id={headerMenuBodyLeftTestId}>
@@ -220,7 +217,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
   };
 
   const getHeaderBodyRight = () => {
-    const navigationTabs = document.getElementById(navigationTabsTestId); // Не удается определить наличие средней колонки чтением headerBodyCenter.children
+    const navigationTabs = document.getElementById(navigationTabsHeaderTestId); // Не удается определить наличие средней колонки чтением headerBodyCenter.children
 
     if (headerBodyRightChildren) {
       return (
@@ -232,8 +229,8 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
             navigationTabs
               ? getHeaderBodyRightWithCenterStyle(columnConfig.rightColWidth, isVisibleSettingsIcon)
               : !isUndefined(headerBodyLeftChildren)
-              ? headerBodyRightWithLeftWithoutCenterStyle
-              : headerBodyRightWithoutLeftAndCenterStyle
+                ? headerBodyRightWithLeftWithoutCenterStyle
+                : headerBodyRightWithoutLeftAndCenterStyle
           }
         >
           {headerBodyRightChildren}

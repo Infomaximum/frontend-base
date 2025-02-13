@@ -15,11 +15,11 @@ export interface IEditableRowButtonProps<T = unknown> {
   /** Функция для добавления кастомных стилей
    *
    * @example
-   * const customStyle = (theme: TTheme) => customContextIconButtonStyle({
+   * const customStyle = gerCustomContextIconButtonStyle({
    *    color: "red",
    *    hoverBackgroundColor: "green",
    *    hoverColor: "black",
-   * })
+   * })(theme: TTheme)
    */
   customStyle?: TCustomContextIconButtonStyle;
 }

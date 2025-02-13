@@ -62,7 +62,7 @@ describe("Тест компонента ContextMenu", () => {
 
     expect(component.find(Menu).find(MenuItem).length === 0).toEqual(true);
 
-    component.find(ContextMenu).find(Button).simulate("click");
+    component.find(ContextMenu).find("button").simulate("click");
 
     expect(component.find(Menu).exists()).toEqual(true);
 
@@ -77,11 +77,11 @@ describe("Тест компонента ContextMenu", () => {
 
     const component = mountContextMenu(props);
 
-    component.find(ContextMenu).find(Button).simulate("click");
+    component.find(ContextMenu).find("button").simulate("click");
 
     expect(mockFunction.mock.calls.length).toEqual(0);
 
-    component.find(Menu).find(MenuItem).first().simulate("click");
+    component.find(Menu).find(MenuItem).first().find("span").simulate("click");
 
     expect(mockFunction.mock.calls.length).toEqual(1);
   });

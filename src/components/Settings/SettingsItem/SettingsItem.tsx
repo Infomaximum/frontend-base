@@ -1,13 +1,14 @@
 import React, { useCallback } from "react";
 import type { ISettingsItemProps } from "./SettingsItem.types";
-import { titleStyle, wrapperStyle, linkStyle } from "./SettingsItem.styles";
+import { titleStyle, wrapperStyle, linkStyle, customLinkStyle } from "./SettingsItem.styles";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { settingsItemTitleTestId } from "../../../utils/TestIds";
 import { goBackPath } from "../../../utils/Routes/paths";
-import { matchPath, useLocation, useNavigate } from "react-router";
+import { generatePath, matchPath, useLocation, useNavigate } from "react-router";
 import { assertSimple } from "@infomaximum/assert";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import { BetaIconSVG } from "../../../resources/icons";
 
 const SettingsItemComponent: React.FC<ISettingsItemProps> = ({ onClick, title, routes }) => {
   const localization = useLocalization();
@@ -34,12 +35,16 @@ const SettingsItemComponent: React.FC<ISettingsItemProps> = ({ onClick, title, r
           assertSimple(!!route.path, "Не передан path");
           assertSimple(!!route.loc, "Не передан loc");
 
-          const isCurrentRoute = !!matchPath(route.path, location.pathname);
+          // Нужно чтобы убрать из шаблонного пути убрать динамические сегменты
+          const path = generatePath(route.path);
+          const isBeta = route.isBeta;
+          const isCurrentRoute = !!matchPath(path, location.pathname);
 
           return (
             <span key={route.key} onClick={isCurrentRoute ? rerenderCurrentRoute : onClick}>
-              <Link to={route.path} css={linkStyle}>
+              <Link to={path} css={[linkStyle, isBeta && customLinkStyle]}>
                 {localization.getLocalized(route.loc)}
+                {isBeta && <BetaIconSVG />}
               </Link>
             </span>
           );

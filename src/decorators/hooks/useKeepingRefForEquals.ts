@@ -20,7 +20,7 @@ export const useKeepingRefForEquals = <T>(
     return ref.current;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }, deps as any[]);
 
   return finalValue;
 };

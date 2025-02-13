@@ -1,8 +1,4 @@
-import type {
-  IDataTableOwnProps,
-  IDataTableProps,
-  IPagingModel,
-} from "../DataTable/DataTable.types";
+import type { IDataTableOwnProps, IDataTableProps } from "../DataTable/DataTable.types";
 import type { TAccess } from "@infomaximum/utility";
 import type { MutableRefObject } from "react";
 import type { EditableDataTableKeys } from "./EditableDataTable";
@@ -12,6 +8,7 @@ import type { IWithModalErrorProps } from "../../decorators/hocs/withModalError/
 import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
 import type { IWithFeatureProps } from "../../decorators/hocs/withFeature/withFeature.types";
 import type { TableStore } from "../../utils";
+import type { PagingGroup } from "../../models";
 
 export interface IEditableRow extends TBaseRow {
   [EditableDataTableKeys.isRowEditDenied]?: boolean;
@@ -109,7 +106,7 @@ export interface IEditableDataTableProps<T>
 
 export interface IEditableLoadingOnScrollDataTableOwnProps<T>
   extends IEditableDataTableOwnProps<T> {
-  tableStore: TableStore<IPagingModel>;
+  tableStore: TableStore<PagingGroup>;
 }
 
 export interface IEditableDataTableState<T> {

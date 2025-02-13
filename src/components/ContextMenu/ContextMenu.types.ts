@@ -54,6 +54,7 @@ export interface IContextMenuProps extends Omit<IDropdownProps, "overlay" | "ove
   buttonStyle?: Interpolation<TTheme>;
   withoutChildWrapper?: boolean;
   dropdownStyle?: React.CSSProperties;
+  dividerStyle?: React.CSSProperties;
   onItemClick?: (params: TOnItemClickParam) => void;
 
   /** Определяет метод сортировки пунктов контекстного меню. */

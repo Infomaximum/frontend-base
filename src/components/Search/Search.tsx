@@ -1,7 +1,7 @@
-import React from "react";
+import React, { type KeyboardEvent } from "react";
 import type { ISearchProps, ISearchState } from "./Search.types";
 import { Input } from "../Input/Input";
-import { isString, isFunction } from "lodash";
+import { isString, isFunction, isEmpty } from "lodash";
 import { KeyupRequestInterval } from "../../utils/const";
 import { SearchOutlined } from "../Icons/Icons";
 import {
@@ -25,7 +25,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
     <SearchOutlined key="search-icon" css={iconStyle(theme)} />
   );
 
-  private timer: NodeJS.Timer | undefined;
+  private timer: NodeJS.Timeout | undefined;
   private lastRequestSearchText: string | undefined;
 
   constructor(props: ISearchProps) {
@@ -52,6 +52,10 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
     }
   }
 
+  public override componentWillUnmount(): void {
+    this.timer && clearTimeout(this.timer);
+  }
+
   private handleChangeState = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({
       searchText: e.target.value,
@@ -72,18 +76,26 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   private handleChange = () => {
     this.timer && clearTimeout(this.timer);
 
+    if (this.props.clearWithoutDelay && isEmpty(this.state.searchText)) {
+      this.handleChangeSearchValue();
+
+      return;
+    }
+
+    this.props.onBeforeChange?.();
     this.timer = setTimeout(this.handleChangeSearchValue, KeyupRequestInterval);
   };
 
   @boundMethod
-  private handlePressEnter() {
+  private handlePressEnter(e: KeyboardEvent<HTMLInputElement>) {
     this.timer && clearTimeout(this.timer);
-
+    this.props.onPressEnter?.(e);
     this.handleChangeSearchValue();
   }
 
   public override render() {
-    const { onChange, value, size, theme, isSecond, ...rest } = this.props;
+    const { onChange, value, size, theme, isSecond, onBeforeChange, clearWithoutDelay, ...rest } =
+      this.props;
     const clearIcon = isSecond ? <CloseSVG /> : null;
 
     const getInputStyle = (): Interpolation<TTheme> => {

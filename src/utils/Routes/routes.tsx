@@ -15,7 +15,6 @@ import {
 import { matchPath } from "react-router-dom";
 import {
   changePasswordPath,
-  enterActivationPath,
   initializePath,
   inviteSetPasswordPath,
   loginPath,
@@ -29,11 +28,11 @@ import { Expander } from "@infomaximum/module-expander";
 import type { TFeatureEnabledChecker } from "@infomaximum/utility";
 import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
 import { assertSimple } from "@infomaximum/assert";
-import { getPathToLocalStorage } from "../URI/URI";
+import { getPathToSessionStorage } from "../URI/URI";
 
 /**
- * @param items {IRoutes[]} - конфиг роутов
- * @returns {IRoutes[]} - линейный конфиг роутов
+ * @param items {NCore.IRoutes[]} - конфиг роутов
+ * @returns {NCore.IRoutes[]} - линейный конфиг роутов
  */
 export const routesMap = (
   items: NCore.IRoutes[] | undefined,
@@ -313,15 +312,14 @@ export const isAuthorizationPath = (path: string) =>
     changePasswordPath,
     inviteSetPasswordPath,
     updatePasswordPath,
-    enterActivationPath,
   ].some((routePath) => !!matchPath(routePath, path));
 
 /**
  *
- * @returns Возвращает путь сохраненный в локал сторадже, если его нет, то rootPath
+ * @returns Возвращает путь сохраненный в sessionStorage, если его нет, то rootPath
  */
-export const getSavedLocaleStoragePath = (): string => {
-  const savedPath = getPathToLocalStorage();
+export const getSavedSessionStoragePath = (): string => {
+  const savedPath = getPathToSessionStorage();
 
   const pathname = !savedPath || savedPath === loginPath ? rootPath : savedPath;
 

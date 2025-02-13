@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import type { ComponentType } from "react";
 import { lazy, Suspense } from "react";
 import { Spinner } from "../../../components/Spinner/Spinner";
 
-const spinner = <Spinner />;
+const spinner = <Spinner delay={3000} />;
 
 type TModuleWithDefaultExport<P = any> = { default: ComponentType<P> };
 type TModuleWithoutDefaultExport = {};
@@ -33,7 +32,7 @@ type TResolver<M extends TModule<P>, P = any> = (
  */
 export function withLazyLoader<
   M extends TModuleWithoutDefaultExport,
-  Resolver extends TResolver<M>
+  Resolver extends TResolver<M>,
 >(loader: () => Promise<M>, resolver: Resolver): ReturnType<Resolver>;
 export function withLazyLoader<M extends TModuleWithDefaultExport>(
   loader: () => Promise<M>

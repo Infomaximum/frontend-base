@@ -1,6 +1,6 @@
 // eslint-disable-next-line im/ban-import-entity
 import type { Input } from "antd";
-import type { TooltipPlacement } from "antd/es/tooltip";
+import type { Interpolation } from "@emotion/react";
 import type { InputProps, TextAreaProps } from "antd/lib/input";
 import type { ReactNode } from "react";
 
@@ -8,10 +8,13 @@ export interface IInputProps extends InputProps {
   overlayOffset?: number;
   clearIcon?: ReactNode;
   isSecond?: boolean;
-  tooltipPlacement?: TooltipPlacement;
+  wrapperStyle?: Interpolation<TTheme>;
+  hideTooltip?: boolean;
 }
 
-export interface ITextAreaProps extends TextAreaProps {}
+export interface ITextAreaProps extends TextAreaProps {
+  minRows?: number;
+}
 
 export interface IInputStaticComponents {
   Group: typeof Input.Group;

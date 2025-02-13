@@ -15,7 +15,9 @@ import {
   EHttpCodes,
   NetworkFailResendAttemptsCount,
   ResendDelays,
+  XTraceIdHeaderKey,
 } from "@infomaximum/utility";
+import { v4 as uuid4 } from "uuid";
 import axiosRetry from "axios-retry";
 
 /**
@@ -68,6 +70,11 @@ axiosRetry(axios, {
       errorStatusCode === EHttpCodes.GATEWAY_TIMEOUT
     );
   },
+  onRetry(retryCount, error, requestConfig) {
+    if (requestConfig.headers) {
+      requestConfig.headers[XTraceIdHeaderKey] = uuid4();
+    }
+  },
 });
 
 /**
@@ -86,7 +93,7 @@ function proxyResponseAxiosFetch(response: AxiosResponse & { message?: string })
     options = {
       status: EHttpCodes.CLIENT_CLOSED_REQUEST,
       statusText: "Client Closed Request",
-      headers: new Headers({}),
+      headers: new Headers((response.headers as any) || {}),
       url: "",
     };
     body = JSON.stringify(response);
@@ -94,12 +101,19 @@ function proxyResponseAxiosFetch(response: AxiosResponse & { message?: string })
     return Promise.reject(new Response(body, options));
   }
 
+  const headers = new Headers((response.headers as any) || {});
+  const traceId = response.config?.headers[XTraceIdHeaderKey];
+
+  if (traceId) {
+    headers.set(XTraceIdHeaderKey, traceId);
+  }
+
   const xhr = response.request;
 
   options = {
     status: xhr.status,
     statusText: xhr.statusText,
-    headers: new Headers((response.headers as any) || {}),
+    headers,
     url: "responseURL" in xhr ? xhr.responseURL : xhr.getResponseHeader("X-Request-URL"),
   };
   body = "response" in xhr ? xhr.response : xhr.responseText;
@@ -166,6 +180,7 @@ export function createUploadLink(graphqlURL: string) {
         headers: {
           ...options.headers,
           "URI-Encoding": "1",
+          [XTraceIdHeaderKey]: uuid4(),
         },
       } as AxiosRequestConfig;
 

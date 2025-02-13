@@ -1,5 +1,5 @@
+import type { PageHeaderProps } from "@ant-design/pro-layout";
 import type { Interpolation } from "@emotion/react";
-import type { PageHeaderProps } from "antd/lib/page-header";
 
 export interface IPageHeaderProps extends PageHeaderProps {
   ["test-id"]?: string;

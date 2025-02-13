@@ -1,4 +1,4 @@
-import { LOG_OUT } from "../../../utils/Localization/Localization";
+import { LOG_OUT, MY_PROFILE } from "../../../utils/Localization/Localization";
 import { headerMenuUserAvatarTestId, logoutButtonTestId } from "../../../utils/TestIds";
 import { Col, Menu, Row } from "antd";
 import { iconsHoverStyle } from "../HeaderMenu.styles";
@@ -6,16 +6,20 @@ import type { IProfileDropdownProps } from "./ProfileDropdown.types";
 import {
   antDropdownMenuSelectedItemClassName,
   iconMenuItemStyle,
+  menuItemTextStyle,
   menuStyle,
 } from "./ProfileDropdown.styles";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { map } from "lodash";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import type { ItemType } from "antd/lib/menu/hooks/useItems";
+import type { ItemType } from "antd/lib/menu/interface";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { LogoutSVG } from "../../../resources/icons";
 import { Dropdown } from "../../Dropdown/Dropdown";
 import { HeaderAvatar } from "../HeaderAvatar/HeaderAvatar";
+import { Tooltip } from "../../Tooltip/Tooltip";
+
+const tooltipAlign = { targetOffset: [0, 2] };
 
 const ProfileDropdownComponent: React.FC<IProfileDropdownProps> = ({
   menuItems: menuItemsProp,
@@ -29,16 +33,16 @@ const ProfileDropdownComponent: React.FC<IProfileDropdownProps> = ({
   const menuItems = useMemo<ItemType[]>(() => {
     function renderItem(icon: React.ReactNode, text: string, testId?: string) {
       return (
-        <Row gutter={8} align="middle" test-id={testId}>
+        <Row gutter={8} align="middle" test-id={testId} wrap={false}>
           <Col css={iconMenuItemStyle}>{icon}</Col>
-          <Col>{text}</Col>
+          <Col css={menuItemTextStyle}>{text}</Col>
         </Row>
       );
     }
 
     return [
       ...map(menuItemsProp, ({ key, loc, path, icon: Icon }) => {
-        const isCurrentPath = matchPath(path, location.pathname);
+        const isCurrentPath = matchPath(`${path}/*`, location.pathname);
 
         const content = renderItem(<Icon />, localization.getLocalized(loc));
 
@@ -57,18 +61,23 @@ const ProfileDropdownComponent: React.FC<IProfileDropdownProps> = ({
     ];
   }, [onLogout, localization, location.pathname, menuItemsProp]);
 
-  const overlay = useMemo(() => {
+  const dropdownRender = useCallback(() => {
     return <Menu css={menuStyle} items={menuItems} />;
   }, [menuItems]);
 
   const trigger = useMemo(() => ["click" as const], []);
 
   return (
-    <Dropdown trigger={trigger} overlay={overlay}>
-      <div css={iconsHoverStyle} test-id={headerMenuUserAvatarTestId}>
-        <HeaderAvatar userId={userId} userName={userName} />
-      </div>
-    </Dropdown>
+    <Tooltip align={tooltipAlign} title={localization.getLocalized(MY_PROFILE)} placement="bottom">
+      {/* Без фрагмента будет ошибка в консоли */}
+      <>
+        <Dropdown trigger={trigger} dropdownRender={dropdownRender}>
+          <div css={iconsHoverStyle} test-id={headerMenuUserAvatarTestId}>
+            <HeaderAvatar userId={userId} userName={userName} />
+          </div>
+        </Dropdown>
+      </>
+    </Tooltip>
   );
 };
 

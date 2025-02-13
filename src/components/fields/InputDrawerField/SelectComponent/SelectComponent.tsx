@@ -18,11 +18,11 @@ import { observer } from "mobx-react";
 import { CloseCircleFilled } from "../../../Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
 import type { IModel } from "@infomaximum/graphql-model";
-import { Tooltip } from "../../../Tooltip";
 import { NOT_SELECTED } from "../../../../utils/Localization/Localization";
 import { BarsSVG } from "../../../../resources/icons";
 import { Select } from "../../../Select/Select";
 import { withLoc } from "../../../../decorators/hocs/withLoc/withLoc";
+import { AlignedTooltip } from "../../../AlignedTooltip";
 
 class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
   public static defaultProps = {
@@ -65,9 +65,9 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
               value: model?.getInnerName(),
               label: (
                 <div css={inputSelectedContentStyle} {...labelProps}>
-                  <Tooltip title={title}>
+                  <AlignedTooltip title={title}>
                     {displayValue || localization.getLocalized(NOT_SELECTED)}
-                  </Tooltip>
+                  </AlignedTooltip>
                 </div>
               ),
             };

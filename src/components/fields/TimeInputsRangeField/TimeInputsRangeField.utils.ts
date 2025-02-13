@@ -1,5 +1,4 @@
 import { compact, isEmpty, size } from "lodash";
-import moment from "moment";
 import { TestIdsUtils } from "@infomaximum/utility";
 import type { TTimeInputsRangeValue } from "./TimeInputsRangeField.types";
 
@@ -20,19 +19,22 @@ export const emptyRangeValueValidator = (values: TTimeInputsRangeValue) => {
 };
 
 export const correctRangeValueValidator = (values: TTimeInputsRangeValue) => {
-  const filledValues = compact(values);
+  const filledValues = compact(values) as
+    | [plugin.Duration]
+    | [plugin.Duration, plugin.Duration]
+    | [];
 
-  if (isEmpty(filledValues)) {
+  if (filledValues.length === 0) {
     return;
   }
 
-  if (size(filledValues) !== 2) {
+  if (filledValues.length !== 2) {
     return { code: TestIdsUtils.FIELD_EMPTY };
   }
 
   const [begin, end] = filledValues;
-  const beginDuration = moment.duration(begin);
-  const endDuration = moment.duration(end);
+  const beginDuration = begin;
+  const endDuration = end;
 
   if (Number(endDuration) === 0) {
     // возможность задать время окончания диапазона 00:00

@@ -2,10 +2,14 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { SelectFormField, SelectFieldComponent } from "../../fields/SelectField/SelectField";
 import type { IOptionalDrawerFormProps } from "./OptionalDrawerForm.types";
 import { filter, first, gt, map, size } from "lodash";
-import { Col, Row } from "antd";
 import type { IDrawerFormProps } from "../DrawerForm/DrawerForm.types";
 import { extractActiveContent, optionalDrawerFormSelect } from "./OptionalDrawerForm.utils";
-import { contentWrapperStyle, headerStyle, stretchStyle } from "./OptionalDrawerForm.styles";
+import {
+  contentWrapperStyle,
+  headerStyle,
+  selectWrapperStyle,
+  stretchStyle,
+} from "./OptionalDrawerForm.styles";
 import { optionalDrawerFormSelectTestId } from "../../../utils/TestIds";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useForm } from "../../../decorators/hooks/useForm";
@@ -73,7 +77,7 @@ const OptionalDrawerFormComponent: React.FC<IOptionalDrawerFormProps> = ({
   );
 
   const select = gt(size(selectOptions), 1) ? (
-    <Col span={8}>
+    <div css={selectWrapperStyle}>
       <SelectFieldComponent
         defaultValue={defaultOption}
         key={optionalDrawerFormSelect}
@@ -84,17 +88,17 @@ const OptionalDrawerFormComponent: React.FC<IOptionalDrawerFormProps> = ({
       >
         {selectOptions}
       </SelectFieldComponent>
-    </Col>
+    </div>
   ) : null;
 
   const { inlineContent, mainContent } =
     extractActiveContent(activeOption, contents) ?? defaultContent ?? {};
 
   const header = Boolean(select || inlineContent) ? (
-    <Row gutter={8} css={headerStyle}>
+    <div css={headerStyle}>
       {select}
       {inlineContent}
-    </Row>
+    </div>
   ) : null;
 
   const isDisabledSubmitBtn = () => {

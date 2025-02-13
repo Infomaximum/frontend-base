@@ -1,5 +1,5 @@
 export const defaultSelectFieldStyle = (theme: TTheme) => ({
-  color: theme.grey9Color,
+  color: theme.grey10Color,
 });
 
 export const defaultWrapperComponentStyle = {

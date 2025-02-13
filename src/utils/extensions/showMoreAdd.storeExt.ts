@@ -1,29 +1,27 @@
-import { isArray, isNumber } from "lodash";
+import { isArray } from "lodash";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Model, TModelStruct } from "@infomaximum/graphql-model";
 import type { Store } from "../Store/Store/Store";
-
-export const REST_GRAPHQL_FAKE_TYPE = "rest";
+import { RestModel } from "../../models";
 
 interface IParams {
   groupFieldNames: string[];
-  nextCountFieldNames: string[];
+  hasNextFieldNames: string[];
 }
 
-export const getRestItemStruct = (nextCount: any) => {
+export const getRestItemStruct = () => {
   return {
-    next_count: isNumber(nextCount) ? nextCount : null,
-    __typename: REST_GRAPHQL_FAKE_TYPE,
+    __typename: RestModel.typename,
   };
 };
 
 const populateWithRest = (
   data: TModelStruct,
   groupFieldNames: string[],
-  nextCountFieldNames: string[]
+  hasNextFieldNames: string[]
 ) => {
   let groupFieldName: string | null = null;
-  let nextCountFieldName: string | null = null;
+  let hasNextFieldName: string | null = null;
   let items: any[] | null = null;
   let newData: TModelStruct | null = null;
 
@@ -44,7 +42,7 @@ const populateWithRest = (
       newData[groupFieldName] = populateWithRest(
         newData[groupFieldName],
         groupFieldNames,
-        nextCountFieldNames
+        hasNextFieldNames
       );
 
       return newData;
@@ -58,49 +56,49 @@ const populateWithRest = (
   }
 
   for (
-    let nextCountFieldIndex = 0;
-    nextCountFieldIndex < nextCountFieldNames.length;
-    nextCountFieldIndex += 1
+    let hasNextFieldIndex = 0;
+    hasNextFieldIndex < hasNextFieldNames.length;
+    hasNextFieldIndex += 1
   ) {
-    nextCountFieldName = nextCountFieldNames[nextCountFieldIndex] ?? null;
+    hasNextFieldName = hasNextFieldNames[hasNextFieldIndex] ?? null;
 
-    if (nextCountFieldName && data[nextCountFieldName]) {
-      // нашли поле, где хранится количество элементов для "показать еще"
+    if (hasNextFieldName && data[hasNextFieldName]) {
+      // нашли поле, где хранится состояние для "показать еще"
       break;
     }
 
-    nextCountFieldName = null;
+    hasNextFieldName = null;
   }
 
   if (items) {
     for (let itemIndex = 0; itemIndex < items.length; itemIndex += 1) {
       const item = items[itemIndex];
-      items[itemIndex] = populateWithRest(item, groupFieldNames, nextCountFieldNames);
+      items[itemIndex] = populateWithRest(item, groupFieldNames, hasNextFieldNames);
     }
   }
 
-  if (nextCountFieldName && items) {
-    items.push(getRestItemStruct(data[nextCountFieldName]));
+  if (hasNextFieldName && items) {
+    items.push(getRestItemStruct());
   }
 
   return newData;
 };
 
 /**
- * Добавляет списки элементов в данных записи "показать еще", рассчитываемые на основе наличия у группы значения
- * в полей "количество непоказанных записей". Имя поля вычисляется из списка переданных
- * {@link params.nextCountFieldNames} и данных в списках.
+ * Добавляет списки элементов в данных записи "показать еще", рассчитываемые на основе наличия у группы состояния
+ *  "наличие непоказанных записей". Имя поля вычисляется из списка переданных
+ * {@link params.hasNextFieldNames} и данных в списках.
  * @param {Object} [params={}]
  * @property {Array.<string>} [params.groupFieldNames=['items']] - Список имен полей, в которых могут лежать вложенные
  * элементы. Из-за разного формата списков с сервера имена полей могут быть разными для разных уровней вложенности
  * (например программы лежат в поле `items`, а окна в программах - в полей `windows`)
- * @property {Array.<string>} [params.nextCountFieldNames=['next_count']] - Список имен полей, в которых может
- * лежать количество не показанных элементов списка. Может быть разным в зависимости от типа списка
- * (next_count, next_windows_count)
+ * @property {Array.<string>} [params.hasNextFieldNames=['has_next']] - Список имен полей, в которых может
+ * лежать состояние наличия не показанных элементов списка. Может быть разным в зависимости от типа списка
+ * (has_next, next_windows_count)
  * @returns {Function}
  */
 export const showMoreAddStoreExt = (params = {}): NStore.TPrepareDataFunc<Store<Model>> => {
-  const { groupFieldNames = ["items"], nextCountFieldNames = ["next_count"] } = params as IParams;
+  const { groupFieldNames = ["items"], hasNextFieldNames = ["has_next"] } = params as IParams;
 
-  return ({ data }) => (data ? populateWithRest(data, groupFieldNames, nextCountFieldNames) : data);
+  return ({ data }) => (data ? populateWithRest(data, groupFieldNames, hasNextFieldNames) : data);
 };

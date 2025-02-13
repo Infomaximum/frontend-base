@@ -16,7 +16,7 @@ export class AutoCompleteListModel<M extends Model = Model> extends Group {
     return this.getListField<M>("items", typenameToModel);
   }
 
-  public getNextCount(): number {
-    return this.getNumberField("next_count") || 0;
+  public hasNext(): boolean {
+    return this.hasAccessToField("has_next") && this.getBoolField("has_next");
   }
 }

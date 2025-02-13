@@ -8,6 +8,7 @@ import type {
   TFilterTypename as TBaseFilterTypename,
   TPreparedFilterValue as TBasePreparedFilterValue,
 } from "@infomaximum/base-filter";
+import type { FiltersStore } from "./FiltersStore";
 
 // todo: описать типы через дженерики
 /** Пространство для типов стора фильтров */
@@ -99,5 +100,13 @@ export declare namespace NFiltersStore {
   export type TFilterDescriptionStruct = {
     typename: string;
     FilterClass: IFilterDescriptionStaticStruct;
+  };
+
+  export type TFilterNameByTypenameParams = {
+    typename: NFiltersStore.TFilterTypename;
+    isSingle: boolean;
+    lastFilterId: number;
+    filterValue: NFiltersStore.TFilterValue;
+    store: FiltersStore;
   };
 }

@@ -9,7 +9,7 @@ import { BannerContentModal } from "../BannerContentModal/BannerContentModal";
 import {
   bannerContentParagraphStyle,
   bannerContentShowMoreButtonStyle,
-  bannerContentShowMoreStyle,
+  getBannerContentShowMoreStyle,
   bannerContentStyle,
 } from "./BannerContent.styles";
 import { showMoreBannerTestId } from "../../../../utils/TestIds";
@@ -67,7 +67,7 @@ const BannerContentComponent: React.FC<IBannerContentProps> = ({
     <div ref={contentRef} className={className} css={bannerContentStyle(theme)}>
       <MarkdownView markdown={md} components={mdViewComponents} options={mdViewOptions} />
       {showShowMoreButton ? (
-        <div css={bannerContentShowMoreStyle(backgroundColor)}>
+        <div css={getBannerContentShowMoreStyle(backgroundColor)}>
           {`... `}
           <Button
             type="link"

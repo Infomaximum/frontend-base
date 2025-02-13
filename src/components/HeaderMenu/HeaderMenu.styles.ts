@@ -10,7 +10,7 @@ export const headerStyle = (theme: TTheme) =>
     height: `${theme.heightHeaderMenu}px`,
     padding: "0px",
     overflow: "hidden",
-  } as const);
+  }) as const;
 
 export const wrapMenuStyle = (theme: TTheme) => ({
   height: `${theme.heightHeaderMenu}px`,

@@ -6,18 +6,19 @@ import type { Interpolation } from "@emotion/react";
 import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IWithFeatureProps } from "../../../decorators/hocs/withFeature/withFeature.types";
 
-export interface IFieldEntityComponentProps<FV = any, T extends HTMLElement = HTMLElement> {
+export interface IFieldEntityComponentProps {
   onRemoveFieldEntity: (index: number) => void;
   fieldEntityPath: string;
   fieldEntityIndex: number;
   removeIcon?: JSX.Element;
   customRemoveIconStyle?: Interpolation<TTheme>;
   readOnly?: boolean;
-  fields?: FieldArrayRenderProps<FV, T>["fields"];
+  isRemoveItem?: boolean;
   writeAccess?: boolean;
   removeAccess?: boolean;
   createAccess?: boolean;
   autoFocus?: boolean;
+  id?: string;
 }
 
 export interface IArrayFieldProvider {

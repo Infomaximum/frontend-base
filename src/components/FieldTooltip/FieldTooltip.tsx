@@ -3,6 +3,7 @@ import { Popover } from "antd";
 import type { IFieldTooltipProps, IFieldTooltipState } from "./FieldTooltip.types";
 import {
   captionStyle,
+  getFieldTooltipContainerStyle,
   popoverStyle,
   questionIconShowPopoverStyle,
   questionIconStyle,
@@ -12,7 +13,7 @@ import { QuestionCircleOutlined } from "../Icons/Icons";
 
 class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTooltipState> {
   private static readonly align = {
-    offset: [0, -22],
+    offset: [16, -16],
   };
 
   public override readonly state = {
@@ -49,10 +50,11 @@ class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTool
       iconStyle,
       arrowPointAtCenter,
       getPopupContainer,
+      isWithoutPadding,
     } = this.props;
 
     return (
-      <>
+      <span css={getFieldTooltipContainerStyle(isWithoutPadding)}>
         {caption ? (
           <span key="label" css={captionStyle}>
             {caption}
@@ -66,7 +68,7 @@ class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTool
             placement={placement}
             content={this.prompt}
             onOpenChange={this.handleVisiblePopover}
-            arrowPointAtCenter={arrowPointAtCenter}
+            arrow={{ pointAtCenter: arrowPointAtCenter }}
             align={FieldTooltipComponent.align}
             getPopupContainer={getPopupContainer}
             overlayStyle={popoverStyle}
@@ -80,7 +82,7 @@ class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTool
             />
           </Popover>
         ) : null}
-      </>
+      </span>
     );
   }
 }

@@ -1,7 +1,7 @@
 import type { ICollapseProps } from "./Collapse.types";
 import { Collapse as AntCollapse } from "antd";
 import { useTheme } from "../../decorators/hooks/useTheme";
-import { cssStyleConversion } from "../../styles";
+import { getCssConversionStyle } from "../../styles";
 
 const CollapseComponent: React.FC<ICollapseProps> = (props) => {
   const { children, collapseStyle, ...rest } = props;
@@ -9,7 +9,7 @@ const CollapseComponent: React.FC<ICollapseProps> = (props) => {
   const theme = useTheme();
 
   return (
-    <AntCollapse {...rest} css={cssStyleConversion(theme, collapseStyle)}>
+    <AntCollapse {...rest} css={getCssConversionStyle(theme, collapseStyle)}>
       {children}
     </AntCollapse>
   );

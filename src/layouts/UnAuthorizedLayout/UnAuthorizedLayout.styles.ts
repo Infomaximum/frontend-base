@@ -26,19 +26,19 @@ export const unAuthorizedContentStyle = () =>
     paddingTop: "24px",
     paddingBottom: "24px",
     minHeight: "min-content", // fix для корректной работы скролла
-  } as const);
+  }) as const;
 
-export const iconBack = (theme: TTheme) => ({
-  color: theme.grey9Color,
+export const iconBackStyle = (theme: TTheme) => ({
+  color: theme.grey10Color,
   paddingRight: "7px",
 });
 
-export const backLink = {
+export const backLinkStyle = {
   display: "inline-block",
   marginRight: "12px",
 };
 
-export const shakeAndDanceKeyframe = {
+const shakeAndDanceKeyframeStyle = {
   "0%": { transform: "translateX(0px)" },
   "10%": { transform: "translateX(-5px)" },
   "20%": { transform: "translateX(10px)" },
@@ -54,11 +54,10 @@ export const shakeAndDanceKeyframe = {
 
 export const wrapperContentLoginStyle = {
   width: "472px",
-  flex: "none", // fix для IE
 };
 
 export const animationContentLoginStyle = {
-  animation: `${keyframes(shakeAndDanceKeyframe)} 1s ease-out`,
+  animation: `${keyframes(shakeAndDanceKeyframeStyle)} 1s ease-out`,
 };
 
 export const formBodyCutStyle = {

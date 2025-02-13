@@ -1,3 +1,4 @@
+import type { ModalProps } from "antd/lib/modal";
 import { scrollDefaultStyle } from "../../../styles/global.styles";
 
 export const titleStyle = (theme: TTheme) => ({
@@ -10,28 +11,32 @@ export const titleStyle = (theme: TTheme) => ({
 export const textStyle = (theme: TTheme) =>
   ({
     margin: `8px 0px 28px`,
-    color: theme.grey8Color,
+    color: theme.grey10Color,
     overflowY: "auto",
     display: "flex",
     flexDirection: "column",
     wordBreak: "break-word",
-  } as const);
+  }) as const;
 
 export const iconWrapStyle = {
   position: "absolute" as const,
 };
 
 export const modalContentStyle = {
-  marginLeft: "32px",
+  marginLeft: "34px",
   whiteSpace: "pre-wrap",
   display: "flex",
   flexDirection: "column",
   width: "100%",
 } as const;
 
-export const modalFooterStyle = {
+export const getModalFooterStyle = (hasAddableButtons: boolean) => ({
   textAlign: "right" as const,
-};
+  ...(hasAddableButtons && {
+    display: "flex",
+    justifyContent: "space-between",
+  }),
+});
 
 export const errorIconStyle = (theme: TTheme) => ({
   color: theme.red6Color,
@@ -43,11 +48,19 @@ export const infoIconStyle = (theme: TTheme) => ({
   fontSize: "24px",
 });
 
-export const bodyModalStyle = {
-  padding: `20px 28px 0`,
-  overflow: "hidden",
-  display: "flex",
-};
+export const modalComponentsStyle = {
+  body: {
+    padding: `20px 24px 0`,
+    overflow: "hidden",
+    display: "flex",
+  },
+  content: {
+    maxHeight: "100%",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+  },
+} satisfies ModalProps["styles"];
 
 export const modalStyle = (theme: TTheme) =>
   ({
@@ -57,17 +70,11 @@ export const modalStyle = (theme: TTheme) =>
       justifyContent: "center",
     },
 
-    ".ant-modal-content": {
-      maxHeight: "100%",
-      display: "flex",
-      flexDirection: "column",
-      width: "100%",
-    },
-
     padding: `48px 0`,
-    height: "100%",
-    display: "inline-flex !important",
-    alignItems: "center",
-    justifyContent: "center",
     ...scrollDefaultStyle(theme),
-  } as const);
+  }) as const;
+
+export const additionalButtonsStyle = {
+  display: "flex",
+  gap: "8px",
+};

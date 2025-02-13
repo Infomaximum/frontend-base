@@ -1,62 +1,62 @@
 import type { InputFieldArrayItemProps } from "./InputFieldArrayItem.types";
-import React, { useCallback } from "react";
-import { isFunction } from "lodash";
-import { wrapperInputFieldStyle, removeButtonStyle } from "./InputFieldArrayItem.styles";
+import React, { memo, useMemo } from "react";
 import { InputFormField } from "../../InputField";
-import { Button } from "../../../Button/Button";
 import { removeInputFieldButtonTestId } from "../../../../utils/TestIds";
-import { CloseOutlined } from "../../../Icons/Icons";
-import { DELETE } from "../../../../utils";
-import { useLocalization } from "../../../../decorators";
+import { RemoveButton } from "../components/RemoveButton/RemoveButton";
+import { Space } from "antd";
+import type { Interpolation, Theme } from "@emotion/react";
+import {
+  getFormItemStyle,
+  inputGroupStyle,
+  wrappedButtonStyle,
+} from "./InputFieldArrayItem.styles";
 
-const InputFieldArrayItem: React.FC<InputFieldArrayItemProps> = (props) => {
+const InputFieldArrayItemComponent: React.FC<InputFieldArrayItemProps> = (props) => {
   const {
     fieldEntityPath,
-    fields,
     fieldEntityIndex,
     onRemoveFieldEntity,
-    removeIcon: RemoveIcon,
+    removeIcon,
     customRemoveIconStyle,
     writeAccess,
     removeAccess,
     readOnly,
+    isRemoveItem,
     ...rest
   } = props;
 
-  const localization = useLocalization();
-  const fieldsLength = fields?.length;
+  const isShowRemoveButton = !!isRemoveItem;
 
-  const removeField = useCallback(() => {
-    if (isFunction(onRemoveFieldEntity)) {
-      onRemoveFieldEntity(fieldEntityIndex);
+  const getRemoveIconStyle = useMemo(() => {
+    const defaultStyles = [wrappedButtonStyle as Interpolation<Theme>];
+
+    if (customRemoveIconStyle) {
+      defaultStyles.push(customRemoveIconStyle);
     }
-  }, [fieldEntityIndex, onRemoveFieldEntity]);
+
+    return defaultStyles;
+  }, [customRemoveIconStyle]);
 
   return (
-    <InputFormField
-      key={fieldEntityPath}
-      name={fieldEntityPath}
-      wrapperComponentStyle={wrapperInputFieldStyle}
-      readOnly={readOnly}
-      rightLabel={
-        fieldsLength && fieldsLength > 1 && !readOnly ? (
-          <Button
-            type="link"
-            size="small"
-            test-id={`${removeInputFieldButtonTestId}_${fieldEntityIndex}`}
-            value={fieldEntityIndex}
-            css={customRemoveIconStyle ?? removeButtonStyle}
-            onClick={removeField}
-            title={localization.getLocalized(DELETE)}
-            tooltipPlacement={"top"}
-          >
-            {RemoveIcon ?? <CloseOutlined />}
-          </Button>
-        ) : null
-      }
-      {...rest}
-    />
+    <Space.Compact style={inputGroupStyle}>
+      <InputFormField
+        key={fieldEntityPath}
+        name={fieldEntityPath}
+        formItemStyle={getFormItemStyle(isShowRemoveButton)}
+        readOnly={readOnly}
+        {...rest}
+      />
+      {isShowRemoveButton && (
+        <RemoveButton
+          fieldEntityIndex={fieldEntityIndex}
+          onRemoveFieldEntity={onRemoveFieldEntity}
+          testId={`${removeInputFieldButtonTestId}_${fieldEntityIndex}`}
+          customRemoveIconStyle={getRemoveIconStyle}
+          removeIcon={removeIcon}
+        />
+      )}
+    </Space.Compact>
   );
 };
 
-export { InputFieldArrayItem };
+export const InputFieldArrayItem = memo(InputFieldArrayItemComponent);

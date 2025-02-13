@@ -20,6 +20,7 @@ export const eyeIconStyle = (theme: TTheme) => ({
   ":last-child": {
     width: "28px",
   },
+  marginInlineEnd: "0px !important",
 });
 
 export const grayCheckIconStyle = (theme: TTheme) => ({
@@ -52,7 +53,7 @@ export const commonNotificationFieldStyle = (theme: TTheme) => ({
   alignItems: "center",
 });
 
-export const notificationFieldStyleWithPadding = (theme: TTheme) => ({
+export const notificationFieldStyleWithPaddingStyle = (theme: TTheme) => ({
   ...commonNotificationFieldStyle(theme),
   paddingBottom: "8px",
 });
@@ -84,7 +85,7 @@ export const checkCircleGreenIconStyle = (theme: TTheme) => ({
   color: theme.green6Color,
 });
 
-export const opacity = { opacity: 0.25 };
+export const opacityStyle = { opacity: 0.25 };
 
 export const popoverInnerStyle = {
   whiteSpace: "nowrap" as const,

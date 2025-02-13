@@ -1,7 +1,7 @@
 import React from "react";
 import { DatePicker } from "antd";
 import { isFunction } from "lodash";
-import type moment from "moment";
+import type { Dayjs } from "dayjs";
 import type {
   IWeekPickerFieldProps,
   IWeekPickerProps,
@@ -14,7 +14,7 @@ import { useLocalization } from "../../../decorators";
 const { WeekPicker: AntWeekPicker } = DatePicker;
 
 class WeekPicker extends React.PureComponent<IWeekPickerProps> {
-  private handleChange = (date: moment.Moment | null) => {
+  private handleChange = (date: Dayjs | null) => {
     const {
       input: { onChange },
     } = this.props;
@@ -26,7 +26,7 @@ class WeekPicker extends React.PureComponent<IWeekPickerProps> {
 
   public override render() {
     const {
-      momentFormat,
+      displayFormat,
       input,
       input: { value },
       meta,
@@ -37,7 +37,7 @@ class WeekPicker extends React.PureComponent<IWeekPickerProps> {
     return (
       <AntWeekPicker
         key="ant-date-week-picker"
-        format={momentFormat || `w [${localization.getLocalized(WEEK).toLowerCase()}] GGGG`}
+        format={displayFormat || `w [${localization.getLocalized(WEEK).toLowerCase()}] GGGG`}
         onChange={this.handleChange}
         value={value}
         {...rest}

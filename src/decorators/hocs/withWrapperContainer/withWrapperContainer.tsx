@@ -13,7 +13,8 @@ const withWrapperContainer =
     component: T,
     commonContainerProps?: TCommonContainerProps
   ) =>
-  (props: NCore.TRouteComponentProps) =>
-    <WrapperContainer {...props} {...(commonContainerProps ?? {})} component={component} />;
+  (props: NCore.TRouteComponentProps) => (
+    <WrapperContainer {...props} {...(commonContainerProps ?? {})} component={component} />
+  );
 
 export { withWrapperContainer };

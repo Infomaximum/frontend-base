@@ -3,21 +3,21 @@ export const bannerContentStyle = (theme: TTheme) =>
     position: "relative",
     maxHeight: `${4 * theme.defaultLineHeight}px`,
     overflow: "hidden",
-  } as const);
+  }) as const;
 
 export const bannerContentParagraphStyle = {
   margin: 0,
   wordBreak: "break-word",
 } as const;
 
-export const bannerContentShowMoreStyle = (backgroundColor: string | undefined) =>
+export const getBannerContentShowMoreStyle = (backgroundColor: string | undefined) =>
   ({
     position: "absolute",
     bottom: 0,
     right: 0,
     display: "inline-block",
     background: backgroundColor,
-  } as const);
+  }) as const;
 
 export const bannerContentShowMoreButtonStyle = (theme: TTheme) =>
   ({
@@ -33,4 +33,4 @@ export const bannerContentShowMoreButtonStyle = (theme: TTheme) =>
     ":active": {
       color: theme.thrust5Color,
     },
-  } as const);
+  }) as const;

@@ -1,11 +1,15 @@
 import { editableCellClassName } from "../fields/TableCellField/TableCellField";
 
 export const defaultTableWrapperStyle = {
-  padding: "16px 24px 0",
+  paddingBottom: "6px",
   display: "flex",
   flexDirection: "column",
   height: "100%",
 } as const;
+
+export const emptyEditableTableStyle = {
+  margin: "57px 0px",
+};
 
 export const clickableRowStyle = (theme: TTheme) =>
   ({
@@ -15,7 +19,7 @@ export const clickableRowStyle = (theme: TTheme) =>
       padding: "2px 7px",
     },
     cursor: "pointer",
-  } as const);
+  }) as const;
 
 // todo: проверить правильность использования данного стиля
 export const sortingRowStyle = {

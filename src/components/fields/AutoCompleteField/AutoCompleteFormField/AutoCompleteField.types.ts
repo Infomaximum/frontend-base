@@ -6,22 +6,29 @@ import type { IGroup, IModel } from "@infomaximum/graphql-model";
 import type { AutoCompleteStore } from "../../../../utils/Store/AutoCompleteStore/AutoCompleteStore";
 import type { Localization } from "@infomaximum/localization";
 import type { IColumnProps } from "../../../VirtualizedTable/VirtualizedTable.types";
-import type { TBaseRow } from "../../../../managers/Tree";
 import type { IFieldProps } from "../../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../../FormField/FormField.types";
 import type { TRowDisable } from "../../../DataTable/DataTable.types";
 import type { IDataTableDrawerOwnProps } from "../../../drawers/DataTableDrawer/DataTableDrawer.types";
+import type { ISelectProps } from "../../../Select/Select.types";
 export type TAutoCompleteFieldValue = IModel[];
 
 export interface IAutoCompleteProps
   extends IAutoCompleteOwnProps,
-    FieldRenderProps<TAutoCompleteFieldValue> {}
+    FieldRenderProps<TAutoCompleteFieldValue> {
+  /**
+   * Автофокус для дровера, чтобы убрать фокус с поля автокомплита и схлопнуть дропдаун,
+   * при открытии дровера без полей для автофокуса
+   */
+  drawerAutoFocus?: boolean;
+}
 
 export interface IAutoCompleteOwnProps
   extends Omit<
       SelectProps<TAutoCompleteFieldValue>,
       "onChange" | "onFocus" | "onBlur" | "value" | "notFoundContent" | "children"
     >,
+    Pick<ISelectProps, "autoFocusWithPreventScroll">,
     IWithFeatureProps,
     Partial<Pick<IDataTableDrawerOwnProps, "tableStore" | "headerMode">> {
   hintContainer?: React.ReactNode;
@@ -36,6 +43,15 @@ export interface IAutoCompleteOwnProps
    */
   onChangeCallback?: (value: TAutoCompleteFieldValue) => void;
 
+  /**
+   * callback-функция, которая будет вызвана при вводе каждого символа
+   */
+  onSearch?: (searchText: string) => void;
+
+  /**
+   * управляемая строка поиска
+   */
+  searchText?: string;
   /**
    * Экземпляр Autocomplete-store возможных значений поля
    */
@@ -52,6 +68,8 @@ export interface IAutoCompleteOwnProps
   drawerTitle?: string;
 
   removeContradictions?: boolean;
+
+  isWithoutParentsGroupSelection?: boolean;
 
   /**
    * Переменные запроса
@@ -94,6 +112,11 @@ export interface IAutoCompleteOwnProps
    */
   showHeader?: boolean;
 
+  /**
+   * Доступен ли поиск
+   */
+  showSearch?: boolean;
+
   localization?: Localization;
 
   /**
@@ -121,11 +144,23 @@ export interface IAutoCompleteOwnProps
   /**
    * columnConfig для таблицы в дровере
    */
-  columnConfig?: IColumnProps<TBaseRow>[];
+  columnConfig?: IColumnProps<any>[];
+
+  renderDrawer?(props: IAutoCompleteDrawerProps): React.ReactNode;
+
+  /** Используется для выполнения действий при открытии дровера */
+  onDrawerOpen?(): void;
+}
+
+export interface IAutoCompleteDrawerProps {
+  onClose(): void;
+  onSubmit(models: IModel[]): Promise<void>;
+  selectedModels: IModel[];
 }
 
 export interface IAutoCompleteState {
   showDrawer?: boolean;
+  searchText?: string;
 }
 
 export interface IAutoCompleteFieldProps

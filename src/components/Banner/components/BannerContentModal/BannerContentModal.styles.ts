@@ -1,6 +1,10 @@
-export const bannerContentModalBodyStyle = {
+const bannerContentModalBodyStyle = {
   padding: "8px 0 28px 0",
 } as const;
+
+export const bannerModalStyle = {
+  body: bannerContentModalBodyStyle,
+};
 
 export const bannerContentModalParagraphStyle = {
   margin: 0,

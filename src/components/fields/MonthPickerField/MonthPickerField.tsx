@@ -12,7 +12,7 @@ const AntMonthPicker = DatePicker.MonthPicker;
 class MonthPicker extends React.PureComponent<IMonthPickerProps> {
   public override render() {
     const {
-      momentFormat,
+      displayFormat,
       input,
       meta,
       input: { value, onChange },
@@ -24,7 +24,7 @@ class MonthPicker extends React.PureComponent<IMonthPickerProps> {
     return (
       <AntMonthPicker
         key="ant-month-picker"
-        format={momentFormat || "MMMM YYYY"}
+        format={displayFormat || "MMMM YYYY"}
         {...rest}
         onChange={onChange}
         value={value}

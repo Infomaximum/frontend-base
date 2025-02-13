@@ -73,14 +73,14 @@ export const INTEGRATED_AUTHENTICATION_ALREADY_EXISTS = {
   en: "Integrated authentication already exists",
 };
 
-export const INTERNET_CONNECTION_ERROR = {
-  ru: "Отсутствует интернет-соединение",
-  en: "Internet connection error",
+export const FAILED_SERVER_CONNECTION = {
+  ru: "Нет соединения с сервером",
+  en: "Connection to the server failed",
 };
 
-export const CHECK_YOUR_CONNECTION = {
-  ru: "Проверьте подключение к сети и повторите попытку.",
-  en: "Please check your network connection and try again.",
+export const CHECK_YOUR_NETWORK_CONNECTION_AND_TRY_AGAIN = {
+  ru: "Проверьте подключение и повторите попытку",
+  en: "Check your network connection and try again",
 };
 
 export const UNABLE_TO_CONNECT_TO_THE_SERVER = {
@@ -94,13 +94,13 @@ export const CONNECTION_ERROR = {
 };
 
 export const SERVER_OVERLOADED_DESCRIPTION = {
-  ru: "Данные сохранены. Дождитесь ответа сервера или перезагрузите страницу",
-  en: "Data is saved. Wait for the server response or refresh the page",
+  ru: "Данные сохранены. Дождитесь ответа сервера или перезагрузите страницу.",
+  en: "Data is saved. Wait for the server response or refresh the page.",
 };
 
 export const CONTACT_ADMINISTRATOR_OR_TRY_AGAIN_LATER = {
-  ru: "Обратитесь к администратору или повторите попытку позже.",
-  en: "Please contact your administrator or try again later.",
+  ru: "Обратитесь к администратору или повторите попытку позже",
+  en: "Please contact your administrator or try again later",
 };
 
 export const INCORRECT_CURRENT_PASSWORD = {
@@ -114,18 +114,18 @@ export const CANNOT_DELETE_NON_EMPTY_DEPARTMENTS = {
 };
 
 export const DELETE_USERS_FROM_DEPARTMENTS_AND_TRY_AGAIN = {
-  ru: "Удалите пользователей из отделов и повторите попытку.",
-  en: "Delete users from departments and try again.",
+  ru: "Удалите пользователей из отделов и повторите попытку",
+  en: "Delete users from departments and try again",
 };
 
 export const CANNOT_DELETE_ACCESS_ROLES_ASSIGNED_TO_USERS = {
-  ru: "Невозможно удалить роли доступа, назначеные пользователям",
+  ru: "Невозможно удалить роли доступа, назначенные пользователям",
   en: "Cannot delete access roles assigned to users",
 };
 
 export const CHANGE_ACCESS_ROLES_IN_USER_PROFILES_AND_TRY_AGAIN = {
-  ru: "Измените в профилях пользователей роли доступа и повторите попытку.",
-  en: "Change access roles in user profiles and try again.",
+  ru: "Измените в профилях пользователей роли доступа и повторите попытку",
+  en: "Change access roles in user profiles and try again",
 };
 
 export const CANNOT_DELETE_USERS_WITH_ROLE_ADMIN = {
@@ -134,8 +134,8 @@ export const CANNOT_DELETE_USERS_WITH_ROLE_ADMIN = {
 };
 
 export const CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN = {
-  ru: "Измените роли доступа у пользователей и повторите попытку.",
-  en: "Change user access roles and try again.",
+  ru: "Измените роли доступа у пользователей и повторите попытку",
+  en: "Change user access roles and try again",
 };
 
 export const CANNOT_DELETE_YOUR_PROFILE = {
@@ -154,8 +154,8 @@ export const YOU_CANNOT_DELETE_DEPARTMENTS_AND_EMPLOYEES = {
 };
 
 export const YOU_CANNOT_DELETE_ADMIN_AND_DEPARTMENTS_THAT_HAS_USERS = {
-  ru: "Удалите пользователей из отделов, измените роли доступа и повторите попытку.",
-  en: "Delete users from departments, change user access roles and try again.",
+  ru: "Удалите пользователей из отделов, измените роли доступа и повторите попытку",
+  en: "Delete users from departments, change user access roles and try again",
 };
 
 export const CANNOT_DELETE_YOUR_PROFILE_AND_NON_EMPTY_DEPARTMENTS = {
@@ -169,8 +169,8 @@ export const CANNOT_DELETE_YOUR_PROFILE_ADMINISTRATORS_AND_NON_EMPTY_DEPARTMENTS
 };
 
 export const DELETE_USERS_FROM_DEPARTMENTS_CHANGE_USER_ACCESS_ROLES_AND_TRY_AGAIN = {
-  ru: "Удалите пользователей из отделов, измените роли доступа у пользователей и повторите попытку.",
-  en: "Delete users from departments, change user access roles and try again.",
+  ru: "Удалите пользователей из отделов, измените роли доступа у пользователей и повторите попытку",
+  en: "Delete users from departments, change user access roles and try again",
 };
 
 export const NEW_PASSWORD_EQUALS_CURRENT_PASSWORD = {
@@ -184,21 +184,21 @@ export const EXPIRED_PASSWORD = {
 };
 
 export const INTEGRATED_AUTHENTICATION_NOT_FOUND = {
-  ru: "Аккаунт заблокирован. Чтобы восстановить, обратитесь к администратору",
-  en: "Account is locked. For recovery, contact administrator",
+  ru: "Аккаунт заблокирован. Чтобы восстановить, обратитесь к администратору.",
+  en: "Account is locked. For recovery, contact administrator.",
 };
 
 export const PASSWORD_RECOVERY_LINK_EXPIRED = {
-  ru: "Ссылка недействительна. Повторите восстановление пароля",
-  en: "The link is invalid. Repeat password recovery procedure",
+  ru: "Ссылка недействительна. Повторите восстановление пароля.",
+  en: "The link is invalid. Repeat password recovery procedure.",
 };
 
-export const NO_PRIVILEGES = {
-  ru: "Доступ ограничен. Обратитесь к администратору",
-  en: "Access is limited. Contact your system administrator",
+export const NO_ACCESS_ROLES = {
+  ru: "Доступ ограничен. Обратитесь к администратору.",
+  en: "Access is limited. Contact your system administrator.",
 };
 
 export const RESTRICTED_ACCESS = {
-  ru: "Доступ в систему ограничен. Обратитесь к администратору",
-  en: "System access is restricted. Contact the administrator",
+  ru: "Доступ в систему ограничен. Обратитесь к администратору.",
+  en: "System access is restricted. Contact the administrator.",
 };

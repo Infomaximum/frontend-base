@@ -4,7 +4,10 @@ import type { ScrollParams } from "react-virtualized";
 export class AntTableScrollListener {
   private bodyHtml: HTMLElement | null = null;
 
-  constructor(container: HTMLElement, private onScroll: (params: ScrollParams) => void) {
+  constructor(
+    container: HTMLElement,
+    private onScroll: (params: ScrollParams) => void
+  ) {
     this.bodyHtml = container.querySelector(".ant-table-body");
   }
 
@@ -23,11 +26,11 @@ export class AntTableScrollListener {
     }
   };
 
-  listen() {
+  public listen() {
     this.bodyHtml?.addEventListener("scroll", this.onBodyScroll);
   }
 
-  dispose() {
+  public dispose() {
     this.bodyHtml?.removeEventListener("scroll", this.onBodyScroll);
   }
 }

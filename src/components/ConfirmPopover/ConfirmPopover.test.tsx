@@ -108,18 +108,14 @@ describe("Тест компонента ConfirmPopover", () => {
     }
   );
 
-  it(
-    "При нажатии по ребенку поповера, если поповер скрыт, срабатывает переданный" +
-      " callback onOpenChange с аргументом true",
-    () => {
-      const component = getMountedComponent({
-        open: false,
-        onOpenChange: jest.fn(),
-      });
+  it("При нажатии по ребенку поповера, если поповер скрыт, срабатывает переданный callback onOpenChange с аргументом true", () => {
+    const component = getMountedComponent({
+      open: false,
+      onOpenChange: jest.fn(),
+    });
 
-      getShowPopoverButton(component).simulate("click");
+    getShowPopoverButton(component).simulate("click");
 
-      expect(component.props().onOpenChange).toHaveBeenCalledWith(true);
-    }
-  );
+    expect(component.props().onOpenChange).toHaveBeenCalledWith(true);
+  });
 });

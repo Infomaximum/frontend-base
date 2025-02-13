@@ -33,6 +33,13 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
 
   const onCancel = useCallback(() => onOpenChange?.(false), [onOpenChange]);
 
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      onOpenChange?.(open);
+    },
+    [onOpenChange]
+  );
+
   const content = (
     <>
       <Row align="middle" gutter={8} css={popoverTitleRowStyle(theme)}>
@@ -44,7 +51,8 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
       <Row justify="end" gutter={8}>
         <Col>
           <Button
-            type="ghost"
+            type="common"
+            ghost={true}
             size={buttonsSize}
             onClick={onCancel}
             test-id={confirmPopoverCancelButtonTestId}
@@ -67,7 +75,7 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
     </>
   );
 
-  return <Popover trigger={trigger} content={content} onOpenChange={onOpenChange} {...rest} />;
+  return <Popover trigger={trigger} content={content} onOpenChange={handleOpenChange} {...rest} />;
 };
 
 export const ConfirmPopover = withLoc(ConfirmPopoverComponent);

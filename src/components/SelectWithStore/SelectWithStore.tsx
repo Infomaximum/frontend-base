@@ -9,6 +9,7 @@ import type { ISelectProps } from "../Select/Select.types";
 import { Select } from "../Select/Select";
 import { DropdownPlaceholder } from "../Select/DropdownPlaceholder/DropdownPlaceholder";
 import { useMountEffect } from "../../decorators";
+import { AlignedTooltip } from "../AlignedTooltip";
 
 const optionFilterProp = "filterProp";
 
@@ -36,7 +37,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
     dataAccessKeys,
     value: valueProps,
     onChange,
-    requestOnMount,
+    requestOnMount = true,
     queryVariables,
     clearDataOnClose,
     onFocus,
@@ -146,7 +147,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
           value={model.getInnerName()}
           filterProp={displayName}
         >
-          {displayName}
+          <AlignedTooltip>{displayName}</AlignedTooltip>
         </Select.Option>
       );
     });
@@ -174,10 +175,6 @@ const SelectWithStoreComponent: FC<ISelectWithStoreProps> = (props) => {
       {model ? renderOptions(model.getItems()) : []}
     </Select>
   );
-};
-
-SelectWithStoreComponent.defaultProps = {
-  requestOnMount: true,
 };
 
 const SelectWithStore = observer(SelectWithStoreComponent);

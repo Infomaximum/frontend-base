@@ -3,8 +3,9 @@ import type { IDocumentNode } from "@infomaximum/utility";
 import type { NBaseStore } from "../BaseStore/BaseStore.types";
 import type { NCore } from "@infomaximum/module-expander";
 import type { Store } from "./Store";
-import type { NRequests } from "../../Requests/Requests.types";
 import type { Model, TModelStruct } from "@infomaximum/graphql-model";
+import type { IRequestService, TCancelableRequest } from "../../../services/Network/Requests.types";
+import type { ISubscriptionService } from "../../../services/Network/Subscriptions.types";
 
 /** Пространство для типов базового стора */
 export declare namespace NStore {
@@ -40,7 +41,7 @@ export declare namespace NStore {
 
   type TStoreParams<
     S extends Store<M>,
-    M extends Model = S extends Store<infer M> ? M : never
+    M extends Model = S extends Store<infer M> ? M : never,
   > = M extends Model
     ? {
         /** Геттер запроса и переменных запроса */
@@ -48,7 +49,9 @@ export declare namespace NStore {
         /** Путь к данным которые приходят с сервера */
         dataPath: string;
         /** Инстанс класса для отправки запросов/мутаций на сервер */
-        requestInstance?: NRequests.IRequest;
+        requestService?: IRequestService;
+        /** Инстанс класса для подписки (вебсокет соединение) */
+        subscriptionService?: ISubscriptionService;
         /** Инстанс класса-кэша серверных данных */
         dataCacheInstance?: NStore.IDataCache;
         /** Обработчики данных которые пришли с сервера перед записью их в стор */
@@ -63,7 +66,7 @@ export declare namespace NStore {
     query?: DocumentNode;
     /** Переменные запроса */
     variables?: TDictionary | undefined;
-    cancelable?: NRequests.TCancelable;
+    cancelable?: TCancelableRequest;
   }
 
   interface IActionSubmitDataParams<V extends TDictionary = never> {
@@ -71,7 +74,7 @@ export declare namespace NStore {
     mutation: IDocumentNode<V>;
     /** Переменные мутации */
     variables?: V extends never ? never : V;
-    cancelable?: NRequests.TCancelable;
+    cancelable?: TCancelableRequest;
     /** Файлы для отправки на сервер */
     files?: unknown[];
     /** Сохранять ли ошибку в store

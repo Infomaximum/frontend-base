@@ -1,12 +1,10 @@
 import type { RangePickerProps } from "antd/lib/date-picker";
-import type { RangePickerDateProps } from "antd/lib/date-picker/generatePicker";
-import type { Moment } from "moment";
+import type { Dayjs } from "dayjs";
 import type { FieldRenderProps } from "react-final-form";
 import type { PickerMode } from "rc-picker/lib/interface";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
-
-export type TRangePickerFieldValue = [Moment, Moment];
+export type TRangePickerFieldValue = [Dayjs, Dayjs];
 
 type TOmitRangePickerProps =
   | "onChange"
@@ -19,14 +17,14 @@ type TOmitRangePickerProps =
 
 export type TPickerValue = PickerMode;
 
+export type TRangeValueType<DateType> = [start: DateType | null, end: DateType | null];
+
 export interface IRangePickerProps
   extends IRangePickerOwnProps,
     FieldRenderProps<TRangePickerFieldValue> {}
 
 export interface IRangePickerOwnProps extends Omit<RangePickerProps, TOmitRangePickerProps> {
-  // Почему-то RangePickerProps не содержит данный тип
-  showTime?: RangePickerDateProps<Moment>["showTime"];
-  momentFormat?: string;
+  displayFormat?: string;
   readOnly?: boolean;
   testId?: string;
 }

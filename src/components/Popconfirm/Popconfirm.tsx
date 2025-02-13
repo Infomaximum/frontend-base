@@ -21,7 +21,7 @@ const PopconfirmComponent: FC<IPopconfirmProps> = ({
     <AntPopconfirm
       placement={placement ?? "topLeft"}
       overlayInnerStyle={overlayInnerStyle}
-      arrowPointAtCenter={true}
+      arrow={{ pointAtCenter: true }}
       {...rest}
     >
       {children}

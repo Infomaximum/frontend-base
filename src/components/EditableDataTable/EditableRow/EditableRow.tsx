@@ -1,6 +1,6 @@
 import { type RefObject, useMemo } from "react";
 import type { IEditableRowProps, IFormComponentProps } from "./EditableRow.types";
-import { tableRowHeight } from "./EditableRow.styles";
+import { tableRowHeightStyle } from "./EditableRow.styles";
 import { EditableRowContext } from "../../../decorators/contexts/EditableRowContext";
 import { useTheme } from "../../../decorators/hooks/useTheme";
 import { Form } from "../../forms/Form/FormWrapper";
@@ -13,7 +13,7 @@ export const FormComponent: React.FC<IFormComponentProps> = ({
   return (
     <tr
       {...restRowProps}
-      css={tableRowHeight}
+      css={tableRowHeightStyle}
       ref={attributes?.ref as RefObject<HTMLTableRowElement>}
     >
       {children}
@@ -31,10 +31,12 @@ const EditableRowComponent: React.FC<IEditableRowProps> = ({
   const isEditing = Boolean(formProps);
   const theme = useTheme();
 
-  const editableTableRowStyles = useMemo(() => tableRowHeight(theme), [theme]);
+  const contextValue = useMemo(() => ({ isEditing }), [isEditing]);
+
+  const editableTableRowStyles = useMemo(() => tableRowHeightStyle(theme), [theme]);
 
   return (
-    <EditableRowContext.Provider value={{ isEditing }}>
+    <EditableRowContext.Provider value={contextValue}>
       {isEditing ? (
         <Form {...formProps} rowProps={restProps} component={FormComponent}>
           {children}

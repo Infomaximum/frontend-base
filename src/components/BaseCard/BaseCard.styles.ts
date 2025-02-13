@@ -1,9 +1,9 @@
-export const cardWrapperDefault = (theme: TTheme) => ({
+export const cardWrapperDefaultStyle = (theme: TTheme) => ({
   background: theme.grey1Color,
   borderRadius: "4px",
 });
 
-export const cardHeaderDefault = (theme: TTheme) => ({
+export const cardHeaderDefaultStyle = (theme: TTheme) => ({
   borderBottom: `1px solid ${theme.grey45Color}`,
   fontSize: "16px",
   fontWeight: "500",

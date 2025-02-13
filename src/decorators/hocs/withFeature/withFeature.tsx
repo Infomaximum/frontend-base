@@ -5,9 +5,15 @@ import { useFeature } from "../../hooks/useFeature";
 
 export const withFeature: TPropInjector<IWithFeatureProps> = (Component: any) => {
   const WithFeature = (props: any) => {
-    const { isFeatureEnabled } = useFeature();
+    const { isFeatureEnabled, isLicenseFeatureEnabled } = useFeature();
 
-    return <Component {...props} isFeatureEnabled={isFeatureEnabled} />;
+    return (
+      <Component
+        {...props}
+        isFeatureEnabled={isFeatureEnabled}
+        isLicenseFeatureEnabled={isLicenseFeatureEnabled}
+      />
+    );
   };
 
   return hoistNonReactStatics(WithFeature, Component);

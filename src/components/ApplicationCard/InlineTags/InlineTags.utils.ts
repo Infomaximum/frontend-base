@@ -10,14 +10,14 @@ import {
 import type { ITagProps } from "./InlineTags.types";
 
 const getTagWidth = (text: string) =>
-  getTextWidth(text, tagFontSize) + (tagSidePadding + tagBorderWidth) * 2;
+  getTextWidth(text, { size: tagFontSize }) + (tagSidePadding + tagBorderWidth) * 2;
 
 export const outerEllipsisText = "...";
 export const tooltipSeparator = "; ";
 
 const minTagWidth = getTagWidth(`Aa...`);
 const outerEllipsisWidth =
-  getTextWidth(outerEllipsisText, outerEllipsisFontSize) + outerEllipsisPaddingLeft;
+  getTextWidth(outerEllipsisText, { size: outerEllipsisFontSize }) + outerEllipsisPaddingLeft;
 
 /* Из переданных тегов возвращает количество поместившихся в контейнер */
 export const getNumberOfPlacedTags = (tags: ITagProps[], containerWidth: number) => {

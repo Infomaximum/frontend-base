@@ -1,6 +1,6 @@
 import type { ButtonProps } from "antd/lib/button/button";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { drawerBodyStyle } from "./DataTableDrawer.styles";
+import { drawerStyle } from "./DataTableDrawer.styles";
 import type {
   IDataTableDrawerProps,
   IOkButtonProps,
@@ -10,7 +10,7 @@ import {
   dataTableDrawerCancelButtonTestId,
   dataTableDrawerOkButtonTestId,
 } from "../../../utils/TestIds";
-import { filter, debounce, sortBy, isEqual, isUndefined, isEmpty } from "lodash";
+import { filter, debounce, sortBy, isEqual, isUndefined, isEmpty, merge } from "lodash";
 import { DataTableDrawerContent } from "./DataTableDrawerContent/DataTableDrawerContent";
 import { observer } from "mobx-react";
 import { useTheme } from "../../../decorators/hooks/useTheme";
@@ -57,6 +57,12 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     className,
     setFormData,
     onChange,
+    placement,
+    styles,
+    onStartClosing,
+    autoFocus,
+    rowSelection,
+    isLoadingOnScroll,
   } = props;
 
   const [isLoading, setLoadingState] = useState(true);
@@ -85,7 +91,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     () =>
       ({
         "test-id": dataTableDrawerCancelButtonTestId,
-      } as unknown as ButtonProps),
+      }) as unknown as ButtonProps,
     []
   );
 
@@ -93,7 +99,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     () =>
       ({
         "test-id": dataTableDrawerOkButtonTestId,
-      } as unknown as IOkButtonProps),
+      }) as unknown as IOkButtonProps,
     []
   );
 
@@ -113,7 +119,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     const mainContent = isLoading ? (
       <Spinner />
     ) : (
-      <DataTableDrawerContent
+      <DataTableDrawerContent<T>
         headerMode={headerMode}
         rowBuilder={rowBuilder}
         columns={columnConfig}
@@ -130,6 +136,8 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
         handlerTableDisplayValues={handlerTableDisplayValues}
         treeCheckedStateCleanSetter={treeCheckedStateCleanSetter}
         onChange={onChange}
+        rowSelection={rowSelection}
+        isLoadingOnScroll={isLoadingOnScroll}
       />
     );
 
@@ -168,6 +176,14 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     return theme.drawerMediumWidth;
   };
 
+  const mergedDrawerStyles = useMemo(() => {
+    if (styles) {
+      return merge({}, drawerStyle, styles);
+    }
+
+    return drawerStyle;
+  }, [styles]);
+
   return (
     <OptionalDrawerForm
       key="data-table-drawer-form"
@@ -179,7 +195,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
       onCancel={onClose}
       onClose={onClose}
       destroyOnClose={true}
-      bodyStyle={drawerBodyStyle}
+      styles={mergedDrawerStyles}
       okButtonProps={okButtonProps}
       cancelButtonProps={cancelButtonProps}
       width={getWidth()}
@@ -196,6 +212,9 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
       isHasAccess={isHasAccess}
       className={className}
       setFormData={setFormData}
+      placement={placement}
+      onStartClosing={onStartClosing}
+      autoFocus={autoFocus}
     />
   );
 };

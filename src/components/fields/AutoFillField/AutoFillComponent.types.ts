@@ -1,4 +1,3 @@
-import type { Key } from "react";
 import type { Interpolation } from "@emotion/react";
 import type { IAutoCompleteProps } from "../AutoCompleteField/AutoCompleteFormField/AutoCompleteField.types";
 import type { AutoCompleteStore } from "../../../utils/Store/AutoCompleteStore/AutoCompleteStore";
@@ -37,10 +36,11 @@ export interface IAutoFillComponentState {
   isOpenedDropdown: boolean;
   /** Был ли открыт dropdown */
   hasBeenOpenedDropdown: boolean;
+  isOverflow: boolean;
 }
 
 export type TAutoFillOption = {
-  key: Key;
+  key: string | number;
   value: string;
   title: string;
   disabled: boolean;

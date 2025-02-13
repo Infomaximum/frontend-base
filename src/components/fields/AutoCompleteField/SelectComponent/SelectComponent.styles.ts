@@ -10,7 +10,7 @@ export const suffixIconStyle = (theme: TTheme) =>
   ({
     ...suffixIconCommonStyle(theme),
     pointerEvents: "auto",
-  } as const);
+  }) as const;
 
 export const closeCircleStyle = (theme: TTheme) => ({
   fontSize: "14px",
@@ -26,7 +26,9 @@ export const inputSelectedContentStyle = {
   overflow: "hidden",
 };
 
-export const hintOptionStyle = {
-  ...hintStyle,
-  whiteSpace: "normal",
-} as const;
+export const hintOptionStyle = (theme: TTheme) =>
+  ({
+    ...hintStyle,
+    color: theme.grey7Color,
+    whiteSpace: "normal",
+  }) as const;

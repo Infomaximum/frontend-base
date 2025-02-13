@@ -5,7 +5,7 @@ import { Store } from "./Store";
 import { Model } from "@infomaximum/graphql-model";
 
 class TestModel extends Model {
-  static override get typename() {
+  public static override get typename() {
     return "test_typename";
   }
 }
@@ -46,7 +46,7 @@ const getStore = () =>
   new Store<TestModel>({
     name: "Test",
     dataPath: "employee.employee",
-    requestInstance: requestInstanceMocks,
+    requestService: requestInstanceMocks,
     getQueryParams({ variables }) {
       return {
         query: graphqlTag`

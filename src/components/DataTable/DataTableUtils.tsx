@@ -5,7 +5,8 @@ import { RestModel } from "../../models/RestModel";
 import { ShowMore } from "../ShowMore/ShowMore";
 import type { IShowMoreOwnProps } from "../ShowMore/ShowMore.types";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
-import type { ITableTopButtonDisabledProps } from "./TopPanel/TopPanel.types";
+import type { ITableTopButtonDisabledProps } from "./DataTable.types";
+import { leftMouseBtnCode } from "../../utils";
 
 function getTableTopButtonDisabledStatus(disabledProps: ITableTopButtonDisabledProps) {
   const {
@@ -82,13 +83,30 @@ function getSelectedEntitiesIds(
   return [itemsIds, groupsIds];
 }
 
-const getColumnsWithShowMore = (
-  columns: IColumnProps<TBaseRow>[] | undefined,
+const onCellDefault = () => {
+  return {
+    onClick(event: React.MouseEvent<HTMLDivElement>) {
+      if (window.getSelection()?.toString()) {
+        event.stopPropagation();
+
+        return;
+      }
+    },
+    onMouseDown(e: React.MouseEvent) {
+      if (e.button === leftMouseBtnCode) {
+        window.getSelection()?.removeAllRanges();
+      }
+    },
+  };
+};
+
+const getColumnsWithShowMore = <T extends TBaseRow>(
+  columns: IColumnProps<T>[] | undefined,
   props: Omit<IShowMoreOwnProps, "model">
 ) =>
-  map(columns, ({ render, ...rest }: IColumnProps<TBaseRow>, index: number) => ({
+  map(columns, ({ render, ...rest }: IColumnProps<T>, index: number) => ({
     ...rest,
-    render(text: string, record: TBaseRow, rowIndex: number) {
+    render(text: string, record: T, rowIndex: number) {
       const { model } = record;
 
       if (model instanceof RestModel) {
@@ -106,14 +124,14 @@ const getColumnsWithShowMore = (
     // объединяет пустые колонки в строке ShowMore AntTable для центрирования при подгрузке по скроллу
     onCell:
       props.mode === "scrolling"
-        ? (record: TBaseRow) => {
+        ? (record: T) => {
             if (record?.model instanceof RestModel && index === 0) {
               return { colSpan: columns?.length };
             }
 
-            return {};
+            return onCellDefault();
           }
-        : rest?.onCell || undefined,
+        : rest?.onCell || onCellDefault,
   }));
 
 export { getTableTopButtonDisabledStatus, getSelectedEntitiesIds, getColumnsWithShowMore };

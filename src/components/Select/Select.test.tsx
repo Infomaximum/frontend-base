@@ -5,8 +5,8 @@ import { Select } from "./Select";
 import "@testing-library/jest-dom";
 import type { ISelectProps } from "./Select.types";
 import { mapChildrenToOptions } from "./Select.utils";
-import { textWrapperStyle } from "./Select.styles";
 import { DropdownAnimationInterval } from "../../utils";
+import { ellipsisStyle } from "../../styles";
 
 enum EElement {
   FIRST = "FIRST",
@@ -181,7 +181,7 @@ describe("Тест компонента Select", () => {
     expect(screen.getByText(/нет данных/i)).toBeInTheDocument();
   });
 
-  xit("Выбор второго элемента", async () => {
+  it("Выбор второго элемента", async () => {
     const user = userEvent.setup();
     const handleClickFn = jest.fn();
 
@@ -227,6 +227,8 @@ describe("Тест компонента Select", () => {
     expect(screen.queryByText(elementDisplayValue[EElement.THIRD])).not.toBeInTheDocument();
 
     simulateBoundingClientRect(400);
+    await user.click(window.document.body);
+    await user.click(target);
     rerender(renderSelect({ onClick: clickFn }));
 
     expect(screen.getByText(elementDisplayValue[EElement.FIRST])).toBeInTheDocument();
@@ -278,7 +280,7 @@ describe("Тестирование утилитных функций", () => {
         ["test-id"]: "1-test-id",
         label: (
           <>
-            <span style={textWrapperStyle} test-id={"1-test-id"}>
+            <span style={ellipsisStyle} test-id={"1-test-id"}>
               1
             </span>
           </>
@@ -289,7 +291,7 @@ describe("Тестирование утилитных функций", () => {
         value: "2v",
         label: (
           <>
-            <span style={textWrapperStyle} test-id={"2-test-id"}>
+            <span style={ellipsisStyle} test-id={"2-test-id"}>
               2
             </span>
           </>
@@ -302,7 +304,7 @@ describe("Тестирование утилитных функций", () => {
         ["test-id"]: "3-test-id",
         label: (
           <>
-            <span style={textWrapperStyle} test-id={"3-test-id"}>
+            <span style={ellipsisStyle} test-id={"3-test-id"}>
               3
             </span>
           </>
@@ -342,7 +344,7 @@ describe("Тестирование утилитных функций", () => {
             ["test-id"]: "1-1-test-id",
             label: (
               <>
-                <span style={textWrapperStyle} test-id={"1-1-test-id"}>
+                <span style={ellipsisStyle} test-id={"1-1-test-id"}>
                   1-1
                 </span>
               </>
@@ -353,7 +355,7 @@ describe("Тестирование утилитных функций", () => {
             value: "1-2v",
             label: (
               <>
-                <span style={textWrapperStyle} test-id={"1-2-test-id"}>
+                <span style={ellipsisStyle} test-id={"1-2-test-id"}>
                   1-2
                 </span>
               </>
@@ -371,7 +373,7 @@ describe("Тестирование утилитных функций", () => {
             ["test-id"]: "2-1-test-id",
             label: (
               <>
-                <span style={textWrapperStyle} test-id={"2-1-test-id"}>
+                <span style={ellipsisStyle} test-id={"2-1-test-id"}>
                   2-1
                 </span>
               </>
@@ -382,7 +384,7 @@ describe("Тестирование утилитных функций", () => {
             value: "2-2v",
             label: (
               <>
-                <span style={textWrapperStyle} test-id={"2-2-test-id"}>
+                <span style={ellipsisStyle} test-id={"2-2-test-id"}>
                   2-2
                 </span>
               </>
@@ -398,7 +400,7 @@ describe("Тестирование утилитных функций", () => {
 });
 
 describe("Тестирование кастомизации поведения поисковой строки в Select", () => {
-  it("Поисковая строка не очищается при клике на иконку очистки", async () => {
+  it("Поисковая строка очищается при клике на иконку очистки", async () => {
     const handleSearchFn = jest.fn();
     const { baseElement } = render(
       renderSelect({
@@ -409,8 +411,10 @@ describe("Тестирование кастомизации поведения �
         onSearch: handleSearchFn,
       })
     );
+
     await userEvent.click(baseElement.querySelector(".ant-select-clear") as Element);
-    expect(handleSearchFn).not.toBeCalled();
+
+    expect(handleSearchFn).toBeCalled();
   });
 
   it("Поисковая строка не очищается при клике вне области текста поисковой строки", async () => {

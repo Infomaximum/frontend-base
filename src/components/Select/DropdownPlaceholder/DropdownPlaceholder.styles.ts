@@ -5,7 +5,6 @@ export const emptyStyle = (theme: TTheme) => ({
   lineHeight: `${theme.verySmallLineHeight}px`,
 });
 
-// fix для IE-11 (неверная высота <AntEmpty>)
 export const emptyImageStyle = {
   height: "46px",
   marginBottom: "4px",

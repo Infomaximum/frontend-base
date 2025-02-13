@@ -6,8 +6,8 @@ import {
   wrapperContentLoginStyle,
   animationContentLoginStyle,
   headStyle,
-  iconBack,
-  backLink,
+  iconBackStyle,
+  backLinkStyle,
   formBodyDefaultStyle,
   companyNameStyle,
   formBodyCutStyle,
@@ -91,10 +91,10 @@ class UnAuthorized extends PureComponent<IUnAuthorizedLayoutProps, IUnAuthorized
           <NavLink
             key="link-back"
             to={backUrl}
-            css={backLink}
+            css={backLinkStyle}
             test-id={unAuthorizedLayoutBackNavLinkTestId}
           >
-            <ArrowLeftOutlined style={iconBack(theme)} />
+            <ArrowLeftOutlined style={iconBackStyle(theme)} />
           </NavLink>
           {title}
         </>

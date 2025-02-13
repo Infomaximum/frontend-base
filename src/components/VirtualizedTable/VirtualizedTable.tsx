@@ -1,9 +1,14 @@
 import { createRef, PureComponent } from "react";
 import type { ListRowProps, List as VList } from "react-virtualized";
-import { getEmptyContentStyle, loaderWrapperStyle } from "./VirtualizedTable.styles";
+import {
+  getEmptyContentStyle,
+  loaderWrapperStyle,
+  getTableWrapperStyle,
+} from "./VirtualizedTable.styles";
 import { Spin, Row, Col } from "antd";
 import type {
   IVirtualizedColumnConfig,
+  IVirtualizedTableOwnProps,
   IVirtualizedTableProps,
   IVirtualizedTableState,
   TRow,
@@ -65,7 +70,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
 
   private vListRef: React.RefObject<VList> = createRef();
 
-  constructor(props: IVirtualizedTableProps<T>) {
+  constructor(props: IVirtualizedTableProps<T | null>) {
     super(props);
 
     this.state = {
@@ -75,11 +80,17 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
       columnConfig: props.columns,
       scrollOffset: 0,
       selectedRowKeysSet: null,
+      loading: true,
+      isCheckableDisabled: true,
+      initialScrollTop: undefined,
     };
   }
 
   public override componentDidMount() {
     const { columns, rowSelection } = this.props;
+
+    // установка при монтировании значения скролла для данных из пропса
+    this.setState({ initialScrollTop: this.props.scrollTop });
 
     if (columns) {
       this.updateSurfaceNodes();
@@ -92,7 +103,12 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
   }
 
   public override componentDidUpdate(prevProps: IVirtualizedTableProps<T | null>) {
-    const { rowSelection, dataSource, expandedRowKeys, loading, columns, rowHeight } = this.props;
+    const { rowSelection, dataSource, expandable, loading, columns, rowHeight } = this.props;
+
+    // при неменяющемся пропсе и заданном значении скрола, устнавливаем его в undef, дабы не мешать работать
+    if (prevProps.scrollTop === this.props.scrollTop && this.state.initialScrollTop !== undefined) {
+      this.setState({ initialScrollTop: undefined });
+    }
 
     if (prevProps.rowSelection !== rowSelection) {
       this.setState(
@@ -113,7 +129,10 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
       this.vListRef.current?.recomputeGridSize();
     }
 
-    if (prevProps.dataSource !== dataSource || prevProps.expandedRowKeys !== expandedRowKeys) {
+    if (
+      prevProps.dataSource !== dataSource ||
+      prevProps.expandable?.expandedRowKeys !== expandable?.expandedRowKeys
+    ) {
       this.updateSurfaceNodes();
       this.vListRef.current?.forceUpdateGrid();
     }
@@ -136,6 +155,10 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
     if (this.state.scrollOffset !== offset) {
       this.setState({ scrollOffset: offset });
     }
+
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 0);
   };
 
   private updateColumnsSortOrders(columns: IVirtualizedTableProps<T | null>["columns"]) {
@@ -199,7 +222,9 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
   }
 
   private updateSurfaceNodes() {
-    const { dataSource, expandedRowKeys } = this.props;
+    const { dataSource, expandable } = this.props;
+
+    const { expandedRowKeys } = expandable || {};
 
     this.expandedRowKeysSet = new Set(expandedRowKeys as Iterable<string>);
 
@@ -239,7 +264,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
     this.setState({ surfaceNodes });
   }
 
-  private handleSorterChange = (column: SorterResult<T | null>["column"]) => {
+  private handleSorterChange = (column: IVirtualizedColumnConfig<T | null>) => {
     const { surfaceNodes } = this.state;
     const key = column?.key;
 
@@ -288,16 +313,21 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
   };
 
   private handleRowExpanderChange = (key: string, isOpening: boolean) => {
-    const { expandedRowKeys, onExpandedRowsChange } = this.props;
+    const { expandable } = this.props;
+
+    const _expandedRowKeys = expandable?.expandedRowKeys;
+    const _onExpandedRowsChange = expandable?.onExpandedRowsChange;
 
     const newExpandedRowKeys = isOpening
-      ? concat(expandedRowKeys as string[], key)
-      : without(expandedRowKeys as string[], key);
+      ? concat(_expandedRowKeys as string[], key)
+      : without(_expandedRowKeys as string[], key);
 
-    onExpandedRowsChange?.(newExpandedRowKeys);
+    _onExpandedRowsChange?.(newExpandedRowKeys);
   };
 
-  private stretchColumn(column: IVirtualizedColumnConfig<T>): IVirtualizedColumnConfig<T> {
+  private stretchColumn(
+    column: IVirtualizedColumnConfig<T | null>
+  ): IVirtualizedColumnConfig<T | null> {
     return { ...column, width: "100%" };
   }
 
@@ -305,7 +335,15 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
    * Отрисовывает каждую строку, попадающую во Viewport
    */
   private rowRenderer = ({ index, key, style }: ListRowProps) => {
-    const { rowSelection, loading, indentSize, enableRowClick, isShowDividers, onRow } = this.props;
+    const {
+      rowSelection,
+      loading,
+      indentSize,
+      enableRowClick,
+      isShowDividers,
+      onRow,
+      isWithoutWrapperStyles,
+    } = this.props;
     const { surfaceNodes, columnConfig, selectedRowKeysSet } = this.state;
 
     const record = surfaceNodes[index] ?? null;
@@ -324,6 +362,12 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
         ? take(columnConfig).map(this.stretchColumn)
         : columnConfig;
 
+    if (!checkboxProps.disabled) {
+      this.setState({
+        isCheckableDisabled: false,
+      });
+    }
+
     return (
       <div key={key} style={style} test-id={virtualizedTableRowTestId}>
         <VirtualizedTableBodyRow
@@ -333,10 +377,12 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
           record={record}
           loading={Boolean(loading)}
           isCheckable={Boolean(rowSelection)}
-          isChecked={!!record?.key && !!selectedRowKeysSet?.has(record.key)}
+          isChecked={
+            !!record?.key && !!selectedRowKeysSet?.has(record.key) && !checkboxProps.disabled
+          }
           onSelectChange={this.handleSelectChange}
           selectionType={rowSelection?.type}
-          checkboxProps={checkboxProps}
+          getCheckboxProps={rowSelection?.getCheckboxProps}
           indentLeft={
             !!record?.key && indentSize ? indentSize * (this.indents.get(record.key) ?? 0) : 0
           }
@@ -346,6 +392,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
           onExpanderChange={this.handleRowExpanderChange}
           enableRowClick={isEnableRowClick}
           isShowDivider={isShowDividers}
+          isWithoutWrapperStyles={isWithoutWrapperStyles}
         />
       </div>
     );
@@ -362,7 +409,8 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
   }
 
   public override render() {
-    const { sorter, columnsOrders, columnConfig } = this.state;
+    const { sorter, columnsOrders, columnConfig, isCheckableDisabled, initialScrollTop } =
+      this.state;
     const {
       showHeader,
       rowSelection,
@@ -374,13 +422,17 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
       onScroll,
       theme,
       rowHeight,
-      scrollTop,
+      isWithoutWrapperStyles,
     } = this.props;
 
     const itemsCount = this.state.surfaceNodes.length;
+    const tableOpacity = !itemsCount ? 1 : this.state.loading ? 0 : 1;
 
     return (
-      <div test-id={virtualizedTableTestId}>
+      <div
+        test-id={virtualizedTableTestId}
+        css={getTableWrapperStyle(theme, tableOpacity, isWithoutWrapperStyles)}
+      >
         {showHeader && (
           <VirtualizedTableHeaderRow<T>
             key="header"
@@ -397,6 +449,8 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
             loading={loading}
             scrollOffset={this.state.scrollOffset}
             isShowDivider={isShowDividers}
+            hideSelectAll={rowSelection?.hideSelectAll}
+            isCheckableDisabled={isCheckableDisabled}
           />
         )}
         {this.loader}
@@ -410,10 +464,11 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
             addScrollOffset={this.addScrollOffset}
             onScroll={onScroll}
             rowHeight={rowHeight}
-            scrollTop={scrollTop}
+            scrollTop={initialScrollTop}
+            isWithoutWrapperStyles={isWithoutWrapperStyles}
           />
         ) : (
-          <div key="empty" css={getEmptyContentStyle(scrollAreaHeight)}>
+          <div key="empty" css={getEmptyContentStyle(scrollAreaHeight, Boolean(loading))}>
             {empty}
           </div>
         )}
@@ -424,4 +479,4 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
 
 export const VirtualizedTable = observer(
   withTheme(withSpinPropsReplacer(VirtualizedTableComponent))
-);
+) as <T>(props: IVirtualizedTableOwnProps<T | null>) => JSX.Element;

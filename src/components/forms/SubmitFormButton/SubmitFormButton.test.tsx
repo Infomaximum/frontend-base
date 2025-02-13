@@ -18,7 +18,7 @@ const getFormProvider = (isValid = true) =>
       validate: isValid ? undefined : () => ({ err: "Ошибка" }),
     }),
     submit,
-  } as IFormProvider<any>);
+  }) as IFormProvider<any>;
 
 const getComponent = (formProvider = getFormProvider()) => {
   return mount(
@@ -55,9 +55,9 @@ describe("Тест на SubmitFormButton", () => {
   it("submit вызывается только один раз при попытке несколько раз кликнуть на SubmitFormButton", async () => {
     const component = getComponent();
 
-    component.find(Button).simulate("click");
-    component.find(Button).simulate("click");
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
+    component.find("button").simulate("click");
+    component.find("button").simulate("click");
 
     await waitForComponentToPaint(component, 105);
 
@@ -71,7 +71,7 @@ describe("Тест на SubmitFormButton", () => {
 
     expect(isDisabled()).toEqual(false);
 
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
 
     await waitForComponentToPaint(component);
 
@@ -81,7 +81,7 @@ describe("Тест на SubmitFormButton", () => {
   it("После таймаута кнопка разблокируется", async () => {
     const component = getComponent();
 
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
 
     const { isDisabled } = getComponentProps(component);
 
@@ -95,9 +95,9 @@ describe("Тест на SubmitFormButton", () => {
   it("После таймаута кнопка разблокируется и можно снова делать submit", async () => {
     const component = getComponent();
 
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
     await waitForComponentToPaint(component, 105);
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
     await waitForComponentToPaint(component);
 
     expect(submit).toHaveBeenCalledTimes(2);
@@ -108,7 +108,7 @@ describe("Тест на SubmitFormButton", () => {
 
     const component = getComponent(formProvider);
 
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
     await waitForComponentToPaint(component);
 
     expect(submit).toHaveBeenCalledTimes(1);
@@ -127,7 +127,7 @@ describe("Тест на SubmitFormButton", () => {
 
     const component = getComponent();
 
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
 
     await waitForComponentToPaint(component);
 
@@ -143,7 +143,7 @@ describe("Тест на SubmitFormButton", () => {
     expect(isDisabled()).toEqual(false);
 
     // кликаем повторно, чтобы проверить что сабмит сработает
-    component.find(Button).simulate("click");
+    component.find("button").simulate("click");
 
     await waitForComponentToPaint(component);
     expect(submit).toHaveBeenCalledTimes(2);

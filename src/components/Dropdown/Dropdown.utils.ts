@@ -1,7 +1,14 @@
 import type { DropdownProps } from "antd";
 import { constant, isFunction, last, lowerFirst, mapValues, words } from "lodash";
 import React, { type RefObject, useCallback, useState } from "react";
-import type { IDropdownParams, IDropdownProps, IFreeSpace, TXPlacement } from "./Dropdown.types";
+import type {
+  IDropdownParams,
+  IDropdownProps,
+  IDropdownSizeParams,
+  IFreeSpace,
+  TXPlacement,
+  TDropdownPositionResult,
+} from "./Dropdown.types";
 
 export const defaultTrigger = ["click"] as ["click"];
 
@@ -43,17 +50,22 @@ export function extractXPlacement(placement: IDropdownProps["placement"]): TXPla
   }
 }
 
+export function getDropdownMenuMaxHeight({
+  itemHeight = 28,
+  visibleMaxCount = defaultVisibleMaxCount,
+  padding = 4,
+}: IDropdownSizeParams) {
+  return itemHeight * visibleMaxCount + padding * 2;
+}
+
 export function useDropdownPosition(
   targetRef: RefObject<HTMLElement>,
-  {
-    itemHeight = 28,
-    visibleMaxCount = defaultVisibleMaxCount,
-    targetGap = 4,
-    padding = 4,
-  }: Partial<IDropdownParams> = {},
+  dropdownParams: IDropdownParams,
   xPlacement: TXPlacement
-) {
-  const maxHeight = itemHeight * visibleMaxCount + padding * 2;
+): TDropdownPositionResult {
+  const { targetGap = 4, ...sizeParams } = dropdownParams ?? {};
+
+  const maxHeight = getDropdownMenuMaxHeight(sizeParams);
 
   const [actualMaxHeight, setActualMaxHeight] = useState<number | undefined>(maxHeight);
   const [align, setAlign] = useState<DropdownProps["align"]>();

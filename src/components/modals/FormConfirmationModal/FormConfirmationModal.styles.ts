@@ -1,11 +1,11 @@
 export const iconStyle = (theme: TTheme) => ({
   fontSize: `${theme.h2FontSize}px`,
   color: `${theme.gold6Color}`,
-  paddingRight: "16px",
+  paddingRight: "12px",
   position: "absolute" as const,
 });
 
 export const titleAndInfoStyle = {
-  paddingLeft: "38px",
+  paddingLeft: "34px",
   display: "inline-block",
 };

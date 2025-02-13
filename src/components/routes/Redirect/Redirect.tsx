@@ -2,7 +2,7 @@ import { memo, useMemo } from "react";
 import { Navigate, generatePath, useParams, useLocation } from "react-router";
 import type { IRedirectProps } from "./Redirect.types";
 
-export const RedirectComponent: React.FC<IRedirectProps> = ({ to, stateGetter }) => {
+const RedirectComponent: React.FC<IRedirectProps> = ({ to, stateGetter }) => {
   const params = useParams();
   const location = useLocation();
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { isFunction, filter, drop, isEmpty, isUndefined, some, compact, uniq } from "lodash";
 import { InvalidIndex } from "@infomaximum/utility";
-import { hiddenCheckbox, weightLabelStyle, spinnerWrapperStyle } from "./DataTable.style";
+import { hiddenCheckboxStyle, weightLabelStyle, spinnerWrapperStyle } from "./DataTable.styles";
 import type {
   IDataTableProps,
   IDataTableState,
@@ -15,7 +15,6 @@ import { observer } from "mobx-react";
 import { type IReactionDisposer, reaction } from "mobx";
 import { type TBaseRow, type TExtendColumns, TreeManager } from "../../managers/Tree";
 import { goBackPath } from "../../utils/Routes/paths";
-import { getBasePrefix } from "../../utils/URI/URI";
 import { Group, type IModel } from "@infomaximum/graphql-model";
 import { RestModel } from "../../models/RestModel";
 import { isShowElement } from "../../utils/access";
@@ -29,8 +28,9 @@ import { Table } from "../Table/Table";
 import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import { withLoc } from "../../decorators/hocs/withLoc";
 import { withTheme } from "../../decorators/hocs/withTheme";
-import { useLoadingOnScroll, withLocation } from "../../decorators";
+import { boundMethod, useLoadingOnScroll, withLocation } from "../../decorators";
 import { useNodeShowMoreParams } from "../../decorators/hooks/useLoadingOnScroll";
+import { historyStore } from "../../store";
 
 const emptyColumnKey = "empty-column";
 
@@ -158,7 +158,16 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       editingState,
       contextMenuGetter,
       isFeatureEnabled,
+      resetRowSelection,
+      callbackResetRowSelection,
+      isCheckable,
     } = this.props;
+
+    if (isCheckable && resetRowSelection && isEmpty(tableStore.checkedState)) {
+      this.treeLogic.clearSelection();
+      this.updateRowSelectionConfig(undefined);
+      isFunction(callbackResetRowSelection) && callbackResetRowSelection();
+    }
 
     if (tableStore.model && prevProps.editingState !== editingState) {
       this.onModelUpdate(this.state.isInitiation);
@@ -219,11 +228,8 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
    */
   private listenLeavingOfRouteBranch(callback: () => void) {
     const sourcePathname = this.props.location.pathname;
-    const dispose = this.props.listenLocationChange(({ location: { pathname } }) => {
-      if (
-        pathname.indexOf(`${getBasePrefix()}${sourcePathname}`) !== 0 &&
-        pathname !== goBackPath
-      ) {
+    const dispose = historyStore.listenLocationChange(({ pathname }) => {
+      if (pathname.indexOf(sourcePathname) !== 0 && pathname !== goBackPath) {
         callback();
         dispose();
       }
@@ -349,6 +355,10 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
    * Метод используется, т.к. в onSelect нe отлавливается нажатие на header
    */
   private onSelectAll = (selected: boolean) => {
+    if (window.getSelection()?.toString()) {
+      window.getSelection()?.removeAllRanges();
+    }
+
     this.onSelect(undefined, selected);
   };
 
@@ -407,7 +417,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       return DataTableComponent.checkBoxProps.indeterminate;
     }
 
-    return isRestModel ? hiddenCheckbox : DataTableComponent.checkBoxProps.empty;
+    return isRestModel ? hiddenCheckboxStyle : DataTableComponent.checkBoxProps.empty;
   };
 
   private clearCheck = () => {
@@ -421,7 +431,8 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     tableStore.searchValueChange(inputValue, queryVariables);
   };
 
-  private handleExpandChange = (expandedRows: string[]) => {
+  @boundMethod
+  private handleExpandChange(expandedRows: string[]) {
     const { tableStore } = this.props;
 
     if (window.getSelection()?.toString()) {
@@ -433,7 +444,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     }
 
     tableStore.expandRows(expandedRows);
-  };
+  }
 
   private updateColumnConfig = <T extends TBaseRow>(columns: IColumnProps<T>[] | undefined) => {
     const { sortColumnsByPriority, tableStore, limitStateName, queryVariables, showMoreMode } =
@@ -481,9 +492,10 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           return {
             style: {
               flexShrink: 0,
-              justifyContent: "end",
-              overflow: "hidden", // fix для IE
+              justifyContent: "center",
+              padding: "0px !important",
             },
+            align: "center",
           };
         },
         key: contextMenuColumnKey,
@@ -553,7 +565,10 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       isShowDividers,
       searchPlaceholder,
       customDataSource,
-      isExpandedTopPanel,
+      isFiltersEmpty,
+      spinnerDelay,
+      subTopPanel,
+      isWithoutWrapperStyles,
       ...restProps
     } = this.props;
 
@@ -562,10 +577,15 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     if (!tableStore.model) {
       return tableStore.error ? null : (
         <div css={spinnerWrapperStyle}>
-          <Spinner />
+          <Spinner delay={spinnerDelay} />
         </div>
       );
     }
+
+    const expandable = {
+      onExpandedRowsChange: this.handleExpandChange,
+      expandedRowKeys: tableStore?.expandedState,
+    };
 
     return (
       <>
@@ -580,15 +600,14 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           searchValue={tableStore.searchValue}
           searchPlaceholder={searchPlaceholder}
           allowClear={allowClear}
-          isExpandedTopPanel={isExpandedTopPanel}
         />
+        {subTopPanel}
         <Table<TExtendColumns<T>>
           {...restProps}
           isShowDividers={isShowDividers}
           loading={loading ?? tableStore?.isLoading}
           localization={localization}
-          expandedRowKeys={tableStore?.expandedState}
-          onExpandedRowsChange={this.handleExpandChange}
+          expandable={expandable}
           size={size}
           dataSource={customDataSource ?? this.state.dataSource}
           rowSelection={this.state.rowSelectionConfig}
@@ -599,34 +618,37 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           targetAll={treeCounter.targetAll}
           emptyHint={emptyHint}
           isSearchEmpty={!tableStore.searchValue}
+          isFiltersEmpty={isFiltersEmpty}
+          isWithoutWrapperStyles={isWithoutWrapperStyles}
         />
       </>
     );
   }
 }
 
-const _DataTableComponent = withFeature(
-  withTheme(withLocation(withLoc(observer(DataTableComponent))))
-);
-
-const DataTable = <T extends TBaseRow = TBaseRow>(props: IDataTableOwnProps<T>) => (
-  <_DataTableComponent {...props} />
-);
+const DataTable = withFeature(withTheme(withLocation(withLoc(observer(DataTableComponent))))) as <
+  T,
+>(
+  props: IDataTableOwnProps<T>
+) => JSX.Element;
 
 const LoadingOnScrollDataTable = observer(
   <T extends TBaseRow = TBaseRow>({
     loading,
     ...restProps
   }: ILoadingOnScrollDataTableOwnProps<T>) => {
-    const showMoreParams = useNodeShowMoreParams(restProps?.queryVariables || {});
+    const showMoreParams = useNodeShowMoreParams(restProps?.queryVariables);
     const handleLoadingOnScroll = useLoadingOnScroll(restProps?.tableStore, showMoreParams);
 
     return (
-      <_DataTableComponent
+      <DataTable
         {...restProps}
         onScroll={handleLoadingOnScroll}
         showMoreMode="scrolling"
-        loading={!restProps.tableStore?.model}
+        loading={
+          !restProps?.tableStore?.isPageLoading &&
+          (loading || restProps?.tableStore?.isLoading || !restProps?.tableStore?.model)
+        }
       />
     );
   }

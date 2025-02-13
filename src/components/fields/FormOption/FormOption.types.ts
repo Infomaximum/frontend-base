@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import type { ColProps } from "antd/lib/col";
 import type { Interpolation } from "@emotion/react";
 import type { NCore } from "@infomaximum/module-expander";
 import type { FormLabelAlign } from "antd/lib/form/interface";
+import type { FormItemLayout } from "antd/lib/form/Form";
 
 export interface IFormOptionProps {
   /**
@@ -11,19 +11,19 @@ export interface IFormOptionProps {
   label?: ReactNode;
 
   /**
-   * Конфигурация колонок для label
+   * кастомизированный label
    */
-  labelCol?: ColProps;
-
-  /**
-   * Конфигурация колонок для содержимого
-   */
-  wrapperCol?: ColProps;
+  labelContent?: ReactNode;
 
   /**
    * Расположение label относительно контента
    */
   labelAlign?: FormLabelAlign;
+
+  /**
+   * Направление поля формы
+   */
+  layout?: FormItemLayout;
 
   /**
    * Отображать ли двоеточие после label
@@ -102,6 +102,11 @@ export interface IFormOptionProps {
   invalid?: boolean;
 
   /**
+   * Дополнительная подсказка перед описанием
+   */
+  additionalHint?: ReactNode;
+
+  /**
    * Описание, находится под полем
    */
   description?: string;
@@ -111,5 +116,8 @@ export interface IFormOptionProps {
    * (работает на первом уровне вложенности компонента формы со свойством sortByPriority)
    */
   priority?: number;
+
   children: React.ReactNode;
+
+  readOnly?: boolean;
 }

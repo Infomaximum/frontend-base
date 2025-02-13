@@ -27,8 +27,8 @@ export const wrappedArrayFieldStyle = {
   },
 };
 
-export const rowsContainerStyle = (spaceSize: string) => (theme: TTheme) => ({
+export const getRowsContainerStyle = (spaceSize: string) => (theme: TTheme) => ({
   display: "flex",
   flexDirection: "column" as const,
-  gap: `${spaceSize === ESpaceSize.small ? 8 : theme.smallSpace}px`,
+  gap: spaceSize === ESpaceSize.default ? 8 : theme.smallSpace,
 });

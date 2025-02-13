@@ -1,3 +1,6 @@
+export const autocompletePaddingRight = 33;
+export const autocompletePaddingLeft = 7;
+
 export const wrapperAutoFillStyle = {
   width: "100%",
 };

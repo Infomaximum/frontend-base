@@ -15,6 +15,7 @@ export interface IUploadComponentOwnProps extends Omit<UploadProps, "onChange"> 
   value?: UploadChangeParam["file"];
   caption?: React.ReactNode;
   fileList: TUploadFieldValue;
+  disableAnimation?: boolean;
   /**
    *
    * @deprecated - Теперь файлы передаются в onSubmit
@@ -39,8 +40,11 @@ export interface IUploadComponentOwnProps extends Omit<UploadProps, "onChange"> 
 export interface IUploadProps
   extends Omit<IFieldProps<TUploadFieldValue>, "component" | "onChange">,
     IUploadComponentOwnProps {
+  disableAnimation?: boolean;
   name: string;
 }
 
 export interface IUploadFormFieldProps
-  extends Omit<IFormFieldProps<TUploadFieldValue>, "component" | "onChange"> {}
+  extends Omit<IFormFieldProps<TUploadFieldValue>, "component" | "onChange"> {
+  disableAnimation?: boolean;
+}

@@ -10,10 +10,13 @@ import {
   closeIconStyle,
   titleStyle,
   closeIconWrapperStyle,
+  footerDrawerStyle,
+  wrapperDrawerStyle,
 } from "./Drawer.styles";
 import { drawerCloseButtonTestId } from "../../../utils/TestIds";
 import { CloseOutlined } from "../../Icons/Icons";
 import { useTheme } from "../../../decorators/hooks/useTheme";
+import { AlignedTooltip } from "../../AlignedTooltip";
 
 export const getBoldTitle = createSelector(
   (title: React.ReactNode) => title,
@@ -21,7 +24,7 @@ export const getBoldTitle = createSelector(
 );
 
 const DrawerComponent: React.FC<IDrawerProps> = (props) => {
-  const { title, closeIcon: closeIconProps, open, ...rest } = props;
+  const { title, closeIcon: closeIconProps, open, styles: stylesProps, ...rest } = props;
   const [isFirstRender, firstRenderCheck] = useState(true);
 
   const drawerOpen = isFirstRender ? false : open;
@@ -31,7 +34,14 @@ const DrawerComponent: React.FC<IDrawerProps> = (props) => {
     firstRenderCheck(false);
   }, []);
 
-  const boldTitle = useMemo(() => <span css={titleStyle}>{title}</span>, [title]);
+  const boldTitle = useMemo(
+    () => (
+      <AlignedTooltip>
+        <span css={titleStyle}>{title}</span>
+      </AlignedTooltip>
+    ),
+    [title]
+  );
 
   const closeIcon = useMemo(() => {
     return (
@@ -45,16 +55,27 @@ const DrawerComponent: React.FC<IDrawerProps> = (props) => {
     );
   }, []);
 
+  const styles = useMemo(
+    () => ({
+      ...stylesProps,
+      header: { ...headerDrawerStyle, ...stylesProps?.header },
+      footer: { ...footerDrawerStyle(theme), ...stylesProps?.footer },
+      wrapper: { ...wrapperDrawerStyle, ...stylesProps?.wrapper },
+    }),
+    [stylesProps, theme]
+  );
+
   return (
     <AntDrawer
       getContainer={document.body} // todo: Не удалять до решения issue https://github.com/ant-design/ant-design/issues/41239
       autoFocus={false} // по умолчанию false, чтобы работал autoFocus полей внутри drawer
       css={drawerStyle}
-      headerStyle={headerDrawerStyle(theme)}
       title={title && boldTitle}
       closeIcon={closeIcon}
+      styles={styles}
       {...rest}
       open={drawerOpen}
+      zIndex={theme.drawerZIndex}
     />
   );
 };

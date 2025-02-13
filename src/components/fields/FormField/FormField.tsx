@@ -10,11 +10,8 @@ import { usePrevious } from "../../../decorators/hooks/usePrevious";
 
 function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
   const {
-    label,
     component: FieldComponent,
     formItemStyle,
-    labelCol,
-    wrapperCol,
     labelAlign,
     colon,
     testId,
@@ -30,6 +27,8 @@ function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
     validate,
     isClearSubmitErrorsOnValueChange = true,
     description,
+    labelContent,
+    additionalHint,
     ...restProps
   } = props;
 
@@ -78,11 +77,10 @@ function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
 
   return (
     <FormOption
-      label={label}
+      label={restProps.label}
+      labelContent={labelContent}
       labelStyle={labelStyle}
       labelAlign={labelAlign}
-      labelCol={labelCol}
-      wrapperCol={wrapperCol}
       colon={colon}
       formItemStyle={formItemStyle}
       testId={testId || fieldTestId}
@@ -94,6 +92,8 @@ function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
       rightLabel={rightLabel}
       wrapperComponentStyle={wrapperComponentStyle}
       description={description}
+      additionalHint={additionalHint}
+      readOnly={restProps.readOnly}
       {...meta}
     >
       <FieldComponent

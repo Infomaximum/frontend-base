@@ -1,5 +1,6 @@
 import {
   notEmptyMemoize,
+  notEmptyMemoizeWithCustomMessage,
   type TFieldValidatorSelector,
   type TValidationError,
 } from "@infomaximum/utility";
@@ -8,6 +9,7 @@ import {
   PASSWORDS_MUST_BE_EQUAL,
   YOU_NEED_SET_PASSWORD,
   PASSWORD_IS_NOT_SECURE,
+  NOT_EMPTY_FIELD,
 } from "../../../utils/Localization/Localization";
 import {
   passwordIsNotSecureTestId,
@@ -334,7 +336,10 @@ const isValidNewPassword: TFieldValidatorSelector<string> =
     }
 
     if (!newPasswordValue && (withNotEmptyValidation || isFilled)) {
-      return notEmptyMemoize(local)(repeatPasswordValue, allValues);
+      return notEmptyMemoizeWithCustomMessage(local, NOT_EMPTY_FIELD)(
+        repeatPasswordValue,
+        allValues
+      );
     }
 
     if (newPasswordValue && complexPassword) {

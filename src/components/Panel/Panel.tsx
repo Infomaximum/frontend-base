@@ -3,7 +3,7 @@ import { Collapse } from "antd";
 import { panelCollapseStyle } from "./Panel.styles";
 import { useMemo } from "react";
 import { useTheme } from "../../decorators/hooks/useTheme";
-import { cssStyleConversion } from "../../styles";
+import { getCssConversionStyle } from "../../styles";
 
 const PanelComponent: React.FC<IPanelProps> = (props) => {
   const { panelStyle, testId, children, header, ...rest } = props;
@@ -17,7 +17,7 @@ const PanelComponent: React.FC<IPanelProps> = (props) => {
     <Collapse.Panel
       {...rest}
       header={wrappedHeader}
-      css={cssStyleConversion(theme, [panelCollapseStyle, panelStyle])}
+      css={getCssConversionStyle(theme, [panelCollapseStyle, panelStyle])}
     >
       {children}
     </Collapse.Panel>

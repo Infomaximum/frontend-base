@@ -1,4 +1,3 @@
-import { TopPanel } from "../TopPanel/TopPanel";
 import { SEARCH } from "../../../utils/Localization/Localization";
 import { headerMarginStyle } from "./DataTableHeader.styles";
 import type { IDataTableHeaderProps } from "./DataTableHeader.types";
@@ -6,13 +5,13 @@ import { dataTableHeaderInputSearchTestId } from "../../../utils/TestIds";
 import { observer } from "mobx-react";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { Search } from "../../Search/Search";
+import { TopPanel } from "../../TopPanel";
+import { topPanelModes } from "../../TopPanel/TopPanel";
 
 const headerModes = {
   NONE: "none",
   SIMPLE_INPUT: "simple-input",
-  LIST: "list",
-  WITHOUT_SEARCH: "withoutsearch",
-  REVERSE_SEARCH: "reverse-search",
+  ...topPanelModes,
 } as const;
 
 const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
@@ -26,12 +25,15 @@ const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
     searchValue,
     allowClear,
     searchPlaceholder,
-    isExpandedTopPanel,
   } = props;
 
   const localization = useLocalization();
 
-  const headerButtonsObjects = headerButtonsGetter?.(treeCounter, editingState);
+  const buttonObjects = headerButtonsGetter?.(treeCounter, editingState);
+
+  if (headerMode === headerModes.NONE) {
+    return null;
+  }
 
   if (headerMode === headerModes.SIMPLE_INPUT) {
     return (
@@ -54,10 +56,9 @@ const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
       <TopPanel
         key="top-panel"
         onInputChange={onSearchChange}
-        selectedItemsCount={treeCounter ? treeCounter.totalCheckedCount : 0}
         onSelectedItemsClear={clearCheck}
-        headerMode={headerModes.LIST}
-        headerButtonsObjects={headerButtonsObjects}
+        mode={topPanelModes.LIST}
+        buttonObjects={buttonObjects}
         searchValue={searchValue}
         allowClear={allowClear}
         searchPlaceholder={searchPlaceholder}
@@ -69,29 +70,10 @@ const DataTableHeaderComponent = <T,>(props: IDataTableHeaderProps<T>) => {
     return (
       <TopPanel
         key="top-panel"
-        selectedItemsCount={treeCounter ? treeCounter.totalCheckedCount : 0}
         onSelectedItemsClear={clearCheck}
-        headerMode={headerModes.WITHOUT_SEARCH}
-        headerButtonsObjects={headerButtonsObjects}
+        mode={topPanelModes.WITHOUT_SEARCH}
+        buttonObjects={buttonObjects}
         allowClear={allowClear}
-        isExpandedTopPanel={isExpandedTopPanel}
-      />
-    );
-  }
-
-  if (headerMode === headerModes.REVERSE_SEARCH) {
-    return (
-      <TopPanel
-        key="top-panel"
-        onInputChange={onSearchChange}
-        selectedItemsCount={treeCounter ? treeCounter.totalCheckedCount : 0}
-        onSelectedItemsClear={clearCheck}
-        headerMode={headerModes.REVERSE_SEARCH}
-        headerButtonsObjects={headerButtonsObjects}
-        searchValue={searchValue}
-        allowClear={allowClear}
-        searchPlaceholder={searchPlaceholder}
-        isExpandedTopPanel={isExpandedTopPanel}
       />
     );
   }

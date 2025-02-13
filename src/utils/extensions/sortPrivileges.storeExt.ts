@@ -17,6 +17,7 @@ export const sortPrivilegesExt: NStore.TPrepareDataFunc<Store<Model>> = ({ data 
             const key: string = privilege.key;
             const groupName =
               key && key.indexOf(".") >= 0 ? key.substring(0, key.indexOf(".")) : key;
+
             return featureGroup.name === groupName;
           });
 

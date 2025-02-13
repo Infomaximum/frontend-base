@@ -46,7 +46,7 @@ class DataTableExtension implements IDataTableExtension {
     });
   }
 
-  public extendColumnConfig<T = unknown>(
+  public extendColumnConfig<T = any>(
     baseConfig: IColumnProps<T>[],
     localization: Localization,
     isFeatureEnabled: TFeatureEnabledChecker | undefined

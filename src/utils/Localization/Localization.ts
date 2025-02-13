@@ -53,6 +53,11 @@ export const SAVE = {
   en: "Save",
 };
 
+export const CANCEL_CHANGES = {
+  ru: "Отменить изменения",
+  en: "Cancel changes",
+};
+
 export const EXIT = {
   ru: "Выйти",
   en: "Exit",
@@ -69,8 +74,8 @@ export const UNABLE_TO_SAVE_CHANGE = {
 };
 
 export const MAKE_SURE_FIELDS_FILLED_CORRECTLY = {
-  ru: "Убедитесь, что поля заполнены корректно.",
-  en: "Make sure that the fields are filled in correctly.",
+  ru: "Убедитесь, что поля заполнены корректно",
+  en: "Make sure that the fields are filled in correctly",
 };
 
 export const CONTINUE_EDITING = {
@@ -130,24 +135,22 @@ export const NOT_SELECTED = {
 
 export const SELECT_FROM_LIST = {
   ru: "Выберите из списка",
-  en: "Select from list",
+  en: "Select from the list",
 };
 
 export const NOTHING_FOUND_CHANGE_QUERY = {
-  ru: "Ничего не найдено. Измените запрос.",
-  en: "Nothing found. Change the query.",
+  ru: "Ничего не найдено, измените запрос",
+  en: "No options available, change the query",
 };
 
-export const SHOWING_OF = {
-  ru: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
-    `Показано ${currentCount} из ${totalCount}`,
-  en: ({ currentCount, totalCount }: { currentCount: number; totalCount: number }) =>
-    `Showing ${currentCount} of the ${totalCount}`,
+export const SHOW_MORE_CRUMBS = {
+  ru: "Показать больше",
+  en: "Show more",
 };
 
 export const SERVICE_MODE = {
-  ru: "Система находится в сервисном режиме: ведутся регламентно-технические работы.",
-  en: "System is in a service mode: regulatory and technical work is going.",
+  ru: "Система находится в сервисном режиме: ведутся регламентно-технические работы",
+  en: "The System is currently undergoing scheduled maintenance",
 };
 
 export const LOG_IN = {
@@ -187,12 +190,22 @@ export const RENAMED_FEMININE = {
 
 export const DELETED_MASCULINE = {
   ru: "удален",
-  en: "deleted",
+  en: "has been deleted",
 };
 
 export const DELETED_FEMININE = {
   ru: "удалена",
-  en: "deleted",
+  en: "has been deleted",
+};
+
+export const DELETED_NEUTER = {
+  ru: "удалено",
+  en: "has been deleted",
+};
+
+export const DELETED_PLURAL = {
+  ru: "удалены",
+  en: "have been deleted",
 };
 
 export const OBJECTS_DELETED = {
@@ -205,14 +218,19 @@ export const SAVED = {
   en: "Saved",
 };
 
-export const MASS_ACTION = {
-  ru: "Массовое действие",
-  en: "Mass action",
+export const APPLIED_FEMALE = {
+  ru: "применена",
+  en: "applied",
 };
 
-export const APPLIED_TO = {
-  ru: "применено к",
-  en: "applied to",
+export const APPLIED_MALE = {
+  ru: "применен",
+  en: "applied",
+};
+
+export const APPLIED_NEUTER = {
+  ru: "применено",
+  en: "applied",
 };
 
 export const CREATED_FEMININE = {
@@ -255,23 +273,19 @@ export const CHANGE_PASSWORD = {
   en: "Change password",
 };
 
-export const ENTER_QUERY_OR_CHOOSE = {
-  ru: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
-    `Показаны ${currentCount} из ${generalCount} значений. Введите поисковой запрос или выберите из списка.`,
-  en: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
-    `Showing ${currentCount} of "${generalCount}" values. Enter a search query or select from the list.`,
+export const ENTER_QUERY = {
+  ru: "Для просмотра других значений задайте запрос",
+  en: "To see other options, type a query",
 };
 
 export const REFINE_QUERY = {
-  ru: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
-    `Показаны ${currentCount} из ${generalCount} найденных значений. Уточните запрос, чтобы увидеть другие.`,
-  en: ({ currentCount, generalCount }: { currentCount: number; generalCount: number }) =>
-    `Showing ${currentCount} of the ${generalCount} values found. Refine the query to see others.`,
+  ru: "Для просмотра других значений измените запрос",
+  en: "To see other options, change the query",
 };
 
-export const SHOWED_ALL_CHANGE_QUERY = {
-  ru: "Показаны все найденные значения. Измените запрос, чтобы увидеть другие.",
-  en: "All values found are shown. Change the query to see others.",
+export const NOT_EMPTY_FIELD = {
+  ru: "Поле должно быть заполнено",
+  en: "The field cannot be empty",
 };
 
 export const CURRENT_PASSWORD = {
@@ -365,9 +379,9 @@ export const WEEK = {
   en: "Week",
 };
 
-export const CLICK_OR_DRAG_FILE = {
+export const CLICK_OR_DROP_A_FILE_HERE = {
   ru: "Нажмите или перетащите файл сюда",
-  en: "Click or drag file here",
+  en: "Click or drop a file here",
 };
 
 export const FILE_FORMAT = {
@@ -395,6 +409,16 @@ export const SELECTED = {
   en: "Selected",
 };
 
+export const SELECTED_LONG_VARIANT = {
+  ru: "Выбранные",
+  en: "Selected",
+};
+
+export const WITHOUT_DEPARTMENT = {
+  ru: "Без отдела",
+  en: "Without department",
+};
+
 export const ALL = {
   // out of date
   ru: "Все",
@@ -409,4 +433,49 @@ export const EMPTY_STRING = {
 export const COPY = {
   ru: "Копировать",
   en: "Copy",
+};
+
+export const MY_PROFILE = {
+  ru: "Мой профиль",
+  en: "My profile",
+};
+
+export const ADMINISTRATION = {
+  ru: "Администрирование",
+  en: "Administration",
+};
+
+export const OTHERS = {
+  ru: "Другие",
+  en: "Others",
+};
+
+export const FILTER = {
+  ru: "Фильтр",
+  en: "Filter",
+};
+
+export const CLOSE_FILTER = {
+  ru: "Закрыть фильтр",
+  en: "Close Filter",
+};
+
+export const CLEAR_FILTER = {
+  ru: "Очистить фильтр",
+  en: "Clear Filter",
+};
+
+export const RESET = {
+  ru: "Сбросить",
+  en: "Reset",
+};
+
+export const MORE = {
+  ru: "Ещё",
+  en: "More",
+};
+
+export const NOT = {
+  ru: "Не",
+  en: "Not",
 };

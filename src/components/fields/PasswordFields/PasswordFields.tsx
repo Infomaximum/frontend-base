@@ -1,4 +1,4 @@
-import { PureComponent } from "react";
+import { createRef, PureComponent } from "react";
 import type {
   IPasswordFieldsProps,
   IPasswordFieldsState,
@@ -36,12 +36,12 @@ import {
   questionIconStyle,
   checkCircleGreenIconStyle,
   redCloseCircleIconStyle,
-  notificationFieldStyleWithPadding,
-  opacity,
+  notificationFieldStyleWithPaddingStyle,
+  opacityStyle,
   popoverInnerStyle,
   inputFieldStyle,
 } from "./PasswordFields.styles";
-import { map, forEach, debounce } from "lodash";
+import { map, forEach, debounce, isNumber } from "lodash";
 import { MIN_PASSWORD_LENGTH } from "../../../utils/const";
 import {
   passwordFieldsPasswordNotificationTestId,
@@ -55,6 +55,9 @@ import {
   passwordFieldsGrayCheckIconTestId,
   passwordFieldsRedCheckIconTestId,
   passwordFieldsFieldsValidIconTestId,
+  passwordFieldsNewPasswordVisibilityIconTestId,
+  passwordFieldsRepeatNewPasswordVisibilityIconTestId,
+  passwordFieldsCurrentPasswordVisibilityIconTestId,
 } from "../../../utils/TestIds";
 import { observer } from "mobx-react";
 import type { Unsubscribe } from "final-form";
@@ -71,12 +74,26 @@ import {
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
 import { withFormProvider } from "../../../decorators/hocs/withFormProvider/withFormProvider";
 import type { Localization } from "@infomaximum/localization";
+import { getTextWidthOfReactNode } from "../../../utils/textWidth";
+import { theme } from "../../../styles";
 
 const REPEAT_NEW_PASSWORD_FIELD = "REPEAT_NEW_PASSWORD";
 
 const currentPasswordLoc = CURRENT_PASSWORD;
 const newPasswordLoc = ENTER_NEW_PASSWORD;
 const repeatNewPasswordLoc = REPEAT_NEW_PASSWORD;
+
+const passwordPopoverPaddingSumNumber = 32;
+const passwordPopoverIconWidth = 16;
+const passwordPopoverTextPadding = 8;
+const passwordPopoverMarginWidth = 8;
+const passwordPopoverReserveWidth = 8;
+const passwordPopoverAdditionWidth =
+  passwordPopoverPaddingSumNumber +
+  passwordPopoverIconWidth +
+  passwordPopoverTextPadding +
+  passwordPopoverMarginWidth +
+  passwordPopoverReserveWidth;
 
 const passwordValidators: IPasswordValidators[] = [
   {
@@ -152,16 +169,20 @@ const ValidFieldIcon = (disabled?: boolean) => (
   <CheckCircleFilled
     key="fields-valid-icon"
     test-id={passwordFieldsFieldsValidIconTestId}
-    style={disabled ? opacity : undefined}
+    style={disabled ? opacityStyle : undefined}
     css={checkCircleGreenIconStyle}
   />
 );
+
+const passwordHelpPopoverZIndex = 1040;
 
 class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPasswordFieldsState> {
   public static defaultProps = {
     withLabels: true,
     requestOnMount: true,
   };
+
+  private passwordHelpIconRef = createRef<HTMLDivElement>();
 
   private unsubscribeFormProvider!: Unsubscribe | undefined;
 
@@ -175,6 +196,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
       repeatNewPasswordFocus: false,
       newPasswordFieldFocus: false,
       showPopover: false,
+      passwordPopoverDirection: "right",
     } as IPasswordFieldsState;
   }
 
@@ -182,6 +204,8 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
     const { formProvider, passwordFieldName, complexPasswordStore } = this.props;
 
     complexPasswordStore.requestData();
+
+    window.addEventListener("resize", this.handlePassPopoverDirectionChange);
 
     if (formProvider) {
       this.unsubscribeFormProvider = formProvider.subscribe(
@@ -211,6 +235,8 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
     complexPasswordStore.cancelRequest();
 
     this.unsubscribeFormProvider?.();
+
+    window.removeEventListener("resize", this.handlePassPopoverDirectionChange);
   }
 
   // очищает поле повторения пароля
@@ -288,15 +314,15 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
     return valueIsValid
       ? CheckGreenIcon
       : passwordField?.touched && passwordField?.invalid
-      ? CloseRedIcon
-      : CheckGrayIcon;
+        ? CloseRedIcon
+        : CheckGrayIcon;
   }
 
   // debounce для игнорирования мгновенного focus-blur, возникающего при клике на область поля
   // за пределами input. Должно исправиться в antd v5 [PT-12981]
   private setFocusState = debounce(
     (isFocus: boolean) => this.setState({ newPasswordFieldFocus: isFocus }),
-    100
+    200
   );
 
   public handleFocusNewPasswordField = () => {
@@ -311,55 +337,114 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
   };
 
   public handleBlurNewPasswordField = () => {
-    this.setFocusState(false);
+    if (this.state.touchedWithError) {
+      this.setFocusState(false);
+    } else {
+      this.setState({
+        newPasswordFieldFocus: false,
+      });
+    }
+  };
+
+  public getPasswordValidatorsData = () => {
+    const { complexPasswordStore } = this.props;
+    const model = complexPasswordStore.model;
+    const hardPassword = model ? model.getMinPasswordLength() : undefined;
+
+    return {
+      hardPassword,
+      passwordValidators: hardPassword ? passwordValidators : [passwordValidators[0]],
+    };
   };
 
   // генерирует строки валидации для Popover
   public getPassNotif = () => {
+    // смена положения, при обновлении контента Popover
+    this.handlePassPopoverDirectionChange();
+
     const { localization, complexPasswordStore } = this.props;
     const { newPasswordValue } = this.state;
-
     const model = complexPasswordStore.model;
 
-    const hardPassword = model ? model.getMinPasswordLength() : undefined;
+    const { hardPassword, passwordValidators } = this.getPasswordValidatorsData();
 
-    const notificationFields = map(
-      hardPassword ? passwordValidators : [passwordValidators[0]],
-      (passwordValidator, index) => {
-        const valueIsValid: boolean = !!passwordValidator?.validator(newPasswordValue, model);
+    const notificationFields = map(passwordValidators, (passwordValidator, index) => {
+      const valueIsValid: boolean = !!passwordValidator?.validator(newPasswordValue, model);
 
-        const containerKey = `pass-notification-field-container-${index}`;
-        const messageKey = `pass-notification-field-message-${index}`;
+      const containerKey = `pass-notification-field-container-${index}`;
+      const messageKey = `pass-notification-field-message-${index}`;
 
-        return (
-          <div
-            key={containerKey}
-            test-id={
-              passwordValidator?.["test-id"]
-                ? `${passwordFieldsPasswordNotificationTestId}_${passwordValidator["test-id"]}`
-                : passwordFieldsPasswordNotificationTestId
-            }
-            css={
-              index === passwordValidators.length - 1 || !hardPassword
-                ? commonNotificationFieldStyle
-                : notificationFieldStyleWithPadding
-            }
-          >
-            {this.getIcon(valueIsValid)}
-            <span key={messageKey} css={notificationTextStyle}>
-              {passwordValidator?.getMessage(localization, model)}
-            </span>
-          </div>
-        );
-      }
-    );
+      return (
+        <div
+          key={containerKey}
+          test-id={
+            passwordValidator?.["test-id"]
+              ? `${passwordFieldsPasswordNotificationTestId}_${passwordValidator["test-id"]}`
+              : passwordFieldsPasswordNotificationTestId
+          }
+          css={
+            index === passwordValidators.length - 1 || !hardPassword
+              ? commonNotificationFieldStyle
+              : notificationFieldStyleWithPaddingStyle
+          }
+        >
+          {this.getIcon(valueIsValid)}
+          <span key={messageKey} css={notificationTextStyle}>
+            {passwordValidator?.getMessage(localization, model)}
+          </span>
+        </div>
+      );
+    });
 
     return <div test-id={passwordFieldsPopoverTestId}>{notificationFields}</div>;
   };
 
-  private getTriggerNode(triggerNode: HTMLElement) {
-    return triggerNode;
-  }
+  private getPasswordPopoverDirection = () => {
+    const { localization, complexPasswordStore } = this.props;
+
+    const { passwordValidators } = this.getPasswordValidatorsData();
+
+    const widthsOfPassPopoverElems = map(passwordValidators, (elem) => {
+      const passPopoverElemWidth = getTextWidthOfReactNode(
+        elem?.getMessage(localization, complexPasswordStore.model),
+        {
+          size: theme.h4FontSize,
+        }
+      );
+
+      if (isNumber(passPopoverElemWidth)) {
+        return passPopoverElemWidth;
+      }
+
+      return 0;
+    });
+
+    const passwordPopoverWidth = Math.ceil(
+      Math.max(...widthsOfPassPopoverElems) + passwordPopoverAdditionWidth
+    );
+
+    if (this.passwordHelpIconRef.current) {
+      if (
+        document.body.clientWidth -
+          this.passwordHelpIconRef.current?.getBoundingClientRect().right <
+        passwordPopoverWidth
+      ) {
+        return "left";
+      } else {
+        return "right";
+      }
+    }
+  };
+
+  private handlePassPopoverDirectionChange = () => {
+    const passwordPopoverDirection = this.getPasswordPopoverDirection();
+
+    if (passwordPopoverDirection) {
+      this.setState({
+        passwordPopoverDirection,
+      });
+    }
+  };
 
   public override render() {
     const {
@@ -438,9 +523,10 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
           disabled={disabled}
           suffix={
             <CurrentPasswordIcon
+              test-id={passwordFieldsCurrentPasswordVisibilityIconTestId}
               onClick={disabled ? undefined : this.changeCurrentPasswordInputType}
               css={eyeIconStyle}
-              style={disabled ? opacity : undefined}
+              style={disabled ? opacityStyle : undefined}
             />
           }
           label={
@@ -474,31 +560,35 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
           <>
             {newPasswordIcon ?? (
               <NewPasswordIcon
+                test-id={passwordFieldsNewPasswordVisibilityIconTestId}
                 onClick={disabled ? undefined : this.changeNewPasswordInputType}
                 css={eyeIconStyle}
-                style={disabled ? opacity : undefined}
+                style={disabled ? opacityStyle : undefined}
               />
             )}
-            {!this.getValid() ? (
-              <Popover
-                open={isOpenPopover}
-                key="password-notification-popover"
-                trigger="click"
-                placement="right"
-                content={this.getPassNotif()}
-                getPopupContainer={this.getTriggerNode}
-                overlayInnerStyle={popoverInnerStyle}
-              >
-                <QuestionCircleOutlined
-                  key="question-circle-popover-icon"
-                  css={isOpenPopover ? questionIconShowPopoverStyle : questionIconStyle}
-                  onClick={disabled ? undefined : this.togglePopover}
-                  style={disabled ? opacity : undefined}
-                />
-              </Popover>
-            ) : (
-              ValidFieldIcon(disabled)
-            )}
+            <div ref={this.passwordHelpIconRef}>
+              {!this.getValid() ? (
+                <Popover
+                  open={isOpenPopover}
+                  key="password-notification-popover"
+                  trigger="click"
+                  placement={this.state.passwordPopoverDirection}
+                  content={this.getPassNotif()}
+                  overlayInnerStyle={popoverInnerStyle}
+                  autoAdjustOverflow={false}
+                  zIndex={passwordHelpPopoverZIndex}
+                >
+                  <QuestionCircleOutlined
+                    key="question-circle-popover-icon"
+                    css={isOpenPopover ? questionIconShowPopoverStyle : questionIconStyle}
+                    onClick={disabled ? undefined : this.togglePopover}
+                    style={disabled ? opacityStyle : undefined}
+                  />
+                </Popover>
+              ) : (
+                ValidFieldIcon(disabled)
+              )}
+            </div>
           </>
         }
         label={
@@ -522,9 +612,10 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
           suffix={
             <>
               <RepeatNewPassIcon
+                test-id={passwordFieldsRepeatNewPasswordVisibilityIconTestId}
                 onClick={disabled ? undefined : this.changeRepeatNewPasswordInputType}
                 css={eyeIconStyle}
-                style={disabled ? opacity : undefined}
+                style={disabled ? opacityStyle : undefined}
               />
               {newPasswordValue !== repeatPasswordValue &&
               repeatNewPasswordFocus &&

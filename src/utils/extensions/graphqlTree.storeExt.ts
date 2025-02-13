@@ -3,7 +3,7 @@ import { InvalidIndex } from "@infomaximum/utility";
 import { forEach, get, isNull, isEmpty, map } from "lodash";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Store } from "../Store/Store/Store";
-import { assertSimple } from "@infomaximum/assert";
+import { RestModel } from "../../models";
 
 type TTreeBuilderParams = {
   // typename группы
@@ -20,8 +20,6 @@ type TTreeBuilderParams = {
 };
 
 const childrenKey = "items";
-
-const nextCountKey = "next_count";
 
 const defaultItemWrapperField = "element";
 
@@ -61,7 +59,7 @@ export function buildTreeFromList(sourceList: TModelStruct[], params: TTreeBuild
       /**
        * Если нет данных во вложенном поле, считаем, что этот элемент - RestModel
        */
-      item = getRestItemStruct(sourceItem[nextCountKey]);
+      item = getRestItemStruct();
     } else {
       const { [itemWrapperField]: omittedField, ...nearbyData } = sourceItem;
 
@@ -103,12 +101,9 @@ export function buildTreeFromList(sourceList: TModelStruct[], params: TTreeBuild
   return tree;
 }
 
-function getRestItemStruct(nextCount: number) {
-  assertSimple(nextCount !== 0, `Попытка принять элемент с ${nextCountKey} = 0 за "Показать еще"`);
-
+function getRestItemStruct() {
   return {
-    next_count: nextCount,
-    __typename: "rest",
+    __typename: RestModel.typename,
   };
 }
 

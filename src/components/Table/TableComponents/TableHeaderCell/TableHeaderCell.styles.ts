@@ -8,7 +8,7 @@ export const commonTableHeaderCellStyle = (theme: TTheme) =>
     lineHeight: "22px",
     fontWeight: "normal",
     transition: "color 0.3s ease",
-  } as const);
+  }) as const;
 
 const tableHeaderSortersCellStyle = (theme: TTheme) =>
   ({
@@ -35,17 +35,17 @@ const tableHeaderSortersCellStyle = (theme: TTheme) =>
       cursor: "pointer",
       ":hover": { color: theme.linkHoverColor },
     },
-  } as const);
+  }) as const;
 
 export const tableHeaderCellStyle = (theme: TTheme) =>
   ({
     position: "relative",
     borderBottom: `${theme.tableRowBorderSize}px solid ${theme.grey5Color}`,
-    textAlign: "left", // fix для IE
+    textAlign: "left",
     ...tableBodyCellStyle(theme),
     ...commonTableHeaderCellStyle(theme),
     ...tableHeaderSortersCellStyle(theme),
     // увеличение области клика чекбокса в header антовской таблицы
     ".ant-table-selection": tableCheckboxCellStyle(theme),
     padding: "8px",
-  } as const);
+  }) as const;

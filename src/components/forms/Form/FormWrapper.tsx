@@ -18,6 +18,7 @@ const FormWrapper: FC<IFormWrapperProps> = ({
   component,
   mutators: mutatorsProp,
   onSubmit,
+  keepDirtyOnReinitialize,
   ...rest
 }) => {
   const { isFeatureEnabled } = useFeature();
@@ -35,6 +36,7 @@ const FormWrapper: FC<IFormWrapperProps> = ({
       onSubmit={onSubmit as FormProps<any>["onSubmit"]}
       mutators={mutators}
       isFeatureEnabled={isFeatureEnabled}
+      keepDirtyOnReinitialize={keepDirtyOnReinitialize ?? true}
       {...rest}
     >
       {(params) => (
@@ -58,7 +60,7 @@ export const Form = withFormSubmitPromise(FormWrapper) as <
     NonNullable<FormProps["component"]>
   >,
   ClearComponentProps extends IBaseFormProps = Exclude<ComponentProps, React.HTMLAttributes<any>>,
-  TrueConnectFormProps = Omit<FormProps, "component" | keyof IBaseFormProps>
+  TrueConnectFormProps = Omit<FormProps, "component" | keyof IBaseFormProps>,
 >(
   props: PropsWithChildren<
     TrueConnectFormProps &

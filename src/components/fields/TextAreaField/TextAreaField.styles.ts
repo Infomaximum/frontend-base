@@ -1,4 +1,4 @@
-export const textAreaFieldStyles = {
+export const textAreaFieldStyle = {
   lineHeight: "22px",
   cursor: "auto",
 };

@@ -22,7 +22,7 @@ export abstract class BaseStore {
     }
   }
 
-  protected name: string;
+  public readonly name: string;
 
   constructor({ name }: NBaseStore.IBaseStoreParams) {
     this.name = name;

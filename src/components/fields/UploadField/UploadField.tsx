@@ -1,5 +1,27 @@
 import React, { createRef, type HTMLAttributes, type FC } from "react";
 import { Upload } from "antd";
+import { isFunction, isEqual, forEach, isEmpty, isString, get } from "lodash";
+import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import { FormContext } from "../../../decorators/contexts/FormContext";
+import { removeUploadFieldButtonTestId } from "../../../utils";
+import {
+  CLICK_OR_DROP_A_FILE_HERE,
+  DELETE,
+  FILE_FORMAT,
+  MAX_SIZE_OF_THE_FILE,
+  UPLOAD_THE_FILE_IN_THE_FORMAT,
+} from "../../../utils/Localization/Localization";
+import {
+  draggerStyle,
+  uploadListItemStyle,
+  uploadIconStyle,
+  uploadWrapperStyle,
+} from "./UploadField.styles";
+import { DeleteOutlined } from "../../Icons";
+import { InboxOutlinedSVG } from "../../../resources/icons";
+import { Message } from "../../Message/Message";
+import { Tooltip } from "../../Tooltip/Tooltip";
+import { Field, FormField } from "../FormField";
 import type { RcFile, UploadChangeParam } from "antd/lib/upload";
 import type {
   IUploadComponentProps,
@@ -7,29 +29,14 @@ import type {
   IUploadFormFieldProps,
   TUploadFieldValue,
 } from "./UploadField.types";
-import { isFunction, isEqual, forEach, isEmpty, isString, get } from "lodash";
-import {
-  CLICK_OR_DRAG_FILE,
-  FILE_FORMAT,
-  MAX_SIZE_OF_THE_FILE,
-  UPLOAD_THE_FILE_IN_THE_FORMAT,
-} from "../../../utils/Localization/Localization";
-import { draggerStyle, uploadIconStyle } from "./UploadField.styles";
-import { Message } from "../../Message/Message";
-import { InboxOutlinedSVG } from "../../../resources/icons";
-import { FormContext } from "../../../decorators/contexts/FormContext";
-import { Field, FormField } from "../FormField";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import type { ShowUploadListInterface } from "antd/es/upload/interface";
 
 const fakeFileType = "fake-file" as const;
 const fileStatusRemoved = "removed";
 
 const removeElementsAttribute = (
   targetNode: HTMLDivElement,
-  selectorList = [
-    "span.ant-upload-list-item-name",
-    "span.ant-upload-list-item-card-actions button",
-  ],
+  selectorList = ["span.ant-upload-list-item-name", "span.ant-upload-list-item-actions button"],
   removableAttribute: keyof HTMLAttributes<HTMLElement> = "title"
 ) => {
   const elementList: Element[] = [];
@@ -110,6 +117,37 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
     }
   }
 
+  private getDefaultUploadListConfig(
+    showUploadList: boolean | ShowUploadListInterface<any> | undefined,
+    isShowTooltip: boolean = false
+  ): ShowUploadListInterface | false {
+    if (
+      typeof showUploadList === "undefined" ||
+      (typeof showUploadList === "boolean" && showUploadList)
+    ) {
+      return {
+        showRemoveIcon: true,
+        removeIcon: isShowTooltip ? (
+          <Tooltip
+            align={{ targetOffset: [0, 0] }}
+            title={this.props.localization.getLocalized(DELETE)}
+            placement={"top"}
+          >
+            <DeleteOutlined test-id={removeUploadFieldButtonTestId} />
+          </Tooltip>
+        ) : (
+          <DeleteOutlined test-id={removeUploadFieldButtonTestId} />
+        ),
+      };
+    }
+
+    if (!showUploadList) {
+      return false;
+    } else {
+      return showUploadList;
+    }
+  }
+
   private handleInputChange(fileListProps: TUploadFieldValue) {
     const { chooseFile, chooseFiles, multiList, input, maxFileSize } = this.props;
 
@@ -186,22 +224,33 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
     }
   };
 
-  private renderUsualMode(): React.ReactNode {
-    const { caption, fieldStyle, readOnly, meta, multiList, input, ...rest } = this.props;
+  private getUpload(): React.ReactNode {
+    const { caption, fieldStyle, multiList, input, showUploadList, ...rest } = this.props;
 
     return (
       <Upload
         {...rest}
+        showUploadList={this.getDefaultUploadListConfig(showUploadList, true)}
         maxCount={!multiList ? 1 : undefined}
         fileList={input.value || this.props.defaultFileList || []}
         onChange={this.handleChange}
         onRemove={this.handleRemove}
         beforeUpload={this.beforeUpload}
-        css={fieldStyle}
+        css={[fieldStyle, uploadListItemStyle]}
       >
         {caption}
       </Upload>
     );
+  }
+
+  private renderUsualMode(): React.ReactNode {
+    const { disableAnimation, input, defaultFileList } = this.props;
+
+    if (disableAnimation && (input.value.length || defaultFileList)) {
+      return <div css={uploadWrapperStyle}>{this.getUpload()}</div>;
+    }
+
+    return this.getUpload();
   }
 
   private renderDragAndDropMode(): React.ReactNode {
@@ -216,6 +265,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
       localization,
       fileFormatPlaceholder,
       maxFileSize,
+      showUploadList,
       ...rest
     } = this.props;
 
@@ -225,17 +275,18 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
         {...rest}
         maxCount={!multiList ? 1 : undefined}
         fileList={input.value || this.props.defaultFileList || []}
+        showUploadList={this.getDefaultUploadListConfig(showUploadList)}
         onChange={this.handleChange}
         onRemove={this.handleRemove}
         beforeUpload={this.beforeUpload}
         accept={accept}
-        css={[fieldStyle, draggerStyle]}
+        css={[fieldStyle, draggerStyle, uploadListItemStyle]}
         onDrop={this.handleDrop}
       >
         <p style={uploadIconStyle}>
           <InboxOutlinedSVG />
         </p>
-        <p className="ant-upload-text">{localization.getLocalized(CLICK_OR_DRAG_FILE)}</p>
+        <p className="ant-upload-text">{localization.getLocalized(CLICK_OR_DROP_A_FILE_HERE)}</p>
         {!accept ? null : (
           <p className="ant-upload-hint">
             {localization.getLocalized(FILE_FORMAT, {
@@ -264,7 +315,11 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
   }
 }
 
-const UploadField: React.FC<IUploadProps> = ({ readOnly, ...rest }) => {
+const UploadField: React.FC<IUploadProps> = ({
+  readOnly,
+  mode = UploadComponent.AVAILABLE_MODE_LIST.USUAL,
+  ...rest
+}) => {
   return (
     <FormContext.Consumer>
       {(formData) => {
@@ -272,14 +327,10 @@ const UploadField: React.FC<IUploadProps> = ({ readOnly, ...rest }) => {
           return null;
         }
 
-        return <Field component={UploadComponent} {...rest} />;
+        return <Field component={UploadComponent} mode={mode} {...rest} />;
       }}
     </FormContext.Consumer>
   );
-};
-
-UploadField.defaultProps = {
-  mode: UploadComponent.AVAILABLE_MODE_LIST.USUAL,
 };
 
 const UploadFormField: FC<IUploadFormFieldProps> & {

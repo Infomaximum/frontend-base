@@ -47,3 +47,11 @@ export const getGradientColorsFromTransparent = (theme: TTheme, maxOpacityColor?
   minOpacity: convertHexToRgbaStyle(theme.grey1Color, 0),
   maxOpacity: convertHexToRgbaStyle(maxOpacityColor ?? theme.grey1Color, 1),
 });
+
+export function isColorDark(color: string) {
+  const { red, green, blue } = colorConversionFromHexToRgb(color);
+  // Каждому из трех основных цветов мы присваиваем коэффициент восприятия человеческим глазом используя метод sRGB Luma
+  const lightness = ((red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255) * 100;
+
+  return lightness <= 64;
+}

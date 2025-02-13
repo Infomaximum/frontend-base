@@ -11,7 +11,7 @@ export const tableCheckboxCellStyle = (theme: TTheme) =>
       top: 0,
       right: 0,
       bottom: 0,
-      minHeight: `${theme.commonTableRowHeight}px`, // Фикс для IE
+      minHeight: `${theme.commonTableRowHeight}px`,
       ".ant-checkbox": {
         margin: "auto",
         top: 0,
@@ -23,7 +23,7 @@ export const tableCheckboxCellStyle = (theme: TTheme) =>
       top: 0,
       right: 0,
       bottom: 0,
-      minHeight: `${theme.commonTableRowHeight}px`, // Фикс для IE
+      minHeight: `${theme.commonTableRowHeight}px`,
       "&-disabled": {
         cursor: "not-allowed",
       },
@@ -32,4 +32,4 @@ export const tableCheckboxCellStyle = (theme: TTheme) =>
         top: 0,
       },
     },
-  } as const);
+  }) as const;

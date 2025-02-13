@@ -1,5 +1,6 @@
 import { useRef, useState, useCallback } from "react";
 import { debounce } from "lodash";
+import { useUnmountEffect } from "./useUnmountEffect";
 
 // todo: Возможно, стоит предусмотреть касмомную задержку для debounce
 export const useContainerWidth = () => {
@@ -18,6 +19,10 @@ export const useContainerWidth = () => {
     }, 500),
     []
   );
+
+  useUnmountEffect(() => {
+    window.removeEventListener("resize", debouncedResizeHandler);
+  });
 
   const setRef = useCallback((node: HTMLElement | null) => {
     if (containerRef.current) {

@@ -34,6 +34,7 @@ class CheckboxComponent extends React.PureComponent<ICheckboxComponentProps> {
         checked={Boolean(value)}
         disabled={readOnly || disabled}
         onClick={onClick}
+        test-id={this.props?.["test-id"]}
       >
         {children}
       </Checkbox>

@@ -6,8 +6,8 @@ import type {
   ITimeInputsRangeProps,
   TDuration,
 } from "./TimeInputsRangeField.types";
-import { eq, isEmpty, isNil, map, xorBy } from "lodash";
-import moment, { type Duration, isDuration } from "moment";
+import { eq, isEmpty, isNil, isNumber, map, xorBy } from "lodash";
+import dayjs from "dayjs";
 import {
   dashStyle,
   timeInputStyle,
@@ -22,14 +22,14 @@ import {
 import { Input } from "../../Input";
 import { Field, FormField } from "../FormField";
 
-enum EMomentFormat {
+enum EDisplayFormat {
   HH_mm = "HH:mm",
   HH_mm_ss = "HH:mm:ss",
 }
 
 enum ECountOfDigits {
-  HH_mm = EMomentFormat.HH_mm.length,
-  HH_mm_ss = EMomentFormat.HH_mm_ss.length,
+  HH_mm = EDisplayFormat.HH_mm.length,
+  HH_mm_ss = EDisplayFormat.HH_mm_ss.length,
 }
 
 const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
@@ -48,45 +48,45 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
         BEGIN: "begin",
         END: "end",
       },
-      format: withSeconds ? EMomentFormat.HH_mm_ss : EMomentFormat.HH_mm,
+      format: withSeconds ? EDisplayFormat.HH_mm_ss : EDisplayFormat.HH_mm,
     }),
     [withSeconds]
   );
 
   const initialInputs = useMemo(() => {
     const [begin, end] = input.value as [
-      null | TDurationDescription | Duration,
-      null | TDurationDescription | Duration
+      null | TDurationDescription | plugin.Duration,
+      null | TDurationDescription | plugin.Duration,
     ];
 
     const resultInitialValues = [] as unknown as [string, string];
 
     if (isNil(begin)) {
       resultInitialValues.push("");
-    } else if (isDuration(begin)) {
+    } else if (dayjs.isDuration(begin)) {
       const milliseconds = begin.asMilliseconds();
 
       if (milliseconds > 0 && milliseconds <= 9) {
         resultInitialValues.push("");
       } else {
-        resultInitialValues.push(moment.utc(milliseconds).format(FIELD_CONST.format));
+        resultInitialValues.push(dayjs.utc(milliseconds).format(FIELD_CONST.format));
       }
     } else {
-      resultInitialValues.push(moment(begin).format(FIELD_CONST.format));
+      resultInitialValues.push(dayjs.duration(begin).format(FIELD_CONST.format));
     }
 
     if (isNil(end)) {
       resultInitialValues.push("");
-    } else if (isDuration(end)) {
+    } else if (dayjs.isDuration(end)) {
       const milliseconds = end.asMilliseconds();
 
       if (milliseconds > 0 && milliseconds <= 9) {
         resultInitialValues.push("");
       } else {
-        resultInitialValues.push(moment.utc(milliseconds).format(FIELD_CONST.format));
+        resultInitialValues.push(dayjs.utc(milliseconds).format(FIELD_CONST.format));
       }
     } else {
-      resultInitialValues.push(moment(end).format(FIELD_CONST.format));
+      resultInitialValues.push(dayjs.duration(end).format(FIELD_CONST.format));
     }
 
     return resultInitialValues;
@@ -96,16 +96,24 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
 
   const handleChange = useCallback(
     ({ target: { value, name } }: ChangeEvent<HTMLInputElement>) => {
-      const { inputNames, format } = FIELD_CONST;
+      const { inputNames } = FIELD_CONST;
       const [begin, end] = inputValues;
       let formattedEnteredTime = formatEnteredTime(value);
 
       const parseFormValue = (str: string) => {
-        if (!moment(str, format).isValid()) {
+        const colonCount = str.split(":").length - 1;
+        const format = colonCount === 2 ? EDisplayFormat.HH_mm_ss : EDisplayFormat.HH_mm;
+        const date = dayjs(str, format);
+
+        if (!date.isValid()) {
           return null;
         }
 
-        const duration = moment.duration(str);
+        const duration = dayjs.duration({
+          hours: date.hour(),
+          minutes: date.minute(),
+          seconds: date.second(),
+        });
 
         if (isExcludeLowValues) {
           const durationInMilliseconds = duration.asMilliseconds();
@@ -121,9 +129,13 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
       if (fixMidnightTime) {
         const formatMidnightTime = (formattedEnteredTime: string) => {
           const duration = parseFormValue(formattedEnteredTime);
+          const durationInMilliseconds = duration?.asMilliseconds();
 
-          if (duration && duration.asMilliseconds() === MillisecondsPerDay) {
-            return moment.utc(MillisecondsPerDay).format(FIELD_CONST.format);
+          if (
+            isNumber(durationInMilliseconds) &&
+            (durationInMilliseconds === 0 || durationInMilliseconds === MillisecondsPerDay)
+          ) {
+            return dayjs.utc(MillisecondsPerDay).format(FIELD_CONST.format);
           }
 
           return formattedEnteredTime;
@@ -144,7 +156,7 @@ const TimeInputsRange: FC<ITimeInputsRangeProps> = (props) => {
   );
 
   const placeholder = useMemo(
-    () => moment().startOf("day").format(FIELD_CONST.format),
+    () => dayjs().startOf("day").format(FIELD_CONST.format),
     [FIELD_CONST]
   );
 

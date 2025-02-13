@@ -5,4 +5,9 @@ export interface IScrollBehavior {
 
 export type TScrollBehaviorOptions = {
   isRelativelyWindow: boolean;
+  nestedScrollContainerId?: string;
+  scrollSpaceParams?: {
+    scrollWidth: number;
+    rightPaddingWidth: number;
+  };
 };

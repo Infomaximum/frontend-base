@@ -42,11 +42,18 @@ export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isD
   }, [localization]);
 
   const showModalError = useCallback(
-    (e: NCore.TError | undefined, closeCb?: () => void) => {
+    (
+      e: NCore.TError | undefined,
+      closeCb?: () => void,
+      maskTransitionName?: string,
+      footerButtons?: React.ReactNode[]
+    ) => {
       setShowModal(true);
       setErrorConfig({
         error: handleErrorInternal(e, localization),
         closeCb,
+        maskTransitionName,
+        footerButtons,
       });
     },
     [localization]
@@ -81,12 +88,21 @@ export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isD
     return (
       <ErrorModal
         error={errorConfig?.error}
+        maskTransitionName={errorConfig?.maskTransitionName}
+        footerButtons={errorConfig?.footerButtons}
         showModal={showModal}
         onCloseModal={handleCloseModal}
         isDebugMode={isDebugMode}
       />
     );
-  }, [errorConfig?.error, showModal, handleCloseModal, isDebugMode]);
+  }, [
+    errorConfig?.error,
+    errorConfig?.maskTransitionName,
+    errorConfig?.footerButtons,
+    showModal,
+    handleCloseModal,
+    isDebugMode,
+  ]);
 
   return (
     <ErrorModalContext.Provider value={providerValue}>

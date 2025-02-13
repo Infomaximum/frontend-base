@@ -13,47 +13,50 @@ export const labeledCrumbsContainerStyle = {
   minWidth: 0,
 };
 
-export const separatorStyle = (width: number) => (theme: TTheme) =>
+export const getSeparatorStyle = (width: number) => (theme: TTheme) =>
   ({
     width,
-    color: theme.grey7Color,
+    color: theme.grey6Color,
     display: "flex",
     justifyContent: "center",
     userSelect: "none",
     flexShrink: 0,
-  } as const);
+  }) as const;
 
-export const crumbStyle = (xPadding: number) => (theme: TTheme) =>
+export const crumbStyle = (theme: TTheme) =>
   ({
-    paddingLeft: xPadding,
-    paddingRight: xPadding,
     cursor: "pointer",
     borderRadius: "2px",
-    height: "100%",
-    background: theme.grey1Color,
+    height: "24px",
+    background: "inherit",
     ":hover": {
-      background: theme.grey3Color,
+      color: theme.grey9Color,
     },
     ":active": {
-      background: theme.grey4Color,
+      color: theme.grey10Color,
     },
     color: theme.grey7Color,
     display: "flex",
     alignItems: "center",
     overflow: "hidden",
     flexShrink: 0,
-  } as const);
+  }) as const;
+
+export const crumbTextStyle = { display: "flex", alignItems: "center", height: "24px" };
 
 export const lastCrumbTextStyle = (theme: TTheme) =>
   ({
-    color: theme.grey9Color,
-  } as const);
+    cursor: "default",
+    color: theme.grey10Color,
+  }) as const;
 
-export const menuStyle = {
+export const getMenuStyle = (maxHeight: number) => ({
   maxWidth: 400,
+  maxHeight,
+  overflow: "auto",
   // Для ellipsis
   li: { display: "block" },
-};
+});
 
 // icons
 
@@ -63,4 +66,10 @@ export const homeIconStyle = (theme: TTheme) => ({
 
 export const threeDotsIconStyle = {
   transform: "rotate(90deg)",
+};
+
+export const dropdownWrapperStyle = {
+  "&& .ant-dropdown-menu-item": {
+    display: "list-item",
+  },
 };

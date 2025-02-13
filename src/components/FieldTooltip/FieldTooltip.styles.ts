@@ -1,5 +1,15 @@
+export const getFieldTooltipContainerStyle = (isWithoutPadding?: boolean) => {
+  return {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    marginLeft: isWithoutPadding ? "none" : "8px",
+  };
+};
+
 export const captionStyle = () => ({
-  marginLeft: "8px",
+  display: "flex",
+  alignItems: "center",
   lineHeight: "31px",
 });
 
@@ -25,4 +35,5 @@ export const questionIconStyle = (theme: TTheme) => ({
 
 export const popoverStyle = {
   maxWidth: "409px",
+  zIndex: 9999,
 };

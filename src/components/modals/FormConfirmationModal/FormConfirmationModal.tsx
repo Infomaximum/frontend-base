@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ConfirmationModal } from "../ConfirmationModal/ConfirmationModal";
 import { titleAndInfoStyle, iconStyle } from "./FormConfirmationModal.styles";
 import type { IFormConfirmationModalProps } from "./FormConfirmationModal.types";
-import type { Transition } from "history";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { contains } from "../../../utils/URI/URI";
-import { useBlocker } from "../../../decorators/hooks/useBlocker";
 import { useMountEffect } from "../../../decorators/hooks/useMountEffect";
 import { ModalAnimationInterval, Z_INDEX_FORM_CONFIRMATION_MODAL } from "../../../utils/const";
 import {
@@ -14,6 +12,9 @@ import {
   SAVE_CHANGES,
   MAKE_SURE_FIELDS_FILLED_CORRECTLY,
 } from "../../../utils/Localization/Localization";
+import { useBlocker } from "react-router";
+import { useBeforeUnload } from "react-router-dom";
+import { usePrevious } from "../../../decorators";
 
 const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   formProvider,
@@ -21,36 +22,46 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   blockUri,
 }) => {
   const localization = useLocalization();
-
-  const [open, setOpen] = useState(false);
   const [hasSubmitErrors, setHasSubmitErrors] = useState<boolean>(
     formProvider?.getState().hasSubmitErrors
   );
   const [invalid, setInvalid] = useState<boolean>(formProvider?.getState().invalid);
 
-  const retryRef = useRef<() => void>();
+  const prevHasSubmitErrors = usePrevious(hasSubmitErrors);
 
-  const blocker = useCallback(
-    (tx: Transition) => {
-      const pathname = tx.location.pathname;
-      const { hasValidationErrors, errors } = formProvider.getState();
-      const mutators = formProvider.mutators;
-
-      // Если пытаемся перейти по пути, который не соответствует blockUri
-      // и не является его дочерней страницей, то блокируем переход
-      if (blockUri !== pathname || !contains(pathname, blockUri as string)) {
-        if (hasValidationErrors && mutators?.touch && errors) {
-          mutators.touch(Object.keys(errors));
+  useBeforeUnload(
+    useCallback(
+      (event) => {
+        if (when) {
+          event.preventDefault();
         }
-
-        setOpen(true);
-        retryRef.current = tx.retry;
-      }
-    },
-    [blockUri, formProvider]
+      },
+      [when]
+    ),
+    { capture: true }
   );
 
-  useBlocker(blocker, when);
+  const blocker = useBlocker(({ nextLocation, currentLocation }) => {
+    const pathname = nextLocation.pathname;
+    const { hasValidationErrors, errors } = formProvider.getState();
+    const mutators = formProvider.mutators;
+
+    // Если пытаемся перейти по пути, который не соответствует blockUri
+    // и не является его дочерней страницей, то блокируем переход
+    if (
+      when &&
+      contains(currentLocation.pathname, blockUri) &&
+      (blockUri !== pathname || !contains(pathname, blockUri as string))
+    ) {
+      if (hasValidationErrors && mutators?.touch && errors) {
+        mutators.touch(Object.keys(errors));
+      }
+
+      return true;
+    }
+
+    return false;
+  });
 
   useMountEffect(() => {
     if (formProvider) {
@@ -68,24 +79,14 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   });
 
   const handleHide = useCallback(() => {
-    setOpen(false);
-  }, []);
-
-  useEffect(() => {
-    if (hasSubmitErrors) {
-      handleHide();
-    }
-  }, [handleHide, hasSubmitErrors]);
+    blocker.reset?.();
+  }, [blocker]);
 
   const handleSuccess = useCallback(() => {
-    if (
-      retryRef.current &&
-      !formProvider.getState().invalid &&
-      !formProvider.getState().hasSubmitErrors
-    ) {
-      retryRef.current();
+    if (!formProvider.getState().invalid && !formProvider.getState().hasSubmitErrors) {
+      blocker.proceed?.();
     }
-  }, [formProvider]);
+  }, [formProvider, blocker]);
 
   const handleSaveButtonClick = useCallback(
     () =>
@@ -98,14 +99,14 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   );
 
   const handleResumeButtonClick = useCallback(() => {
-    retryRef.current?.();
-  }, []);
+    blocker.proceed?.();
+  }, [blocker]);
 
   useEffect(() => {
-    if (hasSubmitErrors) {
+    if (prevHasSubmitErrors !== hasSubmitErrors) {
       setTimeout(handleHide, ModalAnimationInterval);
     }
-  }, [handleHide, hasSubmitErrors]);
+  }, [handleHide, hasSubmitErrors, prevHasSubmitErrors]);
 
   const title = useMemo(
     () => (
@@ -118,7 +119,7 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
     [invalid, hasSubmitErrors, localization]
   );
 
-  return open ? (
+  return blocker.state === "blocked" ? (
     <ConfirmationModal
       isWithoutSaveMode={invalid || hasSubmitErrors}
       onConfirm={handleSaveButtonClick}

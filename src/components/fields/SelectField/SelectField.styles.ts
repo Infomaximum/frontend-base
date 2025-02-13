@@ -10,10 +10,9 @@ export const defaultWrapperComponentStyle = {
 };
 
 export const defaultSelectFieldStyle = (theme: TTheme) => ({
-  color: theme.grey9Color,
+  color: theme.grey10Color,
 });
 
-// fix для IE-11 (неверная высота <AntEmpty>)
 export const emptyImageStyle = {
   height: "46px",
   marginBottom: "4px",

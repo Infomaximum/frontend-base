@@ -1,3 +1,3 @@
-export const tableRowHeight = (theme: TTheme) => ({
+export const tableRowHeightStyle = (theme: TTheme) => ({
   height: `${theme.editableTableRowHeight}px`,
 });

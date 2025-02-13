@@ -22,8 +22,9 @@ export const confirmationModalAdditionalButtonTestId = `${confirmationModalTestI
 export const confirmationModalCancelButtonTestId = `${confirmationModalTestId}_cancel-button`;
 export const confirmationModalConfirmButtonTestId = `${confirmationModalTestId}_confirm-button`;
 
-// SubmitFormButton
+// FormButtons
 export const submitFormButtonTestId = "submit-button";
+export const cancelChangesFormButtonTestId = "cancel-changes-button";
 
 // Spinner
 export const wrapperSpinnerTestId = "wrapper-spinner";
@@ -59,6 +60,9 @@ export const virtualizedTableHeaderTestId = `${virtualizedTableTestId}_header`;
 export const virtualizedTableCheckboxTestId = `${virtualizedTableTestId}_checkbox`;
 export const virtualizedTableDivTestId = `${virtualizedTableTestId}_div`;
 
+// Table
+export const tableCheckboxTestId = "table-checkbox";
+
 // TableRow
 export const tableRowCheckboxTestId = "tableRow-test_checkbox";
 export const tableRowLoadingTestId = "tableRow-test_loading";
@@ -90,6 +94,7 @@ export const unAuthorizedLayoutBackNavLinkTestId = "link-back";
 
 // SettingsItem
 export const settingsItemTitleTestId = "settings-item-title-test-id";
+export const settingsItemTestId = "settings-item-test-id";
 
 // HeaderMenu
 export const headerMenuTestId = "header-menu";
@@ -102,12 +107,21 @@ export const headerMenuLogoTestId = "header-menu-logo";
 export const headerMenuSettingsTestId = "header-menu-settings";
 export const headerMenuUserAvatarTestId = "header-menu-user-avatar";
 
+// SiderMenu
+export const siderMenuTestId = "sider-menu";
+export const siderMenuLogoTestId = "sider-menu-logo";
+export const siderMenuSettingsTestId = "sider-menu-settings";
+export const siderMenuUserAvatarTestId = "sider-menu-user-avatar";
+
 // ProfileSettingsContainer
 export const logoutButtonTestId = "logout-button";
 
 // NavigationTabs
 export const navigationTabTestId = "navigation-tabs_tab";
 export const navigationTabsTestId = "tabs";
+export const navigationTabsHeaderTestId = `${navigationTabsTestId}-header`;
+export const navigationTabsBodyTestId = `${navigationTabsTestId}-body`;
+export const navigationTabsLayoutTestId = `${navigationTabsTestId}-layout`;
 
 // Message
 export const customMessageTestId = "custom-message";
@@ -148,6 +162,9 @@ export const removeDateTimePickerFieldButtonTestId = "remove-date_time_picker-fi
 export const removeInputFieldButtonTestId = "remove-input-field-button";
 export const removeInputNumberFieldButtonTestId = "remove-input_number-field-button";
 
+// SwitcherFieldArray
+export const removeSwitcherFieldButtonTestId = "remove-switcher-field-button";
+
 // AutoCompleteField/Select
 export const autocompleteSelectTestId = "autocomplete_select";
 export const autocompleteSelectSuffixButtonTestId = `${autocompleteSelectTestId}_suffix-button`;
@@ -169,19 +186,27 @@ export const passwordFieldsGreenCheckIconTestId = "green-check-icon";
 export const passwordFieldsGrayCheckIconTestId = "gray-check-icon";
 export const passwordFieldsRedCheckIconTestId = "red-check-icon";
 export const passwordFieldsFieldsValidIconTestId = "fields-valid-icon";
+export const passwordFieldsPasswordVisibilityIconTestId = "password-visibility-icon";
+export const passwordFieldsNewPasswordVisibilityIconTestId = "new-password-visibility-icon";
+export const passwordFieldsCurrentPasswordVisibilityIconTestId = "current-password-visibility-icon";
+export const passwordFieldsRepeatNewPasswordVisibilityIconTestId =
+  "repeat-new-password-visibility-icon";
 
 export const passwordFieldsPasswordNotificationTestId = "password-notification";
+
 export const passwordFieldsPopoverTestId = "password-fields_popover";
 
 // RangePickerField
 export const defaultRangePickerFieldTestId = "range-picker-field";
+
+// UploadField
+export const removeUploadFieldButtonTestId = "remove-upload-field-button";
 
 // TimeInputsRange
 export const timeInputsRangeTestId = "time-inputs-range";
 
 // TopPanel
 const topPanelTestId = "top-panel";
-export const topPanelTagCounterTestId = `${topPanelTestId}_tag-counter`;
 export const topPanelSearchInputTestId = `${topPanelTestId}_search-input`;
 
 // DataTableHeader
@@ -200,3 +225,17 @@ export const controlCellCloseTestId = "close";
 
 // EditableDataTable
 export const editableDataTableAddButtonTestId = "editable-data-table";
+
+// Breadcrumbs
+export const breadcrumbsHomeLinkTestId = "breadcrumbs-home-link";
+export const breadcrumbsShowMoreTestId = "breadcrumbs-show-more";
+
+// FiltersPanel
+export const removeFiltersButtonTestId = "remove-filters-button";
+export const addFilterButtonTestId = "add-filter-button";
+export const filterDropdownTestId = "filter-dropdown";
+export const dropdownActionsFilterButtonTestId = "dropdown-actions-filter-button";
+
+// FilterItems
+export const filterItemEditTestId = "filter-item_edit";
+export const filterItemRemoveTestId = "filter-item_remove";

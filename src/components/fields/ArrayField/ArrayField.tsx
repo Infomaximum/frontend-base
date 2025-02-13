@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { FieldArray } from "react-final-form-arrays";
-import { isFunction, map, isNil, isUndefined, isNumber, isEqual } from "lodash";
+import { isFunction, map, isNil, isUndefined, isNumber, isEqual, isString, uniqueId } from "lodash";
 import {
   addButtonStyle,
   addButtonWrapperStyle,
   addEntityButtonStyle,
   buttonDescriptionWrapperStyle,
   wrappedArrayFieldStyle,
-  rowsContainerStyle,
+  getRowsContainerStyle,
 } from "./ArrayField.styles";
 import type {
   IWrappedArrayFieldProps,
@@ -71,7 +71,7 @@ class WrappedArrayField extends React.PureComponent<
   private getResultFormItemStyle = createSelector(
     (formItemStyle?: Interpolation<TTheme>) => formItemStyle,
     (formItemStyle) => {
-      const resultFormItemStyle: Interpolation<TTheme> = [wrappedArrayFieldStyle];
+      const resultFormItemStyle = [wrappedArrayFieldStyle as Interpolation<TTheme>];
 
       if (formItemStyle) {
         resultFormItemStyle.push(formItemStyle);
@@ -94,7 +94,7 @@ class WrappedArrayField extends React.PureComponent<
       if (!isUndefined(defaultEntityValue)) {
         addMethod?.(arrayFieldName, defaultEntityValue);
       } else {
-        addMethod?.(arrayFieldName, {});
+        addMethod?.(arrayFieldName, { uniqueKey: uniqueId("_") });
       }
     }
   };
@@ -129,6 +129,10 @@ class WrappedArrayField extends React.PureComponent<
     }
 
     if (addEntityButtonPosition === EAddEntityButtonPositions.bottom) {
+      if (index === 0 && dirty) {
+        return true; // фикс автофокуса первого элемента
+      }
+
       if (fields?.length && fields?.length > 1 && dirty) {
         return index === fields.length - 1;
       }
@@ -149,7 +153,7 @@ class WrappedArrayField extends React.PureComponent<
 
     const fields = this.props.fields.value;
 
-    if (readOnly && !fields.length) {
+    if (readOnly && !fields?.length) {
       return ["—"];
     }
 
@@ -157,35 +161,25 @@ class WrappedArrayField extends React.PureComponent<
       const fieldEntityPath = `${arrayFieldName}[${index}]`;
       const newField = !field?.id;
 
-      if (newField) {
-        return (
+      const title = isString(this.props.label) ? this.props.label : "";
+
+      return (
+        <div key={field?.uniqueKey ?? field?.id ?? fieldEntityPath}>
+          <label htmlFor={arrayFieldName} title={title} />
           <EntityComponent
+            id={arrayFieldName}
             key={index}
             onRemoveFieldEntity={this.handleRemoveFieldEntity}
             fieldEntityPath={fieldEntityPath}
             fieldEntityIndex={index}
-            readOnly={readOnly}
-            fields={this.props.fields}
+            readOnly={newField ? readOnly : false}
+            isRemoveItem={!!fields.length && fields.length > 1 && !readOnly}
             writeAccess={this.writeAccess}
             removeAccess={this.deleteAccess}
-            autoFocus={this.getAutoFocusStatusByIndex(index)}
+            autoFocus={newField ? this.getAutoFocusStatusByIndex(index) : undefined}
             {...fieldEntityComponentProps}
           />
-        );
-      }
-
-      return (
-        <EntityComponent
-          key={index}
-          onRemoveFieldEntity={this.handleRemoveFieldEntity}
-          fieldEntityPath={fieldEntityPath}
-          fieldEntityIndex={index}
-          readOnly={false}
-          fields={this.props.fields}
-          writeAccess={this.writeAccess}
-          removeAccess={this.deleteAccess}
-          {...fieldEntityComponentProps}
-        />
+        </div>
       );
     });
 
@@ -198,11 +192,12 @@ class WrappedArrayField extends React.PureComponent<
 
     const isDisabled = fields.value?.some((v) => isNil(v) || v === "");
     const additionalContent = additionalButtonContent?.(formProvider);
+    const isReadOnly = readOnly || !this.createAccess;
 
-    return !readOnly && this.createAccess ? (
+    return (
       <div key="button-block">
         <Button
-          disabled={isDisabled}
+          disabled={isDisabled || isReadOnly}
           key="add-button"
           type="link"
           onClick={this.handleAddFieldEntity}
@@ -218,25 +213,21 @@ class WrappedArrayField extends React.PureComponent<
         </Button>
         {additionalContent}
       </div>
-    ) : null;
+    );
   };
 
   public override render() {
-    const { label, wrapperCol, addEntityButtonPosition, formItemStyle } = this.props;
+    const { label, addEntityButtonPosition, formItemStyle } = this.props;
     const { spaceSize } = this.props;
 
     return (
-      <FormOption
-        label={label}
-        wrapperCol={wrapperCol}
-        formItemStyle={this.getResultFormItemStyle(formItemStyle)}
-      >
-        <div css={rowsContainerStyle(spaceSize)}>
+      <FormOption label={label} formItemStyle={this.getResultFormItemStyle(formItemStyle)}>
+        <div css={getRowsContainerStyle(spaceSize)}>
           {addEntityButtonPosition === EAddEntityButtonPositions.top
             ? [this.getAddEntityButton(), this.getFields()]
             : addEntityButtonPosition === EAddEntityButtonPositions.bottom
-            ? [this.getFields(), this.getAddEntityButton()]
-            : [this.getFields(), null]}
+              ? [this.getFields(), this.getAddEntityButton()]
+              : [this.getFields(), null]}
         </div>
       </FormOption>
     );
@@ -271,4 +262,4 @@ const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
   );
 };
 
-export const ArrayField = withFeature(ArrayFieldComponent);
+export const ArrayField = memo(withFeature(ArrayFieldComponent));

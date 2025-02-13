@@ -1,2 +1,2 @@
 export { ModalForm } from "./ModalForm";
-export { formStyle, modalBodyStyle } from "./ModalForm.styles";
+export { formStyle, modalBodyStyle, modalComponentsStyle } from "./ModalForm.styles";

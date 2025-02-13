@@ -29,7 +29,7 @@ describe("Тест компонента", () => {
       picker: "quarter" as any,
     };
     const component = setUp(nextProps);
-    expect(component.find(`Picker[picker="${nextProps.picker}"]`).exists()).toEqual(true);
+    expect(component.find(`DatePicker[picker="${nextProps.picker}"]`).exists()).toEqual(true);
   });
   it("Проверка на отображение инпута с disabled, если readOnly=true", () => {
     const nextProps = {
@@ -39,21 +39,24 @@ describe("Тест компонента", () => {
     const component = setUp(nextProps);
     expect(component.find(`input[disabled=${nextProps.readOnly}]`).exists()).toEqual(true);
   });
-  it("Проверка кастомного momentFormat", () => {
+  it("Проверка кастомного displayFormat", () => {
     const nextProps = {
       ...props,
-      momentFormat: "hh:mm:ss DD.MM.YYYY",
+      displayFormat: "hh:mm:ss DD.MM.YYYY",
     };
     const component = setUp(nextProps);
-    expect(component.find(`Picker[format="${nextProps.momentFormat}"]`).exists()).toEqual(true);
+    expect(component.find(`DatePicker[format="${nextProps.displayFormat}"]`).exists()).toEqual(
+      true
+    );
   });
 
-  it("Проверка если showTime === true то momentFormat === DD.MM.YYYY, HH:mm", () => {
+  it("Проверка если showTime === true то displayFormat === DD.MM.YYYY, HH:mm", () => {
     const nextProps = {
       ...props,
       showTime: true,
     };
     const component = setUp(nextProps);
-    expect(component.find(`Picker[format="DD.MM.YYYY, HH:mm"]`).exists()).toEqual(true);
+
+    expect(component.find(`DatePicker[format="DD.MM.YYYY, HH:mm"]`).exists()).toEqual(true);
   });
 });

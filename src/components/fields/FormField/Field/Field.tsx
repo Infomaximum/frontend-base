@@ -78,16 +78,18 @@ const FieldComponent = <V, P extends FieldRenderProps<V> = FieldRenderProps<V>>(
 
   if (isFormHasAccess) {
     return (
-      <div data-name={props.name} css={fieldWrapperStyle}>
+      <div css={fieldWrapperStyle}>
+        <label htmlFor={props.name} title={props.label} />
         <FinalFormField<V>
+          id={props.name}
           key="field"
           {...rest}
           readOnly={
             readOnly !== undefined
               ? readOnly
               : isFieldHasAccessData
-              ? !hasWriteAccess
-              : !isFormHasWriteAccess
+                ? !hasWriteAccess
+                : !isFormHasWriteAccess
           }
           validate={validate}
           component={WrappedField}

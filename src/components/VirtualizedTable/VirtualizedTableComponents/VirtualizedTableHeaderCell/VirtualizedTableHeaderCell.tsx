@@ -15,6 +15,7 @@ import {
   virtualizedTableHeaderCellStyle,
   virtualizedTableHeaderSortedCellStyle,
   virtualizedTableHeaderSortedCellActiveStyle,
+  sorterRowStyle,
 } from "./VirtualizedTableHeaderCell.styles";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
 
@@ -26,9 +27,7 @@ const getSorterArrowStyle = (isUp: boolean, isActive: boolean, theme: TTheme) =>
   return isActive ? sorterArrowDownActiveStyle(theme) : sorterArrowDownStyle(theme);
 };
 
-const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
-  props: IVirtualizedTableHeaderCellProps<T>
-) => {
+const VirtualizedTableHeaderCellComponent = <T,>(props: IVirtualizedTableHeaderCellProps<T>) => {
   const { column, onSorterChange, columnsOrders, isSorted, sortOrder } = props;
   const { key, title, width, sorter: isColumnSorter, minWidth } = column || {};
 
@@ -58,7 +57,7 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
     const columnOrders = key ? get(columnsOrders, key) : undefined;
 
     return (
-      <Row key="sortable" align="middle">
+      <Row key="sortable" align="middle" css={sorterRowStyle}>
         <Col css={sorterColumnStyle}>
           {includes(columnOrders, ESortDirection.ASC) && (
             <Row key="asc">
@@ -90,8 +89,10 @@ const VirtualizedTableHeaderCellComponent = <T extends TDictionary>(
   );
 };
 
-const MemoVirtualizedTableHeaderCell = memo(VirtualizedTableHeaderCellComponent);
+const MemoVirtualizedTableHeaderCell = memo(
+  VirtualizedTableHeaderCellComponent
+) as typeof VirtualizedTableHeaderCellComponent;
 
-export const VirtualizedTableHeaderCell = <T extends TDictionary>(
-  props: IVirtualizedTableHeaderCellProps<T>
-) => <MemoVirtualizedTableHeaderCell {...props} />;
+export const VirtualizedTableHeaderCell = <T,>(props: IVirtualizedTableHeaderCellProps<T>) => (
+  <MemoVirtualizedTableHeaderCell<T> {...props} />
+);
