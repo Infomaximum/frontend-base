@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.1](https://github.com/Infomaximum/frontend-base/compare/v7.0.0...v7.0.1) (2025-02-20)
+
+
+### Bug Fixes
+
+* type ([d3fb426](https://github.com/Infomaximum/frontend-base/commit/d3fb4266d390dd76e77224430d9db76af634b7d3))
+
 ## [6.1.0](https://github.com/Infomaximum/frontend-base/compare/v6.0.1...v6.1.0) (2024-01-16)
 
 
