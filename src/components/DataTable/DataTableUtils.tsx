@@ -106,6 +106,7 @@ const getColumnsWithShowMore = <T extends TBaseRow>(
 ) =>
   map(columns, ({ render, ...rest }: IColumnProps<T>, index: number) => ({
     ...rest,
+    filterDropdownProps: rest?.filterDropdownProps as any,
     render(text: string, record: T, rowIndex: number) {
       const { model } = record;
 
