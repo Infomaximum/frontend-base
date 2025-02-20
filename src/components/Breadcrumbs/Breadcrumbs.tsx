@@ -11,7 +11,6 @@ import {
   threeDotsIconStyle,
   getMenuStyle,
   dropdownWrapperStyle,
-  crumbTextStyle,
 } from "./Breadcrumbs.styles";
 import type { IBreadcrumbsProps } from "./Breadcrumbs.types";
 import { calcShrinkMask, interleaveWith } from "./Breadcrumbs.utils";
@@ -169,9 +168,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
 
       return (
         <div key={item.key} css={style} onClick={item.onClick}>
-          <AlignedTooltip css={{ fontSize: crumbFontSize }}>
-            <div css={crumbTextStyle}>{item.name}</div>
-          </AlignedTooltip>
+          <AlignedTooltip css={{ fontSize: crumbFontSize }}>{item.name}</AlignedTooltip>
         </div>
       );
     });

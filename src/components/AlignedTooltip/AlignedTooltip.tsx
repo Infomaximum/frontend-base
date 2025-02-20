@@ -36,6 +36,8 @@ export const AlignedTooltip: FC<IAlignedTooltipProps> = ({
   numberOfLines = 1,
   customStyle,
   expandByParent = true,
+  visible,
+  removeMouseEnterDelay,
 }) => {
   const theme = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,6 +89,8 @@ export const AlignedTooltip: FC<IAlignedTooltipProps> = ({
         // Смена направления стандартного отображения в зависимости от того, хватает места или нет
         placement={isChangeHorizontalDirection ? "topRight" : undefined}
         destroyTooltipOnHide={true}
+        open={visible}
+        removeMouseEnterDelay={removeMouseEnterDelay}
       >
         <div
           ref={containerRef}

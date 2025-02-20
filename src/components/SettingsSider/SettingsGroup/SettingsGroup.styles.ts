@@ -43,10 +43,13 @@ export const betaLinkStyle = {
   columnGap: 8,
 };
 
-export const currentRouteStyle = (theme: TTheme) => ({
-  "&&": {
-    backgroundColor: theme.thrust0Color,
-    border: `1px solid ${theme.thrust2Color}`,
-    borderRadius: "4px",
-  },
-});
+export const currentRouteStyle = (theme: TTheme) =>
+  ({
+    "&&": {
+      backgroundColor: theme.thrust0Color,
+      border: `1px solid ${theme.thrust2Color}`,
+      borderRadius: "4px",
+      cursor: "default",
+      pointerEvents: "none",
+    },
+  }) as const;

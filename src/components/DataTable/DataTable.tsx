@@ -14,7 +14,6 @@ import type { TableRowSelection } from "antd/lib/table/interface";
 import { observer } from "mobx-react";
 import { type IReactionDisposer, reaction } from "mobx";
 import { type TBaseRow, type TExtendColumns, TreeManager } from "../../managers/Tree";
-import { goBackPath } from "../../utils/Routes/paths";
 import { Group, type IModel } from "@infomaximum/graphql-model";
 import { RestModel } from "../../models/RestModel";
 import { isShowElement } from "../../utils/access";
@@ -229,7 +228,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
   private listenLeavingOfRouteBranch(callback: () => void) {
     const sourcePathname = this.props.location.pathname;
     const dispose = historyStore.listenLocationChange(({ pathname }) => {
-      if (pathname.indexOf(sourcePathname) !== 0 && pathname !== goBackPath) {
+      if (pathname.indexOf(sourcePathname) !== 0) {
         callback();
         dispose();
       }

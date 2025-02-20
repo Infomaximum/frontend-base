@@ -81,11 +81,11 @@ const DataTableDrawerContentComponent = <T extends TBaseRow>({
   );
 
   if (!tableStore.model) {
-    return <Spinner />;
+    tableStore.error ? renderErrorAlert(tableStore.error, localization) : <Spinner />;
   }
 
   const isNeedLoadingOnScrollDataTable =
-    (isUndefined(isLoadingOnScroll) && tableStore?.model instanceof PagingGroup) ||
+    (isUndefined(isLoadingOnScroll) && tableStore.model instanceof PagingGroup) ||
     isLoadingOnScroll;
 
   const TableComponent = isNeedLoadingOnScrollDataTable ? LoadingOnScrollDataTable : DataTable;

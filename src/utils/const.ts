@@ -144,8 +144,9 @@ export enum EErrorBoundaryCodesBase {
 // 20 стандартным записям по 38px с блоком счетчиком остатка и спинером
 export const defaultRestScrollTriggerHeight = 800;
 
-/** Код левой кнопки мыши */
+/** Коды кнопок мыши */
 export const leftMouseBtnCode = 0;
+export const middleMouseBtnCode = 1;
 
 /**
  * Количество отображаемых фильтров

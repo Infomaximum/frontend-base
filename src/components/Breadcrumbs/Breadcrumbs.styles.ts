@@ -42,8 +42,6 @@ export const crumbStyle = (theme: TTheme) =>
     flexShrink: 0,
   }) as const;
 
-export const crumbTextStyle = { display: "flex", alignItems: "center", height: "24px" };
-
 export const lastCrumbTextStyle = (theme: TTheme) =>
   ({
     cursor: "default",

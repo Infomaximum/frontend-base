@@ -13,6 +13,7 @@ const TooltipComponent: FC<ITooltipProps> = ({
   overlayStyle: overlayStyleProp,
   title,
   align = alignDefault,
+  removeMouseEnterDelay,
   ...rest
 }) => {
   const theme = useTheme();
@@ -39,7 +40,7 @@ const TooltipComponent: FC<ITooltipProps> = ({
       overlayStyle={overlayStyle}
       overlayInnerStyle={overlayInnerStyle}
       align={align}
-      mouseEnterDelay={1.5}
+      mouseEnterDelay={removeMouseEnterDelay ? undefined : 1.5}
       mouseLeaveDelay={0}
       {...rest}
       title={title}

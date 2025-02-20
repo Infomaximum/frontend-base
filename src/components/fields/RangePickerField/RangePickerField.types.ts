@@ -1,7 +1,6 @@
 import type { RangePickerProps } from "antd/lib/date-picker";
 import type { Dayjs } from "dayjs";
 import type { FieldRenderProps } from "react-final-form";
-import type { PickerMode } from "rc-picker/lib/interface";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 export type TRangePickerFieldValue = [Dayjs, Dayjs];
@@ -15,7 +14,7 @@ type TOmitRangePickerProps =
   | "name"
   | "defaultValue";
 
-export type TPickerValue = PickerMode;
+export type TPickerValue = RangePickerProps["picker"];
 
 export type TRangeValueType<DateType> = [start: DateType | null, end: DateType | null];
 

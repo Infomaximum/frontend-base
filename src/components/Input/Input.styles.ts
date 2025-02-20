@@ -1,3 +1,5 @@
+import { ellipsisStyle } from "../../styles";
+
 export const getDisabledInputStyle = (theme: TTheme, bordered = true) => ({
   height: "28px",
   border: "1px solid transparent !important",
@@ -6,6 +8,7 @@ export const getDisabledInputStyle = (theme: TTheme, bordered = true) => ({
   backgroundColor: theme.grey3Color,
   color: theme.grey7Color,
   padding: bordered ? "2px 7px" : "3px 8px",
+  "& .ant-input": ellipsisStyle,
 });
 
 export const disabledTextAreaStyle = (theme: TTheme) => ({

@@ -42,8 +42,8 @@ const RangePicker: React.FC<IRangePickerProps> = ({
 
   const format = displayFormat || "DD.MM.YYYY";
 
-  const handleCalendarChange = (dates: TRangeValueType<Dayjs>) => {
-    if (dates.every((item: Dayjs) => item !== null)) {
+  const handleCalendarChange: IRangePickerProps["onCalendarChange"] = (dates) => {
+    if (dates.every((item) => item !== null)) {
       onChange(dates);
     }
   };

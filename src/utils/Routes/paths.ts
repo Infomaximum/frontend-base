@@ -12,6 +12,3 @@ export const changePasswordPath = `${rootPath}change-password/:token`;
 export const inviteSetPasswordPath = `${rootPath}invite-set-password/:token`;
 export const updatePasswordPath = `${rootPath}update-password`;
 /* ------------------------------ Логин [END] ----------------------------------- */
-
-// Перенаправление на предыдущую страницу (применяется, для перезагрузки текущей страницы настроек)
-export const goBackPath = `${rootPath}go-back`;

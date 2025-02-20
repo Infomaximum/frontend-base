@@ -14,6 +14,7 @@ import { FormField } from "../FormField/FormField";
 import { InputFieldComponent } from "../InputField/InputField";
 import { Input } from "../../Input/Input";
 import { EyeInvisibleOutlined, EyeOutlined } from "../../Icons";
+import { convertToNotWhitespace } from "../InputField";
 
 /**
  * Компонент для ввода пароля с кнопкой
@@ -92,6 +93,7 @@ const PasswordWithButtonFormFieldComponent: React.FC<IPasswordWithButtonFieldPro
       autoFocus={isEditablePassword}
       priority={priority}
       iconRender={renderVisibilityIcon}
+      parse={convertToNotWhitespace}
       {...rest}
     />
   );

@@ -16,9 +16,7 @@ export interface IColumnProps<T = any> extends IBaseColumnConfig<T> {
 }
 
 export type TRow<T extends TBaseRow = TBaseRow> = Partial<TExtendColumns<T>>;
-export interface IVirtualizedColumnConfig<T> extends IColumnProps<T> {
-  minWidth?: string | number;
-}
+export interface IVirtualizedColumnConfig<T> extends IColumnProps<T> {}
 
 export interface IVirtualizedTableOwnProps<T>
   extends Pick<

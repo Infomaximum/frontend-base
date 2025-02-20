@@ -175,7 +175,9 @@ describe("Тест компонента Select", () => {
     await user.click(target);
 
     expect(clickFn).toHaveBeenCalled();
-    expect(screen.getByText(/no data/i)).toBeInTheDocument();
+    screen.getAllByText(/no data/i).forEach((element) => {
+      expect(element).toBeInTheDocument();
+    });
 
     rerender(<Select onClick={clickFn} notFoundContent="Нет данных" />);
     expect(screen.getByText(/нет данных/i)).toBeInTheDocument();

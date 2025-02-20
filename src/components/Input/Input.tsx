@@ -11,6 +11,7 @@ import {
   useEffect,
   useState,
   useRef,
+  useCallback,
 } from "react";
 import {
   getDefaultInputStyle,
@@ -44,6 +45,14 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
     const [isOverflow, setIsOverflow] = useState(false);
     const inputWrapperRef = useRef<HTMLDivElement>(null);
 
+    const tooltipTitle = useMemo(
+      () => (rest.type !== "password" && !hideTooltip && isOverflow && String(value)) || null,
+      [hideTooltip, isOverflow, rest.type, value]
+    );
+
+    const [isTooltipHidden, setIsTooltipHidden] = useState(true);
+    const [isTooltipVisible, setIsTooltipVisible] = useState<boolean>(false);
+
     useEffect(() => {
       if (inputWrapperRef.current) {
         const textWidth = isString(value) ? getTextWidth(value, { size: theme.h4FontSize }) : 0;
@@ -51,9 +60,59 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
       }
     }, [theme, value]);
 
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        if (!isTooltipHidden && !!tooltipTitle) {
+          setIsTooltipVisible(true);
+        }
+      }, 1500);
+
+      if (!tooltipTitle) {
+        setIsTooltipVisible(false);
+      }
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }, [isTooltipHidden, tooltipTitle]);
+
+    const handleInputContainerMouseLeave = useCallback(() => {
+      setIsTooltipVisible(false);
+      setIsTooltipHidden(true);
+    }, []);
+
+    const handleInputContainerMouseOver = useCallback(
+      (event: React.MouseEvent) => {
+        const target = event.target as HTMLElement | null;
+        const relatedTarget = event.relatedTarget as HTMLElement | null;
+
+        if (target?.classList.contains("ant-input")) {
+          if (!!tooltipTitle) {
+            setIsTooltipHidden(false);
+          }
+        }
+
+        if (relatedTarget?.classList.contains("ant-input")) {
+          setIsTooltipHidden(true);
+          setIsTooltipVisible(false);
+        }
+      },
+      [tooltipTitle]
+    );
+
     return (
-      <div ref={inputWrapperRef} css={wrapperStyle}>
-        <AlignedTooltip offsetY={-1} title={(!hideTooltip && isOverflow && String(value)) || null}>
+      <div
+        onMouseLeave={handleInputContainerMouseLeave}
+        onMouseOver={handleInputContainerMouseOver}
+        ref={inputWrapperRef}
+        css={wrapperStyle}
+      >
+        <AlignedTooltip
+          offsetY={-1}
+          visible={isTooltipVisible}
+          title={tooltipTitle}
+          removeMouseEnterDelay={true}
+        >
           <AntInput
             {...rest}
             ref={ref}

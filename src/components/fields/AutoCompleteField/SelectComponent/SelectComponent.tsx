@@ -36,7 +36,7 @@ import {
 import type { ISelectComponentProps, ISelectState } from "./SelectComponent.types";
 import { observer } from "mobx-react";
 import { reaction } from "mobx";
-import type { RawValueType } from "rc-tree-select/lib/TreeSelect";
+import type { TreeSelectProps } from "rc-tree-select/lib/TreeSelect";
 import { Group, type IModel } from "@infomaximum/graphql-model";
 import { CloseCircleFilled, CloseOutlined } from "../../../Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
@@ -220,7 +220,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
 
   private onSearchDebounced = debounce(this.onSearch, KeyupRequestInterval);
 
-  private mapSelectValueToModel(value: RawValueType) {
+  private mapSelectValueToModel(value: TreeSelectProps["value"]) {
     const { autocompleteStore, value: fieldValue } = this.props;
 
     return autocompleteStore.map?.get(value) ?? this.getFieldValueCollection(fieldValue)[value];

@@ -156,9 +156,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
       this.setState({ scrollOffset: offset });
     }
 
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 0);
+    this.setState({ loading: false });
   };
 
   private updateColumnsSortOrders(columns: IVirtualizedTableProps<T | null>["columns"]) {
@@ -260,9 +258,24 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
     };
 
     traverseTree(dataSource);
+    const isCheckableDisabled = this.areAllCheckboxesDisabled(surfaceNodes);
 
-    this.setState({ surfaceNodes });
+    this.setState({ surfaceNodes, isCheckableDisabled });
   }
+
+  private areAllCheckboxesDisabled = (surfaceNodes: T[]): boolean => {
+    const { rowSelection, dataSource } = this.props;
+
+    if (!rowSelection || !dataSource) {
+      return true;
+    }
+
+    return surfaceNodes.every((record) => {
+      const checkboxProps = rowSelection.getCheckboxProps?.(record) ?? {};
+
+      return checkboxProps.disabled;
+    });
+  };
 
   private handleSorterChange = (column: IVirtualizedColumnConfig<T | null>) => {
     const { surfaceNodes } = this.state;

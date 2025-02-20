@@ -14,7 +14,12 @@ import { useLocalization } from "../../../decorators";
 import { AlignedTooltip } from "../../AlignedTooltip";
 import { Tooltip } from "../../Tooltip";
 import { CloseOutlined } from "../../Icons";
-import { CLOSE_FILTER, filterItemEditTestId, filterItemRemoveTestId } from "../../../utils";
+import {
+  CLOSE_FILTER,
+  filterItemEditTestId,
+  filterItemRemoveTestId,
+  tagFilterItemRemoveTestId,
+} from "../../../utils";
 
 const tooltipAlign = { targetOffset: [0, 2] };
 
@@ -83,6 +88,7 @@ const FilterItem: React.FC<IFilterItemProps> = (props) => {
       handleRemoveFilter={handleRemoveFilter}
       disabled={disabled}
       withOverflow={withOverflow}
+      closeIconTestId={`${tagFilterItemRemoveTestId}-${filterName}`}
     >
       {children}
     </FilterItemTag>

@@ -4,9 +4,18 @@ import { getFilterTagStyle } from "./FilterItemTag.styles";
 import { useTagValue } from "./FilterItemTag.utils";
 import { AlignedTooltip } from "../../../AlignedTooltip";
 import { Tag } from "../../../Tag";
+import { CloseOutlined } from "../../../Icons";
 
 const FilterItemTag: FC<IFilterItemTagProps> = (props) => {
-  const { caption, children, disabled, handleEditFilter, handleRemoveFilter, withOverflow } = props;
+  const {
+    caption,
+    children,
+    disabled,
+    handleEditFilter,
+    handleRemoveFilter,
+    withOverflow,
+    closeIconTestId,
+  } = props;
   const tagValue = useTagValue(caption, children);
 
   return (
@@ -14,6 +23,7 @@ const FilterItemTag: FC<IFilterItemTagProps> = (props) => {
       <Tag
         onClick={handleEditFilter}
         closable={true}
+        closeIcon={<CloseOutlined test-id={closeIconTestId} />}
         onClose={handleRemoveFilter}
         css={getFilterTagStyle(disabled)}
       >

@@ -3,10 +3,7 @@ import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 
-export const getVirtualizedTableCellFlexStyle = (
-  width?: string | number,
-  minWidth?: string | number
-) => {
+export const getVirtualizedTableCellFlexStyle = (width?: string | number, minWidth?: number) => {
   return { flexBasis: width ?? 0, flexGrow: width ? 0 : 1, minWidth };
 };
 

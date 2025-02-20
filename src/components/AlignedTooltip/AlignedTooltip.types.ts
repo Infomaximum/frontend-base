@@ -9,4 +9,6 @@ export interface IAlignedTooltipProps {
   numberOfLines?: number;
   customStyle?: Interpolation<TTheme>;
   expandByParent?: boolean;
+  visible?: boolean;
+  removeMouseEnterDelay?: boolean;
 }
