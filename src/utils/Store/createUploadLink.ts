@@ -19,6 +19,7 @@ import {
 } from "@infomaximum/utility";
 import { v4 as uuid4 } from "uuid";
 import axiosRetry from "axios-retry";
+import type { TModifyUploadLinkAxiosConfig } from "./apollo.types";
 
 /**
  * Перехватчики событий ответа/запроса, которые изменяют глобальную переменную activeRequests, в
@@ -121,7 +122,10 @@ function proxyResponseAxiosFetch(response: AxiosResponse & { message?: string })
   return Promise.resolve(new Response(body, options));
 }
 
-export function createUploadLink(graphqlURL: string) {
+export function createUploadLink(
+  graphqlURL: string,
+  modifyAxiosConfig?: TModifyUploadLinkAxiosConfig
+) {
   return new ApolloLink((operation) => {
     const uri = selectURI(operation, graphqlURL);
 
@@ -184,7 +188,7 @@ export function createUploadLink(graphqlURL: string) {
         },
       } as AxiosRequestConfig;
 
-      axios(config)
+      axios(modifyAxiosConfig ? modifyAxiosConfig(config) : config)
         .then(proxyResponseAxiosFetch, proxyResponseAxiosFetch)
         .then((response) => {
           operation.setContext({

@@ -1,6 +1,6 @@
 import React, { createRef, type HTMLAttributes, type FC } from "react";
 import { Upload } from "antd";
-import { isFunction, isEqual, forEach, isEmpty, isString, get } from "lodash";
+import { isFunction, isEqual, forEach, isEmpty, isString, get, size } from "lodash";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import { removeUploadFieldButtonTestId } from "../../../utils";
@@ -15,7 +15,7 @@ import {
   draggerStyle,
   uploadListItemStyle,
   uploadIconStyle,
-  uploadWrapperStyle,
+  disableAnimationWrapperStyle,
 } from "./UploadField.styles";
 import { DeleteOutlined } from "../../Icons";
 import { InboxOutlinedSVG } from "../../../resources/icons";
@@ -224,8 +224,12 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
     }
   };
 
-  private getUpload(): React.ReactNode {
-    const { caption, fieldStyle, multiList, input, showUploadList, ...rest } = this.props;
+  private renderUsualMode(): React.ReactNode {
+    const { caption, fieldStyle, multiList, input, showUploadList, disableAnimation, ...rest } =
+      this.props;
+
+    const isDisabledAnimation =
+      disableAnimation && (size(input.value) || size(rest.defaultFileList));
 
     return (
       <Upload
@@ -236,21 +240,11 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
         onChange={this.handleChange}
         onRemove={this.handleRemove}
         beforeUpload={this.beforeUpload}
-        css={[fieldStyle, uploadListItemStyle]}
+        css={[fieldStyle, uploadListItemStyle, isDisabledAnimation && disableAnimationWrapperStyle]}
       >
         {caption}
       </Upload>
     );
-  }
-
-  private renderUsualMode(): React.ReactNode {
-    const { disableAnimation, input, defaultFileList } = this.props;
-
-    if (disableAnimation && (input.value.length || defaultFileList)) {
-      return <div css={uploadWrapperStyle}>{this.getUpload()}</div>;
-    }
-
-    return this.getUpload();
   }
 
   private renderDragAndDropMode(): React.ReactNode {

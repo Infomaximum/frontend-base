@@ -65,7 +65,7 @@ export const getDisplaySelectStyle = (iconSlotCount: number) => (theme: TTheme) 
         textOverflow: "unset",
       },
     },
-    ".ant-select-selection-item": {
+    "&& .ant-select-selection-item": {
       paddingRight: "0px !important",
       display: "flex",
       alignItems: "center",

@@ -1413,15 +1413,7 @@
   resolved "https://registry.yarnpkg.com/@infomaximum/global-types/-/global-types-1.1.2.tgz#592ba0bccf973e3026d2ae3419590e1e5c0c1d92"
   integrity sha512-y0xiOhWbuEgfbxdy7Ytol/v6E/dpwVD1QiFIhymBboQ+o3lb6hLHe7ygxOvlJ2EgYYBrN2rtsBa6RSw90E2Kmw==
 
-"@infomaximum/graphql-model@^1.2.0":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@infomaximum/graphql-model/-/graphql-model-1.4.2.tgz#72558c185bb04336f8a2a2c2ce9c254cd8adb053"
-  integrity sha512-NdPtye8hDA1f/UZnxnQOrGvF61D8fvT1666TVDgTcKCAFi3K2K++2ygcVFABrrWkbywbEn2ut8LeoqvTHRmOdw==
-  dependencies:
-    "@infomaximum/assert" "^1.0.0"
-    lodash.get "^4.4.2"
-
-"@infomaximum/graphql-model@^1.5.0":
+"@infomaximum/graphql-model@^1.2.0", "@infomaximum/graphql-model@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@infomaximum/graphql-model/-/graphql-model-1.5.0.tgz#bb2f141e5ce50e7c094591483c7f762ff0efa7bf"
   integrity sha512-PuMWvPyZJ7BdG+0YdL/aGZZUmpdsASdBPKpUk+QQfU2RzewO+NvZeYrAPXJfq6rLwFYsryi2fpaXppKff20XqQ==
@@ -1429,10 +1421,10 @@
     "@infomaximum/assert" "^1.0.0"
     lodash.get "^4.4.2"
 
-"@infomaximum/localization@^1.0.1", "@infomaximum/localization@^1.0.3", "@infomaximum/localization@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@infomaximum/localization/-/localization-1.0.4.tgz#252d2170dc6392688ce065ef8588a0b67d5128c0"
-  integrity sha512-mwN79GRRDg3tQLNTXcUO8Ry5BMTm6vXMQkm0y/n6bvfjqjmUHKSH84d6mT1IHjpDiiKyctkQw5sEzUgWV7ntqg==
+"@infomaximum/localization@^1.0.1", "@infomaximum/localization@^1.0.3", "@infomaximum/localization@^1.0.4", "@infomaximum/localization@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@infomaximum/localization/-/localization-1.0.5.tgz#0acc2035742aea19e5b569bf253af666dfc47486"
+  integrity sha512-bRW9gA6/+cI+nHRD+Dc2szOULNm81grB4V6be0yvnXcA9zGNJhfNindMOqJ3RMQO0Ab4PDW9HLzwPag+qORH1Q==
   dependencies:
     "@infomaximum/assert" "^1.0.0"
 
@@ -5381,9 +5373,9 @@ rc-tree-select@~5.27.0:
     rc-util "^5.43.0"
 
 rc-tree@~5.13.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-5.13.0.tgz#ae34768c1463fd1fb19d73549c29b219c8891296"
-  integrity sha512-2+lFvoVRnvHQ1trlpXMOWtF8BUgF+3TiipG72uOfhpL5CUdXCk931kvDdUkTL/IZVtNEDQKwEEmJbAYJSA5NnA==
+  version "5.13.1"
+  resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-5.13.1.tgz#f36a33a94a1282f4b09685216c01487089748910"
+  integrity sha512-FNhIefhftobCdUJshO7M8uZTA9F4OPGVXqGfZkkD/5soDeOhwO06T/aKTrg0WD8gRg/pyfq+ql3aMymLHCTC4A==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"

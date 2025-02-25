@@ -9,36 +9,34 @@ const alignDefault = { targetOffset: [0, -2] };
 
 const TooltipComponent: FC<ITooltipProps> = ({
   placement,
-  overlayInnerStyle: overlayInnerStyleProp,
-  overlayStyle: overlayStyleProp,
   title,
   align = alignDefault,
   removeMouseEnterDelay,
+  styles: stylesProp,
   ...rest
 }) => {
   const theme = useTheme();
 
-  const overlayStyle = useMemo(
-    () => ({
-      ...tooltipOverlayStyle(theme),
-      ...overlayStyleProp,
-    }),
-    [overlayStyleProp, theme]
-  );
+  const styles = useMemo(() => {
+    const { root, body, ...rest } = stylesProp ?? {};
 
-  const overlayInnerStyle = useMemo(
-    () => ({
-      ...tooltipOverlayInnerStyle(theme),
-      ...overlayInnerStyleProp,
-    }),
-    [theme, overlayInnerStyleProp]
-  );
+    return {
+      body: {
+        ...tooltipOverlayInnerStyle(theme),
+        ...body,
+      },
+      root: {
+        ...tooltipOverlayStyle(theme),
+        ...root,
+      },
+      ...rest,
+    };
+  }, [stylesProp, theme]);
 
   return (
     <AntTooltip
       color={theme.grey9Color}
-      overlayStyle={overlayStyle}
-      overlayInnerStyle={overlayInnerStyle}
+      styles={styles}
       align={align}
       mouseEnterDelay={removeMouseEnterDelay ? undefined : 1.5}
       mouseLeaveDelay={0}

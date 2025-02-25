@@ -4,7 +4,6 @@ import type {
   IRangePickerFieldProps,
   IRangePickerProps,
   IRangePickerFormFieldProps,
-  TRangeValueType,
 } from "./RangePickerField.types";
 import { getPlaceholder } from "./RangePickerField.utils";
 import { defaultRangePickerFieldTestId } from "../../../utils/TestIds";

@@ -25,15 +25,15 @@ export const uploadListItemStyle = {
   },
 };
 
-export const uploadWrapperStyle = {
+export const disableAnimationWrapperStyle = {
   width: "100%",
-  marginBottom: "29px",
-  ".ant-upload-list .ant-upload-list-text": {
-    position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  gap: "8px",
+  ".ant-upload-list .ant-upload-list-item": {
+    marginTop: "0px",
   },
-  ".ant-upload-wrapper .ant-upload-list .ant-upload-list-item-container": {
-    width: "100%",
+  ".ant-upload-list .ant-upload-list-item-container": {
     transition: "opacity 0s, height 0s !important",
-    position: "absolute",
   },
 } as const;
