@@ -9,7 +9,7 @@
     "@types/react": "^18.3.4"
   },
   "sideEffects": [
-    "./src/configure.js"
+    "./configure.js"
   ],
   "dependencies": {
     "@ant-design/icons": "5.3.7",
