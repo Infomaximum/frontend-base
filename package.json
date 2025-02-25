@@ -8,7 +8,9 @@
   "resolutions": {
     "@types/react": "^18.3.4"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "./src/configure.js"
+  ],
   "dependencies": {
     "@ant-design/icons": "5.3.7",
     "@ant-design/pro-layout": "^7.19.0",

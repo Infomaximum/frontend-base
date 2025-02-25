@@ -1,5 +1,3 @@
-import "./dayjs";
-
 export * from "./Localization";
 export * from "./Routes";
 export * from "./ScrollBehavior";

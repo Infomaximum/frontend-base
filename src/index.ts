@@ -9,19 +9,7 @@
 /// <reference path="libs/core/index.ts" />
 /// <reference path="libs/utils/index.ts" />
 
-import { configure } from "mobx";
-
-configure({
-  enforceActions: "always",
-  computedRequiresReaction: false,
-  reactionRequiresObservable: false,
-  observableRequiresReaction: false,
-  disableErrorBoundaries: true,
-});
-
-// Определение пути, по которому лежат chunks динамических импортов
-__webpack_public_path__ = `${window.im.system.apiPrefix ?? ""}/`;
-
+import "./configure";
 export * from "./decorators";
 export * from "./managers";
 export * from "./resources";
