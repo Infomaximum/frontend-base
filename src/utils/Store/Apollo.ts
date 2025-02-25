@@ -1,7 +1,7 @@
 import type { DocumentNode, NextLink, Operation, NormalizedCacheObject } from "@apollo/client";
 import { ApolloClient, ApolloLink, InMemoryCache, split } from "@apollo/client";
 import type { OperationDefinitionNode } from "graphql";
-import type { TApolloLinks } from "./apollo.types";
+import type { TApolloLinks, TModifyUploadLinkAxiosConfig } from "./apollo.types";
 import { createUploadLink } from "./createUploadLink";
 import { createWebSocketLink } from "./createWebSocketLink";
 import { isNil } from "lodash";
@@ -97,7 +97,10 @@ class Apollo {
     return this.apolloClient;
   }
 
-  public createClient(graphqlURL: string) {
+  public createClient(
+    graphqlURL: string,
+    modifyUploadLinkAxiosConfig?: TModifyUploadLinkAxiosConfig
+  ) {
     try {
       // работа с http-заголовками ответа сервера
       const afterwareLink = this.getAfterwareLink(graphqlURL);
@@ -107,7 +110,7 @@ class Apollo {
           (v) => v.kind === "OperationDefinition" && v?.operation === "subscription"
         );
 
-      const uploadLink = createUploadLink(graphqlURL);
+      const uploadLink = createUploadLink(graphqlURL, modifyUploadLinkAxiosConfig);
       const { webSocketLink, subscriptionClient } = createWebSocketLink();
 
       const link = split(hasSubscriptionOperation, webSocketLink, afterwareLink.concat(uploadLink));

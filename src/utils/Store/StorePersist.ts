@@ -15,11 +15,10 @@ class StorePersist {
 
   public static autoSave(store: BaseStore, name: string) {
     Expander.getInstance().runWhenAppReady(() => {
-      const localStorageValue = localStorage.getItem(name);
+      const struct = this.getStruct(name);
 
-      if (localStorageValue) {
-        const restoreStruct = JSON.parse(this.decrypt(localStorageValue));
-        store.restoreByStruct(restoreStruct);
+      if (struct) {
+        store.restoreByStruct(struct);
       }
 
       reaction(
@@ -27,6 +26,12 @@ class StorePersist {
         (value) => this.save(name, value)
       );
     });
+  }
+
+  public static getStruct(key: string) {
+    const localStorageValue = localStorage.getItem(key);
+
+    return localStorageValue === null ? null : JSON.parse(this.decrypt(localStorageValue));
   }
 
   public static save(key: string, value: string | null) {

@@ -16,8 +16,6 @@ type TOmitRangePickerProps =
 
 export type TPickerValue = RangePickerProps["picker"];
 
-export type TRangeValueType<DateType> = [start: DateType | null, end: DateType | null];
-
 export interface IRangePickerProps
   extends IRangePickerOwnProps,
     FieldRenderProps<TRangePickerFieldValue> {}

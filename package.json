@@ -17,7 +17,7 @@
     "@infomaximum/assert": "^1.1.2",
     "@infomaximum/global-types": "1.3.0",
     "@infomaximum/graphql-model": "^1.5.0",
-    "@infomaximum/localization": "^1.0.3",
+    "@infomaximum/localization": "^1.0.5",
     "@infomaximum/module-expander": "^2.4.1",
     "@infomaximum/utility": "^9.0.0",
     "@infomaximum/base-filter": "^1.2.0",

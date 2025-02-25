@@ -28,6 +28,7 @@ export * from "./resources";
 export * from "./styles";
 export * from "./services";
 export * from "./utils";
+export * from "./store";
 
 export * from "@infomaximum/localization";
 export * from "@infomaximum/assert";
