@@ -32,7 +32,7 @@ import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
 import { sortByPriority } from "../../utils/Routes/routes";
 import { contextMenuColumnKey } from "../../utils/const";
 import { ContextMenuTable } from "../ContextMenu/ContextMenuTable/ContextMenuTable";
-import { GlobalSpinner } from "../Spinner";
+import { GlobalSpinner } from "../Spinner/GlobalSpinner/GlobalSpinner";
 import { Table } from "../Table/Table";
 import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import { withLoc } from "../../decorators/hocs/withLoc";

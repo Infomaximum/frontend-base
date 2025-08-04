@@ -43,7 +43,7 @@ import { getCssConversionStyle } from "../../styles";
 import { AntTableScrollListener } from "./Table.utils";
 import type { IVirtualizedColumnConfig } from "../VirtualizedTable/VirtualizedTable.types";
 import type { ExpandableConfig } from "antd/es/table/interface";
-import { GlobalSpinner } from "../Spinner";
+import { GlobalSpinner } from "../Spinner/GlobalSpinner/GlobalSpinner";
 
 class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, ITableState> {
   public static defaultProps = {

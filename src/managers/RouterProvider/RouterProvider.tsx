@@ -11,7 +11,7 @@ import { observer } from "mobx-react";
 import { useLocation, useRoutes } from "react-router";
 import { RoutesContext } from "../../decorators/contexts/RoutesContext";
 import { useFeature } from "../../decorators/hooks/useFeature";
-import { SystemLoaderProvider } from "../SystemLoaderProvider";
+import { SystemLoaderProvider } from "../SystemLoaderProvider/SystemLoaderProvider";
 import type { NCore } from "../../libs/core";
 
 const RouterProviderComponent: FC<IRouterProviderProps> = ({

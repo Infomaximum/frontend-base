@@ -5,7 +5,7 @@ import {
   backgroundSpinnerStyle,
   getSystemLoaderProviderStyle,
 } from "./SystemLoaderProvider.styles";
-import { GlobalSpinner } from "../../components/Spinner";
+import { GlobalSpinner } from "../../components/Spinner/GlobalSpinner/GlobalSpinner";
 import type {
   ISystemLoaderProviderProps,
   TSystemLoaderProviderExternalHandlers,

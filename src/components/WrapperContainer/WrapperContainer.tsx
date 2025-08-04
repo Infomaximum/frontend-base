@@ -4,7 +4,7 @@ import type { IWrapperContainerProps } from "./WrapperContainer.types";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
 import { assertSimple } from "@infomaximum/assert";
 import { commonLayoutStyle } from "../../styles/common.styles";
-import { SystemLoaderProvider } from "../../managers/SystemLoaderProvider";
+import { SystemLoaderProvider } from "../../managers/SystemLoaderProvider/SystemLoaderProvider";
 import { MAIN_LAYOUT_CONTENT_ID, MAIN_LAYOUT_SCROLL_CONTAINER_ID } from "../../utils/const";
 import { contentStyle, scrollContainerStyle, titleStyle } from "./WrapperContainer.styles";
 

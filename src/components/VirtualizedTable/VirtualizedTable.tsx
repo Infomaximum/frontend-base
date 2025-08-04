@@ -41,7 +41,7 @@ import { observer } from "mobx-react";
 import { RestModel } from "../../models/RestModel";
 import { withSpinPropsReplacer } from "./VirtualizedTable.utils";
 import { withTheme } from "../../decorators";
-import { GlobalSpinner } from "../Spinner";
+import { GlobalSpinner } from "../Spinner/GlobalSpinner/GlobalSpinner";
 
 const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [SortOrder, SortOrder];
 
