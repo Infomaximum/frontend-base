@@ -25,8 +25,8 @@ import {
 import {
   hintContainerStyle,
   suffixIconStyle,
-  closeCircleStyle,
   hintOptionStyle,
+  closeCircleStyle,
 } from "./SelectComponent.styles";
 import {
   autocompleteSelectSuffixButtonTestId,
@@ -38,12 +38,10 @@ import { observer } from "mobx-react";
 import { reaction } from "mobx";
 import type { TreeSelectProps } from "rc-tree-select/lib/TreeSelect";
 import { Group, type IModel } from "@infomaximum/graphql-model";
-import { CloseCircleFilled, CloseOutlined } from "../../../Icons/Icons";
+import { CloseCircleFilled, CloseOutlined, ListMarkerOutlined } from "../../../Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
-import { Tooltip } from "../../../Tooltip";
 import { DropdownAnimationInterval, KeyupRequestInterval } from "../../../../utils/const";
 import { Select } from "../../../Select/Select";
-import { BarsSVG } from "../../../../resources/icons";
 import { DropdownPendingPlaceholder } from "../../../Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
 import { withLoc } from "../../../../decorators/hocs/withLoc/withLoc";
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
@@ -93,7 +91,6 @@ function mapExcludedData(value?: IModel[], variables?: TDictionary) {
 class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   public static defaultProps = {
     requestOnMount: false,
-    showArrow: true,
     isHasAccess: true,
   };
 
@@ -282,12 +279,16 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   }
 
   private getSuffixIcon(disabled: boolean) {
-    const { onSuffixClick, suffixButtonTestId } = this.props;
+    const { onSuffixClick, suffixButtonTestId, suffixIcon } = this.props;
 
     const suffixButtonTestIdValue = suffixButtonTestId ?? autocompleteSelectSuffixButtonTestId;
 
     const handleSuffixIconClick =
       !disabled && isFunction(onSuffixClick) ? onSuffixClick : undefined;
+
+    if (isNull(suffixIcon)) {
+      return null;
+    }
 
     if (!onSuffixClick) {
       return;
@@ -300,7 +301,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
         onClick={handleSuffixIconClick}
         test-id={suffixButtonTestIdValue}
       >
-        <BarsSVG />
+        <ListMarkerOutlined />
       </div>
     );
   }
@@ -385,13 +386,13 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           test-id={autocompleteSelectOptionTestId}
           disabled={rowDisable ? rowDisable(item) : undefined}
         >
-          <Tooltip title={title}>
-            {!isUndefined(displayName) && !isNull(displayName) && displayName !== "" ? (
-              <AlignedTooltip>{displayName}</AlignedTooltip>
-            ) : (
-              localization.getLocalized(NOT_SELECTED)
-            )}
-          </Tooltip>
+          {!isUndefined(displayName) && !isNull(displayName) && displayName !== "" ? (
+            <AlignedTooltip expandByParent={false} title={title}>
+              {displayName}
+            </AlignedTooltip>
+          ) : (
+            localization.getLocalized(NOT_SELECTED)
+          )}
         </Select.Option>
       );
     });
@@ -481,7 +482,6 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
       disabled,
       hintContainer,
       localization,
-      showArrow,
       autoFocus,
       autoFocusWithPreventScroll,
       style,
@@ -500,6 +500,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
       innerRef,
       showSearch,
       listHeight,
+      getBoundingContainer,
     } = this.props;
 
     const { searchText, isFocused } = this.state;
@@ -536,7 +537,6 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           onFocus={this.handleFocus}
           showSearch={showSearch ?? true}
           filterOption={false}
-          showArrow={showArrow}
           disabled={disabled}
           notFoundContent={
             autocompleteStore.isDataLoaded ? (
@@ -559,6 +559,7 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
           style={style}
           tagRender={tagRender ?? this.tagRender}
           getPopupContainer={getPopupContainer}
+          getBoundingContainer={getBoundingContainer}
           virtual={false}
           maxTagCount={maxTagCount}
           maxTagPlaceholder={maxTagPlaceholder}

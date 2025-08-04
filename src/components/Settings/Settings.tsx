@@ -1,25 +1,39 @@
-import type { FC } from "react";
+import { useEffect, useRef, type FC } from "react";
 import type { ISettingsProps } from "./Settings.types";
 import { SettingsItem } from "./SettingsItem/SettingsItem";
 import { calculateSize } from "./SettingsItem/SettingsItem.styles";
 import { forEach, map } from "lodash";
 import { Layout, Space } from "antd";
 import { settingsContentStyle } from "./Settings.styles";
-import type { NCore } from "@infomaximum/module-expander";
+import type { NCore } from "../../libs/core";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { useLocation } from "react-router";
+import { useMountEffect } from "../../decorators/hooks/useMountEffect";
 
 const { Content } = Layout;
 
 const SettingsComponent: FC<ISettingsProps> = ({ routes: settingRoutes, onItemClick }) => {
   const localization = useLocalization();
+  const location = useLocation();
+  const openLocationRef = useRef<string | undefined>(undefined);
+
+  useMountEffect(() => {
+    openLocationRef.current = location.pathname;
+  });
+
+  useEffect(() => {
+    if (openLocationRef.current && openLocationRef.current !== location.pathname) {
+      onItemClick?.();
+    }
+  }, [location, onItemClick]);
 
   const getColumns = () => {
     if (!settingRoutes) {
       return [];
     }
 
-    const leftColumn: NCore.IRoutes[] = [];
-    const rightColumn: NCore.IRoutes[] = [];
+    const leftColumn: NCore.IRoute[] = [];
+    const rightColumn: NCore.IRoute[] = [];
     let leftColumnSize = 0;
     let rightColumnSize = 0;
 

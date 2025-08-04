@@ -1,8 +1,8 @@
-import type { NCore } from "@infomaximum/module-expander";
 import type { Localization } from "@infomaximum/localization";
 import { handleErrorInternal } from "../../../../managers/Errors/Errors";
 import { Alert } from "../../../Alert/Alert";
 import { errorAlertStyle } from "./DataTableDrawerContent.styles";
+import type { NCore } from "../../../../libs/core";
 
 export function renderErrorAlert(error: NCore.TError, localization: Localization) {
   const preparedError = handleErrorInternal(error, localization);

@@ -51,7 +51,9 @@ export class HistoryStore {
     this._locationChangeListeners.push(listener);
 
     return () => {
-      this._locationChangeListeners.filter((_listener) => _listener !== listener);
+      this._locationChangeListeners = this._locationChangeListeners.filter(
+        (_listener) => _listener !== listener
+      );
     };
   }
 }

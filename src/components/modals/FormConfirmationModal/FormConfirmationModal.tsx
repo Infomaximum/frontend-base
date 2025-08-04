@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ConfirmationModal } from "../ConfirmationModal/ConfirmationModal";
-import { titleAndInfoStyle, iconStyle } from "./FormConfirmationModal.styles";
+import { titleAndInfoStyle } from "./FormConfirmationModal.styles";
 import type { IFormConfirmationModalProps } from "./FormConfirmationModal.types";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { contains } from "../../../utils/URI/URI";
@@ -11,6 +11,9 @@ import {
   UNABLE_TO_SAVE_CHANGE,
   SAVE_CHANGES,
   MAKE_SURE_FIELDS_FILLED_CORRECTLY,
+  WAIT,
+  ARE_YOU_SURE_YOU_WANT_TO_LEAVE,
+  SAVING_IN_PROGRESS,
 } from "../../../utils/Localization/Localization";
 import { useBlocker } from "react-router";
 import { useBeforeUnload } from "react-router-dom";
@@ -25,7 +28,11 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   const [hasSubmitErrors, setHasSubmitErrors] = useState<boolean>(
     formProvider?.getState().hasSubmitErrors
   );
+  const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(
+    formProvider.getState().submitting
+  );
   const [invalid, setInvalid] = useState<boolean>(formProvider?.getState().invalid);
+  const [isShowSavingInProgressModal, setIsShowSavingInProgressModal] = useState(false);
 
   const prevHasSubmitErrors = usePrevious(hasSubmitErrors);
 
@@ -45,6 +52,8 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
     const pathname = nextLocation.pathname;
     const { hasValidationErrors, errors } = formProvider.getState();
     const mutators = formProvider.mutators;
+
+    setIsShowSavingInProgressModal(isFormSubmitting);
 
     // Если пытаемся перейти по пути, который не соответствует blockUri
     // и не является его дочерней страницей, то блокируем переход
@@ -66,13 +75,15 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   useMountEffect(() => {
     if (formProvider) {
       formProvider.subscribe(
-        ({ hasSubmitErrors, invalid }) => {
+        ({ hasSubmitErrors, invalid, submitting }) => {
           setHasSubmitErrors(hasSubmitErrors);
           setInvalid(invalid);
+          setIsFormSubmitting(submitting);
         },
         {
           hasSubmitErrors: true,
           invalid: true,
+          submitting: true,
         }
       );
     }
@@ -108,37 +119,65 @@ const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
     }
   }, [handleHide, hasSubmitErrors, prevHasSubmitErrors]);
 
-  const title = useMemo(
-    () => (
+  const formConfirmationModalContent = useMemo(() => {
+    const title = (
       <span css={titleAndInfoStyle}>
         {invalid || hasSubmitErrors
           ? localization.getLocalized(UNABLE_TO_SAVE_CHANGE)
-          : localization.getLocalized(SAVE_CHANGES)}
+          : isShowSavingInProgressModal
+            ? localization.getLocalized(SAVING_IN_PROGRESS)
+            : localization.getLocalized(SAVE_CHANGES)}
       </span>
-    ),
-    [invalid, hasSubmitErrors, localization]
-  );
+    );
 
-  return blocker.state === "blocked" ? (
-    <ConfirmationModal
-      isWithoutSaveMode={invalid || hasSubmitErrors}
-      onConfirm={handleSaveButtonClick}
-      onAfterCancel={handleHide}
-      withAdditionalButton={!(invalid || hasSubmitErrors)}
-      onAdditionalButtonClick={handleResumeButtonClick}
-      iconStyle={iconStyle}
-      buttonOkText={SAVE}
-      onAfterConfirm={handleSuccess}
-      title={title}
-      zIndex={Z_INDEX_FORM_CONFIRMATION_MODAL}
-    >
-      {(invalid || hasSubmitErrors) && (
+    const isWithoutSaveMode = invalid || hasSubmitErrors || isShowSavingInProgressModal;
+    const onAfterConfirm = !isShowSavingInProgressModal ? handleSuccess : undefined;
+    const buttonOkText = !isShowSavingInProgressModal ? SAVE : undefined;
+    const buttonContinueText = isShowSavingInProgressModal ? WAIT : undefined;
+
+    const formConfirmationModalBodyText =
+      invalid || hasSubmitErrors ? (
         <span css={titleAndInfoStyle}>
           {localization.getLocalized(MAKE_SURE_FIELDS_FILLED_CORRECTLY)}
         </span>
-      )}
-    </ConfirmationModal>
-  ) : null;
+      ) : (
+        isShowSavingInProgressModal && (
+          <span css={titleAndInfoStyle}>
+            {localization.getLocalized(ARE_YOU_SURE_YOU_WANT_TO_LEAVE)}
+          </span>
+        )
+      );
+
+    return (
+      <ConfirmationModal
+        isWithoutSaveMode={isWithoutSaveMode}
+        onConfirm={handleSaveButtonClick}
+        onAfterCancel={handleHide}
+        withAdditionalButton={!(invalid || hasSubmitErrors || isShowSavingInProgressModal)}
+        onAdditionalButtonClick={handleResumeButtonClick}
+        disabledAdditionalButton={isFormSubmitting}
+        buttonOkText={buttonOkText}
+        buttonContinueText={buttonContinueText}
+        onAfterConfirm={onAfterConfirm}
+        title={title}
+        zIndex={Z_INDEX_FORM_CONFIRMATION_MODAL}
+      >
+        {formConfirmationModalBodyText}
+      </ConfirmationModal>
+    );
+  }, [
+    handleHide,
+    handleResumeButtonClick,
+    handleSaveButtonClick,
+    handleSuccess,
+    hasSubmitErrors,
+    invalid,
+    isShowSavingInProgressModal,
+    localization,
+    isFormSubmitting,
+  ]);
+
+  return blocker.state === "blocked" ? formConfirmationModalContent : null;
 };
 
 export const FormConfirmationModal = FormConfirmationModalComponent;

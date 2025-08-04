@@ -1,5 +1,5 @@
-import type { NCore } from "@infomaximum/module-expander";
 import { useRef } from "react";
+import type { NCore } from "../../libs/core";
 
 /**
  * Сигнализирует о том, что ошибка была,

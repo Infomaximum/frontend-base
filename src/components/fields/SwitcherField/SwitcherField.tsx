@@ -5,7 +5,7 @@ import type {
   ISwitcherState,
   ISwitcherFormFieldProps,
 } from "./SwitcherField.types";
-import { switchStyle, switcherFieldStyle } from "./SwitcherField.styles";
+import { getSwitcherFormItemStyle, switchStyle, switcherFieldStyle } from "./SwitcherField.styles";
 import { Switch } from "../../Switch";
 import { Field, FormField } from "../FormField";
 
@@ -55,7 +55,13 @@ const SwitcherField: React.FC<ISwitcherFieldProps> = (props) => {
 };
 
 const SwitcherFormField: React.FC<ISwitcherFormFieldProps> = (props) => {
-  return <FormField component={SwitcherField} {...props} />;
+  return (
+    <FormField
+      formItemStyle={getSwitcherFormItemStyle(!!props.label)}
+      component={SwitcherField}
+      {...props}
+    />
+  );
 };
 
 export { SwitcherFormField, SwitcherField };

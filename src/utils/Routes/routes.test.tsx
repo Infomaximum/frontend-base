@@ -1,8 +1,8 @@
-import type { NCore } from "@infomaximum/module-expander";
 import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
 import type { ReactElement } from "react";
 import { moduleGroupPath } from "./paths";
 import { getRelativeRoutePath, routesMap, breadcrumbsPacker, removeModulesLayer } from "./routes";
+import type { NCore } from "../../libs/core";
 
 describe("Тесты методов работы с роутингом - routes", () => {
   describe("Удаления из роутов слоя для группировки модулей", () => {
@@ -160,7 +160,7 @@ describe("Тесты методов работы с роутингом - routes"
   describe("Тесты метода routesMap", () => {
     it("Плоский список", () => {
       const TestComponent = () => <>test</>;
-      const routeConfig: NCore.IRoutes[] = [
+      const routeConfig: NCore.IRoute[] = [
         {
           key: "a",
           path: "a",
@@ -181,13 +181,13 @@ describe("Тесты методов работы с роутингом - routes"
         component: TestComponent,
         exact: true,
       };
-      const routeConfig: NCore.IRoutes[] = [route];
+      const routeConfig: NCore.IRoute[] = [route];
 
-      expect(((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement).type).toBe(
+      expect(((routesMap(routeConfig)[0] as NCore.IRoute).element as ReactElement).type).toBe(
         RouteElement
       );
       expect(
-        ((routesMap(routeConfig)[0] as NCore.IRoutes).element as ReactElement).props.route.key
+        ((routesMap(routeConfig)[0] as NCore.IRoute).element as ReactElement).props.route.key
       ).toEqual(route.key);
     });
 
@@ -208,7 +208,7 @@ describe("Тесты методов работы с роутингом - routes"
         routes: [routeB],
       };
 
-      const routeConfig: NCore.IRoutes[] = [routeA];
+      const routeConfig: NCore.IRoute[] = [routeA];
 
       expect(routesMap(routeConfig).find((route) => route.key === routeB.key)).not.toBeUndefined();
     });
@@ -231,7 +231,7 @@ describe("Тесты методов работы с роутингом - routes"
         routes: [routeB],
       };
 
-      const routeConfig: NCore.IRoutes[] = [routeA];
+      const routeConfig: NCore.IRoute[] = [routeA];
 
       expect(routesMap(routeConfig).find((route) => route.key === routeB.key)).not.toBeUndefined();
       expect(routesMap(routeConfig).find((route) => route.key === routeC.key)).not.toBeUndefined();
@@ -254,7 +254,7 @@ describe("Тесты методов работы с роутингом - routes"
         isLayoutRoute: true,
       };
 
-      const routeConfig: NCore.IRoutes[] = [routeA];
+      const routeConfig: NCore.IRoute[] = [routeA];
 
       expect(routesMap(routeConfig)[0]?.key).toEqual(routeA.key);
       expect(routesMap(routeConfig)[0]?.routes?.[0]?.key).toEqual(routeB.key);
@@ -292,7 +292,7 @@ describe("Тесты методов работы с роутингом - routes"
         routes: [routeB],
       };
 
-      const routeConfig: NCore.IRoutes[] = [routeA, routeE];
+      const routeConfig: NCore.IRoute[] = [routeA, routeE];
 
       expect(routesMap(routeConfig)).toEqual(
         expect.arrayContaining([

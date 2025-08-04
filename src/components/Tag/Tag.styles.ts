@@ -22,10 +22,10 @@ export const getTagStyle =
       svg: {
         zIndex: 2,
       },
-      "&& .anticon-close": {
+      " > span": {
         display: "inline-flex",
         justifyContent: "center",
-        paddingRight: "7px",
+        marginRight: "7px",
         color: closeIconColor,
         ":hover": {
           color: closeIconColorHover ?? theme.grey8Color,

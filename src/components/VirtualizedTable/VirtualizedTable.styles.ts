@@ -18,21 +18,18 @@ export const getEmptyContentStyle = (maxHeight: number, loading: boolean) =>
 
 export const withoutDividerStyle = { borderColor: "transparent" };
 
-export const getTableWrapperStyle = (
-  theme: TTheme,
-  opacity: number,
-  isWithoutWrapperStyles?: boolean
-) => {
-  const commonStyle = {
-    opacity,
-  };
-
+export const getTableWrapperStyle = (isWithoutWrapperStyles?: boolean) => (theme: TTheme) => {
   return isWithoutWrapperStyles
-    ? commonStyle
+    ? {}
     : {
-        ...commonStyle,
         padding: "4px 8px 0px 8px",
         background: theme.grey1Color,
         borderRadius: "6px",
       };
+};
+
+export const bodyRowStyle = {
+  "&:last-of-type > div": {
+    borderBottom: "1px solid transparent",
+  },
 };

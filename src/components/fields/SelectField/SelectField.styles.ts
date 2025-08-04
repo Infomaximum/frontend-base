@@ -12,8 +12,3 @@ export const defaultWrapperComponentStyle = {
 export const defaultSelectFieldStyle = (theme: TTheme) => ({
   color: theme.grey10Color,
 });
-
-export const emptyImageStyle = {
-  height: "46px",
-  marginBottom: "4px",
-};

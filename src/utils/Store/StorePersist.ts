@@ -6,6 +6,7 @@ import type { BaseStore } from "./BaseStore";
 
 class StorePersist {
   private static secretKey: string | null = null;
+  protected static storage: Storage = localStorage;
 
   /**
    *  По дефолту сгенерирован 192-битный ключ (base64). Это уровень TOP SECRET для AES шифрования
@@ -29,30 +30,30 @@ class StorePersist {
   }
 
   public static getStruct(key: string) {
-    const localStorageValue = localStorage.getItem(key);
+    const storageValue = this.storage.getItem(key);
 
-    return localStorageValue === null ? null : JSON.parse(this.decrypt(localStorageValue));
+    return storageValue === null ? null : JSON.parse(this.decrypt(storageValue));
   }
 
   public static save(key: string, value: string | null) {
     if (value) {
-      localStorage.setItem(key, this.encrypt(value));
+      this.storage.setItem(key, this.encrypt(value));
     } else {
-      localStorage.removeItem(key);
+      this.storage.removeItem(key);
     }
   }
 
   public static subscribeSaved(
     store: BaseStore,
     name: string,
-    callback: (localStorageValue: string | null) => void
+    callback: (storageValue: string | null) => void
   ) {
     Expander.getInstance().runWhenAppReady(() => {
       reaction(
         () => store.toJSON(),
         () => {
-          const localStorageValue = localStorage.getItem(name);
-          callback(localStorageValue);
+          const storageValue = this.storage.getItem(name);
+          callback(storageValue);
         }
       );
     });

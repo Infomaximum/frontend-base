@@ -1,21 +1,19 @@
 import { compact, dropRight, last, size, takeRight } from "lodash";
 import { useContainerWidth } from "../../decorators/hooks/useContainerWidth";
-import { HomeOutlined } from "../Icons/Icons";
+import { EllipsisOutlined, HomeOutlined } from "../Icons/Icons";
 import {
   containerStyle,
   crumbStyle,
   homeIconStyle,
   lastCrumbTextStyle,
   getSeparatorStyle,
-  labeledCrumbsContainerStyle,
-  threeDotsIconStyle,
+  crumbsSectionContainerStyle,
   getMenuStyle,
   dropdownWrapperStyle,
 } from "./Breadcrumbs.styles";
 import type { IBreadcrumbsProps } from "./Breadcrumbs.types";
 import { calcShrinkMask, interleaveWith } from "./Breadcrumbs.utils";
 import { Dropdown } from "../Dropdown/Dropdown";
-import ThreeDotsSVG from "../../resources/icons/ThreeDots.svg";
 import { useLocalization, useTheme } from "../../decorators";
 import { SHOW_MORE_CRUMBS } from "../../utils/Localization";
 import { getDropdownMenuMaxHeight } from "../Dropdown/Dropdown.utils";
@@ -30,6 +28,7 @@ const tooltipAlign = { targetOffset: [0, -8] };
 
 const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
   items,
+  contentAfterBreadcrumbs,
   visibleCount: propsVisibleCount,
   visibleCountWithLevels = 2,
   onHomeClick,
@@ -61,26 +60,33 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
     recalculateLabeledCrumbsWidth();
   }, [visibleItems]);
 
-  function renderHome() {
+  const renderHome = useCallback(() => {
+    if (!onHomeClick) {
+      return null;
+    }
+
     return (
-      onHomeClick && (
-        <Tooltip title={homeTitle} placement="top" align={tooltipAlign}>
-          <div
-            test-id={
-              props["test-id"]
-                ? `${props["test-id"]}_${breadcrumbsHomeLinkTestId}`
-                : breadcrumbsHomeLinkTestId
-            }
-            key="home"
-            css={crumbStyle}
-            onClick={onHomeClick}
-          >
-            <HomeOutlined css={homeIconStyle(theme)} key="home" />
-          </div>
-        </Tooltip>
-      )
+      <Tooltip
+        key={breadcrumbsHomeLinkTestId}
+        title={homeTitle}
+        placement="top"
+        align={tooltipAlign}
+      >
+        <div
+          test-id={
+            props["test-id"]
+              ? `${props["test-id"]}_${breadcrumbsHomeLinkTestId}`
+              : breadcrumbsHomeLinkTestId
+          }
+          key="home"
+          css={crumbStyle}
+          onClick={onHomeClick}
+        >
+          <HomeOutlined css={homeIconStyle(theme)} key="home" />
+        </div>
+      </Tooltip>
     );
-  }
+  }, [homeTitle, onHomeClick, props, theme]);
 
   const dropdownRender = useCallback((menus: ReactNode) => {
     return (
@@ -126,7 +132,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
             }
             css={crumbStyle}
           >
-            <ThreeDotsSVG style={threeDotsIconStyle} />
+            <EllipsisOutlined />
           </div>
         </Tooltip>
       </Dropdown>
@@ -174,7 +180,7 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
     });
 
     return (
-      <div key="text-crumbs" css={labeledCrumbsContainerStyle} ref={setLabeledCrumbsElement}>
+      <div key="text-crumbs" css={crumbsSectionContainerStyle} ref={setLabeledCrumbsElement}>
         {interleaveWith(renderSeparator, crumbs)}
       </div>
     );
@@ -182,10 +188,13 @@ const BreadcrumbsComponent: React.FC<IBreadcrumbsProps> = ({
 
   return (
     <div css={containerStyle} ref={setContainerElement}>
-      {interleaveWith(
-        renderSeparator,
-        compact([renderHome(), renderShowMore(), renderLabeledCrumbs()])
-      )}
+      <div css={crumbsSectionContainerStyle}>
+        {interleaveWith(
+          renderSeparator,
+          compact([renderHome(), renderShowMore(), renderLabeledCrumbs()])
+        )}
+      </div>
+      {contentAfterBreadcrumbs}
     </div>
   );
 };

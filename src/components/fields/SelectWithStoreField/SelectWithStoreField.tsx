@@ -28,10 +28,10 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
   const {
     readOnly,
     disabled,
-    showArrow,
     input: { onBlur, value: valueProps, onChange, onFocus, ...restInput },
     store,
     onChangeCallback,
+    suffixIcon,
     ...rest
   } = props;
   const isDisabled = readOnly || disabled;
@@ -75,7 +75,7 @@ const SelectWithStoreComponent: FC<ISelectWithStoreComponentProps> = memo((props
       value={valueProps === "" ? undefined : valueProps}
       onChange={handleChange}
       disabled={isDisabled}
-      showArrow={readOnly ? false : showArrow}
+      suffixIcon={readOnly ? null : suffixIcon}
       store={store}
       css={defaultSelectFieldStyle}
       onFocus={handleFocus}

@@ -39,11 +39,13 @@ export const linkRootStyle = (theme: TTheme) => ({
   width: `${HEADER_LEFT_ICON_WIDTH}px`,
   height: "inherit",
   cursor: "pointer",
+  fontSize: "24px",
 });
 
 export const linkBackStyle = (theme: TTheme) => ({
   ...iconsHoverStyle(theme),
   width: `${HEADER_LEFT_ICON_WIDTH}px`,
+  fontSize: "20px",
 });
 
 export const headerBodyRightStyle = () => ({

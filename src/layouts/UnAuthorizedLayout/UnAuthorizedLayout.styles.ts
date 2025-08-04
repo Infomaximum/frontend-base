@@ -30,11 +30,12 @@ export const unAuthorizedContentStyle = () =>
 
 export const iconBackStyle = (theme: TTheme) => ({
   color: theme.grey10Color,
-  paddingRight: "7px",
+  fontSize: "22px",
 });
 
 export const backLinkStyle = {
-  display: "inline-block",
+  display: "inline-flex",
+  alignItems: "center",
   marginRight: "12px",
 };
 
@@ -66,6 +67,7 @@ export const formBodyCutStyle = {
 
 export const headStyle = {
   padding: "16px 48px",
+  display: "flex",
 };
 
 export const formBodyDefaultStyle = {

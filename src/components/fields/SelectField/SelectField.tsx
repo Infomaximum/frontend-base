@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, FocusEventHandler } from "react";
 import React, { memo, useCallback, useState } from "react";
 import type { SelectProps } from "rc-select";
 import type {
@@ -18,17 +18,16 @@ import { FormField } from "../FormField/FormField";
 import { TableCellField } from "../TableCellField/TableCellField";
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
 
-const { Option, OptGroup } = Select;
-
 const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
   const {
     readOnly,
     disabled,
-    showArrow,
-    input: { onBlur, value, ...restInput },
+    suffixIcon,
+    input: { value, onBlur: onBlurInput, ...restInput },
     localization,
     onChangeCallback,
     onSearch,
+    onBlur,
     ...rest
   } = props;
 
@@ -52,6 +51,14 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
     [props]
   );
 
+  const handleBlur = useCallback<FocusEventHandler<HTMLElement>>(
+    (e) => {
+      onBlur?.(e);
+      onBlurInput(e);
+    },
+    [onBlurInput, onBlur]
+  );
+
   if (localization && readOnly && isNil(value)) {
     return <Input value={localization.getLocalized(NOT_SELECTED)} disabled={true} />;
   }
@@ -64,9 +71,10 @@ const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
       // Т.к. из final-form приходит "" при передаче undefined или null
       value={value === "" ? null : value}
       onChange={handleChange}
+      onBlur={handleBlur}
       onSearch={onSearch}
       disabled={isDisabled}
-      showArrow={readOnly ? false : showArrow}
+      suffixIcon={readOnly ? null : suffixIcon}
       css={defaultSelectFieldStyle}
       readOnly={readOnly}
     />
@@ -113,8 +121,8 @@ export class SelectFormFieldComponent extends React.PureComponent<ISelectFormFie
     wrapperComponentStyle: defaultWrapperComponentStyle,
   };
 
-  public static Option = Option;
-  public static OptGroup = OptGroup;
+  public static Option = Option as typeof Option;
+  public static OptGroup = Select.OptGroup as typeof Select.OptGroup;
 
   public override render() {
     return (

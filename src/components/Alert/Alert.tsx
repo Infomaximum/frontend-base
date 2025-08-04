@@ -16,7 +16,7 @@ import {
   Icon,
   CloseCircleFilled,
   CheckCircleFilled,
-  ExclamationCircleFilled,
+  WarningFilled,
   InfoCircleFilled,
 } from "../../components/Icons/Icons";
 import { useTheme } from "../../decorators";
@@ -32,7 +32,7 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
         iconComponent = CheckCircleFilled;
         break;
       case "warning":
-        iconComponent = ExclamationCircleFilled;
+        iconComponent = WarningFilled;
         break;
       case "info":
         iconComponent = InfoCircleFilled;
@@ -42,7 +42,7 @@ const AlertComponent: React.FC<IAlertProps> = (props) => {
         iconComponent = CloseCircleFilled;
     }
 
-    return <Icon component={iconComponent} css={alertIconStyle} />;
+    return <Icon name="alert-icon" component={iconComponent} css={alertIconStyle} />;
   }, [props.type]);
 
   const customStyle = useMemo(() => {

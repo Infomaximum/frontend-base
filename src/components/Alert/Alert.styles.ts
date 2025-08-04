@@ -21,9 +21,7 @@ export const alertStyle = (theme: TTheme) =>
     display: "flex",
     [`${alertClassnames.alertIcon}`]: {
       lineHeight: "unset",
-      position: "relative",
-      top: "2px",
-      fontSize: "14px",
+      fontSize: "16px",
       marginRight: "9px",
       marginTop: "2px",
     },

@@ -16,7 +16,9 @@ const color = {
   grey10Color: "#262626",
 
   blue1Color: "#f0f8ff",
+  blue15Color: "#e6f1fa",
   blue2Color: "#d1e9ff",
+  blue5Color: "#4b88de",
   blue6Color: "#2667d1",
 
   red6Color: "#d93a36",
@@ -110,7 +112,7 @@ const getToken = () => {
 
     colorBgLayout: color.grey1Color,
     colorLink: colorPrimary,
-    colorLinkHover: "#498af2",
+    colorLinkHover: color.blue5Color,
     // --------------------------------------------------------
     ...getScreen(),
   } satisfies ThemeConfig["token"];
@@ -148,7 +150,7 @@ export const getThemeConfig = () => {
         bodySortBg: color.grey1Color,
         fixedHeaderSortActiveBg: color.grey1Color,
         rowSelectedBg: color.blue1Color,
-        rowSelectedHoverBg: color.blue2Color,
+        rowSelectedHoverBg: color.blue15Color,
         headerSplitColor: "none",
         headerSortHoverBg: "none",
         cellPaddingBlockMD: 8,
@@ -190,6 +192,9 @@ export const getThemeConfig = () => {
         itemSelectedColor: color.grey10Color,
         itemHoverColor: color.grey10Color,
         fontSize: 12,
+      },
+      Tabs: {
+        horizontalItemGutter: 16,
       },
     },
   } satisfies ThemeConfig;

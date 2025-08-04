@@ -1,6 +1,6 @@
 import { Empty } from "antd";
 import type { IDropdownPlaceholderProps } from "./DropdownPlaceholder.types";
-import { emptyStyle, emptyImageStyle, hintStyle } from "./DropdownPlaceholder.styles";
+import { emptyStyle, dropdownEmptyImageStyle, hintStyle } from "./DropdownPlaceholder.styles";
 import NoAccess from "../../../resources/icons/NoAccess.svg";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import {
@@ -34,7 +34,7 @@ const DropdownPlaceholderComponent: React.FC<IDropdownPlaceholderProps> = ({
       <Empty
         key="no-access"
         image={<NoAccess />}
-        imageStyle={emptyImageStyle}
+        styles={dropdownEmptyImageStyle}
         description={localization.getLocalized(NO_ACCESS)}
         css={emptyStyle(theme)}
       />

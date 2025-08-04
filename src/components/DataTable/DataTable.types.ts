@@ -7,7 +7,7 @@ import type { TAccessRules } from "../../utils/access";
 import type { ITableOwnProps } from "../Table/Table.types";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
 import type { TExtendColumns } from "../../managers/Tree";
-import type { TContextMenuItem } from "../ContextMenuTable/ContextMenuTable.types";
+import type { IContextMenuItem } from "../ContextMenu/ContextMenu.types";
 import type { TableStore } from "../../utils/Store/TableStore";
 import type { ELimitsStateNames } from "../../utils/const";
 import type { TreeCounter } from "../../managers/TreeCounter";
@@ -28,10 +28,11 @@ export interface ILoadingOnScrollDataTableOwnProps<T> extends IDataTableOwnProps
   tableStore: TableStore<PagingGroup>;
 }
 
-export interface IDataTableOwnProps<T> extends TTableProps<T> {
+export interface IDataTableOwnProps<T> extends Omit<TTableProps<T>, "floatingContextMenuConfig"> {
   customDataSource?: TExtendColumns<T>[];
   columns: IColumnProps<T>[] | undefined;
-  contextMenuGetter?(model?: IModel): TContextMenuItem[] | undefined;
+  contextMenuGetter?(model?: IModel): IContextMenuItem[] | undefined;
+  multipleRowsContextMenuGetter?(model?: IModel): IContextMenuItem[] | undefined;
   onContextMenuSelect?(action: string, record: TExtendColumns<T>): void;
   tableStore: TableStore<Group | PagingGroup>;
   limitStateName: ELimitsStateNames;
@@ -153,6 +154,7 @@ export interface IDataTableState<T> {
   rowSelectionConfig: TableRowSelection<any> | undefined;
   dataSource: TExtendColumns<T>[] | undefined;
   isInitiation: boolean;
+  lastSelectedIndex: number | null;
 }
 
 export interface ITableTopButtonDisabledProps {

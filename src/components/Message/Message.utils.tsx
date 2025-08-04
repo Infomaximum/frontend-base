@@ -5,9 +5,10 @@ import {
   APPLIED_MALE,
   APPLIED_FEMALE,
   APPLIED_NEUTER,
+  APPLIED_PLURAL,
 } from "../../utils/Localization/Localization";
 import { switchedEnabledStyle, switchedOffStyle } from "./Message.styles";
-import type { TGenus } from "./Message.types";
+import type { EMassAssignEndings } from "./Message.types";
 
 export const getStyledAndLocalizedEntities = (
   status: boolean,
@@ -31,13 +32,15 @@ export const getStyledAndLocalizedEntities = (
   return statusLoc;
 };
 
-export const getAppliedLocalized = (localization: Localization, genus: TGenus) => {
-  switch (genus) {
+export const getAppliedLocalized = (localization: Localization, ending: EMassAssignEndings) => {
+  switch (ending) {
     case "male":
       return localization.getLocalized(APPLIED_MALE);
     case "female":
       return localization.getLocalized(APPLIED_FEMALE);
     case "neuter":
       return localization.getLocalized(APPLIED_NEUTER);
+    case "plural":
+      return localization.getLocalized(APPLIED_PLURAL);
   }
 };

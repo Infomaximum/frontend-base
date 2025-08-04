@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import type { Interpolation } from "@emotion/react";
-import type { NCore } from "@infomaximum/module-expander";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import type { FormItemLayout } from "antd/lib/form/Form";
+import type { NCore } from "../../../libs/core";
 
 export interface IFormOptionProps {
   /**
@@ -34,6 +34,11 @@ export interface IFormOptionProps {
    * Стили для FormItem
    */
   formItemStyle?: Interpolation<TTheme>;
+
+  /**
+   * Стили для контейнера label
+   */
+  customLabelContainerStyle?: Interpolation<TTheme>;
 
   /**
    * Стили для label

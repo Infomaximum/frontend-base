@@ -2,7 +2,6 @@ import React, { createRef } from "react";
 import { map, isUndefined, isFunction, isString, isNull } from "lodash";
 import { autocompleteSelectTestId, autocompleteSelectOptionTestId } from "../../../utils/TestIds";
 import { observer } from "mobx-react";
-import { closeCircleStyle } from "../AutoCompleteField/SelectComponent/SelectComponent.styles";
 import type {
   IAutoFillComponentProps,
   IAutoFillComponentState,
@@ -14,7 +13,7 @@ import {
   autocompletePaddingRight,
 } from "./AutoFillField.styles";
 import type { DefaultOptionType } from "antd/lib/select";
-import { CloseCircleFilled, SearchOutlined } from "../../Icons/Icons";
+import { SearchOutlined } from "../../Icons/Icons";
 import type { IModel } from "@infomaximum/graphql-model";
 import {
   ENTER_OR_SELECT_FROM_THE_LIST,
@@ -30,12 +29,10 @@ import { AlignedTooltip } from "../../AlignedTooltip";
 class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillComponentState> {
   public static defaultProps = {
     requestOnMount: false,
-    showArrow: true,
     isHasAccess: true,
     isOptionHintDisplayed: true,
   };
 
-  public static clearIcon = (<CloseCircleFilled css={closeCircleStyle} />);
   private searchTimer: NodeJS.Timeout | undefined;
 
   private wrapperRef = createRef<HTMLDivElement>();
@@ -235,7 +232,6 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
       localization,
       allowClear,
       rowDisable,
-      showArrow,
       autoFocus,
       isHasAccess,
       autoFillComponentStyle,
@@ -254,9 +250,8 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
     return (
       <div ref={this.wrapperRef}>
         <AlignedTooltip
-          title={
-            this.state.isOverflow && !this.isOpenedDropdown() && this.getSelectValue(fieldValue)
-          }
+          title={this.getSelectValue(fieldValue)}
+          visible={this.state.isOverflow && !this.isOpenedDropdown()}
         >
           <AutoComplete
             key="ant-autocomplete"
@@ -270,7 +265,6 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
             onFocus={onFocus}
             showSearch={true}
             filterOption={false}
-            showArrow={showArrow}
             disabled={disabled}
             notFoundContent={
               <DropdownPendingPlaceholder
@@ -280,8 +274,7 @@ class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillCom
                 searchText={this.state.searchText}
               />
             }
-            clearIcon={AutoFill.clearIcon}
-            suffixIcon={suffixIcon ? suffixIcon : !disabled ? this.getSuffixIcon() : undefined}
+            suffixIcon={suffixIcon ? suffixIcon : !disabled ? this.getSuffixIcon() : null}
             onSearch={this.handleSearchChange}
             onSelect={this.handleSelect}
             onDropdownVisibleChange={this.handleDropdownVisibleChange}

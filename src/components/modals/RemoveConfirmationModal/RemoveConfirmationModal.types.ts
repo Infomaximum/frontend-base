@@ -2,7 +2,7 @@ import type React from "react";
 import type { TLocalizationDescription } from "@infomaximum/localization";
 import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
 import type { IWithThemeProps } from "../../../decorators/hocs/withTheme/withTheme";
-import type { AntdIconProps } from "../../Icons";
+import type { IconProps } from "../../Icons";
 import type { Interpolation } from "@emotion/react";
 
 export interface IRemoveConfirmationModalProps extends IWithLocProps, IWithThemeProps<TTheme> {
@@ -34,7 +34,7 @@ export interface IRemoveConfirmationModalProps extends IWithLocProps, IWithTheme
   buttonRemoveText: TLocalizationDescription;
   maskTransitionName?: string;
   className?: string;
-  icon?: React.ComponentType<AntdIconProps>;
+  icon?: React.ComponentType<IconProps>;
   iconStyle?: Interpolation<TTheme>;
 }
 

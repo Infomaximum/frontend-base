@@ -23,6 +23,9 @@ export const uploadListItemStyle = {
   ".ant-upload-list-item-error + .ant-tooltip": {
     display: "none !important",
   },
+  ".ant-btn-icon": {
+    display: "inline-flex",
+  },
 };
 
 export const disableAnimationWrapperStyle = {
@@ -37,3 +40,8 @@ export const disableAnimationWrapperStyle = {
     transition: "opacity 0s, height 0s !important",
   },
 } as const;
+
+export const inboxIconStyle = (theme: TTheme) => ({
+  fontSize: "24px",
+  color: theme.blue6Color,
+});

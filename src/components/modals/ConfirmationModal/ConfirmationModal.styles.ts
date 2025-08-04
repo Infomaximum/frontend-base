@@ -1,16 +1,23 @@
 import type { ModalProps } from "antd/lib/modal";
 
 export const iconModalStyle = (theme: TTheme) => ({
-  fontSize: `${theme.h2FontSize}px`,
+  fontSize: "25px",
   color: `${theme.gold6Color}`,
-  paddingRight: "12px",
+  marginRight: "12px",
 });
 
-export const modalStyle = {
-  body: {
-    padding: "20px 24px 0px",
-  },
-} satisfies ModalProps["styles"];
+export const getModalStyle = (zIndex?: number) =>
+  ({
+    body: {
+      padding: "20px 24px 0px",
+    },
+    wrapper: {
+      zIndex,
+    },
+    mask: {
+      zIndex,
+    },
+  }) satisfies ModalProps["styles"];
 
 export const titleModalStyle = (theme: TTheme) =>
   ({

@@ -19,6 +19,7 @@ import FilterList from "../FilterList/FilterList/FilterList";
 import { Divider } from "antd";
 import {
   addTopPanelFilterButtonStyle,
+  clearFiltersIconStyle,
   getButtonRemoveFilterStyle,
   wrapperPanelStyle,
 } from "./FiltersPanel.styles";
@@ -29,12 +30,12 @@ import { InlineFilterTags } from "./InlineFilterTags/InlineFilterTags";
 import { useLocalization, useMountEffect, useUrlFilters } from "../../decorators";
 import type { NFiltersStore } from "../../utils/Store/FiltersStore/FiltersStore.types";
 import type { IPositionConfig } from "../../utils/filters/BaseFilter/BaseFilter.types";
-import { RemoveFiltersSVG } from "../../resources";
 import { EFilteringMethods } from "@infomaximum/base-filter";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { Tooltip } from "../Tooltip";
 import { Button } from "../Button";
 import { TopPanelPortal } from "../TopPanel";
+import { EraserOutlined } from "../Icons";
 
 export const filtersPanelContextDefaultValue: IFiltersPanelContext = {
   showFilterAddComponent: () => {},
@@ -377,7 +378,7 @@ const FiltersPanelComponent: React.FC<IFiltersPanelProps> = ({
                   onClick={handleRemoveFilters}
                   disabled={isDisabledByOpenFilter}
                 >
-                  <RemoveFiltersSVG />
+                  <EraserOutlined css={clearFiltersIconStyle} />
                 </Button>
               </Tooltip>
               <Divider key="divider" css={dividerVerticalStyle} type="vertical" />

@@ -5,12 +5,13 @@ import { disabledInputStyle, inputNumberStyle } from "./InputNumber.styles";
 import type { IInputNumberProps } from "./InputNumber.types";
 
 const InputNumberComponent: FC<IInputNumberProps & RefAttributes<HTMLInputElement>> = forwardRef(
-  (props, ref: Ref<HTMLInputElement>) => {
+  ({ testId, ...rest }, ref: Ref<HTMLInputElement>) => {
     return (
       <AntInputNumber
-        {...props}
+        {...rest}
         ref={ref}
-        css={[props.disabled && disabledInputStyle, inputNumberStyle]}
+        css={[rest.disabled && disabledInputStyle, inputNumberStyle]}
+        test-id={testId}
       />
     );
   }

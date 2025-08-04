@@ -1,6 +1,7 @@
 import type { IModel } from "@infomaximum/graphql-model";
 import type { TBaseRow } from "../../../../managers/Tree";
 import type { IDataTableOwnProps } from "../../../DataTable/DataTable.types";
+import type { IVirtualizedTableProps } from "../../../VirtualizedTable/VirtualizedTable.types";
 
 export interface IDataTableDrawerContentProps<T extends TBaseRow = TBaseRow>
   extends Pick<
@@ -29,4 +30,5 @@ export interface IDataTableDrawerContentProps<T extends TBaseRow = TBaseRow>
 
   // Принудительно включить (когда модель не наследник PagingGroup) или принудительно выключить (когда нет поддержки сервера или фронта)
   isLoadingOnScroll?: boolean;
+  rowHeight?: IVirtualizedTableProps<T>["rowHeight"];
 }

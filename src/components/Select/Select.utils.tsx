@@ -14,7 +14,10 @@ import type { IDropdownParams, TXPlacement } from "../Dropdown/Dropdown.types";
 import { globalScrollBehavior } from "../../utils/ScrollBehavior/ScrollBehavior";
 import type { BaseSelectRef } from "rc-select";
 import type { ISelectProps } from "./Select.types";
-import { ellipsisStyle } from "../../styles";
+import { getTextValueOfReactNode } from "../../utils/textWidth";
+import { optionContentStyle } from "./Select.styles";
+
+export const searchValueKey = "searchValue";
 
 export const replaceBrowserTooltip = (children: React.ReactNode) =>
   React.Children.map(children, (element) => {
@@ -35,7 +38,7 @@ export const replaceBrowserTooltip = (children: React.ReactNode) =>
           title: null,
           children: isString(groupContent) ? (
             <AlignedTooltip>
-              <span style={ellipsisStyle} test-id={element.props["test-id"]}>
+              <span style={optionContentStyle} test-id={element.props["test-id"]}>
                 {groupContent}
               </span>
             </AlignedTooltip>
@@ -58,7 +61,7 @@ export const replaceBrowserTooltip = (children: React.ReactNode) =>
         title: null,
         children: isString(optionContent) ? (
           <AlignedTooltip>
-            <span style={ellipsisStyle} test-id={element.props["test-id"]}>
+            <span style={optionContentStyle} test-id={element.props["test-id"]}>
               {optionContent}
             </span>
           </AlignedTooltip>
@@ -129,7 +132,12 @@ export const textContent = (node: ReactNode): string => {
   return isArray(children) ? children.map(textContent).join("") : textContent(children);
 };
 
-const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
+export const buildOption = (
+  element: React.ReactNode,
+  additionalProps: { showSearch?: boolean; optionFilterProp?: string }
+): DefaultOptionType | null => {
+  const { showSearch, optionFilterProp } = additionalProps;
+
   if (!React.isValidElement(element)) {
     return null;
   }
@@ -137,7 +145,7 @@ const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
   const { value, children, ...rest } = (element as ReactElement).props;
   const isHasTestId = has(rest, "test-id");
   let label = isHasTestId ? (
-    <span style={ellipsisStyle} test-id={rest["test-id"]}>
+    <span style={optionContentStyle} test-id={rest["test-id"]}>
       {children}
     </span>
   ) : (
@@ -145,14 +153,22 @@ const buildOption = (element: React.ReactNode): DefaultOptionType | null => {
   );
 
   if (isString(children)) {
-    // Фрагмент необходим для отключения title по-умолчанию
-    label = <>{label}</>;
+    label = <AlignedTooltip>{label}</AlignedTooltip>;
   }
 
-  return { value, label, key: element.key, ...rest } as DefaultOptionType;
+  return {
+    value,
+    label,
+    key: element.key,
+    ...(showSearch && optionFilterProp === "label" ? { [searchValueKey]: children } : {}),
+    ...rest,
+  } as DefaultOptionType;
 };
 
-export const mapChildrenToOptions = (children: React.ReactNode): DefaultOptionType[] => {
+export const mapChildrenToOptions = (
+  children: React.ReactNode,
+  additionalProps: { showSearch?: boolean; optionFilterProp?: string }
+): DefaultOptionType[] => {
   return (
     React.Children.map(children, (_child) => {
       if (!React.isValidElement(_child)) {
@@ -160,17 +176,23 @@ export const mapChildrenToOptions = (children: React.ReactNode): DefaultOptionTy
       }
 
       const child = _child as React.ReactElement<
-        { children: ReactNode[]; label: string } | undefined
+        { children: ReactNode[]; label: React.ReactElement } | undefined
       >;
 
       if (child.type === Select.OptGroup) {
         return {
-          label: child?.props?.label,
-          options: child?.props?.children.map(buildOption) as DefaultOptionType[],
+          label: isString(child?.props?.label) ? (
+            <AlignedTooltip>{child.props.label}</AlignedTooltip>
+          ) : (
+            child?.props?.label
+          ),
+          options: child?.props?.children.map((childOpt) =>
+            buildOption(childOpt, additionalProps)
+          ) as DefaultOptionType[],
         };
       }
 
-      return buildOption(child) as DefaultOptionType;
+      return buildOption(child, additionalProps) as DefaultOptionType;
     }) ?? []
   );
 };
@@ -206,10 +228,41 @@ export const optionToValue = (option?: DefaultOptionType): SelectValue => {
   }
 };
 
-export const useGlobalScrollBehavior = (isOpen: boolean) => {
+export const getStringValue = (value: LabeledValue | string | number) => {
+  if (typeof value === "string" || typeof value === "number") {
+    return value.toString();
+  }
+
+  return value.value.toString();
+};
+
+export const getValueFromSelectValue = (selectValue: SelectValue): string | undefined => {
+  if (!isNil(selectValue)) {
+    if (Array.isArray(selectValue)) {
+      if (selectValue.length === 1) {
+        const currentValue = selectValue[0];
+
+        return currentValue ? getStringValue(currentValue) : undefined;
+      }
+    } else {
+      return getStringValue(selectValue);
+    }
+  }
+};
+
+export const getFilteredOptionsByTextValue = (options: DefaultOptionType[], textValue: string) =>
+  options.filter((option) => {
+    return getTextValueOfReactNode(option.label)
+      ?.toLocaleLowerCase()
+      .includes(textValue?.toLowerCase());
+  });
+
+export const useGlobalScrollBehavior = (isOpen: boolean, disabled = false) => {
   useEffect(() => {
-    isOpen ? globalScrollBehavior.hideScroll() : globalScrollBehavior.showScroll();
-  }, [isOpen]);
+    if (!disabled) {
+      isOpen ? globalScrollBehavior.hideScroll() : globalScrollBehavior.showScroll();
+    }
+  }, [disabled, isOpen]);
 };
 
 // todo: Удалить после перехода на antd v5, если исправится [BI-9255]

@@ -8,7 +8,10 @@ interface ICheckboxProps<T>
 }
 
 export interface IVirtualizedTableBodyRowProps<T>
-  extends Pick<IVirtualizedTableProps<T>, "columns" | "onRow" | "isWithoutWrapperStyles"> {
+  extends Pick<
+    IVirtualizedTableProps<T>,
+    "columns" | "onRow" | "isWithoutWrapperStyles" | "floatingContextMenuConfig"
+  > {
   index: number;
   record: T;
   loading: boolean;
@@ -16,6 +19,7 @@ export interface IVirtualizedTableBodyRowProps<T>
   indentLeft: IVirtualizedTableBodyCellProps<T>["indentLeft"];
   isCheckable: boolean;
   onSelectChange(record: T | null, isChecking: boolean): void;
+  onSelectMultipleChange(record: T | null, isChecking: boolean): void;
   selectionType?: TableRowSelection<T>["type"];
   getCheckboxProps?: (record: T) => ICheckboxProps<T>;
   isTree: boolean;

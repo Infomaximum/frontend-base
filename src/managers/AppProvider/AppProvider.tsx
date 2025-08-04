@@ -1,5 +1,3 @@
-import "dayjs/locale/ru";
-import "dayjs/locale/en";
 import { Global } from "@emotion/react";
 import { type ELanguages, Localization } from "@infomaximum/localization";
 import { type FC, memo, useEffect, useMemo } from "react";
@@ -13,7 +11,7 @@ import { EErrorBoundaryCodesBase, rootPath } from "../../utils";
 import { ErrorModalProvider } from "../ErrorModalProvider/ErrorModalProvider";
 import { RouterProvider } from "../RouterProvider/RouterProvider";
 import type { IRouterProviderProps } from "../RouterProvider/RouterProvider.types";
-import { DataInitializer } from "./DataInitializer";
+import { SystemInitializer } from "./SystemInitializer";
 import enUS from "antd/es/locale/en_US";
 import ruRu from "antd/es/locale/ru_RU";
 import { ConfigProvider, type ThemeConfig } from "antd";
@@ -104,9 +102,9 @@ const AppProviderContainer: FC<IAppProviderProps> = (props) => {
   const children = useMemo(
     () => (
       <ErrorModalProvider isDebugMode={!!isDebugMode}>
-        <DataInitializer>
+        <SystemInitializer>
           {typeof childrenProp === "function" ? childrenProp(routerProvider) : routerProvider}
-        </DataInitializer>
+        </SystemInitializer>
       </ErrorModalProvider>
     ),
     [childrenProp, isDebugMode, routerProvider]

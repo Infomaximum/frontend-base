@@ -1,4 +1,4 @@
-import type { NCore } from "@infomaximum/module-expander";
+import type { NCore } from "../../libs/core";
 
 export interface INotificationProps {
   error?: NCore.TError;

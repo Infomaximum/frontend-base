@@ -32,7 +32,7 @@ export const tableWithPaddingDefaultStyle = {
     [`&:has(div#${LOADING_ON_SCROLL_SPINNER_ID})`]: {
       paddingBottom: "0px",
       "&::-webkit-scrollbar-track": {
-        marginBottom: "12px",
+        marginBottom: "8px",
       },
     },
   },
@@ -40,10 +40,7 @@ export const tableWithPaddingDefaultStyle = {
     [`&:has(div#${LOADING_ON_SCROLL_SPINNER_ID})`]: {
       "&": {
         position: "relative",
-        top: "12px",
-      },
-      "& > td": {
-        borderBottom: "none",
+        top: "8px",
       },
     },
   },
@@ -71,6 +68,9 @@ export const getTableStyle = (opacity: TTableOpacity, isWithoutWrapperStyles?: b
 
   return {
     ...newStyles,
+    ".ant-table-tbody > tr:last-of-type > td": {
+      borderBottom: "1px solid transparent",
+    },
     opacity,
   };
 };

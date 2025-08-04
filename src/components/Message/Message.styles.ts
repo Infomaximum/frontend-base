@@ -16,10 +16,6 @@ export const getNotificationsWrapperStyle = (closable: boolean) => (theme: TThem
   ...messageStyle(theme),
 });
 
-export const entityStyle = (theme: TTheme) => ({
-  color: theme.grey10Color,
-});
-
 export const getMessageNoticeStyle = (noticeStyle?: React.CSSProperties) =>
   ({
     maxWidth: "464px",

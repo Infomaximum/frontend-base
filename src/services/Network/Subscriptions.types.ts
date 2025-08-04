@@ -1,4 +1,5 @@
-import type { NCore } from "@infomaximum/module-expander";
+import type { FetchPolicy } from "@apollo/client";
+import type { NCore } from "../../libs/core";
 import type { DocumentNode } from "graphql";
 
 export type TSubscribeParams = {
@@ -9,6 +10,10 @@ export type TSubscribeParams = {
     query: DocumentNode;
     /** Переменные запроса */
     variables?: TDictionary;
+    /** Параметр работы внутреннего кеша
+     * @default "no-cache"
+     */
+    fetchPolicy?: FetchPolicy;
   };
 };
 

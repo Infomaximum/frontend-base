@@ -1,6 +1,6 @@
-import { PureComponent } from "react";
+import { memo, useCallback, useMemo, useState, type FC } from "react";
 import { Popover } from "antd";
-import type { IFieldTooltipProps, IFieldTooltipState } from "./FieldTooltip.types";
+import type { IFieldTooltipProps } from "./FieldTooltip.types";
 import {
   captionStyle,
   getFieldTooltipContainerStyle,
@@ -11,47 +11,39 @@ import {
 import { fieldTooltipPromptTestId, fieldTooltipPromptButtonTestId } from "../../utils/TestIds";
 import { QuestionCircleOutlined } from "../Icons/Icons";
 
-class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTooltipState> {
-  private static readonly align = {
-    offset: [16, -16],
-  };
+const align = {
+  offset: [16, -16],
+};
 
-  public override readonly state = {
-    showPopover: false,
-  };
+export const FieldTooltip: FC<IFieldTooltipProps> = memo(
+  ({
+    trigger = "click",
+    placement = "rightTop",
+    arrowPointAtCenter = true,
+    promptText,
+    promptTestId,
+    caption,
+    iconStyle,
+    getPopupContainer,
+    isWithoutPadding,
+  }) => {
+    const [isShowPopover, setIsShowPopover] = useState(false);
 
-  public static defaultProps = {
-    trigger: "click",
-    placement: "rightTop",
-    arrowPointAtCenter: true,
-  };
+    const handleVisiblePopover = useCallback(() => {
+      setIsShowPopover((showPopover) => {
+        return !showPopover;
+      });
+    }, []);
 
-  private handleVisiblePopover = () => {
-    this.setState(({ showPopover }) => {
+    const prompt = useMemo(() => {
+      return <div test-id={`${fieldTooltipPromptTestId}_${promptTestId}`}>{promptText}</div>;
+    }, [promptTestId, promptText]);
+
+    const arrowConfig = useMemo(() => {
       return {
-        showPopover: !showPopover,
+        pointAtCenter: arrowPointAtCenter,
       };
-    });
-  };
-
-  private get prompt() {
-    const { promptText, promptTestId } = this.props;
-
-    return <div test-id={`${fieldTooltipPromptTestId}_${promptTestId}`}>{promptText}</div>;
-  }
-
-  public override render() {
-    const {
-      caption,
-      promptText,
-      promptTestId,
-      trigger,
-      placement,
-      iconStyle,
-      arrowPointAtCenter,
-      getPopupContainer,
-      isWithoutPadding,
-    } = this.props;
+    }, [arrowPointAtCenter]);
 
     return (
       <span css={getFieldTooltipContainerStyle(isWithoutPadding)}>
@@ -62,21 +54,21 @@ class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTool
         ) : null}
         {promptText ? (
           <Popover
-            open={this.state.showPopover}
+            open={isShowPopover}
             key="prompt-notification-popover"
             trigger={trigger}
             placement={placement}
-            content={this.prompt}
-            onOpenChange={this.handleVisiblePopover}
-            arrow={{ pointAtCenter: arrowPointAtCenter }}
-            align={FieldTooltipComponent.align}
+            content={prompt}
+            onOpenChange={handleVisiblePopover}
+            arrow={arrowConfig}
+            align={align}
             getPopupContainer={getPopupContainer}
-            overlayStyle={popoverStyle}
+            styles={popoverStyle}
           >
             <QuestionCircleOutlined
               style={iconStyle}
               key="question-circle-popover-icon"
-              css={this.state.showPopover ? questionIconShowPopoverStyle : questionIconStyle}
+              css={isShowPopover ? questionIconShowPopoverStyle : questionIconStyle}
               role="button"
               test-id={`${fieldTooltipPromptButtonTestId}_${promptTestId}`}
             />
@@ -85,6 +77,4 @@ class FieldTooltipComponent extends PureComponent<IFieldTooltipProps, IFieldTool
       </span>
     );
   }
-}
-
-export const FieldTooltip = FieldTooltipComponent;
+);

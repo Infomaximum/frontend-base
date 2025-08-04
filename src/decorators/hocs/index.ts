@@ -11,4 +11,5 @@ export * from "./withSystemTitle";
 export * from "./withTheme";
 export * from "./withFormSubmitPromise";
 export * from "./withWrapperContainer";
+export * from "./withSystemLoader";
 export * from "./withFiltersConfig";

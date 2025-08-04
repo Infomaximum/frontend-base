@@ -1,8 +1,6 @@
-import type { ComponentType } from "react";
+import type { ComponentType, PropsWithRef } from "react";
 import { lazy, Suspense } from "react";
-import { Spinner } from "../../../components/Spinner/Spinner";
-
-const spinner = <Spinner delay={3000} />;
+import { SystemLoaderProvider } from "../../../managers/SystemLoaderProvider";
 
 type TModuleWithDefaultExport<P = any> = { default: ComponentType<P> };
 type TModuleWithoutDefaultExport = {};
@@ -44,14 +42,16 @@ export function withLazyLoader<M extends TModule, Resolver extends TResolver<M>>
 ): ReturnType<Resolver> {
   const LazyComponent = lazy(() =>
     loader().then((m) => ({
-      default: resolver ? resolver(m) : m["default"]!,
+      default: resolver ? resolver(m) : m.default!,
     }))
   );
 
-  const Component = (props: any) => (
-    <Suspense fallback={spinner}>
-      <LazyComponent {...props} />
-    </Suspense>
+  const Component = (props: JSX.IntrinsicAttributes & PropsWithRef<unknown>) => (
+    <SystemLoaderProvider>
+      <Suspense>
+        <LazyComponent {...props} />
+      </Suspense>
+    </SystemLoaderProvider>
   );
 
   return Component as ReturnType<Resolver>;

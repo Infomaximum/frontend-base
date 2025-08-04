@@ -12,7 +12,3 @@ export interface IFieldTooltipProps extends TPopover {
   arrowPointAtCenter?: boolean;
   isWithoutPadding?: boolean;
 }
-
-export interface IFieldTooltipState {
-  showPopover: boolean;
-}

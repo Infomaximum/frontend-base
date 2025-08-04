@@ -1,9 +1,11 @@
 import { EHttpCodes } from "@infomaximum/utility";
-import { Expander, type NCore, showGlobalErrorModal } from "@infomaximum/module-expander";
+import { Expander } from "@infomaximum/module-expander";
 import { filter, find, get, isArray, isMatch, isPlainObject } from "lodash";
 import { EErrorCode, PARAMETERS_FIELD_NAME, rootDomNodeName } from "../../../utils/const";
 import type { IErrorHandlerService } from "../ErrorHandlers.types";
 import { assertSimple } from "@infomaximum/assert";
+import { GlobalErrorModalService } from "../../GlobalErrorModal/GlobalErrorModalService";
+import type { NCore } from "../../../libs/core";
 
 export class BaseErrorHandlerService implements IErrorHandlerService {
   private prepareInitialServerError(error: any) {
@@ -21,7 +23,7 @@ export class BaseErrorHandlerService implements IErrorHandlerService {
       }
 
       if (isShowError) {
-        showGlobalErrorModal();
+        GlobalErrorModalService.show();
       }
     }
   }
@@ -64,13 +66,13 @@ export class BaseErrorHandlerService implements IErrorHandlerService {
   /** Находит ошибку и вызывает обработчик */
   protected async handleError(normalizedError: NCore.TError) {
     const error = find(
-      Expander.getInstance().getErrorsHandlers(),
+      Expander.getInstance().getErrorsHandlers() as NCore.TErrorPreparer[],
       (e) => e.code === normalizedError.code && isMatch(normalizedError.params, e.params!)
     );
 
     // Формируем список из ошибок с кодом ошибки кроме той у которой вызываем handle
     const errorsByCode = filter(
-      Expander.getInstance().getErrorsHandlers(),
+      Expander.getInstance().getErrorsHandlers() as NCore.TErrorPreparer[],
       (e) => e.code === normalizedError.code && !!error && e !== error
     );
 

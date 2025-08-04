@@ -11,11 +11,11 @@ export const getAlignedTooltipStyle = (numberOfLines: number) =>
     ? getTextClampStyle(numberOfLines)
     : ({
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        whiteSpace: "pre",
         textOverflow: "ellipsis",
         alignItems: "center",
       } as const);
 
 export const getExpandByParentStyle = (expand?: boolean) => {
-  return expand ? { width: "100%" } : {};
+  return expand ? { width: "100%" } : { maxWidth: "100%" };
 };

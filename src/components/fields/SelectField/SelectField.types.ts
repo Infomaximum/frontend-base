@@ -15,6 +15,7 @@ export interface ISelectComponentOwnProps
     Omit<SelectProps<TSelectFieldValue>, "name"> {
   readOnly?: boolean;
   onChangeCallback?: SelectProps<TSelectFieldValue>["onChange"];
+  disableGlobalScrollBehavior?: boolean;
 }
 
 export interface ISelectFieldProps

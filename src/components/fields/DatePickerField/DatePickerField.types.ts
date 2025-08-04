@@ -24,6 +24,7 @@ export interface IDatePickerOwnProps extends Omit<TDatePickerProps, TOmitDatePic
   showTime?: DatePickerProps<Dayjs>["showTime"];
   displayFormat?: TDatePickerProps["format"];
   readOnly?: boolean;
+  onChangeCallback?(date: Dayjs): void;
 }
 
 export interface IDatePickerFieldProps

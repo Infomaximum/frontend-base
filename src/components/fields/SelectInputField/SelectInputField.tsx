@@ -14,6 +14,7 @@ import { Input } from "../../Input";
 import { Select } from "../../Select";
 import { SelectFormField } from "../SelectField";
 import { Field, FormField } from "../FormField";
+import type { OptionGroupFC } from "rc-select/lib/OptGroup";
 
 const InputContainer: React.FC<IInputContainerProps> = (props) => {
   const { input, meta, readOnly, disabled, ...rest } = props;
@@ -26,7 +27,7 @@ const SelectContainer: React.FC<ISelectContainerProps> = ({
   meta,
   readOnly,
   disabled,
-  showArrow,
+  suffixIcon,
   ...rest
 }) => {
   return (
@@ -34,7 +35,7 @@ const SelectContainer: React.FC<ISelectContainerProps> = ({
       {...restInput}
       {...rest}
       disabled={disabled || readOnly}
-      showArrow={readOnly ? false : showArrow}
+      suffixIcon={readOnly ? null : suffixIcon}
       defaultActiveFirstOption={true}
       style={selectFieldStyle}
     />
@@ -94,7 +95,7 @@ class SelectInputField extends React.PureComponent<ISelectInputProps> {
 
 class SelectInputFormField extends React.PureComponent<ISelectInputFormFieldProps> {
   public static Option = SelectInputField.Option;
-  public static OptionGroup = SelectInputField.OptionGroup;
+  public static OptionGroup: OptionGroupFC = SelectInputField.OptionGroup;
   public static inputFieldName = SelectInputField.inputFieldName;
   public static selectFieldName = SelectInputField.selectFieldName;
 

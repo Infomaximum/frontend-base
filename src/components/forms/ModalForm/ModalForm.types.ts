@@ -20,6 +20,10 @@ export interface IModalFormProps
   afterSubmit?(submitResult?: unknown): void;
   sortByPriority?: boolean;
   hasEnterHotkey?: boolean;
+  /**
+   * Нужен для того, чтобы учитывать внешне переданное состояние дизейбла кнопки сабмита формы в обработчиках клавиши Enter
+   */
+  isSubmitDisabledByOuterCondition?: boolean;
 }
 
 export interface IModalFormState {

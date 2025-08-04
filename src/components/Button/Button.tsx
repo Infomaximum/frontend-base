@@ -19,10 +19,15 @@ import {
   ghostButtonStyle,
   dashedButtonStyle,
   uncertainButtonTypeDisabledStyle,
+  loadingButtonStyle,
+  buttonLocSpinStyle,
+  buttonLocSpinIndicatorStyle,
 } from "./Button.styles";
 import type { Interpolation } from "@emotion/react";
 import { Tooltip } from "../../components/Tooltip/Tooltip";
 import { useTheme } from "../../decorators/hooks/useTheme";
+import { LocalSpinner } from "../Spinner";
+import { ellipsisStyle } from "../../styles";
 
 const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
   (props, ref: React.Ref<HTMLButtonElement>) => {
@@ -32,6 +37,8 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
       dashed,
       tooltipPlacement = "top",
       tooltipAlign,
+      loading,
+      children,
       ...rest
     } = props;
     const onlyIcon = !props.children;
@@ -98,8 +105,12 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
         styles.push(dashedButtonStyle);
       }
 
+      if (loading) {
+        styles.push(loadingButtonStyle(theme));
+      }
+
       return styles;
-    }, [theme, typeProps, rest.size, dashed, ghost, onlyIcon]);
+    }, [theme, typeProps, rest.size, dashed, loading, ghost, onlyIcon]);
 
     const getType = () => {
       switch (typeProps) {
@@ -121,7 +132,25 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
 
     return (
       <Tooltip title={props.title} placement={tooltipPlacement} align={tooltipAlign}>
-        <AntButton {...rest} css={buttonStyles} ref={ref} title={undefined} type={getType()} />
+        <AntButton
+          {...rest}
+          css={buttonStyles}
+          ref={ref}
+          title={undefined}
+          type={getType()}
+          icon={loading ? undefined : props.icon}
+        >
+          {loading && (
+            <LocalSpinner
+              // визуально оптимальное значение > 0
+              delay={10}
+              wrapperStyle={buttonLocSpinStyle}
+              spinIndicatorStyle={buttonLocSpinIndicatorStyle}
+            />
+          )}
+
+          {children && <span css={ellipsisStyle}>{children}</span>}
+        </AntButton>
       </Tooltip>
     );
   }

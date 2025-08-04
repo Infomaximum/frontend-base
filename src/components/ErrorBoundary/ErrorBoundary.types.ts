@@ -1,5 +1,5 @@
-import type { NCore } from "@infomaximum/module-expander";
 import type { IWithModalErrorProps } from "../../decorators/hocs/withModalError/withModalError.types";
+import type { NCore } from "../../libs/core";
 
 export interface IAppErrorBoundaryProps {
   /**

@@ -69,18 +69,17 @@ export const secondInputStyle = (theme: TTheme) => ({
 export const defaultPasswordInputStyle = (theme: TTheme) => ({
   ...getDefaultInputStyle(theme),
   ".ant-input-suffix": {
-    marginRight: "-8px",
     marginLeft: 0,
     zIndex: 10,
-    ".ant-input-password-icon.anticon": {
-      width: "28px",
-      height: "28px",
-      display: "flex",
-      alignItems: "center",
-      paddingLeft: "5px",
+    ".ant-input-password-icon": {
+      fontSize: `${theme.subtitleFontSize}px`,
+      cursor: "pointer",
       color: theme.grey6Color,
       ":hover": {
         color: theme.grey7Color,
+      },
+      "&&": {
+        marginRight: "8px",
       },
     },
   },
@@ -89,7 +88,7 @@ export const defaultPasswordInputStyle = (theme: TTheme) => ({
 export const disabledPasswordInputStyle = (theme: TTheme) => ({
   ...getDisabledInputStyle,
   border: "none",
-  ".ant-input-password-icon.anticon": {
+  ".ant-input-password-icon": {
     display: "none",
   },
   input: {
@@ -98,3 +97,9 @@ export const disabledPasswordInputStyle = (theme: TTheme) => ({
     },
   },
 });
+
+export const tooltipWrapperStyle = {
+  "& > div": {
+    overflow: "unset",
+  },
+};

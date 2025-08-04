@@ -28,6 +28,7 @@ const record: Partial<TExtendColumns<TBaseRow>> = {
 };
 
 const onSelectChange = jest.fn();
+const onSelectMultipleChange = jest.fn();
 const onRowExpanderChange = jest.fn();
 
 const renderComponent = (loading: boolean) => {
@@ -40,6 +41,7 @@ const renderComponent = (loading: boolean) => {
       isCheckable={true}
       isChecked={false}
       onSelectChange={onSelectChange}
+      onSelectMultipleChange={onSelectMultipleChange}
       selectionType={"checkbox"}
       indentLeft={20}
       hasExpander={true}

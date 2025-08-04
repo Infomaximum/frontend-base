@@ -2,18 +2,19 @@ import React, { type ReactNode } from "react";
 import { message } from "antd";
 import { uniqueId } from "lodash";
 import { getMessageNoticeStyle } from "./Message.styles";
-import type {
-  IMessageMethodProps,
-  IMessageProps,
-  TRemoveMessageProps,
-  TGetMassAssignMessageParams,
+import {
+  type IMessageMethodProps,
+  type IMessageProps,
+  type TRemoveMessageProps,
+  type TGetMassAssignMessageParams,
+  EMassAssignEndings,
 } from "./Message.types";
 import MessageBody from "./MessageBody";
 import { ThemeContext } from "@emotion/react";
 import { theme } from "../../styles/theme";
 import { isString, isFunction, forEach, isEqual, map, difference, isUndefined } from "lodash";
 import { generatePath } from "react-router";
-import { entityStyle, messageStyle, nameStyle } from "./Message.styles";
+import { messageStyle, nameStyle } from "./Message.styles";
 import {
   CHANGES_SAVED,
   RENAMED_MASCULINE,
@@ -38,9 +39,10 @@ import {
   moveMessageTestId,
   massAssignMessageTestId,
 } from "../../utils/TestIds";
-import type { NCore } from "@infomaximum/module-expander";
+
 import { Localization, type TLocalizationDescription } from "@infomaximum/localization";
 import { getAppliedLocalized } from "./Message.utils";
+import type { NCore } from "../../libs/core";
 
 const duration = 3000;
 
@@ -313,7 +315,6 @@ class MessageComponent {
     const {
       localization,
       entityLoc,
-      name,
       messageLoc,
       feminineGenus,
       neuterGenus,
@@ -325,8 +326,7 @@ class MessageComponent {
     if (entityLoc) {
       return (
         <div css={messageStyle} key="remove-message" test-id={removeMessageTestId}>
-          {`${localization.getLocalized(entityLoc)} `}
-          <b css={nameStyle}>{name}</b>
+          {`${localization.getLocalized(entityLoc)}`}
           {` ${localization.getLocalized(
             feminineGenus
               ? DELETED_FEMININE
@@ -356,9 +356,9 @@ class MessageComponent {
     ) {
       return (
         <div css={messageStyle} key="remove-message" test-id={removeMessageTestId}>
-          {`${localization.getLocalized(messageLocStartEnd.messageStart)} `}
-          <b css={nameStyle}>{` ${messageLocTemplateDataBold} `}</b>
-          {` ${localization.getLocalized(messageLocStartEnd.messageEnd)}`}
+          {`${localization.getLocalized(messageLocStartEnd.messageStart)}`}
+          {` ${messageLocTemplateDataBold} `}
+          {`${localization.getLocalized(messageLocStartEnd.messageEnd)}`}
         </div>
       );
     }
@@ -419,18 +419,17 @@ class MessageComponent {
    * @param params.localization - локализация
    * @param params.entityLoc - локализация сущности массового действия
    * @param params.entityValue - значения массового действия
-   * @param params.genus - род для APPLIED (по умолчанию "male")
+   * @param params.ending - род или множественное число для APPLIED (по умолчанию "male")
    */
   public static getMassAssignMessage(params: TGetMassAssignMessageParams) {
-    const { localization, entityLoc, entityValue, genus = "male" } = params;
+    const { localization, entityLoc, entityValue, ending = EMassAssignEndings.MALE } = params;
 
-    const localizedApplied = getAppliedLocalized(localization, genus);
+    const localizedApplied = getAppliedLocalized(localization, ending);
 
     return (
       <div css={messageStyle} key="mass-assign-message-content" test-id={massAssignMessageTestId}>
-        <b css={entityStyle}>
-          {localization.getLocalized(entityLoc)} – {entityValue}
-        </b>{" "}
+        {localization.getLocalized(entityLoc)}
+        {entityValue ? <> – {entityValue} </> : " "}
         {localizedApplied}
       </div>
     );

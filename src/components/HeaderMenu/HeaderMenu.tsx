@@ -21,7 +21,6 @@ import type { IHeaderMenuProps } from "./HeaderMenu.types";
 import { useTheme } from "../../decorators/hooks/useTheme";
 import { RoutesContext } from "../../decorators/contexts/RoutesContext";
 import { getDisplayedSettingsRoutes } from "../../utils/Routes/routes";
-import { SettingsSVG } from "../../resources/icons";
 import { Drawer } from "../drawers/Drawer/Drawer";
 import { Settings } from "../Settings/Settings";
 import type { DrawerStyles } from "antd/lib/drawer/DrawerPanel";
@@ -30,6 +29,7 @@ import { ADMINISTRATION } from "../../utils";
 import { Tooltip } from "../Tooltip";
 import { useLocation } from "react-router";
 import { filterChildrenRouts } from "./HeaderMenu.utils";
+import { SettingFilled } from "../Icons";
 
 const { Header } = Layout;
 const tooltipAlign = { targetOffset: [0, 2] };
@@ -89,7 +89,7 @@ const HeaderMenuComponent = React.forwardRef<HTMLDivElement, IHeaderMenuProps>(
               css={linkSettingsStyle}
               onClick={handleSettingsIconClick}
             >
-              <SettingsSVG />
+              <SettingFilled />
             </div>
           </Tooltip>
         ) : null}

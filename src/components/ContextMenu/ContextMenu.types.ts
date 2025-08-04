@@ -37,6 +37,7 @@ export interface IContextMenuParam {
   "test-id"?: string;
   priority?: number;
 }
+
 export interface IContextMenuDivider
   extends Partial<Pick<IContextMenuParam, "priority" | "title">> {
   type: "divider";
@@ -48,6 +49,15 @@ export interface IContextSubMenuParam
   children: TContextMenuParamItem[];
 }
 
+export interface IContextMenuItem
+  extends Omit<IContextMenuParam, "title" | "clickHandler">,
+    Partial<Pick<IContextMenuParam, "title" | "clickHandler">>,
+    Partial<Pick<IContextMenuDivider, "type">> {
+  label?: string | React.ReactNode;
+  /** Иконка, которая будет отображена вместо контекстного меню, если в контекстном меню останется только один пункт */
+  icon?: JSX.Element;
+}
+
 export interface IContextMenuProps extends Omit<IDropdownProps, "overlay" | "overlayStyle"> {
   content: TContextMenuParamItem[];
   "test-id"?: string;
@@ -56,6 +66,8 @@ export interface IContextMenuProps extends Omit<IDropdownProps, "overlay" | "ove
   dropdownStyle?: React.CSSProperties;
   dividerStyle?: React.CSSProperties;
   onItemClick?: (params: TOnItemClickParam) => void;
+  subMenuCloseDelay?: number;
+  triggerSubMenuAction?: MenuProps["triggerSubMenuAction"];
 
   /** Определяет метод сортировки пунктов контекстного меню. */
   sortBy?: keyof typeof ESortingMethodsNames;

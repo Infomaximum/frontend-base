@@ -10,17 +10,20 @@ import {
   drawerFooterStyle,
 } from "./DrawerForm.styles";
 import { EFormLayoutType } from "../BaseForm/BaseForm.types";
-import type { NCore } from "@infomaximum/module-expander";
 import { drawerFormCancelButtonTestId, drawerFormTestId } from "../../../utils/TestIds";
 import type { IDrawerFormProps, IDrawerFormState } from "./DrawerForm.types";
 import type { FormApi } from "final-form";
 import type { IFormData } from "../../../decorators/contexts/FormContext";
-import { DrawerAnimationInterval } from "../../../utils/const";
+import {
+  defaultFormFooterPanelConfigWithoutSubmitButtons,
+  DrawerAnimationInterval,
+} from "../../../utils/const";
 import { SubmitFormButton } from "../SubmitFormButton";
 import { Button } from "../../Button/Button";
 import { Drawer } from "../../drawers/Drawer/Drawer";
 import { Empty } from "../../Empty/Empty";
 import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
+import type { NCore } from "../../../libs/core";
 
 class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerFormState> {
   public static defaultProps = {
@@ -206,7 +209,7 @@ class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerF
             notification={notification}
             setFormData={this.setFormData}
             connectedFormWrapperStyle={formContentStyle}
-            formSubmitPanelConfig={null}
+            formFooterPanelConfig={defaultFormFooterPanelConfigWithoutSubmitButtons}
           >
             {children}
           </Form>

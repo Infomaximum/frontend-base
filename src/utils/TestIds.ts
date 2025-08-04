@@ -27,7 +27,8 @@ export const submitFormButtonTestId = "submit-button";
 export const cancelChangesFormButtonTestId = "cancel-changes-button";
 
 // Spinner
-export const wrapperSpinnerTestId = "wrapper-spinner";
+export const wrapperGlobalSpinnerTestId = "wrapper-global-spinner";
+export const wrapperLocalSpinnerTestId = "wrapper-local-spinner";
 
 // ContextMenu
 export const contextMenuTestId = "context-menu";
@@ -109,9 +110,10 @@ export const headerMenuUserAvatarTestId = "header-menu-user-avatar";
 
 // SiderMenu
 export const siderMenuTestId = "sider-menu";
-export const siderMenuLogoTestId = "sider-menu-logo";
-export const siderMenuSettingsTestId = "sider-menu-settings";
-export const siderMenuUserAvatarTestId = "sider-menu-user-avatar";
+export const siderMenuLogoTestId = `${siderMenuTestId}-logo`;
+export const siderMenuSettingsTestId = `${siderMenuTestId}-settings`;
+export const siderMenuUserAvatarTestId = `${siderMenuTestId}-user-avatar`;
+export const siderMenuMoreTestId = `${siderMenuTestId}-more`;
 
 // ProfileSettingsContainer
 export const logoutButtonTestId = "logout-button";
@@ -169,6 +171,7 @@ export const removeSwitcherFieldButtonTestId = "remove-switcher-field-button";
 export const autocompleteSelectTestId = "autocomplete_select";
 export const autocompleteSelectSuffixButtonTestId = `${autocompleteSelectTestId}_suffix-button`;
 export const autocompleteSelectOptionTestId = `${autocompleteSelectTestId}_option`;
+export const autocompleteSelectClearIconTestId = `${autocompleteSelectTestId}_clear-icon`;
 
 // InputDrawerField/Select
 export const inputDrawerSelectTestId = "input-drawer_select";

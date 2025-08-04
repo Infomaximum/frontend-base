@@ -1,5 +1,3 @@
-import ArrowRightSVG from "../../../../resources/icons/ArrowRight.svg";
-import ArrowUpSVG from "../../../../resources/icons/ArrowUp.svg";
 import {
   tableArrowUpTestId,
   tableArrowRightTestId,
@@ -9,6 +7,7 @@ import { memo, useCallback } from "react";
 import { tableExpandIconHiddenStyle, tableExpandIconStyle } from "./TableExpandIcon.styles";
 import type { ITableExpandIconProps } from "./TableExpandIcon.types";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { RightOutlined, UpOutlined } from "../../../Icons";
 
 const TableExpandIconComponent = <T extends TDictionary>(
   props: ITableExpandIconProps<T | null>
@@ -37,9 +36,9 @@ const TableExpandIconComponent = <T extends TDictionary>(
       test-id={tableExpanderTestId}
     >
       {expanded ? (
-        <ArrowUpSVG test-id={tableArrowUpTestId} />
+        <UpOutlined test-id={tableArrowUpTestId} />
       ) : (
-        <ArrowRightSVG test-id={tableArrowRightTestId} />
+        <RightOutlined test-id={tableArrowRightTestId} />
       )}
     </button>
   );

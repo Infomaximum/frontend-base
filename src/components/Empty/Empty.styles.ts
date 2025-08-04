@@ -25,12 +25,10 @@ export const getWrapperEmptyTableStyle = (isLoading?: boolean, isVirtualized?: b
 export const wrapperEmptyStyle = {} as const;
 
 /**
- * Стили надписи картинки компонента Empty
+ * Контейнерные (табличные) стили надписи картинки компонента Empty
  */
 export const emptyImageStyle = {
-  width: "100%",
-  height: "100%",
-  marginBottom: "25px",
+  image: { width: "100%", height: "100%", marginBottom: "25px" },
 };
 
 export const wrapperNotTableEmptyStyle = {} as const;

@@ -8,6 +8,7 @@ import { Button } from "../../Button/Button";
 import { submitFormButtonTestId } from "../../../utils/TestIds";
 import { useFormButtonState } from "../hooks/useFormButtonState";
 import { SAVE } from "../../../utils";
+import { isEmpty } from "lodash";
 
 /**
  * Кнопка, которая делает submit текущих значений формы
@@ -18,7 +19,6 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
     disableOnInvalid = false,
     size = "default" as SizeType,
     type = "primary-dark" as TButtonType,
-    key,
     styles,
     className,
     formProvider: formProviderProp,
@@ -30,6 +30,7 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
     caption,
     focusable,
     focus,
+    ...restProps
   }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const localization = useLocalization();
@@ -62,6 +63,17 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
       }
     }, [formProvider]);
 
+    const handleEnterKeyPress = useCallback(
+      (event: React.KeyboardEvent) => {
+        if (event.key === "Enter" && isEmpty(formProvider.getState().dirtyFieldsSinceLastSubmit)) {
+          event.preventDefault();
+
+          return;
+        }
+      },
+      [formProvider]
+    );
+
     const validState = formProvider.getState().valid;
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -72,19 +84,21 @@ const SubmitFormButtonComponent: React.FC<ISubmitFormButtonProps> = memo(
           activeElement.getAttribute("type") !== "text" &&
           activeElement.getAttribute("type") !== "password" &&
           activeElement.getAttribute("type") !== "checkbox" &&
-          !activeElement.hasAttribute("step");
+          !activeElement.hasAttribute("step") &&
+          activeElement.tagName !== "TEXTAREA";
 
         if ((!isDisabled && validState && isValidElementType) || focus) {
-          buttonRef?.current?.focus();
+          buttonRef.current?.focus();
         }
       }
     }, [focus, focusable, formProvider, isDisabled, isSubmitting, validState]);
 
     return (
       <Button
-        key={key ?? "submit-form-button"}
+        key={restProps.key ?? "submit-form-button"}
         className={className}
         onClick={handleClick}
+        onKeyDown={handleEnterKeyPress}
         type={type}
         disabled={isDisabled || isSubmitting}
         loading={loading ?? submitting}

@@ -1,14 +1,20 @@
 import type { ModalProps } from "antd";
 
 export const iconDefaultStyle = (theme: TTheme) => ({
-  fontSize: "20px",
+  fontSize: "22px",
   color: `${theme.red6Color}`,
-  padding: "1px 12px 1px 1px",
+  marginRight: "12px",
 });
 
 export const modalStyle = {
   body: {
     padding: "20px 24px 0",
+  },
+  wrapper: {
+    zIndex: 5000,
+  },
+  mask: {
+    zIndex: 5000,
   },
 } satisfies ModalProps["styles"];
 

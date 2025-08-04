@@ -1,5 +1,5 @@
-import type { NCore } from "@infomaximum/module-expander";
 import type React from "react";
+import type { NCore } from "../../libs/core";
 
 export interface IErrorModalProviderProps {
   children: React.ReactNode;

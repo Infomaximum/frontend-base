@@ -15,7 +15,7 @@ import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useForm } from "../../../decorators/hooks/useForm";
 import { DrawerForm } from "../DrawerForm/DrawerForm";
 
-const { Option } = SelectFormField;
+const Option = SelectFormField.Option;
 
 /**
  * Обертка вокруг дровера с формой, позволяющая, в зависимости от выбранной опции,
@@ -69,6 +69,7 @@ const OptionalDrawerFormComponent: React.FC<IOptionalDrawerFormProps> = ({
   const selectOptions = useMemo(
     () =>
       map(filter(optionsConfig, "label"), ({ label, value, disabled }) => (
+        //@ts-expect-error
         <Option key={value} test-id={`select-option-${value}`} value={value} disabled={disabled}>
           <span title={undefined}>{label}</span>
         </Option>
@@ -85,6 +86,7 @@ const OptionalDrawerFormComponent: React.FC<IOptionalDrawerFormProps> = ({
         css={stretchStyle}
         localization={localization}
         test-id={optionalDrawerFormSelectTestId}
+        disableGlobalScrollBehavior={true}
       >
         {selectOptions}
       </SelectFieldComponent>

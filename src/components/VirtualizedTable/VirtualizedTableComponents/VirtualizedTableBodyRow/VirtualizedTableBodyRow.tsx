@@ -9,7 +9,7 @@ import {
   virtualizedTableWithPaddingBodyRowLoadingStyle,
 } from "./VirtualizedTableBodyRow.styles";
 import type { IVirtualizedTableBodyRowProps } from "./VirtualizedTableBodyRow.types";
-import { type MouseEvent } from "react";
+import { useCallback, type MouseEvent } from "react";
 import { Radio } from "../../../Radio/Radio";
 import { Checkbox } from "../../../Checkbox/Checkbox";
 import { map } from "lodash";
@@ -19,6 +19,8 @@ import { TableCheckboxCell } from "../../../Table/TableComponents/TableCheckboxC
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
 import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { ContextMenuFloating } from "../../../ContextMenu/ContextMenuTable/ContextMenuFloating/ContextMenuFloating";
+import { RestModel } from "../../../../models";
 
 const emptyObj: ReturnType<NonNullable<IVirtualizedTableBodyRowProps<any>["getCheckboxProps"]>> =
   {};
@@ -35,6 +37,7 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     enableRowClick,
     getCheckboxProps,
     onSelectChange,
+    onSelectMultipleChange,
     selectionType,
     columns,
     isTree,
@@ -45,11 +48,23 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     isShowDivider,
     onRow,
     isWithoutWrapperStyles,
+    floatingContextMenuConfig,
   } = props;
   const theme = useTheme();
 
   const checkboxProps = getCheckboxProps?.(record) || emptyObj;
   const isRowDisable = checkboxProps ? checkboxProps.disabled : false;
+
+  const handleSelectChange = useCallback(
+    (event: CheckboxChangeEvent | MouseEvent) => {
+      if (event.nativeEvent.shiftKey) {
+        onSelectMultipleChange(record, !isChecked);
+      } else {
+        onSelectChange(record, !isChecked);
+      }
+    },
+    [isChecked, onSelectChange, onSelectMultipleChange, record]
+  );
 
   const selectChange = (event: CheckboxChangeEvent | MouseEvent) => {
     if (enableRowClick) {
@@ -58,13 +73,13 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
 
     if (window.getSelection()?.toString()) {
       setTimeout(() => {
-        onSelectChange(record, !isChecked);
+        handleSelectChange(event);
       }, 0);
 
       return;
     }
 
-    onSelectChange(record, !isChecked);
+    handleSelectChange(event);
   };
 
   const clearTextSelection = () => {
@@ -92,44 +107,62 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
     );
   };
 
+  const rowContent = (
+    <div
+      css={[
+        isChecked
+          ? checkedVirtualizedTableBodyRowStyle(theme)
+          : usualVirtualizedTableBodyRowStyle(theme),
+        isWithoutWrapperStyles ? {} : virtualizedTableWithPaddingBodyRowLoadingStyle,
+        enableRowClick && !isRowDisable && clickableVirtualizedTableBodyRowStyle,
+        isShowDivider ? null : withoutDividerStyle,
+      ]}
+      onClick={!isRowDisable && enableRowClick ? selectChange : undefined}
+      {...onRow?.(record, rowIndex)}
+    >
+      {isCheckable && getCheckbox()}
+      {map(columns, (column, columnIndex) => {
+        return (
+          <VirtualizedTableBodyCell<T>
+            key={column.key}
+            column={column}
+            isTree={isTree}
+            index={columnIndex}
+            indentLeft={indentLeft}
+            record={record}
+            hasExpander={hasExpander}
+            isExpanded={isExpanded}
+            enableRowClick={enableRowClick}
+            onExpanderChange={onExpanderChange}
+          />
+        );
+      })}
+    </div>
+  );
+
+  const loadingContent = loading && (
+    <div css={virtualizedTableBodyRowLoadingCoverStyle(theme)} test-id={tableRowLoadingTestId} />
+  );
+
+  if (!record?.model || record?.model instanceof RestModel) {
+    return (
+      <>
+        {rowContent}
+        {loadingContent}
+      </>
+    );
+  }
+
   return (
     <>
-      <div
-        css={[
-          isChecked
-            ? checkedVirtualizedTableBodyRowStyle(theme)
-            : usualVirtualizedTableBodyRowStyle(theme),
-          isWithoutWrapperStyles ? {} : virtualizedTableWithPaddingBodyRowLoadingStyle,
-          enableRowClick && !isRowDisable && clickableVirtualizedTableBodyRowStyle,
-          isShowDivider ? null : withoutDividerStyle,
-        ]}
-        onClick={!isRowDisable && enableRowClick ? selectChange : undefined}
-        {...onRow?.(record, rowIndex)}
+      <ContextMenuFloating
+        data={record}
+        isRowChecked={isChecked}
+        floatingContextMenuConfig={floatingContextMenuConfig}
       >
-        {isCheckable && getCheckbox()}
-        {map(columns, (column, columnIndex) => {
-          return (
-            <VirtualizedTableBodyCell<T>
-              key={column.key}
-              column={column}
-              isTree={isTree}
-              index={columnIndex}
-              indentLeft={indentLeft}
-              record={record}
-              hasExpander={hasExpander}
-              isExpanded={isExpanded}
-              enableRowClick={enableRowClick}
-              onExpanderChange={onExpanderChange}
-            />
-          );
-        })}
-      </div>
-      {loading && (
-        <div
-          css={virtualizedTableBodyRowLoadingCoverStyle(theme)}
-          test-id={tableRowLoadingTestId}
-        />
-      )}
+        {rowContent}
+      </ContextMenuFloating>
+      {loadingContent}
     </>
   );
 };

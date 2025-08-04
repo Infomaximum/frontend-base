@@ -1,4 +1,4 @@
-import { type FC, useMemo } from "react";
+import { type FC, useMemo, useRef } from "react";
 import type { ITagProps } from "./Tag.types";
 // eslint-disable-next-line im/ban-import-entity
 import { Tag as AntTag } from "antd";
@@ -14,15 +14,11 @@ import { AlignedTooltip } from "../AlignedTooltip";
 
 const TagComponent: FC<ITagProps> = (props) => {
   const theme = useTheme();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const { tagsStyles } = theme;
-  const {
-    closable,
-    color: colorProps = "default",
-    children,
-    title,
-    isWithoutTooltipWrapper,
-  } = props;
+  const { closable, color: colorProps = "default", children, title } = props;
+  const { isWithoutTooltipWrapper, customTooltipWrapperStyle, ...restProps } = props;
 
   const { backgroundColor, borderColor, textColor, closeIconColor, closeIconColorHover } = (get(
     tagsStyles,
@@ -65,17 +61,26 @@ const TagComponent: FC<ITagProps> = (props) => {
 
   const tagRenderComponent = useMemo(
     () => (
-      <AntTag key={colorProps} {...props} css={tagCssRule} color={colorProps} title={undefined}>
-        <div css={tagContentStyle}>{children}</div>
+      <AntTag key={colorProps} {...restProps} css={tagCssRule} color={colorProps} title={undefined}>
+        <div ref={containerRef} css={tagContentStyle}>
+          {children}
+        </div>
       </AntTag>
     ),
-    [children, colorProps, props, tagCssRule]
+    [children, colorProps, restProps, tagCssRule]
   );
 
   return isWithoutTooltipWrapper ? (
     tagRenderComponent
   ) : (
-    <AlignedTooltip title={title ?? children}>{tagRenderComponent}</AlignedTooltip>
+    <AlignedTooltip
+      title={title ?? children}
+      expandByParent={false}
+      customStyle={customTooltipWrapperStyle}
+      containerRef={containerRef}
+    >
+      {tagRenderComponent}
+    </AlignedTooltip>
   );
 };
 

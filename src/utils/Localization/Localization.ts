@@ -14,8 +14,8 @@ export const ERROR = {
 };
 
 export const COPY_TO_CLIPBOARD = {
-  ru: "Копировать",
-  en: "Copy",
+  ru: "Копировать в буфер обмена",
+  en: "Copy to clipboard",
 };
 
 export const DELETION = {
@@ -53,9 +53,14 @@ export const SAVE = {
   en: "Save",
 };
 
-export const CANCEL_CHANGES = {
-  ru: "Отменить изменения",
-  en: "Cancel changes",
+export const WAIT = {
+  ru: "Подождать",
+  en: "Wait",
+};
+
+export const TO_CANCEL = {
+  ru: "Отменить",
+  en: "Cancel",
 };
 
 export const EXIT = {
@@ -76,6 +81,16 @@ export const UNABLE_TO_SAVE_CHANGE = {
 export const MAKE_SURE_FIELDS_FILLED_CORRECTLY = {
   ru: "Убедитесь, что поля заполнены корректно",
   en: "Make sure that the fields are filled in correctly",
+};
+
+export const ARE_YOU_SURE_YOU_WANT_TO_LEAVE = {
+  ru: "Вы уверены, что хотите покинуть страницу?",
+  en: "Are you sure you want to leave this page?",
+};
+
+export const SAVING_IN_PROGRESS = {
+  ru: "Идёт сохранение",
+  en: "Saving in progress",
 };
 
 export const CONTINUE_EDITING = {
@@ -230,6 +245,11 @@ export const APPLIED_MALE = {
 
 export const APPLIED_NEUTER = {
   ru: "применено",
+  en: "applied",
+};
+
+export const APPLIED_PLURAL = {
+  ru: "применены",
   en: "applied",
 };
 
@@ -399,6 +419,11 @@ export const MAX_SIZE_OF_THE_FILE = (maxSize: number) => ({
   en: `Maximum file size: ${maxSize}MB`,
 });
 
+export const ELEMENT_ALREADY_BELONGS_TO_SELECTED_OBJECT = (isPlural: boolean) => ({
+  ru: `Элемент${isPlural ? "" : "ы"} уже принадлеж${isPlural ? "и" : "а"}т выбранному объекту`,
+  en: `The element${isPlural ? "" : "s"} already belongs to the selected object`,
+});
+
 export const SEARCH = {
   ru: "Поиск",
   en: "Search",
@@ -478,4 +503,14 @@ export const MORE = {
 export const NOT = {
   ru: "Не",
   en: "Not",
+};
+
+export const NEXT = {
+  ru: "Далее",
+  en: "Next",
+};
+
+export const FINISH_TOUR = {
+  ru: "Завершить тур",
+  en: "Finish tour",
 };

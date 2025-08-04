@@ -1,10 +1,13 @@
 import type { SpinProps, TableProps } from "antd";
-import { isBoolean } from "lodash";
+import { isBoolean, forEach, isUndefined } from "lodash";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { TPropInjector } from "@infomaximum/utility";
 import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
+import type { TRow } from "../../components/VirtualizedTable/VirtualizedTable.types";
 
 export interface IWithSpinPropsReplacer extends Pick<TableProps<unknown>, "loading"> {}
+
+type TDataSource = TableProps<TRow | null>["dataSource"];
 
 /**
  * Адаптирует компонент, принимающий индикатор загрузки типа Boolean под прием SpinProps.
@@ -24,3 +27,51 @@ export const withSpinPropsReplacer: TPropInjector<
 
   return hoistNonReactStatics(SpinPropsReplacer, Component);
 };
+
+export function getMultipleRowSelectionHelpers(
+  lastSelectedRowIndex: number | null,
+  setLastSelectedRowIndex: (index: number | null) => void
+) {
+  const handleMultipleSelect = (
+    currentSelectedRowIndex: number,
+    dataSource: TDataSource,
+    selectedRowKeysSet: Set<string> | null
+  ) => {
+    const configLastSelectedRowIndex = lastSelectedRowIndex ?? currentSelectedRowIndex;
+
+    const startIndex = Math.min(configLastSelectedRowIndex || 0, currentSelectedRowIndex);
+    const endIndex = Math.max(configLastSelectedRowIndex || 0, currentSelectedRowIndex);
+
+    const rangeKeys = dataSource?.slice(startIndex, endIndex + 1).map((row) => row?.key);
+    const changedKeys: string[] = [];
+
+    const shouldSelected = rangeKeys?.some((rowKey) =>
+      !isUndefined(rowKey) ? !selectedRowKeysSet?.has(rowKey) : false
+    );
+
+    forEach(rangeKeys, (key) => {
+      if (key) {
+        if (shouldSelected) {
+          if (!selectedRowKeysSet?.has(key)) {
+            changedKeys.push(key);
+          }
+
+          selectedRowKeysSet?.add(key);
+        } else {
+          selectedRowKeysSet?.delete(key);
+          changedKeys.push(key);
+        }
+      }
+    });
+
+    setLastSelectedRowIndex(shouldSelected ? currentSelectedRowIndex : null);
+
+    return changedKeys;
+  };
+
+  const updateLastSelectedIndex = (index: number | null) => {
+    setLastSelectedRowIndex(index);
+  };
+
+  return { handleMultipleSelect, updateLastSelectedIndex };
+}

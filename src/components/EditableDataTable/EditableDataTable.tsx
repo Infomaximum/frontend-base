@@ -7,7 +7,6 @@ import type {
   IEditableRow,
 } from "./EditableDataTable.types";
 import type { IDataTableProps } from "../DataTable/DataTable.types";
-import type { NCore } from "@infomaximum/module-expander";
 import { createSelector } from "reselect";
 import { some, find, without, isFunction, merge, compact } from "lodash";
 import {
@@ -27,7 +26,7 @@ import { EAddingRowMethod } from "../../managers/Tree";
 import type { ITableBodyCellProps } from "../Table/TableComponents/TableBodyCell/TableBodyCell.types";
 import { TableBodyCell } from "../Table/TableComponents/TableBodyCell/TableBodyCell";
 import { RestModel } from "../../models/RestModel";
-import { DeleteOutlined, LoadingOutlined } from "../Icons/Icons";
+import { DeleteOutlined, ArcOutlined } from "../Icons/Icons";
 import type { TreeCounter } from "../../managers/TreeCounter";
 import { AddButton } from "../AddButton/AddButton";
 import { EditableTableContext } from "../../decorators/contexts/EditableTableContext";
@@ -41,8 +40,8 @@ import {
   useNodeShowMoreParams,
 } from "../../decorators/hooks/useLoadingOnScroll";
 import { DELETE } from "../../utils";
-import { Tooltip } from "../Tooltip";
 import type { TTopPanelButtonObject } from "../TopPanel/TopPanel.types";
+import type { NCore } from "../../libs/core";
 
 const EditableDataTableKeys = {
   // Ключ для кастомной колонки с кнопками (добавить в columns)
@@ -349,14 +348,9 @@ class EditableDataTableComponent<T extends IEditableRow = IEditableRow> extends 
             onClick={this.handleRemoveRow}
             type={EditableRowButton.types.REMOVE}
             test-id={`${key}_${controlCellRemoveTestId}`}
+            title={removingRowKey !== key ? localization.getLocalized(DELETE) : undefined}
           >
-            {removingRowKey === key ? (
-              <LoadingOutlined />
-            ) : (
-              <Tooltip title={localization.getLocalized(DELETE)} placement={"top"}>
-                <DeleteOutlined />
-              </Tooltip>
-            )}
+            {removingRowKey === key ? <ArcOutlined spin={true} /> : <DeleteOutlined />}
           </EditableRowButton>
         ) : null;
 

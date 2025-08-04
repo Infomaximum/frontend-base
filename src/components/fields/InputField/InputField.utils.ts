@@ -60,7 +60,7 @@ export const parsePhoneNumber = (formValue: string) => {
   const value = formValue.replace(/[^\+\d]*/g, "");
 
   if (value.length) {
-    return value[0] + value.substr(1).replace("+", "");
+    return value[0] + value.substring(1).replace("+", "");
   }
 
   return value;

@@ -49,11 +49,6 @@ export const emptyStyle = (theme: TTheme) => ({
   lineHeight: `${theme.verySmallLineHeight}px`,
 });
 
-export const emptyImageStyle = {
-  height: "46px",
-  marginBottom: "4px",
-};
-
 export const getItemStyle =
   (isHeaderPanel: boolean = true) =>
   (theme: TTheme) => ({

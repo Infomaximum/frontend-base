@@ -1,6 +1,6 @@
 import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IButtonProps } from "../../Button/Button.types";
-import type { AntdIconProps } from "../../Icons/Icons";
+import type { IconProps } from "../../Icons/Icons";
 
 export interface ICancelChangesFormButtonProps
   extends Pick<IButtonProps, "size" | "type" | "ghost" | "styles" | "key"> {
@@ -31,7 +31,7 @@ export interface ICancelChangesFormButtonProps
   /**
    * Иконка для кнопки
    */
-  icon?: React.ComponentType<AntdIconProps>;
+  icon?: React.ComponentType<IconProps>;
 
   className?: string;
 }

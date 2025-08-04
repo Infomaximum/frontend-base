@@ -5,7 +5,7 @@ import { SERVICE_MODE } from "../../../utils/Localization/Localization";
 import { authorizationServiceModePanelTestId } from "../../../utils/TestIds";
 import { Banner } from "../../Banner/Banner";
 import { useTheme } from "../../../decorators/hooks/useTheme";
-import { WarningOutlined } from "../../Icons/Icons";
+import { WarningFilled } from "../../Icons/Icons";
 import { serviceModeBannerStyle, wrapperContentStyle, iconStyle } from "./ServiceModePanel.styles";
 
 const ServiceModePanelComponent: React.FC<IServiceModePanelProps> = ({ serviceModeMessage }) => {
@@ -14,7 +14,7 @@ const ServiceModePanelComponent: React.FC<IServiceModePanelProps> = ({ serviceMo
 
   const content = serviceModeMessage ? serviceModeMessage : localization.getLocalized(SERVICE_MODE);
 
-  const icon = <WarningOutlined style={iconStyle} />;
+  const icon = <WarningFilled style={iconStyle} />;
 
   return (
     <Banner

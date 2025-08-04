@@ -1,69 +1,68 @@
-import { useMemo, useCallback, forwardRef, type ForwardedRef, useState, useEffect } from "react";
+import {
+  useMemo,
+  useCallback,
+  forwardRef,
+  type ForwardedRef,
+  useState,
+  useEffect,
+  useImperativeHandle,
+} from "react";
+import { Link } from "react-router-dom";
+import { observer } from "mobx-react";
+import { isEmpty, isFunction } from "lodash";
+import type { Interpolation } from "@emotion/react";
+import type { DropdownProps } from "antd/lib/dropdown";
 import type { IApplicationCardProps } from "./ApplicationCard.types";
 import {
-  titleStyle,
   contentStyle,
   contextMenuStyle,
-  cardStyle,
-  cardLeftPadding,
-  getCardRightPadding,
   pointerCardStyle,
   focusStyle,
+  getTitleStyle,
+  getCardStyle,
+  disabledStyle,
 } from "./ApplicationCard.styles";
 import { ContextMenu } from "../../components/ContextMenu/ContextMenu";
-import { InlineTags } from "./InlineTags/InlineTags";
-import { isEmpty, isFunction } from "lodash";
 import { applicationCardTestId } from "../../utils/TestIds";
 import { DELETE } from "../../utils/Localization/Localization";
 import { useLocalization } from "../../decorators/hooks/useLocalization";
-import { useNavigate } from "react-router-dom";
-import type { Interpolation } from "@emotion/react";
 import { useTheme } from "../../decorators";
 import type { TOnItemClickParam } from "../ContextMenu/ContextMenu.types";
-import type { DropdownProps } from "antd/lib/dropdown";
-import { observer } from "mobx-react";
 import { AlignedTooltip } from "../AlignedTooltip";
 
 const trigger: DropdownProps["trigger"] = ["contextMenu"];
 
-const ApplicationCardComponent = forwardRef<
-  HTMLAnchorElement | HTMLDivElement,
-  IApplicationCardProps
->(
+const ApplicationCardComponent = forwardRef<any, IApplicationCardProps>(
   (
     {
       entity,
       onClick,
       pathname,
       contextMenuGetter,
-      measuredWidth,
       onRemove,
       isReadOnly,
       hasDeleteAccess,
       mainPageContentRef,
       isDeleteDisabled,
+      additionalFooter,
+      subMenuCloseDelay,
+      numberOfTitleLines = 2,
+      isDisabled = false,
+      contextMenuControllerRef,
     },
     ref
   ) => {
     const localization = useLocalization();
-    const navigate = useNavigate();
     const theme = useTheme();
     const [contextMenuInFocus, setContextMenuInFocus] = useState(false);
+
     const applicationName = entity.getName();
 
     const handleClick = useCallback(() => {
-      if (!!document.getSelection()?.toString().trim()) {
-        return;
-      }
-
-      if (pathname) {
-        navigate(pathname);
-      }
-
       if (isFunction(onClick)) {
         onClick(entity);
       }
-    }, [pathname, onClick, navigate, entity]);
+    }, [onClick, entity]);
 
     const contextMenuItems = useMemo(() => {
       const menuItems = contextMenuGetter?.(entity) ?? [];
@@ -93,7 +92,7 @@ const ApplicationCardComponent = forwardRef<
     const hasContextMenu = !isEmpty(contextMenuItems);
 
     const cardStyles = useMemo(() => {
-      const styles = [cardStyle(theme) as Interpolation<TTheme>];
+      const styles = [getCardStyle(numberOfTitleLines, theme) as Interpolation<TTheme>];
 
       if (onClick || pathname) {
         styles.push(pointerCardStyle);
@@ -103,39 +102,73 @@ const ApplicationCardComponent = forwardRef<
         styles.push(focusStyle(theme));
       }
 
-      return styles;
-    }, [contextMenuInFocus, onClick, pathname, theme]);
+      if (isDisabled) {
+        styles.push(disabledStyle(theme));
+      }
 
-    const tagsMeasuredWidth =
-      measuredWidth - (cardLeftPadding + getCardRightPadding(hasContextMenu));
+      return styles;
+    }, [contextMenuInFocus, onClick, pathname, theme, numberOfTitleLines, isDisabled]);
 
     const cardWrapper = useMemo(() => {
       const content = (
         <div css={contentStyle}>
-          <div css={titleStyle(theme)}>
-            <AlignedTooltip offsetY={-6} title={applicationName} numberOfLines={2}>
+          <div css={getTitleStyle(numberOfTitleLines, isDisabled)}>
+            <AlignedTooltip offsetY={-6} title={applicationName} numberOfLines={numberOfTitleLines}>
               {applicationName}
             </AlignedTooltip>
           </div>
-          <InlineTags tags={entity.tags} measuredWidth={tagsMeasuredWidth} />
+          {additionalFooter && additionalFooter}
         </div>
       );
+
+      if (pathname) {
+        return (
+          <Link
+            to={pathname}
+            css={cardStyles}
+            onClick={onClick && handleClick}
+            ref={ref as ForwardedRef<HTMLAnchorElement>}
+            test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
+          >
+            {content}
+          </Link>
+        );
+      }
 
       return (
         <div
           css={cardStyles}
-          onClick={handleClick}
+          onClick={onClick && handleClick}
           ref={ref as ForwardedRef<HTMLDivElement>}
           test-id={`${applicationCardTestId}-${entity.contentTypename}-${entity.getId()}`}
         >
           {content}
         </div>
       );
-    }, [theme, applicationName, entity, tagsMeasuredWidth, cardStyles, handleClick, ref]);
+    }, [
+      numberOfTitleLines,
+      isDisabled,
+      applicationName,
+      additionalFooter,
+      pathname,
+      cardStyles,
+      onClick,
+      handleClick,
+      ref,
+      entity,
+    ]);
 
     const handleOpenChange = useCallback((isOpen: boolean) => {
       setContextMenuInFocus(isOpen);
     }, []);
+
+    useImperativeHandle(
+      contextMenuControllerRef,
+      () => ({
+        closeContextMenu: () => handleOpenChange(false),
+      }),
+      [handleOpenChange]
+    );
 
     useEffect(() => {
       const mainPageContent = mainPageContentRef?.current;
@@ -155,7 +188,7 @@ const ApplicationCardComponent = forwardRef<
     const onItemClick = useCallback(({ item, param }: TOnItemClickParam) => {
       setContextMenuInFocus(false);
       param.domEvent.stopPropagation();
-      item.clickHandler();
+      item.clickHandler?.();
     }, []);
 
     if (hasContextMenu) {
@@ -167,6 +200,7 @@ const ApplicationCardComponent = forwardRef<
           onItemClick={onItemClick}
           css={contextMenuStyle}
           open={contextMenuInFocus}
+          subMenuCloseDelay={subMenuCloseDelay}
         >
           {cardWrapper}
         </ContextMenu>

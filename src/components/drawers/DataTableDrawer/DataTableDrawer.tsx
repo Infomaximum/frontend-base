@@ -17,7 +17,7 @@ import { useTheme } from "../../../decorators/hooks/useTheme";
 import { DrawerAnimationInterval } from "../../../utils";
 import { useMountEffect } from "../../../decorators/hooks/useMountEffect";
 import { RestModel } from "../../../models/RestModel";
-import { Spinner } from "../../Spinner/Spinner";
+import { GlobalSpinner } from "../../Spinner";
 import { OptionalDrawerForm } from "../../forms/OptionalDrawerForm/OptionalDrawerForm";
 
 const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
@@ -63,6 +63,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     autoFocus,
     rowSelection,
     isLoadingOnScroll,
+    rowHeight,
   } = props;
 
   const [isLoading, setLoadingState] = useState(true);
@@ -117,7 +118,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     /* Сперва отправляются запросы и отображается спиннер, после открытия дровера уже все готово для 
     отображения контента без тормозов интерфейса */
     const mainContent = isLoading ? (
-      <Spinner />
+      <GlobalSpinner />
     ) : (
       <DataTableDrawerContent<T>
         headerMode={headerMode}
@@ -138,6 +139,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
         onChange={onChange}
         rowSelection={rowSelection}
         isLoadingOnScroll={isLoadingOnScroll}
+        rowHeight={rowHeight}
       />
     );
 

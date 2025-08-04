@@ -3,10 +3,10 @@ import { tableCheckboxCellStyle } from "../TableCheckboxCell/TableCheckboxCell.s
 
 export const commonTableHeaderCellStyle = (theme: TTheme) =>
   ({
-    color: theme.grey10Color,
+    color: theme.grey9Color,
     fontSize: `${theme.h4FontSize}px`,
     lineHeight: "22px",
-    fontWeight: "normal",
+    fontWeight: 400,
     transition: "color 0.3s ease",
   }) as const;
 

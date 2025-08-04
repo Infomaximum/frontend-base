@@ -3,7 +3,7 @@ import type { ISearchProps, ISearchState } from "./Search.types";
 import { Input } from "../Input/Input";
 import { isString, isFunction, isEmpty } from "lodash";
 import { KeyupRequestInterval } from "../../utils/const";
-import { SearchOutlined } from "../Icons/Icons";
+import { CloseOutlined, SearchOutlined } from "../Icons/Icons";
 import {
   iconStyle,
   searchMiddleInputStyle,
@@ -12,7 +12,6 @@ import {
 } from "./Search.style";
 import type { Interpolation } from "@emotion/react";
 import { boundMethod, withTheme } from "../../decorators";
-import { CloseSVG } from "../../resources";
 
 class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   public static defaultProps = {
@@ -96,7 +95,7 @@ class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   public override render() {
     const { onChange, value, size, theme, isSecond, onBeforeChange, clearWithoutDelay, ...rest } =
       this.props;
-    const clearIcon = isSecond ? <CloseSVG /> : null;
+    const clearIcon = isSecond ? <CloseOutlined /> : null;
 
     const getInputStyle = (): Interpolation<TTheme> => {
       if (isSecond) {

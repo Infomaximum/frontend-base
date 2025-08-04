@@ -2,13 +2,14 @@ import type { Interpolation } from "@emotion/react";
 import type { IBaseFormProps } from "../../forms/BaseForm/BaseForm.types";
 import type { IFormWrapperProps } from "../../forms/Form/FormWrapper.types";
 import type { IEditableDataTableState, IEditableRow } from "../EditableDataTable.types";
+import type { ITableBodyRowProps } from "../../Table/TableComponents/TableBodyRow/TableBodyRow.types";
 
 export interface IFormComponentProps extends IBaseFormProps {
   rowProps: Omit<IEditableRowProps, "formProps" | "children" | "editingState" | "record">;
   children: React.ReactNode;
 }
 
-export interface IEditableRowProps {
+export interface IEditableRowProps extends ITableBodyRowProps {
   formName: string;
   formProps: IFormWrapperProps<IFormComponentProps>;
   editingState?: IEditableDataTableState<IEditableRow>;

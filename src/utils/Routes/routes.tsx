@@ -23,21 +23,22 @@ import {
   rootPath,
   updatePasswordPath,
 } from "./paths";
-import type { NCore } from "@infomaximum/module-expander";
+
 import { Expander } from "@infomaximum/module-expander";
 import type { TFeatureEnabledChecker } from "@infomaximum/utility";
 import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
 import { assertSimple } from "@infomaximum/assert";
 import { getPathToSessionStorage } from "../URI/URI";
+import type { NCore } from "../../libs/core";
 
 /**
- * @param items {NCore.IRoutes[]} - конфиг роутов
- * @returns {NCore.IRoutes[]} - линейный конфиг роутов
+ * @param items {NCore.IRoute[]} - конфиг роутов
+ * @returns {NCore.IRoute[]} - линейный конфиг роутов
  */
 export const routesMap = (
-  items: NCore.IRoutes[] | undefined,
+  items: NCore.IRoute[] | undefined,
   layoutWrapped: boolean = false
-): NCore.IRoutes[] =>
+): NCore.IRoute[] =>
   flatMap(items, (item) => {
     const routes = [];
 
@@ -102,7 +103,7 @@ export const getRelativeRoutePath = (
   return childPath?.replace(`${parentPath}/`, "");
 };
 
-export const getRoutes = (items: NCore.IRoutes[] | undefined): NCore.IRoutes[] => {
+export const getRoutes = (items: NCore.IRoute[] | undefined): NCore.IRoute[] => {
   const routes = uniq(compact(routesMap(items)));
 
   // Важно: т.к. у вкладок могут быть компоненты-обертки над контентом, а дети отрисовываются
@@ -126,14 +127,14 @@ export function sortByPriority<T extends { priority?: number }[]>(objects: T): T
  * @param routes {IRoutes[]} - конфиг роутов
  * @returns {IRoutes[]} - отсортированный конфиг роутов
  */
-export const sortPriority = (routes: NCore.IRoutes[]): NCore.IRoutes[] =>
+export const sortPriority = (routes: NCore.IRoute[]): NCore.IRoute[] =>
   sortByPriority(
     map(routes, (route) =>
       route.routes ? { ...route, routes: sortPriority(route.routes) } : route
     )
   );
 
-const hasOnlyRedirects = (routes: NCore.IRoutes[]): boolean => {
+const hasOnlyRedirects = (routes: NCore.IRoute[]): boolean => {
   const routesCount: number = routes.length;
   let isOnlyRedirects: boolean = true;
 
@@ -149,17 +150,24 @@ const hasOnlyRedirects = (routes: NCore.IRoutes[]): boolean => {
 
 /** Вырезает роуты к которым нет доступа */
 export const resolveConstraintsInRoutes = (
-  sourceRoutes: NCore.IRoutes[] | undefined,
-  isFeatureEnabled: TFeatureEnabledChecker
-): NCore.IRoutes[] => {
+  sourceRoutes: NCore.IRoute[] | undefined,
+  isFeatureEnabled: TFeatureEnabledChecker,
+  location: NCore.TRouteComponentProps["location"]
+): NCore.IRoute[] => {
   if (!sourceRoutes) {
     return [];
   }
 
-  const outputRoutes: NCore.IRoutes[] = [];
+  const outputRoutes: NCore.IRoute[] = [];
 
   forEach(sourceRoutes, (sourceRoute) => {
-    const { privileges, somePrivileges } = sourceRoute;
+    const { privileges, somePrivileges, childRoutesFilter } = sourceRoute;
+
+    // Проверяет childRoutesFilter перед проверкой привилегий
+    // todo: Рассмотреть возможность отказа от фильтрации роутов в других местах системы [PT-15971]
+    if (childRoutesFilter && !childRoutesFilter(sourceRoute, isFeatureEnabled, location)) {
+      return outputRoutes;
+    }
 
     if (
       (!privileges ||
@@ -179,9 +187,10 @@ export const resolveConstraintsInRoutes = (
         return;
       }
 
-      const outputChildrenRoutes: NCore.IRoutes[] = resolveConstraintsInRoutes(
+      const outputChildrenRoutes: NCore.IRoute[] = resolveConstraintsInRoutes(
         sourceRoute.routes,
-        isFeatureEnabled
+        isFeatureEnabled,
+        location
       );
 
       if (outputChildrenRoutes.length > 0 && !hasOnlyRedirects(outputChildrenRoutes)) {
@@ -194,7 +203,7 @@ export const resolveConstraintsInRoutes = (
 };
 
 /** Удалить из роутов слой для группировки модулей, мешающий обходу роутов с использованием path */
-export function removeModulesLayer(routes: NCore.IRoutes[]): NCore.IRoutes[] {
+export function removeModulesLayer(routes: NCore.IRoute[]): NCore.IRoute[] {
   return routes.flatMap((route) => {
     if (route.path === moduleGroupPath) {
       return route.routes ? removeModulesLayer(route.routes) : [];
@@ -213,17 +222,17 @@ export function removeModulesLayer(routes: NCore.IRoutes[]): NCore.IRoutes[] {
  * @returns Плоский упорядоченный массив роутов, входящих в "хлебные крошки"
  */
 export function breadcrumbsPacker(
-  routes: NCore.IRoutes[],
+  routes: NCore.IRoute[],
   fullPath: string,
-  locKey: keyof NCore.IRoutes,
+  locKey: keyof NCore.IRoute,
   isHideLevel = false
-): NCore.IRoutes[] {
+): NCore.IRoute[] {
   if (isEmpty(routes) || !locKey) {
     return [];
   }
 
   const matchingRoute = maxBy(
-    routes,
+    sortByPriority(routes),
     ({ path = "" }) => matchPath({ path, end: false }, fullPath)?.pathnameBase.length
   );
 
@@ -242,8 +251,8 @@ export function breadcrumbsPacker(
 
 export const getBreadcrumbs = (
   currentPath: string,
-  key: keyof NCore.IRoutes = "loc"
-): NCore.IRoutes[] => {
+  key: keyof NCore.IRoute = "loc"
+): NCore.IRoute[] => {
   const routes = Expander.getInstance().getRoutes();
 
   // console.time("removing modules layer");
@@ -260,7 +269,7 @@ export const getBreadcrumbs = (
  * @param {boolean} exact - точное соответствие
  */
 export const getActiveRouteKeys = (
-  routes: NCore.IRoutes[],
+  routes: NCore.IRoute[],
   currentLocationPath: string,
   exact?: boolean
 ): string[] => {
@@ -278,20 +287,20 @@ export const getActiveRouteKeys = (
 
 /**
  * Пропускает неотображаемые роуты
- * @param {NCore.IRoutes} - конфигурация роутинга
+ * @param {NCore.IRoute} - конфигурация роутинга
  */
-const omitNonDisplayedChildren = ({ routes, ...rest }: NCore.IRoutes) => ({
+const omitNonDisplayedChildren = ({ routes, ...rest }: NCore.IRoute) => ({
   routes: filter(routes, ({ loc }) => Boolean(loc)),
   ...rest,
 });
 
 /**
  * Возвращает подготовленные роуты основных настроек
- * @param {NCore.IRoutes[]} - массив роутов
+ * @param {NCore.IRoute[]} - массив роутов
  */
 export const getDisplayedSettingsRoutes = (
-  routes: NCore.IRoutes[] | undefined
-): NCore.IRoutes[] | undefined => {
+  routes: NCore.IRoute[] | undefined
+): NCore.IRoute[] | undefined => {
   if (routes) {
     return flow([
       (routes) => map(routes, omitNonDisplayedChildren),

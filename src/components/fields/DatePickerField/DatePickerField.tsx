@@ -14,7 +14,7 @@ import { Input } from "../../Input/Input";
 import { NOT_SET } from "../../../utils/Localization/Localization";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
-import { isString, reduce } from "lodash";
+import { isNil, isString, reduce } from "lodash";
 
 const modifyDateBasedOnDisplayFormatConfig = [
   {
@@ -60,11 +60,12 @@ const DatePicker: FC<IDatePickerProps> = ({
   showTime,
   displayFormat = showTime ? "DD.MM.YYYY, HH:mm" : "DD.MM.YYYY",
   picker,
-  input: { value, onChange },
+  input: { value, onChange, ...restInput },
   readOnly,
   onOpenChange,
   datePickerInputStyle = datePickerFieldStyle,
   shouldModifyDateBasedOnDisplayFormat,
+  onChangeCallback,
   ...rest
 }) => {
   const localization = useLocalization();
@@ -76,11 +77,25 @@ const DatePicker: FC<IDatePickerProps> = ({
 
   const handleChange = useCallback<NonNullable<DatePickerProps<Dayjs>["onChange"]>>(
     (_date) => {
-      const date = modifyDateBasedOnDisplayFormat(_date, displayFormat);
+      if (isNil(_date)) {
+        onChangeCallback?.(_date);
 
-      onChange(date);
+        return onChange(_date);
+      }
+
+      if (shouldModifyDateBasedOnDisplayFormat) {
+        const date = modifyDateBasedOnDisplayFormat(_date, displayFormat);
+
+        onChangeCallback?.(date);
+
+        return onChange(date);
+      }
+
+      onChangeCallback?.(_date);
+
+      return onChange(_date);
     },
-    [displayFormat, onChange]
+    [displayFormat, onChange, onChangeCallback, shouldModifyDateBasedOnDisplayFormat]
   );
 
   const handleOpenChange = useCallback(
@@ -120,13 +135,14 @@ const DatePicker: FC<IDatePickerProps> = ({
         key="ant-date-picker"
         picker={picker}
         format={displayFormat}
-        onChange={shouldModifyDateBasedOnDisplayFormat ? handleChange : onChange}
+        onChange={handleChange}
         onOpenChange={handleOpenChange}
         value={value}
         disabled={readOnly}
         style={datePickerInputStyle}
         showTime={showTime}
         {...rest}
+        {...restInput}
       />
     </div>
   );

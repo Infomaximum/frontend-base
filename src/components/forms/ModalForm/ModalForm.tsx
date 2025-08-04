@@ -1,9 +1,10 @@
 import type { FormApi } from "final-form";
-import { isFunction, has } from "lodash";
+import { isFunction, has, isEmpty, debounce } from "lodash";
 import React from "react";
 import { type IFormData, type IFormProvider } from "../../../decorators/contexts/FormContext";
 import { closeModalIconStyle } from "../../../styles";
 import {
+  defaultFormFooterPanelConfigWithoutSubmitButtons,
   ModalAnimationInterval,
   modalFormCancelButtonTestId,
   modalFormCloseIconTestId,
@@ -79,18 +80,28 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
     event: KeyboardEvent,
     formProvider: IFormProvider<TDictionary<any>>
   ) => {
-    this.setState({ submitFocus: false });
-
-    const targetElem = event.target as HTMLElement;
-    const targetFieldType = targetElem?.getAttribute("type");
-    const validFieldType =
-      targetFieldType === "text" ||
-      targetFieldType === "password" ||
-      targetFieldType === "checkbox" ||
-      targetElem?.hasAttribute("step");
-    const isSearchTypeFieldExpanded = targetElem.getAttribute("aria-expanded") === "true";
-
     if (this.props.hasEnterHotkey && event.key === "Enter") {
+      const { isSubmitDisabledByOuterCondition } = this.props;
+
+      if (isSubmitDisabledByOuterCondition) {
+        return;
+      }
+
+      if (isEmpty(formProvider.getState().dirtyFieldsSinceLastSubmit)) {
+        return;
+      }
+
+      this.setState({ submitFocus: false });
+
+      const targetElem = event.target as HTMLElement;
+      const targetFieldType = targetElem?.getAttribute("type");
+      const validFieldType =
+        targetFieldType === "text" ||
+        targetFieldType === "password" ||
+        targetFieldType === "checkbox" ||
+        targetElem?.hasAttribute("step");
+      const isSearchTypeFieldExpanded = targetElem.getAttribute("aria-expanded") === "true";
+
       if (validFieldType) {
         formProvider.submit();
       }
@@ -104,8 +115,15 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
   };
 
   private handleModalKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const { isSubmitDisabledByOuterCondition } = this.props;
+
+    if (isSubmitDisabledByOuterCondition) {
+      return;
+    }
+
     const targetElem = event.target as HTMLElement;
-    const isModalContainer = targetElem.tabIndex === -1;
+    const isModalContainer =
+      targetElem.querySelector(".ant-modal-content") || targetElem.tabIndex === -1;
 
     if (
       this.props.hasEnterHotkey &&
@@ -190,7 +208,7 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
         onCancel={this.handleCancel}
       >
         <Form
-          onKeyDown={this.handleEnterKeyPress}
+          onKeyDown={debounce(this.handleEnterKeyPress, 100, { leading: true, trailing: false })}
           form={form}
           onSubmit={this.handleSubmit}
           initialValues={initialValues}
@@ -198,7 +216,7 @@ class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalForm
           test-id={`${modalFormTestId}_${form}`}
           layoutType={EFormLayoutType.ModalType}
           notification={notification}
-          formSubmitPanelConfig={null}
+          formFooterPanelConfig={defaultFormFooterPanelConfigWithoutSubmitButtons}
           setFormData={this.setFormData}
           sortByPriority={sortByPriority}
           keepDirtyOnReinitialize={keepDirtyOnReinitialize ?? false}

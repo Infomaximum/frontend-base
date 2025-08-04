@@ -2,8 +2,9 @@ import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 
-const notDisabledBtnSelector = ":not(:disabled):not(.ant-btn-disabled)";
-const notDisabledDangerBtnSelector = "&.ant-btn-dangerous:not(:disabled):not(.ant-btn-disabled)";
+export const notDisabledBtnSelector = ":not(:disabled):not(.ant-btn-disabled)";
+export const notDisabledDangerBtnSelector =
+  "&.ant-btn-dangerous:not(:disabled):not(.ant-btn-disabled)";
 
 type TInactiveButtonConfig = {
   transparent?: boolean;
@@ -43,7 +44,6 @@ const getInactiveButtonStyle = (theme: TTheme, config?: TInactiveButtonConfig) =
 export const smallButtonStyle = (theme: TTheme) => ({
   svg: {
     fontSize: !isSafari ? `${theme.h4FontSize}px` : undefined,
-    marginRight: "-4px",
     verticalAlign: !isSafari ? "-0.125em" : undefined,
   },
 });
@@ -56,9 +56,27 @@ export const smallOnlyIconStyle = () => ({
   alignItems: "center",
 });
 
+export const loadingButtonStyle = (theme: TTheme) => ({
+  "&&&&&": { borderColor: theme.grey5Color, color: theme.grey7Color, background: theme.grey4Color },
+});
+
+export const buttonLocSpinStyle = { display: "flex", justifyContent: "flex-end" };
+
+export const buttonLocSpinIndicatorStyle = (theme: TTheme) => ({
+  color: theme.grey7Color,
+  "&&": { fontSize: "14px" },
+});
+
 export const defaultButtonStyle = (theme: TTheme) => ({
   fontSize: `${theme.h5FontSize}px`,
   color: theme.grey10Color,
+  ".ant-btn-icon": {
+    display: "inline-flex",
+    span: {
+      verticalAlign: "-0.125em",
+      fontSize: `${theme.h4FontSize}px`,
+    },
+  },
 });
 
 export const dashedButtonStyle = {
@@ -114,16 +132,18 @@ export const outlinedButtonStyle = (theme: TTheme) => {
 
 export const outlinedDarkButtonStyle = (theme: TTheme) => {
   const commonStyle = {
-    borderColor: theme.grey8Color,
-    color: theme.grey3Color,
-    background: theme.graphite1Color,
+    "&&": {
+      borderColor: theme.grey8Color,
+      color: theme.grey3Color,
+      background: theme.graphite1Color,
+    },
   };
   const commonDangerStyle = {
-    color: commonStyle.color,
-    borderColor: commonStyle.borderColor,
+    color: theme.grey3Color,
+    borderColor: theme.grey8Color,
   };
   const darkBackgroundStyle = {
-    background: commonStyle.background,
+    background: theme.graphite1Color,
   };
 
   return {
@@ -306,13 +326,15 @@ export const linkButtonStyle = (theme: TTheme) => {
   };
 
   return {
-    ...commonStyle,
-    [`${notDisabledBtnSelector}:hover`]: hoverStyle,
-    [`${notDisabledBtnSelector}:focus`]: hoverStyle,
-    [`${notDisabledBtnSelector}:active`]: activeStyle,
-    [`${notDisabledDangerBtnSelector}:focus`]: focusDangerStyle,
-    [`${notDisabledDangerBtnSelector}:active`]: activeDangerStyle,
-    ...getInactiveButtonStyle(theme, { transparent: true }),
+    "&.ant-btn-color-link.ant-btn-variant-link": {
+      ...commonStyle,
+      [`${notDisabledBtnSelector}:hover`]: hoverStyle,
+      [`${notDisabledBtnSelector}:focus`]: hoverStyle,
+      [`${notDisabledBtnSelector}:active`]: activeStyle,
+      [`${notDisabledDangerBtnSelector}:focus`]: focusDangerStyle,
+      [`${notDisabledDangerBtnSelector}:active`]: activeDangerStyle,
+      ...getInactiveButtonStyle(theme, { transparent: true }),
+    },
   };
 };
 

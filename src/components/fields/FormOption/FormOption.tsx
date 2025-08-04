@@ -12,14 +12,11 @@ import {
 } from "./FormOption.styles";
 import { Form } from "antd";
 import type { ColProps } from "antd/lib/col";
-import type { Interpolation } from "@emotion/react";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import { FieldTooltip } from "../../FieldTooltip/FieldTooltip";
 import { SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
 import { DebugModeContext } from "../../../decorators";
 import { isBoolean } from "lodash";
-
-const getPopupContainer = (element: HTMLElement) => element.closest("form") ?? element;
 
 const FormItem = Form.Item;
 
@@ -109,37 +106,38 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
       return "";
     }
 
-    let resultStyle: Interpolation<TTheme>;
+    const resultStyle = props.labelStyle
+      ? [formOptionLabelStyle, props.labelStyle]
+      : formOptionLabelStyle;
 
-    if (props.labelStyle) {
-      resultStyle = [formOptionLabelStyle, props.labelStyle];
-    } else {
-      resultStyle = formOptionLabelStyle;
-    }
+    const resultContainerStyle = props.customLabelContainerStyle
+      ? [labelContainerStyle, props.customLabelContainerStyle]
+      : labelContainerStyle;
 
     return (
-      <div css={labelContainerStyle}>
+      <div css={resultContainerStyle}>
         <label css={resultStyle}>{labelContent || label}</label>
         {promptText ? (
           <div css={[formOptionTooltipContainerDefaultStyle, promptWrapperStyle]}>
             <FieldTooltip
               promptText={promptText}
               promptTestId={promptTestId}
-              getPopupContainer={getPromptPopupContainer ?? getPopupContainer}
+              getPopupContainer={getPromptPopupContainer}
             />
           </div>
         ) : null}
       </div>
     );
   }, [
-    getPromptPopupContainer,
     label,
-    promptTestId,
     promptText,
-    promptWrapperStyle,
-    props.labelStyle,
     rightLabel,
+    props.labelStyle,
+    props.customLabelContainerStyle,
     labelContent,
+    promptWrapperStyle,
+    promptTestId,
+    getPromptPopupContainer,
   ]);
 
   return (
@@ -178,7 +176,7 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
             promptText={promptText}
             caption={isBoolean(rightLabel) ? null : rightLabel}
             promptTestId={promptTestId}
-            getPopupContainer={getPromptPopupContainer ?? getPopupContainer}
+            getPopupContainer={getPromptPopupContainer}
           />
         </div>
       ) : null}

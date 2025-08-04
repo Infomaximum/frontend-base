@@ -1,4 +1,4 @@
-import type { NCore } from "@infomaximum/module-expander";
 import { createContext } from "react";
+import type { NCore } from "../../libs/core";
 
-export const RoutesContext = createContext<NCore.IRoutes[] | undefined>([]);
+export const RoutesContext = createContext<NCore.IRoute[] | undefined>([]);

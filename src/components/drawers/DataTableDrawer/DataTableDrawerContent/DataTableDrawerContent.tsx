@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import type { IDataTableDrawerContentProps } from "./DataTableDrawerContent.types";
 import { ALL, EMPTY_STRING } from "../../../../utils/Localization/Localization";
-import { isFunction, isUndefined } from "lodash";
+import { isEmpty, isFunction, isUndefined } from "lodash";
 import { tableStyle } from "./DataTableDrawerContent.styles";
 import { observer } from "mobx-react";
 import { renderErrorAlert } from "./DataTableDrawerContent.utils";
@@ -14,7 +14,7 @@ import type { TBaseRow } from "../../../../managers/Tree";
 import { PagingGroup } from "../../../../models";
 import { type TableStore } from "../../../../utils";
 import { useMountEffect } from "../../../../decorators";
-import { Spinner } from "../../../Spinner";
+import { GlobalSpinner } from "../../../Spinner";
 
 const DataTableDrawerContentComponent = <T extends TBaseRow>({
   handlerTableDisplayValues,
@@ -32,12 +32,28 @@ const DataTableDrawerContentComponent = <T extends TBaseRow>({
 
   // При монтировании запрашиваем данные (взято из DataTable, туда передается false)
   useMountEffect(() => {
-    const { queryVariables, tableStore } = restProps;
+    const { queryVariables, tableStore, defaultCheckedModels } = restProps;
 
-    requestOnMount &&
+    if (requestOnMount) {
+      // код из DataTable, для установки topRows при первом запросе
+      if (!isUndefined(defaultCheckedModels) && !isEmpty(defaultCheckedModels)) {
+        tableStore.setTopRowsModels(defaultCheckedModels);
+      }
+
+      const checkedModels = defaultCheckedModels || tableStore.checkedState.accumulatedModels;
+
+      // для работы always_coming_data при первом запросе
+      if (checkedModels) {
+        tableStore.setCheckState({
+          accumulatedModels: checkedModels,
+          models: checkedModels,
+        });
+      }
+
       tableStore.requestData({
         variables: queryVariables,
       });
+    }
   });
 
   const columnConfig = useMemo(
@@ -81,7 +97,7 @@ const DataTableDrawerContentComponent = <T extends TBaseRow>({
   );
 
   if (!tableStore.model) {
-    tableStore.error ? renderErrorAlert(tableStore.error, localization) : <Spinner />;
+    return tableStore.error ? renderErrorAlert(tableStore.error, localization) : <GlobalSpinner />;
   }
 
   const isNeedLoadingOnScrollDataTable =

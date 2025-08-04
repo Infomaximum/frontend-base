@@ -14,10 +14,11 @@ export const captionStyle = () => ({
 });
 
 const commonIconStyle = (theme: TTheme) => ({
-  fontSize: `${theme.h4FontSize}px`,
+  fontSize: `${theme.subtitleFontSize}px`,
   display: "flex",
   alignItems: "center",
   height: "100%",
+  cursor: "pointer",
 });
 
 export const questionIconShowPopoverStyle = (theme: TTheme) => ({
@@ -34,6 +35,6 @@ export const questionIconStyle = (theme: TTheme) => ({
 });
 
 export const popoverStyle = {
-  maxWidth: "409px",
-  zIndex: 9999,
+  root: { maxWidth: "409px", zIndex: 9999 },
+  body: { whiteSpace: "pre-line" as const },
 };

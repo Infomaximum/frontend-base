@@ -12,6 +12,7 @@ const formOptionHeight = 28;
 export const formOptionComponentWrapperStyle = {
   float: "left",
   minHeight: `${formOptionHeight}px`,
+  maxWidth: "100%",
 } as const;
 
 export const formOptionTooltipContainerDefaultStyle = {

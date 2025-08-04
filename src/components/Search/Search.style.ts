@@ -57,5 +57,5 @@ export const searchSecondInputStyle = {
 
 export const iconStyle = (theme: TTheme) => ({
   color: theme.grey6Color,
-  fontSize: `${theme.h4FontSize}px`,
+  fontSize: `${theme.subtitleFontSize}px`,
 });

@@ -40,6 +40,7 @@ import {
   opacityStyle,
   popoverInnerStyle,
   inputFieldStyle,
+  questionIconWrapperStyle,
 } from "./PasswordFields.styles";
 import { map, forEach, debounce, isNumber } from "lodash";
 import { MIN_PASSWORD_LENGTH } from "../../../utils/const";
@@ -566,7 +567,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
                 style={disabled ? opacityStyle : undefined}
               />
             )}
-            <div ref={this.passwordHelpIconRef}>
+            <div css={questionIconWrapperStyle} ref={this.passwordHelpIconRef}>
               {!this.getValid() ? (
                 <Popover
                   open={isOpenPopover}

@@ -7,16 +7,19 @@ import type {
   IAutoCompleteFieldProps,
   TAutoCompleteFieldValue,
 } from "./AutoCompleteField.types";
-import { isFunction, map, forEach, some, every, isEmpty, xorBy, filter } from "lodash";
+import { isFunction, map, forEach, some, every, isEmpty, xorBy, filter, difference } from "lodash";
 import { wrapperAutocompleteStyle } from "./AutoCompleteField.styles";
 import { type IModel, Group } from "@infomaximum/graphql-model";
-import { withFeature } from "../../../../decorators/hocs/withFeature/withFeature";
+import { withFeature, withLoc } from "../../../../decorators";
 import { Field } from "../../FormField/Field/Field";
 import { FormField } from "../../FormField/FormField";
 import type { ICommonTableCellProps } from "../../TableCellField/TableCellField.types";
 import { TableCellField } from "../../TableCellField/TableCellField";
 import { headerModes } from "../../../DataTable/DataTableHeader/DataTableHeader";
 import { DataTableDrawer } from "../../../drawers/DataTableDrawer/DataTableDrawer";
+import { Message } from "../../..";
+import { ELEMENT_ALREADY_BELONGS_TO_SELECTED_OBJECT } from "../../../../utils";
+import { symmetricDifference } from "./AutoCompleteField.utils";
 
 const isSameValue = (a: TAutoCompleteFieldValue, b: TAutoCompleteFieldValue) => {
   return isEmpty(xorBy(a, b, (item) => item.getInnerName()));
@@ -61,7 +64,7 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
 
   private handleChange = async (value: TAutoCompleteFieldValue) => {
     const {
-      input: { onChange },
+      input: { onChange, value: initialValue },
       onChangeCallback,
       removeContradictions,
       isWithoutParentsGroupSelection,
@@ -69,7 +72,7 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
 
     if (onChange) {
       const newValue = removeContradictions
-        ? this.removeContradictions(value)
+        ? this.removeContradictions(initialValue, value)
         : isWithoutParentsGroupSelection
           ? this.removeGroups(value)
           : value;
@@ -113,8 +116,17 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
     }
   };
 
-  private removeContradictions(models: TAutoCompleteFieldValue): TAutoCompleteFieldValue {
+  private removeContradictions(
+    initialModels: TAutoCompleteFieldValue,
+    models: TAutoCompleteFieldValue
+  ): TAutoCompleteFieldValue {
+    const { localization } = this.props;
+
     const modelsMap = new Map(map(models, (model) => [model.getInnerName(), model]));
+
+    const initialModelsNames = map(initialModels, (item) => item.getInnerName());
+    const modelsMapNames = map([...modelsMap.values()], (item) => item.getInnerName());
+    const newValuesLength = difference(modelsMapNames, initialModelsNames).length;
 
     // Если хотя бы один родитель элемента есть в списке, удаляем элемент из списка
     forEach(models, (model) => {
@@ -124,6 +136,24 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
         modelsMap.delete(model.getInnerName());
       }
     });
+
+    const resultModelsMapNames = map([...modelsMap.values()], (item) => item.getInnerName());
+
+    //  Массив элементов, которые входят ТОЛЬКО в один из массивов
+    const symmetricDifferenceModelsNames = symmetricDifference(
+      resultModelsMapNames,
+      initialModelsNames
+    );
+
+    if (!symmetricDifferenceModelsNames.length && localization) {
+      Message.showMessage({
+        notification: localization.getLocalized(
+          ELEMENT_ALREADY_BELONGS_TO_SELECTED_OBJECT(newValuesLength === 1)
+        ),
+        type: "error",
+        config: { maxCount: 1 },
+      });
+    }
 
     return [...modelsMap.values()];
   }
@@ -156,6 +186,7 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
         renderDrawer,
         drawerAutoFocus,
         rowSelection,
+        isVirtualized,
       } = this.props;
 
       const selectedModels = value ? value : this.emptySelectedModels;
@@ -195,6 +226,7 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
             columnConfig={columnConfig}
             autoFocus={drawerAutoFocus}
             rowSelection={rowSelection}
+            isVirtualized={isVirtualized}
           />
         );
       }
@@ -220,7 +252,7 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
       handlerTitleValues,
       handlerDisplaySelectedValues,
       rowDisable,
-      showArrow,
+      suffixIcon,
       autoFocus,
       autoFocusWithPreventScroll,
       style,
@@ -269,7 +301,7 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
           handlerTitleValues={handlerTitleValues}
           handlerDisplaySelectedValues={handlerDisplaySelectedValues}
           rowDisable={rowDisable}
-          showArrow={readOnly ? false : showArrow}
+          suffixIcon={readOnly ? null : suffixIcon}
           allowClear={allowClear}
           autoFocus={autoFocus}
           autoFocusWithPreventScroll={autoFocusWithPreventScroll}
@@ -288,8 +320,8 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
 }
 
 // todo: разобраться с типами
-const AutoCompleteWithFeature = withFeature(
-  AutoComplete
+const AutoCompleteWithFeature = withLoc(
+  withFeature(AutoComplete) as React.ComponentType<IAutoCompleteProps>
 ) as React.ComponentType<IAutoCompleteProps>;
 
 const AutoCompleteField: React.FC<IAutoCompleteFieldProps> = (props) => (

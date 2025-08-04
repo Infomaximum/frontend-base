@@ -20,6 +20,7 @@ import {
   disabledPasswordInputStyle,
   defaultPasswordInputStyle,
   secondInputStyle,
+  tooltipWrapperStyle,
 } from "./Input.styles";
 import type { IInputProps, IInputStaticComponents, ITextAreaProps } from "./Input.types";
 import type { AutoSizeType } from "rc-textarea";
@@ -112,6 +113,7 @@ const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(
           visible={isTooltipVisible}
           title={tooltipTitle}
           removeMouseEnterDelay={true}
+          customStyle={tooltipWrapperStyle}
         >
           <AntInput
             {...rest}

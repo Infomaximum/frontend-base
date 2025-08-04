@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { Interpolation } from "@emotion/react";
 import type { TLocalizationDescription } from "@infomaximum/localization";
-import type { AntdIconProps } from "../../Icons/Icons";
+import type { IconProps } from "../../Icons/Icons";
 import type { TButtonType } from "../../Button/Button.types";
 
 export interface IConfirmationModalProps {
@@ -34,6 +34,10 @@ export interface IConfirmationModalProps {
    */
   buttonOkText?: TLocalizationDescription;
   /**
+   * Текст кнопки продолжения редактирования (если нет то текст будет "Продолжить редактирование")
+   */
+  buttonContinueText?: TLocalizationDescription;
+  /**
    * Обработчик клика дополнительной кнопки
    */
   onAdditionalButtonClick?(): void;
@@ -45,6 +49,10 @@ export interface IConfirmationModalProps {
    * Если true, то кнопка "Применить" будет заблокирована
    */
   disabledConfirmButton?: boolean;
+  /**
+   * Если true, то дополнительная кнопка будет заблокирована
+   */
+  disabledAdditionalButton?: boolean;
   /**
    * Текст дополнительной кнопки
    */
@@ -64,7 +72,7 @@ export interface IConfirmationModalProps {
   /**
    * Иконка
    */
-  icon?: React.ComponentType<AntdIconProps>;
+  icon?: React.ComponentType<IconProps>;
   /**
    * Режим без кнопки сохранения
    */

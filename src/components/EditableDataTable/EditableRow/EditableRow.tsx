@@ -26,6 +26,8 @@ const EditableRowComponent: React.FC<IEditableRowProps> = ({
   formProps,
   editingState,
   record,
+  isRowSelected,
+  floatingContextMenuConfig,
   ...restProps
 }) => {
   const isEditing = Boolean(formProps);

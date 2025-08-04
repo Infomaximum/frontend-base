@@ -1,9 +1,9 @@
-import { Spin } from "antd";
-import { spinContainerStyle, spinStyle } from "./ShowMore.styles";
+import { spinContainerStyle } from "./ShowMore.styles";
 import { LOADING_ON_SCROLL_SPINNER_ID } from "../../utils";
+import { LocalSpinner } from "../Spinner";
 
 export const ShowMoreSpinner = () => (
   <div id={LOADING_ON_SCROLL_SPINNER_ID} css={spinContainerStyle}>
-    <Spin css={spinStyle} size="small" />
+    <LocalSpinner />
   </div>
 );

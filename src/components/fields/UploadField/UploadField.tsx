@@ -16,9 +16,9 @@ import {
   uploadListItemStyle,
   uploadIconStyle,
   disableAnimationWrapperStyle,
+  inboxIconStyle,
 } from "./UploadField.styles";
-import { DeleteOutlined } from "../../Icons";
-import { InboxOutlinedSVG } from "../../../resources/icons";
+import { DeleteOutlined, InboxOutlined } from "../../Icons";
 import { Message } from "../../Message/Message";
 import { Tooltip } from "../../Tooltip/Tooltip";
 import { Field, FormField } from "../FormField";
@@ -133,10 +133,14 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
             title={this.props.localization.getLocalized(DELETE)}
             placement={"top"}
           >
-            <DeleteOutlined test-id={removeUploadFieldButtonTestId} />
+            <DeleteOutlined color="rgba(0, 0, 0, 0.45)" test-id={removeUploadFieldButtonTestId} />
           </Tooltip>
         ) : (
-          <DeleteOutlined test-id={removeUploadFieldButtonTestId} />
+          <DeleteOutlined
+            fontSize={16}
+            color="rgba(0, 0, 0, 0.45)"
+            test-id={removeUploadFieldButtonTestId}
+          />
         ),
       };
     }
@@ -278,7 +282,7 @@ class UploadComponent extends React.PureComponent<IUploadComponentProps> {
         onDrop={this.handleDrop}
       >
         <p style={uploadIconStyle}>
-          <InboxOutlinedSVG />
+          <InboxOutlined css={inboxIconStyle} />
         </p>
         <p className="ant-upload-text">{localization.getLocalized(CLICK_OR_DROP_A_FILE_HERE)}</p>
         {!accept ? null : (

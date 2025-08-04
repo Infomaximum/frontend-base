@@ -151,7 +151,7 @@ class InputDrawer extends React.PureComponent<IInputDrawerProps, IInputDrawerSta
       handlerDisplayValues,
       handlerTitleValues,
       handlerDisplaySelectedValues,
-      showArrow,
+      suffixIcon,
       autoFocus,
       style,
       tagRender,
@@ -177,7 +177,7 @@ class InputDrawer extends React.PureComponent<IInputDrawerProps, IInputDrawerSta
           handlerDisplayValues={handlerDisplayValues}
           handlerTitleValues={handlerTitleValues}
           handlerDisplaySelectedValues={handlerDisplaySelectedValues}
-          showArrow={readOnly ? false : showArrow}
+          suffixIcon={readOnly ? null : suffixIcon}
           allowClear={!isDrawerEnabled && allowClear && isUndefined(mode)}
           autoFocus={autoFocus}
           tagRender={tagRender}

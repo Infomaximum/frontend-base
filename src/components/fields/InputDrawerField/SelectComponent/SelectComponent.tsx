@@ -1,5 +1,5 @@
 import React from "react";
-import { map, isUndefined, isEmpty } from "lodash";
+import { map, isUndefined, isEmpty, isNull } from "lodash";
 import { createSelector } from "reselect";
 import type { LabeledValue } from "antd/lib/select";
 import {
@@ -15,21 +15,16 @@ import {
 } from "../../../../utils/TestIds";
 import type { ISelectProps, ISelectState } from "./SelectComponent.types";
 import { observer } from "mobx-react";
-import { CloseCircleFilled } from "../../../Icons/Icons";
+import { CloseCircleFilled, ListMarkerOutlined } from "../../../Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
 import type { IModel } from "@infomaximum/graphql-model";
 import { NOT_SELECTED } from "../../../../utils/Localization/Localization";
-import { BarsSVG } from "../../../../resources/icons";
 import { Select } from "../../../Select/Select";
 import { withLoc } from "../../../../decorators/hocs/withLoc/withLoc";
 import { AlignedTooltip } from "../../../AlignedTooltip";
 
 class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
-  public static defaultProps = {
-    showArrow: true,
-  };
-
-  public static clearIcon = (<CloseCircleFilled css={closeCircleStyle} />);
+  public static clearIconConfig = { clearIcon: <CloseCircleFilled css={closeCircleStyle} /> };
 
   constructor(props: ISelectProps) {
     super(props);
@@ -92,7 +87,7 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
         css={iconBarsDrawerStyle}
         test-id={inputDrawerSelectSuffixButtonTestId}
       >
-        <BarsSVG />
+        <ListMarkerOutlined />
       </div>
     );
   }
@@ -172,8 +167,8 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
       disabled,
       hintContainer,
       localization,
-      allowClear,
-      showArrow,
+      allowClear: allowClearProp,
+      suffixIcon,
       autoFocus,
       style,
       tagRender,
@@ -204,16 +199,14 @@ class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
           labelInValue={true}
           value={value}
           onBlur={onBlur}
-          allowClear={allowClear}
           onFocus={onFocus}
           showSearch={false}
           filterOption={false}
-          showArrow={showArrow}
           disabled={disabled}
           dropdownRender={this.getDropdownRenderContent}
           dropdownStyle={dropdownStyle}
-          suffixIcon={this.getSuffixIcon()}
-          clearIcon={SelectComponent.clearIcon}
+          suffixIcon={isNull(suffixIcon) ? null : this.getSuffixIcon()}
+          allowClear={allowClearProp && SelectComponent.clearIconConfig}
           // @ts-expect-error
           onChange={this.handleChange}
           onSelect={this.handleSelect}

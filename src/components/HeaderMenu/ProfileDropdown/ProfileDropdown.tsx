@@ -14,10 +14,10 @@ import { map } from "lodash";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import type { ItemType } from "antd/lib/menu/interface";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { LogoutSVG } from "../../../resources/icons";
 import { Dropdown } from "../../Dropdown/Dropdown";
 import { HeaderAvatar } from "../HeaderAvatar/HeaderAvatar";
 import { Tooltip } from "../../Tooltip/Tooltip";
+import { ExportOutlined } from "../../Icons";
 
 const tooltipAlign = { targetOffset: [0, 2] };
 
@@ -56,7 +56,11 @@ const ProfileDropdownComponent: React.FC<IProfileDropdownProps> = ({
       {
         key: "logout",
         onClick: onLogout,
-        label: renderItem(<LogoutSVG />, localization.getLocalized(LOG_OUT), logoutButtonTestId),
+        label: renderItem(
+          <ExportOutlined />,
+          localization.getLocalized(LOG_OUT),
+          logoutButtonTestId
+        ),
       },
     ];
   }, [onLogout, localization, location.pathname, menuItemsProp]);

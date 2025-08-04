@@ -114,8 +114,8 @@ function defineDropdownFreeSpace(target: Element, container: HTMLElement): IFree
   const containerBottomBound = containerTopBound + container.offsetHeight;
 
   return {
-    top: targetRect.top - containerTopBound,
-    bottom: containerBottomBound - targetRect.bottom,
+    top: Math.floor(targetRect.top) - containerTopBound,
+    bottom: containerBottomBound - Math.floor(targetRect.bottom),
   };
 }
 

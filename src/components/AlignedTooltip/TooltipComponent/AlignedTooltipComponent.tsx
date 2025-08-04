@@ -2,8 +2,8 @@ import { useLayoutEffect, useMemo, useState, type FC } from "react";
 import { isFunction } from "lodash";
 import type { IAlignedTooltipComponentProps } from "./AlignedTooltipComponent.types";
 import { useFirstMountState, useTheme } from "../../../decorators";
-import { getTextWidthOfReactNode } from "../../../utils/textWidth";
-import { useTooltipAlign } from "./AlignedTooltipComponent.utils";
+import { getTextValueOfReactNode, getTextWidth } from "../../../utils/textWidth";
+import { useTooltipAlign, useTooltipLines } from "./AlignedTooltipComponent.utils";
 import { Tooltip } from "../../Tooltip/Tooltip";
 
 export const AlignedTooltipComponent: FC<IAlignedTooltipComponentProps> = ({
@@ -13,6 +13,7 @@ export const AlignedTooltipComponent: FC<IAlignedTooltipComponentProps> = ({
   removeMouseEnterDelay,
   offsetX,
   containerRef,
+  numberOfLines,
 }) => {
   const theme = useTheme();
   const isFirstRender = useFirstMountState();
@@ -30,15 +31,41 @@ export const AlignedTooltipComponent: FC<IAlignedTooltipComponentProps> = ({
     return () => clearTimeout(timer);
   }, [title, containerRef]);
 
-  const textWidthOfReactNode = getTextWidthOfReactNode(titleText, { size: theme.h5FontSize });
-  const textWidthOfTooltip = textWidthOfReactNode
-    ? Math.min(theme.maxTooltipWidth, textWidthOfReactNode)
-    : undefined;
+  // текстовое значение тултипа
+  const textValue = getTextValueOfReactNode(titleText);
+
+  const hasOverflow = useMemo(() => {
+    if (containerRef.current && textValue) {
+      const elementForStyleComputing = containerRef.current.firstElementChild
+        ? containerRef.current.firstElementChild
+        : containerRef.current;
+      const computedStyles = window.getComputedStyle(elementForStyleComputing, null);
+      const fontSize = computedStyles.getPropertyValue("font-size").replace("px", "");
+      const family = computedStyles.getPropertyValue("font-family");
+      const weight = computedStyles.getPropertyValue("font-weight");
+
+      // доступная для текста ширина контейнера
+      const availableWidth = containerRef.current.getBoundingClientRect().width * numberOfLines;
+      // ширина занимаемая всем текстом
+      const allTextWidth = getTextWidth(textValue, {
+        size: Number(fontSize),
+        family,
+        weight,
+      });
+
+      return !!(availableWidth && allTextWidth && availableWidth < allTextWidth);
+    }
+
+    return true;
+  }, [containerRef, numberOfLines, textValue]);
+
+  // ноды уже разбитых строк и значение максимально широкой строки
+  const { maxLineWidth, tooltipLines } = useTooltipLines(textValue, 20, theme.h5FontSize);
 
   const { tooltipAlign, isChangeHorizontalDirection } = useTooltipAlign({
     containerRef,
     isChangeDirectionCalculationNeeded: true,
-    textWidth: textWidthOfTooltip,
+    textWidth: maxLineWidth,
     offsetY,
     offsetXProp: offsetX,
   });
@@ -51,12 +78,12 @@ export const AlignedTooltipComponent: FC<IAlignedTooltipComponentProps> = ({
 
   return (
     <Tooltip
-      title={titleText}
+      title={tooltipLines}
       align={tooltipAlign}
       // Смена направления стандартного отображения в зависимости от того, хватает места или нет
       placement={isChangeHorizontalDirection ? "topRight" : undefined}
       destroyTooltipOnHide={true}
-      open={!isFirstRender && visible}
+      open={!isFirstRender && visible && hasOverflow}
       removeMouseEnterDelay={removeMouseEnterDelay}
       {...triggerProps}
     />

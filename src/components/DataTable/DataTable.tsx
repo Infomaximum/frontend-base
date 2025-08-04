@@ -1,5 +1,16 @@
 import React from "react";
-import { isFunction, filter, drop, isEmpty, isUndefined, some, compact, uniq } from "lodash";
+import {
+  isFunction,
+  filter,
+  drop,
+  isEmpty,
+  isUndefined,
+  some,
+  compact,
+  uniq,
+  forEach,
+  difference,
+} from "lodash";
 import { InvalidIndex } from "@infomaximum/utility";
 import { hiddenCheckboxStyle, weightLabelStyle, spinnerWrapperStyle } from "./DataTable.styles";
 import type {
@@ -20,9 +31,8 @@ import { isShowElement } from "../../utils/access";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
 import { sortByPriority } from "../../utils/Routes/routes";
 import { contextMenuColumnKey } from "../../utils/const";
-import type { TContextMenuItem } from "../ContextMenuTable/ContextMenuTable.types";
-import { ContextMenuTable } from "../ContextMenuTable/ContextMenuTable";
-import { Spinner } from "../Spinner/Spinner";
+import { ContextMenuTable } from "../ContextMenu/ContextMenuTable/ContextMenuTable";
+import { GlobalSpinner } from "../Spinner";
 import { Table } from "../Table/Table";
 import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
 import { withLoc } from "../../decorators/hocs/withLoc";
@@ -30,6 +40,9 @@ import { withTheme } from "../../decorators/hocs/withTheme";
 import { boundMethod, useLoadingOnScroll, withLocation } from "../../decorators";
 import { useNodeShowMoreParams } from "../../decorators/hooks/useLoadingOnScroll";
 import { historyStore } from "../../store";
+import { getMultipleRowSelectionHelpers } from "../VirtualizedTable/VirtualizedTable.utils";
+import type { IContextMenuItem } from "../ContextMenu/ContextMenu.types";
+import type { TFloatingContextMenuConfig } from "../ContextMenu/ContextMenuTable/ContextMenuFloating/ContextMenuFloating.types";
 
 const emptyColumnKey = "empty-column";
 
@@ -71,6 +84,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     dataSource: undefined,
     isInitiation: true,
     contextMenuColumn: undefined,
+    lastSelectedIndex: null,
   };
 
   constructor(props: IDataTableProps<T>) {
@@ -135,6 +149,8 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       tableStore.setCheckState(checkedState);
 
       this.requestTableData();
+    } else {
+      this.subscribe();
     }
 
     if (contextMenuGetter) {
@@ -261,16 +277,22 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     );
   }
 
+  private subscribe = () => {
+    const { subscribeOnMount, tableStore } = this.props;
+
+    if (subscribeOnMount && tableStore.isHasSubscription && !tableStore.isSubscribed) {
+      tableStore.subscribe();
+    }
+  };
+
   private requestTableData = () => {
-    const { queryVariables, subscribeOnMount, tableStore } = this.props;
+    const { queryVariables, tableStore } = this.props;
 
     tableStore.requestData({
       variables: queryVariables,
     });
 
-    if (subscribeOnMount && tableStore.isHasSubscription && !tableStore.isSubscribed) {
-      tableStore.subscribe();
-    }
+    this.subscribe();
   };
 
   private get isFilteredTree() {
@@ -372,6 +394,53 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     this.applySelectionChange();
   };
 
+  private onChange = (
+    changedKeys: string[],
+    selectedRows: TExtendColumns<T>[],
+    info: { type: string }
+  ) => {
+    const { selectionType, isVirtualized } = this.props;
+
+    if (info.type === "multiple") {
+      const keysToDeselect = isVirtualized
+        ? changedKeys
+        : difference(
+            this.treeLogic.getCheckedStateDispatchData().keys?.map((item) => String(item)),
+            changedKeys
+          );
+
+      forEach(this.treeLogic.getCheckedStateDispatchData().models, (model) => {
+        const rowFromModel = {
+          model,
+          key: model.getInnerName(),
+        };
+
+        if (keysToDeselect.includes(rowFromModel.key)) {
+          this.treeLogic.handleSelect(rowFromModel, false, selectionType, this.blockedRowKeys);
+        }
+      });
+
+      selectedRows.forEach((row) => {
+        this.treeLogic.handleSelect(row, true, selectionType, this.blockedRowKeys);
+      });
+
+      this.applySelectionChange();
+    }
+  };
+
+  public setLastSelectedIndex(index: number | null) {
+    this.setState({
+      lastSelectedIndex: index,
+    });
+  }
+
+  private get multipleRowSelectionConfig() {
+    return getMultipleRowSelectionHelpers(
+      this.state.lastSelectedIndex,
+      this.setLastSelectedIndex.bind(this)
+    );
+  }
+
   private updateRowSelectionConfig = (selectedRowKeys: string[] | number[] | undefined) => {
     const { rowSelection, selectionType } = this.props;
 
@@ -381,6 +450,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           selectedRowKeys,
           type: selectionType,
           onSelect: this.onSelect,
+          onChange: this.onChange,
           onSelectAll: this.onSelectAll,
           getCheckboxProps: this.getCheckboxProps,
         }
@@ -427,6 +497,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
   private handleSearchChange = (inputValue: string) => {
     const { queryVariables, tableStore } = this.props;
 
+    this.setLastSelectedIndex(null);
     tableStore.searchValueChange(inputValue, queryVariables);
   };
 
@@ -479,13 +550,49 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     });
   };
 
+  private getFilteredMenuItems(record: TDictionary) {
+    const { contextMenuGetter, multipleRowsContextMenuGetter, isFeatureEnabled } = this.props;
+
+    const resultMenuItems: {
+      singleRowItems: IContextMenuItem[];
+      multipleRowItems: IContextMenuItem[];
+    } = {
+      singleRowItems: [],
+      multipleRowItems: [],
+    };
+
+    const filterPredicate = (item: IContextMenuItem) =>
+      !item.accessRules ||
+      (!!isFeatureEnabled && isShowElement(item.accessRules, isFeatureEnabled));
+
+    if (contextMenuGetter) {
+      const filteredMenuItems: IContextMenuItem[] = filter(
+        contextMenuGetter(record.model),
+        filterPredicate
+      );
+
+      resultMenuItems.singleRowItems.push(...filteredMenuItems);
+    }
+
+    if (multipleRowsContextMenuGetter) {
+      const filteredMenuItems: IContextMenuItem[] = filter(
+        multipleRowsContextMenuGetter(record.model),
+        filterPredicate
+      );
+
+      resultMenuItems.multipleRowItems.push(...filteredMenuItems);
+    }
+
+    return resultMenuItems;
+  }
+
   /**
    * Возвращает колонку с контекстным меню, если есть доступ
    */
   private getContextMenuColumn(): IColumnProps<T> | undefined {
-    const { contextMenuGetter, onContextMenuSelect, isFeatureEnabled, theme } = this.props;
+    const { onContextMenuSelect, theme } = this.props;
 
-    if (contextMenuGetter && onContextMenuSelect) {
+    if (onContextMenuSelect) {
       return {
         onCell() {
           return {
@@ -505,24 +612,36 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
             return null;
           }
 
-          const filteredMenuItems: TContextMenuItem[] = filter(
-            contextMenuGetter(record.model),
-            (item) =>
-              !item.accessRules ||
-              (!!isFeatureEnabled && isShowElement(item.accessRules, isFeatureEnabled))
-          );
+          const filteredMenuItems: IContextMenuItem[] =
+            this.getFilteredMenuItems(record).singleRowItems;
 
           return (
             <ContextMenuTable
               items={filteredMenuItems}
               data={record}
               onSelect={onContextMenuSelect}
+              isChecked={
+                !!record.key &&
+                !!this.state.rowSelectionConfig?.selectedRowKeys?.includes(record.key) &&
+                !(this.state.rowSelectionConfig?.getCheckboxProps?.(record) ?? {}).disabled
+              }
             />
           );
         },
         priority: InvalidIndex,
       };
     }
+  }
+
+  private getFloatingContextMenuConfig(): TFloatingContextMenuConfig {
+    const { onContextMenuSelect } = this.props;
+
+    return {
+      getSingleRowMenuItems: (record) => this.getFilteredMenuItems(record).singleRowItems,
+      getMultipleRowMenuItems: (record) => this.getFilteredMenuItems(record).multipleRowItems,
+      isMultipleRowSelected: !!this.state.rowSelectionConfig?.selectedRowKeys?.length,
+      menuItemSelectHandler: onContextMenuSelect,
+    };
   }
 
   /**
@@ -568,6 +687,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
       spinnerDelay,
       subTopPanel,
       isWithoutWrapperStyles,
+      isVirtualized,
       ...restProps
     } = this.props;
 
@@ -576,7 +696,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
     if (!tableStore.model) {
       return tableStore.error ? null : (
         <div css={spinnerWrapperStyle}>
-          <Spinner delay={spinnerDelay} />
+          <GlobalSpinner delay={spinnerDelay} />
         </div>
       );
     }
@@ -611,6 +731,7 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           dataSource={customDataSource ?? this.state.dataSource}
           rowSelection={this.state.rowSelectionConfig}
           columns={this.state.extendedColumns}
+          floatingContextMenuConfig={this.getFloatingContextMenuConfig()}
           showHeader={showHeader}
           onRow={onRow}
           className={className}
@@ -619,6 +740,8 @@ class DataTableComponent<T extends TBaseRow = TBaseRow> extends React.Component<
           isSearchEmpty={!tableStore.searchValue}
           isFiltersEmpty={isFiltersEmpty}
           isWithoutWrapperStyles={isWithoutWrapperStyles}
+          isVirtualized={isVirtualized}
+          multipleRowSelectionConfig={this.multipleRowSelectionConfig}
         />
       </>
     );

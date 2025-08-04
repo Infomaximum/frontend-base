@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
-import { ExclamationCircleFilled } from "../Icons/Icons";
+import { WarningFilled } from "../Icons/Icons";
 import { Row, Col, Popover } from "antd";
 import { Button } from "../Button/Button";
 import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
 import type { IConfirmPopoverProps } from "./ConfirmPopover.types";
 import { CANCEL, CONFIRM } from "../../utils/Localization/Localization";
 import {
-  popoverPrimaryButtonStyle,
+  popoverTitleColStyle,
   popoverTitleIconStyle,
   popoverTitleRowStyle,
 } from "./ConfirmPopover.styles";
@@ -43,8 +43,8 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
   const content = (
     <>
       <Row align="middle" gutter={8} css={popoverTitleRowStyle(theme)}>
-        <Col>
-          <ExclamationCircleFilled css={popoverTitleIconStyle(theme)} />
+        <Col css={popoverTitleColStyle}>
+          <WarningFilled css={popoverTitleIconStyle(theme)} />
         </Col>
         <Col>{text}</Col>
       </Row>
@@ -63,7 +63,7 @@ const ConfirmPopoverComponent: React.FC<IConfirmPopoverProps> = ({
         <Col>
           <Button
             size={buttonsSize}
-            css={popoverPrimaryButtonStyle(theme)}
+            type="primary"
             onClick={onSubmit}
             loading={loading}
             test-id={confirmPopoverOkButtonTestId}

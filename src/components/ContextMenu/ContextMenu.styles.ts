@@ -1,12 +1,20 @@
+const contextMenuItemVerticalPadding = 3;
+const contextMenuItemLeftPadding = 8;
+const contextMenuItemRightPadding = 12;
+export const contextMenuItemSummaryHorizontalPadding =
+  contextMenuItemLeftPadding + contextMenuItemRightPadding;
+export const contextMenuItemSummaryVerticalPadding = contextMenuItemVerticalPadding * 2;
+
 const hoverThreeDotsStyle = (theme: TTheme) => ({
-  backgroundColor: `${theme.grey45Color} !important`,
-  color: `${theme.grey10Color} !important`,
+  backgroundColor: `${theme.grey45Color}`,
+  color: `${theme.grey10Color}`,
 });
 
 export const wrapperContextMenuStyle = {
   cursor: "pointer",
   display: "inline-block",
   verticalAlign: "middle",
+  height: "100%",
 };
 
 export const threeDotsButtonStyle = (theme: TTheme) => ({
@@ -20,8 +28,11 @@ export const threeDotsButtonStyle = (theme: TTheme) => ({
   alignItems: "center",
   justifyContent: "center",
   color: theme.grey7Color,
-  ":hover": { ...hoverThreeDotsStyle(theme), cursor: "pointer" },
-  ":focus": {
+  "&&&:not(:disabled):not(.ant-btn-disabled):hover": {
+    ...hoverThreeDotsStyle(theme),
+    cursor: "pointer",
+  },
+  "&&&:not(:disabled):not(.ant-btn-disabled):focus": {
     ...hoverThreeDotsStyle(theme),
     outline: "none",
   },
@@ -34,7 +45,12 @@ export const wrapperMenuDropdownStyle = {
 };
 
 export const getItemStyle = (disabled: boolean | undefined) => (theme: TTheme) => ({
-  padding: "3px 12px 3px 8px",
+  padding: `
+    ${contextMenuItemVerticalPadding}px
+    ${contextMenuItemRightPadding}px
+    ${contextMenuItemVerticalPadding}px
+    ${contextMenuItemLeftPadding}px
+  `,
   color: !disabled ? theme.grey10Color : undefined,
   userSelect: "none" as const,
 });

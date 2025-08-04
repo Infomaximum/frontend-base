@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const packageJSON = require("./package.json");
 const typescript = require("@rollup/plugin-typescript");

@@ -3,10 +3,11 @@ import { shallow } from "enzyme";
 import { Message } from "./Message";
 import { Localization } from "@infomaximum/localization";
 import type { ReactElement } from "react";
-import type {
-  IMessageProps,
-  TRemoveMessageProps,
-  TGetMassAssignMessageParams,
+import {
+  type IMessageProps,
+  type TRemoveMessageProps,
+  type TGetMassAssignMessageParams,
+  EMassAssignEndings,
 } from "./Message.types";
 import { waitForComponentToPaint } from "../../utils/tests/utils";
 import { getStyledAndLocalizedEntities } from "./Message.utils";
@@ -14,6 +15,11 @@ import { getStyledAndLocalizedEntities } from "./Message.utils";
 const ACCESS_ROLE = {
   ru: "Роль доступа",
   en: "Access role",
+};
+
+const SYSTEM_LANGUAGE = {
+  ru: "Язык системы",
+  en: "System language",
 };
 
 const DEPARTMENT = {
@@ -106,18 +112,17 @@ describe("Тесты методов класса 'Message'", () => {
     const params: TGetMassAssignMessageParams = {
       localization,
       entityLoc: ACCESS_ROLE,
-      entityValue: "Сотрудник",
-      genus: "female",
+      ending: EMassAssignEndings.FEMALE,
     };
 
     const component = (params: TGetMassAssignMessageParams) =>
       shallow(Message.getMassAssignMessage(params));
 
-    it("Массовое назначение genus=female", () => {
-      expect(component(params).find("div").text()).toEqual("Роль доступа – Сотрудник применена");
+    it("Массовое назначение ending=female", () => {
+      expect(component(params).find("div").text()).toEqual("Роль доступа применена");
     });
 
-    it("Массовое назначение genus=male", () => {
+    it("Массовое назначение ending=male", () => {
       const MONITORING = {
         ru: "Мониторинг",
         en: "Monitoring",
@@ -131,7 +136,8 @@ describe("Тесты методов класса 'Message'", () => {
 
       expect(component(params).find("div").text()).toEqual("Мониторинг – Откл применен");
     });
-    it("Массовое назначение genus=neuter", () => {
+
+    it("Массовое назначение ending=neuter", () => {
       const DISTRIBUTION = {
         ru: "Распределение",
         en: "Allocation",
@@ -143,10 +149,25 @@ describe("Тесты методов класса 'Message'", () => {
         localization,
         entityLoc: DISTRIBUTION,
         entityValue: entities,
-        genus: "neuter",
+        ending: EMassAssignEndings.NEUTER,
       };
 
       expect(component(params).find("div").text()).toEqual("Распределение – Вкл применено");
+    });
+
+    it("Массовое назначение ending=plural", () => {
+      const LICENSES = {
+        ru: "Лицензии",
+        en: "Licenses",
+      };
+
+      const params: TGetMassAssignMessageParams = {
+        localization,
+        entityLoc: LICENSES,
+        ending: EMassAssignEndings.PLURAL,
+      };
+
+      expect(component(params).find("div").text()).toEqual("Лицензии применены");
     });
   });
 
@@ -182,9 +203,14 @@ describe("Тесты методов класса 'Message'", () => {
       localization,
     };
 
-    it("сообщение об удалении объекта сущности", () => {
-      const nextProps = { ...props, entityLoc: ACCESS_ROLE, name: "сотрудник" };
-      expect(component(nextProps).find("div").text()).toEqual("Роль доступа сотрудник удалена");
+    it("сообщение об удалении объекта сущности женского рода", () => {
+      const nextProps = { ...props, entityLoc: ACCESS_ROLE };
+      expect(component(nextProps).find("div").text()).toEqual("Роль доступа удалена");
+    });
+
+    it("сообщение об удалении объекта сущности мужского рода", () => {
+      const nextProps = { ...props, entityLoc: SYSTEM_LANGUAGE, feminineGenus: false };
+      expect(component(nextProps).find("div").text()).toEqual("Язык системы удален");
     });
 
     it("сообщение об удалении объектов сущности", () => {

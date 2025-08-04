@@ -36,10 +36,10 @@ import { wrapMenuStyle } from "../HeaderMenu.styles";
 import { HeaderMenuContext } from "../../../decorators/contexts/HeaderMenuContext";
 import { MainSystemPagePathContext } from "../../../decorators/contexts/MainSystemPagePathContext";
 import { useFeature } from "../../../decorators/hooks/useFeature";
-import { ArrowBackSVG, HeaderAppsIconSVG } from "../../../resources/icons";
-import { Spinner } from "../../Spinner/Spinner";
+import { LocalSpinner } from "../../Spinner";
 import { assertSimple } from "@infomaximum/assert";
 import { AlignedTooltip } from "../../AlignedTooltip";
+import { ArrowLeftOutlined, ImFilled } from "../../Icons";
 
 const assertSimpleText = "Дочерний компонент не должен помещаться в DOM";
 
@@ -170,7 +170,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
             to={generatePath(backUrl, params as Parameters<typeof generatePath>[1])}
             css={linkBackStyle}
           >
-            <ArrowBackSVG />
+            <ArrowLeftOutlined />
           </Link>
         ) : (
           <Link
@@ -179,12 +179,12 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
             key="logo-icon"
             css={linkRootStyle}
           >
-            <HeaderAppsIconSVG />
+            <ImFilled />
           </Link>
         )}
         <div css={customTitleStyle ?? titleStyle} test-id={headerMenuTitleTestId}>
           {loading ? (
-            <Spinner wrapperStyle={spinnerStyle} size="small" />
+            <LocalSpinner wrapperStyle={spinnerStyle} />
           ) : (
             <AlignedTooltip offsetY={8}>{children}</AlignedTooltip>
           )}

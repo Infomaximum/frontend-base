@@ -7,4 +7,5 @@ export interface IAlignedTooltipComponentProps {
   removeMouseEnterDelay?: boolean;
   offsetX?: number;
   containerRef: React.RefObject<HTMLDivElement>;
+  numberOfLines: number;
 }

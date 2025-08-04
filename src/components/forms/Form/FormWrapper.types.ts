@@ -1,7 +1,7 @@
+import type { NCore } from "../../../libs/core";
 import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
 import type { IFormOwnProps } from "./Form.types";
 import type { FormProps } from "react-final-form";
-import type { NCore } from "@infomaximum/module-expander";
 
 export interface IFormWrapperProps<T extends IBaseFormProps = IBaseFormProps>
   extends Omit<IFormOwnProps<T>, "formName">,

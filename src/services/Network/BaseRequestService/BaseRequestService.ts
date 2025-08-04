@@ -3,7 +3,7 @@ import axios from "axios";
 import { CancelRequest, XTraceIdHeaderKey } from "@infomaximum/utility";
 import { isFunction } from "lodash";
 import type { IRequestService, TRequestDataParams, TSubmitDataParams } from "../Requests.types";
-import type { NCore } from "@infomaximum/module-expander";
+
 import type { QueryOptions } from "@apollo/client";
 import type {
   TCancelableCallback,
@@ -12,6 +12,7 @@ import type {
 import type { IErrorHandlerService } from "../../ErrorHandlers/ErrorHandlers.types";
 import { BaseErrorHandlerService } from "../../ErrorHandlers";
 import { apolloInstance } from "../../../utils/Store/Apollo";
+import type { NCore } from "../../../libs/core";
 
 type TRequestParams = {
   /** Инстанс обработчика ошибок */

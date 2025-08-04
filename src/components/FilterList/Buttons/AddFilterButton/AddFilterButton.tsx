@@ -1,11 +1,14 @@
 import React from "react";
-import { buttonAddFilterStyle, topPanelFilterStyle } from "./AddFilterButton.styles";
+import {
+  buttonAddFilterStyle,
+  headerIconStyle,
+  topPanelFilterStyle,
+} from "./AddFilterButton.styles";
 import type { IAddFilterButtonProps } from "./AddFilterButton.types";
 import { useLocalization } from "../../../../decorators";
 import { Tooltip } from "../../../Tooltip";
 import { Button } from "../../../Button";
-import { AddFilterSVG } from "../../../../resources";
-import { FilterOutlined } from "../../../Icons";
+import { FilterFilled, FilterOutlined } from "../../../Icons";
 import { addFilterButtonTestId, FILTER } from "../../../../utils";
 
 const tooltipAlign = { targetOffset: [0, 2] };
@@ -21,7 +24,7 @@ const AddFilterButtonComponent: React.FC<IAddFilterButtonProps> = React.forwardR
           key="button_add-filter"
           type={isHeaderFilter ? "text" : "common"}
           ref={ref}
-          icon={isHeaderFilter ? <AddFilterSVG /> : <FilterOutlined />}
+          icon={isHeaderFilter ? <FilterFilled css={headerIconStyle} /> : <FilterOutlined />}
           css={isHeaderFilter ? buttonAddFilterStyle : topPanelFilterStyle}
           test-id={addFilterButtonTestId}
           loading={loading}

@@ -98,6 +98,7 @@ export const AlignedTooltip: FC<IAlignedTooltipProps> = ({
             offsetX={clientXRef.current}
             containerRef={containerRef}
             visible={true}
+            numberOfLines={numberOfLines}
             {...rest}
           />
         )}

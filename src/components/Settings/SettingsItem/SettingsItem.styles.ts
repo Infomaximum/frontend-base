@@ -1,5 +1,5 @@
 import type { Interpolation } from "@emotion/react";
-import type { NCore } from "@infomaximum/module-expander";
+import type { NCore } from "../../../libs/core";
 
 export const titleStyle: Interpolation<TTheme> = (theme) => ({
   fontSize: theme.h5FontSize,
@@ -30,7 +30,7 @@ export const customLinkStyle = {
   columnGap: 8,
 };
 
-export function calculateSize(route: NCore.IRoutes): number {
+export function calculateSize(route: NCore.IRoute): number {
   const linkStylePaddingTop = 8;
   const wrapperStyleMarginTop = 16;
   const wrapperStylePaddingTop = 8;

@@ -5,9 +5,11 @@ export const emptyStyle = (theme: TTheme) => ({
   lineHeight: `${theme.verySmallLineHeight}px`,
 });
 
-export const emptyImageStyle = {
-  height: "46px",
-  marginBottom: "4px",
+/**
+ * Стили надписи картинки компонента Empty для дропдаунов
+ */
+export const dropdownEmptyImageStyle = {
+  image: { height: "46px", marginBottom: "4px" },
 };
 
 export const hintStyle = {

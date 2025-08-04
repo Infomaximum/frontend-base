@@ -1,6 +1,6 @@
-import type { NCore } from "@infomaximum/module-expander";
+import type { NCore } from "../../libs/core";
 
 export interface ISettingsProps extends Partial<NCore.TRouteComponentProps> {
-  routes: NCore.IRoutes[];
-  onItemClick?: () => void;
+  routes: NCore.IRoute[];
+  onItemClick: () => void;
 }

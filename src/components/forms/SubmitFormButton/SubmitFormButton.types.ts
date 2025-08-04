@@ -1,6 +1,6 @@
 import type { IFormProvider } from "../../../decorators/contexts/FormContext";
 import type { IButtonProps } from "../../Button/Button.types";
-import type { AntdIconProps } from "../../Icons/Icons";
+import type { IconProps } from "../../Icons/Icons";
 
 export interface ISubmitFormButtonProps
   extends Pick<IButtonProps, "size" | "type" | "ghost" | "styles" | "key"> {
@@ -35,7 +35,7 @@ export interface ISubmitFormButtonProps
   /**
    * Иконка для кнопки
    */
-  icon?: React.ComponentType<AntdIconProps>;
+  icon?: React.ComponentType<IconProps>;
   /**
    * Прямое изменение фокуса
    */

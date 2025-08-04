@@ -28,7 +28,7 @@ export const closeModalIconStyle = (theme: TTheme) => ({
   alignItems: "center",
   justifyContent: "center",
   color: theme.grey7Color,
-
+  fontSize: "20px",
   ":hover": {
     color: theme.grey9Color,
   },
@@ -40,6 +40,8 @@ export const commonLayoutStyle = () =>
     height: "100%",
     position: "relative",
     background: "inherit",
+    width: "100%",
+    minWidth: 0,
   }) as const;
 
 export const commonContentStyle = () =>
@@ -65,7 +67,7 @@ export const commonContentListInsideStyle = () =>
   ({
     ...commonContentStyle(),
     backgroundColor: "inherit",
-    overflow: "hidden",
+    overflow: "visible",
   }) as const;
 
 export const commonContentListDefaultStyle = (theme: TTheme) =>

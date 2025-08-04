@@ -71,8 +71,14 @@ const VirtualizedTableBodyCellComponent = <T extends TRow>(
     return <div css={getVirtualizedTableCellIndentBlockStyle(indentLeft)} />;
   };
 
+  // Вывод "<div />" нужен для того чтобы корректно отрабатывал rightClick на старых Safari.
+  // Без наполнения чем-либо будет вызываться браузерное контекстное меню, несмотря на обработчик сверху
   const wrapInTooltip = (node: React.ReactNode) => {
-    return isString(node) ? <AlignedTooltip>{node}</AlignedTooltip> : node;
+    return (
+      (isString(node) ? <AlignedTooltip expandByParent={false}>{node}</AlignedTooltip> : node) || (
+        <div />
+      )
+    );
   };
 
   // Увеличиваем высоту контента первой ячейки, если включен клик по всей строке

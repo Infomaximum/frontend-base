@@ -5,7 +5,7 @@ import { FormContext } from "../../../../decorators/contexts/FormContext";
 import { assertSimple } from "@infomaximum/assert";
 import { useFormButtonState } from "../../../forms/hooks";
 import { submitFormButtonTestId } from "../../../../utils/TestIds";
-import { LoadingOutlined } from "../../../Icons/Icons";
+import { ArcOutlined } from "../../../Icons/Icons";
 
 /**
  * Кнопка, которая делает submit текущих значений формы-строки таблицы
@@ -45,7 +45,7 @@ const EditableRowSubmitButtonComponent: React.FC<IEditableRowSubmitButtonProps> 
       disabled={isDisabled}
       test-id={`${formName}_${submitFormButtonTestId}`}
     >
-      {!submitting ? children : <LoadingOutlined />}
+      {!submitting ? children : <ArcOutlined spin={true} />}
     </EditableRowButton>
   );
 };

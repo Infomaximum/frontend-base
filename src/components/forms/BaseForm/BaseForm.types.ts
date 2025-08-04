@@ -1,10 +1,9 @@
 import type { Interpolation } from "@emotion/react";
 import type { FormProps } from "antd/lib/form/Form";
 import type { TestIdAttr } from "@infomaximum/utility";
-import type { NCore } from "@infomaximum/module-expander";
 import type { UIEventHandler } from "react";
-import type { TFormButtonsConfig } from "./FormButtonsPanel/FormButtonsPanel.types";
-import type { TFormSubmitPanelConfig } from "./FormSubmitPanel/FormSubmitPanel.types";
+import type { TFormFooterPanelConfig } from "./FormFooterPanel/FormFooterPanel.types";
+import type { NCore } from "../../../libs/core";
 
 /**
  * Типы отличных от стандартной таблиц
@@ -38,17 +37,9 @@ export interface IBaseFormProps extends TAntFormProps {
    */
   footer?: JSX.Element;
   /**
-   * Конфиг кнопок функциональных кнопок формы.
+   * Конфиг футера формы.
    */
-  formButtonsConfig?: TFormButtonsConfig | undefined;
-  /**
-   * Конфиг кнопок сохранения формы.
-   *
-   * Если undefined, то по умолчанию отображаются кнопки submit и cancel changes снизу страницы с формой
-   * Если передан null, то ничего не отображается.
-   */
-  formSubmitPanelConfig?: TFormSubmitPanelConfig | null;
-  customFormSubmitButton?: JSX.Element;
+  formFooterPanelConfig?: TFormFooterPanelConfig;
   // Временный пропс, пока в системе есть header старой навигации
   isFormSubmitButtonInHeader?: boolean;
   customFooterStyle?: Interpolation<TTheme>;

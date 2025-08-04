@@ -14,7 +14,7 @@ import {
   titleModalStyle,
   additionalButtonStyle,
   confirmationModalStyle,
-  modalStyle,
+  getModalStyle,
   rightFooterButtonStyle,
 } from "./ConfirmationModal.styles";
 import type { Interpolation } from "@emotion/react";
@@ -25,7 +25,7 @@ import {
   confirmationModalCancelButtonTestId,
   confirmationModalConfirmButtonTestId,
 } from "../../../utils/TestIds";
-import { WarningOutlined } from "../../Icons/Icons";
+import { WarningFilled } from "../../Icons/Icons";
 import type { IConfirmationModalProps } from "./ConfirmationModal.types";
 import { useLocalization } from "../../../decorators/hooks/useLocalization";
 import { useTheme } from "../../../decorators/hooks/useTheme";
@@ -35,11 +35,13 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     buttonOkType = "primary",
     disabledConfirmButton = false,
     withAdditionalButton = false,
-    icon: Icon = WarningOutlined,
+    disabledAdditionalButton,
+    icon: Icon = WarningFilled,
     buttonCancelText = CANCEL,
     buttonOkText = APPLY,
+    buttonContinueText = CONTINUE_EDITING,
     additionalButtonCaption = DO_NOT_SAVE,
-    zIndex,
+    zIndex = 2000,
     title,
     iconStyle,
     isWithoutSaveMode,
@@ -148,7 +150,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
             onClick={handleCancel}
             test-id={confirmationModalCancelButtonTestId}
           >
-            {localization.getLocalized(CONTINUE_EDITING)}
+            {localization.getLocalized(buttonContinueText)}
           </Button>
           <Button
             onClick={onAdditionalButtonClick}
@@ -171,6 +173,7 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
             onClick={onAdditionalButtonClick}
             css={additionalButtonStyle}
             test-id={confirmationModalAdditionalButtonTestId}
+            disabled={disabledAdditionalButton}
           >
             {localization.getLocalized(additionalButtonCaption)}
           </Button>
@@ -192,16 +195,17 @@ const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
     withAdditionalButton,
     isWithoutSaveMode,
     withoutCancelButton,
+    buttonContinueText,
+    disabledAdditionalButton,
   ]);
 
   return (
     <Modal
       open={isShowModal}
       closable={false}
-      styles={modalStyle}
+      styles={getModalStyle(zIndex)}
       footer={footerModal}
       destroyOnClose={true}
-      zIndex={zIndex}
     >
       {getContentBodyModal()}
     </Modal>

@@ -1,26 +1,19 @@
-const commonIconStyle = {
-  paddingLeft: "5px",
-  height: "28px",
+const commonIconStyle = (theme: TTheme) => ({
   display: "flex",
   alignItems: "center",
-  width: "28px",
-};
+  fontSize: `${theme.subtitleFontSize}px`,
+  cursor: "pointer",
+});
 
 export const eyeIconStyle = (theme: TTheme) => ({
-  ...commonIconStyle,
-  viewBox: "64 64 896 896",
+  ...commonIconStyle(theme),
   color: theme.grey6Color,
   ":hover": {
     color: theme.grey7Color,
   },
-  width: "24px",
   "&&": {
     marginRight: 0,
   },
-  ":last-child": {
-    width: "28px",
-  },
-  marginInlineEnd: "0px !important",
 });
 
 export const grayCheckIconStyle = (theme: TTheme) => ({
@@ -42,9 +35,8 @@ export const redCloseIconStyle = (theme: TTheme) => ({
 });
 
 export const redCloseCircleIconStyle = (theme: TTheme) => ({
-  ...commonIconStyle,
+  ...commonIconStyle(theme),
   color: theme.red6Color,
-  fontSize: `${theme.h4FontSize}px`,
 });
 
 export const commonNotificationFieldStyle = (theme: TTheme) => ({
@@ -65,14 +57,12 @@ export const notificationTextStyle = (theme: TTheme) => ({
 });
 
 export const questionIconShowPopoverStyle = (theme: TTheme) => ({
-  ...commonIconStyle,
-  fontSize: `${theme.h4FontSize}px`,
+  ...commonIconStyle(theme),
   color: theme.blue6Color,
 });
 
 export const questionIconStyle = (theme: TTheme) => ({
-  ...commonIconStyle,
-  fontSize: `${theme.h4FontSize}px`,
+  ...commonIconStyle(theme),
   color: theme.grey6Color,
   ":hover": {
     color: theme.grey7Color,
@@ -80,8 +70,8 @@ export const questionIconStyle = (theme: TTheme) => ({
 });
 
 export const checkCircleGreenIconStyle = (theme: TTheme) => ({
-  ...commonIconStyle,
-  fontSize: `${theme.h4FontSize}px`,
+  ...commonIconStyle(theme),
+  fontSize: `${theme.subtitleFontSize}px`,
   color: theme.green6Color,
 });
 
@@ -93,7 +83,8 @@ export const popoverInnerStyle = {
 
 export const inputFieldStyle = {
   ".ant-input-suffix": {
-    marginRight: "-8px",
     marginLeft: 0,
   },
 };
+
+export const questionIconWrapperStyle = { height: "16px" };

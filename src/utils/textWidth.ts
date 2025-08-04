@@ -37,7 +37,7 @@ export const getTextWidth = (() => {
   return getWidth;
 })();
 
-const getTextValueOfReactNode = (node: React.ReactNode): string | undefined => {
+export const getTextValueOfReactNode = (node: React.ReactNode): string | undefined => {
   if (["string", "number"].includes(typeof node)) {
     return node?.toString();
   }

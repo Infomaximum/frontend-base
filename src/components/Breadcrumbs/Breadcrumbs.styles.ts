@@ -3,9 +3,10 @@ export const containerStyle = {
   height: "24px",
   display: "flex",
   alignItems: "center",
+  gap: "8px",
 };
 
-export const labeledCrumbsContainerStyle = {
+export const crumbsSectionContainerStyle = {
   display: "flex",
   alignItems: "center",
   height: "100%",
@@ -61,10 +62,6 @@ export const getMenuStyle = (maxHeight: number) => ({
 export const homeIconStyle = (theme: TTheme) => ({
   fontSize: theme.h4FontSize,
 });
-
-export const threeDotsIconStyle = {
-  transform: "rotate(90deg)",
-};
 
 export const dropdownWrapperStyle = {
   "&& .ant-dropdown-menu-item": {

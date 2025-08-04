@@ -1,5 +1,5 @@
-import type { NCore } from "@infomaximum/module-expander";
+import type { NCore } from "../../../libs/core";
 
 export interface IRouteElementProps {
-  route: NCore.IRoutes;
+  route: NCore.IRoute;
 }

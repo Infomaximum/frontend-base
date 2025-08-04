@@ -1,11 +1,12 @@
+import { EUserAgents, userAgent } from "@infomaximum/utility";
 import { EFormLayoutType } from "./BaseForm.types";
+
+const isSafari = userAgent() === EUserAgents.Safari;
 
 export const formContentBackgroundStyle = (theme: TTheme) => ({
   borderRadius: "6px",
+  height: isSafari ? "unset" : undefined,
   backgroundColor: theme.grey1Color,
-  "&:not(:first-of-type)": {
-    marginTop: "24px",
-  },
 });
 
 export const getFormDefaultStyle = (formType?: EFormLayoutType) => ({
@@ -17,17 +18,25 @@ export const getFormDefaultStyle = (formType?: EFormLayoutType) => ({
 });
 
 const formFieldsContainerStyle = {
-  marginBottom: "16px",
+  "&:not(:last-of-type)": {
+    marginBottom: "12px",
+  },
   "& > div:first-of-type": {
-    padding: "12px 16px 4px",
+    padding: "12px 16px 0.1px",
     height: "100%",
     maxHeight: "100%",
+  },
+  "&:last-of-type > div:first-of-type": {
+    paddingBottom: "4px",
   },
 };
 
 export const formFieldsContainerWithoutPaddingStyle = {
   margin: 0,
   "& > div:first-of-type": {
+    padding: "0px",
+  },
+  "&:last-of-type > div:first-of-type": {
     padding: "0px",
   },
 };

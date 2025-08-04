@@ -135,7 +135,6 @@ class RemoveConfirmationModalComponent extends PureComponent<
         styles={modalStyle}
         footer={this.getFooterModal()}
         destroyOnClose={true}
-        zIndex={5000}
         maskTransitionName={maskTransitionName}
         className={className}
       >

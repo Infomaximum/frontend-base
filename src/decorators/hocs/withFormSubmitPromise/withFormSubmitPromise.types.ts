@@ -1,5 +1,5 @@
-import type { NCore } from "@infomaximum/module-expander";
 import type { FormApi, SubmissionErrors } from "final-form";
+import type { NCore } from "../../../libs/core";
 
 export interface IWithFormSubmitPromiseProps {
   formError?: {

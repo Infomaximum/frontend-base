@@ -13,6 +13,7 @@ import {
   includes,
   filter,
   isFunction,
+  map,
 } from "lodash";
 import {
   emptyTableStyle,
@@ -32,6 +33,7 @@ import { TableBodyCell } from "./TableComponents/TableBodyCell/TableBodyCell";
 import { TableHeaderRow } from "./TableComponents/TableHeaderRow/TableHeaderRow";
 import { TableHeaderCell } from "./TableComponents/TableHeaderCell/TableHeaderCell";
 import { TableHeaderWrapper } from "./TableComponents/TableHeaderWrapper/TableHeaderWrapper";
+import { AlignedTooltip } from "../AlignedTooltip";
 import { TableExpandIcon } from "./TableComponents/TableExpandIcon/TableExpandIcon";
 import { TableCheckboxCell } from "./TableComponents/TableCheckboxCell/TableCheckboxCell";
 import { createSelector } from "reselect";
@@ -41,6 +43,7 @@ import { getCssConversionStyle } from "../../styles";
 import { AntTableScrollListener } from "./Table.utils";
 import type { IVirtualizedColumnConfig } from "../VirtualizedTable/VirtualizedTable.types";
 import type { ExpandableConfig } from "antd/es/table/interface";
+import { GlobalSpinner } from "../Spinner";
 
 class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, ITableState> {
   public static defaultProps = {
@@ -180,6 +183,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
     (headerHeight: number, loading: ITableOwnProps<T>["loading"]) => loading,
     (headerHeight: number, loading: ITableOwnProps<T>["loading"]) => ({
       style: getAntTableSpinStyle(headerHeight),
+      indicator: <GlobalSpinner delay={0} />,
       ...(isBoolean(loading) ? { spinning: loading } : loading),
     })
   );
@@ -249,19 +253,23 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
   };
 
   private handleRow = (record: T, index: number) => {
-    const { onRow, rowSelection, enableRowClick, dataSource } = this.props;
+    const { onRow, rowSelection, enableRowClick, dataSource, floatingContextMenuConfig } =
+      this.props;
 
     const rowProps = isFunction(onRow) ? onRow?.(record, index) : null;
 
     const checkBoxProps = rowSelection?.getCheckboxProps?.(record);
 
+    const isRowSelected = includes(rowSelection?.selectedRowKeys, record.key);
+
     const newRowProps = {
       ...rowProps,
+      record,
+      isRowSelected,
+      floatingContextMenuConfig,
     };
 
     if (enableRowClick && !newRowProps.onClick && !checkBoxProps?.disabled) {
-      const isSelected = includes(rowSelection?.selectedRowKeys, record.key);
-
       const selectedRows = filter(dataSource, (item) =>
         includes(rowSelection?.selectedRowKeys, item.key)
       );
@@ -271,13 +279,13 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
 
         if (window.getSelection()?.toString()) {
           setTimeout(() => {
-            rowSelection?.onSelect?.(record, !isSelected, selectedRows, e.nativeEvent);
+            rowSelection?.onSelect?.(record, !isRowSelected, selectedRows, e.nativeEvent);
           }, 0);
 
           return;
         }
 
-        rowSelection?.onSelect?.(record, !isSelected, selectedRows, e.nativeEvent);
+        rowSelection?.onSelect?.(record, !isRowSelected, selectedRows, e.nativeEvent);
       };
 
       newRowProps.style = {
@@ -331,6 +339,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
       localization,
       isVirtualized,
       columns,
+      floatingContextMenuConfig,
       isFiltersEmpty,
       isSearchEmpty,
       rowSelection,
@@ -346,6 +355,20 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
       ...rest
     } = this.props;
     const { isExpandableTable } = this.state;
+
+    const tableColumns = map(columns, (column) => {
+      return {
+        ...column,
+        title:
+          !isUndefined(column.title) && column.columnTitleTooltipWrap !== false ? (
+            <AlignedTooltip expandByParent={false}>
+              <>{column.title}</>
+            </AlignedTooltip>
+          ) : (
+            column.title
+          ),
+      };
+    });
 
     const loading = this.getSpinProps(this.props);
     const antTableSpinProps = this.getAntSpinProps(
@@ -375,7 +398,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                 {...rest}
                 rowHeight={rowHeight}
                 isShowDividers={isShowDividers ?? true}
-                columns={columns as IVirtualizedColumnConfig<any>[]}
+                columns={tableColumns as IVirtualizedColumnConfig<any>[]}
                 localization={localization}
                 loading={loading}
                 rowSelection={rowSelection}
@@ -385,6 +408,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                 scrollTop={scrollTop}
                 expandable={expandable}
                 isWithoutWrapperStyles={isWithoutWrapperStylesProp}
+                floatingContextMenuConfig={floatingContextMenuConfig}
               />
             ) : (
               <ConfigProvider renderEmpty={this.getEmpty}>
@@ -396,7 +420,7 @@ class TableComponent<T extends TDictionary> extends Component<ITableProps<T>, IT
                   {...rest}
                   css={this.getStyleTable(this.state.tableOpacity)}
                   loading={antTableSpinProps}
-                  columns={columns}
+                  columns={tableColumns}
                   showSorterTooltip={false}
                   expandable={this.getAntTableExpandable(isExpandableTable, expandable)}
                   components={this.getTableComponents(components)}

@@ -9,6 +9,7 @@ export const contentStyle = (theme: TTheme) =>
   }) as const;
 
 export const scrollContainerStyle = {
+  marginBottom: "16px",
   padding: "0 6px 0 16px",
   overflowY: "scroll",
 } as const;

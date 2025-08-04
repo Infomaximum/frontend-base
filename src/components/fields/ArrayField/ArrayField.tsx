@@ -18,11 +18,11 @@ import { getAccessParameters, EOperationType } from "@infomaximum/utility";
 import { createSelector } from "reselect";
 import type { Interpolation } from "@emotion/react";
 import { Button } from "../../Button/Button";
-import { PlusSVG } from "../../../resources/icons";
 import { FormOption } from "../FormOption/FormOption";
 import { FormContext } from "../../../decorators/contexts/FormContext";
 import { withFeature } from "../../../decorators/hocs/withFeature/withFeature";
 import { SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
+import { PlusOutlined } from "../../Icons";
 
 export enum EAddEntityButtonPositions {
   top = "top",
@@ -187,8 +187,14 @@ class WrappedArrayField extends React.PureComponent<
   };
 
   private getAddEntityButton = () => {
-    const { addButtonDescription, readOnly, fields, additionalButtonContent, formProvider } =
-      this.props;
+    const {
+      addButtonDescription,
+      readOnly,
+      fields,
+      additionalButtonContent,
+      formProvider,
+      addButtonAdditionalStyle,
+    } = this.props;
 
     const isDisabled = fields.value?.some((v) => isNil(v) || v === "");
     const additionalContent = additionalButtonContent?.(formProvider);
@@ -201,12 +207,12 @@ class WrappedArrayField extends React.PureComponent<
           key="add-button"
           type="link"
           onClick={this.handleAddFieldEntity}
-          css={addEntityButtonStyle}
+          css={[addEntityButtonStyle, addButtonAdditionalStyle]}
           test-id={`button_${this.props["test-id"]}`}
         >
           <div css={buttonDescriptionWrapperStyle}>
             <span css={addButtonWrapperStyle}>
-              <PlusSVG css={addButtonStyle} />
+              <PlusOutlined css={addButtonStyle} />
             </span>
             {addButtonDescription}
           </div>
@@ -217,12 +223,12 @@ class WrappedArrayField extends React.PureComponent<
   };
 
   public override render() {
-    const { label, addEntityButtonPosition, formItemStyle } = this.props;
+    const { label, addEntityButtonPosition, formItemStyle, itemsGap } = this.props;
     const { spaceSize } = this.props;
 
     return (
       <FormOption label={label} formItemStyle={this.getResultFormItemStyle(formItemStyle)}>
-        <div css={getRowsContainerStyle(spaceSize)}>
+        <div css={getRowsContainerStyle(spaceSize, itemsGap)}>
           {addEntityButtonPosition === EAddEntityButtonPositions.top
             ? [this.getAddEntityButton(), this.getFields()]
             : addEntityButtonPosition === EAddEntityButtonPositions.bottom
@@ -235,7 +241,7 @@ class WrappedArrayField extends React.PureComponent<
 }
 
 const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
-  const { accessKeys, readOnly, accessKey, ...rest } = props;
+  const { accessKeys, readOnly, accessKey, itemsGap, ...rest } = props;
   const { hasReadAccess } = getAccessParameters(rest.isFeatureEnabled, accessKeys);
 
   const { formProvider } = useContext(FormContext);
@@ -256,6 +262,7 @@ const ArrayFieldComponent: React.FC<IArrayFieldProps> = (props) => {
         readOnly={readOnly}
         formProvider={formProvider}
         spaceSize={spaceSize}
+        itemsGap={itemsGap}
         {...rest}
       />
     </div>

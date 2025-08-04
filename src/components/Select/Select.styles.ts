@@ -1,9 +1,10 @@
 import { first, last, sum, takeRight, tail } from "lodash";
+import { ellipsisStyle } from "../../styles";
 
 export const getDisableSelectStyle =
-  (bordered = true) =>
+  (disabled = true) =>
   (theme: TTheme) => ({
-    backgroundColor: bordered ? theme.grey3Color : theme.grey1Color,
+    backgroundColor: disabled ? theme.grey3Color : theme.grey1Color,
     borderRadius: "4px",
     ".ant-select-selector .ant-select-selection-item": {
       color: `${theme.grey7Color} !important`,
@@ -23,6 +24,7 @@ export const multipleSelectStyle = {
   // фикс inline-block из antd 5 (длинный тег растягивался безгранично)
   ".ant-select-selection-overflow-item": {
     display: "block",
+    marginBlock: 0,
   },
 };
 
@@ -36,9 +38,11 @@ export const getDisplaySelectStyle = (iconSlotCount: number) => (theme: TTheme) 
     display: "block",
     color: theme.grey10Color,
     lineHeight: "22px",
-    ".ant-select-selector": {
+
+    "&& .ant-select-selector": {
       background: "transparent !important",
       paddingRight: `${suffixWidth}px !important`,
+      minHeight: "28px",
 
       ".ant-select-selection-overflow": {
         paddingRight: `${inputRightPadding}px`,
@@ -79,22 +83,23 @@ export const getDisplaySelectStyle = (iconSlotCount: number) => (theme: TTheme) 
       top: 0,
       marginTop: 0,
       height: `${iconHeight}px`,
+      fontSize: "16px",
       zIndex: "100",
     },
-    ".ant-select-clear": {
+    "&&& .ant-select-clear": {
       width: `${first(iconWidths)}px`,
       right: `${sum(tail(iconWidths))}px`,
-      opacity: 0,
+      opacity: 1,
       color: `${theme.grey6Color}`,
       background: "transparent",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "14px",
+      fontSize: "16px",
       ":hover": {
         color: theme.grey7Color,
       },
-      ".anticon-close-circle": {
+      span: {
         background: theme.grey1Color, // для перекрытия иконки стрелки
       },
     },
@@ -113,6 +118,17 @@ export const getDisplaySelectStyle = (iconSlotCount: number) => (theme: TTheme) 
   } as const;
 };
 
+export const selectTextOnFocusInputStyle = {
+  "&&& .ant-select-selection-search .ant-select-selection-search-input": {
+    height: "calc(100% - 1px)",
+  },
+};
+
+export const hiddenDropdownStyle = {
+  visibility: "hidden",
+  zIndex: -1,
+} as const;
+
 export const commonTagStyle = (theme: TTheme) => ({
   fontSize: `${theme.h5FontSize}px`,
   lineHeight: `${theme.verySmallLineHeight}px`,
@@ -130,7 +146,8 @@ export const commonTagStyle = (theme: TTheme) => ({
   },
 
   ".ant-tag-close-icon, .anticon-close": {
-    marginLeft: 0,
+    marginLeft: "3px",
+    fontSize: "12px",
   },
 });
 
@@ -202,3 +219,8 @@ export const arrowSuffixIconStyle = (theme: TTheme) => ({
   ...suffixIconStyle(theme),
   pointerEvents: "none" as const,
 });
+
+export const optionContentStyle = {
+  display: "flex",
+  ...ellipsisStyle,
+};

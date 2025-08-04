@@ -1,7 +1,7 @@
 import type { Localization } from "@infomaximum/localization";
-import type { NCore } from "@infomaximum/module-expander";
+import type { NCore } from "../../../libs/core";
 
 export interface ISettingsGroupProps {
   title: ReturnType<Localization["getLocalized"]>;
-  routes: NCore.IRoutes[] | undefined;
+  routes: NCore.IRoute[] | undefined;
 }

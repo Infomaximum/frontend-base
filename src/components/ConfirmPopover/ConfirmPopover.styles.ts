@@ -7,11 +7,9 @@ export const popoverTitleRowStyle = (theme: TTheme) =>
 export const popoverTitleIconStyle = (theme: TTheme) =>
   ({
     color: theme.orange6Color,
+    fontSize: "16px",
   }) as const;
 
-export const popoverPrimaryButtonStyle = (theme: TTheme) => ({
-  " , :hover, :focus": {
-    color: theme.grey1Color,
-    background: theme.blue6Color,
-  },
-});
+export const popoverTitleColStyle = {
+  display: "flex",
+};

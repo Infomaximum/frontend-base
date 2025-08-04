@@ -1,6 +1,7 @@
 import { css, type Interpolation } from "@emotion/react";
 import { userAgent, EUserAgents } from "@infomaximum/utility";
-import { SYSTEM_FONT } from "../utils";
+import { HoverAnimationInterval, SYSTEM_FONT, treeFixedNodeClass } from "../utils";
+import { ellipsisStyle } from "./common.styles";
 
 export const SCROLLBAR_WIDTH = 6;
 export const SCROLLBAR_HEIGHT = 6;
@@ -99,6 +100,13 @@ const allStyle = (theme: TTheme) => ({
     fontFamily: SYSTEM_FONT,
     ...scrollStyle(theme),
   },
+  button: {
+    margin: "0px",
+    padding: "0px",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+  },
 });
 
 const htmlAndBodyStyle = () => ({
@@ -191,10 +199,11 @@ const antGlobalStyle = (theme: TTheme) => {
         color: theme.grey6Color,
         background: "none",
       },
-      ".anticon": {
-        paddingLeft: "2px",
-        fontSize: "14px",
-        color: theme.thrust5Color,
+      ".ant-select-item-option-state": {
+        svg: {
+          fontSize: "16px",
+          color: theme.thrust5Color,
+        },
       },
     },
     // При layout = vertical у формы создаётся этот selector, который имеет большую специфичность,
@@ -242,10 +251,6 @@ const antGlobalStyle = (theme: TTheme) => {
       },
     },
 
-    ".ant-tabs-tab + .ant-tabs-tab": {
-      margin: "0 !important",
-    },
-
     ".ant-select-item-option-grouped": {
       paddingLeft: "16px !important",
     },
@@ -284,9 +289,10 @@ const antGlobalStyle = (theme: TTheme) => {
       bottom: 0,
       zIndex: 2000,
 
-      "& .ant-message-custom-content": {
+      "&&& .ant-message-custom-content": {
         display: "flex",
         alignItems: "flex-start",
+
         "& > .anticon": {
           paddingTop: "2px",
         },
@@ -296,9 +302,14 @@ const antGlobalStyle = (theme: TTheme) => {
       },
     },
 
-    ".ant-picker-suffix": {
+    ".ant-picker .ant-picker-suffix": {
       pointerEvents: "unset",
       cursor: "pointer",
+      color: theme.grey6Color,
+      "&:hover": {
+        color: theme.grey10Color,
+        transition: "none",
+      },
     },
 
     ".ant-picker-input": {
@@ -350,6 +361,214 @@ const antGlobalStyle = (theme: TTheme) => {
       scrollbarWidth: "unset",
       scrollbarColor: "unset",
       ...scrollStyle(theme),
+      "&::after": {
+        content: "none",
+      },
+    },
+    ".ant-select-tree": {
+      "&& .ant-select-tree-node-content-wrapper": {
+        lineHeight: "28px",
+        minHeight: "28px",
+        width: "100%",
+        overflow: "hidden",
+        background: "transparent !important",
+        "&:hover": {
+          background: "transparent",
+        },
+      },
+      "&& .ant-select-tree-treenode": {
+        padding: 0,
+        color: theme.grey12Color,
+        "&:not(.ant-select-tree-treenode-disabled).filter-node .ant-select-tree-title": {
+          color: "unset",
+        },
+        "&:hover": {
+          background: `${theme.grey3Color} !important`,
+          ".ant-select-tree-title": {
+            transition: `${HoverAnimationInterval}ms`,
+            color: theme.thrust4Color,
+            background: `${theme.grey3Color} !important`,
+          },
+        },
+        "&:active": {
+          background: `${theme.grey3Color} !important`,
+          color: theme.thrust5Color,
+          ".ant-select-tree-switcher-icon": {
+            svg: {
+              color: theme.thrust4Color,
+            },
+          },
+        },
+        ".ant-select-tree-switcher": {
+          "&:hover": {
+            background: "transparent !important",
+            "&::before": {
+              background: "transparent !important",
+            },
+          },
+        },
+        ".ant-select-tree-switcher-icon": {
+          svg: {
+            color: theme.thrust4Color,
+          },
+        },
+      },
+      "&& .ant-select-tree-title": {
+        fontSize: "14px",
+        color: "inherit",
+        lineHeight: "22px",
+        padding: 0,
+      },
+      "&& .ant-select-tree-switcher": {
+        height: "28px",
+        width: "20px",
+        ":hover": {
+          backgroundColor: "transparent !important",
+        },
+        ".ant-select-tree-switcher-icon": {
+          lineHeight: "28px",
+          svg: {
+            color: theme.grey7Color,
+          },
+        },
+      },
+      "&&& .ant-select-tree-node-selected": {
+        background: "transparent",
+      },
+    },
+    ".ant-tree-select": {
+      "&&& .ant-select-clear": {
+        width: "16px",
+        height: "16px",
+        color: `${theme.grey6Color}`,
+        fontSize: "16px",
+        marginTop: "-8px",
+        marginRight: "-2px",
+      },
+    },
+    ".ant-select-empty": {
+      padding: "5px",
+      color: theme.grey7Color,
+    },
+    // Стили для дерева в дочернем выпадающем элементе контекстного меню
+    // Само дерево обёрнуто в класс ".tree-container"
+    "&&& .ant-dropdown-menu-submenu:has(.tree-container)": {
+      padding: "0 !important",
+      margin: "0 !important",
+    },
+    "&&& .ant-dropdown-menu-submenu:has(.group-list)": {
+      padding: "0 !important",
+      margin: "0 0 0 4px !important",
+      backgroundColor: theme.grey1Color,
+      ".group-list": {
+        display: "flex",
+        flexDirection: "column",
+        maxHeight: "240px",
+        ".scrollable-menu": {
+          flex: 1,
+          overflowY: "auto",
+        },
+      },
+      ".ant-menu-item-selected": {
+        backgroundColor: theme.grey1Color,
+        color: theme.grey10Color,
+      },
+      ".ant-menu-item": {
+        padding: "3px 12px 3px 8px !important",
+        lineHeight: "22px",
+        height: "28px",
+        margin: 0,
+        width: "100%",
+        ":active, :hover, :focus": {
+          color: `${theme.grey10Color}`,
+          backgroundColor: `${theme.grey3Color} !important`,
+        },
+      },
+      ".ant-dropdown-menu-item": {
+        padding: "0 !important",
+        backgroundColor: `${theme.grey1Color} !important`,
+      },
+      ".ant-menu": {
+        borderInlineEnd: "none",
+      },
+    },
+    "&&& .ant-dropdown-menu-sub:has(.tree-container)": {
+      padding: "4px 0 !important",
+      width: "320px !important",
+      maxHeight: "414px",
+      overflowY: "auto",
+      overflowX: "hidden",
+      ".ant-tree-list": {
+        width: "320px",
+      },
+      ".ant-tree-treenode": {
+        width: "100%",
+        margin: 0,
+        lineHeight: "28px",
+        transition: `${HoverAnimationInterval}ms`,
+        ".ant-tree-node-content-wrapper": {
+          ...ellipsisStyle,
+          background: "transparent !important",
+          ":hover": {
+            background: `${theme.grey3Color} !important`,
+          },
+        },
+        ".ant-tree-title": {
+          color: theme.grey9Color,
+          fontSize: "14px",
+          background: "transparent !important",
+        },
+        [`:has(.${treeFixedNodeClass})`]: {
+          ".ant-tree-switcher-noop": {
+            display: "none",
+          },
+        },
+        ":hover": {
+          background: `${theme.grey3Color} !important`,
+          ".ant-tree-title": {
+            transition: `${HoverAnimationInterval}ms`,
+            color: theme.thrust4Color,
+            background: `${theme.grey3Color} !important`,
+          },
+        },
+        ":before": {
+          display: "none",
+        },
+      },
+      ".ant-tree-indent, .ant-tree-switcher-noop": {
+        cursor: "default",
+      },
+      "&&& .ant-tree-switcher": {
+        height: "28px",
+        width: "20px",
+        margin: 0,
+        "::before": {
+          background: "transparent !important",
+        },
+        ":hover": {
+          background: "transparent !important",
+        },
+        ".ant-tree-switcher-icon": {
+          lineHeight: "28px",
+          svg: {
+            color: theme.grey7Color,
+            ":hover": {
+              background: "none !important",
+            },
+          },
+          ":hover": {
+            background: "none !important",
+          },
+        },
+      },
+    },
+    "&&& .ant-dropdown-menu-item:has(.tree-container),&&& .ant-dropdown-menu-title-content:has(.tree-container)":
+      {
+        padding: "0 !important",
+      },
+    // Конец стилей для дерева в дочернем выпадающем элементе контекстного меню
+    ".ant-btn": {
+      gap: "4px",
     },
   };
 };

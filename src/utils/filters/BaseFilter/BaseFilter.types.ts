@@ -13,11 +13,12 @@ interface ICommonFilterComponentProps {
 export interface IClickPosition {
   x: number;
   y: number;
-  elementWidth: number;
-  elementHeight: number;
+  elementWidth?: number;
+  elementHeight?: number;
 }
 export interface IPositionConfig extends IClickPosition {
-  type: string;
+  offsetX?: number;
+  offsetY?: number;
 }
 
 export interface IFilterAddComponentProps extends ICommonFilterComponentProps {

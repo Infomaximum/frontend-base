@@ -2,9 +2,9 @@ import type { SelectProps } from "antd/lib/select";
 import type { RowSelectionType } from "antd/lib/table/interface";
 import type { FieldRenderProps } from "react-final-form";
 import type { IWithFeatureProps } from "../../../../decorators/hocs/withFeature/withFeature.types";
+import type { IWithLocProps } from "../../../../decorators/hocs/withLoc/withLoc";
 import type { IGroup, IModel } from "@infomaximum/graphql-model";
 import type { AutoCompleteStore } from "../../../../utils/Store/AutoCompleteStore/AutoCompleteStore";
-import type { Localization } from "@infomaximum/localization";
 import type { IColumnProps } from "../../../VirtualizedTable/VirtualizedTable.types";
 import type { IFieldProps } from "../../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../../FormField/FormField.types";
@@ -30,7 +30,8 @@ export interface IAutoCompleteOwnProps
     >,
     Pick<ISelectProps, "autoFocusWithPreventScroll">,
     IWithFeatureProps,
-    Partial<Pick<IDataTableDrawerOwnProps, "tableStore" | "headerMode">> {
+    IWithLocProps,
+    Partial<Pick<IDataTableDrawerOwnProps, "tableStore" | "headerMode" | "isVirtualized">> {
   hintContainer?: React.ReactNode;
 
   /**
@@ -117,8 +118,6 @@ export interface IAutoCompleteOwnProps
    */
   showSearch?: boolean;
 
-  localization?: Localization;
-
   /**
    * тип элемента выбора в таблице radio или checkbox
    */
@@ -165,10 +164,10 @@ export interface IAutoCompleteState {
 
 export interface IAutoCompleteFieldProps
   extends Omit<IFieldProps<TAutoCompleteFieldValue>, "children">,
-    Omit<IAutoCompleteOwnProps, keyof IWithFeatureProps> {
+    Omit<IAutoCompleteOwnProps, keyof IWithFeatureProps | keyof IWithLocProps> {
   name: string;
 }
 
 export interface IAutoCompleteFormFieldProps
   extends Omit<IFormFieldProps<TAutoCompleteFieldValue>, "children">,
-    Omit<IAutoCompleteOwnProps, keyof IWithFeatureProps> {}
+    Omit<IAutoCompleteOwnProps, keyof IWithFeatureProps | keyof IWithLocProps> {}

@@ -1,13 +1,24 @@
-export const removeButtonStyle = (theme: TTheme) => ({
-  color: theme.grey6Color,
-  padding: "0px",
-  ":hover": {
-    color: theme.red6Color,
-  },
-  ":focus": {
+import { notDisabledBtnSelector } from "../../../../Button/Button.styles";
+
+export const removeButtonDefaultColorsStyle = (theme: TTheme) => ({
+  "&&&": {
     color: theme.grey6Color,
-    ":hover": {
+    padding: "0px",
+    fontSize: "14px",
+    [`${notDisabledBtnSelector}:hover`]: {
       color: theme.red6Color,
+    },
+    [`${notDisabledBtnSelector}:focus`]: {
+      color: theme.grey6Color,
+      [`${notDisabledBtnSelector}:hover`]: {
+        color: theme.red6Color,
+      },
+      [`${notDisabledBtnSelector}:active`]: {
+        color: theme.red7Color,
+      },
+    },
+    [`${notDisabledBtnSelector}:active`]: {
+      color: theme.red7Color,
     },
   },
 });

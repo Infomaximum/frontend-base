@@ -12,4 +12,5 @@ export const tooltipOverlayInnerStyle = (theme: TTheme) => ({
   minWidth: "30px",
   fontSize: `${theme.h5FontSize}px`,
   lineHeight: "18px",
+  whiteSpace: "pre-wrap" as const,
 });

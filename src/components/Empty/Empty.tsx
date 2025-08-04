@@ -66,7 +66,7 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
     <AntEmpty
       key="empty"
       image={emptyImageProps ?? emptyImage}
-      imageStyle={emptyImageStyle}
+      styles={emptyImageStyle}
       description={emptyDescription}
       css={!isTableComponent ? wrapperNotTableEmptyStyle : undefined}
     >

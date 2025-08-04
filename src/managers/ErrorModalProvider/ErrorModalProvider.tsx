@@ -1,4 +1,3 @@
-import type { NCore } from "@infomaximum/module-expander";
 import {
   ErrorModalContext,
   type IErrorModalContextContextData,
@@ -14,6 +13,7 @@ import type {
 } from "./ErrorModalProvider.types";
 import { useLocation } from "react-router";
 import { usePrevious } from "../../decorators";
+import type { NCore } from "../../libs/core";
 
 export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isDebugMode }) => {
   const [showModal, setShowModal] = useState(false);

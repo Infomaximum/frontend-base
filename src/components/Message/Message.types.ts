@@ -1,15 +1,20 @@
-import type { NCore } from "@infomaximum/module-expander";
 import type { Localization, TLocalizationDescription } from "@infomaximum/localization";
 import type { ReactNode } from "react";
 import type { ConfigOptions } from "antd/lib/message/interface";
+import type { NCore } from "../../libs/core";
 
-export type TGenus = "male" | "female" | "neuter";
+export enum EMassAssignEndings {
+  MALE = "male",
+  FEMALE = "female",
+  NEUTER = "neuter",
+  PLURAL = "plural",
+}
 
 export type TGetMassAssignMessageParams = {
   localization: Localization;
   entityLoc: TLocalizationDescription;
-  entityValue: ReactNode;
-  genus?: TGenus;
+  entityValue?: ReactNode;
+  ending?: EMassAssignEndings;
 };
 
 export interface IMessageProps {
@@ -27,7 +32,6 @@ export interface IMessageProps {
 export type TRemoveMessageProps = {
   localization: Localization;
   entityLoc?: TLocalizationDescription;
-  name?: string;
   messageLoc?: TLocalizationDescription;
   feminineGenus?: boolean;
   neuterGenus?: boolean;

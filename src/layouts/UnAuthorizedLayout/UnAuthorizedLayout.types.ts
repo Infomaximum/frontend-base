@@ -1,10 +1,11 @@
 import type React from "react";
 import type { Interpolation } from "@emotion/react";
-import type { NCore } from "@infomaximum/module-expander";
+
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
 import type { IWithSystemTitleProps } from "../../decorators/hocs/withSystemTitle/withSystemTitle.types";
 import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
 import type { TLocalizationDescription } from "@infomaximum/localization";
+import type { NCore } from "../../libs/core";
 
 export interface IUnAuthorizedLayoutProps
   extends IWithThemeProps<TTheme>,
@@ -19,7 +20,7 @@ export interface IUnAuthorizedLayoutProps
   bodyStyle?: Interpolation<TTheme>;
   wrapperStyle?: Interpolation<TTheme>;
 
-  route: NCore.IRoutes;
+  route: NCore.IRoute;
 
   productNameLoc?: TLocalizationDescription;
   /** Логотип который отображается над формой */

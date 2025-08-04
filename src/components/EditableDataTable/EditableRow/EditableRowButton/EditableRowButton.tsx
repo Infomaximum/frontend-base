@@ -7,6 +7,7 @@ import {
   disabledButtonStyle,
   removeButtonStyle,
 } from "./EditableRowButton.styles";
+import { Tooltip } from "../../../Tooltip/Tooltip";
 
 enum EEditableRowButtonTypes {
   DEFAULT = "DEFAULT",
@@ -23,6 +24,7 @@ const EditableRowButtonComponent: React.FC<IEditableRowButtonProps> & {
   onClick,
   disabled,
   clickHandlerData,
+  title,
   ...rest
 }) => {
   const handleClick: typeof onClick = useCallback(
@@ -54,9 +56,11 @@ const EditableRowButtonComponent: React.FC<IEditableRowButtonProps> & {
   }
 
   return (
-    <div css={buttonStyle} onClick={!disabled ? handleClick : undefined} {...rest}>
-      {children}
-    </div>
+    <Tooltip title={title} placement="top">
+      <div css={buttonStyle} onClick={!disabled ? handleClick : undefined} {...rest}>
+        {children}
+      </div>
+    </Tooltip>
   );
 };
 

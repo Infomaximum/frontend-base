@@ -4,9 +4,10 @@ import userEvent from "@testing-library/user-event";
 import { Select } from "./Select";
 import "@testing-library/jest-dom";
 import type { ISelectProps } from "./Select.types";
-import { mapChildrenToOptions } from "./Select.utils";
+import { getValueFromSelectValue, mapChildrenToOptions } from "./Select.utils";
 import { DropdownAnimationInterval } from "../../utils";
 import { ellipsisStyle } from "../../styles";
+import { AlignedTooltip } from "../AlignedTooltip";
 
 enum EElement {
   FIRST = "FIRST",
@@ -253,11 +254,11 @@ describe("Тестирование утилитных функций", () => {
       </Select.Option>,
     ];
 
-    const mappingResult = mapChildrenToOptions(testElementList);
+    const mappingResult = mapChildrenToOptions(testElementList, { showSearch: false });
     const expectedResult = [
-      { key: "1", value: "1v", label: <>1</> },
-      { key: "2", value: "2v", label: <>2</> },
-      { key: "3", value: "3v", label: <>3</> },
+      { key: "1", value: "1v", label: <AlignedTooltip>1</AlignedTooltip> },
+      { key: "2", value: "2v", label: <AlignedTooltip>2</AlignedTooltip> },
+      { key: "3", value: "3v", label: <AlignedTooltip>3</AlignedTooltip> },
     ];
     expect(mappingResult).toEqual(expectedResult);
   });
@@ -274,29 +275,29 @@ describe("Тестирование утилитных функций", () => {
       </Select.Option>,
     ];
 
-    const mappingResult = mapChildrenToOptions(testElementList);
+    const mappingResult = mapChildrenToOptions(testElementList, { showSearch: false });
     const expectedResult = [
       {
         key: "1",
         value: "1v",
         ["test-id"]: "1-test-id",
         label: (
-          <>
-            <span style={ellipsisStyle} test-id={"1-test-id"}>
+          <AlignedTooltip>
+            <span style={{ display: "flex", ...ellipsisStyle }} test-id={"1-test-id"}>
               1
             </span>
-          </>
+          </AlignedTooltip>
         ),
       },
       {
         key: "2",
         value: "2v",
         label: (
-          <>
-            <span style={ellipsisStyle} test-id={"2-test-id"}>
+          <AlignedTooltip>
+            <span style={{ display: "flex", ...ellipsisStyle }} test-id={"2-test-id"}>
               2
             </span>
-          </>
+          </AlignedTooltip>
         ),
         ["test-id"]: "2-test-id",
       },
@@ -305,11 +306,11 @@ describe("Тестирование утилитных функций", () => {
         value: "3v",
         ["test-id"]: "3-test-id",
         label: (
-          <>
-            <span style={ellipsisStyle} test-id={"3-test-id"}>
+          <AlignedTooltip>
+            <span style={{ display: "flex", ...ellipsisStyle }} test-id={"3-test-id"}>
               3
             </span>
-          </>
+          </AlignedTooltip>
         ),
       },
     ];
@@ -335,61 +336,61 @@ describe("Тестирование утилитных функций", () => {
       </Select.OptGroup>,
     ];
 
-    const mappingResult = mapChildrenToOptions(testElementList);
+    const mappingResult = mapChildrenToOptions(testElementList, { showSearch: false });
     const expectedResult = [
       {
-        label: "1 group",
+        label: <AlignedTooltip>1 group</AlignedTooltip>,
         options: [
           {
             key: "1-1",
             value: "1-1v",
             ["test-id"]: "1-1-test-id",
             label: (
-              <>
-                <span style={ellipsisStyle} test-id={"1-1-test-id"}>
+              <AlignedTooltip>
+                <span style={{ display: "flex", ...ellipsisStyle }} test-id={"1-1-test-id"}>
                   1-1
                 </span>
-              </>
+              </AlignedTooltip>
             ),
           },
           {
             key: "1-2",
             value: "1-2v",
             label: (
-              <>
-                <span style={ellipsisStyle} test-id={"1-2-test-id"}>
+              <AlignedTooltip>
+                <span style={{ display: "flex", ...ellipsisStyle }} test-id={"1-2-test-id"}>
                   1-2
                 </span>
-              </>
+              </AlignedTooltip>
             ),
             ["test-id"]: "1-2-test-id",
           },
         ],
       },
       {
-        label: "2 group",
+        label: <AlignedTooltip>2 group</AlignedTooltip>,
         options: [
           {
             key: "2-1",
             value: "2-1v",
             ["test-id"]: "2-1-test-id",
             label: (
-              <>
-                <span style={ellipsisStyle} test-id={"2-1-test-id"}>
+              <AlignedTooltip>
+                <span style={{ display: "flex", ...ellipsisStyle }} test-id={"2-1-test-id"}>
                   2-1
                 </span>
-              </>
+              </AlignedTooltip>
             ),
           },
           {
             key: "2-2",
             value: "2-2v",
             label: (
-              <>
-                <span style={ellipsisStyle} test-id={"2-2-test-id"}>
+              <AlignedTooltip>
+                <span style={{ display: "flex", ...ellipsisStyle }} test-id={"2-2-test-id"}>
                   2-2
                 </span>
-              </>
+              </AlignedTooltip>
             ),
             ["test-id"]: "2-2-test-id",
           },
@@ -398,6 +399,45 @@ describe("Тестирование утилитных функций", () => {
     ];
 
     expect(mappingResult).toEqual(expectedResult);
+  });
+
+  it("Тест функции getValueFromSelectValue", () => {
+    let empty;
+
+    const values = [
+      "Text",
+      123,
+      [123],
+      ["Text"],
+      ["Text", 123],
+      ["Text", "Text"],
+      { key: "Key", value: "TextValue", label: "Label" },
+      { key: "Key", value: 321, label: "Label" },
+      [{ key: "Key1", value: "TextValue1", label: "Label1" }],
+      [],
+      [{ key: "Key1", value: 321, label: "Label1" }],
+      [
+        { key: "Key1", value: "TextValue1", label: "Label1" },
+        { key: "Key2", value: "TextValue2", label: "Label2" },
+      ],
+      empty,
+    ];
+
+    expect(values.map(getValueFromSelectValue)).toStrictEqual([
+      "Text",
+      "123",
+      "123",
+      "Text",
+      undefined,
+      undefined,
+      "TextValue",
+      "321",
+      "TextValue1",
+      undefined,
+      "321",
+      undefined,
+      undefined,
+    ]);
   });
 });
 

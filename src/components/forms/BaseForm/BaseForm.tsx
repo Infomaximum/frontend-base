@@ -15,11 +15,11 @@ import { FormContext } from "../../../decorators/contexts/FormContext";
 import { Notification } from "../../Notification";
 import { ESpaceSize, SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
 import type { Interpolation } from "@emotion/react";
-import { FormButtonsPanel } from "./FormButtonsPanel/FormButtonsPanel";
-import { forEach, isArray, isNull, map } from "lodash";
+import { forEach, isArray } from "lodash";
 import { FormSubgroup } from "../FormSubgroup/FormSubgroup";
-import { FormSubmitPanel } from "./FormSubmitPanel/FormSubmitPanel";
+import { FormFooterPanel } from "./FormFooterPanel/FormFooterPanel";
 import { isValidReactNode } from "./BaseForm.utils";
+import { FORM_WRAPPER_ID } from "../../../utils";
 
 const { Footer, Content } = Layout;
 
@@ -50,8 +50,7 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
     showNotification = true,
     layoutType,
     handleScrollContent,
-    formSubmitPanelConfig,
-    formButtonsConfig,
+    formFooterPanelConfig,
     connectedFormStyles,
   } = props;
 
@@ -109,19 +108,22 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
     [formContentStyles, handleScrollContent, layoutType]
   );
 
-  const gerWrappedMainSubgroup = useCallback(
+  const getWrappedMainSubgroup = useCallback(
     (element: ReactNode) => {
-      if (!formButtonsConfig) {
-        return getWrappedFormSubgroup(element, "main");
-      }
-
       const mainSubgroupFunctionButtonsFooter = (
-        <FormButtonsPanel formButtonsConfig={formButtonsConfig} />
+        <FormFooterPanel
+          formFooterPanelConfig={formFooterPanelConfig ?? {}}
+          layoutType={layoutType}
+        />
       );
 
-      return getWrappedFormSubgroup(element, "main", mainSubgroupFunctionButtonsFooter);
+      return getWrappedFormSubgroup(
+        element,
+        "main",
+        props.footer ? undefined : mainSubgroupFunctionButtonsFooter
+      );
     },
-    [formButtonsConfig, getWrappedFormSubgroup]
+    [formFooterPanelConfig, getWrappedFormSubgroup, layoutType, props.footer]
   );
 
   const formContent = useMemo(() => {
@@ -158,29 +160,41 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
       distributeElements(node);
     });
 
-    const sortedContentSubgroups = contentSubgroups.sort((prev, curr) => {
-      if (React.isValidElement(prev) && React.isValidElement(curr)) {
-        return (prev.props.priority ?? 0) > (curr.props.priority ?? 0) ? -1 : 1;
+    if (mainContentSubgroup.length > 0) {
+      if (layoutType === EFormLayoutType.ModalType) {
+        mainContentSubgroup.unshift(notification);
+      } else {
+        mainContentSubgroup.push(notification);
       }
 
-      return 0;
-    });
-
-    if (layoutType === EFormLayoutType.ModalType) {
-      mainContentSubgroup.unshift(notification);
-    } else {
-      mainContentSubgroup.push(notification);
+      contentSubgroups.push(
+        <FormSubgroup priority={0} key="main">
+          {mainContentSubgroup}
+        </FormSubgroup>
+      );
     }
 
-    return [
-      mainContentSubgroup.length > 0 ? [gerWrappedMainSubgroup(mainContentSubgroup)] : null,
-      map(sortedContentSubgroups, (item, index) => getWrappedFormSubgroup(item, index)),
-      modalsSubgroup,
-    ];
-  }, [props.children, layoutType, gerWrappedMainSubgroup, notification, getWrappedFormSubgroup]);
+    const sortedContentSubgroups = contentSubgroups
+      .sort((prev, curr) => {
+        if (React.isValidElement(prev) && React.isValidElement(curr)) {
+          return (prev.props.priority ?? 1) > (curr.props.priority ?? 1) ? -1 : 1;
+        }
+
+        return 0;
+      })
+      .map((subgroup, index) => {
+        if (React.isValidElement(subgroup) && subgroup.key === "main") {
+          return getWrappedMainSubgroup(subgroup);
+        }
+
+        return getWrappedFormSubgroup(subgroup, index);
+      });
+
+    return [sortedContentSubgroups, modalsSubgroup];
+  }, [props.children, layoutType, notification, getWrappedFormSubgroup, getWrappedMainSubgroup]);
 
   return (
-    <div css={formContainerStyle}>
+    <div id={FORM_WRAPPER_ID} css={formContainerStyle}>
       <AntForm
         component={component}
         css={getFormDefaultStyle(layoutType)}
@@ -190,11 +204,7 @@ const BaseFormComponent: React.FC<IBaseFormProps & { children: React.ReactNode }
       >
         <div {...props.attributes} css={[connectedFormContainerStyle, connectedFormStyles]}>
           {formContent}
-          {props.footer ? (
-            customFooter
-          ) : !isNull(formSubmitPanelConfig) ? (
-            <FormSubmitPanel formSubmitPanelConfig={formSubmitPanelConfig} />
-          ) : null}
+          {props.footer && customFooter}
         </div>
       </AntForm>
     </div>

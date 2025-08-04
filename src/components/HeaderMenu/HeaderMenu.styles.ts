@@ -10,6 +10,9 @@ export const headerStyle = (theme: TTheme) =>
     height: `${theme.heightHeaderMenu}px`,
     padding: "0px",
     overflow: "hidden",
+
+    // хедер должен быть выше любых элементов без zIndex
+    zIndex: 2,
   }) as const;
 
 export const wrapMenuStyle = (theme: TTheme) => ({
@@ -50,6 +53,7 @@ export const wrapStaticMenuStyle = (theme: TTheme) => ({
 
 export const linkSettingsStyle = (theme: TTheme) => ({
   ...iconsHoverStyle(theme),
+  fontSize: "20px",
   cursor: "pointer",
 });
 

@@ -47,7 +47,7 @@ export const filterValuesStyle = (theme: TTheme) =>
   }) as const;
 
 export const closeIconStyle = (theme: TTheme) => ({
-  fontSize: `${theme.h5FontSize}px`,
+  fontSize: `${theme.h4FontSize}px`,
 });
 
 export const getFilterRemoveButtonStyle = (disabled: boolean) => (theme: TTheme) => {

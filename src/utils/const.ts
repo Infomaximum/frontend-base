@@ -134,10 +134,13 @@ export const MAIN_LAYOUT_CONTENT_ID = "main-layout-content-id";
 export const MAIN_LAYOUT_SCROLL_CONTAINER_ID = "main-layout-scroll-container-id";
 /** Для работы со спиннером динамической подгрузки */
 export const LOADING_ON_SCROLL_SPINNER_ID = "loading-on-scroll-spinner-id";
+/** Для работы со страницами с формой */
+export const FORM_WRAPPER_ID = "form-wrapper-id";
 
 export enum EErrorBoundaryCodesBase {
   app = "app",
   unAuthorizedLayout = "unAuthorizedLayout",
+  loaderProvider = "loaderProvider",
 }
 
 // триггер остаточной высоты запускающей подгрузку по скроллу, 800 равносильно
@@ -152,3 +155,11 @@ export const middleMouseBtnCode = 1;
  * Количество отображаемых фильтров
  */
 export const FILTERS_LIMIT = 8;
+
+// Базовый конфиг футера формы без кнопок сохранения
+export const defaultFormFooterPanelConfigWithoutSubmitButtons = {
+  formSubmitButtons: null,
+};
+
+// Для фиксированных элементов дерева
+export const treeFixedNodeClass = "tree-fixed-node";

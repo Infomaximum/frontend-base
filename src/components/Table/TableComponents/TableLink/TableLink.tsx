@@ -33,7 +33,7 @@ const TableLinkComponent: FC<ITableLinkProps> = ({
   }
 
   return (
-    <AlignedTooltip title={title} customStyle={customTooltipWrapperStyle}>
+    <AlignedTooltip title={title} customStyle={customTooltipWrapperStyle} expandByParent={false}>
       {component}
     </AlignedTooltip>
   );

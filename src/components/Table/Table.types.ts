@@ -12,13 +12,17 @@ export interface IBaseColumnConfig<T>
   dataIndex?: string;
   priority?: number;
   key?: string | number;
+  columnTitleTooltipWrap?: boolean;
 }
 
 type TTableProps<T> = Omit<TableProps<T>, "columns" | "onScroll" | "rowKey">;
 
 export interface ITableOwnProps<T>
   extends TTableProps<T>,
-    Pick<IVirtualizedTableProps<T>, "targetAll" | "rowHeight"> {
+    Pick<
+      IVirtualizedTableProps<T>,
+      "targetAll" | "rowHeight" | "multipleRowSelectionConfig" | "floatingContextMenuConfig"
+    > {
   rowKey?: string;
   localization: Localization;
   onScroll?(params: ScrollParams): void;

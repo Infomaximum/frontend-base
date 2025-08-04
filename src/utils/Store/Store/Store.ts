@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-import type { NCore } from "@infomaximum/module-expander";
+
 import { cloneDeep, get, isArray, isNil, reduce } from "lodash";
 import { action, computed, makeObservable, observable } from "mobx";
 import { typenameToModel } from "../../../models/typenameToModel";
@@ -15,6 +15,7 @@ import type { IRequestService } from "../../../services/Network/Requests.types";
 import type { ISubscriptionService } from "../../../services/Network/Subscriptions.types";
 import { BaseRequestService } from "../../../services/Network/BaseRequestService";
 import { BaseSubscriptionService } from "../../../services/Network/BaseSubscriptionService";
+import type { NCore } from "../../../libs/core";
 
 type TPrivateStoreField =
   | "_data"
@@ -314,7 +315,6 @@ export class Store<M extends Model = never> extends BaseStore {
         cancelable: cancelable ?? false,
         files,
       });
-      this.setIsDataLoaded(true);
 
       if (dataPath) {
         data = this.getPreparedData(data, dataPath, variables);
@@ -322,6 +322,7 @@ export class Store<M extends Model = never> extends BaseStore {
 
       if (isSaveData) {
         this.receiveData(data as TModelStruct);
+        this.setIsDataLoaded(true);
       }
     } catch (error) {
       if (isSaveError) {
@@ -408,7 +409,7 @@ export class Store<M extends Model = never> extends BaseStore {
   }
 
   /** Получает модель из хранилища моделей */
-  protected getModel(_struct: TModelStruct | null): M {
+  protected getModel(_struct: TModelStruct | null): M | null {
     let modelClass: any;
 
     const struct = _struct as TNullable<TModelStruct>;

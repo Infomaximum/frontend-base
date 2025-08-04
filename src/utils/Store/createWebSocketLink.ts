@@ -18,23 +18,6 @@ export function createWebSocketLink() {
       new Promise((res) => {
         setTimeout(res, WebSocketConnectionRetryInterval);
       }),
-    /* Обработчик нужен для того, чтобы Apollo корректно отследил ошибку.
-    Согласно стандарту, ошибка в подписке, должна содержать поле "message".
-    https://spec.graphql.org/October2021/#sec-Errors.Error-result-format
-
-    todo: убрать после реализации на сервере задачи https://jira.office.infomaximum.com/browse/PT-14768
-    задача https://jira.office.infomaximum.com/browse/PT-14771 */
-    jsonMessageReviver: (key, value) => {
-      if (!key && value?.type === "error" && Array.isArray(value?.payload)) {
-        value.payload.forEach((payloadValue: any) => {
-          if (payloadValue?.code && !payloadValue.message) {
-            payloadValue.message = payloadValue.code;
-          }
-        });
-      }
-
-      return value;
-    },
   });
 
   return {

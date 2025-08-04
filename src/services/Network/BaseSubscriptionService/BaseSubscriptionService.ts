@@ -24,7 +24,7 @@ export class BaseSubscriptionService implements ISubscriptionService {
     const self = this;
     const apolloClient = apolloInstance.apolloClient;
 
-    const observer = apolloClient.subscribe(params.config);
+    const observer = apolloClient.subscribe({ fetchPolicy: "no-cache", ...params.config });
 
     this.subscription = observer.subscribe(
       (response) => {

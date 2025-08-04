@@ -3,6 +3,7 @@ const colors = {
   transparentColor: "rgba(0, 0, 0, 0)",
   /** --------------------------------- Blue -------------------------------- */
   blue1Color: "#F0F8FF",
+  blue15Color: "#E6F1FA",
   blue2Color: "#D1E9FF",
   blue3Color: "#A3CCF7",
   blue4Color: "#75AAEB",
@@ -213,6 +214,7 @@ export const theme = {
   drawerMediumWidth: 580,
   drawerLargeWidth: 720,
   drawerXLargeWidth: 960,
+  nextDrawerOverlap: 140,
   // ----- drawerStyles [END]-----//
 
   // ----- modalStyles [START] -----//
@@ -246,7 +248,7 @@ export const theme = {
   tagsStyles: {
     blue: {
       backgroundColor: colors.blue1Color,
-      borderColor: "#E6F1FA",
+      borderColor: colors.blue15Color,
       textColor: colors.blue6Color,
       closeIconColor: colors.grey7Color,
       closeIconColorHover: colors.grey8Color,
@@ -439,7 +441,7 @@ export const theme = {
 
   /** =========================== Link Colors [START]  =========================== */
 
-  linkHoverColor: "#498af2",
+  linkHoverColor: colors.blue5Color,
 
   /** =========================== Link Colors [END]  =========================== */
 

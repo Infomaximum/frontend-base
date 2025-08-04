@@ -14,10 +14,22 @@ export interface ISelectProps<T extends SelectValue = SelectValue>
   isClearIconOverSuffix?: boolean;
   selectTextOnFocus?: boolean;
   /**
+   * Применять ли новое значение. Корректно работает, только если передан selectTextOnFocus
+   */
+  enableAddingNewOption?: boolean;
+  /**
+   * Отключение функции globalScrollBehavior
+   */
+  disableGlobalScrollBehavior?: boolean;
+  /**
+   * Применять ли пустое значение.
+   * Корректно работает, только если передан selectTextOnFocus и enableAddingNewOption
+   */
+  submitEmptyValue?: boolean;
+  /**
    * Значение в поле ввода
    */
   searchValue?: string;
-  bordered?: boolean;
   /**
    * Ref для ситуаций, когда нужен доступ к элементу из родительских компонентов
    */
@@ -27,4 +39,6 @@ export interface ISelectProps<T extends SelectValue = SelectValue>
    */
   autoFocusWithPreventScroll?: boolean;
   readOnly?: boolean;
+  /** Возвращает компонент, относительно которого высчитывается свободное пространство для дропдауна. */
+  getBoundingContainer?: () => HTMLElement;
 }

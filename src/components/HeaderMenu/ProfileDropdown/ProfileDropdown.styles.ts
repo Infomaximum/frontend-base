@@ -31,10 +31,11 @@ export const menuStyle = (theme: TTheme) => ({
   },
 });
 
-export const menuItemTextStyle = (theme: TTheme) => ({
-  fontSize: `${theme.h5FontSize}px`,
-  whiteSpace: "nowrap",
-} as const);
+export const menuItemTextStyle = (theme: TTheme) =>
+  ({
+    fontSize: `${theme.h5FontSize}px`,
+    whiteSpace: "nowrap",
+  }) as const;
 
 export const iconMenuItemStyle = {
   display: "flex",

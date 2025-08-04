@@ -24,7 +24,6 @@ import { NothingFoundBoxDarkSVG } from "../../../../resources";
 import type { IDropdownAddFilterProps } from "./DropdownAddFilter.types";
 import {
   emptyStyle,
-  emptyImageStyle,
   getWrapperStyle,
   getWrapperWithScrollStyle,
   headerFilterItemsWrapperStyle,
@@ -38,6 +37,7 @@ import {
   defaultFilterItemsWrapperStyle,
 } from "./DropdownAddFilter.styles";
 import { AddFilterButton } from "../../../FilterList/Buttons/AddFilterButton/AddFilterButton";
+import { dropdownEmptyImageStyle } from "../../../Select/DropdownPlaceholder/DropdownPlaceholder.styles";
 
 const trigger: DropDownProps["trigger"] = ["click"];
 
@@ -188,7 +188,7 @@ const DropdownAddFilterComponent: React.FC<IDropdownAddFilterProps> = (props) =>
       return (
         <Empty
           image={nothingFoundIcon}
-          imageStyle={emptyImageStyle}
+          styles={dropdownEmptyImageStyle}
           description={localization.getLocalized(searchText ? NOTHING_FOUND : EMPTY_HERE)}
           css={emptyStyle}
         />

@@ -8,6 +8,7 @@ import type { Index, ScrollParams } from "react-virtualized";
 import type { TBaseRow, TExtendColumns } from "../../managers/Tree";
 import type { IBaseColumnConfig } from "../Table/Table.types";
 import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
+import type { IContextMenuFloatingProps } from "../ContextMenu/ContextMenuTable/ContextMenuFloating/ContextMenuFloating.types";
 
 export interface IColumnProps<T = any> extends IBaseColumnConfig<T> {
   /** Позволяет раскрыть строку виртуализированной таблицы при клике на конкретную ячейку */
@@ -20,17 +21,18 @@ export interface IVirtualizedColumnConfig<T> extends IColumnProps<T> {}
 
 export interface IVirtualizedTableOwnProps<T>
   extends Pick<
-    TableProps<T>,
-    | "expandedRowKeys"
-    | "expandable"
-    | "onExpandedRowsChange"
-    | "rowSelection"
-    | "dataSource"
-    | "showHeader"
-    | "indentSize"
-    | "onChange"
-    | "onRow"
-  > {
+      TableProps<T>,
+      | "expandedRowKeys"
+      | "expandable"
+      | "onExpandedRowsChange"
+      | "rowSelection"
+      | "dataSource"
+      | "showHeader"
+      | "indentSize"
+      | "onChange"
+      | "onRow"
+    >,
+    Pick<IContextMenuFloatingProps, "floatingContextMenuConfig"> {
   targetAll?: boolean;
   columns: IVirtualizedColumnConfig<T | null>[] | undefined;
   enableRowClick?: boolean;
@@ -43,6 +45,14 @@ export interface IVirtualizedTableOwnProps<T>
   localization: IWithLocProps["localization"];
   loading?: IWithSpinPropsReplacer["loading"];
   isWithoutWrapperStyles?: boolean;
+  multipleRowSelectionConfig?: {
+    handleMultipleSelect: (
+      currentSelectedRowIndex: number,
+      dataSource: TableProps<TRow | null>["dataSource"],
+      selectedRowKeysSet: Set<string> | null
+    ) => string[];
+    updateLastSelectedIndex: (index: number | null) => void;
+  };
 }
 
 export interface IVirtualizedTableProps<T>
@@ -57,8 +67,6 @@ export interface IVirtualizedTableState<T> {
   scrollOffset: number;
   /** Коллекция для быстрого определения состояния выбранности строки */
   selectedRowKeysSet: Set<string> | null;
-  /** Флаг инициализации таблицы */
-  loading: boolean;
   isCheckableDisabled: boolean;
   /** scrollTop сначала из пропсов для восстановления позиции скролла, затем undefined, чтобы не мешать работать  */
   initialScrollTop: number | undefined;

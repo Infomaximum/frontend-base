@@ -1,7 +1,7 @@
 export const hiddenCheckboxStyle = { style: { display: "none" } };
 
 export const weightLabelStyle = {
-  fontWeight: "bold",
+  fontWeight: 500,
 } as const;
 
 export const spinnerWrapperStyle = {

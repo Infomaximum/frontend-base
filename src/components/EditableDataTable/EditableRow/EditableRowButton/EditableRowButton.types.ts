@@ -6,4 +6,5 @@ export interface IEditableRowButtonProps<T = any> {
   onClick(data: T): void;
   disabled?: boolean;
   children: React.ReactNode;
+  title?: string;
 }

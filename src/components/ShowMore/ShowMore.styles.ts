@@ -23,14 +23,4 @@ export const spinContainerStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  ".ant-spin-sm .ant-spin-dot-holder": {
-    fontSize: "16px",
-  },
 } as const;
-
-export const spinStyle = {
-  display: "flex",
-  ".ant-spin-dot": {
-    fontSize: "14px",
-  },
-};

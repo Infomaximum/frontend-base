@@ -2,6 +2,7 @@ import type { IDocumentNode, TInferredVariables } from "@infomaximum/utility";
 import type { Store } from "../../../utils/Store/Store/Store";
 import type { Model } from "@infomaximum/graphql-model";
 import type { TCancelableRequest } from "../../../services/Network/Requests.types";
+import type { NCore } from "../../../libs/core";
 
 export type TQueryParams = {
   /** Запрос */
@@ -62,6 +63,8 @@ export interface IWithStoreProps<S extends Store<Model>> {
   model: S["model"];
   /** Модель из кэша */
   cachedModel: S["cachedModel"];
+  /** Ошибка при выполнении запроса в store */
+  error: NCore.TGraphqlError | undefined;
 }
 
 export type TWithStoreParams = {

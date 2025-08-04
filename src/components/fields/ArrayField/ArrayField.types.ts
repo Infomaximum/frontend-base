@@ -43,6 +43,11 @@ export interface ICommonArrayFieldProps {
   addButtonDescription?: string | React.ReactElement;
 
   /**
+   * Дополнительные стили кнопки добавления нового поля
+   */
+  addButtonAdditionalStyle?: Interpolation<TTheme>;
+
+  /**
    * Позиционирование кнопки добавление сущности
    */
   addEntityButtonPosition?: EAddEntityButtonPositions;
@@ -99,6 +104,7 @@ export interface IWrappedArrayFieldProps<FV = any, T extends HTMLElement = HTMLE
   spaceSize: string;
   formItemStyle?: Interpolation<TTheme>;
   additionalButtonContent?: (formProvider: IFormProvider) => React.ReactElement;
+  itemsGap?: number;
 }
 
 export interface IWrappedArrayFieldState {}
@@ -114,4 +120,5 @@ export interface IArrayFieldProps<FV = any, T extends HTMLElement = HTMLElement>
   children?: React.ReactNode;
   additionalButtonContent?: (formProvider: IFormProvider) => React.ReactElement;
   isEqual?: FieldArrayProps<FV, T>["isEqual"];
+  itemsGap?: number;
 }

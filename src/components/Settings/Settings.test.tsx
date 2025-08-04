@@ -1,10 +1,9 @@
 import enzyme from "enzyme";
 import { Settings } from "./Settings";
-import type { NCore } from "@infomaximum/module-expander";
-
 import { moduleGroupPath, getDisplayedSettingsRoutes } from "../../utils/Routes";
 import { SettingsItem } from "./SettingsItem/SettingsItem";
 import { getDefaultWrappers, testLocalization } from "../../utils/tests/wrappers";
+import type { NCore } from "../../libs/core";
 
 const BASE_MODULE = {
   ru: "Base",
@@ -27,7 +26,7 @@ const TEST_PAGE = {
 const key1 = "1";
 const key2 = "2";
 
-const routes1: NCore.IRoutes = {
+const routes1: NCore.IRoute = {
   key: "test1",
   path: moduleGroupPath,
   loc: BASE_MODULE,
@@ -60,7 +59,7 @@ const routes1: NCore.IRoutes = {
   ],
 };
 
-const routes2: NCore.IRoutes = {
+const routes2: NCore.IRoute = {
   key: "test2",
   path: moduleGroupPath,
   loc: BASE_MODULE,
@@ -91,26 +90,27 @@ const routes2: NCore.IRoutes = {
   ],
 };
 
-const renderMountComponent = (route: NCore.IRoutes) => {
+const onItemClick = () => {};
+
+const renderMountComponent = (route: NCore.IRoute) => {
   return enzyme.mount(
     getDefaultWrappers(
       ["router", "theme", "localization"],
-      <Settings routes={getDisplayedSettingsRoutes(route.routes ?? []) ?? []} />
+      <Settings
+        onItemClick={onItemClick}
+        routes={getDisplayedSettingsRoutes(route.routes ?? []) ?? []}
+      />
     )
   );
 };
 
-const renderShallowComponent = (route: NCore.IRoutes) => {
-  return enzyme.shallow(<Settings routes={getDisplayedSettingsRoutes(route.routes ?? []) ?? []} />);
-};
-
 describe("Тест компонента Settings", () => {
   test("Корректная фильтрация элементов подменю", () => {
-    const component1 = renderShallowComponent(routes1);
-    const component2 = renderShallowComponent(routes2);
-
+    const component1 = renderMountComponent(routes1);
+    const component2 = renderMountComponent(routes2);
     expect(component1.find(SettingsItem).length).toEqual(routes1.routes?.length);
-    expect(component2.find(SettingsItem).length).toEqual(1);
+
+    expect(component2.find(SettingsItem).length).toEqual(0);
   });
 
   test("Роуты сортируются по приоритету для отображения", () => {

@@ -1,4 +1,4 @@
-import { AutoComplete as AntAutoComplete, Spin } from "antd";
+import { AutoComplete as AntAutoComplete } from "antd";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { isFunction, noop } from "lodash";
 import { type FC, useCallback, useMemo, useRef } from "react";
@@ -7,6 +7,7 @@ import { useSelectDropdownPosition } from "../../components/Select/Select.utils"
 import { suffixIconSpinnerStyle } from "./AutoComplete.styles";
 import { suffixLoaderDelay } from "../../utils/const";
 import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
+import { LocalSpinner } from "../Spinner";
 
 const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
   const {
@@ -41,7 +42,7 @@ const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
     if (loadingState) {
       return (
         <div css={suffixIconSpinnerStyle}>
-          <Spin size="small" />
+          <LocalSpinner delay={0} />
         </div>
       );
     }
@@ -64,4 +65,7 @@ const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
   );
 };
 
-export const AutoComplete = hoistNonReactStatics(AutoCompleteComponent, AntAutoComplete);
+export const AutoComplete = hoistNonReactStatics(
+  AutoCompleteComponent,
+  AntAutoComplete
+) as typeof AutoCompleteComponent & typeof AntAutoComplete;

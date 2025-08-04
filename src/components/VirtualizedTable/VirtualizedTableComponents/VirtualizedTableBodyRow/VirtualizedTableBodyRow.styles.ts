@@ -51,7 +51,7 @@ export const checkedVirtualizedTableBodyRowStyle = (theme: TTheme) =>
     ...virtualizedTableBodyRowStyle(theme),
     background: theme.blue1Color,
     ":hover": {
-      background: theme.blue2Color,
+      background: theme.blue15Color,
     },
   }) as const;
 
@@ -61,8 +61,7 @@ export const clickableVirtualizedTableBodyRowStyle = {
 
 export const virtualizedTableWithPaddingBodyRowLoadingStyle = {
   [`&:has(div#${LOADING_ON_SCROLL_SPINNER_ID})`]: {
-    borderBottom: "none",
     position: "relative" as const,
-    top: "11px",
+    top: "5px",
   },
 };

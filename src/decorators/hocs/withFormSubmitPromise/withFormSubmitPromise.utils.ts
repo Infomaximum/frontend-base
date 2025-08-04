@@ -1,5 +1,5 @@
 import { assertSilent } from "@infomaximum/assert";
-import type { NCore } from "@infomaximum/module-expander";
+
 import { FORM_ERROR } from "final-form";
 import {
   difference,
@@ -15,6 +15,7 @@ import {
 } from "lodash";
 import { ERROR_FIELD_NAME, ERROR_FIELD_VALUE } from "../../../utils/const";
 import type { TRegisteredFields } from "./withFormSubmitPromise.types";
+import type { NCore } from "../../../libs/core";
 
 /**
  * Метод возвращает объект c описанием ошибок формы для полей, значение которых совпадает со

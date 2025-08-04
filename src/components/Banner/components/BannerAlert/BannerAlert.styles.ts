@@ -18,7 +18,6 @@ export const closeIconBannerAlertStyle = {
   fontSize: "14px",
   cursor: "pointer",
   marginLeft: "8px",
-  padding: "4px 1px",
 };
 
 export const wrapperContentBannerAlertStyle = {

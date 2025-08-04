@@ -1,8 +1,9 @@
 import { Localization } from "@infomaximum/localization";
 import enzyme from "enzyme";
 import { Notification } from "./Notification";
-import type { NCore } from "@infomaximum/module-expander";
+
 import { ERROR, ERROR_404 } from "../../utils/Localization/Localization";
+import type { NCore } from "../../libs/core";
 
 const localization = new Localization({ language: Localization.Language.ru });
 

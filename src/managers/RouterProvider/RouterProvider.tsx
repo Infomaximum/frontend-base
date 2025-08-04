@@ -5,12 +5,14 @@ import {
   routesMap,
   sortPriority,
 } from "../../utils/Routes/routes";
-import type { NCore } from "@infomaximum/module-expander";
+
 import type { IRouterProviderProps } from "./RouterProvider.types";
 import { observer } from "mobx-react";
-import { useRoutes } from "react-router";
+import { useLocation, useRoutes } from "react-router";
 import { RoutesContext } from "../../decorators/contexts/RoutesContext";
 import { useFeature } from "../../decorators/hooks/useFeature";
+import { SystemLoaderProvider } from "../SystemLoaderProvider";
+import type { NCore } from "../../libs/core";
 
 const RouterProviderComponent: FC<IRouterProviderProps> = ({
   layout: LayoutProps,
@@ -21,14 +23,17 @@ const RouterProviderComponent: FC<IRouterProviderProps> = ({
   unInitializeRoutes,
 }) => {
   const { isFeatureEnabled } = useFeature();
+  const location = useLocation();
 
   const resolvedRoutes = useMemo(() => {
     return isFeatureEnabled
-      ? getRoutes(sortPriority(resolveConstraintsInRoutes(routesConfig, isFeatureEnabled)))
+      ? getRoutes(
+          sortPriority(resolveConstraintsInRoutes(routesConfig, isFeatureEnabled, location))
+        )
       : null;
-  }, [routesConfig, isFeatureEnabled]);
+  }, [routesConfig, isFeatureEnabled, location]);
 
-  let routesForRender: NCore.IRoutes[] = [];
+  let routesForRender: NCore.IRoute[] = [];
 
   if (!isSystemInitialized) {
     routesForRender = routesMap(sortPriority(unInitializeRoutes));
@@ -43,7 +48,9 @@ const RouterProviderComponent: FC<IRouterProviderProps> = ({
   if (isAuthorizedUser && resolvedRoutes) {
     return (
       <RoutesContext.Provider value={resolvedRoutes}>
-        <LayoutProps>{renderedRoutes}</LayoutProps>
+        <LayoutProps>
+          <SystemLoaderProvider>{renderedRoutes}</SystemLoaderProvider>
+        </LayoutProps>
       </RoutesContext.Provider>
     );
   }

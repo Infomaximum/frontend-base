@@ -17,7 +17,7 @@ export const getBoldTitleModal = createSelector(
 );
 
 const ModalComponent: React.FC<IModalProps> = (props) => {
-  const { title, width, styles: stylesProps, height, ...rest } = props;
+  const { title, width, styles: stylesProps, height, zIndex, ...rest } = props;
   const theme = useTheme();
 
   const boldTitle = (
@@ -34,6 +34,7 @@ const ModalComponent: React.FC<IModalProps> = (props) => {
       focusTriggerAfterClose={false}
       width={width ?? 480}
       css={modalStyle}
+      zIndex={zIndex ?? 1050}
       styles={merge({}, getModalStyle(height), stylesProps)}
       centered={true}
       {...rest}

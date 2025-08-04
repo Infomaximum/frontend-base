@@ -19,3 +19,7 @@ export const addTopPanelFilterButtonStyle = {
   width: "28px",
   height: "28px",
 };
+
+export const clearFiltersIconStyle = {
+  fontSize: "16px",
+};

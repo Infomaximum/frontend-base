@@ -4,7 +4,7 @@ import { Button } from "../../Button";
 import { assertSimple } from "@infomaximum/assert";
 import { useFormButtonState } from "../hooks/useFormButtonState";
 import { FormContext, useLocalization } from "../../../decorators";
-import { CANCEL_CHANGES, cancelChangesFormButtonTestId } from "../../../utils";
+import { TO_CANCEL, cancelChangesFormButtonTestId } from "../../../utils";
 import type { TButtonType } from "../../Button/Button.types";
 import type { SizeType } from "antd/lib/config-provider/SizeContext";
 
@@ -63,7 +63,7 @@ const CancelChangesFormButtonComponent: React.FC<ICancelChangesFormButtonProps> 
         test-id={`${formName}_${cancelChangesFormButtonTestId}`}
         styles={styles}
       >
-        {caption || localization.getLocalized(CANCEL_CHANGES)}
+        {caption || localization.getLocalized(TO_CANCEL)}
       </Button>
     );
   }
