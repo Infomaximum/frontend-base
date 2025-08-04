@@ -24,7 +24,7 @@
     "@infomaximum/utility": "^9.0.0",
     "@infomaximum/base-filter": "^1.2.0",
     "antd": "5.24.1",
-    "crypto-js": "4.1.1",
+    "crypto-js": "4.2.0",
     "dayjs": "1.11.13",
     "final-form": "^4.20.9",
     "react-final-form": "^6.5.9",
