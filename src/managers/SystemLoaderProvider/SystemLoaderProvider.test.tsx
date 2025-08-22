@@ -1,8 +1,8 @@
 import React, { useContext, useId, useLayoutEffect, type FC } from "react";
 import { render, act, screen, fireEvent } from "@testing-library/react";
 import { SystemLoaderProvider } from "./SystemLoaderProvider";
-import { SystemLoaderContext } from "../../decorators/contexts/SystemLoaderContext";
-import { wrapperGlobalSpinnerTestId } from "../../utils/TestIds";
+import { SystemLoaderContext } from "@infomaximum/base/src/decorators/contexts/SystemLoaderContext";
+import { wrapperGlobalSpinnerTestId } from "@infomaximum/base/src/utils/TestIds";
 import type { TSystemLoaderProviderExternalHandlers } from "./SystemLoaderProvider.types";
 
 const mockSystemLoaderContext = {

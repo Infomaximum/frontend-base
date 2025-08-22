@@ -1,5 +1,5 @@
 import { css, keyframes } from "@emotion/react";
-import AuthorizationBackground from "../../resources/icons/AuthorizationBackground.svg?url";
+import AuthorizationBackground from "@infomaximum/base/src/resources/icons/AuthorizationBackground.svg?url";
 
 export const layoutStyle = (theme: TTheme) => [
   css`
@@ -25,7 +25,8 @@ export const unAuthorizedContentStyle = () =>
     alignItems: "center",
     paddingTop: "24px",
     paddingBottom: "24px",
-    minHeight: "min-content", // fix для корректной работы скролла
+    // fix для корректной работы скролла
+    minHeight: "min-content",
   }) as const;
 
 export const iconBackStyle = (theme: TTheme) => ({

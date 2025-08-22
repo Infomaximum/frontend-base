@@ -1,4 +1,4 @@
-import { ellipsisStyle } from "../../styles";
+import { ellipsisStyle } from "@infomaximum/base/src/styles";
 
 export const getDisabledInputStyle = (theme: TTheme, bordered = true) => ({
   height: "28px",

@@ -26,10 +26,10 @@ import {
 
 import { Expander } from "@infomaximum/module-expander";
 import type { TFeatureEnabledChecker } from "@infomaximum/utility";
-import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
+import { RouteElement } from "@infomaximum/base/src/components/routes/RouteElement/RouteElement";
 import { assertSimple } from "@infomaximum/assert";
 import { getPathToSessionStorage } from "../URI/URI";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 /**
  * @param items {NCore.IRoute[]} - конфиг роутов

@@ -2,7 +2,7 @@ import React, { type KeyboardEvent } from "react";
 import type { ISearchProps, ISearchState } from "./Search.types";
 import { Input } from "../Input/Input";
 import { isString, isFunction, isEmpty } from "lodash";
-import { KeyupRequestInterval } from "../../utils/const";
+import { KeyupRequestInterval } from "@infomaximum/base/src/utils/const";
 import { CloseOutlined, SearchOutlined } from "../Icons/Icons";
 import {
   iconStyle,
@@ -11,7 +11,7 @@ import {
   searchSmallInputStyle,
 } from "./Search.style";
 import type { Interpolation } from "@emotion/react";
-import { boundMethod, withTheme } from "../../decorators";
+import { boundMethod, withTheme } from "@infomaximum/base/src/decorators";
 
 class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   public static defaultProps = {

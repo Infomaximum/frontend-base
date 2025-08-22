@@ -1,8 +1,8 @@
 import { useCallback, useMemo, type FC } from "react";
 import type { IRemoveButtonProps } from "./RemoveButton.types";
-import { Button } from "../../../../Button";
+import { Button } from "@infomaximum/base/src/components/Button";
 import { isFunction } from "lodash";
-import { CloseOutlined } from "../../../../Icons";
+import { CloseOutlined } from "@infomaximum/base/src/components/Icons";
 import { removeButtonDefaultColorsStyle } from "./RemoveButton.styles";
 import type { Interpolation, Theme } from "@emotion/react";
 

@@ -1,11 +1,11 @@
 import { memo, useContext } from "react";
 import type { IEditableRowSubmitButtonProps } from "./EditableRowSubmitButton.types";
 import { EditableRowButton } from "../EditableRowButton/EditableRowButton";
-import { FormContext } from "../../../../decorators/contexts/FormContext";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
 import { assertSimple } from "@infomaximum/assert";
-import { useFormButtonState } from "../../../forms/hooks";
-import { submitFormButtonTestId } from "../../../../utils/TestIds";
-import { ArcOutlined } from "../../../Icons/Icons";
+import { useFormButtonState } from "@infomaximum/base/src/components/forms/hooks";
+import { submitFormButtonTestId } from "@infomaximum/base/src/utils/TestIds";
+import { ArcOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 
 /**
  * Кнопка, которая делает submit текущих значений формы-строки таблицы

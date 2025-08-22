@@ -1,5 +1,4 @@
 export * from "./AddButton";
-export * from "./Alert";
 export * from "./ApplicationCard";
 export * from "./AutoComplete";
 export * from "./AlignedTooltip";
@@ -50,3 +49,4 @@ export * from "./TopPanel";
 export * from "./FiltersPanel";
 export * from "./FilterList";
 export * from "./Tour";
+export { Alert, type AlertProps } from "@infomaximum/ui-kit";

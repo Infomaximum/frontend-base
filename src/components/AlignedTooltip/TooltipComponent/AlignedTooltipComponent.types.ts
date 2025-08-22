@@ -8,4 +8,5 @@ export interface IAlignedTooltipComponentProps {
   offsetX?: number;
   containerRef: React.RefObject<HTMLDivElement>;
   numberOfLines: number;
+  show?: boolean;
 }

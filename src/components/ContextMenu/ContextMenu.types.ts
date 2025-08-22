@@ -1,8 +1,8 @@
-import type { IDropdownProps } from "../../components/Dropdown/Dropdown.types";
+import type { IDropdownProps } from "@infomaximum/base/src/components/Dropdown/Dropdown.types";
 import type { Interpolation } from "@emotion/react";
 import type { SubMenuProps } from "antd/lib/menu/SubMenu";
 import type { MenuProps } from "antd";
-import type { TAccessRules } from "../../utils/access";
+import type { TAccessRules } from "@infomaximum/base/src/utils/access";
 
 export enum ESortingMethodsNames {
   priority = "priority",

@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Deferred } from "@infomaximum/utility";
 import type { TLocalizationDescription } from "@infomaximum/localization";
 import { useLocalization } from "./useLocalization";
-import { RemoveConfirmationModal } from "../../components/modals/RemoveConfirmationModal/RemoveConfirmationModal";
+import { RemoveConfirmationModal } from "@infomaximum/base/src/components/modals/RemoveConfirmationModal/RemoveConfirmationModal";
 
 type TRemoveConfirmationParams<T> = {
   /** Колбек который будет вызван после подтверждения удаления данных */

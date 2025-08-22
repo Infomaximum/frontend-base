@@ -1,10 +1,10 @@
 import { memo, useMemo, type FC } from "react";
 import type { IAddButtonProps } from "./AddButton.types";
-import { Button } from "../../components/Button/Button";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
-import { PlusOutlined } from "../../components/Icons/Icons";
-import { ADD } from "../../utils/Localization/Localization";
-import { addButtonTestId } from "../../utils/TestIds";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { PlusOutlined } from "@infomaximum/base/src/components/Icons/Icons";
+import { ADD } from "@infomaximum/base/src/utils/Localization/Localization";
+import { addButtonTestId } from "@infomaximum/base/src/utils/TestIds";
 
 const AddButtonComponent: FC<IAddButtonProps> = (props) => {
   const localization = useLocalization();

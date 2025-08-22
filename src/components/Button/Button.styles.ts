@@ -38,6 +38,12 @@ const getInactiveButtonStyle = (theme: TTheme, config?: TInactiveButtonConfig) =
       ...disabledStyle,
       "&:hover, &:focus, &:active": disabledStyle,
     },
+    ".ant-btn-icon": {
+      display: "inline",
+      span: {
+        fontSize: `${theme.h5FontSize}px`,
+      },
+    },
   };
 };
 
@@ -47,6 +53,8 @@ export const smallButtonStyle = (theme: TTheme) => ({
     verticalAlign: !isSafari ? "-0.125em" : undefined,
   },
 });
+
+export const onlyIconStyle = { padding: 0, width: 28 };
 
 export const smallOnlyIconStyle = () => ({
   minWidth: "28px",

@@ -3,12 +3,12 @@ import type { ISelectWithStoreProps, THandlerDisplayValues } from "./SelectWithS
 import { compact, every, isArray, isFunction, isNull, isString, isUndefined, map } from "lodash";
 import { observer } from "mobx-react";
 import type { IModel, Model } from "@infomaximum/graphql-model";
-import { useFeature } from "../../decorators/hooks/useFeature";
-import { useStore } from "../../decorators/hooks/useStore";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
+import { useStore } from "@infomaximum/base/src/decorators/hooks/useStore";
 import type { ISelectProps } from "../Select/Select.types";
 import { Select } from "../Select/Select";
 import { DropdownPlaceholder } from "../Select/DropdownPlaceholder/DropdownPlaceholder";
-import { useMountEffect } from "../../decorators";
+import { useMountEffect } from "@infomaximum/base/src/decorators";
 import { AlignedTooltip } from "../AlignedTooltip";
 
 const optionFilterProp = "filterProp";

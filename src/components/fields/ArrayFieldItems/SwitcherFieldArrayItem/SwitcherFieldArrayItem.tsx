@@ -1,7 +1,7 @@
 import { memo, type FC } from "react";
-import { removeSwitcherFieldButtonTestId } from "../../../../utils/TestIds";
+import { removeSwitcherFieldButtonTestId } from "@infomaximum/base/src/utils/TestIds";
 import type { ISwitcherFieldArrayItemProps } from "./SwitcherFieldArrayItem.types";
-import { SwitcherFormField } from "../../SwitcherField";
+import { SwitcherFormField } from "@infomaximum/base/src/components/fields/SwitcherField";
 import { RemoveButton } from "../components/RemoveButton/RemoveButton";
 import { wrapperStyle } from "../ArrayFieldItems.styles";
 

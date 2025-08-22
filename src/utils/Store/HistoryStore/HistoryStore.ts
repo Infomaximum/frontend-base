@@ -1,6 +1,6 @@
 import type { NavigateFunction, Location } from "react-router";
 import { assertSimple } from "@infomaximum/assert";
-import { getApiPrefix, getBasePrefix } from "../../URI/URI";
+import { getApiPrefix, getBasePrefix } from "@infomaximum/base/src/utils/URI/URI";
 
 type TLocationChangeListener = (location: Location) => void;
 

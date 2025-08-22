@@ -1,4 +1,4 @@
-import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { tableCheckboxCellStyle } from "./TableCheckboxCell.styles";
 import type { ITableCheckboxCellProps } from "./TableCheckboxCell.types";
 

@@ -1,7 +1,7 @@
 import { mount } from "enzyme";
 import { BaseCard } from "./BaseCard";
 import { keyframes } from "@emotion/react";
-import { getRouterWrapper } from "../../utils/tests/wrappers";
+import { getRouterWrapper } from "@infomaximum/base/src/utils/tests/wrappers";
 
 describe("Тест компонента BaseCard", () => {
   // Тест на "Вызов функции 'onAnimationEnd' не работает

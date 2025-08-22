@@ -7,7 +7,7 @@ import {
   tableArrowRightTestId,
   tableArrowUpTestId,
   tableExpanderTestId,
-} from "../../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 
 describe("Тест компонента VirtualizedTableBodyCell", () => {
   it("Простое отображение значения", async () => {

@@ -10,20 +10,23 @@ import {
   drawerFooterStyle,
 } from "./DrawerForm.styles";
 import { EFormLayoutType } from "../BaseForm/BaseForm.types";
-import { drawerFormCancelButtonTestId, drawerFormTestId } from "../../../utils/TestIds";
+import {
+  drawerFormCancelButtonTestId,
+  drawerFormTestId,
+} from "@infomaximum/base/src/utils/TestIds";
 import type { IDrawerFormProps, IDrawerFormState } from "./DrawerForm.types";
 import type { FormApi } from "final-form";
-import type { IFormData } from "../../../decorators/contexts/FormContext";
+import type { IFormData } from "@infomaximum/base/src/decorators/contexts/FormContext";
 import {
   defaultFormFooterPanelConfigWithoutSubmitButtons,
   DrawerAnimationInterval,
-} from "../../../utils/const";
+} from "@infomaximum/base/src/utils/const";
 import { SubmitFormButton } from "../SubmitFormButton";
-import { Button } from "../../Button/Button";
-import { Drawer } from "../../drawers/Drawer/Drawer";
-import { Empty } from "../../Empty/Empty";
-import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
-import type { NCore } from "../../../libs/core";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
+import { Drawer } from "@infomaximum/base/src/components/drawers/Drawer/Drawer";
+import { Empty } from "@infomaximum/base/src/components/Empty/Empty";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 class DrawerFormComponent extends React.PureComponent<IDrawerFormProps, IDrawerFormState> {
   public static defaultProps = {

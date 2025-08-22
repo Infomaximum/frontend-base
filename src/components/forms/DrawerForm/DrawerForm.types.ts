@@ -1,11 +1,11 @@
 import type { ButtonProps } from "antd/lib/button/button";
-import type { IButtonProps } from "../../Button/Button.types";
-import type { IFormProvider } from "../../../decorators/contexts/FormContext";
+import type { IButtonProps } from "@infomaximum/base/src/components/Button/Button.types";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
 import type { IFormWrapperProps } from "../Form/FormWrapper.types";
 import type { FormProps } from "react-final-form";
-import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 import type { EFormLayoutType } from "../BaseForm";
-import type { IDrawerProps } from "../../drawers/Drawer/Drawer.types";
+import type { IDrawerProps } from "@infomaximum/base/src/components/drawers/Drawer/Drawer.types";
 
 export interface IOkButtonProps extends Omit<ButtonProps, "icon"> {}
 

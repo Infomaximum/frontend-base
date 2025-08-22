@@ -13,7 +13,7 @@ import type {
 } from "./ContainerExt.types";
 import { every, forEach } from "lodash";
 import type { GraphQlQuery } from "@infomaximum/utility";
-import type { NStore } from "../../Store/Store/Store.types";
+import type { NStore } from "@infomaximum/base/src/utils/Store/Store/Store.types";
 
 export class ContainerExt<P = unknown> {
   private formElementsGetterList: TFormElementsGetterList<P> = [];

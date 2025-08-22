@@ -7,7 +7,7 @@ import {
   usePrevious,
   useTheme,
   useUnmountEffect,
-} from "../../../../decorators";
+} from "@infomaximum/base/src/decorators";
 import {
   DropdownAnimationInterval,
   EMPTY_HERE,
@@ -16,11 +16,11 @@ import {
   NOTHING_FOUND,
   SEARCH,
   type BaseFilter,
-} from "../../../../utils";
-import { Dropdown, mainBaseDropdownOverlayStyle } from "../../../Dropdown";
-import { Input } from "../../../Input";
-import { SearchOutlined } from "../../../Icons";
-import { NothingFoundBoxDarkSVG } from "../../../../resources";
+} from "@infomaximum/base/src/utils";
+import { Dropdown, mainBaseDropdownOverlayStyle } from "@infomaximum/base/src/components/Dropdown";
+import { Input } from "@infomaximum/base/src/components/Input";
+import { SearchOutlined } from "@infomaximum/base/src/components/Icons";
+import { NothingFoundBoxDarkSVG } from "@infomaximum/base/src/resources";
 import type { IDropdownAddFilterProps } from "./DropdownAddFilter.types";
 import {
   emptyStyle,
@@ -36,8 +36,8 @@ import {
   headerInputStyle,
   defaultFilterItemsWrapperStyle,
 } from "./DropdownAddFilter.styles";
-import { AddFilterButton } from "../../../FilterList/Buttons/AddFilterButton/AddFilterButton";
-import { dropdownEmptyImageStyle } from "../../../Select/DropdownPlaceholder/DropdownPlaceholder.styles";
+import { AddFilterButton } from "@infomaximum/base/src/components/FilterList/Buttons/AddFilterButton/AddFilterButton";
+import { dropdownEmptyImageStyle } from "@infomaximum/base/src/components/Select/DropdownPlaceholder/DropdownPlaceholder.styles";
 
 const trigger: DropDownProps["trigger"] = ["click"];
 

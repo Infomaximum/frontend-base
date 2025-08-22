@@ -1,8 +1,8 @@
 import type { Interpolation } from "@emotion/react";
-import type { IBaseFormProps } from "../../forms/BaseForm/BaseForm.types";
-import type { IFormWrapperProps } from "../../forms/Form/FormWrapper.types";
+import type { IBaseFormProps } from "@infomaximum/base/src/components/forms/BaseForm/BaseForm.types";
+import type { IFormWrapperProps } from "@infomaximum/base/src/components/forms/Form/FormWrapper.types";
 import type { IEditableDataTableState, IEditableRow } from "../EditableDataTable.types";
-import type { ITableBodyRowProps } from "../../Table/TableComponents/TableBodyRow/TableBodyRow.types";
+import type { ITableBodyRowProps } from "@infomaximum/base/src/components/Table/TableComponents/TableBodyRow/TableBodyRow.types";
 
 export interface IFormComponentProps extends IBaseFormProps {
   rowProps: Omit<IEditableRowProps, "formProps" | "children" | "editingState" | "record">;

@@ -1,11 +1,11 @@
 import type React from "react";
 import type { Interpolation } from "@emotion/react";
 
-import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
-import type { IWithSystemTitleProps } from "../../decorators/hocs/withSystemTitle/withSystemTitle.types";
-import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
+import type { IWithThemeProps } from "@infomaximum/base/src/decorators/hocs/withTheme/withTheme";
+import type { IWithSystemTitleProps } from "@infomaximum/base/src/decorators/hocs/withSystemTitle/withSystemTitle.types";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 import type { TLocalizationDescription } from "@infomaximum/localization";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export interface IUnAuthorizedLayoutProps
   extends IWithThemeProps<TTheme>,

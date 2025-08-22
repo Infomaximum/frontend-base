@@ -1,5 +1,5 @@
 import type React from "react";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export interface IRouterProviderProps {
   routesConfig: NCore.IRoute[];

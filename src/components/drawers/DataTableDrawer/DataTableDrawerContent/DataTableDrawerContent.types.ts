@@ -1,7 +1,7 @@
 import type { IModel } from "@infomaximum/graphql-model";
-import type { TBaseRow } from "../../../../managers/Tree";
-import type { IDataTableOwnProps } from "../../../DataTable/DataTable.types";
-import type { IVirtualizedTableProps } from "../../../VirtualizedTable/VirtualizedTable.types";
+import type { TBaseRow } from "@infomaximum/base/src/managers/Tree";
+import type { IDataTableOwnProps } from "@infomaximum/base/src/components/DataTable/DataTable.types";
+import type { IVirtualizedTableProps } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 
 export interface IDataTableDrawerContentProps<T extends TBaseRow = TBaseRow>
   extends Pick<
@@ -21,6 +21,7 @@ export interface IDataTableDrawerContentProps<T extends TBaseRow = TBaseRow>
       | "isVirtualized"
       | "onChange"
       | "rowSelection"
+      | "isShowDividers"
     >,
     Pick<Partial<IDataTableOwnProps<T>>, "rowBuilder"> {
   // todo: Зачем нужен этот проп, если есть возможность передать rowBuilder?

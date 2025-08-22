@@ -14,8 +14,8 @@ import {
   overlayStyle,
 } from "./FilterList.styles";
 import type { IFilterListProps, IFilterListState } from "./FilterList.types";
-import { boundMethod } from "../../../decorators";
-import { BaseDropdown, EBaseDropdownPlacement } from "../../Dropdown";
+import { boundMethod } from "@infomaximum/base/src/decorators";
+import { BaseDropdown, EBaseDropdownPlacement } from "@infomaximum/base/src/components/Dropdown";
 
 enum EFilterItemWith {
   small = 139,

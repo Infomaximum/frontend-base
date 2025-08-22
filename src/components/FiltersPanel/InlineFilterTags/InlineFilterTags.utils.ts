@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import type { TInlineFilterTagsConfig } from "./InlineFilterTags.types";
-import { getTextWidth } from "../../../utils/textWidth";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 
 export const tagConfig: TInlineFilterTagsConfig = {
   tagSidePadding: 8,

@@ -1,5 +1,5 @@
 import type { Mutator } from "final-form";
-import type { NCore } from "../../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 import { forEach } from "lodash";
 import type { TWrappedError } from "./FormWrapper.types";
 

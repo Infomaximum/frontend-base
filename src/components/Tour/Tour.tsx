@@ -3,9 +3,9 @@ import { Tour as AntTour } from "antd";
 import { Global } from "@emotion/react";
 import { nextButtonChildrenStyle, tourGlobalStyle } from "./Tour.styles";
 import type { ITourComponentProps } from "./Tour.types";
-import { useLocalization } from "../../decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators";
 import { ArrowLeftOutlined } from "../Icons/Icons";
-import { FINISH_TOUR, NEXT } from "../../utils";
+import { FINISH_TOUR, NEXT } from "@infomaximum/base/src/utils";
 
 const TourComponent: FC<ITourComponentProps> = ({
   steps,

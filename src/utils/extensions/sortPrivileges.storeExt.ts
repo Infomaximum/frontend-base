@@ -3,7 +3,7 @@ import { Expander } from "@infomaximum/module-expander";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Store } from "../Store/Store/Store";
 import type { Model } from "@infomaximum/graphql-model";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export const sortPrivilegesExt: NStore.TPrepareDataFunc<Store<Model>> = ({ data }) => {
   const { featureList, featureGroupList } =

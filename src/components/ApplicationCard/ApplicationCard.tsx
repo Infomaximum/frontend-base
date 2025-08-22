@@ -22,11 +22,11 @@ import {
   getCardStyle,
   disabledStyle,
 } from "./ApplicationCard.styles";
-import { ContextMenu } from "../../components/ContextMenu/ContextMenu";
-import { applicationCardTestId } from "../../utils/TestIds";
-import { DELETE } from "../../utils/Localization/Localization";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
-import { useTheme } from "../../decorators";
+import { ContextMenu } from "@infomaximum/base/src/components/ContextMenu/ContextMenu";
+import { applicationCardTestId } from "@infomaximum/base/src/utils/TestIds";
+import { DELETE } from "@infomaximum/base/src/utils/Localization/Localization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useTheme } from "@infomaximum/base/src/decorators";
 import type { TOnItemClickParam } from "../ContextMenu/ContextMenu.types";
 import { AlignedTooltip } from "../AlignedTooltip";
 

@@ -13,7 +13,7 @@ import {
   NON_ALPHABETIC_CHARACTERS,
   NUMBERS,
   NOT_LESS_SYMBOL,
-} from "../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   isValidRepeatPasswordMemoize,
   isValidNewPasswordMemoize,
@@ -43,7 +43,7 @@ import {
   questionIconWrapperStyle,
 } from "./PasswordFields.styles";
 import { map, forEach, debounce, isNumber } from "lodash";
-import { MIN_PASSWORD_LENGTH } from "../../../utils/const";
+import { MIN_PASSWORD_LENGTH } from "@infomaximum/base/src/utils/const";
 import {
   passwordFieldsPasswordNotificationTestId,
   passwordFieldsPopoverTestId,
@@ -59,7 +59,7 @@ import {
   passwordFieldsNewPasswordVisibilityIconTestId,
   passwordFieldsRepeatNewPasswordVisibilityIconTestId,
   passwordFieldsCurrentPasswordVisibilityIconTestId,
-} from "../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import { observer } from "mobx-react";
 import type { Unsubscribe } from "final-form";
 import { convertToNotWhitespace, InputFormField } from "../InputField";
@@ -71,12 +71,12 @@ import {
   EyeInvisibleOutlined,
   EyeOutlined,
   QuestionCircleOutlined,
-} from "../../Icons/Icons";
-import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
-import { withFormProvider } from "../../../decorators/hocs/withFormProvider/withFormProvider";
+} from "@infomaximum/base/src/components/Icons/Icons";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import { withFormProvider } from "@infomaximum/base/src/decorators/hocs/withFormProvider/withFormProvider";
 import type { Localization } from "@infomaximum/localization";
-import { getTextWidthOfReactNode } from "../../../utils/textWidth";
-import { theme } from "../../../styles";
+import { getTextWidthOfReactNode } from "@infomaximum/base/src/utils/textWidth";
+import { theme } from "@infomaximum/base/src/styles";
 
 const REPEAT_NEW_PASSWORD_FIELD = "REPEAT_NEW_PASSWORD";
 
@@ -175,7 +175,7 @@ const ValidFieldIcon = (disabled?: boolean) => (
   />
 );
 
-const passwordHelpPopoverZIndex = 1040;
+const passwordHelpPopoverZIndex = 1050;
 
 class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPasswordFieldsState> {
   public static defaultProps = {

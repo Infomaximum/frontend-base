@@ -1,5 +1,5 @@
 import type React from "react";
-import type { NFiltersStore } from "../../Store/FiltersStore/FiltersStore.types";
+import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
 import type { IFilterAddComponentProps, IFilterEditComponentProps } from "./BaseFilter.types";
 import type { Localization } from "@infomaximum/localization";
 import type { IBaseFilter } from "@infomaximum/base-filter";

@@ -1,5 +1,5 @@
 import type { Group, IModel, Model } from "@infomaximum/graphql-model";
-import type { Store } from "../../utils/Store";
+import type { Store } from "@infomaximum/base/src/utils/Store";
 import type { ISelectProps } from "../Select/Select.types";
 
 export type THandlerDisplayValues = (value: IModel) => React.ReactNode;

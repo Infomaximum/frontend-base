@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import type { DocumentNode } from "@apollo/client";
-import { useUnmountEffect } from "../../decorators";
-import type { NCore } from "../../libs/core";
-import { BaseSubscriptionService } from "../../services/Network/BaseSubscriptionService";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators";
+import type { NCore } from "@infomaximum/base/src/libs/core";
+import { BaseSubscriptionService } from "@infomaximum/base/src/services/Network/BaseSubscriptionService";
 
 export type TLazySubscriptionParams = {
   onMessage?: (params: { first: boolean; response: TDictionary }) => void;

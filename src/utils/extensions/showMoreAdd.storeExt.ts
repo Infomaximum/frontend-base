@@ -2,7 +2,7 @@ import { isArray } from "lodash";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Model, TModelStruct } from "@infomaximum/graphql-model";
 import type { Store } from "../Store/Store/Store";
-import { RestModel } from "../../models";
+import { RestModel } from "@infomaximum/base/src/models";
 
 interface IParams {
   groupFieldNames: string[];

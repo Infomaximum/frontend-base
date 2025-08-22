@@ -1,4 +1,4 @@
-import { suffixIconStyle } from "../../../Select";
+import { suffixIconStyle } from "@infomaximum/base/src/components/Select";
 
 export const hintContainerStyle = {
   float: "right",

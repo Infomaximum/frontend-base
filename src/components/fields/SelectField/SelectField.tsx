@@ -9,14 +9,14 @@ import type {
 import { defaultWrapperComponentStyle, defaultSelectFieldStyle } from "./SelectField.styles";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
 import { isNil, isNull } from "lodash";
-import { Select } from "../../Select/Select";
-import { Input } from "../../Input/Input";
-import { NOT_SELECTED } from "../../../utils/Localization/Localization";
+import { Select } from "@infomaximum/base/src/components/Select/Select";
+import { Input } from "@infomaximum/base/src/components/Input/Input";
+import { NOT_SELECTED } from "@infomaximum/base/src/utils/Localization/Localization";
 import { Field } from "../FormField/Field/Field";
-import { DropdownPlaceholder } from "../../Select/DropdownPlaceholder/DropdownPlaceholder";
+import { DropdownPlaceholder } from "@infomaximum/base/src/components/Select/DropdownPlaceholder/DropdownPlaceholder";
 import { FormField } from "../FormField/FormField";
 import { TableCellField } from "../TableCellField/TableCellField";
-import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 
 const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
   const {

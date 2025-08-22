@@ -1,7 +1,7 @@
 import type { IModel } from "@infomaximum/graphql-model";
 import type { SelectProps } from "antd";
 import type React from "react";
-import type { IWithLocProps } from "../../../../decorators/hocs/withLoc/withLoc";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 
 type TAntSelectProps = Omit<SelectProps<any>, "value" | "onChange" | "notFoundContent">;
 

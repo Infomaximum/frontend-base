@@ -1,5 +1,5 @@
-import { hintStyle } from "../../../Select/DropdownPlaceholder/DropdownPlaceholder.styles";
-import { suffixIconStyle as suffixIconCommonStyle } from "../../../Select/Select.styles";
+import { hintStyle } from "@infomaximum/base/src/components/Select/DropdownPlaceholder/DropdownPlaceholder.styles";
+import { suffixIconStyle as suffixIconCommonStyle } from "@infomaximum/base/src/components/Select/Select.styles";
 
 export const hintContainerStyle = {
   float: "right",

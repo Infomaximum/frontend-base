@@ -4,9 +4,12 @@ import type { NBaseStore } from "../BaseStore/BaseStore.types";
 
 import type { Store } from "./Store";
 import type { Model, TModelStruct } from "@infomaximum/graphql-model";
-import type { IRequestService, TCancelableRequest } from "../../../services/Network/Requests.types";
-import type { ISubscriptionService } from "../../../services/Network/Subscriptions.types";
-import type { NCore } from "../../../libs/core";
+import type {
+  IRequestService,
+  TCancelableRequest,
+} from "@infomaximum/base/src/services/Network/Requests.types";
+import type { ISubscriptionService } from "@infomaximum/base/src/services/Network/Subscriptions.types";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 /** Пространство для типов базового стора */
 export declare namespace NStore {

@@ -7,7 +7,7 @@ import type {
 import type { TextAreaRef } from "antd/lib/input/TextArea";
 import { textAreaFieldStyle, textAreaWrapperStyle } from "./TextAreaField.styles";
 import { Field, FormField } from "../FormField";
-import { Input } from "../../Input";
+import { Input } from "@infomaximum/base/src/components/Input";
 
 const TextArea = Input.TextArea;
 

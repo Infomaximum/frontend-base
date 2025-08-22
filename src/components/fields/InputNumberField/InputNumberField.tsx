@@ -7,9 +7,9 @@ import type {
 import { InputNumber as AntInputNumber } from "antd";
 import { isNumber, isInteger, isNil, isNull } from "lodash";
 import { antInputNumberStyle, defaultWrapperComponentStyle } from "./InputNumberField.styles";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { NOT_SET } from "../../../utils/Localization/Localization";
-import { Input } from "../../Input/Input";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { NOT_SET } from "@infomaximum/base/src/utils/Localization/Localization";
+import { Input } from "@infomaximum/base/src/components/Input/Input";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 

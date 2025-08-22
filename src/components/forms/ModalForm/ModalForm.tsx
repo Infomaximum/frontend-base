@@ -1,24 +1,27 @@
 import type { FormApi } from "final-form";
 import { isFunction, has, isEmpty, debounce } from "lodash";
 import React from "react";
-import { type IFormData, type IFormProvider } from "../../../decorators/contexts/FormContext";
-import { closeModalIconStyle } from "../../../styles";
+import {
+  type IFormData,
+  type IFormProvider,
+} from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { closeModalIconStyle } from "@infomaximum/base/src/styles";
 import {
   defaultFormFooterPanelConfigWithoutSubmitButtons,
   ModalAnimationInterval,
   modalFormCancelButtonTestId,
   modalFormCloseIconTestId,
   modalFormTestId,
-} from "../../../utils";
+} from "@infomaximum/base/src/utils";
 import { EFormLayoutType } from "../BaseForm";
 import { SubmitFormButton } from "../SubmitFormButton";
 import { modalComponentsStyle, formStyle, wrapperModalFormStyle } from "./ModalForm.styles";
 import type { IModalFormProps, IModalFormState } from "./ModalForm.types";
 import { Space } from "antd";
-import { Button } from "../../Button";
-import { Modal } from "../../modals";
+import { Button } from "@infomaximum/base/src/components/Button";
+import { Modal } from "@infomaximum/base/src/components/modals";
 import { Form } from "../Form";
-import { CloseOutlined } from "../../Icons/Icons";
+import { CloseOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 
 class ModalFormComponent extends React.PureComponent<IModalFormProps, IModalFormState> {
   public static defaultProps = {

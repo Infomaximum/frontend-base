@@ -1,5 +1,5 @@
 import type { InputProps } from "antd/lib/input";
-import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
+import type { IWithThemeProps } from "@infomaximum/base/src/decorators/hocs/withTheme/withTheme";
 
 export interface ISearchProps
   extends Omit<InputProps, "onChange" | "value">,

@@ -1,7 +1,7 @@
 // eslint-disable-next-line im/ban-import-entity
 import { Select as AntSelect } from "antd";
 import type { SelectValue } from "antd/lib/select";
-import { CheckOutlined, CloseCircleFilled, CloseOutlined, DownOutlined } from "../Icons/Icons";
+import { CheckOutlined, CloseCircleFilled, DownOutlined } from "../Icons/Icons";
 import React, {
   type MouseEvent,
   useState,
@@ -12,7 +12,6 @@ import React, {
   useLayoutEffect,
 } from "react";
 import {
-  closeIconStyle,
   arrowSuffixIconStyle,
   getDisableSelectStyle,
   disableTagStyle,
@@ -23,9 +22,8 @@ import {
   hiddenDropdownStyle,
   selectTextOnFocusInputStyle,
 } from "./Select.styles";
-import type { ISelectProps } from "./Select.types";
+import type { ISelectProps, ITagRenderProps } from "./Select.types";
 import { Tag } from "../Tag/Tag";
-import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import type { Interpolation } from "@emotion/react";
 import {
   findActiveOption,
@@ -57,18 +55,21 @@ import {
   isUndefined,
   noop,
 } from "lodash";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import {
   ENTER_OR_SELECT_FROM_THE_LIST,
   NOT_SELECTED,
   SELECT_FROM_LIST,
-} from "../../utils/Localization/Localization";
-import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
-import { suffixLoaderDelay, DropdownAnimationInterval } from "../../utils/const";
+} from "@infomaximum/base/src/utils/Localization/Localization";
+import { useDelayedTrue } from "@infomaximum/base/src/decorators/hooks/useDelayedTrue";
+import { suffixLoaderDelay, DropdownAnimationInterval } from "@infomaximum/base/src/utils/const";
 import type { BaseSelectRef } from "rc-select";
-import { useTheme } from "../../decorators/hooks/useTheme";
-import { useMountEffect } from "../../decorators";
-import { autocompleteSelectClearIconTestId, removeElementsAttribute } from "../../utils";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { useMountEffect } from "@infomaximum/base/src/decorators";
+import {
+  autocompleteSelectClearIconTestId,
+  removeElementsAttribute,
+} from "@infomaximum/base/src/utils";
 import { ConfigProvider } from "antd";
 import { LocalSpinner } from "../Spinner";
 import { AlignedTooltip } from "../AlignedTooltip";
@@ -442,17 +443,19 @@ const SelectComponent = <T extends SelectValue = SelectValue>({
   }, []);
 
   const tagRender = useCallback(
-    (props: CustomTagProps) => {
+    (props: ITagRenderProps) => {
       const { label, closable, onClose, isMaxTag } = props;
 
-      const closeIcon = <CloseOutlined onMouseDown={handleMouseDown} css={closeIconStyle(theme)} />;
+      const onCloseTag = (e: MouseEvent) => {
+        handleMouseDown(e);
+        onClose(e);
+      };
 
       return (
         <Tag
           closable={closable}
-          onClose={onClose}
+          onClose={onCloseTag}
           css={!closable ? disableTagStyle(theme) : tagStyle(theme)}
-          closeIcon={closeIcon}
           isWithoutTooltipWrapper={isMaxTag}
         >
           {label}

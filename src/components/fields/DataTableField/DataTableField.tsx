@@ -6,10 +6,10 @@ import type {
   IDataTableFormFieldProps,
 } from "./DataTableField.types";
 import { wrapperFieldStyle } from "./DataTableField.styles";
-import type { TBaseRow } from "../../../managers/Tree";
+import type { TBaseRow } from "@infomaximum/base/src/managers/Tree";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
-import { DataTable } from "../../DataTable/DataTable";
+import { DataTable } from "@infomaximum/base/src/components/DataTable/DataTable";
 
 class DataTableComponent<T extends TBaseRow> extends PureComponent<IDataTableComponentProps<T>> {
   public handleCheckChange = (selectedModels: TDataTableFieldValue): void => {

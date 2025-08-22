@@ -5,11 +5,11 @@ import {
   topPanelFilterStyle,
 } from "./AddFilterButton.styles";
 import type { IAddFilterButtonProps } from "./AddFilterButton.types";
-import { useLocalization } from "../../../../decorators";
-import { Tooltip } from "../../../Tooltip";
-import { Button } from "../../../Button";
-import { FilterFilled, FilterOutlined } from "../../../Icons";
-import { addFilterButtonTestId, FILTER } from "../../../../utils";
+import { useLocalization } from "@infomaximum/base/src/decorators";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip";
+import { Button } from "@infomaximum/base/src/components/Button";
+import { FilterFilled, FilterOutlined } from "@infomaximum/base/src/components/Icons";
+import { addFilterButtonTestId, FILTER } from "@infomaximum/base/src/utils";
 
 const tooltipAlign = { targetOffset: [0, 2] };
 

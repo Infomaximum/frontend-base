@@ -1,7 +1,7 @@
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { TPropInjector } from "@infomaximum/utility";
 import type { IWithFeatureProps } from "./withFeature.types";
-import { useFeature } from "../../hooks/useFeature";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
 
 export const withFeature: TPropInjector<IWithFeatureProps> = (Component: any) => {
   const WithFeature = (props: any) => {

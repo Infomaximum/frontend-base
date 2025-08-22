@@ -9,16 +9,16 @@ import type {
 import {
   dataTableDrawerCancelButtonTestId,
   dataTableDrawerOkButtonTestId,
-} from "../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import { filter, debounce, sortBy, isEqual, isUndefined, isEmpty, merge } from "lodash";
 import { DataTableDrawerContent } from "./DataTableDrawerContent/DataTableDrawerContent";
 import { observer } from "mobx-react";
-import { useTheme } from "../../../decorators/hooks/useTheme";
-import { DrawerAnimationInterval } from "../../../utils";
-import { useMountEffect } from "../../../decorators/hooks/useMountEffect";
-import { RestModel } from "../../../models/RestModel";
-import { GlobalSpinner } from "../../Spinner";
-import { OptionalDrawerForm } from "../../forms/OptionalDrawerForm/OptionalDrawerForm";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { DrawerAnimationInterval } from "@infomaximum/base/src/utils";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
+import { RestModel } from "@infomaximum/base/src/models/RestModel";
+import { GlobalSpinner } from "@infomaximum/base/src/components/Spinner/GlobalSpinner/GlobalSpinner";
+import { OptionalDrawerForm } from "@infomaximum/base/src/components/forms/OptionalDrawerForm/OptionalDrawerForm";
 
 const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
   props: IDataTableDrawerProps<T>
@@ -64,6 +64,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
     rowSelection,
     isLoadingOnScroll,
     rowHeight,
+    isShowDividers,
   } = props;
 
   const [isLoading, setLoadingState] = useState(true);
@@ -140,6 +141,7 @@ const DataTableDrawerComponent = <T extends IConvertedModel = IConvertedModel>(
         rowSelection={rowSelection}
         isLoadingOnScroll={isLoadingOnScroll}
         rowHeight={rowHeight}
+        isShowDividers={isShowDividers}
       />
     );
 

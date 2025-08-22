@@ -17,12 +17,12 @@ import type {
 import { getAccessParameters, EOperationType } from "@infomaximum/utility";
 import { createSelector } from "reselect";
 import type { Interpolation } from "@emotion/react";
-import { Button } from "../../Button/Button";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
 import { FormOption } from "../FormOption/FormOption";
-import { FormContext } from "../../../decorators/contexts/FormContext";
-import { withFeature } from "../../../decorators/hocs/withFeature/withFeature";
-import { SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
-import { PlusOutlined } from "../../Icons";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { withFeature } from "@infomaximum/base/src/decorators/hocs/withFeature/withFeature";
+import { SpaceSizeContext } from "@infomaximum/base/src/decorators/contexts/SpaceSizeContext";
+import { PlusOutlined } from "@infomaximum/base/src/components/Icons";
 
 export enum EAddEntityButtonPositions {
   top = "top",

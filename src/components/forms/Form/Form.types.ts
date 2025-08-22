@@ -7,9 +7,9 @@ import type {
   IFormContextData,
   IFormData,
   IFormProvider,
-} from "../../../decorators/contexts/FormContext";
-import type { IWithFormSubmitPromiseProps } from "../../../decorators/hocs/withFormSubmitPromise/withFormSubmitPromise.types";
-import type { IWithFeatureProps } from "../../../decorators/hocs/withFeature/withFeature.types";
+} from "@infomaximum/base/src/decorators/contexts/FormContext";
+import type { IWithFormSubmitPromiseProps } from "@infomaximum/base/src/decorators/hocs/withFormSubmitPromise/withFormSubmitPromise.types";
+import type { IWithFeatureProps } from "@infomaximum/base/src/decorators/hocs/withFeature/withFeature.types";
 
 /**
  * Интерфейс для описание пропсов которые можно передавать извне

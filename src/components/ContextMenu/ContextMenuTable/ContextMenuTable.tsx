@@ -5,7 +5,7 @@ import { contextMenuContainerStyle, getThreeDotsStyle } from "./ContextMenuTable
 import { ContextMenu } from "../ContextMenu";
 import type { IContextMenuItem } from "../ContextMenu.types";
 import { FloatingMenuContext } from "./ContextMenuFloating/ContextMenuFloating";
-import { useMountEffect } from "../../../decorators";
+import { useMountEffect } from "@infomaximum/base/src/decorators";
 
 export const tableContextMenuOverlayClassName = "table-context-menu-overlay";
 

@@ -9,7 +9,10 @@
     "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
     "declarationDir": "dist",
     "experimentalDecorators": false,
-    "emitDecoratorMetadata": false
+    "emitDecoratorMetadata": false,
+    "paths": {
+      "@infomaximum/base/src/*": ["./src/*"]
+    }
   },
   "exclude": ["/node_modules/", "**/node_modules", "**/.*/", "./dist"],
   "include": ["src"]

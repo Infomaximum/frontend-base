@@ -2,9 +2,9 @@ import { isArray, isString, last } from "lodash";
 import React, { forwardRef } from "react";
 import { tableBodyCellStyle } from "./TableBodyCell.styles";
 import type { ITableBodyCellProps } from "./TableBodyCell.types";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { AlignedTooltip } from "../../../AlignedTooltip/AlignedTooltip";
-import { getCssConversionStyle } from "../../../../styles";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip/AlignedTooltip";
+import { getCssConversionStyle } from "@infomaximum/base/src/styles";
 import type { Interpolation } from "@emotion/react";
 
 const TableBodyCellComponent: React.FC<ITableBodyCellProps> = forwardRef(

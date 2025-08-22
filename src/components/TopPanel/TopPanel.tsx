@@ -1,6 +1,6 @@
 import React, { type FC, useCallback, useMemo, useState } from "react";
 import { Layout, Row, Col } from "antd";
-import { SEARCH } from "../../utils/Localization/Localization";
+import { SEARCH } from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   clearButtonStyle,
   customizeButtonStyle,
@@ -9,18 +9,21 @@ import {
   selectedFiltersWrapperStyle,
 } from "./TopPanel.styles";
 import { forEach, map, mapValues } from "lodash";
-import { topPanelSearchInputTestId } from "../../utils/TestIds";
+import { topPanelSearchInputTestId } from "@infomaximum/base/src/utils/TestIds";
 import type { ITopPanelProps } from "./TopPanel.types";
-import { reverseSearchBreakpoints, searchBreakpoints } from "../../styles/searchLayout";
+import {
+  reverseSearchBreakpoints,
+  searchBreakpoints,
+} from "@infomaximum/base/src/styles/searchLayout";
 import { observer } from "mobx-react";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
-import { useFeature } from "../../decorators/hooks/useFeature";
-import { sortByPriority } from "../../utils/Routes/routes";
-import { isShowElement } from "../../utils/access";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
+import { sortByPriority } from "@infomaximum/base/src/utils/Routes/routes";
+import { isShowElement } from "@infomaximum/base/src/utils/access";
 import { Search } from "../Search";
 import { Button } from "../Button";
 import { CloseOutlined } from "../Icons";
-import { TopPanelContext } from "../../decorators";
+import { TopPanelContext } from "@infomaximum/base/src/decorators";
 
 const { Header } = Layout;
 

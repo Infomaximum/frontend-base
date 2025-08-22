@@ -1,12 +1,12 @@
 import { type FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useWillMountEffect } from "../../decorators/hooks/useWillMountEffect";
-import { historyStore } from "../../store/historyStore";
-import { SystemLoaderProvider } from "../SystemLoaderProvider";
+import { useWillMountEffect } from "@infomaximum/base/src/decorators/hooks/useWillMountEffect";
+import { historyStore } from "@infomaximum/base/src/store/historyStore";
+import { SystemLoaderProvider } from "../SystemLoaderProvider/SystemLoaderProvider";
 import {
   SystemLoaderContext,
   type TSystemLoaderContextValue,
-} from "../../decorators/contexts/SystemLoaderContext";
+} from "@infomaximum/base/src/decorators/contexts/SystemLoaderContext";
 import { noop } from "lodash";
 
 interface ISystemInitializerProps {

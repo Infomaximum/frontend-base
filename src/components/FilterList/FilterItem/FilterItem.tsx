@@ -10,16 +10,15 @@ import {
 } from "./FilterItem.styles";
 import { isFunction } from "lodash";
 import FilterItemTag from "./FilterItemTag/FilterItemTag";
-import { useLocalization } from "../../../decorators";
-import { AlignedTooltip } from "../../AlignedTooltip";
-import { Tooltip } from "../../Tooltip";
-import { CloseOutlined } from "../../Icons";
+import { useLocalization } from "@infomaximum/base/src/decorators";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip";
+import { CloseOutlined } from "@infomaximum/base/src/components/Icons";
 import {
   CLOSE_FILTER,
   filterItemEditTestId,
   filterItemRemoveTestId,
-  tagFilterItemRemoveTestId,
-} from "../../../utils";
+} from "@infomaximum/base/src/utils";
 
 const tooltipAlign = { targetOffset: [0, 2] };
 
@@ -88,7 +87,6 @@ const FilterItem: React.FC<IFilterItemProps> = (props) => {
       handleRemoveFilter={handleRemoveFilter}
       disabled={disabled}
       withOverflow={withOverflow}
-      closeIconTestId={`${tagFilterItemRemoveTestId}-${filterName}`}
     >
       {children}
     </FilterItemTag>

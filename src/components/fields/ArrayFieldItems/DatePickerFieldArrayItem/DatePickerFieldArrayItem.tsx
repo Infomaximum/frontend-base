@@ -2,8 +2,8 @@ import type { IDatePickerFieldArrayItemProps } from "./DatePickerFieldArrayItem.
 import {
   removeDatePickerFieldButtonTestId,
   removeDateTimePickerFieldButtonTestId,
-} from "../../../../utils/TestIds";
-import { DatePickerFormField } from "../../DatePickerField";
+} from "@infomaximum/base/src/utils/TestIds";
+import { DatePickerFormField } from "@infomaximum/base/src/components/fields/DatePickerField";
 import { RemoveButton } from "../components/RemoveButton/RemoveButton";
 import { wrapperFieldStyle, wrapperStyle } from "../ArrayFieldItems.styles";
 import { memo } from "react";

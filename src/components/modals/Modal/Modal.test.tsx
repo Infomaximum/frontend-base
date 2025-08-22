@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
 import { Modal } from "./Modal";
-import { modalTitleTestId } from "../../../utils/TestIds";
+import { modalTitleTestId } from "@infomaximum/base/src/utils/TestIds";
 
 describe("Тест компонента Modal", () => {
   it("Тестирование title компонента Modal", () => {

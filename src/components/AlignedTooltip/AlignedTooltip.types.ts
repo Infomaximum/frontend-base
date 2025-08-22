@@ -15,4 +15,6 @@ export interface IAlignedTooltipProps {
   removeMouseEnterDelay?: boolean;
   /* возможность переопределить контейнер, относительно которого происходят расчеты */
   containerRef?: RefObject<HTMLDivElement>;
+  /** Возможность отображать вне зависимости от переполнения все что передано в title  default: false */
+  show?: boolean;
 }

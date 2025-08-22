@@ -3,7 +3,7 @@ import type { IControlPanelProps } from "./ControlPanel.types";
 import { EditableRowSubmitButton } from "../EditableRowSubmitButton/EditableRowSubmitButton";
 import { EditableRowResetButton } from "../EditableRowResetButton/EditableRowResetButton";
 import { containerStyle } from "./ControlPanel.styles.";
-import { CheckOutlined, CloseOutlined } from "../../../Icons/Icons";
+import { CheckOutlined, CloseOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 
 class ControlPanel extends PureComponent<IControlPanelProps> {
   private get formButtons() {

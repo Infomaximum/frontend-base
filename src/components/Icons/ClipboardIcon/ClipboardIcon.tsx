@@ -1,11 +1,11 @@
 import { type FC, memo, useCallback } from "react";
 import type { IClipboardIconProps } from "./ClipboardIcon.types";
 import { iconStyle } from "./ClipboardIcon.styles";
-import { Tooltip } from "../../Tooltip/Tooltip";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { COPY } from "../../../utils/Localization/Localization";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { COPY } from "@infomaximum/base/src/utils/Localization/Localization";
 import copyToClipboard from "copy-to-clipboard";
-import { useTheme } from "../../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { CopyOutlined } from "../Icons";
 
 const ClipboardIconComponent: FC<IClipboardIconProps> = memo(

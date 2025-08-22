@@ -5,8 +5,8 @@ import { Select } from "./Select";
 import "@testing-library/jest-dom";
 import type { ISelectProps } from "./Select.types";
 import { getValueFromSelectValue, mapChildrenToOptions } from "./Select.utils";
-import { DropdownAnimationInterval } from "../../utils";
-import { ellipsisStyle } from "../../styles";
+import { DropdownAnimationInterval } from "@infomaximum/base/src/utils";
+import { ellipsisStyle } from "@infomaximum/base/src/styles";
 import { AlignedTooltip } from "../AlignedTooltip";
 
 enum EElement {

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import type { Interpolation } from "@emotion/react";
 import type { TLocalizationDescription } from "@infomaximum/localization";
-import type { IconProps } from "../../Icons/Icons";
-import type { TButtonType } from "../../Button/Button.types";
+import type { IconProps } from "@infomaximum/base/src/components/Icons/Icons";
+import type { TButtonType } from "@infomaximum/base/src/components/Button/Button.types";
 
 export interface IConfirmationModalProps {
   /**

@@ -6,7 +6,7 @@ import type {
   ISwitcherFormFieldProps,
 } from "./SwitcherField.types";
 import { getSwitcherFormItemStyle, switchStyle, switcherFieldStyle } from "./SwitcherField.styles";
-import { Switch } from "../../Switch";
+import { Switch } from "@infomaximum/base/src/components/Switch";
 import { Field, FormField } from "../FormField";
 
 class Switcher extends React.PureComponent<ISwitcherProps, ISwitcherState> {

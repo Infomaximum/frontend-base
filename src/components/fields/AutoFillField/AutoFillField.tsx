@@ -7,7 +7,7 @@ import type {
   IAutoFillFormFieldProps,
   IAutoFillProps,
 } from "./AutoFillField.types";
-import { useFeature } from "../../../decorators/hooks/useFeature";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";

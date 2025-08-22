@@ -7,7 +7,7 @@ import {
   disabledButtonStyle,
   removeButtonStyle,
 } from "./EditableRowButton.styles";
-import { Tooltip } from "../../../Tooltip/Tooltip";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";
 
 enum EEditableRowButtonTypes {
   DEFAULT = "DEFAULT",

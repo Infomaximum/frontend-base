@@ -1,13 +1,13 @@
 import type { TableProps } from "antd/lib/table";
-import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 import type { SortOrder } from "antd/lib/table/interface";
 import type { DataIndex } from "rc-table/lib/interface";
 import type { IWithSpinPropsReplacer } from "./VirtualizedTable.utils";
 import type React from "react";
 import type { Index, ScrollParams } from "react-virtualized";
-import type { TBaseRow, TExtendColumns } from "../../managers/Tree";
+import type { TBaseRow, TExtendColumns } from "@infomaximum/base/src/managers/Tree";
 import type { IBaseColumnConfig } from "../Table/Table.types";
-import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
+import type { IWithThemeProps } from "@infomaximum/base/src/decorators/hocs/withTheme/withTheme";
 import type { IContextMenuFloatingProps } from "../ContextMenu/ContextMenuTable/ContextMenuFloating/ContextMenuFloating.types";
 
 export interface IColumnProps<T = any> extends IBaseColumnConfig<T> {

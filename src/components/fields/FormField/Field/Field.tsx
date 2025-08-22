@@ -3,8 +3,8 @@ import { Field as FinalFormField, type FieldRenderProps } from "react-final-form
 import type { IFieldProps, IWrappedFieldProps } from "./Field.types";
 import { isArray, isEqual, isFunction } from "lodash";
 import { alternatelyValidators, getAccessParameters } from "@infomaximum/utility";
-import { useFeature } from "../../../../decorators/hooks/useFeature";
-import { FormContext } from "../../../../decorators/contexts/FormContext";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
 
 /**
  * Компонент-обертка над содержимым field

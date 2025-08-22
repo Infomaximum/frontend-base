@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import { getBreadcrumbs } from "../../../utils/Routes/routes";
-import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
+import { getBreadcrumbs } from "@infomaximum/base/src/utils/Routes/routes";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 import { compact, isArray } from "lodash";
 import type { TPropInjector } from "@infomaximum/utility";
 import type {

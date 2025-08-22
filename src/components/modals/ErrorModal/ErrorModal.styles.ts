@@ -1,5 +1,5 @@
 import type { ModalProps } from "antd/lib/modal";
-import { scrollDefaultStyle } from "../../../styles/global.styles";
+import { scrollDefaultStyle } from "@infomaximum/base/src/styles/global.styles";
 
 export const titleStyle = (theme: TTheme) => ({
   fontSize: `${theme.subtitleFontSize}px`,

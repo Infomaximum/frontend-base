@@ -1,9 +1,9 @@
-import { Alert } from "../Alert/Alert";
-import { notificationErrorTestId } from "../../utils/TestIds";
+import { Alert } from "@infomaximum/ui-kit";
+import { notificationErrorTestId } from "@infomaximum/base/src/utils/TestIds";
 import type { INotificationProps } from "./Notification.types";
 import { observer } from "mobx-react";
 import { type FC, useContext } from "react";
-import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
+import { DebugModeContext } from "@infomaximum/base/src/decorators/contexts/DebugModeContext";
 
 const NotificationComponent: FC<INotificationProps> = ({ error }) => {
   const isDebugMode = useContext(DebugModeContext);
@@ -19,15 +19,20 @@ const NotificationComponent: FC<INotificationProps> = ({ error }) => {
     ? `${notificationErrorTestId}_${error.code.toLowerCase().replace("_", "-")}`
     : notificationErrorTestId;
 
+  const messageTitle = error.message ? error.title : undefined;
+  const messageDescription = isDebugMode && traceId ? `${message} [${traceId}]` : message;
+
+  const combinedMessage = (
+    <>
+      {messageTitle}
+      {messageTitle && messageDescription && <br />}
+      {messageDescription}
+    </>
+  );
+
   return (
     <div key="notification-component-wrapper" test-id={testId}>
-      <Alert
-        key="notification-component"
-        type="error"
-        showIcon={true}
-        message={error.message ? error.title : undefined}
-        description={isDebugMode && traceId ? `${message} [${traceId}]` : message}
-      />
+      <Alert key="notification-component" type="error" showIcon={true} message={combinedMessage} />
     </div>
   );
 };

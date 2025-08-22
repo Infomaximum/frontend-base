@@ -10,13 +10,13 @@ import {
   YOU_NEED_SET_PASSWORD,
   PASSWORD_IS_NOT_SECURE,
   NOT_EMPTY_FIELD,
-} from "../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   passwordIsNotSecureTestId,
   passwordsMustBeEqualTestId,
   youNeedSetPasswordTestId,
-} from "../../../utils/TestIds";
-import { MIN_PASSWORD_LENGTH } from "../../../utils/const";
+} from "@infomaximum/base/src/utils/TestIds";
+import { MIN_PASSWORD_LENGTH } from "@infomaximum/base/src/utils/const";
 import type { Localization } from "@infomaximum/localization";
 import type { IComplexPasswordModel } from "./PasswordFields.types";
 

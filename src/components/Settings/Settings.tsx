@@ -5,10 +5,10 @@ import { calculateSize } from "./SettingsItem/SettingsItem.styles";
 import { forEach, map } from "lodash";
 import { Layout, Space } from "antd";
 import { settingsContentStyle } from "./Settings.styles";
-import type { NCore } from "../../libs/core";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
+import type { NCore } from "@infomaximum/base/src/libs/core";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { useLocation } from "react-router";
-import { useMountEffect } from "../../decorators/hooks/useMountEffect";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
 
 const { Content } = Layout;
 

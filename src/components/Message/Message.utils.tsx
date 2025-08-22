@@ -6,8 +6,7 @@ import {
   APPLIED_FEMALE,
   APPLIED_NEUTER,
   APPLIED_PLURAL,
-} from "../../utils/Localization/Localization";
-import { switchedEnabledStyle, switchedOffStyle } from "./Message.styles";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import type { EMassAssignEndings } from "./Message.types";
 
 export const getStyledAndLocalizedEntities = (
@@ -22,11 +21,9 @@ export const getStyledAndLocalizedEntities = (
   }
 
   if (status) {
-    statusLoc = (
-      <span css={switchedEnabledStyle}>{localization.getLocalized(SWITCHED_ENABLED)}</span>
-    );
+    statusLoc = <span>{localization.getLocalized(SWITCHED_ENABLED)}</span>;
   } else if (!locTerm) {
-    statusLoc = <span css={switchedOffStyle}>{localization.getLocalized(SWITCHED_OFF)}</span>;
+    statusLoc = <span>{localization.getLocalized(SWITCHED_OFF)}</span>;
   }
 
   return statusLoc;

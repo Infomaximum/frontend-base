@@ -1,6 +1,9 @@
 import React, { createRef } from "react";
 import { map, isUndefined, isFunction, isString, isNull } from "lodash";
-import { autocompleteSelectTestId, autocompleteSelectOptionTestId } from "../../../utils/TestIds";
+import {
+  autocompleteSelectTestId,
+  autocompleteSelectOptionTestId,
+} from "@infomaximum/base/src/utils/TestIds";
 import { observer } from "mobx-react";
 import type {
   IAutoFillComponentProps,
@@ -13,18 +16,18 @@ import {
   autocompletePaddingRight,
 } from "./AutoFillField.styles";
 import type { DefaultOptionType } from "antd/lib/select";
-import { SearchOutlined } from "../../Icons/Icons";
+import { SearchOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 import type { IModel } from "@infomaximum/graphql-model";
 import {
   ENTER_OR_SELECT_FROM_THE_LIST,
   NOT_SELECTED,
-} from "../../../utils/Localization/Localization";
-import { KeyupRequestInterval } from "../../../utils/const";
-import { AutoComplete } from "../../AutoComplete/AutoComplete";
-import { DropdownPendingPlaceholder } from "../../Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
-import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
-import { getTextWidth } from "../../../utils/textWidth";
-import { AlignedTooltip } from "../../AlignedTooltip";
+} from "@infomaximum/base/src/utils/Localization/Localization";
+import { KeyupRequestInterval } from "@infomaximum/base/src/utils/const";
+import { AutoComplete } from "@infomaximum/base/src/components/AutoComplete/AutoComplete";
+import { DropdownPendingPlaceholder } from "@infomaximum/base/src/components/Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
 
 class AutoFill extends React.PureComponent<IAutoFillComponentProps, IAutoFillComponentState> {
   public static defaultProps = {

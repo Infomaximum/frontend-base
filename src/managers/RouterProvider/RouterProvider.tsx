@@ -4,15 +4,15 @@ import {
   resolveConstraintsInRoutes,
   routesMap,
   sortPriority,
-} from "../../utils/Routes/routes";
+} from "@infomaximum/base/src/utils/Routes/routes";
 
 import type { IRouterProviderProps } from "./RouterProvider.types";
 import { observer } from "mobx-react";
 import { useLocation, useRoutes } from "react-router";
-import { RoutesContext } from "../../decorators/contexts/RoutesContext";
-import { useFeature } from "../../decorators/hooks/useFeature";
+import { RoutesContext } from "@infomaximum/base/src/decorators/contexts/RoutesContext";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
 import { SystemLoaderProvider } from "../SystemLoaderProvider/SystemLoaderProvider";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 const RouterProviderComponent: FC<IRouterProviderProps> = ({
   layout: LayoutProps,

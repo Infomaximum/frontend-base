@@ -1,19 +1,19 @@
 import {
   ErrorModalContext,
   type IErrorModalContextContextData,
-} from "../../decorators/contexts/ErrorModalContext";
+} from "@infomaximum/base/src/decorators/contexts/ErrorModalContext";
 import { type FC, useCallback, useEffect, useMemo, useState } from "react";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { handleErrorInternal } from "../Errors/Errors";
-import { ModalAnimationInterval } from "../../utils/const";
-import { ErrorModal } from "../../components/modals/ErrorModal/ErrorModal";
+import { ModalAnimationInterval } from "@infomaximum/base/src/utils/const";
+import { ErrorModal } from "@infomaximum/base/src/components/modals/ErrorModal/ErrorModal";
 import type {
   IErrorModalProviderConfigState,
   IErrorModalProviderProps,
 } from "./ErrorModalProvider.types";
 import { useLocation } from "react-router";
-import { usePrevious } from "../../decorators";
-import type { NCore } from "../../libs/core";
+import { usePrevious } from "@infomaximum/base/src/decorators";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isDebugMode }) => {
   const [showModal, setShowModal] = useState(false);

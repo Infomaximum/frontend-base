@@ -10,8 +10,8 @@ import type {
 import { selectFieldStyle, inputFieldStyle } from "./SelectInputField.styles";
 import { Field as FinalField } from "react-final-form";
 import type { FieldRenderProps } from "react-final-form";
-import { Input } from "../../Input";
-import { Select } from "../../Select";
+import { Input } from "@infomaximum/base/src/components/Input";
+import { Select } from "@infomaximum/base/src/components/Select";
 import { SelectFormField } from "../SelectField";
 import { Field, FormField } from "../FormField";
 import type { OptionGroupFC } from "rc-select/lib/OptGroup";

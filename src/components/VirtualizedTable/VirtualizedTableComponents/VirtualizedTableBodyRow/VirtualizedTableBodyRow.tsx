@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { tableRowCheckboxTestId, tableRowLoadingTestId } from "../../../../utils/TestIds";
+import { tableRowCheckboxTestId, tableRowLoadingTestId } from "@infomaximum/base/src/utils/TestIds";
 import {
   virtualizedTableBodyRowLoadingCoverStyle,
   usualVirtualizedTableBodyRowStyle,
@@ -10,17 +10,17 @@ import {
 } from "./VirtualizedTableBodyRow.styles";
 import type { IVirtualizedTableBodyRowProps } from "./VirtualizedTableBodyRow.types";
 import { useCallback, type MouseEvent } from "react";
-import { Radio } from "../../../Radio/Radio";
-import { Checkbox } from "../../../Checkbox/Checkbox";
+import { Radio } from "@infomaximum/base/src/components/Radio/Radio";
+import { Checkbox } from "@infomaximum/base/src/components/Checkbox/Checkbox";
 import { map } from "lodash";
 import { VirtualizedTableBodyCell } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell";
-import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
-import { TableCheckboxCell } from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
+import type { TRow } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import { TableCheckboxCell } from "@infomaximum/base/src/components/Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
-import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { ContextMenuFloating } from "../../../ContextMenu/ContextMenuTable/ContextMenuFloating/ContextMenuFloating";
-import { RestModel } from "../../../../models";
+import { withoutDividerStyle } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.styles";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { ContextMenuFloating } from "@infomaximum/base/src/components/ContextMenu/ContextMenuTable/ContextMenuFloating/ContextMenuFloating";
+import { RestModel } from "@infomaximum/base/src/models";
 
 const emptyObj: ReturnType<NonNullable<IVirtualizedTableBodyRowProps<any>["getCheckboxProps"]>> =
   {};

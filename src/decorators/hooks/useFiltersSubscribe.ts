@@ -1,7 +1,7 @@
 import { type IReactionDisposer, reaction } from "mobx";
 import { useCallback, useRef } from "react";
 import { useUnmountEffect } from "./useUnmountEffect";
-import type { FiltersStore } from "../../utils";
+import type { FiltersStore } from "@infomaximum/base/src/utils";
 
 /**
  * Callback, который будет вызываться, при каждом изменении значений фильтров

@@ -1,7 +1,7 @@
 import React from "react";
-import type { NCore } from "../../../libs/core";
-import type { IWrapperContainerProps } from "../../../components/WrapperContainer/WrapperContainer.types";
-import { WrapperContainer } from "../../../components/WrapperContainer/WrapperContainer";
+import type { NCore } from "@infomaximum/base/src/libs/core";
+import type { IWrapperContainerProps } from "@infomaximum/base/src/components/WrapperContainer/WrapperContainer.types";
+import { WrapperContainer } from "@infomaximum/base/src/components/WrapperContainer/WrapperContainer";
 
 type TCommonContainerProps = Omit<
   IWrapperContainerProps,

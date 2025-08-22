@@ -1,37 +1,46 @@
 import { Localization } from "@infomaximum/localization";
-import enzyme from "enzyme";
 import { Notification } from "./Notification";
-
-import { ERROR, ERROR_404 } from "../../utils/Localization/Localization";
-import type { NCore } from "../../libs/core";
+import { ERROR, ERROR_404 } from "@infomaximum/base/src/utils/Localization/Localization";
+import type { NCore } from "@infomaximum/base/src/libs/core";
+import { render, screen } from "@testing-library/react";
+import { notificationErrorTestId } from "@infomaximum/base/src/utils/TestIds";
 
 const localization = new Localization({ language: Localization.Language.ru });
 
 const testError: NCore.TError = {
   title: localization.getLocalized(ERROR),
   message: localization.getLocalized(ERROR_404),
-  code: "validation_error",
+  code: "validation-error",
 };
 
 const renderComponent = (error: NCore.TError) => {
-  return enzyme.mount(<Notification error={error} />);
+  return render(<Notification error={error} />);
 };
 
 describe("Тест компонента Notification", () => {
+  it("Тест отрисовки обертки Notification в соответствии с кодом ошибки", () => {
+    renderComponent(testError);
+    const notificationWrapper = screen.getByTestId(`${notificationErrorTestId}_${testError.code}`);
+    expect(notificationWrapper).toBeInTheDocument();
+  });
+
   it("Тест отрисовки компонента", () => {
-    expect(renderComponent(testError).find("Alert").length).toEqual(1);
+    renderComponent(testError);
+    const alertDiv = screen.getByRole("alert");
+    expect(alertDiv).toBeInTheDocument();
   });
 
-  it("Тест отрисовки передаваемого title", () => {
-    expect(renderComponent(testError).find("div[className='ant-alert-message']").text()).toEqual(
-      localization.getLocalized(ERROR)
+  it("Тест отрисовки передаваемой ошибки", () => {
+    renderComponent(testError);
+    const alertDiv = screen.getByRole("alert");
+
+    const errorSpan = Array.from(alertDiv.querySelectorAll("span")).find(
+      (span) =>
+        span.textContent ===
+        `${localization.getLocalized(ERROR)}${localization.getLocalized(ERROR_404)}`
     );
-  });
 
-  it("Тест отрисовки передаваемого description", () => {
-    expect(
-      renderComponent(testError).find("div[className='ant-alert-description']").text()
-    ).toEqual(localization.getLocalized(ERROR_404));
+    expect(errorSpan).toBeInTheDocument();
   });
 
   it("Тест реакции на отсутствие code у error", () => {
@@ -39,8 +48,9 @@ describe("Тест компонента Notification", () => {
       title: localization.getLocalized(ERROR),
       message: localization.getLocalized(ERROR_404),
     };
-    expect(
-      renderComponent(localeError).find("div[test-id='notification-error_validation-error']").length
-    ).toEqual(0);
+
+    const { queryByTestId } = renderComponent(localeError);
+    const notificationWrapper = queryByTestId(`${notificationErrorTestId}_${testError.code}`);
+    expect(notificationWrapper).not.toBeInTheDocument();
   });
 });

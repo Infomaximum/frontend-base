@@ -2,9 +2,9 @@ import { type FC, isValidElement, memo, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { tableLinkStyle } from "./TableLink.styles";
 import type { ITableLinkProps } from "./TableLink.types";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { AlignedTooltip } from "../../../AlignedTooltip";
-import { Tag } from "../../../Tag";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
+import { Tag } from "@infomaximum/base/src/components/Tag";
 
 const TableLinkComponent: FC<ITableLinkProps> = ({
   title,

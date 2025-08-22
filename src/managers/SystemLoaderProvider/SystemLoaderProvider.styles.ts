@@ -1,4 +1,4 @@
-import { wrapperGlobalSpinnerStyle } from "../../components/Spinner/GlobalSpinner/GlobalSpinner.styles";
+import { wrapperGlobalSpinnerStyle } from "@infomaximum/base/src/components/Spinner/GlobalSpinner/GlobalSpinner.styles";
 
 export const getSystemLoaderProviderStyle = (isLoading: boolean) =>
   ({

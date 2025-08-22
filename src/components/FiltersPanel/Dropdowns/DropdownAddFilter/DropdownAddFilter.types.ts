@@ -1,4 +1,4 @@
-import type { BaseFilter } from "../../../../utils";
+import type { BaseFilter } from "@infomaximum/base/src/utils";
 
 export interface IDropdownAddFilterProps {
   onFilterClick: (filter: BaseFilter) => void;

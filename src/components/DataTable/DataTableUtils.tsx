@@ -1,12 +1,12 @@
 import { Group, type IGroup, type IModel } from "@infomaximum/graphql-model";
 import { forEach, map } from "lodash";
-import type { TBaseRow } from "../../managers/Tree";
-import { RestModel } from "../../models/RestModel";
+import type { TBaseRow } from "@infomaximum/base/src/managers/Tree";
+import { RestModel } from "@infomaximum/base/src/models/RestModel";
 import { ShowMore } from "../ShowMore/ShowMore";
 import type { IShowMoreOwnProps } from "../ShowMore/ShowMore.types";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
 import type { ITableTopButtonDisabledProps } from "./DataTable.types";
-import { leftMouseBtnCode } from "../../utils";
+import { leftMouseBtnCode } from "@infomaximum/base/src/utils";
 
 function getTableTopButtonDisabledStatus(disabledProps: ITableTopButtonDisabledProps) {
   const {

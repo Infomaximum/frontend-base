@@ -1,9 +1,9 @@
 import type { TableRowSelection } from "antd/es/table/interface";
-import type { IWithThemeProps } from "../../../../decorators/hocs/withTheme/withTheme";
+import type { IWithThemeProps } from "@infomaximum/base/src/decorators/hocs/withTheme/withTheme";
 import type {
   IVirtualizedTableProps,
   IVirtualizedTableState,
-} from "../../../VirtualizedTable/VirtualizedTable.types";
+} from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 import type { IVirtualizedTableHeaderCellProps } from "../VirtualizedTableHeaderCell/VirtualizedTableHeaderCell.types";
 
 export interface IVirtualizedTableHeaderRowOwnProps<T>

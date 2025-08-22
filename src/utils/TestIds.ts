@@ -242,4 +242,3 @@ export const dropdownActionsFilterButtonTestId = "dropdown-actions-filter-button
 // FilterItems
 export const filterItemEditTestId = "filter-item_edit";
 export const filterItemRemoveTestId = "filter-item_remove";
-export const tagFilterItemRemoveTestId = "tag-filter-item_remove";

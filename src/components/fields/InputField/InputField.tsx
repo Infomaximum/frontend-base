@@ -9,14 +9,14 @@ import type {
 } from "./InputField.types";
 import { isString, isFunction } from "lodash";
 import type { InputProps } from "antd/lib/input/Input";
-import { NOT_SET } from "../../../utils/Localization/Localization";
-import { Input } from "../../Input/Input";
-import { withLoc } from "../../../decorators";
+import { NOT_SET } from "@infomaximum/base/src/utils/Localization/Localization";
+import { Input } from "@infomaximum/base/src/components/Input/Input";
+import { withLoc } from "@infomaximum/base/src/decorators";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 import { TableCellField } from "../TableCellField/TableCellField";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
-import { trimAndCompressWhitespace } from "./InputField.utils";
+import { convertToNotWhitespace, trimAndCompressWhitespace } from "./InputField.utils";
 import { useField } from "react-final-form";
 
 class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
@@ -142,6 +142,10 @@ const InputFieldComponent: FC<IInputFieldProps> = ({
 
       if (trimValue) {
         parsedValue = trimAndCompressWhitespace(parsedValue);
+      }
+
+      if (rest.type === "email") {
+        parsedValue = convertToNotWhitespace(parsedValue);
       }
 
       try {

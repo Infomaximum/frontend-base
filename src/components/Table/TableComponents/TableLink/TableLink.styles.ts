@@ -1,5 +1,5 @@
 import { EUserAgents, userAgent } from "@infomaximum/utility";
-import { ellipsisStyle } from "../../../../styles/common.styles";
+import { ellipsisStyle } from "@infomaximum/base/src/styles/common.styles";
 
 const isSafari = userAgent() === EUserAgents.Safari;
 

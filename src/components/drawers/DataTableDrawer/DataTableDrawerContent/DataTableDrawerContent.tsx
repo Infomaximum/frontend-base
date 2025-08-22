@@ -1,20 +1,23 @@
 import React, { useCallback, useMemo } from "react";
 import type { IDataTableDrawerContentProps } from "./DataTableDrawerContent.types";
-import { ALL, EMPTY_STRING } from "../../../../utils/Localization/Localization";
+import { ALL, EMPTY_STRING } from "@infomaximum/base/src/utils/Localization/Localization";
 import { isEmpty, isFunction, isUndefined } from "lodash";
 import { tableStyle } from "./DataTableDrawerContent.styles";
 import { observer } from "mobx-react";
 import { renderErrorAlert } from "./DataTableDrawerContent.utils";
 import { type IModel } from "@infomaximum/graphql-model";
-import { useLocalization } from "../../../../decorators/hooks/useLocalization";
-import { DataTable, LoadingOnScrollDataTable } from "../../../DataTable/DataTable";
-import { ELimitsStateNames } from "../../../../utils/const";
-import { AlignedTooltip } from "../../../AlignedTooltip";
-import type { TBaseRow } from "../../../../managers/Tree";
-import { PagingGroup } from "../../../../models";
-import { type TableStore } from "../../../../utils";
-import { useMountEffect } from "../../../../decorators";
-import { GlobalSpinner } from "../../../Spinner";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import {
+  DataTable,
+  LoadingOnScrollDataTable,
+} from "@infomaximum/base/src/components/DataTable/DataTable";
+import { ELimitsStateNames } from "@infomaximum/base/src/utils/const";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
+import type { TBaseRow } from "@infomaximum/base/src/managers/Tree";
+import { PagingGroup } from "@infomaximum/base/src/models";
+import { type TableStore } from "@infomaximum/base/src/utils";
+import { useMountEffect } from "@infomaximum/base/src/decorators";
+import { GlobalSpinner } from "@infomaximum/base/src/components/Spinner/GlobalSpinner/GlobalSpinner";
 
 const DataTableDrawerContentComponent = <T extends TBaseRow>({
   handlerTableDisplayValues,
@@ -24,6 +27,7 @@ const DataTableDrawerContentComponent = <T extends TBaseRow>({
   isVirtualized,
   isLoadingOnScroll,
   requestOnMount = true,
+  isShowDividers,
   ...restProps
 }: IDataTableDrawerContentProps<T>) => {
   const { tableStore } = restProps;
@@ -121,7 +125,7 @@ const DataTableDrawerContentComponent = <T extends TBaseRow>({
         headerMode={headerMode}
         clearOnUnmount={true}
         enableRowClick={true}
-        isShowDividers={tableStore.isTree || columnConfig.length > 1}
+        isShowDividers={isShowDividers ?? (tableStore.isTree || columnConfig.length > 1)}
         tableStore={tableStore as TableStore<PagingGroup>}
         requestOnMount={false}
         isWithoutWrapperStyles={true}

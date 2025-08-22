@@ -1,6 +1,6 @@
 import type { IModel } from "@infomaximum/graphql-model";
 import type { FieldRenderProps } from "react-final-form";
-import type { IDataTableOwnProps } from "../../DataTable/DataTable.types";
+import type { IDataTableOwnProps } from "@infomaximum/base/src/components/DataTable/DataTable.types";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 

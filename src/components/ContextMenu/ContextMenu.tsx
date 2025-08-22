@@ -21,15 +21,15 @@ import {
   contextMenuItemTestId,
   contextMenuDropDownTestId,
   contextMenuDropDownBtnTestId,
-} from "../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import { Button } from "../Button/Button";
 import type { ItemType } from "antd/lib/menu/interface";
-import { useFeature } from "../../decorators/hooks/useFeature";
-import { useTheme } from "../../decorators/hooks/useTheme";
-import { sortByPriority } from "../../utils/Routes/routes";
-import { isShowElement } from "../../utils/access";
-import { sortByTitle } from "../../utils/sortings";
-import { withTheme } from "../../decorators/hocs/withTheme/withTheme";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { sortByPriority } from "@infomaximum/base/src/utils/Routes/routes";
+import { isShowElement } from "@infomaximum/base/src/utils/access";
+import { sortByTitle } from "@infomaximum/base/src/utils/sortings";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme/withTheme";
 import { removeDuplicateDividers } from "./ContextMenu.utils";
 import { MoreOutlined } from "../Icons";
 
@@ -46,7 +46,7 @@ const isDivider = (item: TContextMenuParamItem): item is IContextMenuDivider =>
 const isSubMenu = (item: TContextMenuParamItem): item is IContextSubMenuParam =>
   !isEmpty((item as IContextSubMenuParam).children);
 
-const subMenuPopupOffset: SubMenuProps["popupOffset"] = [0, -4];
+const subMenuPopupOffset: SubMenuProps["popupOffset"] = [4, -5];
 
 const ContextMenuComponent: React.FC<IContextMenuProps> = (props) => {
   const {

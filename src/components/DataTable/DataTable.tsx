@@ -24,22 +24,26 @@ import { getColumnsWithShowMore } from "./DataTableUtils";
 import type { TableRowSelection } from "antd/lib/table/interface";
 import { observer } from "mobx-react";
 import { type IReactionDisposer, reaction } from "mobx";
-import { type TBaseRow, type TExtendColumns, TreeManager } from "../../managers/Tree";
+import {
+  type TBaseRow,
+  type TExtendColumns,
+  TreeManager,
+} from "@infomaximum/base/src/managers/Tree";
 import { Group, type IModel } from "@infomaximum/graphql-model";
-import { RestModel } from "../../models/RestModel";
-import { isShowElement } from "../../utils/access";
+import { RestModel } from "@infomaximum/base/src/models/RestModel";
+import { isShowElement } from "@infomaximum/base/src/utils/access";
 import type { IColumnProps } from "../VirtualizedTable/VirtualizedTable.types";
-import { sortByPriority } from "../../utils/Routes/routes";
-import { contextMenuColumnKey } from "../../utils/const";
+import { sortByPriority } from "@infomaximum/base/src/utils/Routes/routes";
+import { contextMenuColumnKey } from "@infomaximum/base/src/utils/const";
 import { ContextMenuTable } from "../ContextMenu/ContextMenuTable/ContextMenuTable";
 import { GlobalSpinner } from "../Spinner/GlobalSpinner/GlobalSpinner";
 import { Table } from "../Table/Table";
-import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
-import { withLoc } from "../../decorators/hocs/withLoc";
-import { withTheme } from "../../decorators/hocs/withTheme";
-import { boundMethod, useLoadingOnScroll, withLocation } from "../../decorators";
-import { useNodeShowMoreParams } from "../../decorators/hooks/useLoadingOnScroll";
-import { historyStore } from "../../store";
+import { withFeature } from "@infomaximum/base/src/decorators/hocs/withFeature/withFeature";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
+import { boundMethod, useLoadingOnScroll, withLocation } from "@infomaximum/base/src/decorators";
+import { useNodeShowMoreParams } from "@infomaximum/base/src/decorators/hooks/useLoadingOnScroll";
+import { historyStore } from "@infomaximum/base/src/store";
 import { getMultipleRowSelectionHelpers } from "../VirtualizedTable/VirtualizedTable.utils";
 import type { IContextMenuItem } from "../ContextMenu/ContextMenu.types";
 import type { TFloatingContextMenuConfig } from "../ContextMenu/ContextMenuTable/ContextMenuFloating/ContextMenuFloating.types";

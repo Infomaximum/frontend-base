@@ -1,8 +1,8 @@
 import type { ComponentType } from "react";
 import type { InputProps } from "antd/lib/input";
 import type { FieldRenderProps } from "react-final-form";
-import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
-import type { Input } from "../../Input/Input";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import type { Input } from "@infomaximum/base/src/components/Input/Input";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 export type TInputFieldValue = string | number | string[];

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { ITableBodyRowProps } from "./TableBodyRow.types";
-import { ContextMenuFloating } from "../../../ContextMenu";
-import { RestModel } from "../../../../models";
+import { ContextMenuFloating } from "@infomaximum/base/src/components/ContextMenu";
+import { RestModel } from "@infomaximum/base/src/models";
 
 const TableBodyRowComponent: React.FC<ITableBodyRowProps> = forwardRef(
   (

@@ -1,7 +1,7 @@
 import type { NFiltersStore } from "./FiltersStore.types";
 import { action, makeObservable, observable, computed, ObservableMap } from "mobx";
 import { find, forEach, isEmpty, isFunction, isNil } from "lodash";
-import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
+import { type BaseFilter } from "@infomaximum/base/src/utils/filters/BaseFilter/BaseFilter";
 import { FilterStorage } from "./FiltersStorage";
 import { StorePersist } from "../StorePersist";
 import { BaseStore } from "../BaseStore";

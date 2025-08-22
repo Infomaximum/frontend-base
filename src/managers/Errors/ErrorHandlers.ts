@@ -1,5 +1,5 @@
-import type { NCore } from "../../libs/core";
-import { EErrorCode, ERROR_FIELD_NAME } from "../../utils/const";
+import type { NCore } from "@infomaximum/base/src/libs/core";
+import { EErrorCode, ERROR_FIELD_NAME } from "@infomaximum/base/src/utils/const";
 import {
   ACCESS_DENIED,
   ACCOUNT_IS_LOCKED,
@@ -40,7 +40,7 @@ import {
   NETWORK_FAILURE_OCCURRED,
   CHECK_YOUR_NETWORK_CONNECTION_AND_TRY_AGAIN,
   NO_ACCESS_ROLES,
-} from "../../utils/Localization/ErrorLocalization";
+} from "@infomaximum/base/src/utils/Localization/ErrorLocalization";
 
 export const baseErrorHandlers: NCore.TErrorPreparer[] = [
   {

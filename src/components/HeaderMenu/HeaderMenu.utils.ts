@@ -1,7 +1,7 @@
 import type { TFeatureEnabledChecker } from "@infomaximum/utility";
 import { filter, isFunction } from "lodash";
 import type { Location } from "react-router";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export const filterChildrenRouts = (
   parentRoute: NCore.IRoute | undefined,

@@ -5,5 +5,4 @@ export interface IFilterItemTagProps {
   handleEditFilter: () => void;
   handleRemoveFilter: () => void;
   withOverflow?: boolean;
-  closeIconTestId?: string;
 }

@@ -11,15 +11,18 @@ import {
   connectedFormContainerStyle,
 } from "./BaseForm.styles";
 import { Layout, Form as AntForm } from "antd";
-import { FormContext } from "../../../decorators/contexts/FormContext";
-import { Notification } from "../../Notification";
-import { ESpaceSize, SpaceSizeContext } from "../../../decorators/contexts/SpaceSizeContext";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { Notification } from "@infomaximum/base/src/components/Notification";
+import {
+  ESpaceSize,
+  SpaceSizeContext,
+} from "@infomaximum/base/src/decorators/contexts/SpaceSizeContext";
 import type { Interpolation } from "@emotion/react";
 import { forEach, isArray } from "lodash";
 import { FormSubgroup } from "../FormSubgroup/FormSubgroup";
 import { FormFooterPanel } from "./FormFooterPanel/FormFooterPanel";
 import { isValidReactNode } from "./BaseForm.utils";
-import { FORM_WRAPPER_ID } from "../../../utils";
+import { FORM_WRAPPER_ID } from "@infomaximum/base/src/utils";
 
 const { Footer, Content } = Layout;
 

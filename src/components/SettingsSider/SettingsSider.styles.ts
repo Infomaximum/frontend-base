@@ -1,5 +1,5 @@
-import { scrollDefaultStyle } from "../../styles";
-import { getFixedSizeByZoom } from "../../utils/zoom";
+import { scrollDefaultStyle } from "@infomaximum/base/src/styles";
+import { getFixedSizeByZoom } from "@infomaximum/base/src/utils/zoom";
 
 const hiddenScrollStyle = () =>
   ({

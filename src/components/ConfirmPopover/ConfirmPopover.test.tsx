@@ -5,7 +5,7 @@ import { Localization } from "@infomaximum/localization";
 import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,
-} from "../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import { Button } from "../Button/Button";
 
 describe("Тест компонента ConfirmPopover", () => {

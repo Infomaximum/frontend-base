@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import type { IErrorModalProps } from "./ErrorModal.types";
-import { Modal } from "../../modals/Modal/Modal";
-import { Button } from "../../Button/Button";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import { Modal } from "@infomaximum/base/src/components/modals/Modal/Modal";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import {
   getModalFooterStyle,
   iconWrapStyle,
@@ -19,13 +19,17 @@ import {
   modalErrorCloseButtonTestId,
   modalErrorTitleErrorTestId,
   modalErrorContentErrorTestId,
-} from "../../../utils/TestIds";
-import { CLOSE, CONTINUE, ERROR } from "../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/TestIds";
+import { CLOSE, CONTINUE, ERROR } from "@infomaximum/base/src/utils/Localization/Localization";
 import { kebabCase } from "lodash";
-import { CloseCircleFilled, CloseOutlined, InfoCircleOutlined } from "../../Icons/Icons";
+import {
+  CloseCircleFilled,
+  CloseOutlined,
+  InfoCircleOutlined,
+} from "@infomaximum/base/src/components/Icons/Icons";
 import { observer } from "mobx-react";
 import { useFooterAndTitleHeight } from "./ErrorModal.utils";
-import { useTheme } from "../../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 const ErrorModalComponent: React.FC<IErrorModalProps> = observer(
   ({ error, showModal, onCloseModal, maskTransitionName, footerButtons, isDebugMode }) => {

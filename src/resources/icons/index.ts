@@ -11,3 +11,6 @@ export { default as PageNotFoundImageSVG } from "./PageNotFoundImage.svg";
 export { default as SumSVG } from "./Sum.svg";
 export { default as BetaIconSVG } from "./BetaIcon.svg";
 export { default as SpinnerTemplateSVG } from "./SpinnerTemplate.svg";
+export { default as EmptyTestingDataSVG } from "./EmptyTestingData.svg";
+export { default as EmptyBookMarkSVG } from "./EmptyBookMark.svg";
+export { default as NothingFoundOtherSVG } from "./NothingFoundOther.svg";

@@ -1,10 +1,10 @@
-import { useContainerWidth } from "../../../../decorators/hooks/useContainerWidth";
+import { useContainerWidth } from "@infomaximum/base/src/decorators/hooks/useContainerWidth";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import MarkdownView from "react-showdown";
-import { Button } from "../../../Button/Button";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
 import type { IBannerContentProps } from "./BannerContent.types";
-import { useLocalization } from "../../../../decorators/hooks/useLocalization";
-import { SHOW_MORE } from "../../../../utils/Localization/Localization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { SHOW_MORE } from "@infomaximum/base/src/utils/Localization/Localization";
 import { BannerContentModal } from "../BannerContentModal/BannerContentModal";
 import {
   bannerContentParagraphStyle,
@@ -12,8 +12,8 @@ import {
   getBannerContentShowMoreStyle,
   bannerContentStyle,
 } from "./BannerContent.styles";
-import { showMoreBannerTestId } from "../../../../utils/TestIds";
-import { useTheme } from "../../../../decorators";
+import { showMoreBannerTestId } from "@infomaximum/base/src/utils/TestIds";
+import { useTheme } from "@infomaximum/base/src/decorators";
 
 const BannerContentComponent: React.FC<IBannerContentProps> = ({
   md,

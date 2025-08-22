@@ -1,12 +1,12 @@
-import type { Store } from "../../utils/Store/Store/Store";
+import type { Store } from "@infomaximum/base/src/utils/Store/Store/Store";
 import type { IDocumentNode, TInferredVariables } from "@infomaximum/utility";
 import type { Model } from "@infomaximum/graphql-model";
-import type { NStore } from "../../utils/Store/Store/Store.types";
+import type { NStore } from "@infomaximum/base/src/utils/Store/Store/Store.types";
 import { useCallback, useEffect } from "react";
 import { useMountEffect } from "./useMountEffect";
 import { useUnmountEffect } from "./useUnmountEffect";
 import { useModalError } from "./useModalError";
-import { EErrorCode } from "../../utils/const";
+import { EErrorCode } from "@infomaximum/base/src/utils/const";
 
 export type TStoreParams = {
   /** Выполнять ли запрос при маунте компонента `(false)` */

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
-import { TopPanelContext } from "../../../decorators/contexts/TopPanelContext";
+import { TopPanelContext } from "@infomaximum/base/src/decorators/contexts/TopPanelContext";
 
 const TopPanelPortalComponent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const topPanelContainer = useContext(TopPanelContext);

@@ -1,5 +1,5 @@
-import type { IFieldEntityComponentProps } from "../../ArrayField/ArrayField.types";
-import type { IInputNumberFieldProps } from "../../InputNumberField/InputNumberField.types";
+import type { IFieldEntityComponentProps } from "@infomaximum/base/src/components/fields/ArrayField/ArrayField.types";
+import type { IInputNumberFieldProps } from "@infomaximum/base/src/components/fields/InputNumberField/InputNumberField.types";
 
 export interface InputNumberFieldArrayItemProps
   extends IFieldEntityComponentProps,

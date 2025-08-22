@@ -1,6 +1,6 @@
 import type { Interpolation } from "@emotion/react";
 import type { ReactNode } from "react";
-import type { ISystemLoaderCallbackOptions } from "../../decorators/contexts/SystemLoaderContext";
+import type { ISystemLoaderCallbackOptions } from "@infomaximum/base/src/decorators/contexts/SystemLoaderContext";
 
 export type TSystemLoaderCallbackExternalControlOptions = Omit<ISystemLoaderCallbackOptions, "id">;
 

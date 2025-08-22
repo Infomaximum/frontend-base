@@ -3,6 +3,8 @@ export const tableStyle = {
   overflowX: "hidden" as const,
 };
 
-export const errorAlertStyle = (theme: TTheme) => ({
-  marginBottom: `${theme.defaultSpace}px`,
-});
+export const alertStyle = {
+  wrapper: (theme: Theme) => ({
+    marginBottom: `${theme.x6}px`,
+  }),
+};

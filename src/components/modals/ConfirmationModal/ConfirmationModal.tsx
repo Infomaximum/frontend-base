@@ -1,13 +1,13 @@
 import { useState, type FC, useMemo, useCallback, useRef, useEffect } from "react";
-import { Button } from "../../Button/Button";
-import { Modal } from "../../modals/Modal/Modal";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
+import { Modal } from "@infomaximum/base/src/components/modals/Modal/Modal";
 import {
   APPLY,
   CANCEL,
   CONTINUE_EDITING,
   DO_NOT_SAVE,
   EXIT,
-} from "../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   bodyModalStyle,
   iconModalStyle,
@@ -19,16 +19,16 @@ import {
 } from "./ConfirmationModal.styles";
 import type { Interpolation } from "@emotion/react";
 import { isFunction } from "lodash";
-import { ModalAnimationInterval } from "../../../utils/const";
+import { ModalAnimationInterval } from "@infomaximum/base/src/utils/const";
 import {
   confirmationModalAdditionalButtonTestId,
   confirmationModalCancelButtonTestId,
   confirmationModalConfirmButtonTestId,
-} from "../../../utils/TestIds";
-import { WarningFilled } from "../../Icons/Icons";
+} from "@infomaximum/base/src/utils/TestIds";
+import { WarningFilled } from "@infomaximum/base/src/components/Icons/Icons";
 import type { IConfirmationModalProps } from "./ConfirmationModal.types";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { useTheme } from "../../../decorators/hooks/useTheme";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 const ConfirmationModalComponent: FC<IConfirmationModalProps> = (props) => {
   const {

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ArrowLeftOutlined } from "../../Icons/Icons";
+import { ArrowLeftOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 import { PageHeader as AntPageHeader } from "@ant-design/pro-layout";
 import {
   iconBackStyle,
@@ -7,10 +7,10 @@ import {
   pageHeaderTitleStyle,
   headerTitleWrapperStyle,
 } from "./PageHeader.styles";
-import { pageHeaderBackButtonTestId } from "../../../utils/TestIds";
+import { pageHeaderBackButtonTestId } from "@infomaximum/base/src/utils/TestIds";
 import type { IPageHeaderProps } from "./PageHeader.types";
-import { useTheme } from "../../../decorators/hooks/useTheme";
-import { getCssConversionStyle } from "../../../styles";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { getCssConversionStyle } from "@infomaximum/base/src/styles";
 
 const PageHeaderComponent: React.FC<IPageHeaderProps> = (props) => {
   const { title, onBack, titleStyle, leftOutlinedIcon, titleWrapperStyle, ...rest } = props;

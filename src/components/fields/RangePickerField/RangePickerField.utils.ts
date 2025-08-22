@@ -5,7 +5,7 @@ import {
   END_DATE,
   START_MONTH,
   END_MONTH,
-} from "../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import type { TPickerValue } from "./RangePickerField.types";
 import type { Localization } from "@infomaximum/localization";
 

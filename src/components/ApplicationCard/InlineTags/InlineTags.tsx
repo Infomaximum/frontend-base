@@ -1,11 +1,21 @@
 import React, { memo, useMemo } from "react";
-import type { IInlineTagsProps } from "./InlineTags.types";
+import type { IInlineTagsProps } from "@infomaximum/base/src/components/ApplicationCard/InlineTags/InlineTags.types";
 import { map, last, join, take, drop } from "lodash";
-import { containerStyle, ellipsisStyle, getTagContainerStyle, tagStyle } from "./InlineTags.styles";
-import { getNumberOfPlacedTags, outerEllipsisText, tooltipSeparator } from "./InlineTags.utils";
-import { Tag } from "../../../components/Tag/Tag";
-import { useTheme } from "../../../decorators";
-import { AlignedTooltip } from "../../AlignedTooltip";
+import {
+  containerStyle,
+  ellipsisStyle,
+  getTagContainerStyle,
+  tagStyle,
+} from "@infomaximum/base/src/components/ApplicationCard/InlineTags/InlineTags.styles";
+import {
+  getNumberOfPlacedTags,
+  outerEllipsisText,
+  tooltipSeparator,
+} from "@infomaximum/base/src/components/ApplicationCard/InlineTags/InlineTags.utils";
+import { Tag } from "@infomaximum/base/src/components/Tag/Tag";
+import { useTheme } from "@infomaximum/base/src/decorators";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
+import { getTagPropsByColor } from "@infomaximum/base/src/components/Tag";
 
 const InlineTagsComponent: React.FC<IInlineTagsProps> = ({ tags, measuredWidth }) => {
   const theme = useTheme();
@@ -23,8 +33,8 @@ const InlineTagsComponent: React.FC<IInlineTagsProps> = ({ tags, measuredWidth }
 
         return (
           <span key={tag.getInnerName()} style={getTagContainerStyle(flexShrink)}>
-            <Tag color={tag.color} style={tagStyle}>
-              {tag.getName()}
+            <Tag {...getTagPropsByColor(tag.color)} style={tagStyle}>
+              {tag.getName?.()}
             </Tag>
           </span>
         );

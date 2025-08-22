@@ -1,4 +1,4 @@
-import type { BaseFilter, FiltersStore } from "../../utils";
+import type { BaseFilter, FiltersStore } from "@infomaximum/base/src/utils";
 import { useWillMountEffect } from "./useWillMountEffect";
 
 /**

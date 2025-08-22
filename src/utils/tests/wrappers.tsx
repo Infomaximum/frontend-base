@@ -1,6 +1,6 @@
-import { ThemeContext } from "../../decorators/contexts/ThemeContext";
+import { ThemeContext } from "@infomaximum/base/src/decorators/contexts/ThemeContext";
 // eslint-disable-next-line im/ban-import-entity
-import { theme } from "../../styles/theme";
+import { theme } from "@infomaximum/base/src/styles/theme";
 import { Localization } from "@infomaximum/localization";
 import { reduce } from "lodash";
 import React from "react";
@@ -10,7 +10,7 @@ import {
   createBrowserRouter,
   createRoutesFromChildren,
 } from "react-router-dom";
-import { LocalizationContext } from "../../decorators/contexts/LocalizationContext";
+import { LocalizationContext } from "@infomaximum/base/src/decorators/contexts/LocalizationContext";
 
 export const testLocalization = new Localization({
   language: Localization.Language.ru,

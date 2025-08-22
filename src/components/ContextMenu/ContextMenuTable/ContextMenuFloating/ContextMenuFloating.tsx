@@ -8,14 +8,17 @@ import {
   getSummaryDropdownHeight,
 } from "./ContextMenuFloating.utils";
 import React from "react";
-import { useUnmountEffect } from "../../../../decorators";
-import { getTextWidth } from "../../../../utils/textWidth";
-import { ContextMenu } from "../../ContextMenu";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
+import { ContextMenu } from "@infomaximum/base/src/components/ContextMenu/ContextMenu";
 import {
   contextMenuItemSummaryHorizontalPadding,
   contextMenuItemSummaryVerticalPadding,
-} from "../../ContextMenu.styles";
-import type { IContextMenuItem, TContextMenuParamItem } from "../../ContextMenu.types";
+} from "@infomaximum/base/src/components/ContextMenu/ContextMenu.styles";
+import type {
+  IContextMenuItem,
+  TContextMenuParamItem,
+} from "@infomaximum/base/src/components/ContextMenu/ContextMenu.types";
 import { tableContextMenuOverlayClassName } from "../ContextMenuTable";
 
 // Значение border задаётся в global.styles.ts

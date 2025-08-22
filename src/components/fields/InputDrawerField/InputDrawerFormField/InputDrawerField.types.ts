@@ -3,9 +3,9 @@ import type { RowSelectionType } from "antd/lib/table/interface";
 import type { FieldRenderProps } from "react-final-form";
 import type { IGroup, IModel } from "@infomaximum/graphql-model";
 import type { Localization } from "@infomaximum/localization";
-import type { IFieldProps } from "../../FormField/Field/Field.types";
-import type { IFormFieldProps } from "../../FormField/FormField.types";
-import type { IDataTableDrawerOwnProps } from "../../../drawers/DataTableDrawer/DataTableDrawer.types";
+import type { IFieldProps } from "@infomaximum/base/src/components/fields/FormField/Field/Field.types";
+import type { IFormFieldProps } from "@infomaximum/base/src/components/fields/FormField/FormField.types";
+import type { IDataTableDrawerOwnProps } from "@infomaximum/base/src/components/drawers/DataTableDrawer/DataTableDrawer.types";
 export type TInputDrawerFieldValue = IModel[];
 
 export interface IInputDrawerProps

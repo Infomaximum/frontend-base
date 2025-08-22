@@ -13,13 +13,13 @@ import {
   timeInputStyle,
   timeInputWithSecondsStyle,
 } from "./TimeInputsRangeField.styles";
-import { timeInputsRangeTestId } from "../../../utils/TestIds";
+import { timeInputsRangeTestId } from "@infomaximum/base/src/utils/TestIds";
 import {
   formatEnteredTime,
   MillisecondsPerDay,
   type TDurationDescription,
 } from "@infomaximum/utility";
-import { Input } from "../../Input";
+import { Input } from "@infomaximum/base/src/components/Input";
 import { Field, FormField } from "../FormField";
 
 enum EDisplayFormat {

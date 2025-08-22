@@ -7,9 +7,9 @@ import type {
 import { tableRadioGroupStyle, radioStyle, labelStyle } from "./TableRadioGroupField.styles";
 import type { RadioChangeEvent } from "antd/lib/radio";
 import { createSelector } from "reselect";
-import type { IBaseColumnConfig } from "../../Table/Table.types";
-import { Radio } from "../../Radio/Radio";
-import { Table } from "../../Table";
+import type { IBaseColumnConfig } from "@infomaximum/base/src/components/Table/Table.types";
+import { Radio } from "@infomaximum/base/src/components/Radio/Radio";
+import { Table } from "@infomaximum/base/src/components/Table";
 import { Field, FormField } from "../FormField";
 
 /** Пример использования в AccessToSystemFilterDrawer */

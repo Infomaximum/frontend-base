@@ -1,6 +1,6 @@
-import type { IFormProvider } from "../../../decorators/contexts/FormContext";
-import type { IButtonProps } from "../../Button/Button.types";
-import type { IconProps } from "../../Icons/Icons";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import type { IButtonProps } from "@infomaximum/base/src/components/Button/Button.types";
+import type { IconProps } from "@infomaximum/base/src/components/Icons/Icons";
 
 export interface ICancelChangesFormButtonProps
   extends Pick<IButtonProps, "size" | "type" | "ghost" | "styles" | "key"> {

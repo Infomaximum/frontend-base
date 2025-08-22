@@ -3,8 +3,8 @@ import type { FormItemProps } from "antd/lib/form/FormItem";
 import type { EAddEntityButtonPositions } from "./ArrayField";
 import type { TFeatureEnabledChecker } from "@infomaximum/utility";
 import type { Interpolation } from "@emotion/react";
-import type { IFormProvider } from "../../../decorators/contexts/FormContext";
-import type { IWithFeatureProps } from "../../../decorators/hocs/withFeature/withFeature.types";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import type { IWithFeatureProps } from "@infomaximum/base/src/decorators/hocs/withFeature/withFeature.types";
 
 export interface IFieldEntityComponentProps {
   onRemoveFieldEntity: (index: number) => void;

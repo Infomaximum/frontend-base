@@ -16,32 +16,38 @@ import {
   sortingRowStyle,
 } from "./EditableDataTable.styles";
 import { getAccessParameters } from "@infomaximum/utility";
-import { controlCellRemoveTestId, editableDataTableAddButtonTestId } from "../../utils/TestIds";
+import {
+  controlCellRemoveTestId,
+  editableDataTableAddButtonTestId,
+} from "@infomaximum/base/src/utils/TestIds";
 import { EditableRow } from "./EditableRow/EditableRow";
 import { EditableRowButton } from "./EditableRow/EditableRowButton/EditableRowButton";
 import { ControlPanel } from "./EditableRow/ControlPanel/ControlPanel";
 import { observer } from "mobx-react";
 import type { MutableRefObject } from "react";
-import { EAddingRowMethod } from "../../managers/Tree";
+import { EAddingRowMethod } from "@infomaximum/base/src/managers/Tree";
 import type { ITableBodyCellProps } from "../Table/TableComponents/TableBodyCell/TableBodyCell.types";
 import { TableBodyCell } from "../Table/TableComponents/TableBodyCell/TableBodyCell";
-import { RestModel } from "../../models/RestModel";
+import { RestModel } from "@infomaximum/base/src/models/RestModel";
 import { DeleteOutlined, ArcOutlined } from "../Icons/Icons";
-import type { TreeCounter } from "../../managers/TreeCounter";
+import type { TreeCounter } from "@infomaximum/base/src/managers/TreeCounter";
 import { AddButton } from "../AddButton/AddButton";
-import { EditableTableContext } from "../../decorators/contexts/EditableTableContext";
+import { EditableTableContext } from "@infomaximum/base/src/decorators/contexts/EditableTableContext";
 import { DataTable } from "../DataTable/DataTable";
-import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
-import { withFeature } from "../../decorators/hocs/withFeature/withFeature";
-import { withModalError } from "../../decorators/hocs/withModalError/withModalError";
-import type { IFormData, IFormProvider } from "../../decorators/contexts/FormContext";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import { withFeature } from "@infomaximum/base/src/decorators/hocs/withFeature/withFeature";
+import { withModalError } from "@infomaximum/base/src/decorators/hocs/withModalError/withModalError";
+import type {
+  IFormData,
+  IFormProvider,
+} from "@infomaximum/base/src/decorators/contexts/FormContext";
 import {
   useLoadingOnScroll,
   useNodeShowMoreParams,
-} from "../../decorators/hooks/useLoadingOnScroll";
-import { DELETE } from "../../utils";
+} from "@infomaximum/base/src/decorators/hooks/useLoadingOnScroll";
+import { DELETE } from "@infomaximum/base/src/utils";
 import type { TTopPanelButtonObject } from "../TopPanel/TopPanel.types";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 const EditableDataTableKeys = {
   // Ключ для кастомной колонки с кнопками (добавить в columns)

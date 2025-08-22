@@ -3,7 +3,7 @@ import { InvalidIndex } from "@infomaximum/utility";
 import { forEach, get, isNull, isEmpty, map } from "lodash";
 import type { NStore } from "../Store/Store/Store.types";
 import type { Store } from "../Store/Store/Store";
-import { RestModel } from "../../models";
+import { RestModel } from "@infomaximum/base/src/models";
 
 type TTreeBuilderParams = {
   // typename группы

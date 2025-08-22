@@ -2,8 +2,8 @@ import type { SpinProps, TableProps } from "antd";
 import { isBoolean, forEach, isUndefined } from "lodash";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { TPropInjector } from "@infomaximum/utility";
-import { useDelayedTrue } from "../../decorators/hooks/useDelayedTrue";
-import type { TRow } from "../../components/VirtualizedTable/VirtualizedTable.types";
+import { useDelayedTrue } from "@infomaximum/base/src/decorators/hooks/useDelayedTrue";
+import type { TRow } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 
 export interface IWithSpinPropsReplacer extends Pick<TableProps<unknown>, "loading"> {}
 

@@ -1,4 +1,4 @@
-import { typenameToModel } from "../../../models/typenameToModel";
+import { typenameToModel } from "@infomaximum/base/src/models/typenameToModel";
 import { graphqlTag } from "@infomaximum/utility";
 import { forEach, set } from "lodash";
 import { Store } from "./Store";

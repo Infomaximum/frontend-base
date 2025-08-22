@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import type { ColumnProps, TableProps } from "antd/lib/table";
 import type { Localization } from "@infomaximum/localization";
 import type { Interpolation } from "@emotion/react";
-import type { IWithThemeProps } from "../../decorators/hocs/withTheme/withTheme";
+import type { IWithThemeProps } from "@infomaximum/base/src/decorators/hocs/withTheme/withTheme";
 import type { ScrollParams } from "react-virtualized";
 import type { IVirtualizedTableProps } from "../VirtualizedTable/VirtualizedTable.types";
 

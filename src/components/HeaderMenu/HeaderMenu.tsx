@@ -12,20 +12,20 @@ import {
   headerSettingsDrawerStyle,
 } from "./HeaderMenu.styles";
 import { find, forEach, isEmpty } from "lodash";
-import { headerMenuSettingsTestId, headerMenuTestId } from "../../utils/TestIds";
+import { headerMenuSettingsTestId, headerMenuTestId } from "@infomaximum/base/src/utils/TestIds";
 import { observer } from "mobx-react";
 import { ProfileDropdown } from "./ProfileDropdown/ProfileDropdown";
-import { profileKey, settingsKey } from "../../utils/Routes/keys";
+import { profileKey, settingsKey } from "@infomaximum/base/src/utils/Routes/keys";
 import type { IProfileMenuItem } from "./ProfileDropdown/ProfileDropdown.types";
 import type { IHeaderMenuProps } from "./HeaderMenu.types";
-import { useTheme } from "../../decorators/hooks/useTheme";
-import { RoutesContext } from "../../decorators/contexts/RoutesContext";
-import { getDisplayedSettingsRoutes } from "../../utils/Routes/routes";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { RoutesContext } from "@infomaximum/base/src/decorators/contexts/RoutesContext";
+import { getDisplayedSettingsRoutes } from "@infomaximum/base/src/utils/Routes/routes";
 import { Drawer } from "../drawers/Drawer/Drawer";
 import { Settings } from "../Settings/Settings";
 import type { DrawerStyles } from "antd/lib/drawer/DrawerPanel";
-import { useFeature, useLocalization } from "../../decorators";
-import { ADMINISTRATION } from "../../utils";
+import { useFeature, useLocalization } from "@infomaximum/base/src/decorators";
+import { ADMINISTRATION } from "@infomaximum/base/src/utils";
 import { Tooltip } from "../Tooltip";
 import { useLocation } from "react-router";
 import { filterChildrenRouts } from "./HeaderMenu.utils";

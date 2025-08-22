@@ -5,7 +5,7 @@ import {
   SystemLoaderContext,
   type ISystemLoaderCallbackOptions,
   type TSystemLoaderContextValue,
-} from "../../../decorators/contexts/SystemLoaderContext";
+} from "@infomaximum/base/src/decorators/contexts/SystemLoaderContext";
 import type {
   TSystemLoaderCallbackExternalControlOptions,
   TSystemLoaderProviderExternalHandlers,

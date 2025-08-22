@@ -5,9 +5,9 @@ import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 import {
   virtualizedTableHeaderTestId,
   virtualizedTableCheckboxTestId,
-} from "../../../../utils/TestIds";
-import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
-import { Checkbox } from "../../../Checkbox/Checkbox";
+} from "@infomaximum/base/src/utils/TestIds";
+import type { TRow } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import { Checkbox } from "@infomaximum/base/src/components/Checkbox/Checkbox";
 import type {
   IVirtualizedTableHeaderRowOwnProps,
   IVirtualizedTableHeaderRowProps,
@@ -21,10 +21,10 @@ import {
   virtualizedTableBodyRowLoadingCoverStyle,
   virtualizedTableCheckboxCellStyle,
 } from "../VirtualizedTableBodyRow/VirtualizedTableBodyRow.styles";
-import { TableCheckboxCell } from "../../../Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
-import { withoutDividerStyle } from "../../../VirtualizedTable/VirtualizedTable.styles";
-import { TABLE_HEADER_ID } from "../../../../utils/const";
-import { withTheme } from "../../../../decorators";
+import { TableCheckboxCell } from "@infomaximum/base/src/components/Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
+import { withoutDividerStyle } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.styles";
+import { TABLE_HEADER_ID } from "@infomaximum/base/src/utils/const";
+import { withTheme } from "@infomaximum/base/src/decorators";
 
 export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends PureComponent<
   IVirtualizedTableHeaderRowProps<T | null>

@@ -1,4 +1,4 @@
-import { tableBodyCellStyle } from "../../../Table/TableComponents/TableBodyCell/TableBodyCell.styles";
+import { tableBodyCellStyle } from "@infomaximum/base/src/components/Table/TableComponents/TableBodyCell/TableBodyCell.styles";
 import { EUserAgents, userAgent } from "@infomaximum/utility";
 
 const isSafari = userAgent() === EUserAgents.Safari;

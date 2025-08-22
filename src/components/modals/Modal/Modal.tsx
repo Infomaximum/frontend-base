@@ -3,8 +3,8 @@ import type { IModalProps } from "./Modal.types";
 import { Modal as AntModal } from "antd";
 import { createSelector } from "reselect";
 import { boldTitleStyle, modalStyle, getModalStyle, titleStyle } from "./Modal.styles";
-import { modalTitleTestId } from "../../../utils/TestIds";
-import { useTheme } from "../../../decorators/hooks/useTheme";
+import { modalTitleTestId } from "@infomaximum/base/src/utils/TestIds";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { merge } from "lodash";
 
 export const getBoldTitleModal = createSelector(

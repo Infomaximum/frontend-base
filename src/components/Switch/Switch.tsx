@@ -1,7 +1,7 @@
 import { Switch as AntSwitch } from "antd";
 import type { FC } from "react";
 import { memo } from "react";
-import { useTheme } from "../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { uncheckedSwitchStyle, checkedSwitchStyle } from "./Switch.styles";
 import type { ISwitchProps } from "./Switch.types";
 

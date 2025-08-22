@@ -1,7 +1,7 @@
 import enzyme from "enzyme";
-import { settingsItemTitleTestId } from "../../../utils/TestIds";
+import { settingsItemTitleTestId } from "@infomaximum/base/src/utils/TestIds";
 import { Link } from "react-router-dom";
-import { getRouterWrapper, testLocalization } from "../../../utils";
+import { getRouterWrapper, testLocalization } from "@infomaximum/base/src/utils";
 import { SettingsGroup } from "./SettingsGroup";
 
 const title = "Модуль";

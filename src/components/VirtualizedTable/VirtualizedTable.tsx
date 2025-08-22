@@ -29,8 +29,11 @@ import {
   take,
   isUndefined,
 } from "lodash";
-import { virtualizedTableRowTestId, virtualizedTableTestId } from "../../utils/TestIds";
-import { ESortDirection } from "../../utils/const";
+import {
+  virtualizedTableRowTestId,
+  virtualizedTableTestId,
+} from "@infomaximum/base/src/utils/TestIds";
+import { ESortDirection } from "@infomaximum/base/src/utils/const";
 import { VirtualizedTableHeaderRow } from "./VirtualizedTableComponents/VirtualizedTableHeaderRow/VirtualizedTableHeaderRow";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableComponents/VirtualizedTableBodyRow/VirtualizedTableBodyRow";
 import { VirtualizedTableBody } from "./VirtualizedTableComponents/VirtualizedTableBody/VirtualizedTableBody";
@@ -38,9 +41,9 @@ import { assertSimple } from "@infomaximum/assert";
 import type { SorterResult, SortOrder } from "antd/lib/table/interface";
 import { borderTopStyle } from "../Table/Table.styles";
 import { observer } from "mobx-react";
-import { RestModel } from "../../models/RestModel";
+import { RestModel } from "@infomaximum/base/src/models/RestModel";
 import { withSpinPropsReplacer } from "./VirtualizedTable.utils";
-import { withTheme } from "../../decorators";
+import { withTheme } from "@infomaximum/base/src/decorators";
 import { GlobalSpinner } from "../Spinner/GlobalSpinner/GlobalSpinner";
 
 const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [SortOrder, SortOrder];

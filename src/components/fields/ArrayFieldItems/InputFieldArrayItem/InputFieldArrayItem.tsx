@@ -1,7 +1,7 @@
 import type { InputFieldArrayItemProps } from "./InputFieldArrayItem.types";
 import React, { memo, useMemo } from "react";
-import { InputFormField } from "../../InputField";
-import { removeInputFieldButtonTestId } from "../../../../utils/TestIds";
+import { InputFormField } from "@infomaximum/base/src/components/fields/InputField";
+import { removeInputFieldButtonTestId } from "@infomaximum/base/src/utils/TestIds";
 import { RemoveButton } from "../components/RemoveButton/RemoveButton";
 import { Space } from "antd";
 import type { Interpolation, Theme } from "@emotion/react";

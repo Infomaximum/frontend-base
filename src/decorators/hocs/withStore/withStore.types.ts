@@ -1,8 +1,8 @@
 import type { IDocumentNode, TInferredVariables } from "@infomaximum/utility";
-import type { Store } from "../../../utils/Store/Store/Store";
+import type { Store } from "@infomaximum/base/src/utils/Store/Store/Store";
 import type { Model } from "@infomaximum/graphql-model";
-import type { TCancelableRequest } from "../../../services/Network/Requests.types";
-import type { NCore } from "../../../libs/core";
+import type { TCancelableRequest } from "@infomaximum/base/src/services/Network/Requests.types";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export type TQueryParams = {
   /** Запрос */

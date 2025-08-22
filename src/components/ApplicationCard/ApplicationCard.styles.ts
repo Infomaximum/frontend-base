@@ -1,4 +1,4 @@
-import { convertHexToRgbaStyle } from "../../utils/colors";
+import { convertHexToRgbaStyle } from "@infomaximum/base/src/utils/colors";
 
 export const cardWidth = 264;
 export const cardLeftPadding = 7;

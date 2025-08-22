@@ -1,25 +1,25 @@
 import React from "react";
-import { SelectComponent } from "../SelectComponent/SelectComponent";
+import { SelectComponent } from "@infomaximum/base/src/components/fields/AutoCompleteField/SelectComponent/SelectComponent";
 import type {
   IAutoCompleteFormFieldProps,
   IAutoCompleteProps,
   IAutoCompleteState,
   IAutoCompleteFieldProps,
   TAutoCompleteFieldValue,
-} from "./AutoCompleteField.types";
+} from "@infomaximum/base/src/components/fields/AutoCompleteField/AutoCompleteFormField/AutoCompleteField.types";
 import { isFunction, map, forEach, some, every, isEmpty, xorBy, filter, difference } from "lodash";
-import { wrapperAutocompleteStyle } from "./AutoCompleteField.styles";
+import { wrapperAutocompleteStyle } from "@infomaximum/base/src/components/fields/AutoCompleteField/AutoCompleteFormField/AutoCompleteField.styles";
 import { type IModel, Group } from "@infomaximum/graphql-model";
-import { withFeature, withLoc } from "../../../../decorators";
-import { Field } from "../../FormField/Field/Field";
-import { FormField } from "../../FormField/FormField";
-import type { ICommonTableCellProps } from "../../TableCellField/TableCellField.types";
-import { TableCellField } from "../../TableCellField/TableCellField";
-import { headerModes } from "../../../DataTable/DataTableHeader/DataTableHeader";
-import { DataTableDrawer } from "../../../drawers/DataTableDrawer/DataTableDrawer";
-import { Message } from "../../..";
-import { ELEMENT_ALREADY_BELONGS_TO_SELECTED_OBJECT } from "../../../../utils";
-import { symmetricDifference } from "./AutoCompleteField.utils";
+import { withFeature, withLoc } from "@infomaximum/base/src/decorators";
+import { Field } from "@infomaximum/base/src/components/fields/FormField/Field/Field";
+import { FormField } from "@infomaximum/base/src/components/fields/FormField/FormField";
+import type { ICommonTableCellProps } from "@infomaximum/base/src/components/fields/TableCellField/TableCellField.types";
+import { TableCellField } from "@infomaximum/base/src/components/fields/TableCellField/TableCellField";
+import { headerModes } from "@infomaximum/base/src/components/DataTable/DataTableHeader/DataTableHeader";
+import { DataTableDrawer } from "@infomaximum/base/src/components/drawers/DataTableDrawer/DataTableDrawer";
+import { Message } from "@infomaximum/base/src/components/Message";
+import { ELEMENT_ALREADY_BELONGS_TO_SELECTED_OBJECT } from "@infomaximum/base/src/utils";
+import { symmetricDifference } from "@infomaximum/base/src/components/fields/AutoCompleteField/AutoCompleteFormField/AutoCompleteField.utils";
 
 const isSameValue = (a: TAutoCompleteFieldValue, b: TAutoCompleteFieldValue) => {
   return isEmpty(xorBy(a, b, (item) => item.getInnerName()));
@@ -187,6 +187,10 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
         drawerAutoFocus,
         rowSelection,
         isVirtualized,
+        rowHeight,
+        drawerStyles,
+        onStartClosing,
+        isShowDividers,
       } = this.props;
 
       const selectedModels = value ? value : this.emptySelectedModels;
@@ -227,6 +231,10 @@ class AutoComplete extends React.PureComponent<IAutoCompleteProps, IAutoComplete
             autoFocus={drawerAutoFocus}
             rowSelection={rowSelection}
             isVirtualized={isVirtualized}
+            rowHeight={rowHeight}
+            styles={drawerStyles}
+            onStartClosing={onStartClosing}
+            isShowDividers={isShowDividers}
           />
         );
       }

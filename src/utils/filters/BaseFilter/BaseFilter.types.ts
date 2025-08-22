@@ -1,5 +1,5 @@
-import type { FiltersStore } from "../../Store/FiltersStore/FiltersStore";
-import type { NFiltersStore } from "../../Store/FiltersStore/FiltersStore.types";
+import type { FiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore";
+import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
 import type { EFilteringMethods, IBaseFilter } from "@infomaximum/base-filter";
 
 interface ICommonFilterComponentProps {

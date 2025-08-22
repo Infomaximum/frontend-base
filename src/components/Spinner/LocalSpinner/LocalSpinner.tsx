@@ -6,8 +6,8 @@ import {
   localSpinnerWrapperStyle,
   spinnerIndicatorDefaultStyle,
 } from "./LocalSpinner.styles";
-import { loaderDelay, wrapperLocalSpinnerTestId } from "../../../utils";
-import { ArcOutlined } from "../../Icons";
+import { loaderDelay, wrapperLocalSpinnerTestId } from "@infomaximum/base/src/utils";
+import { ArcOutlined } from "@infomaximum/base/src/components/Icons";
 
 export const LocalSpinner: FC<ILocalSpinnerProps> = ({
   wrapperStyle = localSpinnerWrapperStyle,

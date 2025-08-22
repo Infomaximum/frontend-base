@@ -1,10 +1,10 @@
 import { useLayoutEffect, useMemo, useState, type FC } from "react";
 import { isFunction } from "lodash";
 import type { IAlignedTooltipComponentProps } from "./AlignedTooltipComponent.types";
-import { useFirstMountState, useTheme } from "../../../decorators";
-import { getTextValueOfReactNode, getTextWidth } from "../../../utils/textWidth";
+import { useFirstMountState, useTheme } from "@infomaximum/base/src/decorators";
+import { getTextValueOfReactNode, getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { useTooltipAlign, useTooltipLines } from "./AlignedTooltipComponent.utils";
-import { Tooltip } from "../../Tooltip/Tooltip";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";
 
 export const AlignedTooltipComponent: FC<IAlignedTooltipComponentProps> = ({
   title,
@@ -14,6 +14,7 @@ export const AlignedTooltipComponent: FC<IAlignedTooltipComponentProps> = ({
   offsetX,
   containerRef,
   numberOfLines,
+  show = false,
 }) => {
   const theme = useTheme();
   const isFirstRender = useFirstMountState();
@@ -83,7 +84,7 @@ export const AlignedTooltipComponent: FC<IAlignedTooltipComponentProps> = ({
       // Смена направления стандартного отображения в зависимости от того, хватает места или нет
       placement={isChangeHorizontalDirection ? "topRight" : undefined}
       destroyTooltipOnHide={true}
-      open={!isFirstRender && visible && hasOverflow}
+      open={!isFirstRender && visible && (show || hasOverflow)}
       removeMouseEnterDelay={removeMouseEnterDelay}
       {...triggerProps}
     />

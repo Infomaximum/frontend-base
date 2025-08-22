@@ -1,4 +1,4 @@
-import { withModalError } from "../../decorators/hocs/withModalError/withModalError";
+import { withModalError } from "@infomaximum/base/src/decorators/hocs/withModalError/withModalError";
 import type { ComponentType, ErrorInfo } from "react";
 import { Component } from "react";
 import { ErrorHandling } from "@infomaximum/utility";
@@ -7,8 +7,8 @@ import type {
   IErrorBoundaryProps,
   IErrorBoundaryState,
 } from "./ErrorBoundary.types";
-import { EErrorCode } from "../../utils/const";
-import { historyStore } from "../../store/historyStore";
+import { EErrorCode } from "@infomaximum/base/src/utils/const";
+import { historyStore } from "@infomaximum/base/src/store/historyStore";
 
 const AppErrorHandlingService = new ErrorHandling();
 

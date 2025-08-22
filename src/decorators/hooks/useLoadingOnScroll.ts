@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { ScrollParams } from "react-virtualized";
-import { InvalidIndex } from "../../libs/utils";
-import type { NTableStore } from "../../utils/Store/TableStore/TableStore.types";
-import { ELimitsStateNames, defaultRestScrollTriggerHeight, type TableStore } from "../../utils";
-import type { PagingGroup } from "../../models";
+import { InvalidIndex } from "@infomaximum/base/src/libs/utils";
+import type { NTableStore } from "@infomaximum/base/src/utils/Store/TableStore/TableStore.types";
+import {
+  ELimitsStateNames,
+  defaultRestScrollTriggerHeight,
+  type TableStore,
+} from "@infomaximum/base/src/utils";
+import type { PagingGroup } from "@infomaximum/base/src/models";
 import { useUnmountEffect } from "./useUnmountEffect";
 import { useFirstMountState } from "./useFirstMountState";
 

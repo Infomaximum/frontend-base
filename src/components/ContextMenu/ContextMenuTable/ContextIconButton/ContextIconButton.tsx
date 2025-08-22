@@ -5,8 +5,8 @@ import {
   redButtonStyle,
   disabledButtonStyle,
 } from "./ContextIconButton.styles";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { Tooltip } from "../../../Tooltip/Tooltip";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";
 
 export enum EContextIconButtonColors {
   DEFAULT = "DEFAULT",

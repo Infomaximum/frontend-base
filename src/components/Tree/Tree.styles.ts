@@ -1,4 +1,4 @@
-import { HoverAnimationInterval } from "../../utils/const";
+import { HoverAnimationInterval } from "@infomaximum/base/src/utils/const";
 import { Tree } from "./Tree";
 
 export const treeSwitcherIconContainerStyle = (theme: TTheme) =>

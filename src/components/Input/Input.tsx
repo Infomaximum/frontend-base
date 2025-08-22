@@ -25,9 +25,9 @@ import {
 import type { IInputProps, IInputStaticComponents, ITextAreaProps } from "./Input.types";
 import type { AutoSizeType } from "rc-textarea";
 import type { InputRef, PasswordProps } from "antd/lib/input";
-import { useTheme } from "../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { isString } from "lodash";
-import { getTextWidth } from "../../utils/textWidth";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { AlignedTooltip } from "../AlignedTooltip";
 
 const InputComponent: FC<IInputProps & RefAttributes<InputRef>> = forwardRef(

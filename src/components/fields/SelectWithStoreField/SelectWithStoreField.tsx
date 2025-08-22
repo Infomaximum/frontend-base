@@ -9,11 +9,11 @@ import type {
   ISelectWithStoreFieldProps,
   ISelectWithStoreFormFieldProps,
 } from "./SelectWithStoreField.types";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import type { ISelectWithStoreProps } from "../../SelectWithStore/SelectWithStore.types";
-import { Input } from "../../Input/Input";
-import { NOT_SELECTED } from "../../../utils/Localization/Localization";
-import { SelectWithStore } from "../../SelectWithStore/SelectWithStore";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import type { ISelectWithStoreProps } from "@infomaximum/base/src/components/SelectWithStore/SelectWithStore.types";
+import { Input } from "@infomaximum/base/src/components/Input/Input";
+import { NOT_SELECTED } from "@infomaximum/base/src/utils/Localization/Localization";
+import { SelectWithStore } from "@infomaximum/base/src/components/SelectWithStore/SelectWithStore";
 import { Field, FormField } from "../FormField";
 import type { IModel } from "@infomaximum/graphql-model";
 

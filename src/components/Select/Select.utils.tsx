@@ -11,10 +11,10 @@ import { find, has, isArray, isEmpty, isNil, isNumber, isString, map } from "lod
 import { useDropdownPosition } from "../Dropdown/Dropdown.utils";
 import type { DefaultOptionType, LabeledValue, SelectValue } from "antd/lib/select";
 import type { IDropdownParams, TXPlacement } from "../Dropdown/Dropdown.types";
-import { globalScrollBehavior } from "../../utils/ScrollBehavior/ScrollBehavior";
+import { globalScrollBehavior } from "@infomaximum/base/src/utils/ScrollBehavior/ScrollBehavior";
 import type { BaseSelectRef } from "rc-select";
 import type { ISelectProps } from "./Select.types";
-import { getTextValueOfReactNode } from "../../utils/textWidth";
+import { getTextValueOfReactNode } from "@infomaximum/base/src/utils/textWidth";
 import { optionContentStyle } from "./Select.styles";
 
 export const searchValueKey = "searchValue";

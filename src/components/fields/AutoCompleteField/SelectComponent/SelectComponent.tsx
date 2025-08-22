@@ -21,7 +21,7 @@ import {
   ENTER_QUERY,
   REFINE_QUERY,
   NOT_SELECTED,
-} from "../../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   hintContainerStyle,
   suffixIconStyle,
@@ -32,23 +32,26 @@ import {
   autocompleteSelectSuffixButtonTestId,
   autocompleteSelectTestId,
   autocompleteSelectOptionTestId,
-} from "../../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import type { ISelectComponentProps, ISelectState } from "./SelectComponent.types";
 import { observer } from "mobx-react";
 import { reaction } from "mobx";
 import type { TreeSelectProps } from "rc-tree-select/lib/TreeSelect";
 import { Group, type IModel } from "@infomaximum/graphql-model";
-import { CloseCircleFilled, CloseOutlined, ListMarkerOutlined } from "../../../Icons/Icons";
+import {
+  CloseCircleFilled,
+  ListMarkerOutlined,
+} from "@infomaximum/base/src/components/Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
-import { DropdownAnimationInterval, KeyupRequestInterval } from "../../../../utils/const";
-import { Select } from "../../../Select/Select";
-import { DropdownPendingPlaceholder } from "../../../Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
-import { withLoc } from "../../../../decorators/hocs/withLoc/withLoc";
-import type { CustomTagProps } from "rc-select/lib/BaseSelect";
-import { Tag } from "../../../Tag";
-import { boundMethod } from "../../../../decorators";
-import { closeIconStyle, disableTagStyle, tagStyle } from "../../../Select/Select.styles";
-import { AlignedTooltip } from "../../../AlignedTooltip";
+import { DropdownAnimationInterval, KeyupRequestInterval } from "@infomaximum/base/src/utils/const";
+import { Select } from "@infomaximum/base/src/components/Select/Select";
+import { DropdownPendingPlaceholder } from "@infomaximum/base/src/components/Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import { Tag } from "@infomaximum/base/src/components/Tag";
+import { boundMethod } from "@infomaximum/base/src/decorators";
+import { disableTagStyle, tagStyle } from "@infomaximum/base/src/components/Select/Select.styles";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
+import type { ITagRenderProps } from "@infomaximum/base/src/components/Select/Select.types";
 
 /** Используется, если нужен одинаковый title для выбранного и выбираемых значений
  * По умолчанию, если есть handlerDisplayValues, то title для выбранного и выбираемых значений разный
@@ -435,22 +438,20 @@ class _Select extends React.PureComponent<ISelectComponentProps, ISelectState> {
   }
 
   @boundMethod
-  private tagRender({ label, closable, onClose }: CustomTagProps): React.ReactElement {
+  private tagRender({ label, closable, onClose }: ITagRenderProps): React.ReactElement {
     const { handlerTitleValues } = this.props;
 
-    const handleMouseDown = (e: MouseEvent) => {
+    const handleClose = (e: MouseEvent) => {
       e.stopPropagation();
       e.preventDefault();
+      onClose(e);
     };
-
-    const closeIcon = <CloseOutlined onMouseDown={handleMouseDown} css={closeIconStyle} />;
 
     return (
       <Tag
         closable={closable}
-        onClose={onClose}
+        onClose={handleClose}
         css={!closable ? disableTagStyle : tagStyle}
-        closeIcon={closeIcon}
         title={handlerTitleValues ? "" : undefined}
         isWithoutTooltipWrapper={true}
       >

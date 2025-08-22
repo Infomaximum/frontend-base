@@ -13,19 +13,19 @@ import {
   formBodyCutStyle,
 } from "./UnAuthorizedLayout.styles";
 import { NavLink } from "react-router-dom";
-import { unAuthorizedLayoutBackNavLinkTestId } from "../../utils/TestIds";
-import { EErrorBoundaryCodesBase } from "../../utils/const";
+import { unAuthorizedLayoutBackNavLinkTestId } from "@infomaximum/base/src/utils/TestIds";
+import { EErrorBoundaryCodesBase } from "@infomaximum/base/src/utils/const";
 import type {
   IUnAuthorizedLayoutDefaultProps,
   IUnAuthorizedLayoutProps,
   IUnAuthorizedLayoutState,
 } from "./UnAuthorizedLayout.types";
 import { observer } from "mobx-react";
-import { LOG_IN } from "../../utils/Localization/Localization";
-import { ArrowLeftOutlined } from "../../components/Icons/Icons";
-import { ErrorBoundary } from "../../components/ErrorBoundary";
-import { BaseCard } from "../../components/BaseCard";
-import { withLoc, withSystemTitle, withTheme } from "../../decorators/hocs";
+import { LOG_IN } from "@infomaximum/base/src/utils/Localization/Localization";
+import { ArrowLeftOutlined } from "@infomaximum/base/src/components/Icons/Icons";
+import { ErrorBoundary } from "@infomaximum/base/src/components/ErrorBoundary";
+import { BaseCard } from "@infomaximum/base/src/components/BaseCard";
+import { withLoc, withSystemTitle, withTheme } from "@infomaximum/base/src/decorators/hocs";
 
 const { Content } = Layout;
 

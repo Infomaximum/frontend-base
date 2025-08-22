@@ -1,9 +1,9 @@
-import { VIRTUALIZED_TABLE_BODY_ID } from "../../../../utils/const";
+import { VIRTUALIZED_TABLE_BODY_ID } from "@infomaximum/base/src/utils/const";
 import React, { type FC, useEffect, useCallback, useMemo } from "react";
 import { List as VList, type Index } from "react-virtualized";
-import { ScrollBehavior } from "../../../../utils/ScrollBehavior/ScrollBehavior";
+import { ScrollBehavior } from "@infomaximum/base/src/utils/ScrollBehavior/ScrollBehavior";
 import { observer } from "mobx-react";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import {
   getBugsFixStyle,
   vListContainerStyle,

@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import type { NFiltersStore } from "../../utils/Store/FiltersStore/FiltersStore.types";
-import type { FiltersStore } from "../../utils";
+import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
+import type { FiltersStore } from "@infomaximum/base/src/utils";
 
 export const defaultFiltersContext = {};
 

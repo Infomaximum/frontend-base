@@ -6,10 +6,10 @@ import type {
   IRangePickerFormFieldProps,
 } from "./RangePickerField.types";
 import { getPlaceholder } from "./RangePickerField.utils";
-import { defaultRangePickerFieldTestId } from "../../../utils/TestIds";
+import { defaultRangePickerFieldTestId } from "@infomaximum/base/src/utils/TestIds";
 import { defaultRangePickerFieldStyle } from "./RangePickerField.styles";
 import type { Dayjs } from "dayjs";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { Field, FormField } from "../FormField";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
 import { TableCellField } from "../TableCellField/TableCellField";

@@ -3,7 +3,7 @@ import { Avatar } from "antd";
 import type { IHeaderAvatarProps, TAvatarColorConfig } from "./HeaderAvatar.types";
 import { getColorConfigList, getIconAvatarStyle } from "./HeaderAvatar.styles";
 import { observer } from "mobx-react";
-import { useTheme } from "../../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 const HeaderAvatarComponent: React.FC<IHeaderAvatarProps> = ({
   userName,

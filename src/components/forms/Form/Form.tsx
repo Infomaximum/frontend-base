@@ -6,9 +6,12 @@ import type { IBaseFormProps } from "../BaseForm/BaseForm.types";
 import { omittedPropsConnectedForm, type TOmittedConnectedFormProps } from "./Form.utils";
 import type { Location } from "react-router";
 import { BaseForm } from "../BaseForm/BaseForm";
-import { FormContext, type IFormProvider } from "../../../decorators/contexts/FormContext";
-import { contains } from "../../../utils/URI/URI";
-import { FormConfirmationModal } from "../../modals/FormConfirmationModal/FormConfirmationModal";
+import {
+  FormContext,
+  type IFormProvider,
+} from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { contains } from "@infomaximum/base/src/utils/URI/URI";
+import { FormConfirmationModal } from "@infomaximum/base/src/components/modals/FormConfirmationModal/FormConfirmationModal";
 import { assertSimple } from "@infomaximum/assert";
 
 class FormComponent extends Component<IFormProps, IFormState> {

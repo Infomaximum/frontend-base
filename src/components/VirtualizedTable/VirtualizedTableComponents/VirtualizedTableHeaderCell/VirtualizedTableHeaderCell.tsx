@@ -1,10 +1,10 @@
 import { get, includes } from "lodash";
-import { ESortDirection } from "../../../../utils/const";
+import { ESortDirection } from "@infomaximum/base/src/utils/const";
 import React, { memo, useMemo } from "react";
 import type { IVirtualizedTableHeaderCellProps } from "./VirtualizedTableHeaderCell.types";
 import { Row, Col } from "antd";
-import { CaretDownOutlined, CaretUpOutlined } from "../../../Icons/Icons";
-import { virtualizedTableDivTestId } from "../../../../utils/TestIds";
+import { CaretDownOutlined, CaretUpOutlined } from "@infomaximum/base/src/components/Icons/Icons";
+import { virtualizedTableDivTestId } from "@infomaximum/base/src/utils/TestIds";
 import { getVirtualizedTableCellFlexStyle } from "../VirtualizedTableBodyCell/VirtualizedTableBodyCell.styles";
 import {
   sorterArrowDownActiveStyle,
@@ -17,7 +17,7 @@ import {
   virtualizedTableHeaderSortedCellActiveStyle,
   sorterRowStyle,
 } from "./VirtualizedTableHeaderCell.styles";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 const getSorterArrowStyle = (isUp: boolean, isActive: boolean, theme: TTheme) => {
   if (isUp) {

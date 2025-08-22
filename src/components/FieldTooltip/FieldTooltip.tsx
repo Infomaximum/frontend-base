@@ -8,7 +8,10 @@ import {
   questionIconShowPopoverStyle,
   questionIconStyle,
 } from "./FieldTooltip.styles";
-import { fieldTooltipPromptTestId, fieldTooltipPromptButtonTestId } from "../../utils/TestIds";
+import {
+  fieldTooltipPromptTestId,
+  fieldTooltipPromptButtonTestId,
+} from "@infomaximum/base/src/utils/TestIds";
 import { QuestionCircleOutlined } from "../Icons/Icons";
 
 const align = {

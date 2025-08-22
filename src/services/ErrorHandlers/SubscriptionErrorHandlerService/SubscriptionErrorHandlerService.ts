@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import type { NCore } from "../../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 import { BaseErrorHandlerService } from "../BaseErrorHandlerService";
 
 type TGraphqlError = {

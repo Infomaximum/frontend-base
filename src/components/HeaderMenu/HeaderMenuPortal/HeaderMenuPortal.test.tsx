@@ -1,10 +1,10 @@
 import enzyme from "enzyme";
 import { HeaderMenuPortal } from "./HeaderMenuPortal";
 import { HeaderMenu } from "../HeaderMenu";
-import { ERROR_404, LOG_OUT } from "../../../utils/Localization/Localization";
+import { ERROR_404, LOG_OUT } from "@infomaximum/base/src/utils/Localization/Localization";
 import { BrowserRouter } from "react-router-dom";
 import { createRef } from "react";
-import { HeaderMenuContext } from "../../../decorators/contexts/HeaderMenuContext";
+import { HeaderMenuContext } from "@infomaximum/base/src/decorators/contexts/HeaderMenuContext";
 import { Localization } from "@infomaximum/localization";
 
 const noop = () => {};

@@ -1,4 +1,4 @@
-import { notDisabledBtnSelector } from "../../../../Button/Button.styles";
+import { notDisabledBtnSelector } from "@infomaximum/base/src/components/Button/Button.styles";
 
 export const removeButtonDefaultColorsStyle = (theme: TTheme) => ({
   "&&&": {

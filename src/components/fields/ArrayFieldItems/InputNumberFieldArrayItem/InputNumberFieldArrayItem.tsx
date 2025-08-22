@@ -1,8 +1,8 @@
 import type { InputNumberFieldArrayItemProps } from "./InputNumberFieldArrayItem.types";
 import React, { memo } from "react";
 import { wrapperFieldStyle, wrapperStyle } from "../ArrayFieldItems.styles";
-import { removeInputNumberFieldButtonTestId } from "../../../../utils/TestIds";
-import { InputNumberFormField } from "../../InputNumberField/InputNumberField";
+import { removeInputNumberFieldButtonTestId } from "@infomaximum/base/src/utils/TestIds";
+import { InputNumberFormField } from "@infomaximum/base/src/components/fields/InputNumberField/InputNumberField";
 import { RemoveButton } from "../components/RemoveButton/RemoveButton";
 
 const InputNumberFieldArrayItemComponent: React.FC<InputNumberFieldArrayItemProps> = (props) => {

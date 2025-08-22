@@ -1,7 +1,7 @@
 import type { TPropInjector } from "@infomaximum/utility";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { Localization } from "@infomaximum/localization";
-import { useLocalization } from "../../hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 
 export interface IWithLocProps {
   localization: Localization;

@@ -1,7 +1,7 @@
 import type { ObservableMap } from "mobx";
 import type { TFilterClassByTypenameCache } from "../FiltersPanel.types";
-import type { NFiltersStore } from "../../../utils/Store/FiltersStore/FiltersStore.types";
-import type { BaseFilter } from "../../../utils";
+import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
+import type { BaseFilter } from "@infomaximum/base/src/utils";
 
 export interface IInlineFilterTagsProps {
   filters: ObservableMap<string, NFiltersStore.TFilter & { id: number }>;

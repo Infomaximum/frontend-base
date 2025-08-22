@@ -6,7 +6,7 @@ import type {
   ICheckboxFormFieldProps,
 } from "./CheckboxField.types";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox/Checkbox";
-import { Checkbox } from "../../Checkbox/Checkbox";
+import { Checkbox } from "@infomaximum/base/src/components/Checkbox/Checkbox";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 

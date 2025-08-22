@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 import type { IServiceModePanelProps } from "./ServiceModePanel.types";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { SERVICE_MODE } from "../../../utils/Localization/Localization";
-import { authorizationServiceModePanelTestId } from "../../../utils/TestIds";
-import { Banner } from "../../Banner/Banner";
-import { useTheme } from "../../../decorators/hooks/useTheme";
-import { WarningFilled } from "../../Icons/Icons";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { SERVICE_MODE } from "@infomaximum/base/src/utils/Localization/Localization";
+import { authorizationServiceModePanelTestId } from "@infomaximum/base/src/utils/TestIds";
+import { Banner } from "@infomaximum/base/src/components/Banner/Banner";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { WarningFilled } from "@infomaximum/base/src/components/Icons/Icons";
 import { serviceModeBannerStyle, wrapperContentStyle, iconStyle } from "./ServiceModePanel.styles";
 
 const ServiceModePanelComponent: React.FC<IServiceModePanelProps> = ({ serviceModeMessage }) => {

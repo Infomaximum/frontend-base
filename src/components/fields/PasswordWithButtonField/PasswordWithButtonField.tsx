@@ -1,19 +1,19 @@
 import type { IPasswordWithButtonFieldProps } from "./PasswordWithButtonField.types";
-import { PASSWORD, CHANGE_PASSWORD } from "../../../utils/Localization/Localization";
+import { PASSWORD, CHANGE_PASSWORD } from "@infomaximum/base/src/utils/Localization/Localization";
 import { useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import {
   changePasswordButtonTestId,
   passwordFieldsPasswordVisibilityIconTestId,
-} from "../../../utils/TestIds";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { useForm } from "../../../decorators/hooks/useForm";
-import { FormContext } from "../../../decorators/contexts/FormContext";
+} from "@infomaximum/base/src/utils/TestIds";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useForm } from "@infomaximum/base/src/decorators/hooks/useForm";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
 import { FormOption } from "../FormOption/FormOption";
-import { Button } from "../../Button/Button";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
 import { FormField } from "../FormField/FormField";
 import { InputFieldComponent } from "../InputField/InputField";
-import { Input } from "../../Input/Input";
-import { EyeInvisibleOutlined, EyeOutlined } from "../../Icons";
+import { Input } from "@infomaximum/base/src/components/Input/Input";
+import { EyeInvisibleOutlined, EyeOutlined } from "@infomaximum/base/src/components/Icons";
 import { convertToNotWhitespace } from "../InputField";
 
 /**

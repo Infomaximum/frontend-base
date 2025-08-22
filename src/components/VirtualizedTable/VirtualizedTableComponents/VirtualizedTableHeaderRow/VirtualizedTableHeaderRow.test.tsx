@@ -2,9 +2,9 @@ import enzyme from "enzyme";
 import { Localization } from "@infomaximum/localization";
 import { VirtualizedTableHeaderRow } from "./VirtualizedTableHeaderRow";
 import type { SortOrder } from "antd/lib/table/interface";
-import { ERROR } from "../../../../utils/Localization/Localization";
-import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";
-import type { IVirtualizedColumnConfig } from "../../VirtualizedTable.types";
+import { ERROR } from "@infomaximum/base/src/utils/Localization/Localization";
+import type { TBaseRow, TExtendColumns } from "@infomaximum/base/src/managers/Tree";
+import type { IVirtualizedColumnConfig } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 
 const localization = new Localization({ language: Localization.Language.ru });
 const sorterChange = jest.fn();

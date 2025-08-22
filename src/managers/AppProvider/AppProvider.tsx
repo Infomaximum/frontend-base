@@ -1,13 +1,16 @@
 import { Global } from "@emotion/react";
 import { type ELanguages, Localization } from "@infomaximum/localization";
 import { type FC, memo, useEffect, useMemo } from "react";
-import { DebugModeContext } from "../../decorators/contexts/DebugModeContext";
-import { FeatureContext, defaultFeatureChecker } from "../../decorators/contexts/FeatureContext";
-import { LocalizationContext } from "../../decorators/contexts/LocalizationContext";
-import { MainSystemPagePathContext } from "../../decorators/contexts/MainSystemPagePathContext";
-import { ThemeProvider } from "../../decorators/contexts/ThemeContext";
-import { globalStyles, theme } from "../../styles";
-import { EErrorBoundaryCodesBase, rootPath } from "../../utils";
+import { DebugModeContext } from "@infomaximum/base/src/decorators/contexts/DebugModeContext";
+import {
+  FeatureContext,
+  defaultFeatureChecker,
+} from "@infomaximum/base/src/decorators/contexts/FeatureContext";
+import { LocalizationContext } from "@infomaximum/base/src/decorators/contexts/LocalizationContext";
+import { MainSystemPagePathContext } from "@infomaximum/base/src/decorators/contexts/MainSystemPagePathContext";
+import { ThemeProvider } from "@infomaximum/base/src/decorators/contexts/ThemeContext";
+import { globalStyles, theme } from "@infomaximum/base/src/styles";
+import { EErrorBoundaryCodesBase, rootPath } from "@infomaximum/base/src/utils";
 import { ErrorModalProvider } from "../ErrorModalProvider/ErrorModalProvider";
 import { RouterProvider } from "../RouterProvider/RouterProvider";
 import type { IRouterProviderProps } from "../RouterProvider/RouterProvider.types";
@@ -15,16 +18,17 @@ import { SystemInitializer } from "./SystemInitializer";
 import enUS from "antd/es/locale/en_US";
 import ruRu from "antd/es/locale/ru_RU";
 import { ConfigProvider, type ThemeConfig } from "antd";
-import { AppErrorBoundary } from "../../components/ErrorBoundary/ErrorBoundary";
-import { historyStore } from "../../store/historyStore";
+import { AppErrorBoundary } from "@infomaximum/base/src/components/ErrorBoundary/ErrorBoundary";
+import { historyStore } from "@infomaximum/base/src/store/historyStore";
 import { EDays, localeUpdate, type TFeatureEnabledChecker } from "@infomaximum/utility";
 import { BrowserRouter } from "./BrowserRouter";
 import { getThemeConfig } from "./antdTheme";
 import {
   LicenseFeatureContext,
   defaultLicenseFeatureChecker,
-} from "../../decorators/contexts/LicenseFeatureContext";
+} from "@infomaximum/base/src/decorators/contexts/LicenseFeatureContext";
 import { StyleProvider } from "@ant-design/cssinjs";
+import { messagesHolder } from "@infomaximum/ui-kit";
 
 export interface IAppProviderProps extends IRouterProviderProps {
   baseName?: string;
@@ -104,6 +108,7 @@ const AppProviderContainer: FC<IAppProviderProps> = (props) => {
       <ErrorModalProvider isDebugMode={!!isDebugMode}>
         <SystemInitializer>
           {typeof childrenProp === "function" ? childrenProp(routerProvider) : routerProvider}
+          {messagesHolder}
         </SystemInitializer>
       </ErrorModalProvider>
     ),

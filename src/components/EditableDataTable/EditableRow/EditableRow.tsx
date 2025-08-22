@@ -1,9 +1,9 @@
 import { type RefObject, useMemo } from "react";
 import type { IEditableRowProps, IFormComponentProps } from "./EditableRow.types";
 import { tableRowHeightStyle } from "./EditableRow.styles";
-import { EditableRowContext } from "../../../decorators/contexts/EditableRowContext";
-import { useTheme } from "../../../decorators/hooks/useTheme";
-import { Form } from "../../forms/Form/FormWrapper";
+import { EditableRowContext } from "@infomaximum/base/src/decorators/contexts/EditableRowContext";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { Form } from "@infomaximum/base/src/components/forms/Form/FormWrapper";
 
 export const FormComponent: React.FC<IFormComponentProps> = ({
   children,

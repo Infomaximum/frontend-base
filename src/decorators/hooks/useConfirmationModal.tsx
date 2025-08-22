@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Deferred } from "@infomaximum/utility";
 import type { TLocalizationDescription } from "@infomaximum/localization";
 import { useLocalization } from "./useLocalization";
-import { ConfirmationModal } from "../../components/modals/ConfirmationModal/ConfirmationModal";
-import { SAVE } from "../../utils/Localization/Localization";
+import { ConfirmationModal } from "@infomaximum/base/src/components/modals/ConfirmationModal/ConfirmationModal";
+import { SAVE } from "@infomaximum/base/src/utils/Localization/Localization";
 
 type TConfirmationParams<T> = {
   /** Колбек который будет вызван после подтверждения выполняемого действия */

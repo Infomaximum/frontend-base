@@ -1,4 +1,4 @@
-import { getTextClampStyle } from "../../styles";
+import { getTextClampStyle } from "@infomaximum/base/src/styles";
 
 export const wrapperStyle = {
   display: "flex",

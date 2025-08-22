@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 /**
  * Сигнализирует о том, что ошибка была,

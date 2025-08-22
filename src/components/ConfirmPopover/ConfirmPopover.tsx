@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import { WarningFilled } from "../Icons/Icons";
 import { Row, Col, Popover } from "antd";
 import { Button } from "../Button/Button";
-import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 import type { IConfirmPopoverProps } from "./ConfirmPopover.types";
-import { CANCEL, CONFIRM } from "../../utils/Localization/Localization";
+import { CANCEL, CONFIRM } from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   popoverTitleColStyle,
   popoverTitleIconStyle,
@@ -13,8 +13,8 @@ import {
 import {
   confirmPopoverOkButtonTestId,
   confirmPopoverCancelButtonTestId,
-} from "../../utils/TestIds";
-import { useTheme } from "../../decorators/hooks/useTheme";
+} from "@infomaximum/base/src/utils/TestIds";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 const buttonsSize = "small";
 

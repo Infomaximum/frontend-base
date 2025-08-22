@@ -176,6 +176,9 @@ const antGlobalStyle = (theme: TTheme) => {
     },
     ".ant-select-item-option-content": {
       textOverflow: "unset",
+      "& > *": {
+        alignItems: "center",
+      },
     },
     ".ant-select-selector": {
       color: theme.grey10Color,
@@ -275,6 +278,9 @@ const antGlobalStyle = (theme: TTheme) => {
     },
     ".ant-empty .ant-empty-description": {
       color: theme.grey6Color,
+    },
+    ".ant-empty .ant-empty-footer": {
+      marginTop: "4px",
     },
     // Важно, чтобы стиль был глобальным, т.к. строка рендерится в body
     ".row-dragging": {

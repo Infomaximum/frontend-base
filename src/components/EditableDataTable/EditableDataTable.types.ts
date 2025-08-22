@@ -2,13 +2,17 @@ import type { IDataTableOwnProps, IDataTableProps } from "../DataTable/DataTable
 import type { TAccess } from "@infomaximum/utility";
 import type { MutableRefObject } from "react";
 import type { EditableDataTableKeys } from "./EditableDataTable";
-import type { EAddingRowMethod, TBaseRow, TExtendColumns } from "../../managers/Tree";
+import type {
+  EAddingRowMethod,
+  TBaseRow,
+  TExtendColumns,
+} from "@infomaximum/base/src/managers/Tree";
 import type { IFormWrapperProps } from "../forms/Form/FormWrapper.types";
-import type { IWithModalErrorProps } from "../../decorators/hocs/withModalError/withModalError.types";
-import type { IWithLocProps } from "../../decorators/hocs/withLoc/withLoc";
-import type { IWithFeatureProps } from "../../decorators/hocs/withFeature/withFeature.types";
-import type { TableStore } from "../../utils";
-import type { PagingGroup } from "../../models";
+import type { IWithModalErrorProps } from "@infomaximum/base/src/decorators/hocs/withModalError/withModalError.types";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import type { IWithFeatureProps } from "@infomaximum/base/src/decorators/hocs/withFeature/withFeature.types";
+import type { TableStore } from "@infomaximum/base/src/utils";
+import type { PagingGroup } from "@infomaximum/base/src/models";
 
 export interface IEditableRow extends TBaseRow {
   [EditableDataTableKeys.isRowEditDenied]?: boolean;

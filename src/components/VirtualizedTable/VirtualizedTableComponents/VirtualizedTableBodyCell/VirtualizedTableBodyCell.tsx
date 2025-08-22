@@ -7,12 +7,12 @@ import {
   getVirtualizedTableCellIndentBlockStyle,
 } from "./VirtualizedTableBodyCell.styles";
 import type { IVirtualizedTableBodyCellProps } from "./VirtualizedTableBodyCell.types";
-import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
-import { TableExpandIcon } from "../../../Table/TableComponents/TableExpandIcon/TableExpandIcon";
-import { contextMenuColumnKey } from "../../../../utils/const";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { getCssConversionStyle } from "../../../../styles";
-import { AlignedTooltip } from "../../../AlignedTooltip";
+import type { TRow } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import { TableExpandIcon } from "@infomaximum/base/src/components/Table/TableComponents/TableExpandIcon/TableExpandIcon";
+import { contextMenuColumnKey } from "@infomaximum/base/src/utils/const";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { getCssConversionStyle } from "@infomaximum/base/src/styles";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
 
 const VirtualizedTableBodyCellComponent = <T extends TRow>(
   props: IVirtualizedTableBodyCellProps<T | null>

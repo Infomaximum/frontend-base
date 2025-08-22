@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef } from "react";
 import type { DocumentNode } from "@apollo/client";
-import { useUnmountEffect } from "../../decorators";
-import type { TCancelableRequest } from "../../services/Network/Requests.types";
-import { BaseRequestService } from "../../services/Network/BaseRequestService";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators";
+import type { TCancelableRequest } from "@infomaximum/base/src/services/Network/Requests.types";
+import { BaseRequestService } from "@infomaximum/base/src/services/Network/BaseRequestService";
 
 interface ILazyQueryParams {
   /** Запрос */

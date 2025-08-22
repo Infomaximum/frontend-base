@@ -2,14 +2,14 @@ import type { Localization } from "@infomaximum/localization";
 import type { IModel, Model } from "@infomaximum/graphql-model";
 import type { GraphQlQuery, TFeatureEnabledChecker } from "@infomaximum/utility";
 import { assignIn, isNil, isFunction } from "lodash";
-import type { IColumnProps } from "../../VirtualizedTable/VirtualizedTable.types";
+import type { IColumnProps } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 import type {
   IDataTableExtension,
   TDataSourceExt,
   TQueryExtension,
   TRowExt,
 } from "./DataTableExtension.types";
-import type { Store } from "../../../utils";
+import type { Store } from "@infomaximum/base/src/utils";
 
 class DataTableExtension implements IDataTableExtension {
   private columnConfigExtension: Set<TRowExt> = new Set();

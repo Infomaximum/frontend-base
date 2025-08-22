@@ -3,7 +3,7 @@ import type { FormProps } from "antd/lib/form/Form";
 import type { TestIdAttr } from "@infomaximum/utility";
 import type { UIEventHandler } from "react";
 import type { TFormFooterPanelConfig } from "./FormFooterPanel/FormFooterPanel.types";
-import type { NCore } from "../../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 /**
  * Типы отличных от стандартной таблиц

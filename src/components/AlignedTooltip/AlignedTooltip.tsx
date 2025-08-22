@@ -6,7 +6,7 @@ import {
   type MouseEvent as ReactMouseEvent,
   type WheelEvent,
 } from "react";
-import { useUnmountEffect } from "../../decorators";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators";
 import type { IAlignedTooltipProps } from "./AlignedTooltip.types";
 import {
   getAlignedTooltipStyle,

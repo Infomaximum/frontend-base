@@ -4,6 +4,7 @@
 import type { Model } from "@infomaximum/graphql-model";
 import type { theme } from "./styles/theme";
 import type { Store } from "./utils/Store/Store";
+import type { TUiKitTheme } from "./styles";
 
 type TFrontendConfigImage = {
   // id родительского элемента в который будет добавлена картинка
@@ -62,6 +63,8 @@ declare global {
   }
 
   type TTheme = typeof theme;
+
+  type Theme = TUiKitTheme;
 }
 
 export {};

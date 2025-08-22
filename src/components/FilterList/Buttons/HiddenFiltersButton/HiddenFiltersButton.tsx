@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../../Button";
+import { Button } from "@infomaximum/base/src/components/Button";
 import { buttonHiddenFiltersStyle, textStyle } from "./HiddenFiltersButton.styles";
 import type { IHiddenFiltersButtonProps } from "./HiddenFiltersButton.types";
 

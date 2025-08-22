@@ -1,14 +1,14 @@
 import { Empty } from "antd";
 import type { IDropdownPlaceholderProps } from "./DropdownPlaceholder.types";
 import { emptyStyle, dropdownEmptyImageStyle, hintStyle } from "./DropdownPlaceholder.styles";
-import NoAccess from "../../../resources/icons/NoAccess.svg";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
+import NoAccess from "@infomaximum/base/src/resources/icons/NoAccess.svg";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import {
   EMPTY_HERE,
   NO_ACCESS,
   NOTHING_FOUND_CHANGE_QUERY,
-} from "../../../utils/Localization/Localization";
-import { useTheme } from "../../../decorators/hooks/useTheme";
+} from "@infomaximum/base/src/utils/Localization/Localization";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 /**
  * Placeholder выпадающего списка (данные запрашиваются 1 раз).

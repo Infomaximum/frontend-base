@@ -1,6 +1,6 @@
 import type { Model } from "@infomaximum/graphql-model";
 import type { TLocalizationDescription } from "@infomaximum/localization";
-import type { Store } from "../../../utils/Store/Store/Store";
+import type { Store } from "@infomaximum/base/src/utils/Store/Store/Store";
 
 export type TParams = {
   displayModelNameInTitle?: boolean;

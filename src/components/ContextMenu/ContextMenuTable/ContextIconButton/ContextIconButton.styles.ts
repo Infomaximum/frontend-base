@@ -1,6 +1,6 @@
 import { assignInWith, isNil } from "lodash";
-import { HoverAnimationInterval } from "../../../../utils/const";
-import type { TCustomContextIconButtonFuncStyle } from "./ContextIconButton.types";
+import { HoverAnimationInterval } from "@infomaximum/base/src/utils/const";
+import type { TCustomContextIconButtonFuncStyle } from "@infomaximum/base/src/components/ContextMenu/ContextMenuTable/ContextIconButton/ContextIconButton.types";
 
 export const getDefaultButtonStyle = (size: number) => (theme: TTheme) =>
   ({

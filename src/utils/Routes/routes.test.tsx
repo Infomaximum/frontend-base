@@ -1,8 +1,8 @@
-import { RouteElement } from "../../components/routes/RouteElement/RouteElement";
+import { RouteElement } from "@infomaximum/base/src/components/routes/RouteElement/RouteElement";
 import type { ReactElement } from "react";
 import { moduleGroupPath } from "./paths";
 import { getRelativeRoutePath, routesMap, breadcrumbsPacker, removeModulesLayer } from "./routes";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 describe("Тесты методов работы с роутингом - routes", () => {
   describe("Удаления из роутов слоя для группировки модулей", () => {

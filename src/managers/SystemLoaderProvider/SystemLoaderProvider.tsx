@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, forwardRef, useImperativeHandle, useRef, useLayoutEffect, useId } from "react";
-import { SystemLoaderContext } from "../../decorators/contexts/SystemLoaderContext";
+import { SystemLoaderContext } from "@infomaximum/base/src/decorators/contexts/SystemLoaderContext";
 import {
   backgroundSpinnerStyle,
   getSystemLoaderProviderStyle,
 } from "./SystemLoaderProvider.styles";
-import { GlobalSpinner } from "../../components/Spinner/GlobalSpinner/GlobalSpinner";
+import { GlobalSpinner } from "@infomaximum/base/src/components/Spinner/GlobalSpinner/GlobalSpinner";
 import type {
   ISystemLoaderProviderProps,
   TSystemLoaderProviderExternalHandlers,
 } from "./SystemLoaderProvider.types";
 import { useLoaderContextValue } from "./hooks/useLoaderContextValue";
-import { ErrorBoundary } from "../../components/ErrorBoundary";
-import { EErrorBoundaryCodesBase } from "../../utils/const";
+import { ErrorBoundary } from "@infomaximum/base/src/components/ErrorBoundary";
+import { EErrorBoundaryCodesBase } from "@infomaximum/base/src/utils/const";
 
 /**
  * Провайдер системного лоадера(спиннера), позволяет централизованно управлять отображением

@@ -1,4 +1,4 @@
-import { commonContentStyle } from "../../styles/common.styles";
+import { commonContentStyle } from "@infomaximum/base/src/styles/common.styles";
 
 export const contentStyle = (theme: TTheme) =>
   ({

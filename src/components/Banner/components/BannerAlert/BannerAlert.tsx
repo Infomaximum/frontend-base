@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { CloseOutlined } from "../../../../components/Icons/Icons";
+import { CloseOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 import {
   closeIconBannerAlertStyle,
   iconBannerAlertStyle,
@@ -8,7 +8,7 @@ import {
 } from "./BannerAlert.styles";
 import type { IBannerAlertProps } from "./BannerAlert.types";
 import { isFunction } from "lodash";
-import { crossCloseBannerTestId } from "../../../../utils/TestIds";
+import { crossCloseBannerTestId } from "@infomaximum/base/src/utils/TestIds";
 
 const BannerAlertComponent = forwardRef<HTMLDivElement, IBannerAlertProps>((props, ref) => {
   const { children, icon, onClose, backgroundColor, closable, wrapperContentStyle } = props;

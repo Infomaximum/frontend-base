@@ -1,6 +1,6 @@
 import type { Interpolation } from "@emotion/react";
 import type { RowProps } from "antd/lib/grid/row";
-import type { TAccessRules } from "../../utils/access";
+import type { TAccessRules } from "@infomaximum/base/src/utils/access";
 import type { topPanelModes } from "./TopPanel";
 
 export type TTopPanelButtonObject = {

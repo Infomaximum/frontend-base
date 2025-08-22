@@ -2,10 +2,10 @@ import { memo, useCallback, useContext, useMemo, useRef, useState, type FC } fro
 import type { ISettingsProps } from "./SettingsSider.types";
 import { find, isEmpty, map } from "lodash";
 import { Layout } from "antd";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { getSiderStyle, siderContentWrapperStyle } from "./SettingsSider.styles";
-import { RoutesContext } from "../../decorators";
-import { getDisplayedSettingsRoutes, settingsKey } from "../../utils";
+import { RoutesContext } from "@infomaximum/base/src/decorators";
+import { getDisplayedSettingsRoutes, settingsKey } from "@infomaximum/base/src/utils";
 import { SettingsGroup } from "./SettingsGroup/SettingsGroup";
 
 const { Sider } = Layout;

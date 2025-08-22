@@ -1,9 +1,9 @@
 import enzyme from "enzyme";
 import { Settings } from "./Settings";
-import { moduleGroupPath, getDisplayedSettingsRoutes } from "../../utils/Routes";
+import { moduleGroupPath, getDisplayedSettingsRoutes } from "@infomaximum/base/src/utils/Routes";
 import { SettingsItem } from "./SettingsItem/SettingsItem";
-import { getDefaultWrappers, testLocalization } from "../../utils/tests/wrappers";
-import type { NCore } from "../../libs/core";
+import { getDefaultWrappers, testLocalization } from "@infomaximum/base/src/utils/tests/wrappers";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 const BASE_MODULE = {
   ru: "Base",

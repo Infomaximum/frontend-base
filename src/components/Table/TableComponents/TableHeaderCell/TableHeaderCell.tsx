@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { tableHeaderCellStyle } from "./TableHeaderCell.styles";
 import type { ITableHeaderCellProps } from "./TableHeaderCell.types";
-import { tableCheckboxTestId } from "../../../../utils/TestIds";
+import { tableCheckboxTestId } from "@infomaximum/base/src/utils/TestIds";
 
 const TableHeaderCellComponent: React.FC<ITableHeaderCellProps> = forwardRef(
   ({ children, ...restProps }, ref: React.Ref<HTMLTableCellElement>) => {

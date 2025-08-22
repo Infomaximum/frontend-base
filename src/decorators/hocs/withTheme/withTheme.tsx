@@ -1,5 +1,5 @@
 import { type Context, useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { ThemeContext } from "@infomaximum/base/src/decorators/contexts/ThemeContext";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import type { TPropInjector } from "@infomaximum/utility";
 

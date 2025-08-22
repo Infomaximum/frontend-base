@@ -13,10 +13,10 @@ import {
   footerDrawerStyle,
   wrapperDrawerStyle,
 } from "./Drawer.styles";
-import { drawerCloseButtonTestId } from "../../../utils/TestIds";
-import { CloseOutlined } from "../../Icons/Icons";
-import { useTheme } from "../../../decorators/hooks/useTheme";
-import { AlignedTooltip } from "../../AlignedTooltip";
+import { drawerCloseButtonTestId } from "@infomaximum/base/src/utils/TestIds";
+import { CloseOutlined } from "@infomaximum/base/src/components/Icons/Icons";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
 
 export const getBoldTitle = createSelector(
   (title: React.ReactNode) => title,

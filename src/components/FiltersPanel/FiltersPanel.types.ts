@@ -1,6 +1,6 @@
-import type { BaseFilter, FiltersStore } from "../../utils";
-import type { NFiltersStore } from "../../utils/Store/FiltersStore/FiltersStore.types";
-import type { IPositionConfig } from "../../utils/filters/BaseFilter/BaseFilter.types";
+import type { BaseFilter, FiltersStore } from "@infomaximum/base/src/utils";
+import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
+import type { IPositionConfig } from "@infomaximum/base/src/utils/filters/BaseFilter/BaseFilter.types";
 
 export interface IFiltersPanelContext {
   showFilterAddComponent(

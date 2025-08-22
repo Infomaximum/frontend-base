@@ -1,8 +1,8 @@
 import type { Interpolation } from "@emotion/react";
 import type { IAutoCompleteProps } from "../AutoCompleteField/AutoCompleteFormField/AutoCompleteField.types";
-import type { AutoCompleteStore } from "../../../utils/Store/AutoCompleteStore/AutoCompleteStore";
+import type { AutoCompleteStore } from "@infomaximum/base/src/utils/Store/AutoCompleteStore/AutoCompleteStore";
 import type { IModel } from "@infomaximum/graphql-model";
-import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 
 type TAutoCompleteProps = Omit<IAutoCompleteProps, "onChange" | "value">;
 

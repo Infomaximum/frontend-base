@@ -1,10 +1,10 @@
-import { waitForComponentToPaint } from "../../../utils/tests/utils";
+import { waitForComponentToPaint } from "@infomaximum/base/src/utils/tests/utils";
 import { mount, type ReactWrapper } from "enzyme";
 import { createForm } from "final-form";
 import { SubmitFormButton } from "./SubmitFormButton";
 import type { ISubmitFormButtonProps } from "./SubmitFormButton.types";
-import type { IFormProvider } from "../../../decorators/contexts/FormContext";
-import { Button } from "../../Button/Button";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
 
 const formName = "form";
 

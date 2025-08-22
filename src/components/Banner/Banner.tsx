@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState, type FC } from "react";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { Checkbox } from "../Checkbox/Checkbox";
 import type { IBannerProps } from "./Banner.types";
 import { BannerContent } from "./components/BannerContent/BannerContent";
-import { Button } from "../../components/Button/Button";
-import { DONT_SHOW_AGAIN, CLOSE } from "../../utils/Localization/Localization";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
+import { DONT_SHOW_AGAIN, CLOSE } from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   bannerStyle,
   dontShowAgainWrapperBannerStyle,
@@ -15,7 +15,10 @@ import {
 import { BannerAlert } from "./components/BannerAlert/BannerAlert";
 import { isFunction } from "lodash";
 import { MillisecondsPerSecond } from "@infomaximum/utility";
-import { bannerDontShowAgainTestId, closeBannerButtonTestId } from "../../utils/TestIds";
+import {
+  bannerDontShowAgainTestId,
+  closeBannerButtonTestId,
+} from "@infomaximum/base/src/utils/TestIds";
 import type { CheckboxChangeEvent } from "antd/lib/checkbox";
 
 const BannerComponent: FC<IBannerProps> = ({

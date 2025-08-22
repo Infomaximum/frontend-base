@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import type { List, ListRowProps, ScrollParams } from "react-virtualized";
-import type { IVirtualizedTableProps } from "../../../VirtualizedTable/VirtualizedTable.types";
+import type { IVirtualizedTableProps } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 
 export interface IVirtualizedTableBodyProps
   extends Pick<

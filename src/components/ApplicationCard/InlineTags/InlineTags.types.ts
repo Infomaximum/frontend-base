@@ -1,10 +1,10 @@
-export interface ITagProps {
+export interface IInlineTagProps {
   getName(): string | undefined;
   getInnerName(): string;
   color: string | undefined;
 }
 
 export interface IInlineTagsProps {
-  tags: ITagProps[];
+  tags: IInlineTagProps[];
   measuredWidth: number;
 }

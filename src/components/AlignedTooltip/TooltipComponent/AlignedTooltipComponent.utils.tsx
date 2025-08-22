@@ -1,8 +1,8 @@
 import { useMemo, useState, type RefObject } from "react";
-import { useMountEffect, useTheme } from "../../../decorators";
-import { getHyphenatedText } from "../../../decorators/hooks/useCardLinesOverlay";
+import { useMountEffect, useTheme } from "@infomaximum/base/src/decorators";
+import { getHyphenatedText } from "@infomaximum/base/src/decorators/hooks/useCardLinesOverlay";
 import { map, max, trimStart } from "lodash";
-import { getTextWidth } from "../../../utils/textWidth";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 
 interface IUseTooltipAlignProps {
   containerRef: RefObject<HTMLDivElement>; // ref контейнера на котором нужно отобразить тултип.

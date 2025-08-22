@@ -1,5 +1,5 @@
 import type { ObservableMap } from "mobx";
-import { type BaseFilter } from "../../filters/BaseFilter/BaseFilter";
+import { type BaseFilter } from "@infomaximum/base/src/utils/filters/BaseFilter/BaseFilter";
 import type { NBaseStore } from "../BaseStore/BaseStore.types";
 import type {
   TFilterState,

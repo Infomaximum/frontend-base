@@ -1,5 +1,5 @@
-import { ellipsisStyle } from "../../styles/common.styles";
-import { LOADING_ON_SCROLL_SPINNER_ID } from "../../utils";
+import { ellipsisStyle } from "@infomaximum/base/src/styles/common.styles";
+import { LOADING_ON_SCROLL_SPINNER_ID } from "@infomaximum/base/src/utils";
 import type { TTableOpacity } from "./Table.types";
 
 export const borderTopStyle = (theme: TTheme) =>
@@ -47,8 +47,12 @@ export const tableWithPaddingDefaultStyle = {
 };
 
 export const emptyTableStyle = {
+  ".ant-table-body": {
+    height: "100vh",
+  },
   ".ant-table-tbody > tr > td": {
     borderBottom: "none",
+    padding: "0px !important",
   },
   /* для ei ant отдает ширину, данному узлу дом, равную 0 */
   ".ant-table .ant-table-expanded-row-fixed": {

@@ -3,11 +3,11 @@ import type { ISettingsItemProps } from "./SettingsItem.types";
 import { titleStyle, wrapperStyle, linkStyle, customLinkStyle } from "./SettingsItem.styles";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
-import { settingsItemTitleTestId } from "../../../utils/TestIds";
+import { settingsItemTitleTestId } from "@infomaximum/base/src/utils/TestIds";
 import { generatePath } from "react-router";
 import { assertSimple } from "@infomaximum/assert";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { BetaIconSVG } from "../../../resources/icons";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { BetaIconSVG } from "@infomaximum/base/src/resources/icons";
 
 const SettingsItemComponent: FC<ISettingsItemProps> = ({ onClick, title, routes }) => {
   const localization = useLocalization();

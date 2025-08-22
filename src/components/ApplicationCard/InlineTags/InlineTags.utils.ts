@@ -1,4 +1,4 @@
-import { getTextWidth } from "../../../utils/textWidth";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import {
   tagSidePadding,
   tagsGutter,
@@ -7,7 +7,7 @@ import {
   outerEllipsisPaddingLeft,
   tagBorderWidth,
 } from "./InlineTags.styles";
-import type { ITagProps } from "./InlineTags.types";
+import type { IInlineTagProps } from "./InlineTags.types";
 
 const getTagWidth = (text: string) =>
   getTextWidth(text, { size: tagFontSize }) + (tagSidePadding + tagBorderWidth) * 2;
@@ -20,7 +20,7 @@ const outerEllipsisWidth =
   getTextWidth(outerEllipsisText, { size: outerEllipsisFontSize }) + outerEllipsisPaddingLeft;
 
 /* Из переданных тегов возвращает количество поместившихся в контейнер */
-export const getNumberOfPlacedTags = (tags: ITagProps[], containerWidth: number) => {
+export const getNumberOfPlacedTags = (tags: IInlineTagProps[], containerWidth: number) => {
   const isTagTooOutOfBounds = (leftBound: number, isLast: boolean) => {
     const freeSpace = isLast
       ? containerWidth - leftBound

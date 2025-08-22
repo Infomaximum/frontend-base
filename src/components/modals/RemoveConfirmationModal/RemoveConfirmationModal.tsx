@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
-import { CloseCircleFilled } from "../../Icons/Icons";
-import { Button } from "../../Button/Button";
-import { Modal } from "../../modals/Modal/Modal";
+import { CloseCircleFilled } from "@infomaximum/base/src/components/Icons/Icons";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
+import { Modal } from "@infomaximum/base/src/components/modals/Modal/Modal";
 import {
   modalStyle,
   titleModalStyle,
@@ -9,19 +9,19 @@ import {
   bodyModalStyle,
   modalContentStyle,
 } from "./RemoveConfirmationModal.styles";
-import { CANCEL, DELETE, DELETION } from "../../../utils/Localization/Localization";
-import { withLoc } from "../../../decorators/hocs/withLoc/withLoc";
-import { ModalAnimationInterval } from "../../../utils/const";
+import { CANCEL, DELETE, DELETION } from "@infomaximum/base/src/utils/Localization/Localization";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import { ModalAnimationInterval } from "@infomaximum/base/src/utils/const";
 import { isFunction } from "lodash";
 import {
   removeConfirmationModalCancelButtonTestId,
   removeConfirmationModalRemoveButtonTestId,
-} from "../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import type {
   IRemoveConfirmationModalProps,
   IRemoveConfirmationModalState,
 } from "./RemoveConfirmationModal.types";
-import { withTheme } from "../../../decorators/hocs/withTheme";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
 import { Space } from "antd";
 import type { Interpolation } from "@emotion/react";
 

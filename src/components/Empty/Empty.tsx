@@ -1,15 +1,15 @@
-import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import {
   NOTHING_FOUND,
   NO_ACCESS,
   NO_OBJECTS_MATCHING_FILTER_CRITERIA,
   EMPTY_HERE,
-} from "../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import { Empty as AntEmpty } from "antd";
-import EmptyHereForNowSVG from "../../resources/icons/EmptyHereForNow.svg";
-import NoObjectsMatchingFilterCriteriaSVG from "../../resources/icons/NoObjectsMatchingFilterCriteria.svg";
-import NothingFoundSVG from "../../resources/icons/NothingFound.svg";
-import NoAccessImage from "../../resources/icons/NoAccessImage.svg";
+import EmptyHereForNow from "@infomaximum/base/src/resources/icons/EmptyHereForNow.svg";
+import NoObjectsMatchingFilterCriteria from "@infomaximum/base/src/resources/icons/NoObjectsMatchingFilterCriteria.svg";
+import NothingFound from "@infomaximum/base/src/resources/icons/NothingFound.svg";
+import NoAccessImage from "@infomaximum/base/src/resources/icons/NoAccessImage.svg";
 import {
   emptyDescriptionStyle,
   emptyHintStyle,
@@ -20,7 +20,7 @@ import {
 } from "./Empty.styles";
 import type { IEmptyProps } from "./Empty.types";
 import { isBoolean, isUndefined } from "lodash";
-import { useTheme } from "../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 const EmptyComponent: React.FC<IEmptyProps> = ({
   isFiltersEmpty,
@@ -38,22 +38,22 @@ const EmptyComponent: React.FC<IEmptyProps> = ({
   const localization = useLocalization();
   const theme = useTheme();
 
-  let emptyImage: React.ReactNode = <EmptyHereForNowSVG />;
+  let emptyImage: React.ReactNode = <EmptyHereForNow />;
   let emptyCaption: React.ReactNode = localization.getLocalized(EMPTY_HERE);
 
   if (!description) {
     if (isBoolean(isSearchEmpty) && !isSearchEmpty) {
-      emptyImage = <NothingFoundSVG />;
+      emptyImage = <NothingFound />;
       emptyCaption = localization.getLocalized(NOTHING_FOUND);
     } else if (isBoolean(isFiltersEmpty) && !isFiltersEmpty) {
-      emptyImage = <NoObjectsMatchingFilterCriteriaSVG />;
+      emptyImage = <NoObjectsMatchingFilterCriteria />;
       emptyCaption = localization.getLocalized(NO_OBJECTS_MATCHING_FILTER_CRITERIA);
     } else if (isBoolean(isHasAccess) && !isHasAccess) {
       emptyImage = <NoAccessImage />;
       emptyCaption = localization.getLocalized(NO_ACCESS);
     }
   } else if (isBoolean(isSearchEmpty) && !isSearchEmpty) {
-    emptyImage = <NothingFoundSVG />;
+    emptyImage = <NothingFound />;
     emptyCaption = description;
   } else {
     emptyCaption = description;

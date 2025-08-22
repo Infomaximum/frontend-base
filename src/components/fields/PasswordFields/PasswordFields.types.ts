@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import type { Localization } from "@infomaximum/localization";
-import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
-import type { IWithFormProviderProps } from "../../../decorators/hocs/withFormProvider/withFormProvider";
-import type { Store } from "../../../utils";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import type { IWithFormProviderProps } from "@infomaximum/base/src/decorators/hocs/withFormProvider/withFormProvider";
+import type { Store } from "@infomaximum/base/src/utils";
 import type { Model } from "@infomaximum/graphql-model";
 import type { Interpolation } from "@emotion/react";
 import type { TooltipPlacement } from "antd/lib/tooltip";

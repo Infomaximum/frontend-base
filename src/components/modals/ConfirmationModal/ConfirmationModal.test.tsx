@@ -2,12 +2,12 @@ import type { ReactWrapper } from "enzyme";
 import { mount } from "enzyme";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { Localization } from "@infomaximum/localization";
-import { ModalAnimationInterval } from "../../../utils/const";
+import { ModalAnimationInterval } from "@infomaximum/base/src/utils/const";
 import {
   confirmationModalAdditionalButtonTestId,
   confirmationModalCancelButtonTestId,
   confirmationModalConfirmButtonTestId,
-} from "../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 
 describe("Тест компонента ConfirmationModal", () => {
   const props = {

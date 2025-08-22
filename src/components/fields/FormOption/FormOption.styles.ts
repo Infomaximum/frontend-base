@@ -1,4 +1,4 @@
-import { ESpaceSize } from "../../../decorators/contexts/SpaceSizeContext";
+import { ESpaceSize } from "@infomaximum/base/src/decorators/contexts/SpaceSizeContext";
 
 export const formOptionLabelStyle = (theme: TTheme) => ({
   display: "inline-flex",

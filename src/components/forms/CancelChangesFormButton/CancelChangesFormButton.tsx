@@ -1,11 +1,11 @@
 import { memo, useCallback, useContext } from "react";
 import type { ICancelChangesFormButtonProps } from "./CancelChangesFormButton.types";
-import { Button } from "../../Button";
+import { Button } from "@infomaximum/base/src/components/Button";
 import { assertSimple } from "@infomaximum/assert";
 import { useFormButtonState } from "../hooks/useFormButtonState";
-import { FormContext, useLocalization } from "../../../decorators";
-import { TO_CANCEL, cancelChangesFormButtonTestId } from "../../../utils";
-import type { TButtonType } from "../../Button/Button.types";
+import { FormContext, useLocalization } from "@infomaximum/base/src/decorators";
+import { TO_CANCEL, cancelChangesFormButtonTestId } from "@infomaximum/base/src/utils";
+import type { TButtonType } from "@infomaximum/base/src/components/Button/Button.types";
 import type { SizeType } from "antd/lib/config-provider/SizeContext";
 
 /**

@@ -30,16 +30,16 @@ import {
   headerMenuSettingsTestId,
   headerMenuBodyCenterTestId,
   navigationTabsHeaderTestId,
-} from "../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import ReactDOM from "react-dom";
 import { wrapMenuStyle } from "../HeaderMenu.styles";
-import { HeaderMenuContext } from "../../../decorators/contexts/HeaderMenuContext";
-import { MainSystemPagePathContext } from "../../../decorators/contexts/MainSystemPagePathContext";
-import { useFeature } from "../../../decorators/hooks/useFeature";
-import { LocalSpinner } from "../../Spinner";
+import { HeaderMenuContext } from "@infomaximum/base/src/decorators/contexts/HeaderMenuContext";
+import { MainSystemPagePathContext } from "@infomaximum/base/src/decorators/contexts/MainSystemPagePathContext";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
+import { LocalSpinner } from "@infomaximum/base/src/components/Spinner";
 import { assertSimple } from "@infomaximum/assert";
-import { AlignedTooltip } from "../../AlignedTooltip";
-import { ArrowLeftOutlined, ImFilled } from "../../Icons";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
+import { ArrowLeftOutlined, ImFilled } from "@infomaximum/base/src/components/Icons";
 
 const assertSimpleText = "Дочерний компонент не должен помещаться в DOM";
 

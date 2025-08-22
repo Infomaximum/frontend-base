@@ -1,5 +1,6 @@
 import type { DefaultOptionType, SelectProps, SelectValue } from "antd/lib/select";
 import type { TXPlacement } from "../Dropdown/Dropdown.types";
+import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 
 export interface ISelectProps<T extends SelectValue = SelectValue>
   extends Omit<SelectProps<T>, "dropdownAlign" | "searchValue" | "bordered"> {
@@ -41,4 +42,8 @@ export interface ISelectProps<T extends SelectValue = SelectValue>
   readOnly?: boolean;
   /** Возвращает компонент, относительно которого высчитывается свободное пространство для дропдауна. */
   getBoundingContainer?: () => HTMLElement;
+}
+
+export interface ITagRenderProps extends Omit<CustomTagProps, "onClose"> {
+  onClose: (event?: React.MouseEvent<Element, MouseEvent>) => void;
 }

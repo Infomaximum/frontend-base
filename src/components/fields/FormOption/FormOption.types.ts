@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { Interpolation } from "@emotion/react";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import type { FormItemLayout } from "antd/lib/form/Form";
-import type { NCore } from "../../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export interface IFormOptionProps {
   /**

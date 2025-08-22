@@ -1,13 +1,13 @@
 import { memo, useCallback, useContext, useEffect, useRef, useState } from "react";
 import type { SizeType } from "antd/lib/config-provider/SizeContext";
 import type { ISubmitFormButtonProps } from "./SubmitFormButton.types";
-import { FormContext, useLocalization } from "../../../decorators";
-import type { TButtonType } from "../../Button/Button.types";
+import { FormContext, useLocalization } from "@infomaximum/base/src/decorators";
+import type { TButtonType } from "@infomaximum/base/src/components/Button/Button.types";
 import { assertSimple } from "@infomaximum/assert";
-import { Button } from "../../Button/Button";
-import { submitFormButtonTestId } from "../../../utils/TestIds";
+import { Button } from "@infomaximum/base/src/components/Button/Button";
+import { submitFormButtonTestId } from "@infomaximum/base/src/utils/TestIds";
 import { useFormButtonState } from "../hooks/useFormButtonState";
-import { SAVE } from "../../../utils";
+import { SAVE } from "@infomaximum/base/src/utils";
 import { isEmpty } from "lodash";
 
 /**

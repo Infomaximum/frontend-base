@@ -4,8 +4,8 @@ import type { TRelatedRequestData } from "./RelatedRequestService.types";
 import { XTraceIdHeaderKey } from "@infomaximum/utility";
 
 import { assertSimple } from "@infomaximum/assert";
-import { apolloInstance } from "../../../utils/Store/Apollo";
-import type { NCore } from "../../../libs/core";
+import { apolloInstance } from "@infomaximum/base/src/utils/Store/Apollo";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export class RelatedRequestService extends BaseRequestService {
   public override async requestData(params: TRequestDataParams<TRelatedRequestData>): Promise<any> {

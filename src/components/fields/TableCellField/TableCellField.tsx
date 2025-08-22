@@ -11,9 +11,9 @@ import {
 import type { FieldMetaState, FieldRenderProps } from "react-final-form";
 import { hasAutoFocus } from "./TableCellField.utils";
 import type { TFieldProvider } from "../FormField/Field/Field.types";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { EditableRowContext } from "../../../decorators/contexts/EditableRowContext";
-import { EditableTableContext } from "../../../decorators/contexts/EditableTableContext";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { EditableRowContext } from "@infomaximum/base/src/decorators/contexts/EditableRowContext";
+import { EditableTableContext } from "@infomaximum/base/src/decorators/contexts/EditableTableContext";
 
 export const editableCellClassName = "editable-cell-wrapper";
 export const editableCellParentClassName = "editable-cell-wrapper-parent";

@@ -1,5 +1,5 @@
 import { compact, dropRight, last, size, takeRight } from "lodash";
-import { useContainerWidth } from "../../decorators/hooks/useContainerWidth";
+import { useContainerWidth } from "@infomaximum/base/src/decorators/hooks/useContainerWidth";
 import { EllipsisOutlined, HomeOutlined } from "../Icons/Icons";
 import {
   containerStyle,
@@ -14,12 +14,12 @@ import {
 import type { IBreadcrumbsProps } from "./Breadcrumbs.types";
 import { calcShrinkMask, interleaveWith } from "./Breadcrumbs.utils";
 import { Dropdown } from "../Dropdown/Dropdown";
-import { useLocalization, useTheme } from "../../decorators";
-import { SHOW_MORE_CRUMBS } from "../../utils/Localization";
+import { useLocalization, useTheme } from "@infomaximum/base/src/decorators";
+import { SHOW_MORE_CRUMBS } from "@infomaximum/base/src/utils/Localization";
 import { getDropdownMenuMaxHeight } from "../Dropdown/Dropdown.utils";
-import { getTextWidth } from "../../utils/textWidth";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { AlignedTooltip } from "../AlignedTooltip";
-import { breadcrumbsHomeLinkTestId, breadcrumbsShowMoreTestId } from "../../utils";
+import { breadcrumbsHomeLinkTestId, breadcrumbsShowMoreTestId } from "@infomaximum/base/src/utils";
 import { useCallback, useLayoutEffect, type ReactNode } from "react";
 import type { ItemType } from "antd/es/menu/interface";
 import { Tooltip } from "../Tooltip/Tooltip";

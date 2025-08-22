@@ -2,7 +2,7 @@ import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 import type { SelectProps } from "antd/lib/select";
 import type { FieldRenderProps } from "react-final-form";
-import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 
 export type TSelectFieldValue = any;
 

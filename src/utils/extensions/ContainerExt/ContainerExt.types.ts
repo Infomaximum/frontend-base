@@ -1,5 +1,5 @@
 import type { GraphQlQuery } from "@infomaximum/utility";
-import type { NStore } from "../../Store/Store/Store.types";
+import type { NStore } from "@infomaximum/base/src/utils/Store/Store/Store.types";
 
 export type TFormElementsGetter<P = unknown> = (props: P) => React.ReactNode[];
 

@@ -1,10 +1,10 @@
 import type { FieldRenderProps } from "react-final-form";
-import type { IAutoCompleteProps as IAutoCompleteInternalProps } from "../../AutoComplete/AutoComplete.types";
+import type { IAutoCompleteProps as IAutoCompleteInternalProps } from "@infomaximum/base/src/components/AutoComplete/AutoComplete.types";
 import type { IModel } from "@infomaximum/graphql-model";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
-import type { AutoCompleteStore } from "../../../utils/Store/AutoCompleteStore/AutoCompleteStore";
-import type { TRowDisable } from "../../DataTable/DataTable.types";
+import type { AutoCompleteStore } from "@infomaximum/base/src/utils/Store/AutoCompleteStore/AutoCompleteStore";
+import type { TRowDisable } from "@infomaximum/base/src/components/DataTable/DataTable.types";
 
 export type TAutoFillFieldValue = IModel;
 

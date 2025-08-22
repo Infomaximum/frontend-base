@@ -1,10 +1,10 @@
-import type { Store } from "../../../utils/Store/Store/Store";
+import type { Store } from "@infomaximum/base/src/utils/Store/Store/Store";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { type FC, useCallback } from "react";
 import type { TPropInjector } from "@infomaximum/utility";
 import { observer } from "mobx-react";
-import { useMountEffect } from "../../hooks/useMountEffect";
-import { useUnmountEffect } from "../../hooks/useUnmountEffect";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators/hooks/useUnmountEffect";
 import type {
   IWithStoreProps,
   IFormMutateParams,

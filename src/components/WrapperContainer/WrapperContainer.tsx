@@ -1,11 +1,14 @@
 import React from "react";
 import { Layout } from "antd";
 import type { IWrapperContainerProps } from "./WrapperContainer.types";
-import { useLocalization } from "../../decorators/hooks/useLocalization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { assertSimple } from "@infomaximum/assert";
-import { commonLayoutStyle } from "../../styles/common.styles";
-import { SystemLoaderProvider } from "../../managers/SystemLoaderProvider/SystemLoaderProvider";
-import { MAIN_LAYOUT_CONTENT_ID, MAIN_LAYOUT_SCROLL_CONTAINER_ID } from "../../utils/const";
+import { commonLayoutStyle } from "@infomaximum/base/src/styles/common.styles";
+import { SystemLoaderProvider } from "@infomaximum/base/src/managers/SystemLoaderProvider";
+import {
+  MAIN_LAYOUT_CONTENT_ID,
+  MAIN_LAYOUT_SCROLL_CONTAINER_ID,
+} from "@infomaximum/base/src/utils/const";
 import { contentStyle, scrollContainerStyle, titleStyle } from "./WrapperContainer.styles";
 
 const WrapperContainerComponent: React.FC<IWrapperContainerProps> = ({

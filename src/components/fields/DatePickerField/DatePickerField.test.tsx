@@ -2,7 +2,7 @@ import { mount } from "enzyme";
 import type { IDatePickerFormFieldProps } from "./DatePickerField.types";
 import { BrowserRouter } from "react-router-dom";
 import { DatePickerFormField } from "./DatePickerField";
-import { Form } from "../../forms/Form/FormWrapper";
+import { Form } from "@infomaximum/base/src/components/forms/Form/FormWrapper";
 
 const props = {
   name: "Fake_name",

@@ -1,4 +1,4 @@
-import type { IFormProvider } from "../../../decorators/contexts/FormContext";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
 
 export interface IFormConfirmationModalProps {
   formProvider: IFormProvider;

@@ -1,7 +1,7 @@
 import { type ThemeConfig } from "antd";
 import type { AliasToken } from "antd/lib/theme/interface";
-import { SYSTEM_FONT } from "../../utils";
-import { theme } from "../../styles";
+import { SYSTEM_FONT } from "@infomaximum/base/src/utils";
+import { theme } from "@infomaximum/base/src/styles";
 
 const color = {
   grey1Color: "#ffffff",

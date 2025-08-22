@@ -2,9 +2,9 @@ import React, { createContext } from "react";
 import { Dropdown } from "../Dropdown";
 import type { IBaseDropdownProps, IBaseDropdownState } from "./BaseDropdown.types";
 import { menuStyle, mainBaseDropdownOverlayStyle } from "./BaseDropdown.styles";
-import { DropdownAnimationInterval } from "../../../utils/const";
-import { boundMethod, withTheme } from "../../../decorators";
-import { getCssConversionStyle } from "../../../styles";
+import { DropdownAnimationInterval } from "@infomaximum/base/src/utils/const";
+import { boundMethod, withTheme } from "@infomaximum/base/src/decorators";
+import { getCssConversionStyle } from "@infomaximum/base/src/styles";
 
 export enum EBaseDropdownPlacement {
   bottomLeft = "bottomLeft",

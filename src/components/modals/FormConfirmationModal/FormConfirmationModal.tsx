@@ -2,10 +2,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ConfirmationModal } from "../ConfirmationModal/ConfirmationModal";
 import { titleAndInfoStyle } from "./FormConfirmationModal.styles";
 import type { IFormConfirmationModalProps } from "./FormConfirmationModal.types";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { contains } from "../../../utils/URI/URI";
-import { useMountEffect } from "../../../decorators/hooks/useMountEffect";
-import { ModalAnimationInterval, Z_INDEX_FORM_CONFIRMATION_MODAL } from "../../../utils/const";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { contains } from "@infomaximum/base/src/utils/URI/URI";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
+import {
+  ModalAnimationInterval,
+  Z_INDEX_FORM_CONFIRMATION_MODAL,
+} from "@infomaximum/base/src/utils/const";
 import {
   SAVE,
   UNABLE_TO_SAVE_CHANGE,
@@ -14,10 +17,10 @@ import {
   WAIT,
   ARE_YOU_SURE_YOU_WANT_TO_LEAVE,
   SAVING_IN_PROGRESS,
-} from "../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import { useBlocker } from "react-router";
 import { useBeforeUnload } from "react-router-dom";
-import { usePrevious } from "../../../decorators";
+import { usePrevious } from "@infomaximum/base/src/decorators";
 
 const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   formProvider,

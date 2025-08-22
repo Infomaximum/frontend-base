@@ -2,12 +2,12 @@ import {
   tableArrowUpTestId,
   tableArrowRightTestId,
   tableExpanderTestId,
-} from "../../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import { memo, useCallback } from "react";
 import { tableExpandIconHiddenStyle, tableExpandIconStyle } from "./TableExpandIcon.styles";
 import type { ITableExpandIconProps } from "./TableExpandIcon.types";
-import { useTheme } from "../../../../decorators/hooks/useTheme";
-import { RightOutlined, UpOutlined } from "../../../Icons";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { RightOutlined, UpOutlined } from "@infomaximum/base/src/components/Icons";
 
 const TableExpandIconComponent = <T extends TDictionary>(
   props: ITableExpandIconProps<T | null>

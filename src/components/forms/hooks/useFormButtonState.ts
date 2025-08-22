@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { IFormProvider } from "../../../decorators/contexts/FormContext";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
 
 type TFormButtonState = {
   submitting: boolean;

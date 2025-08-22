@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { UrlParamAccessor, type FiltersStore } from "../../utils";
+import { UrlParamAccessor, type FiltersStore } from "@infomaximum/base/src/utils";
 import { useFiltersSubscribe } from "./useFiltersSubscribe";
 import { useWillMountEffect } from "./useWillMountEffect";
 import { useMountEffect } from "./useMountEffect";

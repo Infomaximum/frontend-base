@@ -22,12 +22,13 @@ import {
   loadingButtonStyle,
   buttonLocSpinStyle,
   buttonLocSpinIndicatorStyle,
+  onlyIconStyle,
 } from "./Button.styles";
 import type { Interpolation } from "@emotion/react";
-import { Tooltip } from "../../components/Tooltip/Tooltip";
-import { useTheme } from "../../decorators/hooks/useTheme";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { LocalSpinner } from "../Spinner";
-import { ellipsisStyle } from "../../styles";
+import { ellipsisStyle } from "@infomaximum/base/src/styles";
 
 const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
   (props, ref: React.Ref<HTMLButtonElement>) => {
@@ -99,6 +100,10 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
         } else {
           styles.push(smallButtonStyle(theme));
         }
+      }
+
+      if (onlyIcon) {
+        styles.push(onlyIconStyle);
       }
 
       if (dashed) {

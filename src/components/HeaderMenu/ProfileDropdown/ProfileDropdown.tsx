@@ -1,5 +1,8 @@
-import { LOG_OUT, MY_PROFILE } from "../../../utils/Localization/Localization";
-import { headerMenuUserAvatarTestId, logoutButtonTestId } from "../../../utils/TestIds";
+import { LOG_OUT, MY_PROFILE } from "@infomaximum/base/src/utils/Localization/Localization";
+import {
+  headerMenuUserAvatarTestId,
+  logoutButtonTestId,
+} from "@infomaximum/base/src/utils/TestIds";
 import { Col, Menu, Row } from "antd";
 import { iconsHoverStyle } from "../HeaderMenu.styles";
 import type { IProfileDropdownProps } from "./ProfileDropdown.types";
@@ -13,11 +16,11 @@ import { useMemo, useCallback } from "react";
 import { map } from "lodash";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import type { ItemType } from "antd/lib/menu/interface";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { Dropdown } from "../../Dropdown/Dropdown";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { Dropdown } from "@infomaximum/base/src/components/Dropdown/Dropdown";
 import { HeaderAvatar } from "../HeaderAvatar/HeaderAvatar";
-import { Tooltip } from "../../Tooltip/Tooltip";
-import { ExportOutlined } from "../../Icons";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";
+import { ExportOutlined } from "@infomaximum/base/src/components/Icons";
 
 const tooltipAlign = { targetOffset: [0, 2] };
 

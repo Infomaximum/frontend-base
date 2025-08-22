@@ -1,6 +1,6 @@
 import type { TPropInjector } from "@infomaximum/utility";
-import type { IFormProvider } from "../../contexts/FormContext";
-import { FormContext } from "../../contexts/FormContext";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
 import hoistNonReactStatics from "hoist-non-react-statics";
 
 export interface IWithFormProviderProps {

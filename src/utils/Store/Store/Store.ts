@@ -2,7 +2,7 @@
 
 import { cloneDeep, get, isArray, isNil, reduce } from "lodash";
 import { action, computed, makeObservable, observable } from "mobx";
-import { typenameToModel } from "../../../models/typenameToModel";
+import { typenameToModel } from "@infomaximum/base/src/models/typenameToModel";
 import { type TInferredVariables } from "@infomaximum/utility";
 import type { NStore } from "./Store.types";
 import type { DocumentNode } from "graphql";
@@ -10,12 +10,12 @@ import { BaseStore } from "../BaseStore/BaseStore";
 import type { Model, TModelStruct } from "@infomaximum/graphql-model";
 import { assertSimple } from "@infomaximum/assert";
 import { ApolloDataCache } from "../ApolloDataCache";
-import { boundMethod } from "../../../decorators/decorators/boundMethod/boundMethod";
-import type { IRequestService } from "../../../services/Network/Requests.types";
-import type { ISubscriptionService } from "../../../services/Network/Subscriptions.types";
-import { BaseRequestService } from "../../../services/Network/BaseRequestService";
-import { BaseSubscriptionService } from "../../../services/Network/BaseSubscriptionService";
-import type { NCore } from "../../../libs/core";
+import { boundMethod } from "@infomaximum/base/src/decorators/decorators/boundMethod/boundMethod";
+import type { IRequestService } from "@infomaximum/base/src/services/Network/Requests.types";
+import type { ISubscriptionService } from "@infomaximum/base/src/services/Network/Subscriptions.types";
+import { BaseRequestService } from "@infomaximum/base/src/services/Network/BaseRequestService";
+import { BaseSubscriptionService } from "@infomaximum/base/src/services/Network/BaseSubscriptionService";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 type TPrivateStoreField =
   | "_data"

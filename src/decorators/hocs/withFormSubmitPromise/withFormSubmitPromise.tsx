@@ -10,10 +10,10 @@ import {
   getFormFieldsError,
 } from "./withFormSubmitPromise.utils";
 import type { SubmissionErrors } from "final-form";
-import { useLocalization } from "../../hooks/useLocalization";
-import { handleErrorInternal } from "../../../managers/Errors/Errors";
-import type { IFormProvider } from "../../contexts/FormContext";
-import { Message } from "../../../components/Message/Message";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { handleErrorInternal } from "@infomaximum/base/src/managers/Errors/Errors";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { Message } from "@infomaximum/base/src/components/Message/Message";
 
 const withFormSubmitPromise: TPropInjector<IWithFormSubmitPromiseProps> = (Component: any) => {
   const WithFormSubmitPromise: React.FC<any> = ({ onSubmit, notification, ...rest }) => {

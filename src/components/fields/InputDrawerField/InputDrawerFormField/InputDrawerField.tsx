@@ -10,12 +10,12 @@ import type {
 import { isFunction, map, forEach, some, isUndefined, isEqual } from "lodash";
 import { wrapperInputDrawerStyle } from "./InputDrawerField.styles";
 import type { IModel } from "@infomaximum/graphql-model";
-import { Field } from "../../FormField/Field/Field";
-import { FormField } from "../../FormField/FormField";
-import type { ICommonTableCellProps } from "../../TableCellField/TableCellField.types";
-import { TableCellField } from "../../TableCellField/TableCellField";
-import { headerModes } from "../../../DataTable/DataTableHeader/DataTableHeader";
-import { DataTableDrawer } from "../../../drawers/DataTableDrawer/DataTableDrawer";
+import { Field } from "@infomaximum/base/src/components/fields/FormField/Field/Field";
+import { FormField } from "@infomaximum/base/src/components/fields/FormField/FormField";
+import type { ICommonTableCellProps } from "@infomaximum/base/src/components/fields/TableCellField/TableCellField.types";
+import { TableCellField } from "@infomaximum/base/src/components/fields/TableCellField/TableCellField";
+import { headerModes } from "@infomaximum/base/src/components/DataTable/DataTableHeader/DataTableHeader";
+import { DataTableDrawer } from "@infomaximum/base/src/components/drawers/DataTableDrawer/DataTableDrawer";
 
 class InputDrawer extends React.PureComponent<IInputDrawerProps, IInputDrawerState> {
   public static defaultProps: Partial<IInputDrawerProps> = {

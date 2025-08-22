@@ -1,13 +1,13 @@
 import React from "react";
 import { ArrowDownOutlined } from "../Icons/Icons";
 import { Button } from "../Button/Button";
-import { withLoc } from "../../decorators/hocs/withLoc/withLoc";
-import { SHOW_MORE } from "../../utils/Localization/Localization";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import { SHOW_MORE } from "@infomaximum/base/src/utils/Localization/Localization";
 import type { IShowMoreProps } from "./ShowMore.types";
-import { tableShowMoreButtonTestId } from "../../utils/TestIds";
+import { tableShowMoreButtonTestId } from "@infomaximum/base/src/utils/TestIds";
 import { buttonStyle, ghostButtonStyle } from "./ShowMore.styles";
 import { observer } from "mobx-react";
-import { withTheme } from "../../decorators/hocs/withTheme/withTheme";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme/withTheme";
 import { isNumber } from "lodash";
 import { ShowMoreSpinner } from "./ShowMoreSpinner";
 

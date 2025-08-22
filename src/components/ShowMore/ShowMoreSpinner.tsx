@@ -1,5 +1,5 @@
 import { spinContainerStyle } from "./ShowMore.styles";
-import { LOADING_ON_SCROLL_SPINNER_ID } from "../../utils";
+import { LOADING_ON_SCROLL_SPINNER_ID } from "@infomaximum/base/src/utils";
 import { LocalSpinner } from "../Spinner";
 
 export const ShowMoreSpinner = () => (

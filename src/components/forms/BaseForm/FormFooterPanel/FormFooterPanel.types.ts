@@ -1,6 +1,5 @@
-import type { EFormLayoutType } from "../BaseForm.types";
-
-import type { TAccessRules } from "../../../../utils/access";
+import type { EFormLayoutType } from "@infomaximum/base/src/components/forms/BaseForm/BaseForm.types";
+import type { TAccessRules } from "@infomaximum/base/src/utils/access";
 
 export type TFormFunctionalButtonObject = {
   component: React.ReactElement | null;

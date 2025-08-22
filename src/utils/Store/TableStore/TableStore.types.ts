@@ -1,8 +1,8 @@
 import type { IModel } from "@infomaximum/graphql-model";
-import type { TreeCounter } from "../../../managers/TreeCounter";
-import type { ELimitsStateNames } from "../../../utils/const";
+import type { TreeCounter } from "@infomaximum/base/src/managers/TreeCounter";
+import type { ELimitsStateNames } from "@infomaximum/base/src/utils/const";
 import type { NStore } from "../Store/Store.types";
-import type { RestModel } from "../../../models/RestModel";
+import type { RestModel } from "@infomaximum/base/src/models/RestModel";
 import type { TableStore } from "./TableStore";
 
 export declare namespace NTableStore {

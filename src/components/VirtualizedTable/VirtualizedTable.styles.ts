@@ -9,8 +9,8 @@ export const loaderWrapperStyle = {
 
 export const getEmptyContentStyle = (maxHeight: number, loading: boolean) =>
   ({
-    padding: "9px 0px 27px 0px",
-    height: "fit-content",
+    padding: "0px 0px 27px 0px",
+    height: "100vh",
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
     opacity: loading ? 0.3 : 1,

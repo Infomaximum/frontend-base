@@ -1,4 +1,4 @@
-import { LOADING_ON_SCROLL_SPINNER_ID } from "../../../../utils";
+import { LOADING_ON_SCROLL_SPINNER_ID } from "@infomaximum/base/src/utils";
 
 export const virtualizedTableBodyListWithPaddingStyle = {
   paddingBottom: "8px",

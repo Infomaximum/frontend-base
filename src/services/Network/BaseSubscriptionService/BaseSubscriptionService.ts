@@ -1,9 +1,9 @@
 import { isFunction } from "lodash";
 import type { ISubscriptionService, TSubscribeParams } from "../Subscriptions.types";
 import type { Subscription } from "zen-observable-ts";
-import type { IErrorHandlerService } from "../../ErrorHandlers/ErrorHandlers.types";
-import { SubscriptionErrorHandlerService } from "../../ErrorHandlers";
-import { apolloInstance } from "../../../utils/Store/Apollo";
+import type { IErrorHandlerService } from "@infomaximum/base/src/services/ErrorHandlers/ErrorHandlers.types";
+import { SubscriptionErrorHandlerService } from "@infomaximum/base/src/services/ErrorHandlers";
+import { apolloInstance } from "@infomaximum/base/src/utils/Store/Apollo";
 
 type TSubscriptionParams = {
   /** Инстанс обработчика ошибок */

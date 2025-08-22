@@ -5,7 +5,7 @@ import { treeStyle, treeSwitcherIconContainerStyle, treeSwitcherIconStyle } from
 import { DownOutlined } from "../Icons/Icons";
 import type { DataNode } from "antd/lib/tree";
 import { map } from "lodash";
-import { useTheme } from "../../decorators/hooks/useTheme";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 /** Метод возвращает новые данные дерева с добавлением classNames для различных состояний */
 const mapTreeData = (treeData: DataNode[] | undefined): DataNode[] | undefined => {

@@ -1,5 +1,5 @@
 import { first, last, sum, takeRight, tail } from "lodash";
-import { ellipsisStyle } from "../../styles";
+import { ellipsisStyle } from "@infomaximum/base/src/styles";
 
 export const getDisableSelectStyle =
   (disabled = true) =>
@@ -151,27 +151,10 @@ export const commonTagStyle = (theme: TTheme) => ({
   },
 });
 
-export const getSelectTagStyle = (closable: boolean, color?: keyof TTheme["tagsStyles"]) => {
-  if (closable) {
-    return commonTagStyle;
-  }
-
-  if (color === "greyInv") {
-    return disableGreyInvTagStyle;
-  }
-
-  return disableTagStyle;
-};
-
 export const disableTagStyle = (theme: TTheme) => ({
   ...commonTagStyle(theme),
   cursor: "not-allowed",
   paddingRight: "7px",
-});
-
-const disableGreyInvTagStyle = (theme: TTheme) => ({
-  ...disableTagStyle(theme),
-  color: `${theme.tagsStyles.greyInv.textColor} !important`,
 });
 
 export const tagStyle = (theme: TTheme) => ({
@@ -179,13 +162,6 @@ export const tagStyle = (theme: TTheme) => ({
   background: theme.grey3Color,
   border: `1px solid ${theme.grey4Color}`,
   color: theme.grey8Color,
-});
-
-export const closeIconStyle = (theme: TTheme) => ({
-  color: `${theme.grey7Color}`,
-  marginLeft: "1px",
-  display: "flex",
-  alignItems: "center",
 });
 
 export const suffixIconStyle = (theme: TTheme) => ({

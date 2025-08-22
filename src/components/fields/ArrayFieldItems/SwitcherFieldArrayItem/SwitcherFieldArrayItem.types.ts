@@ -1,5 +1,5 @@
-import type { IFieldEntityComponentProps } from "../../ArrayField/ArrayField.types";
-import type { ISwitcherFieldProps } from "../../SwitcherField/SwitcherField.types";
+import type { IFieldEntityComponentProps } from "@infomaximum/base/src/components/fields/ArrayField/ArrayField.types";
+import type { ISwitcherFieldProps } from "@infomaximum/base/src/components/fields/SwitcherField/SwitcherField.types";
 
 export interface ISwitcherFieldArrayItemProps
   extends IFieldEntityComponentProps,

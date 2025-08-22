@@ -1,8 +1,8 @@
-import type { ISelectProps } from "../../../Select/Select.types";
-import type { IWithLocProps } from "../../../../decorators/hocs/withLoc/withLoc";
-import type { AutoCompleteStore } from "../../../../utils/Store/AutoCompleteStore/AutoCompleteStore";
+import type { ISelectProps } from "@infomaximum/base/src/components/Select/Select.types";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import type { AutoCompleteStore } from "@infomaximum/base/src/utils/Store/AutoCompleteStore/AutoCompleteStore";
 import type { IModel } from "@infomaximum/graphql-model";
-import type { TRowDisable } from "../../../DataTable/DataTable.types";
+import type { TRowDisable } from "@infomaximum/base/src/components/DataTable/DataTable.types";
 
 export interface ISelectComponentProps
   extends Omit<

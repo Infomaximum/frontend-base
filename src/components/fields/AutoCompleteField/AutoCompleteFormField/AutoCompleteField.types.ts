@@ -1,16 +1,17 @@
 import type { SelectProps } from "antd/lib/select";
 import type { RowSelectionType } from "antd/lib/table/interface";
 import type { FieldRenderProps } from "react-final-form";
-import type { IWithFeatureProps } from "../../../../decorators/hocs/withFeature/withFeature.types";
-import type { IWithLocProps } from "../../../../decorators/hocs/withLoc/withLoc";
+import type { IWithFeatureProps } from "@infomaximum/base/src/decorators/hocs/withFeature/withFeature.types";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 import type { IGroup, IModel } from "@infomaximum/graphql-model";
-import type { AutoCompleteStore } from "../../../../utils/Store/AutoCompleteStore/AutoCompleteStore";
-import type { IColumnProps } from "../../../VirtualizedTable/VirtualizedTable.types";
-import type { IFieldProps } from "../../FormField/Field/Field.types";
-import type { IFormFieldProps } from "../../FormField/FormField.types";
-import type { TRowDisable } from "../../../DataTable/DataTable.types";
-import type { IDataTableDrawerOwnProps } from "../../../drawers/DataTableDrawer/DataTableDrawer.types";
-import type { ISelectProps } from "../../../Select/Select.types";
+import type { AutoCompleteStore } from "@infomaximum/base/src/utils/Store/AutoCompleteStore/AutoCompleteStore";
+import type { IColumnProps } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import type { IFieldProps } from "@infomaximum/base/src/components/fields/FormField/Field/Field.types";
+import type { IFormFieldProps } from "@infomaximum/base/src/components/fields/FormField/FormField.types";
+import type { TRowDisable } from "@infomaximum/base/src/components/DataTable/DataTable.types";
+import type { IDataTableDrawerOwnProps } from "@infomaximum/base/src/components/drawers/DataTableDrawer/DataTableDrawer.types";
+import type { ISelectProps } from "@infomaximum/base/src/components/Select/Select.types";
+import type { DrawerStyles } from "antd/lib/drawer/DrawerPanel";
 export type TAutoCompleteFieldValue = IModel[];
 
 export interface IAutoCompleteProps
@@ -31,7 +32,17 @@ export interface IAutoCompleteOwnProps
     Pick<ISelectProps, "autoFocusWithPreventScroll">,
     IWithFeatureProps,
     IWithLocProps,
-    Partial<Pick<IDataTableDrawerOwnProps, "tableStore" | "headerMode" | "isVirtualized">> {
+    Partial<
+      Pick<
+        IDataTableDrawerOwnProps,
+        | "tableStore"
+        | "headerMode"
+        | "isVirtualized"
+        | "rowHeight"
+        | "onStartClosing"
+        | "isShowDividers"
+      >
+    > {
   hintContainer?: React.ReactNode;
 
   /**
@@ -62,6 +73,11 @@ export interface IAutoCompleteOwnProps
    * Включать ли дровер для выбора значения из таблицы
    */
   isDrawerEnabled?: boolean;
+
+  /**
+   * Стилизация дровера
+   */
+  drawerStyles?: DrawerStyles;
 
   /**
    * Заголовок в дровере

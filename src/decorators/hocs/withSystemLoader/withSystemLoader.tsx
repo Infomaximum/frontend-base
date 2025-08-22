@@ -1,7 +1,7 @@
 import type { TPropInjector } from "@infomaximum/utility";
 import { useCallback, useState } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import { useSystemLoaderControl } from "../../hooks/useSystemLoaderControl";
+import { useSystemLoaderControl } from "@infomaximum/base/src/decorators/hooks/useSystemLoaderControl";
 
 export interface IWithSystemLoaderProps {
   hideSystemLoader: () => void;

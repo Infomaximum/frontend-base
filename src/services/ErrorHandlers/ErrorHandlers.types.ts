@@ -1,4 +1,4 @@
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 /** Интерфейс сервисов обработки ошибок */
 export interface IErrorHandlerService {

@@ -1,17 +1,17 @@
 import { Fragment, memo, useCallback, useContext, useMemo } from "react";
 import { Layout } from "antd";
 import React from "react";
-import { isShowElement, sortByPriority } from "../../../../utils";
-import { FormContext, useFeature } from "../../../../decorators";
-import { SubmitFormButton } from "../../SubmitFormButton";
-import { CancelChangesFormButton } from "../../CancelChangesFormButton";
+import { isShowElement, sortByPriority } from "@infomaximum/base/src/utils";
+import { FormContext, useFeature } from "@infomaximum/base/src/decorators";
+import { SubmitFormButton } from "@infomaximum/base/src/components/forms/SubmitFormButton";
+import { CancelChangesFormButton } from "@infomaximum/base/src/components/forms/CancelChangesFormButton";
 import {
   getFormFooterStyle,
   formFunctionalButtonsContainerStyle,
   formSubmitButtonStyle,
   submitButtonsStyle,
 } from "./FormFooterPanel.styles";
-import { HeaderMenuPortal } from "../../../HeaderMenu";
+import { HeaderMenuPortal } from "@infomaximum/base/src/components/HeaderMenu";
 import { forEach, isNull, isUndefined, map } from "lodash";
 import type { IFormFooterPanelProps } from "./FormFooterPanel.types";
 

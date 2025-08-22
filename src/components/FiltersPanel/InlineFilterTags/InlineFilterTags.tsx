@@ -29,22 +29,22 @@ import {
   tagsWrapperStyle,
   wrapperStyle,
 } from "./InlineFilterTags.styles";
-import { Dropdown } from "../../Dropdown";
-import { ErrorBoundary } from "../../ErrorBoundary";
-import { Tag } from "../../Tag";
-import { getTextWidth } from "../../../utils/textWidth";
-import { tooltipSeparator } from "../../ApplicationCard/InlineTags/InlineTags.utils";
-import { MORE, NOT, removeFiltersButtonTestId, RESET } from "../../../utils";
+import { Dropdown } from "@infomaximum/base/src/components/Dropdown";
+import { ErrorBoundary } from "@infomaximum/base/src/components/ErrorBoundary";
+import { Tag } from "@infomaximum/base/src/components/Tag";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
+import { tooltipSeparator } from "@infomaximum/base/src/components/ApplicationCard/InlineTags/InlineTags.utils";
+import { MORE, NOT, removeFiltersButtonTestId, RESET } from "@infomaximum/base/src/utils";
 import {
   TopPanelContext,
   useLocalization,
   useMountEffect,
   useTheme,
   useUnmountEffect,
-} from "../../../decorators";
-import FilterItem from "../../FilterList/FilterItem/FilterItem";
+} from "@infomaximum/base/src/decorators";
+import FilterItem from "@infomaximum/base/src/components/FilterList/FilterItem/FilterItem";
 import { Row } from "antd";
-import { getDropdownMenuMaxHeight } from "../../Dropdown/Dropdown.utils";
+import { getDropdownMenuMaxHeight } from "@infomaximum/base/src/components/Dropdown/Dropdown.utils";
 import type { ItemType } from "antd/es/menu/interface";
 import { getNumberOfPlacedTags, tagConfig } from "./InlineFilterTags.utils";
 

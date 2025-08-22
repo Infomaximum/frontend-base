@@ -1,8 +1,8 @@
 import type { Interpolation } from "@emotion/react";
 import { useContainerWidth } from "./useContainerWidth";
 import { forEach, isEmpty, map } from "lodash";
-import { getGradientColorsFromTransparent } from "../../utils/colors";
-import { getTextWidth } from "../../utils/textWidth";
+import { getGradientColorsFromTransparent } from "@infomaximum/base/src/utils/colors";
+import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { useMemo } from "react";
 
 /**

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useId, useLayoutEffect, useRef } from "react";
 import { useExecuteCallbackOnceOnCondition } from "../useExecuteCallbackOnceOnCondition";
-import { SystemLoaderContext } from "../../contexts/SystemLoaderContext";
+import { SystemLoaderContext } from "@infomaximum/base/src/decorators/contexts/SystemLoaderContext";
 
 type TParams = {
   model: unknown | null;

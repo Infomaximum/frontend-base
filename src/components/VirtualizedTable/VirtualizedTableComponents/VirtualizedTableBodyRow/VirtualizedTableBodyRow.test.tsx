@@ -1,10 +1,10 @@
 import enzyme from "enzyme";
 import { Localization } from "@infomaximum/localization";
 import { VirtualizedTableBodyRow } from "./VirtualizedTableBodyRow";
-import { ERROR } from "../../../../utils/Localization/Localization";
-import { tableExpanderTestId } from "../../../../utils/TestIds";
-import type { TBaseRow, TExtendColumns } from "../../../../managers/Tree";
-import type { IVirtualizedColumnConfig } from "../../VirtualizedTable.types";
+import { ERROR } from "@infomaximum/base/src/utils/Localization/Localization";
+import { tableExpanderTestId } from "@infomaximum/base/src/utils/TestIds";
+import type { TBaseRow, TExtendColumns } from "@infomaximum/base/src/managers/Tree";
+import type { IVirtualizedColumnConfig } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 
 const localization = new Localization({ language: Localization.Language.ru });
 

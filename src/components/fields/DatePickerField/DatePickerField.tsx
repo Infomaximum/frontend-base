@@ -7,11 +7,11 @@ import type {
 } from "./DatePickerField.types";
 import { datePickerFieldStyle } from "./DatePickerField.styles";
 import dayjs, { type Dayjs } from "dayjs";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { useClearElementFromAttribute } from "../../../decorators/hooks/useClearElementFromAttribute";
-import { globalScrollBehavior } from "../../../utils/ScrollBehavior/ScrollBehavior";
-import { Input } from "../../Input/Input";
-import { NOT_SET } from "../../../utils/Localization/Localization";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useClearElementFromAttribute } from "@infomaximum/base/src/decorators/hooks/useClearElementFromAttribute";
+import { globalScrollBehavior } from "@infomaximum/base/src/utils/ScrollBehavior/ScrollBehavior";
+import { Input } from "@infomaximum/base/src/components/Input/Input";
+import { NOT_SET } from "@infomaximum/base/src/utils/Localization/Localization";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 import { isNil, isString, reduce } from "lodash";

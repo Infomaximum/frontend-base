@@ -1,7 +1,11 @@
 import type { Localization, TLocalizationDescription } from "@infomaximum/localization";
 import type { ReactNode } from "react";
-import type { ConfigOptions } from "antd/lib/message/interface";
-import type { NCore } from "../../libs/core";
+import type {
+  ConfigType,
+  MessageType,
+  SpecialMessageTaskType,
+} from "@infomaximum/ui-kit/dist/components/Message/message.types";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export enum EMassAssignEndings {
   MALE = "male",
@@ -17,16 +21,14 @@ export type TGetMassAssignMessageParams = {
   ending?: EMassAssignEndings;
 };
 
-export interface IMessageProps {
-  config?: ConfigOptions;
+type TPickSpecialMessageTaskType = "onClick" | "onClose" | "styles" | "className" | "closable";
+
+export interface IMessageProps extends Pick<SpecialMessageTaskType, TPickSpecialMessageTaskType> {
+  config?: ConfigType;
   notification: ReactNode | (() => ReactNode) | [() => ReactNode];
   messageDuration?: number;
-  type?: string;
-  localization?: Localization;
-  noticeStyle?: React.CSSProperties;
-  closable?: boolean;
-  infinity?: boolean;
-  customKey?: string;
+  type?: MessageType;
+  customKey?: SpecialMessageTaskType["key"];
 }
 
 export type TRemoveMessageProps = {
@@ -53,12 +55,4 @@ export interface IMessageMethodProps {
     navigate: NCore.TRouteComponentProps["navigate"];
     feminineGenus?: boolean;
   };
-}
-
-export interface IMessageBodyProps {
-  messageBody: ReactNode;
-  messageKey: string | number;
-  duration: number;
-  closable?: boolean;
-  infinity?: boolean;
 }

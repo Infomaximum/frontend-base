@@ -1,6 +1,6 @@
 import type React from "react";
-import type { BaseFilter } from "../../../utils";
-import type { NFiltersStore } from "../../../utils/Store/FiltersStore/FiltersStore.types";
+import type { BaseFilter } from "@infomaximum/base/src/utils";
+import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
 
 export interface IFilterItemProps {
   caption: string;

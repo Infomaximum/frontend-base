@@ -8,7 +8,11 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { isFunction, reverse, isUndefined, keyBy, isNil, size } from "lodash";
-import { type BaseFilter, CLEAR_FILTER, removeFiltersButtonTestId } from "../../utils";
+import {
+  type BaseFilter,
+  CLEAR_FILTER,
+  removeFiltersButtonTestId,
+} from "@infomaximum/base/src/utils";
 import type {
   TFilterClassByTypenameCache,
   IFiltersPanelProps,
@@ -27,9 +31,9 @@ import { DropdownAddFilter } from "./Dropdowns/DropdownAddFilter/DropdownAddFilt
 import { observer } from "mobx-react";
 import { dividerVerticalStyle } from "../FilterList/FilterList/FilterList.styles";
 import { InlineFilterTags } from "./InlineFilterTags/InlineFilterTags";
-import { useLocalization, useMountEffect, useUrlFilters } from "../../decorators";
-import type { NFiltersStore } from "../../utils/Store/FiltersStore/FiltersStore.types";
-import type { IPositionConfig } from "../../utils/filters/BaseFilter/BaseFilter.types";
+import { useLocalization, useMountEffect, useUrlFilters } from "@infomaximum/base/src/decorators";
+import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
+import type { IPositionConfig } from "@infomaximum/base/src/utils/filters/BaseFilter/BaseFilter.types";
 import { EFilteringMethods } from "@infomaximum/base-filter";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { Tooltip } from "../Tooltip";

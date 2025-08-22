@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Navigate, generatePath, useParams } from "react-router";
-import { getSavedSessionStoragePath } from "../../../utils";
+import { getSavedSessionStoragePath } from "@infomaximum/base/src/utils";
 
 const RedirectToCurrentPathComponent: React.FC = () => {
   const params = useParams();

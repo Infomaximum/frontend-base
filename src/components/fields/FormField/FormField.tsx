@@ -4,9 +4,9 @@ import { FormOption } from "../FormOption/FormOption";
 import { getAccessParameters } from "@infomaximum/utility";
 import type { TFieldProvider } from "./Field/Field.types";
 import type { FieldMetaState } from "react-final-form";
-import { useFeature } from "../../../decorators/hooks/useFeature";
-import { FormContext } from "../../../decorators/contexts/FormContext";
-import { usePrevious } from "../../../decorators/hooks/usePrevious";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { usePrevious } from "@infomaximum/base/src/decorators/hooks/usePrevious";
 
 function FormFieldComponent<V = any>(props: IFormFieldProps<V>) {
   const {

@@ -1,5 +1,5 @@
-import { menuStyle } from "../../../Dropdown";
-import { FILTERS_LIMIT } from "../../../../utils";
+import { menuStyle } from "@infomaximum/base/src/components/Dropdown";
+import { FILTERS_LIMIT } from "@infomaximum/base/src/utils";
 
 export const getWrapperStyle = (theme: TTheme, isHeaderFilter?: boolean) => ({
   ...menuStyle(theme),
@@ -27,7 +27,8 @@ export const getWrapperWithScrollStyle = (isHeaderFilter: boolean) => (theme: TT
 
 export const defaultFilterItemsWrapperStyle = (theme: TTheme) =>
   ({
-    maxHeight: `${FILTERS_LIMIT * theme.mediumLineHeight}px`, // n - полей по 32px
+    // n - полей по 32px
+    maxHeight: `${FILTERS_LIMIT * theme.mediumLineHeight}px`,
     overflowY: "auto" as const,
   }) as const;
 

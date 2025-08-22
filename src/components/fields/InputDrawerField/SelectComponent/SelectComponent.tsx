@@ -12,16 +12,19 @@ import {
 import {
   inputDrawerSelectSuffixButtonTestId,
   inputDrawerSelectTestId,
-} from "../../../../utils/TestIds";
+} from "@infomaximum/base/src/utils/TestIds";
 import type { ISelectProps, ISelectState } from "./SelectComponent.types";
 import { observer } from "mobx-react";
-import { CloseCircleFilled, ListMarkerOutlined } from "../../../Icons/Icons";
+import {
+  CloseCircleFilled,
+  ListMarkerOutlined,
+} from "@infomaximum/base/src/components/Icons/Icons";
 import type { Localization } from "@infomaximum/localization";
 import type { IModel } from "@infomaximum/graphql-model";
-import { NOT_SELECTED } from "../../../../utils/Localization/Localization";
-import { Select } from "../../../Select/Select";
-import { withLoc } from "../../../../decorators/hocs/withLoc/withLoc";
-import { AlignedTooltip } from "../../../AlignedTooltip";
+import { NOT_SELECTED } from "@infomaximum/base/src/utils/Localization/Localization";
+import { Select } from "@infomaximum/base/src/components/Select/Select";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
 
 class _SelectComponent extends React.PureComponent<ISelectProps, ISelectState> {
   public static clearIconConfig = { clearIcon: <CloseCircleFilled css={closeCircleStyle} /> };

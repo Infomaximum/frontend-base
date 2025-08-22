@@ -1,5 +1,5 @@
-import type { TRow } from "../../../VirtualizedTable/VirtualizedTable.types";
-import type { IContextMenuItem } from "../../ContextMenu.types";
+import type { TRow } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
+import type { IContextMenuItem } from "@infomaximum/base/src/components/ContextMenu/ContextMenu.types";
 
 export type TPositionCoordinates = {
   x: number;

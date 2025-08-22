@@ -3,11 +3,11 @@ import { useSystemLoaderControl } from "./useSystemLoaderControl";
 import {
   SystemLoaderContext,
   type TSystemLoaderContextValue,
-} from "../../contexts/SystemLoaderContext";
+} from "@infomaximum/base/src/decorators/contexts/SystemLoaderContext";
 import type { FC, ReactNode } from "react";
-import { type Model, RestModel } from "../../../models";
+import { type Model, RestModel } from "@infomaximum/base/src/models";
 import { InvalidIndex } from "@infomaximum/utility";
-import type { NCore } from "../../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 type TTestWrapperComponentProps = {
   children: ReactNode;

@@ -1,7 +1,7 @@
 import type { ModalProps } from "antd/lib/modal";
 import type React from "react";
 import type { FormProps } from "react-final-form";
-import type { IFormProvider } from "../../../decorators/contexts/FormContext";
+import type { IFormProvider } from "@infomaximum/base/src/decorators/contexts/FormContext";
 import type { IFormWrapperProps } from "../Form/FormWrapper.types";
 
 export interface IModalFormProps

@@ -9,10 +9,10 @@ import type {
   TCancelableCallback,
   TControlCancelableRequestsParams,
 } from "./BaseRequestService.types";
-import type { IErrorHandlerService } from "../../ErrorHandlers/ErrorHandlers.types";
-import { BaseErrorHandlerService } from "../../ErrorHandlers";
-import { apolloInstance } from "../../../utils/Store/Apollo";
-import type { NCore } from "../../../libs/core";
+import type { IErrorHandlerService } from "@infomaximum/base/src/services/ErrorHandlers/ErrorHandlers.types";
+import { BaseErrorHandlerService } from "@infomaximum/base/src/services/ErrorHandlers";
+import { apolloInstance } from "@infomaximum/base/src/utils/Store/Apollo";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 type TRequestParams = {
   /** Инстанс обработчика ошибок */

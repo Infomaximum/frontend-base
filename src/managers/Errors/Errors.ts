@@ -1,6 +1,6 @@
 import { isMatch, find, isObject } from "lodash";
 import type { Localization } from "@infomaximum/localization";
-import type { NCore } from "../../libs/core";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 import { Expander } from "@infomaximum/module-expander";
 
 export const isErrorMatchWithPreparer = function (

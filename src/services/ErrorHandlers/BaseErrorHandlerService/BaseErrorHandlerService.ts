@@ -1,11 +1,15 @@
 import { EHttpCodes } from "@infomaximum/utility";
 import { Expander } from "@infomaximum/module-expander";
 import { filter, find, get, isArray, isMatch, isPlainObject } from "lodash";
-import { EErrorCode, PARAMETERS_FIELD_NAME, rootDomNodeName } from "../../../utils/const";
+import {
+  EErrorCode,
+  PARAMETERS_FIELD_NAME,
+  rootDomNodeName,
+} from "@infomaximum/base/src/utils/const";
 import type { IErrorHandlerService } from "../ErrorHandlers.types";
 import { assertSimple } from "@infomaximum/assert";
-import { GlobalErrorModalService } from "../../GlobalErrorModal/GlobalErrorModalService";
-import type { NCore } from "../../../libs/core";
+import { GlobalErrorModalService } from "@infomaximum/base/src/services/GlobalErrorModal/GlobalErrorModalService";
+import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export class BaseErrorHandlerService implements IErrorHandlerService {
   private prepareInitialServerError(error: any) {

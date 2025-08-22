@@ -1,7 +1,7 @@
 import type { IModel } from "@infomaximum/graphql-model";
 import type { FieldRenderProps } from "react-final-form";
-import type { IWithLocProps } from "../../../decorators/hocs/withLoc/withLoc";
-import type { ISelectWithStoreProps } from "../../SelectWithStore/SelectWithStore.types";
+import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
+import type { ISelectWithStoreProps } from "@infomaximum/base/src/components/SelectWithStore/SelectWithStore.types";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
 

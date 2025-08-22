@@ -11,10 +11,13 @@ export const emptyHintStyle = (theme: TTheme) => ({
   fontSize: `${theme.subtitleFontSize}px`,
   lineHeight: `${theme.smallLineHeight}px`,
   color: theme.grey7Color,
+  "& > *:first-child > *:first-child": {
+    marginBottom: "12px",
+  },
 });
 
 export const getWrapperEmptyTableStyle = (isLoading?: boolean, isVirtualized?: boolean) => {
-  const marginValue = isLoading ? (isVirtualized ? 22 : 23) : 56;
+  const marginValue = isLoading ? (isVirtualized ? 22 : 23) : 48;
 
   return {
     position: "relative",
@@ -28,7 +31,9 @@ export const wrapperEmptyStyle = {} as const;
  * Контейнерные (табличные) стили надписи картинки компонента Empty
  */
 export const emptyImageStyle = {
-  image: { width: "100%", height: "100%", marginBottom: "25px" },
+  image: { display: "flex", width: "100%", height: "100%", marginBottom: "8px" },
 };
 
-export const wrapperNotTableEmptyStyle = {} as const;
+export const wrapperNotTableEmptyStyle = {
+  marginTop: "48px",
+} as const;

@@ -5,10 +5,10 @@ import {
   actionButtonStyle,
   iconStyle,
 } from "./ActionsFilterButton.styles";
-import { BaseDropdownContext } from "../../../Dropdown";
-import { Button } from "../../../Button";
-import { CaretDownOutlined } from "../../../Icons";
-import { dropdownActionsFilterButtonTestId } from "../../../../utils";
+import { BaseDropdownContext } from "@infomaximum/base/src/components/Dropdown";
+import { Button } from "@infomaximum/base/src/components/Button";
+import { CaretDownOutlined } from "@infomaximum/base/src/components/Icons";
+import { dropdownActionsFilterButtonTestId } from "@infomaximum/base/src/utils";
 
 const ActionsFilterButton: React.FC<IActionsFilterButtonProps> = React.forwardRef(
   ({ ...rest }, ref: React.Ref<HTMLButtonElement>) => {

@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { Layout, Form as AntForm } from "antd";
 import { formContentDefaultStyle } from "../BaseForm/BaseForm.styles";
 import type { IUnAuthorizedFormProps } from "./UnAuthorizedForm.types";
-import { unAuthorizedFormLayout } from "../../../styles/formLayout";
-import { Notification } from "../../Notification";
+import { unAuthorizedFormLayout } from "@infomaximum/base/src/styles/formLayout";
+import { Notification } from "@infomaximum/base/src/components/Notification";
 
 const { Content } = Layout;
 

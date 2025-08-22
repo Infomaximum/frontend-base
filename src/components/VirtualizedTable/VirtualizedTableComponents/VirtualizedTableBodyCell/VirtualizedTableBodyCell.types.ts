@@ -1,4 +1,4 @@
-import type { IVirtualizedColumnConfig } from "../../../VirtualizedTable/VirtualizedTable.types";
+import type { IVirtualizedColumnConfig } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.types";
 
 export interface IVirtualizedTableBodyCellProps<T> {
   index: number;

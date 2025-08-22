@@ -1,16 +1,16 @@
 import React, { createRef, type HTMLAttributes, type FC } from "react";
 import { Upload } from "antd";
 import { isFunction, isEqual, forEach, isEmpty, isString, get, size } from "lodash";
-import { useLocalization } from "../../../decorators/hooks/useLocalization";
-import { FormContext } from "../../../decorators/contexts/FormContext";
-import { removeUploadFieldButtonTestId } from "../../../utils";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { removeUploadFieldButtonTestId } from "@infomaximum/base/src/utils";
 import {
   CLICK_OR_DROP_A_FILE_HERE,
   DELETE,
   FILE_FORMAT,
   MAX_SIZE_OF_THE_FILE,
   UPLOAD_THE_FILE_IN_THE_FORMAT,
-} from "../../../utils/Localization/Localization";
+} from "@infomaximum/base/src/utils/Localization/Localization";
 import {
   draggerStyle,
   uploadListItemStyle,
@@ -18,9 +18,9 @@ import {
   disableAnimationWrapperStyle,
   inboxIconStyle,
 } from "./UploadField.styles";
-import { DeleteOutlined, InboxOutlined } from "../../Icons";
-import { Message } from "../../Message/Message";
-import { Tooltip } from "../../Tooltip/Tooltip";
+import { DeleteOutlined, InboxOutlined } from "@infomaximum/base/src/components/Icons";
+import { Message } from "@infomaximum/base/src/components/Message/Message";
+import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";
 import { Field, FormField } from "../FormField";
 import type { RcFile, UploadChangeParam } from "antd/lib/upload";
 import type {

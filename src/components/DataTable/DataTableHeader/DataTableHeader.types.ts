@@ -1,4 +1,4 @@
-import type { TreeCounter } from "../../../managers/TreeCounter";
+import type { TreeCounter } from "@infomaximum/base/src/managers/TreeCounter";
 import type { IDataTableProps } from "../DataTable.types";
 
 export interface IDataTableHeaderProps<T>
