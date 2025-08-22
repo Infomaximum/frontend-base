@@ -105,7 +105,6 @@
   "husky": {
     "hooks": {
       "prepare-commit-msg": "jira-prepare-commit-msg",
-      "pre-push": "node ../../configs/jest/changedFiles.js",
       "pre-commit": "lint-staged"
     }
   },
