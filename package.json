@@ -113,7 +113,7 @@
     "*": [
       "yarn prettier"
     ],
-    "*.(js|jsx|ts|tsx|json)": [
+    "*.(js|jsx|ts|tsx)": [
       "yarn lint"
     ]
   },
