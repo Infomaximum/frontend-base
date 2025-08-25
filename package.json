@@ -96,7 +96,7 @@
     "typescript": "5.9.2"
   },
   "scripts": {
-    "release": "tsc --noEmit && standard-version && rollup -c",
+    "release": "tsc --noEmit && standard-version",
     "test": "jest",
     "lint": "tsc --noEmit",
     "prettier": "prettier --find-config-path --ignore-path ../../.prettierignore --write ./src",
