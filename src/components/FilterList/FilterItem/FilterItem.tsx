@@ -10,7 +10,7 @@ import {
 } from "./FilterItem.styles";
 import { isFunction } from "lodash";
 import FilterItemTag from "./FilterItemTag/FilterItemTag";
-import { useLocalization } from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
 import { Tooltip } from "@infomaximum/base/src/components/Tooltip";
 import { CloseOutlined } from "@infomaximum/base/src/components/Icons";

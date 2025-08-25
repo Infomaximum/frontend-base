@@ -3,7 +3,8 @@ import { Dropdown } from "../Dropdown";
 import type { IBaseDropdownProps, IBaseDropdownState } from "./BaseDropdown.types";
 import { menuStyle, mainBaseDropdownOverlayStyle } from "./BaseDropdown.styles";
 import { DropdownAnimationInterval } from "@infomaximum/base/src/utils/const";
-import { boundMethod, withTheme } from "@infomaximum/base/src/decorators";
+import { boundMethod } from "@infomaximum/base/src/decorators/decorators/boundMethod";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
 import { getCssConversionStyle } from "@infomaximum/base/src/styles";
 
 export enum EBaseDropdownPlacement {

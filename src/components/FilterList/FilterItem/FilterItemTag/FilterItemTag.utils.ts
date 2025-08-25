@@ -1,6 +1,6 @@
 import { isBoolean, toLower } from "lodash";
 import { useEffect, useState } from "react";
-import { useLocalization } from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { NOT } from "@infomaximum/base/src/utils";
 
 export const useTagValue = (caption: string, children: React.ReactNode) => {

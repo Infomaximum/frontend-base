@@ -8,7 +8,7 @@ import { useStore } from "@infomaximum/base/src/decorators/hooks/useStore";
 import type { ISelectProps } from "../Select/Select.types";
 import { Select } from "../Select/Select";
 import { DropdownPlaceholder } from "../Select/DropdownPlaceholder/DropdownPlaceholder";
-import { useMountEffect } from "@infomaximum/base/src/decorators";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
 import { AlignedTooltip } from "../AlignedTooltip";
 
 const optionFilterProp = "filterProp";

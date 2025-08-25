@@ -25,7 +25,9 @@ import { LOG_IN } from "@infomaximum/base/src/utils/Localization/Localization";
 import { ArrowLeftOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 import { ErrorBoundary } from "@infomaximum/base/src/components/ErrorBoundary";
 import { BaseCard } from "@infomaximum/base/src/components/BaseCard";
-import { withLoc, withSystemTitle, withTheme } from "@infomaximum/base/src/decorators/hocs";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc";
+import { withSystemTitle } from "@infomaximum/base/src/decorators/hocs/withSystemTitle";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
 
 const { Content } = Layout;
 

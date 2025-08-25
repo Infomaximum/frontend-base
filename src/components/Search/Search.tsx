@@ -11,7 +11,8 @@ import {
   searchSmallInputStyle,
 } from "./Search.style";
 import type { Interpolation } from "@emotion/react";
-import { boundMethod, withTheme } from "@infomaximum/base/src/decorators";
+import { boundMethod } from "@infomaximum/base/src/decorators/decorators/boundMethod";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
 
 class SearchComponent extends React.PureComponent<ISearchProps, ISearchState> {
   public static defaultProps = {

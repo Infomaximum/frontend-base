@@ -24,7 +24,7 @@ import {
 import { TableCheckboxCell } from "@infomaximum/base/src/components/Table/TableComponents/TableCheckboxCell/TableCheckboxCell";
 import { withoutDividerStyle } from "@infomaximum/base/src/components/VirtualizedTable/VirtualizedTable.styles";
 import { TABLE_HEADER_ID } from "@infomaximum/base/src/utils/const";
-import { withTheme } from "@infomaximum/base/src/decorators";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
 
 export class VirtualizedTableHeaderRowComponent<T extends TRow = TRow> extends PureComponent<
   IVirtualizedTableHeaderRowProps<T | null>

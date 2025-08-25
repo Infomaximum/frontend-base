@@ -1,7 +1,8 @@
 import { memo, useCallback, useContext, useEffect, useRef, useState } from "react";
 import type { SizeType } from "antd/lib/config-provider/SizeContext";
 import type { ISubmitFormButtonProps } from "./SubmitFormButton.types";
-import { FormContext, useLocalization } from "@infomaximum/base/src/decorators";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import type { TButtonType } from "@infomaximum/base/src/components/Button/Button.types";
 import { assertSimple } from "@infomaximum/assert";
 import { Button } from "@infomaximum/base/src/components/Button/Button";

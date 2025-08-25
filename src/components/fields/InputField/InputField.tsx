@@ -11,7 +11,7 @@ import { isString, isFunction } from "lodash";
 import type { InputProps } from "antd/lib/input/Input";
 import { NOT_SET } from "@infomaximum/base/src/utils/Localization/Localization";
 import { Input } from "@infomaximum/base/src/components/Input/Input";
-import { withLoc } from "@infomaximum/base/src/decorators";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc";
 import { Field } from "../FormField/Field/Field";
 import { FormField } from "../FormField/FormField";
 import { TableCellField } from "../TableCellField/TableCellField";

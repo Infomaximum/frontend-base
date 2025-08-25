@@ -49,9 +49,10 @@ const config = [
       preserveModules: true,
       preserveModulesRoot: "src",
     },
+    cache: false,
 
     plugins: [
-      del({ targets: "dist/*" }),
+      del({ targets: ["dist/*", ".rollup.cache", "tsconfig.tsbuildinfo"] }),
       alias({
         entries: [{ find: packageJSON.name, replacement: path.resolve(__dirname) }],
       }),

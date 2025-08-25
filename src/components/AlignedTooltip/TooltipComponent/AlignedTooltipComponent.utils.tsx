@@ -1,5 +1,6 @@
 import { useMemo, useState, type RefObject } from "react";
-import { useMountEffect, useTheme } from "@infomaximum/base/src/decorators";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { getHyphenatedText } from "@infomaximum/base/src/decorators/hooks/useCardLinesOverlay";
 import { map, max, trimStart } from "lodash";
 import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";

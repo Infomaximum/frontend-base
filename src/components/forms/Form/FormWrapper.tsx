@@ -1,7 +1,7 @@
 import { Form as RFForm, type FormProps } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
-import { withFormSubmitPromise } from "@infomaximum/base/src/decorators";
+import { withFormSubmitPromise } from "@infomaximum/base/src/decorators/hocs/withFormSubmitPromise";
 import type { IFormWrapperProps } from "./FormWrapper.types";
 import { type ComponentPropsWithoutRef, type FC, type PropsWithChildren, useMemo } from "react";
 import { FormComponent } from "./Form";

@@ -5,7 +5,7 @@ import {
   topPanelFilterStyle,
 } from "./AddFilterButton.styles";
 import type { IAddFilterButtonProps } from "./AddFilterButton.types";
-import { useLocalization } from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { Tooltip } from "@infomaximum/base/src/components/Tooltip";
 import { Button } from "@infomaximum/base/src/components/Button";
 import { FilterFilled, FilterOutlined } from "@infomaximum/base/src/components/Icons";

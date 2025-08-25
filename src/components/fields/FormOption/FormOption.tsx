@@ -15,7 +15,7 @@ import type { ColProps } from "antd/lib/col";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import { FieldTooltip } from "@infomaximum/base/src/components/FieldTooltip/FieldTooltip";
 import { SpaceSizeContext } from "@infomaximum/base/src/decorators/contexts/SpaceSizeContext";
-import { DebugModeContext } from "@infomaximum/base/src/decorators";
+import { DebugModeContext } from "@infomaximum/base/src/decorators/contexts/DebugModeContext";
 import { isBoolean } from "lodash";
 
 const FormItem = Form.Item;

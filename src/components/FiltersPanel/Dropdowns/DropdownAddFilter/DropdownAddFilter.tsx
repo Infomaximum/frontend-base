@@ -1,13 +1,11 @@
 import React, { useState, memo, useMemo, useRef, useCallback } from "react";
 import { trim, toLower, debounce, forEach, sortBy } from "lodash";
 import { Empty, type DropDownProps } from "antd";
-import {
-  useLocalization,
-  useMountEffect,
-  usePrevious,
-  useTheme,
-  useUnmountEffect,
-} from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
+import { usePrevious } from "@infomaximum/base/src/decorators/hooks/usePrevious";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators/hooks/useUnmountEffect";
 import {
   DropdownAnimationInterval,
   EMPTY_HERE,

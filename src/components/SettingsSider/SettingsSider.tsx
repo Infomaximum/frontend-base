@@ -4,7 +4,7 @@ import { find, isEmpty, map } from "lodash";
 import { Layout } from "antd";
 import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { getSiderStyle, siderContentWrapperStyle } from "./SettingsSider.styles";
-import { RoutesContext } from "@infomaximum/base/src/decorators";
+import { RoutesContext } from "@infomaximum/base/src/decorators/contexts/RoutesContext";
 import { getDisplayedSettingsRoutes, settingsKey } from "@infomaximum/base/src/utils";
 import { SettingsGroup } from "./SettingsGroup/SettingsGroup";
 

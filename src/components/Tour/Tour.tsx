@@ -3,7 +3,7 @@ import { Tour as AntTour } from "antd";
 import { Global } from "@emotion/react";
 import { nextButtonChildrenStyle, tourGlobalStyle } from "./Tour.styles";
 import type { ITourComponentProps } from "./Tour.types";
-import { useLocalization } from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { ArrowLeftOutlined } from "../Icons/Icons";
 import { FINISH_TOUR, NEXT } from "@infomaximum/base/src/utils";
 

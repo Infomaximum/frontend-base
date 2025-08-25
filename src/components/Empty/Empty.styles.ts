@@ -3,13 +3,13 @@
  */
 export const emptyDescriptionStyle = (theme: TTheme) => ({
   fontSize: `${theme.h1FontSize}px`,
-  lineHeight: `${theme.mediumLineHeight}px`,
+  lineHeight: `${theme.smallLineHeight}px`,
   color: theme.grey10Color,
 });
 
 export const emptyHintStyle = (theme: TTheme) => ({
   fontSize: `${theme.subtitleFontSize}px`,
-  lineHeight: `${theme.smallLineHeight}px`,
+  lineHeight: `${theme.defaultLineHeight}px`,
   color: theme.grey7Color,
   "& > *:first-child > *:first-child": {
     marginBottom: "12px",

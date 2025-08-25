@@ -18,6 +18,8 @@ import { FormField } from "../FormField/FormField";
 import { TableCellField } from "../TableCellField/TableCellField";
 import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 
+const { Option, OptGroup } = Select;
+
 const SelectComponent: FC<ISelectComponentProps> = memo((props) => {
   const {
     readOnly,

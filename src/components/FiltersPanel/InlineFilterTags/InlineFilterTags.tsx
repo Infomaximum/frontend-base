@@ -35,13 +35,11 @@ import { Tag } from "@infomaximum/base/src/components/Tag";
 import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { tooltipSeparator } from "@infomaximum/base/src/components/ApplicationCard/InlineTags/InlineTags.utils";
 import { MORE, NOT, removeFiltersButtonTestId, RESET } from "@infomaximum/base/src/utils";
-import {
-  TopPanelContext,
-  useLocalization,
-  useMountEffect,
-  useTheme,
-  useUnmountEffect,
-} from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators/hooks/useUnmountEffect";
+import { TopPanelContext } from "@infomaximum/base/src/decorators/contexts/TopPanelContext";
 import FilterItem from "@infomaximum/base/src/components/FilterList/FilterItem/FilterItem";
 import { Row } from "antd";
 import { getDropdownMenuMaxHeight } from "@infomaximum/base/src/components/Dropdown/Dropdown.utils";

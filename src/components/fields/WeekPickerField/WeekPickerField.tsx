@@ -9,7 +9,7 @@ import type {
 } from "./WeekPickerField.types";
 import { WEEK } from "@infomaximum/base/src/utils/Localization/Localization";
 import { Field, FormField } from "../FormField";
-import { useLocalization } from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 
 const { WeekPicker: AntWeekPicker } = DatePicker;
 

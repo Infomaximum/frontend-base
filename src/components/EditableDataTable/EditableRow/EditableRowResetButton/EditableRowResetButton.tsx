@@ -1,7 +1,7 @@
 import { useCallback, memo, useContext } from "react";
 import type { IEditableRowResetButtonProps } from "./EditableRowResetButton.types";
 import { EditableRowButton } from "../EditableRowButton/EditableRowButton";
-import { useFormButtonState } from "@infomaximum/base/src/components/forms/hooks";
+import { useFormButtonState } from "@infomaximum/base/src/components/forms/hooks/useFormButtonState";
 import { assertSimple } from "@infomaximum/assert";
 import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
 

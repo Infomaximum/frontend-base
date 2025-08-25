@@ -24,7 +24,8 @@ import { getDisplayedSettingsRoutes } from "@infomaximum/base/src/utils/Routes/r
 import { Drawer } from "../drawers/Drawer/Drawer";
 import { Settings } from "../Settings/Settings";
 import type { DrawerStyles } from "antd/lib/drawer/DrawerPanel";
-import { useFeature, useLocalization } from "@infomaximum/base/src/decorators";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { ADMINISTRATION } from "@infomaximum/base/src/utils";
 import { Tooltip } from "../Tooltip";
 import { useLocation } from "react-router";

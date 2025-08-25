@@ -16,7 +16,7 @@ import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip"
 import type { TBaseRow } from "@infomaximum/base/src/managers/Tree";
 import { PagingGroup } from "@infomaximum/base/src/models";
 import { type TableStore } from "@infomaximum/base/src/utils";
-import { useMountEffect } from "@infomaximum/base/src/decorators";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
 import { GlobalSpinner } from "@infomaximum/base/src/components/Spinner/GlobalSpinner/GlobalSpinner";
 
 const DataTableDrawerContentComponent = <T extends TBaseRow>({

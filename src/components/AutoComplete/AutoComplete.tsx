@@ -6,8 +6,8 @@ import type { IAutoCompleteProps } from "./AutoComplete.types";
 import { useSelectDropdownPosition } from "@infomaximum/base/src/components/Select/Select.utils";
 import { suffixIconSpinnerStyle } from "./AutoComplete.styles";
 import { suffixLoaderDelay } from "@infomaximum/base/src/utils/const";
+import { LocalSpinner } from "../Spinner/LocalSpinner/LocalSpinner";
 import { useDelayedTrue } from "@infomaximum/base/src/decorators/hooks/useDelayedTrue";
-import { LocalSpinner } from "../Spinner";
 
 const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
   const {

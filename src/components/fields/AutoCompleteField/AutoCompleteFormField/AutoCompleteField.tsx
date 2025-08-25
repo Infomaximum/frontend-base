@@ -10,7 +10,8 @@ import type {
 import { isFunction, map, forEach, some, every, isEmpty, xorBy, filter, difference } from "lodash";
 import { wrapperAutocompleteStyle } from "@infomaximum/base/src/components/fields/AutoCompleteField/AutoCompleteFormField/AutoCompleteField.styles";
 import { type IModel, Group } from "@infomaximum/graphql-model";
-import { withFeature, withLoc } from "@infomaximum/base/src/decorators";
+import { withFeature } from "@infomaximum/base/src/decorators/hocs/withFeature";
+import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc";
 import { Field } from "@infomaximum/base/src/components/fields/FormField/Field/Field";
 import { FormField } from "@infomaximum/base/src/components/fields/FormField/FormField";
 import type { ICommonTableCellProps } from "@infomaximum/base/src/components/fields/TableCellField/TableCellField.types";

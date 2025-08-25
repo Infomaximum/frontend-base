@@ -48,7 +48,7 @@ import { Select } from "@infomaximum/base/src/components/Select/Select";
 import { DropdownPendingPlaceholder } from "@infomaximum/base/src/components/Select/DropdownPendingPlaceholder/DropdownPendingPlaceholder";
 import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
 import { Tag } from "@infomaximum/base/src/components/Tag";
-import { boundMethod } from "@infomaximum/base/src/decorators";
+import { boundMethod } from "@infomaximum/base/src/decorators/decorators/boundMethod";
 import { disableTagStyle, tagStyle } from "@infomaximum/base/src/components/Select/Select.styles";
 import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
 import type { ITagRenderProps } from "@infomaximum/base/src/components/Select/Select.types";

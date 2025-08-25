@@ -13,7 +13,7 @@ import {
   bannerContentStyle,
 } from "./BannerContent.styles";
 import { showMoreBannerTestId } from "@infomaximum/base/src/utils/TestIds";
-import { useTheme } from "@infomaximum/base/src/decorators";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 
 const BannerContentComponent: React.FC<IBannerContentProps> = ({
   md,

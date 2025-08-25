@@ -13,7 +13,7 @@ import {
   tooltipSeparator,
 } from "@infomaximum/base/src/components/ApplicationCard/InlineTags/InlineTags.utils";
 import { Tag } from "@infomaximum/base/src/components/Tag/Tag";
-import { useTheme } from "@infomaximum/base/src/decorators";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
 import { getTagPropsByColor } from "@infomaximum/base/src/components/Tag";
 

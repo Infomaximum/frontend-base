@@ -72,7 +72,6 @@ const OptionalDrawerFormComponent: React.FC<IOptionalDrawerFormProps> = ({
   const selectOptions = useMemo(
     () =>
       map(filter(optionsConfig, "label"), ({ label, value, disabled }) => (
-        //@ts-expect-error
         <Option key={value} test-id={`select-option-${value}`} value={value} disabled={disabled}>
           <span title={undefined}>{label}</span>
         </Option>

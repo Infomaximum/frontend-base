@@ -3,7 +3,8 @@ import type { ICancelChangesFormButtonProps } from "./CancelChangesFormButton.ty
 import { Button } from "@infomaximum/base/src/components/Button";
 import { assertSimple } from "@infomaximum/assert";
 import { useFormButtonState } from "../hooks/useFormButtonState";
-import { FormContext, useLocalization } from "@infomaximum/base/src/decorators";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { TO_CANCEL, cancelChangesFormButtonTestId } from "@infomaximum/base/src/utils";
 import type { TButtonType } from "@infomaximum/base/src/components/Button/Button.types";
 import type { SizeType } from "antd/lib/config-provider/SizeContext";

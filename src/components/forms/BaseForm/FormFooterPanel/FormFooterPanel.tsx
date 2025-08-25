@@ -2,7 +2,8 @@ import { Fragment, memo, useCallback, useContext, useMemo } from "react";
 import { Layout } from "antd";
 import React from "react";
 import { isShowElement, sortByPriority } from "@infomaximum/base/src/utils";
-import { FormContext, useFeature } from "@infomaximum/base/src/decorators";
+import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
+import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
 import { SubmitFormButton } from "@infomaximum/base/src/components/forms/SubmitFormButton";
 import { CancelChangesFormButton } from "@infomaximum/base/src/components/forms/CancelChangesFormButton";
 import {

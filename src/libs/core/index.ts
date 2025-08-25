@@ -1,5 +1,5 @@
 export * from "@infomaximum/module-expander";
-import { type Route, type ErrorPayload } from "@infomaximum/module-expander";
+import type { Route, ErrorPayload } from "@infomaximum/module-expander";
 
 import type { Location, NavigateFunction, PathMatch, NonIndexRouteObject } from "react-router";
 import type { TFeatureEnabledChecker } from "@infomaximum/utility";

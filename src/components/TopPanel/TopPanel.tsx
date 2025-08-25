@@ -23,7 +23,7 @@ import { isShowElement } from "@infomaximum/base/src/utils/access";
 import { Search } from "../Search";
 import { Button } from "../Button";
 import { CloseOutlined } from "../Icons";
-import { TopPanelContext } from "@infomaximum/base/src/decorators";
+import { TopPanelContext } from "@infomaximum/base/src/decorators/contexts/TopPanelContext";
 
 const { Header } = Layout;
 

@@ -20,7 +20,7 @@ import {
 } from "@infomaximum/base/src/utils/Localization/Localization";
 import { useBlocker } from "react-router";
 import { useBeforeUnload } from "react-router-dom";
-import { usePrevious } from "@infomaximum/base/src/decorators";
+import { usePrevious } from "@infomaximum/base/src/decorators/hooks/usePrevious";
 
 const FormConfirmationModalComponent: React.FC<IFormConfirmationModalProps> = ({
   formProvider,

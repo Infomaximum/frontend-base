@@ -65,7 +65,7 @@ import { useDelayedTrue } from "@infomaximum/base/src/decorators/hooks/useDelaye
 import { suffixLoaderDelay, DropdownAnimationInterval } from "@infomaximum/base/src/utils/const";
 import type { BaseSelectRef } from "rc-select";
 import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
-import { useMountEffect } from "@infomaximum/base/src/decorators";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
 import {
   autocompleteSelectClearIconTestId,
   removeElementsAttribute,

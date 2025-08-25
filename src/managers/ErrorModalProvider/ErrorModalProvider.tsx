@@ -12,7 +12,7 @@ import type {
   IErrorModalProviderProps,
 } from "./ErrorModalProvider.types";
 import { useLocation } from "react-router";
-import { usePrevious } from "@infomaximum/base/src/decorators";
+import { usePrevious } from "@infomaximum/base/src/decorators/hooks/usePrevious";
 import type { NCore } from "@infomaximum/base/src/libs/core";
 
 export const ErrorModalProvider: FC<IErrorModalProviderProps> = ({ children, isDebugMode }) => {

@@ -31,7 +31,9 @@ import { DropdownAddFilter } from "./Dropdowns/DropdownAddFilter/DropdownAddFilt
 import { observer } from "mobx-react";
 import { dividerVerticalStyle } from "../FilterList/FilterList/FilterList.styles";
 import { InlineFilterTags } from "./InlineFilterTags/InlineFilterTags";
-import { useLocalization, useMountEffect, useUrlFilters } from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
+import { useUrlFilters } from "@infomaximum/base/src/decorators/hooks/useUrlFilters";
 import type { NFiltersStore } from "@infomaximum/base/src/utils/Store/FiltersStore/FiltersStore.types";
 import type { IPositionConfig } from "@infomaximum/base/src/utils/filters/BaseFilter/BaseFilter.types";
 import { EFilteringMethods } from "@infomaximum/base-filter";

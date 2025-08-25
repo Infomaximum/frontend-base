@@ -43,7 +43,7 @@ import { borderTopStyle } from "../Table/Table.styles";
 import { observer } from "mobx-react";
 import { RestModel } from "@infomaximum/base/src/models/RestModel";
 import { withSpinPropsReplacer } from "./VirtualizedTable.utils";
-import { withTheme } from "@infomaximum/base/src/decorators";
+import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
 import { GlobalSpinner } from "../Spinner/GlobalSpinner/GlobalSpinner";
 
 const defaultOrders = [ESortDirection.ASC, ESortDirection.DESC] as [SortOrder, SortOrder];

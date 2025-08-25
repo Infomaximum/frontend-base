@@ -1,7 +1,8 @@
 import { useLayoutEffect, useMemo, useState, type FC } from "react";
 import { isFunction } from "lodash";
 import type { IAlignedTooltipComponentProps } from "./AlignedTooltipComponent.types";
-import { useFirstMountState, useTheme } from "@infomaximum/base/src/decorators";
+import { useFirstMountState } from "@infomaximum/base/src/decorators/hooks/useFirstMountState";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { getTextValueOfReactNode, getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { useTooltipAlign, useTooltipLines } from "./AlignedTooltipComponent.utils";
 import { Tooltip } from "@infomaximum/base/src/components/Tooltip/Tooltip";

@@ -3,7 +3,7 @@ import type { IEditableRowSubmitButtonProps } from "./EditableRowSubmitButton.ty
 import { EditableRowButton } from "../EditableRowButton/EditableRowButton";
 import { FormContext } from "@infomaximum/base/src/decorators/contexts/FormContext";
 import { assertSimple } from "@infomaximum/assert";
-import { useFormButtonState } from "@infomaximum/base/src/components/forms/hooks";
+import { useFormButtonState } from "@infomaximum/base/src/components/forms/hooks/useFormButtonState";
 import { submitFormButtonTestId } from "@infomaximum/base/src/utils/TestIds";
 import { ArcOutlined } from "@infomaximum/base/src/components/Icons/Icons";
 

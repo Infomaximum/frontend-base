@@ -14,12 +14,16 @@ import {
 import type { IBreadcrumbsProps } from "./Breadcrumbs.types";
 import { calcShrinkMask, interleaveWith } from "./Breadcrumbs.utils";
 import { Dropdown } from "../Dropdown/Dropdown";
-import { useLocalization, useTheme } from "@infomaximum/base/src/decorators";
+import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
+import { useTheme } from "@infomaximum/base/src/decorators/hooks/useTheme";
 import { SHOW_MORE_CRUMBS } from "@infomaximum/base/src/utils/Localization";
 import { getDropdownMenuMaxHeight } from "../Dropdown/Dropdown.utils";
 import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { AlignedTooltip } from "../AlignedTooltip";
-import { breadcrumbsHomeLinkTestId, breadcrumbsShowMoreTestId } from "@infomaximum/base/src/utils";
+import {
+  breadcrumbsHomeLinkTestId,
+  breadcrumbsShowMoreTestId,
+} from "@infomaximum/base/src/utils/TestIds";
 import { useCallback, useLayoutEffect, type ReactNode } from "react";
 import type { ItemType } from "antd/es/menu/interface";
 import { Tooltip } from "../Tooltip/Tooltip";
