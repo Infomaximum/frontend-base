@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.2.2](https://github.com/Infomaximum/frontend-base/compare/v7.2.1...v7.2.2) (2025-08-25)
+
+
+### Bug Fixes
+
+* исправлен импорт ([ec6a4e8](https://github.com/Infomaximum/frontend-base/commit/ec6a4e88f6806692cf26b068ce0b18e829449d97))
+* исправлена сборка иконок ([36bab3e](https://github.com/Infomaximum/frontend-base/commit/36bab3eb7f03fe2d24b32186e2775d526f12e531))
+* исправлены импорты ([53b7418](https://github.com/Infomaximum/frontend-base/commit/53b7418874b2d741b15cf93e48bb7f6ead8ecf1c))
+
 ### [7.2.1](https://github.com/Infomaximum/frontend-base/compare/v7.2.0...v7.2.1) (2025-08-22)
 
 
