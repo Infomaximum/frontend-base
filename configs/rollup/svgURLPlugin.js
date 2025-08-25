@@ -19,10 +19,10 @@ const svgURLPlugin = () => {
 
       const newId = id.replace("?url", "");
 
-      return pluginUrl.load(newId);
+      return pluginUrl.load.call(this, newId);
     },
     generateBundle(...args) {
-      return pluginUrl.generateBundle(...args);
+      return pluginUrl.generateBundle.call(this, ...args);
     },
   };
 };

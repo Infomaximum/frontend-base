@@ -1,0 +1,19 @@
+node_modules/
+*.svg
+*.cur
+_release
+.gitignore
+.gitkeep
+.gitmodules
+.npmrc
+.yarnrc
+.env
+.rpt2_cache/
+yarn-error.log
+
+# typescript
+*.tsbuildinfo
+
+CHANGELOG.md
+.eslintcache
+*.lock

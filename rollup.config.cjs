@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const packageJSON = require("./package.json");
+const path = require("path");
 const typescript = require("@rollup/plugin-typescript");
 const resolve = require("@rollup/plugin-node-resolve");
 const commonjs = require("@rollup/plugin-commonjs");
@@ -8,6 +9,7 @@ const babel = require("@rollup/plugin-babel");
 const del = require("rollup-plugin-delete");
 const svgr = require("@svgr/rollup");
 const json = require("@rollup/plugin-json");
+const alias = require("@rollup/plugin-alias");
 const { svgURLPlugin } = require("./configs/rollup/svgURLPlugin");
 
 const externalPackages = [
@@ -50,6 +52,9 @@ const config = [
 
     plugins: [
       del({ targets: "dist/*" }),
+      alias({
+        entries: [{ find: packageJSON.name, replacement: path.resolve(__dirname) }],
+      }),
       typescript(),
       resolve(),
       commonjs(),
