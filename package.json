@@ -106,15 +106,12 @@
   "husky": {
     "hooks": {
       "prepare-commit-msg": "jira-prepare-commit-msg",
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && yarn lint"
     }
   },
   "lint-staged": {
     "*": [
       "yarn prettier"
-    ],
-    "*.(js|jsx|ts|tsx)": [
-      "yarn lint"
     ]
   },
   "jira-prepare-commit-msg": {

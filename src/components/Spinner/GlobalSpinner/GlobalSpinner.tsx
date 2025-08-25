@@ -1,6 +1,6 @@
 import { useState, type FC } from "react";
 import type { IGlobalSpinnerProps } from "./GlobalSpinner.types";
-import { useMountEffect } from "@infomaximum/base/src/decorators";
+import { useMountEffect } from "@infomaximum/base/src/decorators/hooks/useMountEffect";
 import { loaderDelay, wrapperGlobalSpinnerTestId } from "@infomaximum/base/src/utils";
 import { SpinnerTemplateSVG } from "@infomaximum/base/src/resources";
 import {

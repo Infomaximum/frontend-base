@@ -8,7 +8,7 @@ import {
   getSummaryDropdownHeight,
 } from "./ContextMenuFloating.utils";
 import React from "react";
-import { useUnmountEffect } from "@infomaximum/base/src/decorators";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators/hooks/useUnmountEffect";
 import { getTextWidth } from "@infomaximum/base/src/utils/textWidth";
 import { ContextMenu } from "@infomaximum/base/src/components/ContextMenu/ContextMenu";
 import {

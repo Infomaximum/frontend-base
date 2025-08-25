@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import type { DocumentNode } from "@apollo/client";
-import { useUnmountEffect } from "@infomaximum/base/src/decorators";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators/hooks/useUnmountEffect";
 import type { NCore } from "@infomaximum/base/src/libs/core";
 import { BaseSubscriptionService } from "@infomaximum/base/src/services/Network/BaseSubscriptionService";
 

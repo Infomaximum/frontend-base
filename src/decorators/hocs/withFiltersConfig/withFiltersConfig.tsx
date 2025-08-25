@@ -1,6 +1,6 @@
 import type { TPropInjector } from "@infomaximum/utility";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import { useFiltersConfig } from "@infomaximum/base/src/decorators/hooks";
+import { useFiltersConfig } from "@infomaximum/base/src/decorators/hooks/useFiltersConfig";
 import type { IFiltersContext } from "@infomaximum/base/src/decorators/contexts/FiltersContext";
 
 export interface IWithFiltersConfig extends IFiltersContext {}

@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import type { DocumentNode } from "@apollo/client";
-import { useUnmountEffect } from "@infomaximum/base/src/decorators";
+import { useUnmountEffect } from "@infomaximum/base/src/decorators/hooks/useUnmountEffect";
 import type { TCancelableRequest } from "@infomaximum/base/src/services/Network/Requests.types";
 import { BaseRequestService } from "@infomaximum/base/src/services/Network/BaseRequestService";
 
