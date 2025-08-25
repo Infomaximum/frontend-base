@@ -1,6 +1,6 @@
 import type { ComponentType, PropsWithRef } from "react";
 import { lazy, Suspense } from "react";
-import { SystemLoaderProvider } from "@infomaximum/base/src/managers/SystemLoaderProvider";
+import { SystemLoaderProvider } from "@infomaximum/base/src/managers/SystemLoaderProvider/SystemLoaderProvider";
 
 type TModuleWithDefaultExport<P = any> = { default: ComponentType<P> };
 type TModuleWithoutDefaultExport = {};
