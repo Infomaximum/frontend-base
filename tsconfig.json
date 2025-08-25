@@ -6,7 +6,7 @@
     "jsx": "preserve",
     "declaration": true,
     "incremental": true,
-    "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo",
     "declarationDir": "dist",
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
