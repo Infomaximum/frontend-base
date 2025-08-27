@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
@@ -13,7 +14,8 @@ function fixImports(filePath) {
         path.dirname(filePath.replace("dist/", "src/")),
         path.join("src", importPath)
       );
-      return `from "${relativePath.startsWith(".") ? relativePath : "./" + relativePath}"`;
+
+      return `from "${relativePath.startsWith(".") ? relativePath : `./${relativePath}`}"`;
     }
   );
 
