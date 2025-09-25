@@ -52,7 +52,7 @@ const config = [
     cache: false,
 
     plugins: [
-      del({ targets: ["dist/*", ".rollup.cache"] }),
+      del({ targets: ["dist/*", ".rollup.cache", "tsconfig.tsbuildinfo"] }),
       alias({
         entries: [{ find: packageJSON.name, replacement: path.resolve(__dirname) }],
       }),

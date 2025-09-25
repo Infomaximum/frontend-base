@@ -45,4 +45,18 @@ describe("SearchParamAccessor", () => {
     const search = "?a=1&b=2";
     expect(await SearchParamAccessor.get(search, "b")).toEqual("2");
   });
+
+  it("Если размер url превышает заданный лимит, то происходит сжатие параметров", async () => {
+    let search = "?a=1";
+
+    for (let i = 0; search.length <= SearchParamAccessor.urlLimit + 1; i++) {
+      search += `&f${i}`;
+    }
+
+    expect(
+      (await SearchParamAccessor.set(search, "d", "4")).includes(
+        SearchParamAccessor.compressParamKey
+      )
+    ).toEqual(true);
+  });
 });

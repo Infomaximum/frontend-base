@@ -1,11 +1,6 @@
-export interface IHeaderAvatarProps {
+import type { AvatarProps } from "@infomaximum/ui-kit";
+
+export interface IHeaderAvatarProps extends Pick<AvatarProps, "size"> {
   userId: number;
   userName: string;
-  size?: number;
-  fontSize?: number;
 }
-
-export type TAvatarColorConfig = {
-  letterColor: string;
-  backgroundColor: string;
-};

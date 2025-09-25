@@ -1,4 +1,4 @@
-import type { RangePickerProps } from "antd/lib/date-picker";
+import type { RangePickerProps } from "@infomaximum/ui-kit";
 import type { Dayjs } from "dayjs";
 import type { FieldRenderProps } from "react-final-form";
 import type { IFieldProps } from "../FormField/Field/Field.types";

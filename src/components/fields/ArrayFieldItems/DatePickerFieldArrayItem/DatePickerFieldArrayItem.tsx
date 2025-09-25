@@ -27,7 +27,6 @@ const DatePickerFieldArrayItemComponent: React.FC<IDatePickerFieldArrayItemProps
       <DatePickerFormField
         key={fieldEntityPath}
         name={fieldEntityPath}
-        css={wrapperFieldStyle}
         formItemStyle={wrapperFieldStyle}
         wrapperComponentStyle={wrapperFieldStyle}
         readOnly={readOnly}

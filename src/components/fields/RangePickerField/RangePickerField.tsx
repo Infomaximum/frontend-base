@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import { DatePicker } from "antd";
+import { DatePicker } from "@infomaximum/ui-kit";
 import type {
   IRangePickerFieldProps,
   IRangePickerProps,
@@ -7,14 +7,13 @@ import type {
 } from "./RangePickerField.types";
 import { getPlaceholder } from "./RangePickerField.utils";
 import { defaultRangePickerFieldTestId } from "@infomaximum/base/src/utils/TestIds";
-import { defaultRangePickerFieldStyle } from "./RangePickerField.styles";
 import type { Dayjs } from "dayjs";
 import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 import { Field, FormField } from "../FormField";
 import type { ICommonTableCellProps } from "../TableCellField/TableCellField.types";
 import { TableCellField } from "../TableCellField/TableCellField";
 
-const { RangePicker: AntRangePicker } = DatePicker;
+const { RangePicker: UiKitRangePicker } = DatePicker;
 
 const RangePicker: React.FC<IRangePickerProps> = ({
   input: { value, onChange, onBlur },
@@ -49,16 +48,15 @@ const RangePicker: React.FC<IRangePickerProps> = ({
 
   return (
     <div test-id={testId || defaultRangePickerFieldTestId}>
-      <AntRangePicker
+      <UiKitRangePicker
         defaultOpen={rest.autoFocus}
         onOpenChange={handleOpenChange}
-        key="ant-date-range-picker"
+        key="date-range-picker"
         format={format}
         picker={picker}
         onChange={onChange}
         value={value}
         placeholder={propsPlaceholder ?? placeholder}
-        style={defaultRangePickerFieldStyle}
         onCalendarChange={handleCalendarChange}
         {...rest}
         disabled={readOnly || disabled}

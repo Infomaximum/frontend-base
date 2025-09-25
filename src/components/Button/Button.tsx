@@ -143,17 +143,18 @@ const ButtonComponent: React.FC<IButtonProps> = React.forwardRef(
           ref={ref}
           title={undefined}
           type={getType()}
-          icon={loading ? undefined : props.icon}
+          icon={
+            loading ? (
+              <LocalSpinner
+                delay={0}
+                wrapperStyle={buttonLocSpinStyle}
+                spinIndicatorStyle={buttonLocSpinIndicatorStyle}
+              />
+            ) : (
+              props.icon
+            )
+          }
         >
-          {loading && (
-            <LocalSpinner
-              // визуально оптимальное значение > 0
-              delay={10}
-              wrapperStyle={buttonLocSpinStyle}
-              spinIndicatorStyle={buttonLocSpinIndicatorStyle}
-            />
-          )}
-
           {children && <span css={ellipsisStyle}>{children}</span>}
         </AntButton>
       </Tooltip>

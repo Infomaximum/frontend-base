@@ -8,13 +8,24 @@ type TGraphqlError = {
 };
 
 export class SubscriptionErrorHandlerService extends BaseErrorHandlerService {
+  private isWSError(err: any): err is WebSocketEventMap["error"] {
+    return err instanceof Event;
+  }
+
   public override async prepareError(
     graphqlError: NCore.TGraphqlError,
     params?: NCore.TErrorHandlerParams | undefined
   ): Promise<NCore.TError | undefined> {
-    const errors = get(graphqlError, "graphQLErrors") as TGraphqlError[] | undefined;
+    const errors = get(graphqlError, "graphQLErrors") as
+      | TGraphqlError[]
+      | WebSocketEventMap["error"][]
+      | undefined;
 
     const firstError = errors?.at(0);
+
+    if (this.isWSError(firstError)) {
+      return;
+    }
 
     if (firstError) {
       const normalizedError = this.createNormalizedError(firstError, params);

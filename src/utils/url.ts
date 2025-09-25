@@ -4,17 +4,24 @@ import { historyStore } from "../store";
 
 // /** Утилиты для работы с GET-параметрами URL */
 export class SearchParamAccessor {
-  private static compressParamKey = "cd";
+  public static readonly compressParamKey = "cd";
   private static compressMethod = "deflate" as const;
-  private static urlLimit = 1800;
+  public static readonly urlLimit = 1800;
 
   private static async getSearchParams(search: string) {
     let searchParams = new URLSearchParams(search);
     const compressedSearch = searchParams.get(this.compressParamKey);
+    searchParams.delete(this.compressParamKey);
 
     if (compressedSearch) {
       try {
-        searchParams = new URLSearchParams(await decompress(compressedSearch, this.compressMethod));
+        const decompressedParams = new URLSearchParams(
+          await decompress(compressedSearch, this.compressMethod)
+        );
+
+        searchParams.forEach((value, name) => decompressedParams.append(name, value));
+
+        searchParams = decompressedParams;
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error("Decompress URL error:", error);

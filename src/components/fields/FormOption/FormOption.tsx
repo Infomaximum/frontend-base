@@ -11,6 +11,7 @@ import {
   labelContainerStyle,
 } from "./FormOption.styles";
 import { Form } from "antd";
+import { Form as UiKitForm } from "@infomaximum/ui-kit";
 import type { ColProps } from "antd/lib/col";
 import type { FormLabelAlign } from "antd/lib/form/interface";
 import { FieldTooltip } from "@infomaximum/base/src/components/FieldTooltip/FieldTooltip";
@@ -19,6 +20,25 @@ import { DebugModeContext } from "@infomaximum/base/src/decorators/contexts/Debu
 import { isBoolean } from "lodash";
 
 const FormItem = Form.Item;
+const UiKitFormItem = UiKitForm.Item;
+
+/**
+ * * В новой навигации иконка подсказки указывается около label.
+ * * Отображается, если передать promptText.
+ * @example
+ * <FormOption promptText={ReactNode}>{children}</FormOption>
+ *
+ * * Чтобы отобразить иконку справа от элемента, необходимо передать rightLabel.
+ * @example
+ * 1) <FormOption rightLabel={ReactNode}>{children}</FormOption> - только текст
+ * 2) <FormOption rightLabel={ReactNode} promptText={ReactNode}>
+ *      {children}
+ *    </FormOption> - текст + иконка с popover
+ * 3) <FormOption rightLabel={true} promptText={ReactNode}>
+ *      {children}
+ *    </FormOption> - только иконка с popover
+ *
+ */
 
 /**
  * * В новой навигации иконка подсказки указывается около label.
@@ -140,50 +160,56 @@ const FormOptionComponent: FC<IFormOptionProps> = (props) => {
     getPromptPopupContainer,
   ]);
 
+  const validateStatus = useMemo(
+    () =>
+      (touched && invalid) || (readOnly && invalid) || highlightFieldWithError
+        ? "error"
+        : "success",
+    [highlightFieldWithError, invalid, readOnly, touched]
+  );
+
   return (
-    <FormItem
-      label={formOptionLabel}
-      layout={layout}
-      validateStatus={
-        (touched && invalid) || (readOnly && invalid) || highlightFieldWithError
-          ? "error"
-          : "success"
-      }
-      help={
-        ((touched || readOnly) &&
-          invalid &&
-          error &&
-          error.message &&
-          error.code &&
-          formOptionError) ||
-        (highlightFieldWithError ? "" : null)
-      }
-      css={formItemStyle}
-      test-id={testId}
-      {...fieldOwnProps}
-    >
-      <div
-        style={promptText || rightLabel ? formOptionComponentWrapperStyle : undefined}
-        key="component-wrapper"
-        css={wrapperComponentStyle}
+    <UiKitFormItem validateStatus={validateStatus}>
+      <FormItem
+        label={formOptionLabel}
+        layout={layout}
+        validateStatus={validateStatus}
+        help={
+          ((touched || readOnly) &&
+            invalid &&
+            error &&
+            error.message &&
+            error.code &&
+            formOptionError) ||
+          (highlightFieldWithError ? "" : null)
+        }
+        css={formItemStyle}
+        test-id={testId}
+        {...fieldOwnProps}
       >
-        {props.children}
-      </div>
-
-      {rightLabel ? (
-        <div css={[formOptionRightTooltipContainerStyle, promptWrapperStyle]}>
-          <FieldTooltip
-            promptText={promptText}
-            caption={isBoolean(rightLabel) ? null : rightLabel}
-            promptTestId={promptTestId}
-            getPopupContainer={getPromptPopupContainer}
-          />
+        <div
+          style={promptText || rightLabel ? formOptionComponentWrapperStyle : undefined}
+          key="component-wrapper"
+          css={wrapperComponentStyle}
+        >
+          {props.children}
         </div>
-      ) : null}
 
-      {additionalHint}
-      {description && <div css={fieldDescriptionStyle}>{description}</div>}
-    </FormItem>
+        {rightLabel ? (
+          <div css={[formOptionRightTooltipContainerStyle, promptWrapperStyle]}>
+            <FieldTooltip
+              promptText={promptText}
+              caption={isBoolean(rightLabel) ? null : rightLabel}
+              promptTestId={promptTestId}
+              getPopupContainer={getPromptPopupContainer}
+            />
+          </div>
+        ) : null}
+
+        {additionalHint}
+        {description && <div css={fieldDescriptionStyle}>{description}</div>}
+      </FormItem>
+    </UiKitFormItem>
   );
 };
 

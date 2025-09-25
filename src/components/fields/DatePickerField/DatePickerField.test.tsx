@@ -3,6 +3,8 @@ import type { IDatePickerFormFieldProps } from "./DatePickerField.types";
 import { BrowserRouter } from "react-router-dom";
 import { DatePickerFormField } from "./DatePickerField";
 import { Form } from "@infomaximum/base/src/components/forms/Form/FormWrapper";
+import { ConfigProvider } from "@infomaximum/ui-kit";
+import { componentsRuLocale } from "@infomaximum/base/src/utils";
 
 const props = {
   name: "Fake_name",
@@ -11,9 +13,11 @@ const props = {
 const setUp = (props: IDatePickerFormFieldProps) =>
   mount(
     <BrowserRouter>
-      <Form form={"fake-form-name"}>
-        <DatePickerFormField {...props} />
-      </Form>
+      <ConfigProvider locale={componentsRuLocale}>
+        <Form form={"fake-form-name"}>
+          <DatePickerFormField {...props} />
+        </Form>
+      </ConfigProvider>
     </BrowserRouter>
   );
 
@@ -45,9 +49,8 @@ describe("Тест компонента", () => {
       displayFormat: "hh:mm:ss DD.MM.YYYY",
     };
     const component = setUp(nextProps);
-    expect(component.find(`DatePicker[format="${nextProps.displayFormat}"]`).exists()).toEqual(
-      true
-    );
+
+    expect(component.find(`RefPicker[format="${nextProps.displayFormat}"]`).exists()).toEqual(true);
   });
 
   it("Проверка если showTime === true то displayFormat === DD.MM.YYYY, HH:mm", () => {
@@ -57,6 +60,6 @@ describe("Тест компонента", () => {
     };
     const component = setUp(nextProps);
 
-    expect(component.find(`DatePicker[format="DD.MM.YYYY, HH:mm"]`).exists()).toEqual(true);
+    expect(component.find(`RefPicker[format="DD.MM.YYYY, HH:mm"]`).exists()).toEqual(true);
   });
 });

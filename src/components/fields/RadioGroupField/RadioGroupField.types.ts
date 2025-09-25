@@ -1,4 +1,4 @@
-import type { RadioGroupProps } from "antd/lib/radio";
+import type { RadioGroupProps } from "@infomaximum/ui-kit";
 import type { FieldRenderProps } from "react-final-form";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";

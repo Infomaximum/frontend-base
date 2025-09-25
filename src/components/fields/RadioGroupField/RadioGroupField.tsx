@@ -4,13 +4,11 @@ import type {
   IRadioGroupFieldContainerProps,
   IRadioGroupFormFieldProps,
 } from "./RadioGroupField.types";
-import { Radio } from "antd";
-import type { RadioChangeEvent } from "antd/lib/radio";
-import { radioGroupStyle } from "./RadioGroupField.style";
+import { Radio, type RadioChangeEvent } from "@infomaximum/ui-kit";
 import { Field, FormField } from "../FormField";
 
 const RadioGroupContainer: React.FC<IRadioGroupFieldContainerProps> = (props) => {
-  const { children, readOnly, disabled, input, ...rest } = props;
+  const { children, readOnly, disabled, input, meta, label, render, priority, ...rest } = props;
 
   const onChange = React.useCallback(
     (e: RadioChangeEvent) => {
@@ -20,13 +18,7 @@ const RadioGroupContainer: React.FC<IRadioGroupFieldContainerProps> = (props) =>
   );
 
   return (
-    <Radio.Group
-      css={radioGroupStyle}
-      onChange={onChange}
-      value={input.value}
-      {...rest}
-      disabled={readOnly || disabled}
-    >
+    <Radio.Group onChange={onChange} value={input.value} {...rest} disabled={readOnly || disabled}>
       {children}
     </Radio.Group>
   );

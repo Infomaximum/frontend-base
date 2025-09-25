@@ -1,8 +1,16 @@
+import { getApiPrefix } from "../URI";
+
 export const rootPath = "/";
 
 export const noMatchPath = "*";
 
 export const moduleGroupPath = "_";
+
+const brandingResourcesPath = `${rootPath}branding`;
+
+export function getBrandingResourcePath() {
+  return `${getApiPrefix() ?? ""}${brandingResourcesPath}`;
+}
 
 /* ------------------------------ Логин [START] ----------------------------------- */
 export const loginPath = `${rootPath}login`;

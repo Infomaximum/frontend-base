@@ -177,11 +177,6 @@ export const getThemeConfig = () => {
         paddingInlineLG: 7,
         ...activeShadows,
       },
-      DatePicker: {
-        paddingInlineLG: 7,
-        paddingInline: 7,
-        ...activeShadows,
-      },
       Switch: { trackHeightSM: 16, trackMinWidthSM: 28, handleSizeSM: 12 },
       Popover: {
         boxShadowSecondary: "0 2px 8px 0px rgba(113, 113, 113, 0.2)",

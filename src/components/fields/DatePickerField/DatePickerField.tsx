@@ -1,14 +1,12 @@
 import { useCallback, type FC } from "react";
-import { DatePicker as AntDatePicker, type DatePickerProps } from "antd";
+import { DatePicker as UiKitDatePicker, type DatePickerProps } from "@infomaximum/ui-kit";
 import type {
   IDatePickerFieldProps,
   IDatePickerFormFieldProps,
   IDatePickerProps,
 } from "./DatePickerField.types";
-import { datePickerFieldStyle } from "./DatePickerField.styles";
 import dayjs, { type Dayjs } from "dayjs";
 import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
-import { useClearElementFromAttribute } from "@infomaximum/base/src/decorators/hooks/useClearElementFromAttribute";
 import { globalScrollBehavior } from "@infomaximum/base/src/utils/ScrollBehavior/ScrollBehavior";
 import { Input } from "@infomaximum/base/src/components/Input/Input";
 import { NOT_SET } from "@infomaximum/base/src/utils/Localization/Localization";
@@ -36,10 +34,10 @@ const modifyDateBasedOnDisplayFormatConfig = [
 ];
 
 const modifyDateBasedOnDisplayFormat = (
-  date: Dayjs,
+  date: Dayjs | Dayjs[],
   displayFormat: IDatePickerProps["displayFormat"]
 ) => {
-  if (!isString(displayFormat)) {
+  if (!isString(displayFormat) || Array.isArray(date)) {
     return date;
   }
 
@@ -63,19 +61,14 @@ const DatePicker: FC<IDatePickerProps> = ({
   input: { value, onChange, ...restInput },
   readOnly,
   onOpenChange,
-  datePickerInputStyle = datePickerFieldStyle,
+  datePickerInputStyle,
   shouldModifyDateBasedOnDisplayFormat,
   onChangeCallback,
   ...rest
 }) => {
   const localization = useLocalization();
 
-  const { ref } = useClearElementFromAttribute<HTMLDivElement>({
-    selector: "input",
-    removableAttribute: "title",
-  });
-
-  const handleChange = useCallback<NonNullable<DatePickerProps<Dayjs>["onChange"]>>(
+  const handleChange = useCallback<NonNullable<DatePickerProps["onChange"]>>(
     (_date) => {
       if (isNil(_date)) {
         onChangeCallback?.(_date);
@@ -130,21 +123,19 @@ const DatePicker: FC<IDatePickerProps> = ({
   }
 
   return (
-    <div ref={ref}>
-      <AntDatePicker
-        key="ant-date-picker"
-        picker={picker}
-        format={displayFormat}
-        onChange={handleChange}
-        onOpenChange={handleOpenChange}
-        value={value}
-        disabled={readOnly}
-        style={datePickerInputStyle}
-        showTime={showTime}
-        {...rest}
-        {...restInput}
-      />
-    </div>
+    <UiKitDatePicker
+      key="date-picker"
+      picker={picker}
+      format={displayFormat}
+      onChange={handleChange}
+      onOpenChange={handleOpenChange}
+      value={value}
+      disabled={readOnly}
+      style={datePickerInputStyle}
+      showTime={showTime}
+      {...rest}
+      {...restInput}
+    />
   );
 };
 

@@ -1,13 +1,11 @@
 import React from "react";
-import { DatePicker } from "antd";
+import { DatePicker as UiKitDatePicker } from "@infomaximum/ui-kit";
 import type {
   IMonthPickerProps,
   IMonthPickerFieldProps,
   IMonthPickerFormFieldProps,
 } from "./MonthPickerField.types";
 import { FormField, Field } from "../FormField";
-
-const AntMonthPicker = DatePicker.MonthPicker;
 
 class MonthPicker extends React.PureComponent<IMonthPickerProps> {
   public override render() {
@@ -22,9 +20,10 @@ class MonthPicker extends React.PureComponent<IMonthPickerProps> {
     } = this.props;
 
     return (
-      <AntMonthPicker
-        key="ant-month-picker"
+      <UiKitDatePicker
+        key="month-picker"
         format={displayFormat || "MMMM YYYY"}
+        picker="month"
         {...rest}
         onChange={onChange}
         value={value}

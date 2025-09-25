@@ -28,8 +28,22 @@ import { BaseCard } from "@infomaximum/base/src/components/BaseCard";
 import { withLoc } from "@infomaximum/base/src/decorators/hocs/withLoc";
 import { withSystemTitle } from "@infomaximum/base/src/decorators/hocs/withSystemTitle";
 import { withTheme } from "@infomaximum/base/src/decorators/hocs/withTheme";
+import { getBrandingResourcePath } from "@infomaximum/base/src/utils";
 
 const { Content } = Layout;
+
+// Сделано через div и маску для работы currentColor
+const companyLogoIcon = (
+  <div
+    css={{
+      width: "440px",
+      height: "40px",
+      mask: `url(${getBrandingResourcePath()}/company_logo.svg) no-repeat center`,
+      backgroundColor: "currentColor",
+      maskSize: "contain",
+    }}
+  />
+);
 
 class UnAuthorized extends PureComponent<IUnAuthorizedLayoutProps, IUnAuthorizedLayoutState> {
   public static getDerivedStateFromProps(
@@ -110,7 +124,13 @@ class UnAuthorized extends PureComponent<IUnAuthorizedLayoutProps, IUnAuthorized
 
   public override render() {
     const { showAnimate } = this.state;
-    const { wrapperStyle, bodyStyle, children, topPanel, companyLogo } = this.props;
+    const {
+      wrapperStyle,
+      bodyStyle,
+      children,
+      topPanel,
+      companyLogo = companyLogoIcon,
+    } = this.props;
 
     const wrapperContentStyles = [
       wrapperContentLoginStyle,
@@ -122,7 +142,7 @@ class UnAuthorized extends PureComponent<IUnAuthorizedLayoutProps, IUnAuthorized
         <ErrorBoundary code={EErrorBoundaryCodesBase.unAuthorizedLayout}>
           {topPanel}
           <Content css={unAuthorizedContentStyle}>
-            {!!companyLogo && <div css={companyNameStyle}>{companyLogo}</div>}
+            {<div css={companyNameStyle}>{companyLogo}</div>}
             <BaseCard
               styleWrapper={[wrapperContentStyles, wrapperStyle]}
               headStyle={headStyle}

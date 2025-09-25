@@ -58,12 +58,12 @@ export const VirtualizedTableBodyRowComponent = <T extends TRow>(
   const handleSelectChange = useCallback(
     (event: CheckboxChangeEvent | MouseEvent) => {
       if (event.nativeEvent.shiftKey) {
-        onSelectMultipleChange(record, !isChecked);
+        onSelectMultipleChange(rowIndex);
       } else {
-        onSelectChange(record, !isChecked);
+        onSelectChange(record, !isChecked, rowIndex);
       }
     },
-    [isChecked, onSelectChange, onSelectMultipleChange, record]
+    [isChecked, onSelectChange, onSelectMultipleChange, record, rowIndex]
   );
 
   const selectChange = (event: CheckboxChangeEvent | MouseEvent) => {

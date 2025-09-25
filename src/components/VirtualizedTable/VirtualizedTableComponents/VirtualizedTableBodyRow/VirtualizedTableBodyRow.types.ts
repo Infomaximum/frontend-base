@@ -18,8 +18,8 @@ export interface IVirtualizedTableBodyRowProps<T>
   isChecked: boolean;
   indentLeft: IVirtualizedTableBodyCellProps<T>["indentLeft"];
   isCheckable: boolean;
-  onSelectChange(record: T | null, isChecking: boolean): void;
-  onSelectMultipleChange(record: T | null, isChecking: boolean): void;
+  onSelectChange(record: T | null, isChecking: boolean, index?: number): void;
+  onSelectMultipleChange(index: number): void;
   selectionType?: TableRowSelection<T>["type"];
   getCheckboxProps?: (record: T) => ICheckboxProps<T>;
   isTree: boolean;

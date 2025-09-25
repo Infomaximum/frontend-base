@@ -31,13 +31,10 @@ import { getAppliedLocalized } from "./Message.utils";
 import type { NCore } from "@infomaximum/base/src/libs/core";
 import type { MessageKey } from "@infomaximum/ui-kit/dist/components/Message/message.types";
 
-// duration нужно передавать в секундах, т.к внутри message происходит конвертация в миллисекунды
-const defaultDuration = 3;
-
 function showMessageGrid(props: IMessageProps, notification: ReactNode) {
   const {
     config,
-    closable,
+    closable = true,
     messageDuration,
     styles,
     type,
@@ -45,8 +42,9 @@ function showMessageGrid(props: IMessageProps, notification: ReactNode) {
     onClick,
     onClose,
     className,
+    infinity = false,
   } = props;
-  const duration = messageDuration ?? defaultDuration;
+  const duration = infinity ? 0 : messageDuration;
   const key = customKey ?? uniqueId("message-key");
 
   const notificationData = {
@@ -302,12 +300,6 @@ class MessageComponent {
     const notifications = isFunction(props.notification)
       ? props.notification()
       : props.notification;
-
-    if (props.config) {
-      message.config({ ...props.config, duration: 0 });
-    } else {
-      message.config({ duration: 0 });
-    }
 
     if (Array.isArray(notifications)) {
       notifications.map((notification: any) => {

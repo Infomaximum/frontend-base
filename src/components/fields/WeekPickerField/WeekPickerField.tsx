@@ -1,5 +1,5 @@
 import React from "react";
-import { DatePicker } from "antd";
+import { DatePicker as UiKitDatePicker } from "@infomaximum/ui-kit";
 import { isFunction } from "lodash";
 import type { Dayjs } from "dayjs";
 import type {
@@ -11,13 +11,15 @@ import { WEEK } from "@infomaximum/base/src/utils/Localization/Localization";
 import { Field, FormField } from "../FormField";
 import { useLocalization } from "@infomaximum/base/src/decorators/hooks/useLocalization";
 
-const { WeekPicker: AntWeekPicker } = DatePicker;
-
 class WeekPicker extends React.PureComponent<IWeekPickerProps> {
-  private handleChange = (date: Dayjs | null) => {
+  private handleChange = (date: Dayjs | Dayjs[] | null) => {
     const {
       input: { onChange },
     } = this.props;
+
+    if (Array.isArray(date)) {
+      return;
+    }
 
     if (isFunction(onChange)) {
       onChange(date ? date.startOf("week") : undefined);
@@ -35,11 +37,12 @@ class WeekPicker extends React.PureComponent<IWeekPickerProps> {
     } = this.props;
 
     return (
-      <AntWeekPicker
-        key="ant-date-week-picker"
+      <UiKitDatePicker
+        key="date-week-picker"
         format={displayFormat || `w [${localization.getLocalized(WEEK).toLowerCase()}] GGGG`}
         onChange={this.handleChange}
         value={value}
+        picker="week"
         {...rest}
       />
     );

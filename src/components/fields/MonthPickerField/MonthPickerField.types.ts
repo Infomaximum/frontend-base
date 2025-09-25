@@ -2,7 +2,8 @@ import type { FieldRenderProps } from "react-final-form";
 import type { Dayjs } from "dayjs";
 import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { IFormFieldProps } from "../FormField/FormField.types";
-import type { MonthPickerProps } from "antd/lib/date-picker";
+import type { DatePickerProps } from "@infomaximum/ui-kit";
+
 export type TMonthPickerFieldValue = Dayjs | undefined;
 
 type TOmitMonthPickerProps =
@@ -19,7 +20,7 @@ export interface IMonthPickerProps
   extends IMonthPickerOwnProps,
     FieldRenderProps<TMonthPickerFieldValue> {}
 
-export interface IMonthPickerOwnProps extends Omit<MonthPickerProps, TOmitMonthPickerProps> {
+export interface IMonthPickerOwnProps extends Omit<DatePickerProps, TOmitMonthPickerProps> {
   displayFormat?: string;
   readOnly?: boolean;
 }

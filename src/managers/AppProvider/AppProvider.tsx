@@ -10,7 +10,12 @@ import { LocalizationContext } from "@infomaximum/base/src/decorators/contexts/L
 import { MainSystemPagePathContext } from "@infomaximum/base/src/decorators/contexts/MainSystemPagePathContext";
 import { ThemeProvider } from "@infomaximum/base/src/decorators/contexts/ThemeContext";
 import { globalStyles, theme } from "@infomaximum/base/src/styles";
-import { EErrorBoundaryCodesBase, rootPath } from "@infomaximum/base/src/utils";
+import {
+  componentsEnLocale,
+  componentsRuLocale,
+  EErrorBoundaryCodesBase,
+  rootPath,
+} from "@infomaximum/base/src/utils";
 import { ErrorModalProvider } from "../ErrorModalProvider/ErrorModalProvider";
 import { RouterProvider } from "../RouterProvider/RouterProvider";
 import type { IRouterProviderProps } from "../RouterProvider/RouterProvider.types";
@@ -28,7 +33,7 @@ import {
   defaultLicenseFeatureChecker,
 } from "@infomaximum/base/src/decorators/contexts/LicenseFeatureContext";
 import { StyleProvider } from "@ant-design/cssinjs";
-import { messagesHolder } from "@infomaximum/ui-kit";
+import { messagesHolder, ConfigProvider as UiKitConfigProvider } from "@infomaximum/ui-kit";
 
 export interface IAppProviderProps extends IRouterProviderProps {
   baseName?: string;
@@ -70,15 +75,30 @@ const AppProviderContainer: FC<IAppProviderProps> = (props) => {
     localeUpdate(currentLanguage, EDays.MONDAY);
   }, [localizationInstance]);
 
-  const locale = useMemo(() => {
+  const languageConfig = useMemo(() => {
     const { Language } = Localization;
 
     const currentLanguage = localizationInstance.getLanguage();
 
+    return {
+      currentLanguage,
+      Language,
+    };
+  }, [localizationInstance]);
+
+  const locale = useMemo(() => {
+    const { currentLanguage, Language } = languageConfig;
+
     const locale = currentLanguage === Language.en ? enUS : ruRu;
 
     return locale;
-  }, [localizationInstance]);
+  }, [languageConfig]);
+
+  const uiKitLocale = useMemo(() => {
+    const { currentLanguage, Language } = languageConfig;
+
+    return currentLanguage === Language.en ? componentsEnLocale : componentsRuLocale;
+  }, [languageConfig]);
 
   const _theme = themeProps ?? theme;
 
@@ -127,16 +147,18 @@ const AppProviderContainer: FC<IAppProviderProps> = (props) => {
           <LocalizationContext.Provider value={localizationInstance}>
             <StyleProvider autoClear={true}>
               <ConfigProvider locale={locale} theme={antdTheme}>
-                <ThemeProvider theme={_theme}>
-                  <FeatureContext.Provider value={featureChecker}>
-                    <LicenseFeatureContext.Provider value={licenseFeatureChecker}>
-                      <Global styles={globalStyles(_theme)} />
-                      <BrowserRouter basename={baseName ?? historyStore.basename}>
-                        {children}
-                      </BrowserRouter>
-                    </LicenseFeatureContext.Provider>
-                  </FeatureContext.Provider>
-                </ThemeProvider>
+                <UiKitConfigProvider locale={uiKitLocale}>
+                  <ThemeProvider theme={_theme}>
+                    <FeatureContext.Provider value={featureChecker}>
+                      <LicenseFeatureContext.Provider value={licenseFeatureChecker}>
+                        <Global styles={globalStyles(_theme)} />
+                        <BrowserRouter basename={baseName ?? historyStore.basename}>
+                          {children}
+                        </BrowserRouter>
+                      </LicenseFeatureContext.Provider>
+                    </FeatureContext.Provider>
+                  </ThemeProvider>
+                </UiKitConfigProvider>
               </ConfigProvider>
             </StyleProvider>
           </LocalizationContext.Provider>

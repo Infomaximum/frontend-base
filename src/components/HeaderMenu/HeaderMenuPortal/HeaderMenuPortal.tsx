@@ -39,7 +39,21 @@ import { useFeature } from "@infomaximum/base/src/decorators/hooks/useFeature";
 import { LocalSpinner } from "@infomaximum/base/src/components/Spinner";
 import { assertSimple } from "@infomaximum/assert";
 import { AlignedTooltip } from "@infomaximum/base/src/components/AlignedTooltip";
-import { ArrowLeftOutlined, ImFilled } from "@infomaximum/base/src/components/Icons";
+import { ArrowLeftOutlined } from "@infomaximum/base/src/components/Icons";
+import { getBrandingResourcePath } from "@infomaximum/base/src/utils";
+
+// Сделано через div и маску для работы currentColor
+const menuLogoIcon = (
+  <div
+    css={{
+      width: "20px",
+      height: "20px",
+      mask: `url(${getBrandingResourcePath()}/menu_logo.svg) no-repeat center`,
+      backgroundColor: "currentColor",
+      maskSize: "20px 20px",
+    }}
+  />
+);
 
 const assertSimpleText = "Дочерний компонент не должен помещаться в DOM";
 
@@ -179,7 +193,7 @@ const HeaderMenuPortalComponent: React.FC<IHeaderMenuPortalProps> & {
             key="logo-icon"
             css={linkRootStyle}
           >
-            <ImFilled />
+            {menuLogoIcon}
           </Link>
         )}
         <div css={customTitleStyle ?? titleStyle} test-id={headerMenuTitleTestId}>

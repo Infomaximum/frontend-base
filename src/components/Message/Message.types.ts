@@ -29,6 +29,8 @@ export interface IMessageProps extends Pick<SpecialMessageTaskType, TPickSpecial
   messageDuration?: number;
   type?: MessageType;
   customKey?: SpecialMessageTaskType["key"];
+  infinity?: boolean;
+  closable?: boolean;
 }
 
 export type TRemoveMessageProps = {

@@ -102,7 +102,7 @@ class InputComponent extends PureComponent<IInputComponentProps, IInputState> {
 
       return (
         <div key="input-read-only">
-          <Input value={value} suffix={rest.suffix} disabled={true} />
+          <Input aria-label={rest.label} value={value} suffix={rest.suffix} disabled={true} />
         </div>
       );
     }

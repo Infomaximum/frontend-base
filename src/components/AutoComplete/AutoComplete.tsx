@@ -17,6 +17,7 @@ const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
     suffixIcon: suffixIconProps,
     loading: loadingProps = false,
     onDropdownVisibleChange,
+    onFocus,
   } = props;
   const loadingState = useDelayedTrue(loadingProps, suffixLoaderDelay);
 
@@ -36,6 +37,13 @@ const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
       onDropdownVisibleChange?.(shouldOpen);
     },
     [onDropdownVisibleChange, computeDropdownPosition, getPopupContainer]
+  );
+
+  const handleFocus = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      onFocus?.length ? onFocus(e) : e.target.select();
+    },
+    [onFocus]
   );
 
   const suffixIcon = useMemo(() => {
@@ -60,6 +68,7 @@ const AutoCompleteComponent: FC<IAutoCompleteProps> = (props) => {
         dropdownAlign={dropdownPosition.align}
         suffixIcon={suffixIcon}
         onDropdownVisibleChange={handleDropdownVisibleChange}
+        onFocus={handleFocus}
       />
     </div>
   );

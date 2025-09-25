@@ -1,5 +1,5 @@
 import type React from "react";
-import type { RadioGroupProps } from "antd/lib/radio";
+import type { RadioGroupProps } from "@infomaximum/ui-kit";
 import type { FieldRenderProps } from "react-final-form";
 import type { ITableOwnProps } from "@infomaximum/base/src/components/Table/Table.types";
 import type { IFieldProps } from "../FormField/Field/Field.types";

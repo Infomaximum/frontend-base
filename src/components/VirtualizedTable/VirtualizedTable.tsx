@@ -305,7 +305,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
     this.vListRef.current?.forceUpdateGrid();
   };
 
-  private handleSelectMultipleChange(index: number) {
+  private handleSelectMultipleChange = (index: number) => {
     const { rowSelection, multipleRowSelectionConfig } = this.props;
 
     const onChange = rowSelection?.onChange;
@@ -327,7 +327,7 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
 
       onChange(changedKeys, selectedRows, { type: "multiple" });
     }
-  }
+  };
 
   private handleSelectChange = (record: T | null, isChecking: boolean, index?: number) => {
     const { rowSelection, dataSource, multipleRowSelectionConfig } = this.props;
@@ -425,10 +425,8 @@ class VirtualizedTableComponent<T extends TRow> extends PureComponent<
           isChecked={
             !!record?.key && !!selectedRowKeysSet?.has(record.key) && !checkboxProps.disabled
           }
-          onSelectChange={(record, isChecking) =>
-            this.handleSelectChange(record, isChecking, index)
-          }
-          onSelectMultipleChange={() => this.handleSelectMultipleChange(index)}
+          onSelectChange={this.handleSelectChange}
+          onSelectMultipleChange={this.handleSelectMultipleChange}
           selectionType={rowSelection?.type}
           getCheckboxProps={rowSelection?.getCheckboxProps}
           indentLeft={

@@ -68,7 +68,14 @@ export const loadingButtonStyle = (theme: TTheme) => ({
   "&&&&&": { borderColor: theme.grey5Color, color: theme.grey7Color, background: theme.grey4Color },
 });
 
-export const buttonLocSpinStyle = { display: "flex", justifyContent: "flex-end" };
+export const buttonLocSpinStyle = (theme: TTheme) => ({
+  justifyContent: "flex-end",
+  ".ant-spin": {
+    svg: {
+      fontSize: `${theme.h5FontSize}px`,
+    },
+  },
+});
 
 export const buttonLocSpinIndicatorStyle = (theme: TTheme) => ({
   color: theme.grey7Color,

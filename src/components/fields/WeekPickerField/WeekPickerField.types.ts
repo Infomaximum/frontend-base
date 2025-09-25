@@ -3,7 +3,8 @@ import type { IFieldProps } from "../FormField/Field/Field.types";
 import type { FieldRenderProps } from "react-final-form";
 import type { Dayjs } from "dayjs";
 import type { IWithLocProps } from "@infomaximum/base/src/decorators/hocs/withLoc/withLoc";
-import type { WeekPickerProps } from "antd/lib/date-picker";
+import type { DatePickerProps } from "@infomaximum/ui-kit";
+
 export type TWeekPickerFieldValue = Dayjs;
 
 type TOmitWeekPickerProps =
@@ -20,7 +21,7 @@ export interface IWeekPickerProps
     TRemoveIndex<FieldRenderProps<TWeekPickerFieldValue>> {}
 
 export interface IWeekPickerOwnProps
-  extends Omit<WeekPickerProps, TOmitWeekPickerProps>,
+  extends Omit<DatePickerProps, TOmitWeekPickerProps>,
     IWithLocProps {
   displayFormat?: string;
 }

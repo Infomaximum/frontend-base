@@ -1,7 +1,7 @@
 // изменение области клика
 export const tableRadioGroupStyle = {
   width: "100%",
-  ".ant-radio-wrapper": {
+  ".radio-wrapper": {
     display: "flex",
     padding: "8px 8px 7px",
   },

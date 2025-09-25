@@ -175,6 +175,9 @@ const ValidFieldIcon = (disabled?: boolean) => (
   />
 );
 
+const getPopupContainer = (): HTMLElement =>
+  document.querySelector(".ant-modal-content") || document.body;
+
 const passwordHelpPopoverZIndex = 1050;
 
 class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPasswordFieldsState> {
@@ -578,6 +581,7 @@ class PasswordFieldsComponent extends PureComponent<IPasswordFieldsProps, IPassw
                   overlayInnerStyle={popoverInnerStyle}
                   autoAdjustOverflow={false}
                   zIndex={passwordHelpPopoverZIndex}
+                  getPopupContainer={getPopupContainer}
                 >
                   <QuestionCircleOutlined
                     key="question-circle-popover-icon"
