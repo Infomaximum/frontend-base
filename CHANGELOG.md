@@ -2,12 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [7.2.8](https://github.com/Infomaximum/frontend-base/compare/v7.2.7...v7.2.8) (2025-12-03)
+### [7.2.9](https://github.com/Infomaximum/frontend-base/compare/v7.2.8...v7.2.9) (2025-12-03)
 
+### [7.2.8](https://github.com/Infomaximum/frontend-base/compare/v7.2.7...v7.2.8) (2025-12-03)
 
 ### Bug Fixes
 
-* исправлена проблема с неправильными путями в папке external ([1d2e3a2](https://github.com/Infomaximum/frontend-base/commit/1d2e3a2f1624aabfb81c98ebcce345fba0d7123c))
+- исправлена проблема с неправильными путями в папке external ([1d2e3a2](https://github.com/Infomaximum/frontend-base/commit/1d2e3a2f1624aabfb81c98ebcce345fba0d7123c))
 
 ### [7.2.7](https://github.com/Infomaximum/frontend-base/compare/v7.2.6...v7.2.7) (2025-09-25)
 
@@ -21,19 +22,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [7.2.2](https://github.com/Infomaximum/frontend-base/compare/v7.2.1...v7.2.2) (2025-08-25)
 
-
 ### Bug Fixes
 
-* исправлен импорт ([ec6a4e8](https://github.com/Infomaximum/frontend-base/commit/ec6a4e88f6806692cf26b068ce0b18e829449d97))
-* исправлена сборка иконок ([36bab3e](https://github.com/Infomaximum/frontend-base/commit/36bab3eb7f03fe2d24b32186e2775d526f12e531))
-* исправлены импорты ([53b7418](https://github.com/Infomaximum/frontend-base/commit/53b7418874b2d741b15cf93e48bb7f6ead8ecf1c))
+- исправлен импорт ([ec6a4e8](https://github.com/Infomaximum/frontend-base/commit/ec6a4e88f6806692cf26b068ce0b18e829449d97))
+- исправлена сборка иконок ([36bab3e](https://github.com/Infomaximum/frontend-base/commit/36bab3eb7f03fe2d24b32186e2775d526f12e531))
+- исправлены импорты ([53b7418](https://github.com/Infomaximum/frontend-base/commit/53b7418874b2d741b15cf93e48bb7f6ead8ecf1c))
 
 ### [7.2.1](https://github.com/Infomaximum/frontend-base/compare/v7.2.0...v7.2.1) (2025-08-22)
 
-
 ### Bug Fixes
 
-* lint ([3d4a58e](https://github.com/Infomaximum/frontend-base/commit/3d4a58e425b6eeee67756a52752b48fb5eea3c7c))
+- lint ([3d4a58e](https://github.com/Infomaximum/frontend-base/commit/3d4a58e425b6eeee67756a52752b48fb5eea3c7c))
 
 ## [7.2.0](https://github.com/Infomaximum/frontend-base/compare/v7.1.0...v7.2.0) (2025-08-22)
 
@@ -41,33 +40,29 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [7.0.4](https://github.com/Infomaximum/frontend-base/compare/v7.0.3...v7.0.4) (2025-02-25)
 
-
 ### Bug Fixes
 
-* side effects ([d6694df](https://github.com/Infomaximum/frontend-base/commit/d6694dfac6608b0012e015a45ba7dd9e4d52f5db))
+- side effects ([d6694df](https://github.com/Infomaximum/frontend-base/commit/d6694dfac6608b0012e015a45ba7dd9e4d52f5db))
 
 ### [7.0.3](https://github.com/Infomaximum/frontend-base/compare/v7.0.2...v7.0.3) (2025-02-25)
 
 ### [7.0.2](https://github.com/Infomaximum/frontend-base/compare/v7.0.1...v7.0.2) (2025-02-20)
 
-
 ### Bug Fixes
 
-* cp package.json ([ac0e7b6](https://github.com/Infomaximum/frontend-base/commit/ac0e7b6637c9cabb1261fc2568c7a56fdd690e62))
+- cp package.json ([ac0e7b6](https://github.com/Infomaximum/frontend-base/commit/ac0e7b6637c9cabb1261fc2568c7a56fdd690e62))
 
 ### [7.0.1](https://github.com/Infomaximum/frontend-base/compare/v7.0.0...v7.0.1) (2025-02-20)
 
-
 ### Bug Fixes
 
-* type ([d3fb426](https://github.com/Infomaximum/frontend-base/commit/d3fb4266d390dd76e77224430d9db76af634b7d3))
+- type ([d3fb426](https://github.com/Infomaximum/frontend-base/commit/d3fb4266d390dd76e77224430d9db76af634b7d3))
 
 ## [6.1.0](https://github.com/Infomaximum/frontend-base/compare/v6.0.1...v6.1.0) (2024-01-16)
 
-
 ### Features
 
-* добавлен атрибут lang у html ([393de89](https://github.com/Infomaximum/frontend-base/commit/393de8964bc8179b83984553aa4e0356ad13e13f))
+- добавлен атрибут lang у html ([393de89](https://github.com/Infomaximum/frontend-base/commit/393de8964bc8179b83984553aa4e0356ad13e13f))
 
 ### [6.0.1](https://github.com/Infomaximum/frontend-base/compare/v5.0.2...v6.0.1) (2023-10-02)
 
