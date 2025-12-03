@@ -39,13 +39,7 @@ const config = [
       dir: "dist",
       format: "es",
       sourcemap: true,
-      entryFileNames: (w) => {
-        if (w?.name?.includes?.("node_modules/")) {
-          return w.name.replace("node_modules/", "external/") + ".js";
-        }
-
-        return "[name].js";
-      },
+      entryFileNames: "[name].js",
       preserveModules: true,
       preserveModulesRoot: "src",
     },
