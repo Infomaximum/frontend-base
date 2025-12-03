@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.2.8](https://github.com/Infomaximum/frontend-base/compare/v7.2.7...v7.2.8) (2025-12-03)
+
+
+### Bug Fixes
+
+* исправлена проблема с неправильными путями в папке external ([1d2e3a2](https://github.com/Infomaximum/frontend-base/commit/1d2e3a2f1624aabfb81c98ebcce345fba0d7123c))
+
 ### [7.2.7](https://github.com/Infomaximum/frontend-base/compare/v7.2.6...v7.2.7) (2025-09-25)
 
 ### [7.2.6](https://github.com/Infomaximum/frontend-base/compare/v7.2.5...v7.2.6) (2025-08-27)
